@@ -22,12 +22,12 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-8 max-w-7xl">
-        <div className="max-w-3xl">
+        <div>
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] mb-6 w-full"
+            className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
           >
             あなたの音楽制作の<br />
@@ -40,8 +40,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-[#8a8a9e] text-lg mb-12 max-w-2xl"
           >
-            AI音楽に埋もれない。<br />
-            制作過程を世界に1つだけのグッズとして販売できるプラットフォーム
+            AI音楽に埋もれないために。<br />
+            楽曲の制作どうがを、世界に1つだけのグッズとして販売できるプラットフォーム
           </motion.p>
           
           <motion.button

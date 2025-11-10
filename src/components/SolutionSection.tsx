@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
 import { Music, Upload, ShoppingCart, Gavel, Package } from 'lucide-react';
+import { FlowDiagram } from './FlowDiagram';
 
 export function SolutionSection() {
   const ref = useRef(null);
@@ -29,10 +30,20 @@ export function SolutionSection() {
             Lapsellでは、楽曲の制作動画を<br />
             <span className="text-[#d4a574]">世界に1つだけのグッズとして販売できます</span>
           </h2>
-          <p className="text-[#8a8a9e] text-lg max-w-3xl mx-auto leading-relaxed mb-12">
+          <p className="text-[#8a8a9e] text-lg leading-relaxed mb-12">
             試行錯誤の過程をタイムラプス動画として記録し、完成した楽曲と紐づけて販売。<br />
             ファンはあなたの創作プロセスに触れられる、世界に1つだけのデジタルグッズを手に入れられます。
           </p>
+
+          {/* Flow Diagram */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-16"
+          >
+            <FlowDiagram />
+          </motion.div>
 
           {/* Model Toggle */}
           <div className="inline-flex border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-1 gap-1">
