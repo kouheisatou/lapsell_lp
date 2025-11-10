@@ -55,11 +55,12 @@ const produceSingleFile = process.env.SINGLE_FILE === 'true'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/lapsell_lp/',
   plugins: [
-    react(), 
-    tailwindcss(), 
-    figmaAssetsResolver(), 
-    removeVersionSpecifiers(), 
+    react(),
+    tailwindcss(),
+    figmaAssetsResolver(),
+    removeVersionSpecifiers(),
     ...(produceSingleFile ? [viteSingleFile()] : [])
   ],
 })
