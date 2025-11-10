@@ -88,7 +88,6 @@ The project includes two custom Vite plugins in `vite.config.ts`:
 
 ## Development Notes
 
-- The project name in package.json is "figma-make-local-runner" but the actual product is "Lapsell"
 - All components use functional React patterns with hooks
 - No routing library - single scrolling page design
 - shadcn/ui provides comprehensive UI component library
