@@ -1,12 +1,12 @@
 import { motion } from 'motion/react';
-import { Users, Package, Palette, Share2, DollarSign, Film, Shield, Eye } from 'lucide-react';
+import { Users, Package, Palette, Landmark, DollarSign, Film, Award, Image } from 'lucide-react';
 
 export function ServiceFlowDiagram() {
   const participants = [
     { id: 'fan', label: 'ファン', icon: Users },
     { id: 'lapsell', label: 'Lapsell', icon: Package },
     { id: 'artist', label: 'クリエイター', icon: Palette },
-    { id: 'streaming', label: '配信\nプラットフォーム', icon: Share2 },
+    { id: 'streaming', label: 'ギャラリーなど', icon: Landmark },
   ];
 
   const flows = [
@@ -17,9 +17,9 @@ export function ServiceFlowDiagram() {
     // クリエイター → Lapsell: 制作過程動画
     { from: 'artist', to: 'lapsell', label: '制作過程\n動画', icon: Film, color: '#8a8a9e', yOffset: 20 },
     // Lapsell → ファン: 制作過程動画 + NFT
-    { from: 'lapsell', to: 'fan', label: '制作過程動画・支援証明NFT', icons: [Film, Shield], color: '#8a8a9e', yOffset: 20, dualIcon: true },
-    // クリエイター → 配信プラットフォーム: 作品
-    { from: 'artist', to: 'streaming', label: '作品', icon: Eye, color: '#6a6a7e', yOffset: -20 },
+    { from: 'lapsell', to: 'fan', label: '制作過程動画・支援証明NFT', icons: [Film, Award], color: '#8a8a9e', yOffset: 20, dualIcon: true },
+    // クリエイター → ギャラリーなど: 作品
+    { from: 'artist', to: 'streaming', label: '作品', icon: Image, color: '#6a6a7e', yOffset: -20 },
   ];
 
   const spacing = 280;
