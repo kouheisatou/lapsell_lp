@@ -34,8 +34,8 @@ export function FanBenefitsSection() {
   return (
     <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] via-[#1a1a2e]/30 to-[#1a1a2e]/50">
       {/* Ambient glow */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[750px] h-[750px] bg-[#d4a574] blur-[140px] rounded-full" />
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4a574] blur-[150px] rounded-full" />
       </div>
 
       {/* Background accent */}

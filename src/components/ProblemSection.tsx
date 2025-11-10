@@ -24,8 +24,8 @@ export function ProblemSection() {
   return (
     <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f]">
       {/* Ambient glow */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#d4a574] blur-[120px] rounded-full" />
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4a574] blur-[150px] rounded-full" />
       </div>
 
       {/* Background grid */}

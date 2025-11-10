@@ -20,7 +20,7 @@ export function RevenueSection() {
   let currentAngle = -90; // Start from top
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#1a1a2e]/50 to-[#0a0a0f]">
+    <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] via-[#1a1a2e]/30 to-[#0a0a0f]">
       {/* Ambient glow */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4a574] blur-[150px] rounded-full" />

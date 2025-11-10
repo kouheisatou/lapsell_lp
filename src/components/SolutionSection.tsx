@@ -10,11 +10,6 @@ export function SolutionSection() {
 
   return (
     <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] via-[#1a1a2e]/20 to-[#0a0a0f]">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-1/2 right-1/4 w-[700px] h-[700px] bg-[#d4a574] blur-[130px] rounded-full" />
-      </div>
-
       <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0 }}

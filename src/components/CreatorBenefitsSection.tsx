@@ -39,8 +39,8 @@ export function CreatorBenefitsSection() {
   return (
     <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] via-[#1a1a2e]/20 to-[#0a0a0f]">
       {/* Ambient glow */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-1/2 left-1/4 w-[700px] h-[700px] bg-[#d4a574] blur-[130px] rounded-full" />
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4a574] blur-[150px] rounded-full" />
       </div>
 
       {/* Background accent */}
