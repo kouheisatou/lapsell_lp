@@ -1,7 +1,6 @@
 import { HeroSection } from './components/HeroSection';
 import { ProblemSection } from './components/ProblemSection';
 import { SolutionSection } from './components/SolutionSection';
-import { ProcessSection } from './components/ProcessSection';
 import { FanBenefitsSection } from './components/FanBenefitsSection';
 import { RevenueSection } from './components/RevenueSection';
 import { CTASection } from './components/CTASection';
@@ -50,7 +49,6 @@ export default function App() {
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
-      <ProcessSection />
       <FanBenefitsSection />
       <RevenueSection />
       <CTASection />

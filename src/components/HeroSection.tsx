@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import heroBackground from '/images/music_production_studio_dark.png';
 
 export function HeroSection() {
   return (
@@ -7,7 +8,7 @@ export function HeroSection() {
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1690381763970-f26cfa7c0ef0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMHByb2R1Y3Rpb24lMjBzdHVkaW8lMjBkYXJrfGVufDF8fHx8MTc2MTU4MDAxOXww&ixlib=rb-4.1.0&q=80&w=1080"
+          src={heroBackground}
           alt="Music Production Studio"
           className="w-full h-full object-cover"
         />
@@ -30,7 +31,7 @@ export function HeroSection() {
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
           >
             あなたの音楽制作の<br />
-            <span className="text-[#d4a574] whitespace-nowrap">模索を売りませんか？</span>
+            <span className="text-[#d4a574]">模索を売りませんか？</span>
           </motion.h1>
           
           <motion.p
