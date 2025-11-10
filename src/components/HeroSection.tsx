@@ -4,7 +4,7 @@ import heroBackground from '/images/music_production_studio_dark.png';
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
