@@ -40,8 +40,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-[#8a8a9e] text-lg mb-12 max-w-2xl"
           >
-            AI音楽に埋もれないために。<br />
-            楽曲の制作どうがを、世界に1つだけのグッズとして販売できるプラットフォーム
+            AI音楽に埋もれない。<br />
+            制作過程を世界に1つだけのグッズとして販売できるプラットフォーム
           </motion.p>
           
           <motion.button

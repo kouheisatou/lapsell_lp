@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
 import { Music, Upload, ShoppingCart, Gavel, Package } from 'lucide-react';
-import { FlowDiagram } from './FlowDiagram';
+import { ServiceFlowDiagram } from './ServiceFlowDiagram';
 
 export function SolutionSection() {
   const ref = useRef(null);
@@ -35,14 +35,14 @@ export function SolutionSection() {
             ファンはあなたの創作プロセスに触れられる、世界に1つだけのデジタルグッズを手に入れられます。
           </p>
 
-          {/* Flow Diagram */}
+          {/* Service Flow Diagram */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="mb-16"
           >
-            <FlowDiagram />
+            <ServiceFlowDiagram />
           </motion.div>
 
           {/* Model Toggle */}
