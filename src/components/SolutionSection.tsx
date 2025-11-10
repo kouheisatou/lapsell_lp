@@ -26,11 +26,11 @@ export function SolutionSection() {
             className="text-[clamp(2rem,4vw,3.5rem)] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
-            Lapsellでは、楽曲の制作動画を<br />
+            Lapsellでは、作品の制作動画を<br />
             <span className="text-[#d4a574]">世界に1つだけのグッズとして販売できます</span>
           </h2>
           <p className="text-[#8a8a9e] text-lg leading-relaxed mb-2">
-            試行錯誤の過程をタイムラプス動画として記録し、完成した楽曲と紐づけて販売。<br />
+            試行錯誤の過程をタイムラプス動画として記録し、完成した作品と紐づけて販売。<br />
             ファンはあなたの創作プロセスに触れられる、世界に1つだけのデジタルグッズを手に入れられます。
           </p>
 
@@ -61,13 +61,13 @@ function UsageSteps({ isInView }: { isInView: boolean }) {
     },
     {
       icon: CheckCircle,
-      title: '楽曲完成',
-      description: '楽曲が完成したら、録画を停止。制作過程動画が自動的に10分単位に分割され、各区間が世界に1つだけのグッズとして準備完了します。',
+      title: '作品完成',
+      description: '作品が完成したら、録画を停止。制作過程動画が自動的に10分単位に分割され、各区間が世界に1つだけのグッズとして準備完了します。',
     },
     {
       icon: ShoppingCart,
       title: '販売',
-      description: 'ライブ会場やSNSでLapsellのQRコードを表示。ファンが購入すると、制作過程動画と支援証明NFTが自動発行されます。',
+      description: 'イベント会場やSNSでLapsellのQRコードを表示。ファンが購入すると、制作過程動画と支援証明NFTが自動発行されます。',
     },
     {
       icon: Repeat,
@@ -94,8 +94,8 @@ function UsageSteps({ isInView }: { isInView: boolean }) {
           return (
             <div key={idx}>
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 + idx * 0.15 }}
                 className="relative"
               >

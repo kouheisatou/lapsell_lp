@@ -56,7 +56,7 @@ export function CTASection() {
             className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] mb-8"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
-            世界の音楽の<br />
+            世界の創作の<br />
             <span className="text-[#d4a574]">多様性を守る</span>
           </h2>
         </motion.div>
@@ -67,8 +67,8 @@ export function CTASection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-[#8a8a9e] text-xl mb-16 max-w-3xl mx-auto leading-relaxed"
         >
-          時間をかけて制作する人が減少すれば、世界の音楽は画一化してしまう。<br />
-          私たちは、AIを使わずに新しい音楽を生み出すクリエイターを応援します。
+          時間をかけて制作する人が減少すれば、世界の創作物は画一化してしまう。<br />
+          私たちは、AIを使わずに新しい作品を生み出すクリエイターを応援します。
         </motion.p>
 
         <motion.div

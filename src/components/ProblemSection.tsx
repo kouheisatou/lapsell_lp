@@ -1,18 +1,19 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Clock, TrendingDown } from 'lucide-react';
+import { Clock, PlayCircle } from 'lucide-react';
+import { FeatureCard } from './ui/FeatureCard';
 
 const problems = [
   {
     icon: Clock,
     title: 'AIに数秒でできることに、何時間もかける意味があるのか',
-    description: '朝から晩まで音作りに没頭し、細部にこだわって完成させた楽曲。でもAIなら数秒で「それっぽい」ものができてしまう。AIが量産した楽曲も、魂を込めて作った楽曲も、同じ土俵で評価される。「どれだけ時間をかけたか」「どんな想いで作ったか」は、誰も知らない。',
+    description: '朝から晩まで創作に没頭し、細部にこだわって完成させた作品。でもAIなら数秒で「それっぽい」ものができてしまう。AIが量産した作品も、魂を込めて作った作品も、同じ土俵で評価される。「どれだけ時間をかけたか」「どんな想いで作ったか」は、誰も知らない。',
   },
   {
-    icon: TrendingDown,
-    title: '曲が完成するまで収益が発生しない',
-    description: 'ストリーミングの収益は楽曲がリリースされてから。制作期間中は収入ゼロで、生活のために副業が必須。本業の合間に音楽を作る生活が続き、いつしか「音楽で食べていく」夢を諦めかけている。',
+    icon: PlayCircle,
+    title: '制作過程を配信しているけど収益が出ない',
+    description: '動画配信プラットフォームで制作過程を配信しても、広告収益は微々たるもの。視聴者数が伸びず、収益化の条件すら満たせない。時間をかけて配信しても、報われない現実に疲弊している。',
   },
 ];
 
@@ -46,35 +47,22 @@ export function ProblemSection() {
             className="text-[clamp(2rem,4vw,3.5rem)] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
-            音楽生成AIの台頭で、<br />
+            生成AIの台頭で、<br />
             こんな悩みを抱えていませんか？
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {problems.map((problem, idx) => {
-            const Icon = problem.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-8"
-              >
-                {/* Icon */}
-                <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center border border-[#d4a574]/30 bg-[#d4a574]/5 mb-6">
-                  <Icon className="w-8 h-8 text-[#d4a574]" />
-                </div>
-
-                {/* Content */}
-                <div>
-                  <h3 className="text-xl mb-4 leading-relaxed">{problem.title}</h3>
-                  <p className="text-[#8a8a9e] leading-relaxed">{problem.description}</p>
-                </div>
-              </motion.div>
-            );
-          })}
+          {problems.map((problem, idx) => (
+            <FeatureCard
+              key={idx}
+              icon={problem.icon}
+              title={problem.title}
+              description={problem.description}
+              isInView={isInView}
+              delay={idx * 0.15}
+            />
+          ))}
         </div>
 
         {/* Empathy statement */}
@@ -90,7 +78,7 @@ export function ProblemSection() {
             </p>
             <p className="text-[#8a8a9e] text-lg leading-relaxed">
               AI時代だからこそ、「人が時間をかけて作った証明」に価値が生まれる。<br />
-              あなたの制作過程そのものが、誰にも真似できない唯一無二のコンテンツになる。
+              あなたの作品の制作過程そのものが、誰にも真似できない唯一無二のコンテンツになる。
             </p>
           </div>
         </motion.div>

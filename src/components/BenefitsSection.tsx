@@ -14,11 +14,11 @@ const benefits = [
   },
   {
     title: '創作の透明性',
-    description: 'AI生成ではない証明。あなたの手で、時間をかけて作られた音楽であることを明確に示せます。',
+    description: 'AI生成ではない証明。あなたの手で、時間をかけて作られた作品であることを明確に示せます。',
   },
   {
     title: '教育コンテンツとしての価値',
-    description: '制作過程そのものが、音楽を学ぶ人々にとっての貴重な教材に。新たな価値提供が可能になります。',
+    description: '制作過程そのものが、創作を学ぶ人々にとっての貴重な教材に。新たな価値提供が可能になります。',
   },
 ];
 
@@ -54,21 +54,21 @@ export function BenefitsSection() {
 
       <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-32 text-[clamp(2rem,4vw,3.5rem)]"
           style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
         >
-          音楽クリエイターが得られる価値
+          クリエイターが得られる価値
         </motion.h2>
 
         <div className="space-y-20">
           {benefits.map((benefit, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
               className="relative flex items-start gap-8 pr-32"
             >

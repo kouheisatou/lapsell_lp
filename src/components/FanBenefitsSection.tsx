@@ -2,17 +2,18 @@ import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Sparkles, TrendingUp, Crown, Users } from 'lucide-react';
+import { FeatureCard } from './ui/FeatureCard';
 
 const benefits = [
   {
     icon: Sparkles,
     title: '世界に1つだけ。誰も見たことのない特別な瞬間を独占',
-    description: '完成品は全員が聴けるが、各区間の制作過程は世界に1人だけが所有できる数量限定グッズ。「この曲のサビがどう生まれたか」を知っているのは、あなただけ。複製不可能なオンリーワングッズ。',
+    description: '完成品は全員が見られるが、各区間の制作過程は世界に1人だけが所有できる数量限定グッズ。「この作品のあの部分がどう生まれたか」を知っているのは、あなただけ。複製不可能なオンリーワングッズ。',
   },
   {
     icon: TrendingUp,
     title: '作品がバズったら、NFTの価値も上昇',
-    description: 'あなたが支援した楽曲が人気になれば、その制作過程動画のNFTも価値が上がる可能性。世界で一つだけでもう手に入ることがないから、将来的な資産になります。値上がり期待のワクワク感で、投資としての購入動機も生まれます。',
+    description: 'あなたが支援した作品が人気になれば、その制作過程動画のNFTも価値が上がる可能性。世界で一つだけでもう手に入ることがないから、将来的な資産になります。値上がり期待のワクワク感で、投資としての購入動機も生まれます。',
   },
   {
     icon: Crown,
@@ -66,29 +67,16 @@ export function FanBenefitsSection() {
 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {benefits.map((benefit, idx) => {
-            const Icon = benefit.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="relative border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-8 group hover:border-[#d4a574]/40 transition-all duration-300"
-              >
-                {/* Icon */}
-                <div className="w-14 h-14 flex items-center justify-center border border-[#d4a574]/30 bg-[#d4a574]/5 mb-6 group-hover:bg-[#d4a574]/10 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-[#d4a574]" />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl mb-4">{benefit.title}</h3>
-                <p className="text-[#8a8a9e] leading-relaxed">
-                  {benefit.description}
-                </p>
-              </motion.div>
-            );
-          })}
+          {benefits.map((benefit, idx) => (
+            <FeatureCard
+              key={idx}
+              icon={benefit.icon}
+              title={benefit.title}
+              description={benefit.description}
+              isInView={isInView}
+              delay={idx * 0.1}
+            />
+          ))}
         </div>
 
         {/* Call to emotion */}

@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src={heroBackground}
-          alt="Music Production Studio"
+          alt="Creative Production Studio"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/80 to-[#0a0a0f]/60" />
@@ -30,7 +30,7 @@ export function HeroSection() {
             className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
           >
-            あなたの音楽制作の<br />
+            あなたの作品制作の<br />
             <span className="text-[#d4a574]">模索を売りませんか？</span>
           </motion.h1>
           
@@ -40,7 +40,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-[#8a8a9e] text-lg mb-12 max-w-2xl"
           >
-            AI音楽に埋もれない。<br />
+            AI生成に埋もれない。<br />
             制作過程を世界に1つだけのグッズとして販売できるプラットフォーム
           </motion.p>
           

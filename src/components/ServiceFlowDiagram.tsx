@@ -1,25 +1,25 @@
 import { motion } from 'motion/react';
-import { Users, Package, Music, Radio, DollarSign, Video, Shield, Headphones } from 'lucide-react';
+import { Users, Package, Palette, Share2, DollarSign, Film, Shield, Eye } from 'lucide-react';
 
 export function ServiceFlowDiagram() {
   const participants = [
     { id: 'fan', label: 'ファン', icon: Users },
     { id: 'lapsell', label: 'Lapsell', icon: Package },
-    { id: 'artist', label: 'アーティスト', icon: Music },
-    { id: 'streaming', label: '音楽配信\nサービス', icon: Radio },
+    { id: 'artist', label: 'クリエイター', icon: Palette },
+    { id: 'streaming', label: '配信\nプラットフォーム', icon: Share2 },
   ];
 
   const flows = [
     // ファン → Lapsell: お金
     { from: 'fan', to: 'lapsell', label: '購入', icon: DollarSign, color: '#d4a574', yOffset: -20 },
-    // Lapsell → アーティスト: お金
+    // Lapsell → クリエイター: お金
     { from: 'lapsell', to: 'artist', label: '売り上げ', icon: DollarSign, color: '#d4a574', yOffset: -20 },
-    // アーティスト → Lapsell: 制作過程動画
-    { from: 'artist', to: 'lapsell', label: '制作過程\n動画', icon: Video, color: '#8a8a9e', yOffset: 20 },
+    // クリエイター → Lapsell: 制作過程動画
+    { from: 'artist', to: 'lapsell', label: '制作過程\n動画', icon: Film, color: '#8a8a9e', yOffset: 20 },
     // Lapsell → ファン: 制作過程動画 + NFT
-    { from: 'lapsell', to: 'fan', label: '制作過程動画\n支援証明NFT', icon: Shield, color: '#8a8a9e', yOffset: 20 },
-    // アーティスト → 音楽配信サービス: 楽曲
-    { from: 'artist', to: 'streaming', label: '楽曲', icon: Headphones, color: '#6a6a7e', yOffset: -20 },
+    { from: 'lapsell', to: 'fan', label: '制作過程動画・支援証明NFT', icons: [Film, Shield], color: '#8a8a9e', yOffset: 20, dualIcon: true },
+    // クリエイター → 配信プラットフォーム: 作品
+    { from: 'artist', to: 'streaming', label: '作品', icon: Eye, color: '#6a6a7e', yOffset: -20 },
   ];
 
   const spacing = 280;
@@ -78,7 +78,6 @@ export function ServiceFlowDiagram() {
           const y = centerY + flow.yOffset;
           
           const midX = (startX + endX) / 2;
-          const FlowIcon = flow.icon;
           const isUpperArrow = flow.yOffset < 0;
 
           const markerId = flow.color === '#d4a574' ? 'arrowhead' : 
@@ -100,17 +99,53 @@ export function ServiceFlowDiagram() {
                 transition={{ duration: 1, delay: 0.5 + idx * 0.2 }}
               />
               
-              {/* Icon - position depends on whether it's upper or lower arrow */}
-              <foreignObject
-                x={midX - 20}
-                y={isUpperArrow ? y - 80 : y + 20}
-                width="40"
-                height="40"
-              >
-                <div className="flex items-center justify-center">
-                  <FlowIcon className="w-8 h-8" style={{ color: flow.color }} />
-                </div>
-              </foreignObject>
+              {/* Icon(s) - position depends on whether it's upper or lower arrow */}
+              {flow.dualIcon && flow.icons ? (
+                // Dual icons (side by side)
+                <>
+                  <foreignObject
+                    x={midX - 50}
+                    y={isUpperArrow ? y - 80 : y + 20}
+                    width="40"
+                    height="40"
+                  >
+                    <div className="flex items-center justify-center">
+                      {(() => {
+                        const Icon1 = flow.icons[0];
+                        return <Icon1 className="w-7 h-7" style={{ color: flow.color }} />;
+                      })()}
+                    </div>
+                  </foreignObject>
+                  <foreignObject
+                    x={midX + 10}
+                    y={isUpperArrow ? y - 80 : y + 20}
+                    width="40"
+                    height="40"
+                  >
+                    <div className="flex items-center justify-center">
+                      {(() => {
+                        const Icon2 = flow.icons[1];
+                        return <Icon2 className="w-7 h-7" style={{ color: flow.color }} />;
+                      })()}
+                    </div>
+                  </foreignObject>
+                </>
+              ) : flow.icon ? (
+                // Single icon
+                <foreignObject
+                  x={midX - 20}
+                  y={isUpperArrow ? y - 80 : y + 20}
+                  width="40"
+                  height="40"
+                >
+                  <div className="flex items-center justify-center">
+                    {(() => {
+                      const FlowIcon = flow.icon;
+                      return <FlowIcon className="w-8 h-8" style={{ color: flow.color }} />;
+                    })()}
+                  </div>
+                </foreignObject>
+              ) : null}
               
               {/* Label text - position depends on whether it's upper or lower arrow */}
               <text
