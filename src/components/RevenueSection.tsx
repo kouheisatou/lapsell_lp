@@ -110,7 +110,7 @@ export function RevenueSection() {
                 {/* Center text */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                   <div className="text-center">
-                    <div className="text-[#d4a574] text-5xl" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    <div className="text-white text-5xl" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                       {totalPaying}%
                     </div>
                     <div className="text-[#8a8a9e] text-sm mt-1">支払意向あり</div>

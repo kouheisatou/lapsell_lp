@@ -12,7 +12,7 @@ const benefits = [
   {
     icon: TrendingUp,
     title: '作品がバズったら、NFTの価値も上昇',
-    description: 'あなたが支援した楽曲が人気になれば、その制作過程動画のNFTも価値が上がる可能性。世界で一つだけでもう手に入ることがないから、将来的な資産になります。',
+    description: 'あなたが支援した楽曲が人気になれば、その制作過程動画のNFTも価値が上がる可能性。世界で一つだけでもう手に入ることがないから、将来的な資産になります。値上がり期待のワクワク感で、投資としての購入動機も生まれます。',
   },
   {
     icon: Crown,
@@ -93,18 +93,20 @@ export function FanBenefitsSection() {
 
         {/* Call to emotion */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 text-center max-w-4xl mx-auto border-t border-[#d4a574]/20 pt-12"
+          className="max-w-4xl mx-auto text-center mt-32"
         >
-          <p className="text-[#d4a574] text-2xl mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            「推しが有名になる前から支援していた証拠」が、一生残る
-          </p>
-          <p className="text-[#8a8a9e] text-lg leading-relaxed">
-            あなたのファンは、単なる「いいね」では満足できない。<br />
-            もっと深く、もっと特別な形で、あなたの創作に関わりたいと思っています。
-          </p>
+          <div className="border-t border-b border-[#d4a574]/30 py-12">
+            <p className="text-xl text-[#d4a574] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              「推しが有名になる前から支援していた証拠」が、一生残る
+            </p>
+            <p className="text-[#8a8a9e] text-lg leading-relaxed">
+              あなたのファンは、単なる「いいね」では満足できない。<br />
+              もっと深く、もっと特別な形で、あなたの創作に関わりたいと思っています。
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

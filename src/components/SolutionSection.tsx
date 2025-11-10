@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
-import { Music, Upload, ShoppingCart, Megaphone, Gavel, Package } from 'lucide-react';
+import { Music, Upload, ShoppingCart, Gavel, Package } from 'lucide-react';
 
 export function SolutionSection() {
   const ref = useRef(null);
@@ -23,12 +23,11 @@ export function SolutionSection() {
           className="text-center mb-16"
         >
           <h2
-            className="text-[clamp(2rem,4vw,3.5rem)] mb-6 max-w-4xl mx-auto"
+            className="text-[clamp(2rem,4vw,3.5rem)] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
-            Lapsellは、楽曲の制作動画を<br />
-            <span className="text-[#d4a574]">世界に1つだけのグッズとして販売できる</span><br />
-            新しいプラットフォーム
+            Lapsellでは、楽曲の制作動画を<br />
+            <span className="text-[#d4a574]">世界に1つだけのグッズとして販売できます</span>
           </h2>
           <p className="text-[#8a8a9e] text-lg max-w-3xl mx-auto leading-relaxed mb-12">
             試行錯誤の過程をタイムラプス動画として記録し、完成した楽曲と紐づけて販売。<br />
@@ -83,17 +82,17 @@ function BasicModelContent({ isInView }: { isInView: boolean }) {
     {
       icon: Music,
       title: '制作',
-      description: 'いつも通り制作するだけ。Lapsellアプリで録音ボタンを押すと、手元を自動撮影して制作過程動画が記録される。',
+      description: 'Lapsellアプリで録音ボタンを押すと、手元を自動撮影して制作過程動画が記録される。',
     },
     {
       icon: Upload,
       title: 'アップロード',
-      description: '楽曲完成後、制作過程動画を10分単位に自動分割してアップロード。各区間が世界に1つだけのグッズとして準備完了。',
+      description: '制作過程動画を10分単位に自動分割してアップロード。各区間がグッズとして準備完了。',
     },
     {
       icon: ShoppingCart,
       title: '販売',
-      description: 'ライブ会場などでグッズの一つとして、LapsellのQRコードを表示して制作過程動画を販売。販売時に動画にNFTが付与され、誰がいつ応援したかを半永久的に証明できる。',
+      description: 'LapsellのQRコードを表示して制作過程動画を販売。販売時にNFTが付与される。',
     },
   ];
 
@@ -107,11 +106,6 @@ function BasicModelContent({ isInView }: { isInView: boolean }) {
         className="text-center mb-12"
       >
         <p className="text-[#e8e8ed] text-lg mb-2">楽曲完成後に制作過程動画を数量限定グッズとして販売</p>
-        <div className="max-w-3xl mx-auto text-[#8a8a9e] space-y-2">
-          <p>• 楽曲完成後、制作過程動画をグッズとして販売</p>
-          <p>• <span className="text-[#e8e8ed]">各区間は世界に1つだけ。早い者勝ちで売り切れる</span></p>
-          <p>• いつも通りの制作をするだけで、自動的に新しい収益源が生まれる</p>
-        </div>
       </motion.div>
 
       {/* Steps */}
@@ -119,7 +113,7 @@ function BasicModelContent({ isInView }: { isInView: boolean }) {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mb-16"
+        className="mb-8"
       >
         <div className="border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-8 max-w-5xl mx-auto">
           <div className="space-y-8">
@@ -143,11 +137,25 @@ function BasicModelContent({ isInView }: { isInView: boolean }) {
         </div>
       </motion.div>
 
-      {/* Recommendation */}
+      {/* Features */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.4 }}
+        className="text-center mb-16"
+      >
+        <div className="max-w-3xl mx-auto text-[#8a8a9e] space-y-2">
+          <p>• 楽曲完成後、制作過程動画をグッズとして販売</p>
+          <p>• 各区間は世界に1つだけ。早い者勝ちで売り切れる</p>
+          <p>• いつも通りの制作をするだけで、自動的に新しい収益源が生まれる</p>
+        </div>
+      </motion.div>
+
+      {/* Recommendation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.5 }}
         className="text-center"
       >
         <p className="text-[#d4a574] mb-2">こんなクリエイターにおすすめ</p>
@@ -162,29 +170,24 @@ function BasicModelContent({ isInView }: { isInView: boolean }) {
 function AuctionModelContent({ isInView }: { isInView: boolean }) {
   const auctionSteps = [
     {
-      icon: Megaphone,
-      title: '予告',
-      description: '「明日20:00から3時間レコーディング！」と制作予定を事前告知。ファンの期待が高まる。',
-    },
-    {
       icon: Gavel,
       title: 'オークション',
-      description: '制作予定時間を10分単位で区切り、各区間をオークション出品。ファンは「どの10分が神回になるか」を予想して入札。最低500円、即決3,000円で設定。',
+      description: '制作予定を事前告知。制作予定時間を10分単位で区切り、各区間をオークション出品。',
     },
     {
       icon: Music,
       title: '制作',
-      description: '予定通り制作開始。全区間が落札済みなので、確実に販売できることが確定してから作業できる。',
+      description: '予定通り制作開始。全区間が落札済みなので、確実に販売できることが確定。',
     },
     {
       icon: Upload,
       title: 'アップロード',
-      description: '楽曲完成後、制作過程動画を10分単位に分割してアップロード。落札者のみがアクセスできる。',
+      description: '制作過程動画を10分単位に分割してアップロード。落札者のみがアクセス可能。',
     },
     {
       icon: Package,
       title: '配布',
-      description: '作品がリリースされたら、落札者に制作過程動画を配布。配布時にNFTが付与され、支援の証明が永遠に残る。',
+      description: '作品リリース後、落札者に制作過程動画を配布。配布時にNFTが付与される。',
     },
   ];
 
@@ -198,11 +201,6 @@ function AuctionModelContent({ isInView }: { isInView: boolean }) {
         className="text-center mb-12"
       >
         <p className="text-[#e8e8ed] text-lg mb-2">制作前に時間枠をオークション販売</p>
-        <div className="max-w-3xl mx-auto text-[#8a8a9e] space-y-2">
-          <p>• 制作予定時間を事前に指定（例：「明日の夜3時間レコーディング」）</p>
-          <p>• <span className="text-[#e8e8ed]">どの10分が「神回」になるかわからないガチャ性</span>で投機的興奮を生む</p>
-          <p>• 確実に販売できることが確定してから作業できる</p>
-        </div>
       </motion.div>
 
       {/* Steps */}
@@ -210,7 +208,7 @@ function AuctionModelContent({ isInView }: { isInView: boolean }) {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mb-16"
+        className="mb-8"
       >
         <div className="border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-8 max-w-5xl mx-auto">
           <div className="space-y-8">
@@ -234,11 +232,25 @@ function AuctionModelContent({ isInView }: { isInView: boolean }) {
         </div>
       </motion.div>
 
-      {/* Recommendation */}
+      {/* Features */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.4 }}
+        className="text-center mb-16"
+      >
+        <div className="max-w-3xl mx-auto text-[#8a8a9e] space-y-2">
+          <p>• 制作予定時間を事前に指定（例：「明日の夜3時間レコーディング」）</p>
+          <p>• どの10分が「神回」になるかわからないガチャ性で投機的興奮を生む</p>
+          <p>• 確実に販売できることが確定してから作業できる</p>
+        </div>
+      </motion.div>
+
+      {/* Recommendation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.5 }}
         className="text-center"
       >
         <p className="text-[#d4a574] mb-2">こんなクリエイターにおすすめ</p>

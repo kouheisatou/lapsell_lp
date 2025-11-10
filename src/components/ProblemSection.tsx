@@ -35,7 +35,7 @@ export function ProblemSection() {
         }} />
       </div>
 
-      <div className="container mx-auto px-8 max-w-4xl relative z-10">
+      <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -46,15 +46,12 @@ export function ProblemSection() {
             className="text-[clamp(2rem,4vw,3.5rem)] mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
-            時間をかけて音楽を作る意味を、<br />
-            <span className="text-[#d4a574]">見失いそうになっていませんか？</span>
+            音楽生成AIの台頭で、<br />
+            こんな悩みを抱えていませんか？
           </h2>
-          <p className="text-[#8a8a9e] text-lg max-w-3xl mx-auto leading-relaxed">
-            AI生成楽曲の台頭で、音楽クリエイターが直面している葛藤
-          </p>
         </motion.div>
 
-        <div className="space-y-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {problems.map((problem, idx) => {
             const Icon = problem.icon;
             return (
@@ -63,16 +60,16 @@ export function ProblemSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="flex items-start gap-6"
+                className="border border-[#d4a574]/20 bg-[#1a1a2e]/50 backdrop-blur-sm p-8"
               >
                 {/* Icon */}
-                <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center border border-[#d4a574]/30 bg-[#d4a574]/5">
+                <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center border border-[#d4a574]/30 bg-[#d4a574]/5 mb-6">
                   <Icon className="w-8 h-8 text-[#d4a574]" />
                 </div>
 
                 {/* Content */}
-                <div className="flex-1">
-                  <h3 className="text-xl mb-3 leading-relaxed">{problem.title}</h3>
+                <div>
+                  <h3 className="text-xl mb-4 leading-relaxed">{problem.title}</h3>
                   <p className="text-[#8a8a9e] leading-relaxed">{problem.description}</p>
                 </div>
               </motion.div>

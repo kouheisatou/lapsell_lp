@@ -46,7 +46,7 @@ export function CTASection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-8 max-w-5xl text-center">
+      <div className="relative z-10 container mx-auto px-8 max-w-7xl text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}

@@ -52,7 +52,7 @@ export function BenefitsSection() {
         />
       </div>
 
-      <div className="container mx-auto px-8 max-w-6xl relative z-10">
+      <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
