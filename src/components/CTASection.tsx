@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import copperTexture from '/images/abstract_copper_texture.png';
 
 export function CTASection() {
   const ref = useRef(null);
@@ -14,7 +15,7 @@ export function CTASection() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]" />
         <div className="absolute inset-0 opacity-5">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1565660467558-2cc40ad3066b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNvcHBlciUyMHRleHR1cmV8ZW58MXx8fHwxNzYxNTgwMTgxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            src={copperTexture}
             alt="Background texture"
             className="w-full h-full object-cover"
           />

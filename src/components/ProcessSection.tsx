@@ -9,8 +9,13 @@ export function ProcessSection() {
   const [activeModel, setActiveModel] = useState<'basic' | 'auction'>('basic');
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
-      <div className="container mx-auto px-8 max-w-7xl">
+    <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] to-[#0f0f1a]">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute bottom-1/3 left-1/3 w-[650px] h-[650px] bg-[#d4a574] blur-[125px] rounded-full" />
+      </div>
+
+      <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -34,7 +39,7 @@ export function ProcessSection() {
                   : 'text-[#8a8a9e] hover:text-white'
               }`}
             >
-              基本モデル
+              通常販売
             </button>
             <button
               onClick={() => setActiveModel('auction')}
@@ -44,7 +49,7 @@ export function ProcessSection() {
                   : 'text-[#8a8a9e] hover:text-white'
               }`}
             >
-              作業時間オークションモデル
+              オークション販売
             </button>
           </div>
         </motion.div>

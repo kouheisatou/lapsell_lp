@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
+import waveBackground from '/images/sound_wave_visualization.png';
 
 const benefits = [
   {
@@ -26,11 +27,16 @@ export function BenefitsSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0f0f1a] to-[#0a0a0f]">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-1/2 right-1/3 w-[700px] h-[700px] bg-[#d4a574] blur-[130px] rounded-full" />
+      </div>
+
       {/* Wave visualization background */}
       <div className="absolute inset-0 opacity-[0.03]">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1759912804199-a104b710a308?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb3VuZCUyMHdhdmUlMjB2aXN1YWxpemF0aW9ufGVufDF8fHx8MTc2MTUwMjcwN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+          src={waveBackground}
           alt="Sound waves"
           className="w-full h-full object-cover"
         />
