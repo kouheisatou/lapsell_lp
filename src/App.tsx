@@ -1,6 +1,7 @@
 import { HeroSection } from './components/HeroSection';
 import { ProblemSection } from './components/ProblemSection';
 import { SolutionSection } from './components/SolutionSection';
+import { UsageScenariosSection } from './components/UsageScenariosSection';
 import { CreatorBenefitsSection } from './components/CreatorBenefitsSection';
 import { FanBenefitsSection } from './components/FanBenefitsSection';
 import { RevenueSection } from './components/RevenueSection';
@@ -50,6 +51,7 @@ export default function App() {
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
+      <UsageScenariosSection />
       <CreatorBenefitsSection />
       <FanBenefitsSection />
       <RevenueSection />
