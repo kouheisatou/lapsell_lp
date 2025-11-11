@@ -33,7 +33,7 @@ export function ServiceFlowDiagram() {
 
   return (
     <div className="w-full overflow-x-auto">
-      <svg width="1200" height="550" className="mx-auto" viewBox="0 0 1200 550">
+      <svg width="100%" height="auto" className="mx-auto max-w-[1200px]" viewBox="0 0 1200 550" preserveAspectRatio="xMidYMid meet">
         <defs>
           <marker
             id="arrowhead"
