@@ -94,7 +94,7 @@ export function UsageScenariosSection() {
   const Icon = activeScenario.icon;
 
   return (
-    <section ref={ref} className="relative py-24 overflow-hidden bg-gradient-to-b from-[#0a0a0f] to-[#1a1a2e]/20">
+    <section ref={ref} className="relative py-32 overflow-hidden bg-gradient-to-b from-[#0a0a0f] to-[#1a1a2e]/20">
       <div className="container mx-auto px-8 max-w-7xl relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
@@ -175,7 +175,7 @@ export function UsageScenariosSection() {
               <Swiper
                 modules={[Pagination]}
                 centeredSlides={true}
-                slidesPerView={2.5}
+                slidesPerView={1.8}
                 spaceBetween={30}
                 loop={true}
                 pagination={{
