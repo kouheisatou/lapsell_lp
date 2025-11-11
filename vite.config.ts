@@ -55,7 +55,7 @@ const produceSingleFile = process.env.SINGLE_FILE === 'true'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/lapsell_lp/',
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
