@@ -32,11 +32,12 @@ The landing page follows a single-page application pattern with sequential secti
 
 1. **HeroSection** - Main visual and catchphrase
 2. **ProblemSection** - Challenges faced by music creators
-3. **SolutionSection** - Platform solution overview
-4. **ProcessSection** - Usage process walkthrough
-5. **FanBenefitsSection** - Benefits for fans
-6. **RevenueSection** - Monetization mechanism
-7. **CTASection** - Call to action
+3. **SolutionSection** - Platform solution overview and usage steps
+4. **UsageScenariosSection** - Real-world usage scenarios (carousel display)
+5. **CreatorBenefitsSection** - Benefits for creators
+6. **FanBenefitsSection** - Benefits for fans
+7. **RevenueSection** - Monetization mechanism with survey data
+8. **CTASection** - Call to action
 
 All sections are composed in `src/App.tsx` in order.
 
@@ -85,6 +86,25 @@ The project includes two custom Vite plugins in `vite.config.ts`:
 - **Single-file build mode**: Set `SINGLE_FILE=true` environment variable to bundle all assets inline (used by `npm run build:single`)
 - **TypeScript**: Project references architecture with separate configs for app and node code
 - **ESLint**: Configured for TypeScript/React with hooks and refresh plugins
+
+## Content Editing Workflow
+
+**IMPORTANT**: When editing the landing page content, always follow this workflow:
+
+1. **First, edit `lapsell_lp.md`**: Update the content specification document with the new copy, structure, or messaging changes
+2. **Then, update the code**: Reflect the changes from `lapsell_lp.md` into the React components
+
+This ensures that:
+- Content changes are documented and version-controlled
+- The content specification remains the single source of truth
+- Future edits maintain consistency with the documented structure
+- Content and code stay in sync
+
+The `lapsell_lp.md` file contains:
+- Complete copy for all sections
+- Image asset requirements
+- Tone and voice guidelines
+- Animation and interaction specifications
 
 ## Development Notes
 
