@@ -981,24 +981,202 @@ small { font-size: 0.78em; }
 /* =========================================================
    FOOTER (drawing title block)
    ========================================================= */
+/* =========================================================
+   FOOTER — Drawing title block / stamp area
+   ========================================================= */
 .footer {
-  padding: clamp(28px, 3vw, 40px) var(--gutter);
-  border-top: var(--hairline) solid var(--rule);
+  padding: clamp(40px, 5vw, 64px) var(--gutter);
+  border-top: var(--line) solid var(--ink);
+  background: var(--paper-edge);
+  position: relative;
 }
-.footer-row {
+.footer-inner {
   max-width: var(--content-max);
   margin: 0 auto;
+}
+
+/* ----- Main title block (2 rows) ----- */
+.footer-tb {
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  margin-bottom: 14px;
+}
+.ftb-row { display: grid; }
+.ftb-row--1 {
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  border-bottom: var(--line) solid var(--ink);
+}
+.ftb-row--2 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.ftb-cell {
+  padding: 12px 14px;
+  border-right: var(--line) solid var(--ink);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 56px;
+  position: relative;
+}
+.ftb-cell:last-child { border-right: 0; }
+.ftb-cell .tb-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--graphite);
 }
-.footer-mark { color: var(--ink); font-weight: 400; letter-spacing: 0.28em; }
+.ftb-cell .tb-value {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  font-weight: 400;
+}
+.ftb-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border: var(--line) solid var(--accent);
+  color: var(--accent);
+  font-size: 11px !important;
+  letter-spacing: 0.2em;
+  align-self: flex-start;
+}
+
+/* ----- Approval block (DRAWN / CHECKED / APPROVED / REV HISTORY) ----- */
+.footer-ap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  margin-bottom: 14px;
+}
+.ap-cell {
+  padding: 12px 14px 14px;
+  border-right: var(--line) solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 78px;
+}
+.ap-cell:last-child { border-right: 0; }
+.ap-cell .tb-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+.ap-cell .tb-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.ap-date {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--graphite-2);
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: var(--hairline) solid var(--rule);
+}
+.ap-stamp {
+  display: inline-block;
+  padding: 4px 10px;
+  color: var(--accent) !important;
+  border: var(--line) solid var(--accent);
+  letter-spacing: 0.22em !important;
+  transform: rotate(-3deg);
+  font-family: var(--mono);
+  font-size: 11px !important;
+  align-self: flex-start;
+}
+
+/* ----- Color management bar ----- */
+.color-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--graphite);
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  margin-bottom: 14px;
+}
+.cb-group { display: inline-flex; gap: 0; }
+.cb-chip {
+  width: 18px; height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: var(--paper);
+  border: var(--hairline) solid var(--ink);
+  letter-spacing: 0;
+}
+.cb-chip--c { background: #1eaee0; }
+.cb-chip--m { background: #d6166e; }
+.cb-chip--y { background: #f3d61a; color: var(--ink); }
+.cb-chip--k { background: var(--ink); }
+
+.cb-divider { width: 1px; height: 14px; background: var(--rule); }
+.cb-text { color: var(--graphite); }
+.cb-density { display: inline-flex; gap: 1px; }
+.cb-density i {
+  width: 11px; height: 11px;
+  display: inline-block;
+  border: var(--hairline) solid var(--ink);
+}
+.cb-density i:nth-child(1) { background: var(--graphite-2); }
+.cb-density i:nth-child(2) { background: var(--graphite); }
+.cb-density i:nth-child(3) { background: var(--ink-soft); }
+.cb-density i:nth-child(4) { background: var(--ink); }
+
+/* ----- Tiny copyright caption ----- */
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  text-align: center;
+  padding-top: 10px;
+  border-top: var(--hairline) solid var(--rule);
+  line-height: 1.7;
+}
+.footer-copy a { color: var(--ink); border-bottom: var(--hairline) solid var(--ink); }
+.footer-copy a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ftb-row--1 { grid-template-columns: 1fr 1fr; }
+  .ftb-row--1 .ftb-cell:nth-child(1),
+  .ftb-row--1 .ftb-cell:nth-child(2) { border-bottom: var(--line) solid var(--ink); }
+  .ftb-row--1 .ftb-cell:nth-child(2n) { border-right: 0; }
+  .ftb-row--2 { grid-template-columns: repeat(3, 1fr); }
+  .ftb-row--2 .ftb-cell:nth-child(1),
+  .ftb-row--2 .ftb-cell:nth-child(2),
+  .ftb-row--2 .ftb-cell:nth-child(3) { border-bottom: var(--line) solid var(--ink); }
+  .ftb-row--2 .ftb-cell:nth-child(3n) { border-right: 0; }
+  .footer-ap { grid-template-columns: 1fr 1fr; }
+  .footer-ap .ap-cell:nth-child(1),
+  .footer-ap .ap-cell:nth-child(2) { border-bottom: var(--line) solid var(--ink); }
+  .footer-ap .ap-cell:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 540px) {
+  .ftb-row--1, .ftb-row--2 { grid-template-columns: 1fr 1fr; }
+  .ftb-row--1 .ftb-cell, .ftb-row--2 .ftb-cell { border-bottom: var(--line) solid var(--ink); }
+  .ftb-row--1 .ftb-cell:nth-child(2n), .ftb-row--2 .ftb-cell:nth-child(2n) { border-right: 0; }
+  .ftb-row--1 .ftb-cell:nth-last-child(-n+2),
+  .ftb-row--2 .ftb-cell:nth-last-child(-n+2) { border-bottom: 0; }
+}
 
 /* =========================================================
    ANIMATIONS / IN-VIEW
