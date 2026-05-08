@@ -1,13 +1,644 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lapsell</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lapsell — 音楽・絵画など、創作の模索（プロセス）そのものを世界に1つだけのグッズとして販売できるプラットフォーム。" />
+  <meta name="theme-color" content="#f5f1e6" />
+  <title>LAPSELL — DRAWINGS FOR THE PROCESS OF MAKING</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&family=Inter:wght@200;300;400;500&family=Noto+Sans+JP:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- =========================================================
+       PAGE-LEVEL TRIM MARKS (fixed at viewport corners)
+       ========================================================= -->
+  <div class="trim trim--tl" aria-hidden="true"></div>
+  <div class="trim trim--tr" aria-hidden="true"></div>
+  <div class="trim trim--bl" aria-hidden="true"></div>
+  <div class="trim trim--br" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       TOP STATUS BAR (drawing meta)
+       ========================================================= -->
+  <div class="status-bar" aria-hidden="true">
+    <span>PROJECT&nbsp;/&nbsp;LAPSELL</span>
+    <span>DWG.&nbsp;NO.&nbsp;LP-2026-01</span>
+    <span>SCALE&nbsp;1:1</span>
+    <span>REV.&nbsp;2026.05</span>
+    <span>DOMAIN&nbsp;www.lapsell.art</span>
+  </div>
+
+  <main>
+
+    <!-- =========================================================
+         00 / COVER SHEET
+         ========================================================= -->
+    <section class="sheet sheet--cover" id="cover" data-no="00">
+      <div class="sheet-frame" aria-hidden="true">
+        <span class="corner corner--tl"></span>
+        <span class="corner corner--tr"></span>
+        <span class="corner corner--bl"></span>
+        <span class="corner corner--br"></span>
+      </div>
+
+      <div class="cover-inner">
+        <div class="cover-meta-row" aria-hidden="true">
+          <span class="meta-pill">SHEET&nbsp;A1</span>
+          <span class="dim-h">
+            <span class="dim-h__line"></span>
+            <span class="dim-h__value">00&nbsp;/&nbsp;08</span>
+            <span class="dim-h__line"></span>
+          </span>
+          <span class="meta-pill">COVER</span>
+        </div>
+
+        <h1 class="wordmark">
+          <span class="wordmark__line">LAPSELL</span>
+        </h1>
+
+        <p class="cover-tagline-en">DRAWINGS&nbsp;FOR&nbsp;THE&nbsp;PROCESS&nbsp;OF&nbsp;MAKING</p>
+        <p class="cover-tagline-jp">あなたの作品制作の<br />模索を、売りませんか。</p>
+
+        <p class="cover-sub">AI生成に埋もれない。<br />制作過程を世界に1つだけのグッズとして販売できるプラットフォーム。</p>
+
+        <div class="cover-titleblock">
+          <div class="tb-cell"><span class="tb-label">DRAWN&nbsp;BY</span><span class="tb-value">LAPSELL&nbsp;TEAM</span></div>
+          <div class="tb-cell"><span class="tb-label">DATE</span><span class="tb-value">2026.05</span></div>
+          <div class="tb-cell"><span class="tb-label">DRAWING&nbsp;NO.</span><span class="tb-value">LP&minus;2026&minus;01</span></div>
+          <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">01&nbsp;/&nbsp;09</span></div>
+          <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">1&nbsp;:&nbsp;1</span></div>
+          <div class="tb-cell"><span class="tb-label">REV.</span><span class="tb-value">A</span></div>
+        </div>
+
+        <a class="scroll-cue" href="#brief" aria-label="次のセクションへ">
+          <span class="scroll-cue__label">SCROLL&nbsp;/&nbsp;次へ</span>
+          <span class="scroll-cue__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 64" width="24" height="64">
+              <line class="anim-line" x1="12" y1="0" x2="12" y2="56" />
+              <polyline class="anim-line" points="4,48 12,60 20,48" fill="none" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         01 / THE BRIEF
+         ========================================================= -->
+    <section class="sheet" id="brief" data-no="01">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">01</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">THE&nbsp;BRIEF&nbsp;/&nbsp;与件</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">1&nbsp;:&nbsp;1</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">02&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">THE&nbsp;BRIEF</span>
+          <span class="heading-jp">生成AIの台頭で、<br />こんな悩みを抱えていませんか。</span>
+        </h2>
+
+        <aside class="fact-callout" aria-label="生成AI音楽に関するデータ">
+          <div class="fact-num">
+            <span class="fact-num__digits">44</span><span class="fact-num__pct">%</span>
+          </div>
+          <div class="fact-body">
+            <header class="fact-head">
+              <span class="fact-label">DATA&nbsp;/&nbsp;01</span>
+              <span class="fact-rule" aria-hidden="true"></span>
+              <span class="fact-source">DEEZER&nbsp;NEWSROOM&nbsp;&middot;&nbsp;2026.04</span>
+            </header>
+            <p class="fact-text">Deezer に毎日アップロードされる新譜の <strong>44&nbsp;%</strong> が、すでに AI による生成楽曲。1日あたり約 <strong>75,000 トラック</strong> が機械的に流し込まれている。</p>
+            <p class="fact-sub">— 音楽クリエイターは、いまや<em>生成AI音楽との差別化</em>に直面している。</p>
+          </div>
+        </aside>
+
+        <div class="brief-grid">
+          <article class="brief-card" data-num="01">
+            <div class="card-frame" aria-hidden="true">
+              <span class="card-tag">PROBLEM&nbsp;01</span>
+            </div>
+            <h3 class="brief-card__title">AIに数秒でできることに、<br />何時間もかける意味があるのか。</h3>
+            <p class="brief-card__body">朝から晩まで創作に没頭し、細部にこだわって完成させた作品。でもAIなら数秒で「それっぽい」ものができてしまう。AIが量産した作品も、魂を込めて作った作品も、同じ土俵で評価される。「どれだけ時間をかけたか」「どんな想いで作ったか」は、誰も知らない。</p>
+            <div class="card-dim" aria-hidden="true">
+              <span class="card-dim__label">DIM.&nbsp;A</span>
+              <span class="card-dim__line"></span>
+            </div>
+          </article>
+
+          <article class="brief-card" data-num="02">
+            <div class="card-frame" aria-hidden="true">
+              <span class="card-tag">PROBLEM&nbsp;02</span>
+            </div>
+            <h3 class="brief-card__title">配信しているけど、<br />収益が出ない。</h3>
+            <p class="brief-card__body">動画配信プラットフォームで制作過程を配信しても、広告収益は微々たるもの。視聴者数が伸びず、収益化の条件すら満たせない。時間をかけて配信しても、報われない現実に疲弊している。</p>
+            <div class="card-dim" aria-hidden="true">
+              <span class="card-dim__label">DIM.&nbsp;B</span>
+              <span class="card-dim__line"></span>
+            </div>
+          </article>
+
+          <article class="brief-card" data-num="03">
+            <div class="card-frame" aria-hidden="true">
+              <span class="card-tag">PROBLEM&nbsp;03</span>
+            </div>
+            <h3 class="brief-card__title">試行錯誤の過程は、<br />誰にも見えない。</h3>
+            <p class="brief-card__body">完成した作品だけが評価され、そこに至るまでの迷いやひらめきの瞬間は、誰の目にも触れない。一番面白いはずの「途中」が、誰にも届かないまま消えていく。</p>
+            <div class="card-dim" aria-hidden="true">
+              <span class="card-dim__label">DIM.&nbsp;C</span>
+              <span class="card-dim__line"></span>
+            </div>
+          </article>
+        </div>
+
+        <p class="empathy">
+          <span class="empathy__rule" aria-hidden="true"></span>
+          <span class="empathy__text">AI時代だからこそ、<br /><strong>人が時間をかけて作った証明</strong>に、価値が生まれる。</span>
+          <span class="empathy__rule" aria-hidden="true"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         02 / CONCEPT
+         ========================================================= -->
+    <section class="sheet sheet--concept" id="concept" data-no="02">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">02</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">CONCEPT&nbsp;/&nbsp;概念</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">1&nbsp;:&nbsp;1</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">03&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body sheet-body--concept">
+        <p class="concept-leadin">CONCEPT&nbsp;/&nbsp;このプラットフォームの根本思想</p>
+
+        <h2 class="concept-statement">
+          <span class="cs-line cs-line--1">制作過程を、</span>
+          <span class="cs-line cs-line--2">世界に１つだけの</span>
+          <span class="cs-line cs-line--3">グッズに。</span>
+        </h2>
+
+        <div class="concept-rule" aria-hidden="true">
+          <span class="cr-tick"></span>
+          <span class="cr-line"></span>
+          <span class="cr-label">SCALE&nbsp;1:1</span>
+          <span class="cr-line"></span>
+          <span class="cr-tick"></span>
+        </div>
+
+        <p class="concept-body">完成品は誰でも見られる。けれど、その「制作の途中」だけは、世界で１人にしか所有できない。<br />Lapsell は、創作の <em>模索そのもの</em> を、ファンが手にとれる形に翻訳するためのプラットフォームです。</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         03 / MECHANISM
+         ========================================================= -->
+    <section class="sheet" id="mechanism" data-no="03">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">03</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">MECHANISM&nbsp;/&nbsp;仕組み</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">N.T.S.</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">04&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">SCHEMATIC&nbsp;DIAGRAM</span>
+          <span class="heading-jp">クリエイター・ファン・Lapsell の関係。</span>
+        </h2>
+
+        <figure class="schematic">
+          <svg class="schematic__svg" viewBox="0 0 1200 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schematic-title">
+            <title id="schematic-title">Lapsell の取引関係を示す模式図</title>
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+              </marker>
+            </defs>
+
+            <!-- Grid frame -->
+            <rect class="schem-frame" x="20" y="20" width="1160" height="500" />
+
+            <!-- Corner ticks -->
+            <g class="schem-ticks">
+              <path d="M20 40 L20 20 L40 20" />
+              <path d="M1180 40 L1180 20 L1160 20" />
+              <path d="M20 500 L20 520 L40 520" />
+              <path d="M1180 500 L1180 520 L1160 520" />
+            </g>
+
+            <!-- Nodes -->
+            <g class="schem-node" transform="translate(120,180)">
+              <rect width="220" height="160" />
+              <text class="node-label-en" x="20" y="30">CREATOR&nbsp;/&nbsp;01</text>
+              <text class="node-label-jp" x="110" y="80" text-anchor="middle">クリエイター</text>
+              <text class="node-sub" x="110" y="110" text-anchor="middle">制作過程を録画する人</text>
+              <text class="node-dim" x="20" y="148">220 × 160</text>
+            </g>
+
+            <g class="schem-node schem-node--center" transform="translate(490,180)">
+              <rect width="220" height="160" />
+              <text class="node-label-en" x="20" y="30">LAPSELL&nbsp;/&nbsp;02</text>
+              <text class="node-label-jp" x="110" y="80" text-anchor="middle">プラットフォーム</text>
+              <text class="node-sub" x="110" y="110" text-anchor="middle">分割／決済／NFT発行</text>
+              <text class="node-dim" x="20" y="148">220 × 160</text>
+            </g>
+
+            <g class="schem-node" transform="translate(860,180)">
+              <rect width="220" height="160" />
+              <text class="node-label-en" x="20" y="30">FAN&nbsp;/&nbsp;03</text>
+              <text class="node-label-jp" x="110" y="80" text-anchor="middle">ファン</text>
+              <text class="node-sub" x="110" y="110" text-anchor="middle">プロセスを所有する人</text>
+              <text class="node-dim" x="20" y="148">220 × 160</text>
+            </g>
+
+            <!-- Flow arrows: CREATOR -> LAPSELL -->
+            <g class="schem-flow">
+              <line class="anim-line" x1="340" y1="225" x2="490" y2="225" marker-end="url(#arrow)" />
+              <text class="flow-label" x="415" y="215" text-anchor="middle">制作過程動画</text>
+              <text class="flow-num" x="415" y="245" text-anchor="middle">→ 1</text>
+            </g>
+            <!-- LAPSELL -> CREATOR (return: 売上) -->
+            <g class="schem-flow">
+              <line class="anim-line" x1="490" y1="295" x2="340" y2="295" marker-end="url(#arrow)" />
+              <text class="flow-label" x="415" y="285" text-anchor="middle">売上&nbsp;＋&nbsp;ロイヤリティ</text>
+              <text class="flow-num" x="415" y="315" text-anchor="middle">← 4</text>
+            </g>
+
+            <!-- LAPSELL -> FAN: NFT + 動画 -->
+            <g class="schem-flow">
+              <line class="anim-line" x1="710" y1="225" x2="860" y2="225" marker-end="url(#arrow)" />
+              <text class="flow-label" x="785" y="215" text-anchor="middle">分割動画&nbsp;＋&nbsp;支援証明NFT</text>
+              <text class="flow-num" x="785" y="245" text-anchor="middle">→ 3</text>
+            </g>
+            <!-- FAN -> LAPSELL: 購入 -->
+            <g class="schem-flow">
+              <line class="anim-line" x1="860" y1="295" x2="710" y2="295" marker-end="url(#arrow)" />
+              <text class="flow-label" x="785" y="285" text-anchor="middle">購入&nbsp;／&nbsp;二次流通</text>
+              <text class="flow-num" x="785" y="315" text-anchor="middle">← 2</text>
+            </g>
+
+            <!-- Dimension line under entire diagram -->
+            <g class="schem-dim">
+              <line class="anim-line" x1="120" y1="430" x2="1080" y2="430" />
+              <line x1="120" y1="420" x2="120" y2="440" />
+              <line x1="1080" y1="420" x2="1080" y2="440" />
+              <text class="dim-text" x="600" y="420" text-anchor="middle">SUPPLY&nbsp;CHAIN&nbsp;&nbsp;OF&nbsp;&nbsp;THE&nbsp;&nbsp;PROCESS</text>
+              <text class="dim-text dim-text--small" x="600" y="455" text-anchor="middle">DIM.&nbsp;A&nbsp;&nbsp;=&nbsp;&nbsp;960</text>
+            </g>
+          </svg>
+
+          <figcaption class="schematic__caption">
+            FIG.&nbsp;01&nbsp;&nbsp;&middot;&nbsp;&nbsp;LAPSELL&nbsp;TRANSACTION&nbsp;FLOW&nbsp;&middot;&nbsp;&nbsp;ファンが支払い、Lapsell が分割・決済・NFT 発行を担い、クリエイターには売上とロイヤリティが還流する。
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         04 / PROCESS
+         ========================================================= -->
+    <section class="sheet" id="process" data-no="04">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">04</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">PROCESS&nbsp;/&nbsp;工程</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">N.T.S.</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">05&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">PROCESS&nbsp;DIAGRAM</span>
+          <span class="heading-jp">録画から二次流通まで、4 工程。</span>
+        </h2>
+
+        <ol class="process">
+          <li class="process-step" data-step="01">
+            <div class="step-num">STEP&nbsp;01</div>
+            <h3 class="step-title">制作（録画）</h3>
+            <p class="step-body">Lapsellアプリで制作を開始。録画ボタンを押すだけで、制作過程が自動的にタイムラプス動画として記録され、クラウドにアップロードされます。</p>
+            <div class="step-axis" aria-hidden="true"><span class="axis-tick"></span></div>
+          </li>
+          <li class="process-step" data-step="02">
+            <div class="step-num">STEP&nbsp;02</div>
+            <h3 class="step-title">作品完成・自動分割</h3>
+            <p class="step-body">作品が完成したら録画を停止。動画は自動的に <em>10分単位</em> へ分割され、各区間が世界に１つだけのグッズとして整います。</p>
+            <div class="step-axis" aria-hidden="true"><span class="axis-tick"></span></div>
+          </li>
+          <li class="process-step" data-step="03">
+            <div class="step-num">STEP&nbsp;03</div>
+            <h3 class="step-title">販売（QRコード）</h3>
+            <p class="step-body">イベント会場や SNS、名刺、グッズに QR コードを表示。ファンが購入すると、制作過程動画と支援証明NFTが自動発行されます。</p>
+            <div class="step-axis" aria-hidden="true"><span class="axis-tick"></span></div>
+          </li>
+          <li class="process-step" data-step="04">
+            <div class="step-num">STEP&nbsp;04</div>
+            <h3 class="step-title">二次流通・ロイヤリティ</h3>
+            <p class="step-body">購入したファンは制作過程動画を他のファンに転売可能。転売時にはあなたへ <em>一定のロイヤリティ</em> が自動的に支払われます。</p>
+            <div class="step-axis" aria-hidden="true"><span class="axis-tick"></span></div>
+          </li>
+        </ol>
+
+        <div class="process-axisline" aria-hidden="true">
+          <span class="axis-arrow">←</span>
+          <span class="axis-rule"></span>
+          <span class="axis-label">TIME&nbsp;AXIS&nbsp;/&nbsp;制作開始から流通まで</span>
+          <span class="axis-rule"></span>
+          <span class="axis-arrow">→</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         05 / SPECIMENS
+         ========================================================= -->
+    <section class="sheet sheet--specimens" id="specimens" data-no="05">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">05</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">SPECIMENS&nbsp;/&nbsp;標本</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">VAR.</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">06&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">USAGE&nbsp;SPECIMENS&nbsp;&nbsp;N&nbsp;=&nbsp;9</span>
+          <span class="heading-jp">9 通りの使われ方。横にスクロール。</span>
+        </h2>
+
+        <div class="specimen-track-wrap">
+          <button class="specimen-nav specimen-nav--prev" type="button" aria-label="前のスペシメンへ">←</button>
+          <button class="specimen-nav specimen-nav--next" type="button" aria-label="次のスペシメンへ">→</button>
+
+          <div class="specimen-track" tabindex="0">
+            <article class="specimen" data-spm="01">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;01</span>
+                <span class="spm-cat">EXHIBITION</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/1.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">作品の横に QR コードを置く</h3>
+              <p class="spm-body">展示会やギャラリーで、作品の横に QR コードを設置。訪れた人が気軽にスマホでスキャンして、その場で制作過程動画を購入できます。</p>
+            </article>
+            <article class="specimen" data-spm="02">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;02</span>
+                <span class="spm-cat">MERCH</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/2.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">キーホルダーにつける</h3>
+              <p class="spm-body">QR コード付きのキーホルダーを作成。イベントで配布したりグッズとして販売。物理的グッズとデジタル体験を融合した新しい応援の形です。</p>
+            </article>
+            <article class="specimen" data-spm="03">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;03</span>
+                <span class="spm-cat">PRE-SALE</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/3.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">次の作品の支援を募る</h3>
+              <p class="spm-body">新作の制作前に、SNS で QR コードを共有。完成前から応援するファンに、最初の瞬間から記録された特別な動画を届けます。</p>
+            </article>
+            <article class="specimen" data-spm="04">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;04</span>
+                <span class="spm-cat">LIVE&nbsp;EVENT</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/4.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">ライブペインティング中に販売</h3>
+              <p class="spm-body">イベント会場で実演しながら、完成前から制作過程を販売。観客がその場で購入し、後日完成版動画も受け取れます。</p>
+            </article>
+            <article class="specimen" data-spm="05">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;05</span>
+                <span class="spm-cat">PRINT&nbsp;TOOL</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/5.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">名刺やフライヤーに QR 印刷</h3>
+              <p class="spm-body">個展の案内状や名刺に QR を印刷。配った相手がいつでもアクセスできる営業ツールとして機能します。</p>
+            </article>
+            <article class="specimen" data-spm="06">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;06</span>
+                <span class="spm-cat">SUBSCRIPTION</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/6.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">ファンクラブ／サブスク特典</h3>
+              <p class="spm-body">月額会員限定で制作過程動画を配布。限定 QR で特別感を演出し、定期収益と特別な体験を両立します。</p>
+            </article>
+            <article class="specimen" data-spm="07">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;07</span>
+                <span class="spm-cat">EDUCATION</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/7.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">ワークショップの教材</h3>
+              <p class="spm-body">自分の制作過程を受講生への教材として販売。技術や考え方を学べる貴重な資料となり、教育ビジネスに展開可能。</p>
+            </article>
+            <article class="specimen" data-spm="08">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;08</span>
+                <span class="spm-cat">PORTFOLIO</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/8.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">作品集／ポートフォリオに添付</h3>
+              <p class="spm-body">印刷された作品集に QR を付帯。クライアント提案時に差別化でき、デジタルとフィジカルを融合したポートフォリオに。</p>
+            </article>
+            <article class="specimen" data-spm="09">
+              <header class="spm-head">
+                <span class="spm-no">SPM.&nbsp;09</span>
+                <span class="spm-cat">EPHEMERAL</span>
+              </header>
+              <div class="spm-plate"><img src="images/scenarios/9.png" alt="" loading="lazy" /></div>
+              <h3 class="spm-title">一時的な作品の記録</h3>
+              <p class="spm-body">チョークアートや砂絵など消えてしまう作品の制作過程を永久保存。作品自体は消えても、記録として価値を持ち続けます。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         06 / BENEFICIARIES
+         ========================================================= -->
+    <section class="sheet" id="beneficiaries" data-no="06">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">06</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">BENEFICIARIES&nbsp;/&nbsp;受益者</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">1&nbsp;:&nbsp;1</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">07&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">TWO&nbsp;ELEVATIONS</span>
+          <span class="heading-jp">クリエイターと、ファン。それぞれの立面。</span>
+        </h2>
+
+        <div class="bene-split">
+          <article class="bene-col bene-col--creator">
+            <header class="bene-head">
+              <span class="bene-tag">ELEV.&nbsp;A</span>
+              <h3 class="bene-title">FOR&nbsp;CREATORS<br /><small>クリエイターへ</small></h3>
+            </header>
+            <ul class="bene-list">
+              <li><span class="bene-num">A.01</span><div><strong>人間が時間をかけて作った証明。</strong>タイムラプス動画は、AI 生成ではない・人の手による創作であることを明確に示します。</div></li>
+              <li><span class="bene-num">A.02</span><div><strong>自分のファン以外にも販売機会。</strong>Lapsell を使う他のクリエイターのファンにも届く、アプリ内 SNS で新しい支援者と出会えます。</div></li>
+              <li><span class="bene-num">A.03</span><div><strong>制作過程そのものが商品になる。</strong>試行錯誤、迷い、ひらめきの瞬間。その全てに価値があります。</div></li>
+              <li><span class="bene-num">A.04</span><div><strong>二次流通でも継続的なロイヤリティ。</strong>一度制作した動画が、継続的に収益を生み出す資産になります。</div></li>
+              <li><span class="bene-num">A.05</span><div><strong>グローバルな販売が可能。</strong>制作過程はノンバーバル。ブロックチェーンで世界中のファンに直接販売できます。</div></li>
+            </ul>
+            <p class="bene-quote">制作する時間が、そのまま収益になる。</p>
+          </article>
+
+          <article class="bene-col bene-col--fan">
+            <header class="bene-head">
+              <span class="bene-tag">ELEV.&nbsp;B</span>
+              <h3 class="bene-title">FOR&nbsp;FANS<br /><small>ファンへ</small></h3>
+            </header>
+            <ul class="bene-list">
+              <li><span class="bene-num">B.01</span><div><strong>世界に１つだけの瞬間を独占。</strong>各区間の制作過程は世界に１人だけが所有できる、複製不可能なオンリーワングッズ。</div></li>
+              <li><span class="bene-num">B.02</span><div><strong>作品がバズれば、NFT の価値も上昇。</strong>支援した作品が人気になれば、その制作過程動画 NFT も価値が上がる可能性。</div></li>
+              <li><span class="bene-num">B.03</span><div><strong>「古参」の証明が、永遠に残る。</strong>ブロックチェーンに刻まれた支援証明は、誰にも消せません。</div></li>
+              <li><span class="bene-num">B.04</span><div><strong>クリエイターとの深い繋がり。</strong>あなたの支援が「この部分の制作」を生み出した。作品の誕生に関わったパートナーとしての実感。</div></li>
+            </ul>
+            <p class="bene-quote">推しが有名になる前から支援していた証拠が、一生残る。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         07 / SPECIFICATIONS (revenue / survey)
+         ========================================================= -->
+    <section class="sheet" id="specs" data-no="07">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">07</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">SPECIFICATIONS&nbsp;/&nbsp;仕様・収益試算</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">DATA</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">08&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body">
+        <h2 class="section-heading">
+          <span class="heading-en">SPECIFICATIONS&nbsp;&middot;&nbsp;REVENUE</span>
+          <span class="heading-jp">制作時間そのものが収入になる、その試算。</span>
+        </h2>
+
+        <div class="spec-grid">
+          <table class="spec-table">
+            <caption>SURVEY&nbsp;&middot;&nbsp;制作過程動画 10 分への支払い意向（独自アンケート 2025 年・N&nbsp;=&nbsp;393）</caption>
+            <thead>
+              <tr><th scope="col">CODE</th><th scope="col">PRICE&nbsp;BAND</th><th scope="col" class="num">RATIO</th><th scope="col">BAR</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">P.01</th><td>3,001 円以上</td><td class="num">15&nbsp;%</td>
+                <td><span class="bar"><span class="bar-fill" style="--w:15"></span></span></td>
+              </tr>
+              <tr>
+                <th scope="row">P.02</th><td>1,001 〜 3,000 円</td><td class="num">8&nbsp;%</td>
+                <td><span class="bar"><span class="bar-fill" style="--w:8"></span></span></td>
+              </tr>
+              <tr>
+                <th scope="row">P.03</th><td>1 〜 1,000 円</td><td class="num">9&nbsp;%</td>
+                <td><span class="bar"><span class="bar-fill" style="--w:9"></span></span></td>
+              </tr>
+              <tr class="row-sum">
+                <th scope="row">P.SUM</th><td>支払意向あり（合計）</td><td class="num"><strong>32&nbsp;%</strong></td>
+                <td><span class="bar"><span class="bar-fill bar-fill--accent" style="--w:32"></span></span></td>
+              </tr>
+              <tr>
+                <th scope="row">P.04</th><td>購入しない</td><td class="num">68&nbsp;%</td>
+                <td><span class="bar"><span class="bar-fill bar-fill--muted" style="--w:68"></span></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <aside class="spec-calc">
+            <p class="spec-leader">EQUATION&nbsp;/&nbsp;期待支払額×時間枠 = 時給期待値</p>
+            <p class="spec-eq">
+              <span class="eq-num">¥&nbsp;880</span>
+              <span class="eq-mul">×</span>
+              <span class="eq-num">6&nbsp;枠</span>
+              <span class="eq-eq">=</span>
+              <span class="eq-num eq-num--out">¥&nbsp;5,280&nbsp;/&nbsp;hr</span>
+            </p>
+            <p class="spec-note">DIM.&nbsp;X&nbsp;=&nbsp;支払意向のある支援者の期待支払額（10 分／枠）<br />NOTE.&nbsp;実際の収益はクリエイターのフォロワー数や作品の人気度によって変動します。</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         08 / SIGN-OFF (CTA)
+         ========================================================= -->
+    <section class="sheet sheet--signoff" id="signoff" data-no="08">
+      <header class="title-block">
+        <div class="tb-cell tb-cell--no"><span class="tb-label">SECTION</span><span class="tb-value">08</span></div>
+        <div class="tb-cell tb-cell--title"><span class="tb-label">DRAWING&nbsp;TITLE</span><span class="tb-value">SIGN&minus;OFF&nbsp;/&nbsp;承認</span></div>
+        <div class="tb-cell"><span class="tb-label">SCALE</span><span class="tb-value">1&nbsp;:&nbsp;1</span></div>
+        <div class="tb-cell"><span class="tb-label">SHEET</span><span class="tb-value">09&nbsp;/&nbsp;09</span></div>
+      </header>
+
+      <div class="sheet-body sheet-body--signoff">
+        <p class="signoff-leadin">MISSION&nbsp;STATEMENT</p>
+        <h2 class="signoff-statement">
+          <span>世界の創作の</span>
+          <span>多様性を、守る。</span>
+        </h2>
+        <p class="signoff-body">時間をかけて制作する人が減れば、世界の創作物は画一化してしまう。<br />私たちは、AI を使わずに新しい作品を生み出すクリエイターを応援します。</p>
+
+        <div class="cta-row">
+          <a class="cta cta--primary" href="#" role="button">
+            <span class="cta__label">無料で始める</span>
+            <span class="cta__sub">START&nbsp;FREE</span>
+          </a>
+          <a class="cta cta--ghost" href="#cover" role="button">
+            <span class="cta__label">最初から見る</span>
+            <span class="cta__sub">BACK&nbsp;TO&nbsp;COVER</span>
+          </a>
+        </div>
+
+        <div class="approval-block" aria-hidden="true">
+          <div class="ap-cell"><span class="tb-label">DRAWN</span><span class="tb-value">LAPSELL</span></div>
+          <div class="ap-cell"><span class="tb-label">CHECKED</span><span class="tb-value">—</span></div>
+          <div class="ap-cell"><span class="tb-label">APPROVED</span><span class="tb-value ap-stamp">SIGNED</span></div>
+          <div class="ap-cell"><span class="tb-label">DATE</span><span class="tb-value">2026.05</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER (drawing title block)
+       ========================================================= -->
+  <footer class="footer">
+    <div class="footer-block">
+      <div class="ap-cell"><span class="tb-label">PROJECT</span><span class="tb-value">LAPSELL</span></div>
+      <div class="ap-cell"><span class="tb-label">DOMAIN</span><span class="tb-value">www.lapsell.art</span></div>
+      <div class="ap-cell"><span class="tb-label">DWG.&nbsp;NO.</span><span class="tb-value">LP&minus;2026&minus;01</span></div>
+      <div class="ap-cell"><span class="tb-label">REV.</span><span class="tb-value">A&nbsp;/&nbsp;2026.05</span></div>
+      <div class="ap-cell"><span class="tb-label">SHEETS</span><span class="tb-value">09&nbsp;/&nbsp;09</span></div>
+      <div class="ap-cell"><span class="tb-label">© 2026</span><span class="tb-value">LAPSELL.&nbsp;ALL&nbsp;RIGHTS&nbsp;RESERVED.</span></div>
+    </div>
+    <div class="color-bar" aria-hidden="true">
+      <span class="cb-chip cb-chip--c">C</span>
+      <span class="cb-chip cb-chip--m">M</span>
+      <span class="cb-chip cb-chip--y">Y</span>
+      <span class="cb-chip cb-chip--k">K</span>
+      <span class="cb-text">PRINT&nbsp;CONTROL&nbsp;&middot;&nbsp;K100&nbsp;&middot;&nbsp;C0&nbsp;M0&nbsp;Y0&nbsp;K0</span>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+</body>
 </html>

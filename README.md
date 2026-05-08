@@ -1,123 +1,58 @@
-# Lapsell
+# Lapsell — Landing Page
 
-音楽制作プロセスを販売するプラットフォームのランディングページです。
+**Drawings for the process of making.**
 
-## 概要
+音楽・絵画など、創作の模索（プロセス）そのものを世界に1つだけのグッズとして販売できるプラットフォーム、Lapsell のランディングページ。
 
-このプロジェクトは、音楽制作者が制作過程を「世界に1つだけのグッズ」として販売できるプラットフォームのランディングページです。AI音楽が溢れる時代において、制作者の想いや制作過程の価値を伝えることを目的としています。
+公開URL: <https://www.lapsell.art/>
 
-## 技術スタック
+---
 
-- **フレームワーク**: React 19 + TypeScript
-- **ビルドツール**: Vite 7
-- **スタイリング**: Tailwind CSS 4
-- **UIコンポーネント**: shadcn/ui
-- **アニメーション**: Motion (Framer Motion)
-- **フォント**: Google Fonts (Cormorant Garamond, Inter)
+## 構成
 
-## セクション構成
+純粋な HTML / CSS / JavaScript で書かれた、ビルド不要の静的サイト。
 
-1. **HeroSection** - メインビジュアルとキャッチコピー
-2. **ProblemSection** - 音楽制作者が直面する課題
-3. **SolutionSection** - プラットフォームのソリューション
-4. **ProcessSection** - 利用プロセス
-5. **FanBenefitsSection** - ファンへのメリット
-6. **RevenueSection** - 収益化の仕組み
-7. **CTASection** - 行動喚起
+```
+.
+├── index.html         全セクションを含む単一HTML
+├── css/style.css      全スタイル（建築設計図モチーフ）
+├── js/script.js       in-view アニメ・スペシメン横スクロール
+├── images/            写真・素材
+├── CNAME              www.lapsell.art
+├── .nojekyll
+└── .github/workflows/deploy.yml   GitHub Pages デプロイ
+```
 
-## セットアップ
+依存関係なし。Node も npm も不要。
 
-### 必要な環境
-
-- Node.js 18以上
-- npm または yarn
-
-### インストール
+## ローカル開発
 
 ```bash
-npm install
+python -m http.server 8000
+# → http://localhost:8000/
 ```
 
-### 開発サーバーの起動
+または VS Code の Live Server / `npx serve` 等でも可。
+ファイルを編集して保存し、ブラウザでリロードするだけ。
 
-```bash
-npm run dev
-```
+## デザインコンセプト
 
-開発サーバーは `http://localhost:5173` で起動します。
+印刷前のトンボや建築設計図をモチーフとした、線主体・モノクロベースのデザイン。
+LP 全体が「Lapsell の図面」というメタファーで構成されている。
 
-### ビルド
+- 紙ベースの背景に 5mm 相当の方眼グリッド
+- 各セクションに DRAWN / DATE / DWG NO. のタイトルブロック
+- ページ四隅にトンボ（registration marks）
+- アクセントは校正赤（#C43E1C）のみ、極めて限定的に使用
 
-```bash
-npm run build
-```
+## デプロイ
 
-ビルド成果物は `dist` ディレクトリに出力されます。
+`main` ブランチへの push で GitHub Actions が走り、リポジトリ・ルートをそのまま GitHub Pages に公開する。
 
-### シングルファイルビルド
+## コンテンツ編集
 
-```bash
-npm run build:single
-```
-
-すべてのアセットを1つのHTMLファイルにバンドルします。
-
-### プレビュー
-
-```bash
-npm run preview
-```
-
-ビルドした成果物をプレビューします。
-
-### リント
-
-```bash
-npm run lint
-```
-
-ESLintでコードをチェックします。
-
-## プロジェクト構造
-
-```
-src/
-├── components/          # コンポーネント
-│   ├── HeroSection.tsx
-│   ├── ProblemSection.tsx
-│   ├── SolutionSection.tsx
-│   ├── ProcessSection.tsx
-│   ├── FanBenefitsSection.tsx
-│   ├── RevenueSection.tsx
-│   ├── CTASection.tsx
-│   ├── figma/           # Figma関連コンポーネント
-│   └── ui/              # shadcn/uiコンポーネント
-├── styles/              # スタイルファイル
-├── guidelines/          # ガイドライン
-├── App.tsx              # メインアプリケーション
-└── main.tsx             # エントリーポイント
-```
-
-## 主な機能
-
-- **レスポンシブデザイン**: モバイルからデスクトップまで対応
-- **スムーズなアニメーション**: Motionを使用したスクロール連動アニメーション
-- **Figmaアセット統合**: Figmaからエクスポートしたアセットを簡単に使用可能
-- **ダークテーマ**: 音楽制作スタジオをイメージしたダークカラースキーム
-
-## カスタマイズ
-
-### カラースキーム
-
-メインカラーは `#d4a574`（ゴールド）、背景色は `#0a0a0f`（ダーク）です。これらの色は各コンポーネントで使用されています。
-
-### フォント
-
-- **見出し**: Cormorant Garamond（セリフ）
-- **本文**: Inter（サンセリフ）
+`lapsell_lp.md` がコンテンツの一次資料。コピーや構成を変更するときは、まずこのファイルを更新してから `index.html` に反映する。
 
 ## ライセンス
 
-このプロジェクトはプライベートプロジェクトです。
-
-
+© 2026 Lapsell. All rights reserved.

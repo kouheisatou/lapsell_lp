@@ -1,113 +1,98 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは Claude Code がこのリポジトリで作業する際のガイダンスです。
 
-## Project Overview
+## プロジェクト概要
 
-This is a landing page for "Lapsell" - a platform that allows music creators to sell their creative process as unique merchandise. Built with React 19, TypeScript, and Vite 7, using Tailwind CSS 4 and shadcn/ui components.
+Lapsell のランディングページ。「音楽・絵画など、創作の模索（プロセス）そのものを世界に1つだけのグッズとして販売できるプラットフォーム」を訴求するための1ページサイト。
 
-## Development Commands
+GitHub Pages で `https://www.lapsell.art/` に配信。
 
-### Development
-```bash
-npm run dev          # Start dev server at http://localhost:5173
+## 技術スタック
+
+ビルド不要の **純粋な静的サイト**。
+
+- HTML5（`index.html`、単一ページ）
+- CSS3（`css/style.css`、CSS カスタムプロパティで色管理）
+- Vanilla JavaScript（`js/script.js`、`IntersectionObserver` のみ使用）
+- フォント: Google Fonts（JetBrains Mono / Inter / Noto Sans JP）
+
+依存関係・ビルド・トランスパイラ・パッケージマネージャは **無し**。
+
+## ファイル構成
+
+```
+.
+├── index.html               全セクション（カバー・与件・概念・仕組み・工程・標本・受益者・仕様・承認）
+├── css/style.css            全スタイル
+├── js/script.js             in-view アニメ・スペシメン横スクロール
+├── images/
+│   ├── scenarios/1.png … 9.png   利用シーン写真（モノクロ表示）
+│   └── *.png                その他の素材
+├── CNAME                    www.lapsell.art
+├── .nojekyll                Jekyll 処理を抑止
+├── .github/workflows/deploy.yml  Actions で GitHub Pages にデプロイ
+├── lapsell_lp.md            コンテンツ仕様書（編集はまずこちら）
+└── README.md
 ```
 
-### Building
+## 開発フロー
+
+ローカル HTTP サーバを起動してブラウザで確認：
+
 ```bash
-npm run build        # Standard production build to dist/
-npm run build:single # Bundle everything into a single HTML file
-npm run preview      # Preview production build
+# Python が入っていればこれでOK
+python -m http.server 8000
+# → http://localhost:8000/
 ```
 
-### Code Quality
-```bash
-npm run lint         # Run ESLint on TypeScript files
-```
+VS Code の Live Server 拡張、`npx http-server`、`npx serve` 等でも可。
 
-## Architecture
+ファイルを直接編集 → 保存 → ブラウザでリロード、で完結する。ビルドは不要。
 
-### Page Structure
-The landing page follows a single-page application pattern with sequential sections:
+## デプロイ
 
-1. **HeroSection** - Main visual and catchphrase
-2. **ProblemSection** - Challenges faced by music creators
-3. **SolutionSection** - Platform solution overview and usage steps
-4. **UsageScenariosSection** - Real-world usage scenarios (carousel display)
-5. **CreatorBenefitsSection** - Benefits for creators
-6. **FanBenefitsSection** - Benefits for fans
-7. **RevenueSection** - Monetization mechanism with survey data
-8. **CTASection** - Call to action
+`main` への push で `.github/workflows/deploy.yml` が走り、リポジトリのルートをそのまま GitHub Pages に公開する。`CNAME` と `.nojekyll` は必ずルートに置いておくこと。
 
-All sections are composed in `src/App.tsx` in order.
+## ビジュアルデザイン規約（重要）
 
-### Component Organization
+このサイトは **印刷前のトンボ・建築設計図** をモチーフとした、線主体・モノクロベースのデザイン。次の原則を守ること：
 
-- `src/components/` - Page section components
-- `src/components/ui/` - shadcn/ui reusable components (accordion, alert-dialog, button, card, etc.)
-- `src/components/figma/` - Figma-specific components (currently only ImageWithFallback)
-- `src/styles/` - Additional style files
-- `src/guidelines/` - Design system guidelines (currently template only)
+- **モチーフ**: 図面・与件書・仕様書・スペシメンプレート。LP 全体が「Lapsell の図面」というメタファー。
+- **色**: 紙ベース（`--paper #f5f1e6`）＋インク（`--ink #0e0e0e`）。アクセント `--accent #c43e1c` は校正赤として CTA・1〜2 箇所のみ。
+- **タイポ**: 等幅は JetBrains Mono、本文は Noto Sans JP / Inter（共に Light/Regular）。見出しは細字大型。
+- **線**: CAD 製図機の硬い直線。`--hairline 0.5px` / `--line 1px` / `--line-bold 1.5px` を使い分ける。
+- **背景**: 5mm 相当の方眼グリッドが常時敷かれている。
+- **要素**: トンボ（ページ四隅）、寸法線（両端矢印＋数値）、タイトルブロック（DRAWN/DATE/DWG NO 等）、引き出し線、丸数字、印刷管理マーク（K100 等）。
+- **モーション**: 線が引かれるアニメ（`stroke-dashoffset`）と注釈のフェードインのみ。派手な視差は禁止。`prefers-reduced-motion` を尊重。
+- **絶対にやらないこと**: ダーク背景、ゴールドアクセント、Cormorant Garamond セリフ、Tailwind/shadcn など旧 LP の系譜に戻ること。
 
-### Custom Vite Plugins
+色トークンは `css/style.css` の `:root` に集約されているので、グローバル変更はここで行う。
 
-The project includes two custom Vite plugins in `vite.config.ts`:
+## コンテンツ編集ワークフロー
 
-1. **removeVersionSpecifiers**: Automatically strips version numbers from import statements (e.g., `@radix-ui/react-slot@1.1.2` → `@radix-ui/react-slot`)
+**重要**: コンテンツ（コピー・構成）を変更するときは：
 
-2. **figmaAssetsResolver**: Resolves imports with `figma:asset/` prefix to `./src/assets/` directory for Figma-exported assets
+1. **先に `lapsell_lp.md` を更新する** — このファイルがコンテンツの一次資料
+2. その後、`index.html` に反映する
 
-### Design System
+これにより、コンテンツの変更が文書化され、仕様書とコードが乖離しない。
 
-**Color Palette:**
-- Primary accent: `#d4a574` (gold)
-- Background: `#0a0a0f` (dark)
-- Text: `#e8e8ed` (light gray)
-- Scrollbar thumb: `#d4a574` with hover `#e8b888`
+## セクション構成
 
-**Typography:**
-- Headings: Cormorant Garamond (serif) - weights 300, 400, 500
-- Body text: Inter (sans-serif) - weights 400, 500, 600
-- Base styling loaded via Google Fonts in App.tsx
+| No. | ID | タイトル | 役割 |
+|----|----|----|----|
+| 00 | `cover` | COVER | 図面表紙、タグライン、CTA への誘導 |
+| 01 | `brief` | THE BRIEF | 課題（AI生成・配信収益・見えないプロセス） |
+| 02 | `concept` | CONCEPT | 「制作過程を、世界に1つだけのグッズに。」 |
+| 03 | `mechanism` | MECHANISM | クリエイター×Lapsell×ファンの取引模式図（インラインSVG） |
+| 04 | `process` | PROCESS | 録画→完成→販売→二次流通 の4工程 |
+| 05 | `specimens` | SPECIMENS | 利用シーン9種を標本台紙風に横スクロール |
+| 06 | `beneficiaries` | BENEFICIARIES | クリエイター/ファンそれぞれのベネフィット（二面図） |
+| 07 | `specs` | SPECIFICATIONS | 収益試算・調査データ（仕様書風テーブル） |
+| 08 | `signoff` | SIGN-OFF | ミッション + CTA + 承認欄 |
 
-**Animation:**
-- Uses Motion (Framer Motion) for scroll-linked animations
-- Smooth scroll behavior enabled globally via CSS
+## 注意事項
 
-### Styling Approach
-
-- Tailwind CSS 4 with Vite plugin for styling
-- Dark theme optimized for music production studio aesthetic
-- Custom scrollbar styling for brand consistency
-- Responsive design from mobile to desktop
-
-### Build Configuration
-
-- **Single-file build mode**: Set `SINGLE_FILE=true` environment variable to bundle all assets inline (used by `npm run build:single`)
-- **TypeScript**: Project references architecture with separate configs for app and node code
-- **ESLint**: Configured for TypeScript/React with hooks and refresh plugins
-
-## Content Editing Workflow
-
-**IMPORTANT**: When editing the landing page content, always follow this workflow:
-
-1. **First, edit `lapsell_lp.md`**: Update the content specification document with the new copy, structure, or messaging changes
-2. **Then, update the code**: Reflect the changes from `lapsell_lp.md` into the React components
-
-This ensures that:
-- Content changes are documented and version-controlled
-- The content specification remains the single source of truth
-- Future edits maintain consistency with the documented structure
-- Content and code stay in sync
-
-The `lapsell_lp.md` file contains:
-- Complete copy for all sections
-- Image asset requirements
-- Tone and voice guidelines
-- Animation and interaction specifications
-
-## Development Notes
-
-- All components use functional React patterns with hooks
-- No routing library - single scrolling page design
-- shadcn/ui provides comprehensive UI component library
+- 旧 React/Vite/Tailwind/shadcn のコードは完全削除済み。`npm run dev` などのコマンドは存在しない。
+- `images/` 配下の写真はモノクロ前提。CSS 側で `filter: grayscale(1) contrast(1.05)` を当てている。
