@@ -610,9 +610,23 @@ small { font-size: 0.78em; }
    03 / MECHANISM (SCHEMATIC)
    ========================================================= */
 .schematic { width: 100%; }
+.schematic__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) var(--paper-edge);
+}
+.schematic__scroll::-webkit-scrollbar { height: 8px; }
+.schematic__scroll::-webkit-scrollbar-track { background: var(--paper-edge); }
+.schematic__scroll::-webkit-scrollbar-thumb { background: var(--ink); }
 .schematic__svg {
-  width: 100%;
+  width: 1200px;
+  max-width: none;
   height: auto;
+  display: block;
+  margin: 0 auto;
   font-family: var(--mono);
   color: var(--ink);
 }
@@ -680,13 +694,25 @@ small { font-size: 0.78em; }
 /* =========================================================
    04 / PROCESS
    ========================================================= */
+.process-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 calc(var(--gutter) * -1) clamp(28px, 4vw, 56px);
+  padding: 0 var(--gutter) 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) var(--paper-edge);
+}
+.process-scroll::-webkit-scrollbar { height: 8px; }
+.process-scroll::-webkit-scrollbar-track { background: var(--paper-edge); }
+.process-scroll::-webkit-scrollbar-thumb { background: var(--ink); }
+
 .process {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
   gap: 0;
   border: var(--line) solid var(--ink);
   background: var(--paper);
-  margin-bottom: clamp(28px, 4vw, 56px);
+  min-width: 1040px;
 }
 .process-step {
   position: relative;
@@ -728,14 +754,7 @@ small { font-size: 0.78em; }
   background: var(--paper);
   transform: rotate(45deg);
 }
-@media (max-width: 1024px) { .process { grid-template-columns: 1fr 1fr; }
-  .process-step:nth-child(2) { border-right: 0; }
-  .process-step:nth-child(1), .process-step:nth-child(2) { border-bottom: var(--line) solid var(--ink); }
-}
-@media (max-width: 640px) { .process { grid-template-columns: 1fr; }
-  .process-step { border-right: 0; border-bottom: var(--line) solid var(--ink); }
-  .process-step:last-child { border-bottom: 0; }
-}
+/* .process always renders as 4 columns; .process-scroll handles overflow on narrow viewports */
 
 .process-axisline {
   display: flex;
