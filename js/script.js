@@ -54,21 +54,4 @@
     });
   }
 
-  /* ---------- Update top status bar with current sheet number ---------- */
-  const sheets = document.querySelectorAll('.sheet[data-no]');
-  const statusBar = document.querySelector('.status-bar');
-  if (sheets.length && statusBar) {
-    const dwgPill = statusBar.querySelector('span:nth-child(2)');
-    if (dwgPill && 'IntersectionObserver' in window) {
-      const sheetIO = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting && e.intersectionRatio > 0.45) {
-            const no = e.target.getAttribute('data-no');
-            dwgPill.textContent = `DWG. NO. LP-2026-01 / SHEET ${no}`;
-          }
-        });
-      }, { threshold: [0.45, 0.6, 0.75] });
-      sheets.forEach((s) => sheetIO.observe(s));
-    }
-  }
 })();
