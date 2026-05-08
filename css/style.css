@@ -78,7 +78,8 @@ small { font-size: 0.78em; }
 
 .num, .tabular { font-variant-numeric: tabular-nums; }
 
-/* ---------- Page-level trim marks ---------- */
+/* ---------- Page-level drafting marks ---------- */
+/* Outer trim marks (角トンボ・出来上がり線) */
 .trim {
   position: fixed;
   width: 26px;
@@ -99,6 +100,88 @@ small { font-size: 0.78em; }
 .trim--tr { top: 14px;    right: 14px; }
 .trim--bl { bottom: 14px; left: 14px; }
 .trim--br { bottom: 14px; right: 14px; }
+
+/* Inner trim marks (角トンボ・裁ち落とし) — secondary, lighter */
+.trim--soft {
+  width: 18px;
+  height: 18px;
+  color: var(--graphite-2);
+  z-index: 49;
+}
+.trim--tl-i { top: 32px;    left: 32px; }
+.trim--tr-i { top: 32px;    right: 32px; }
+.trim--bl-i { bottom: 32px; left: 32px; }
+.trim--br-i { bottom: 32px; right: 32px; }
+
+/* Center registration marks (センタートンボ・見当合わせ) */
+.reg {
+  position: fixed;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  color: var(--graphite);
+  z-index: 50;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.7;
+}
+.reg--top    { top: 6px;     left: 50%; transform: translateX(-50%); }
+.reg--bottom { bottom: 6px;  left: 50%; transform: translateX(-50%); }
+.reg--left   { top: 50%;     left: 6px;  transform: translateY(-50%); }
+.reg--right  { top: 50%;     right: 6px; transform: translateY(-50%); }
+
+/* Edge rulers — fine tick marks every 24px (matches grid) */
+.ruler {
+  position: fixed;
+  pointer-events: none;
+  z-index: 48;
+  color: var(--graphite-2);
+}
+.ruler--left {
+  top: 60px; bottom: 60px; left: 8px;
+  width: 6px;
+  background:
+    linear-gradient(to right, currentColor 0 100%) left center / var(--hairline) 100% no-repeat,
+    repeating-linear-gradient(to bottom, transparent 0 23px, currentColor 23px 24px) left top / 4px 100% no-repeat;
+}
+.ruler--top {
+  left: 60px; right: 60px; top: 8px;
+  height: 6px;
+  background:
+    linear-gradient(to bottom, currentColor 0 100%) top left / 100% var(--hairline) no-repeat,
+    repeating-linear-gradient(to right, transparent 0 23px, currentColor 23px 24px) top left / 100% 4px no-repeat;
+}
+
+/* Per-section corner marks (CSS-only, no extra HTML) */
+.sheet { position: relative; }
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 32px clamp(8px, 1.5vw, 28px);
+  pointer-events: none;
+  z-index: 0;
+  --c: var(--graphite-2);
+  --w: 14px;
+  background:
+    /* top-left L */
+    linear-gradient(var(--c), var(--c)) top left    / var(--w) var(--hairline) no-repeat,
+    linear-gradient(var(--c), var(--c)) top left    / var(--hairline) var(--w) no-repeat,
+    /* top-right L */
+    linear-gradient(var(--c), var(--c)) top right   / var(--w) var(--hairline) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right   / var(--hairline) var(--w) no-repeat,
+    /* bottom-left L */
+    linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--hairline) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--hairline) var(--w) no-repeat,
+    /* bottom-right L */
+    linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--hairline) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--hairline) var(--w) no-repeat;
+}
+.sheet > * { position: relative; z-index: 1; }
+
+@media (max-width: 720px) {
+  .trim--soft, .reg, .ruler { display: none; }
+  .sheet::before { inset: 18px 4px; --w: 10px; }
+}
 
 /* =========================================================
    SHEET (a section = a drawing sheet)
@@ -184,36 +267,6 @@ small { font-size: 0.78em; }
   flex-direction: column;
   justify-content: center;
 }
-.sheet-frame {
-  position: absolute;
-  inset: clamp(40px, 5vw, 80px) clamp(20px, 3vw, 60px);
-  pointer-events: none;
-}
-.sheet-frame::before,
-.sheet-frame::after { content: none; }
-.corner {
-  position: absolute;
-  width: 22px; height: 22px;
-  color: var(--ink);
-}
-.corner::before, .corner::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
-}
-.corner--tl { top: 0; left: 0; }
-.corner--tl::before { top: 0; left: 0; width: 22px; height: var(--line); }
-.corner--tl::after  { top: 0; left: 0; width: var(--line); height: 22px; }
-.corner--tr { top: 0; right: 0; }
-.corner--tr::before { top: 0; right: 0; width: 22px; height: var(--line); }
-.corner--tr::after  { top: 0; right: 0; width: var(--line); height: 22px; }
-.corner--bl { bottom: 0; left: 0; }
-.corner--bl::before { bottom: 0; left: 0; width: 22px; height: var(--line); }
-.corner--bl::after  { bottom: 0; left: 0; width: var(--line); height: 22px; }
-.corner--br { bottom: 0; right: 0; }
-.corner--br::before { bottom: 0; right: 0; width: 22px; height: var(--line); }
-.corner--br::after  { bottom: 0; right: 0; width: var(--line); height: 22px; }
-
 .cover-inner {
   position: relative;
   z-index: 1;
