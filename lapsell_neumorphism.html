@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>練習の時間を収益に変える｜Lapsell（ラプセル）</title>
+  <meta name="description" content="捨てていた練習・裏側の時間が、世界に1つのデジタルグッズになって売れる。初期費用0円・手数料5%〜。地下アイドル／インディーズアーティストの新しい収益源。">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg: #E8EBF2;
+      --surface: #E8EBF2;
+      --shadow-dark: rgba(163,176,198,0.7);
+      --shadow-light: rgba(255,255,255,0.9);
+      --text: #3A3E52;
+      --text-muted: #7A82A0;
+      --accent: #7C6EE8;
+      --accent-dim: rgba(124,110,232,0.12);
+      --accent-border: rgba(124,110,232,0.25);
+      --pink: #E87CA4;
+      --pink-dim: rgba(232,124,164,0.12);
+      --green: #6ECBA0;
+      --teal: #6EC5E8;
+
+      --raise: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+      --raise-sm: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+      --raise-lg: 10px 10px 24px var(--shadow-dark), -10px -10px 24px var(--shadow-light);
+      --inset: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+      --inset-sm: inset 2px 2px 6px var(--shadow-dark), inset -2px -2px 6px var(--shadow-light);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Noto Sans JP', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--bg);
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(163,176,198,0.3);
+    }
+    .nav-logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      color: var(--accent);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { box-shadow: var(--inset-sm); }
+    .nav-cta:active { box-shadow: var(--inset); }
+
+    /* === LAYOUT === */
+    .section { padding: 6rem 2rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1.4rem;
+    }
+    h2.sec-h {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .accent-text { color: var(--accent); }
+    p.sec-sub { font-size: 1rem; color: var(--text-muted); max-width: 480px; line-height: 1.85; margin-bottom: 3rem; }
+
+    /* === NEUMORPHIC CARD === */
+    .nm-card {
+      background: var(--bg);
+      box-shadow: var(--raise);
+      border-radius: 20px;
+    }
+    .nm-card-sm {
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border-radius: 14px;
+    }
+    .nm-inset {
+      background: var(--bg);
+      box-shadow: var(--inset);
+      border-radius: 14px;
+    }
+
+    /* === HERO === */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1060px;
+      width: 100%;
+    }
+    .hero-text {}
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1.8rem;
+    }
+    .kicker-dot { width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 1.5s ease-in-out infinite; }
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+    h1.hero-h {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.3rem;
+      color: var(--text);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 400px;
+      line-height: 1.85;
+      margin-bottom: 1.8rem;
+    }
+    .hero-badges { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2.2rem; }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .hb-dot {
+      width: 28px; height: 28px;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-nm {
+      background: var(--bg);
+      box-shadow: var(--raise);
+      color: var(--accent);
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-nm:hover { box-shadow: var(--inset); }
+    .btn-nm-primary {
+      background: var(--accent);
+      box-shadow: 4px 4px 12px rgba(124,110,232,0.4), -2px -2px 8px rgba(255,255,255,0.8);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-nm-primary:hover { box-shadow: 2px 2px 8px rgba(124,110,232,0.5), inset 1px 1px 4px rgba(0,0,0,0.1); }
+
+    /* Hero visual - neumorphic phone mockup */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .nm-phone {
+      width: 220px;
+      height: 420px;
+      background: var(--bg);
+      box-shadow: var(--raise-lg);
+      border-radius: 40px;
+      padding: 20px 12px;
+      position: relative;
+    }
+    .nm-phone-notch {
+      width: 80px; height: 22px;
+      background: var(--bg);
+      box-shadow: var(--inset-sm);
+      border-radius: 12px;
+      margin: 0 auto 16px;
+    }
+    .nm-phone-screen {
+      background: var(--bg);
+      box-shadow: var(--inset);
+      border-radius: 24px;
+      height: calc(100% - 60px);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .phone-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .phone-item {
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .pi-dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+    .pi-d1 { background: radial-gradient(circle at 35% 35%, #B088FF, var(--accent)); }
+    .pi-d2 { background: radial-gradient(circle at 35% 35%, #F0A0C0, var(--pink)); }
+    .pi-d3 { background: radial-gradient(circle at 35% 35%, #80DDB8, var(--green)); }
+    .pi-d4 { background: radial-gradient(circle at 35% 35%, #80CDE8, var(--teal)); }
+    .pi-info {}
+    .pi-name { font-size: 8px; font-weight: 700; color: var(--text); }
+    .pi-sub  { font-size: 7px; color: var(--text-muted); }
+    .phone-cta {
+      background: var(--accent);
+      box-shadow: 2px 2px 6px rgba(124,110,232,0.4);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 20px;
+      padding: 8px;
+      margin-top: auto;
+      letter-spacing: 0.05em;
+    }
+
+    /* === PAIN === */
+    .pain { }
+    .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .pain-card { padding: 2rem; }
+    .pain-icon {
+      width: 50px; height: 50px;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .pain-h { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pain-p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.72; }
+    .verdict-nm {
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: var(--bg);
+      box-shadow: var(--inset);
+      border-radius: 16px;
+    }
+    .verdict-nm p { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.65; }
+
+    /* === STEPS === */
+    .steps-nm { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 1rem; }
+    .step-nm {
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+    }
+    .step-circle {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--bg);
+      box-shadow: var(--raise);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .step-nm:hover .step-circle { box-shadow: var(--inset); }
+    .step-badge {
+      font-size: 0.6rem;
+      font-family: monospace;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .step-h { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step-p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* === PROOF === */
+    .proof { }
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proof-big { grid-column: 1/-1; padding: 2.5rem; }
+    .proof-stat { padding: 2rem; }
+    .proof-num { font-size: clamp(2.2rem,4.5vw,3.5rem); font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+    .proof-label { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+    .proof-src { font-size: 0.7rem; color: rgba(58,62,82,0.35); margin-top: 0.5rem; font-family: monospace; }
+
+    /* survey visualization */
+    .survey-nm { margin-top: 1.5rem; }
+    .sr-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; }
+    .sr-label { font-size: 0.78rem; color: var(--text-muted); width: 130px; flex-shrink: 0; }
+    .sr-track { flex: 1; height: 10px; background: var(--bg); box-shadow: var(--inset-sm); border-radius: 5px; overflow: hidden; }
+    .sr-fill { height: 100%; border-radius: 5px; transition: width 1.5s ease; }
+    .sf-buy { background: linear-gradient(90deg, var(--accent), var(--pink)); }
+    .sf-no  { background: rgba(122,130,160,0.3); }
+    .sr-val { font-size: 0.75rem; font-weight: 700; color: var(--text); width: 42px; text-align: right; font-family: monospace; }
+
+    /* === BENEFITS === */
+    .benefit-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+    .benefit-card { padding: 2.2rem; transition: box-shadow 0.2s; }
+    .benefit-card:hover { box-shadow: var(--raise-lg); }
+    .benefit-tag { display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border-radius: 4px; padding: 0.2rem 0.5rem; margin-bottom: 1rem; }
+    .benefit-h { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .benefit-p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; }
+    .inset-quote { background: var(--bg); box-shadow: var(--inset-sm); border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* === SAFETY === */
+    .safety-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .safety-card { padding: 2.2rem; }
+    .flow-items { margin-top: 1rem; display: flex; flex-direction: column; gap: 0; }
+    .flow-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(163,176,198,0.2);
+    }
+    .flow-item:last-child { border-bottom: none; }
+    .fi-icon {
+      width: 34px; height: 34px;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .fi-label { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .fi-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.5; }
+
+    /* === TARGET === */
+    .target-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+    .target-card { padding: 1.8rem; text-align: center; }
+    .target-icon {
+      width: 64px; height: 64px;
+      background: var(--bg);
+      box-shadow: var(--raise);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1rem;
+    }
+    .target-h { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .target-p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* === PRICING === */
+    .pricing-nm { max-width: 480px; margin: 0 auto; padding: 3rem; text-align: center; }
+    .price-big { font-size: 4rem; font-weight: 800; color: var(--accent); line-height: 1; margin: 0.8rem 0 0.3rem; }
+    .price-note { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .price-list { text-align: left; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 0.7rem 1rem;
+      background: var(--bg);
+      box-shadow: var(--inset-sm);
+      border-radius: 10px;
+    }
+    .pr-check { color: var(--green); font-size: 1rem; }
+
+    /* === FAQ === */
+    .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.7rem; }
+    .faq-item { overflow: hidden; }
+    .faq-q {
+      width: 100%;
+      background: var(--bg);
+      box-shadow: var(--raise-sm);
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.1rem 1.4rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      border-radius: 14px;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item.open .faq-q { box-shadow: var(--inset-sm); border-radius: 14px 14px 0 0; }
+    .faq-arrow { color: var(--accent); transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: var(--bg);
+      box-shadow: var(--inset-sm);
+      border-radius: 0 0 14px 14px;
+      padding: 0 1.4rem;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.2rem; padding-top: 0.8rem; }
+    .faq-a p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.78; }
+
+    /* === CTA === */
+    .cta-sec { padding: 7rem 2rem; text-align: center; }
+    .cta-card { max-width: 580px; margin: 0 auto; padding: 3.5rem 2.5rem; }
+    h2.cta-h { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    .cta-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.7; }
+    .form-nm {
+      display: flex;
+      border-radius: 50px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: var(--inset);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .form-email-nm {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      padding: 0.9rem 1.2rem;
+      font-size: 0.88rem;
+      outline: none;
+      font-family: inherit;
+    }
+    .form-email-nm::placeholder { color: var(--text-muted); }
+    .form-btn-nm {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.4rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+      border-radius: 40px;
+      margin: 5px;
+      white-space: nowrap;
+    }
+    .form-btn-nm:hover { opacity: 0.88; }
+    .form-note-nm { font-size: 0.72rem; color: var(--text-muted); margin-top: 1rem; }
+
+    /* === FOOTER === */
+    footer { background: var(--bg); padding: 2.5rem 3rem; box-shadow: 0 -4px 20px rgba(163,176,198,0.25); }
+    .footer-in { max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem; }
+    .footer-logo { font-size:1.1rem;font-weight:800;color:var(--accent);text-decoration:none; }
+    .footer-copy { font-size:0.72rem;color:var(--text-muted); }
+    .footer-links { display:flex;gap:1.5rem;list-style:none; }
+    .footer-links a { font-size:0.72rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s; }
+    .footer-links a:hover { color:var(--accent); }
+
+    /* === SCROLL FX === */
+    .fi { opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease; }
+    .fi.in { opacity:1;transform:translateY(0); }
+    .fi.d1{transition-delay:.1s;}.fi.d2{transition-delay:.2s;}.fi.d3{transition-delay:.3s;}.fi.d4{transition-delay:.4s;}
+
+    @media(max-width:900px){
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero-inner { grid-template-columns:1fr; }
+      .hero-visual { display:none; }
+      .pain-grid,.steps-nm,.benefit-grid,.safety-grid,.target-grid { grid-template-columns:1fr; }
+      .proof-grid { grid-template-columns:1fr; }
+      .proof-big { grid-column:1; }
+      .section { padding:5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Lapsell</a>
+  <ul class="nav-links">
+    <li><a href="#pain">課題</a></li>
+    <li><a href="#solution">仕組み</a></li>
+    <li><a href="#proof">根拠</a></li>
+    <li><a href="#benefits">メリット</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">無料で始める</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-kicker"><div class="kicker-dot"></div>アイドル・アーティスト向け</div>
+      <h1 class="hero-h">練習の<span class="accent-text">"時間"</span>が、<br>収益になる。</h1>
+      <p class="hero-sub">捨てていた練習・裏側が、ファンにとって世界に1つのグッズに。撮影はスマホで撮るだけ、編集も不要。</p>
+      <div class="hero-badges">
+        <div class="hero-badge"><div class="hb-dot">✓</div>初期費用0円</div>
+        <div class="hero-badge"><div class="hb-dot">✓</div>手数料は売れた分だけ（5%〜）</div>
+        <div class="hero-badge"><div class="hb-dot">✓</div>撮影は当日スマホのみ、編集不要</div>
+      </div>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-nm-primary">無料で出品をはじめる</a>
+        <a href="#solution" class="btn-nm">仕組みを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="nm-phone">
+        <div class="nm-phone-notch"></div>
+        <div class="nm-phone-screen">
+          <div class="phone-title">Lapsell — 出品中</div>
+          <div class="phone-item">
+            <div class="pi-dot pi-d1"></div>
+            <div class="pi-info"><div class="pi-name">練習セッション #047</div><div class="pi-sub">¥500 · 残り3枠</div></div>
+          </div>
+          <div class="phone-item">
+            <div class="pi-dot pi-d2"></div>
+            <div class="pi-info"><div class="pi-name">リハーサル映像 #023</div><div class="pi-sub">¥300 · SOLD OUT</div></div>
+          </div>
+          <div class="phone-item">
+            <div class="pi-dot pi-d3"></div>
+            <div class="pi-info"><div class="pi-name">ネタ合わせ #018</div><div class="pi-sub">¥800 · 残り1枠</div></div>
+          </div>
+          <div class="phone-item">
+            <div class="pi-dot pi-d4"></div>
+            <div class="pi-info"><div class="pi-name">制作風景 #032</div><div class="pi-sub">¥400 · 残り5枠</div></div>
+          </div>
+          <div class="phone-cta">今月の売上：¥42,500</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain section" id="pain">
+  <div class="container">
+    <div class="section-badge fi">課題</div>
+    <h2 class="sec-h fi d1">裏側が一番価値あるのに、<br>お金にならない。</h2>
+    <div class="pain-grid fi d2">
+      <div class="nm-card pain-card">
+        <div class="pain-icon">😰</div>
+        <div class="pain-h">撮影・編集が大変</div>
+        <p class="pain-p">毎日の投稿は手間で続かない。動画を撮っても編集に時間がかかり、本業の練習に集中できない。</p>
+      </div>
+      <div class="nm-card pain-card">
+        <div class="pain-icon">⚠️</div>
+        <div class="pain-h">配信は事故が怖い</div>
+        <p class="pain-p">失言・映り込みがそのまま流れ取り返しがつかない。ライブ配信は常に一発勝負でリスクが高い。</p>
+      </div>
+      <div class="nm-card pain-card">
+        <div class="pain-icon">💸</div>
+        <div class="pain-h">裏側は儲からない</div>
+        <p class="pain-p">再生数が取れず手間に見合わないから撮られない。練習風景・舞台裏には価値があるのに収益化できていない。</p>
+      </div>
+    </div>
+    <div class="verdict-nm fi d3">
+      <p>毎日生まれている価値ある時間が、収益化されないまま消えています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section" id="solution">
+  <div class="container">
+    <div class="section-badge fi">仕組み</div>
+    <h2 class="sec-h fi d1">時間枠を<span class="accent-text">"先に売って"</span>、<br>後から映像を渡す。</h2>
+    <div class="steps-nm fi d2">
+      <div class="nm-card step-nm">
+        <div class="step-circle">📋</div>
+        <div class="step-badge">STEP 01</div>
+        <div class="step-h">出品</div>
+        <p class="step-p">練習の日時と価格を決めて出品。販売枠数・1本の長さも自由に設定。</p>
+      </div>
+      <div class="nm-card step-nm">
+        <div class="step-circle">🎫</div>
+        <div class="step-badge">STEP 02</div>
+        <div class="step-h">購入</div>
+        <p class="step-p">ファンが時間枠を購入。中身は届くまで分からない——ガチャの楽しさ。</p>
+      </div>
+      <div class="nm-card step-nm">
+        <div class="step-circle">📱</div>
+        <div class="step-badge">STEP 03</div>
+        <div class="step-h">撮影</div>
+        <p class="step-p">当日はスマホで撮るだけ。編集一切不要。普通の練習そのまま。</p>
+      </div>
+      <div class="nm-card step-nm">
+        <div class="step-circle">🎁</div>
+        <div class="step-badge">STEP 04</div>
+        <div class="step-h">開封</div>
+        <p class="step-p">映像をセグメントに分割し、各ファンへランダムに配布。世界に1つの一点物。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof section" id="proof">
+  <div class="container">
+    <div class="section-badge fi">根拠</div>
+    <h2 class="sec-h fi d1">"素"には、確かに<br><span class="accent-text">需要がある。</span></h2>
+    <p class="sec-sub fi d2">ファンは本当に買うのか？データが証明します。</p>
+    <div class="proof-grid fi d2">
+      <div class="nm-card proof-big">
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;">「このサービスで購入したいか？」自社アンケート（N=393）</p>
+        <div class="survey-nm">
+          <div class="sr-row">
+            <div class="sr-label">購入する（合計）</div>
+            <div class="sr-track"><div class="sr-fill sf-buy" style="width:31.9%;"></div></div>
+            <div class="sr-val">31.9%</div>
+          </div>
+          <div class="sr-row">
+            <div class="sr-label">— うち3,001円以上</div>
+            <div class="sr-track"><div class="sr-fill" style="width:15.1%;background:var(--pink);"></div></div>
+            <div class="sr-val">15.1%</div>
+          </div>
+          <div class="sr-row">
+            <div class="sr-label">購入しない</div>
+            <div class="sr-track"><div class="sr-fill sf-no" style="width:68.1%;"></div></div>
+            <div class="sr-val">68.1%</div>
+          </div>
+        </div>
+        <p style="margin-top:1.2rem;font-size:0.95rem;font-weight:700;color:var(--accent);">→ 約3人に1人が「買う」と回答。</p>
+      </div>
+      <div class="nm-card proof-stat">
+        <div class="proof-num">7,000億円</div>
+        <div class="proof-label">デジタルガチャ市場の規模。中身が分からないものへの繰り返し課金は、実証済みのモデル。</div>
+        <div class="proof-src">国内スマホゲーム課金 × ガチャ比率 推計</div>
+      </div>
+      <div class="nm-card proof-stat">
+        <div class="proof-num">約7割</div>
+        <div class="proof-label">ライブ配信の推し活ファンが月1万円以上を支出。ファンの支払い意欲は高い。</div>
+        <div class="proof-src">17LIVE 推し活実態調査</div>
+      </div>
+      <div class="nm-card proof-stat">
+        <div class="proof-num">75.3%</div>
+        <div class="proof-label">「推しの新たな一面が見えるのは嬉しい」と回答。裏側需要は数字が証明。</div>
+        <div class="proof-src">ネオマーケティング 2024</div>
+      </div>
+      <div class="nm-card proof-stat">
+        <div class="proof-num">68%</div>
+        <div class="proof-label">推し活を「自己投資」と捉えているファンの割合。意味ある投資として購買行動が起きる。</div>
+        <div class="proof-src">Liume 調査</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <div class="container">
+    <div class="section-badge fi">導入メリット</div>
+    <h2 class="sec-h fi d1">Lapsellを使う<br>4つの理由。</h2>
+    <div class="benefit-grid fi d2">
+      <div class="nm-card benefit-card">
+        <div class="benefit-tag">CORE BENEFIT 01</div>
+        <div class="benefit-h">💰 お金にならなかった時間が、収益になる</div>
+        <p class="benefit-p">捨てていた練習・裏側が、そのまま新しい収益源に。初期費用0円、撮るだけ。すでに確保している練習の時間を資産に変えます。</p>
+      </div>
+      <div class="nm-card benefit-card">
+        <div class="benefit-tag">CORE BENEFIT 02</div>
+        <div class="benefit-h">⭐ 「自分が育てた」とファンに思ってもらえる</div>
+        <p class="benefit-p">小さい"今"の推しを支えたファンは、後から「私が見つけて支えた」という誇りを持ち続けます。</p>
+        <div class="inset-quote">例：M!LKは結成11年目で大ブレイク（紅白初出場）。無名時代の一点物には計り知れない価値があります。</div>
+      </div>
+      <div class="nm-card benefit-card">
+        <div class="benefit-tag">BENEFIT 03 — 副次的</div>
+        <div class="benefit-h">📣 自然に拡散され、宣伝になる</div>
+        <p class="benefit-p">"あたり"を引いたファンは、それを拡散したくなります。界隈の外まで広がり、新規ファンを呼ぶ副次的な効果も期待できます。</p>
+      </div>
+      <div class="nm-card benefit-card">
+        <div class="benefit-tag">BENEFIT 04</div>
+        <div class="benefit-h">🛡️ 配信事故を、事前に防げる</div>
+        <p class="benefit-p">撮影後にアップロードするため、公開前に内容を確認できます。本当にまずい瞬間だけを省いて、偶然の名場面はそのまま届けます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="section" id="safety">
+  <div class="container">
+    <div class="section-badge fi">安全性・技術</div>
+    <h2 class="sec-h fi d1">「怖い」を、<br>技術で消す。</h2>
+    <div class="safety-grid fi d2">
+      <div class="nm-card safety-card">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.8rem;">事故の瞬間だけを省いて、偶然の名場面は届ける</h3>
+        <div class="flow-items">
+          <div class="flow-item"><div class="fi-icon">📱</div><div><div class="fi-label">撮影後アップロード</div><div class="fi-sub">ライブ配信と違い、撮り終えてからプラットフォームに上げます。</div></div></div>
+          <div class="flow-item"><div class="fi-icon">👁</div><div><div class="fi-label">公開前チェック</div><div class="fi-sub">まずい瞬間だけ非公開に。該当購入者は自動返金。</div></div></div>
+          <div class="flow-item"><div class="fi-icon">✅</div><div><div class="fi-label">残りをガチャ配布</div><div class="fi-sub">日常も偶然の名場面もそのまま届けます。</div></div></div>
+        </div>
+      </div>
+      <div class="nm-card safety-card">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.8rem;">世界に1つの"本物"を技術で担保</h3>
+        <div class="flow-items">
+          <div class="flow-item"><div class="fi-icon">💾</div><div><div class="fi-label">購入者がダウンロード保有</div><div class="fi-sub">プラットフォーム側は長期保管しない設計。スケールしてもコスト増なし。</div></div></div>
+          <div class="flow-item"><div class="fi-icon">🔏</div><div><div class="fi-label">電子透かし埋め込み</div><div class="fi-sub">所有者情報を映像内に刻印。スクリーンショットしても消えません。</div></div></div>
+          <div class="flow-item"><div class="fi-icon">🔍</div><div><div class="fi-label">所有者を公開検証可能</div><div class="fi-sub">誰でも「今の所有者は誰か」をサイトで確認できます。</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section class="section" id="target">
+  <div class="container">
+    <div class="section-badge fi">こんな方に</div>
+    <h2 class="sec-h fi d1">生身で活動する、<br>中小・個人の作り手へ。</h2>
+    <div class="target-grid fi d2">
+      <div class="nm-card target-card">
+        <div class="target-icon">💃</div>
+        <div class="target-h">地下アイドル</div>
+        <p class="target-p">日々の練習があり、ファンとの距離が近い。推し活の熱量が高いファン層と相性抜群。</p>
+      </div>
+      <div class="nm-card target-card">
+        <div class="target-icon">🎸</div>
+        <div class="target-h">インディーズ楽曲アーティスト・バンド</div>
+        <p class="target-p">リハーサル・制作風景があり、下積みが将来価値になる。</p>
+      </div>
+      <div class="nm-card target-card">
+        <div class="target-icon">🎤</div>
+        <div class="target-h">インディーズお笑い芸人</div>
+        <p class="target-p">ネタ合わせ・楽屋など裏側のニーズが厚い。笑いの瞬間は拡散力も期待できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-badge fi" style="display:flex;justify-content:center;">料金</div>
+    <div class="nm-card pricing-nm fi d1">
+      <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">初期費用</p>
+      <div class="price-big">¥0</div>
+      <p class="price-note">リスクなく始められます。</p>
+      <div class="price-list">
+        <div class="price-row"><span class="pr-check">✓</span>登録・出品：完全無料</div>
+        <div class="price-row"><span class="pr-check">✓</span>取引手数料：5%〜（売れた分だけ）</div>
+        <div class="price-row"><span class="pr-check">✓</span>二次流通時もあなたに還元（将来機能）</div>
+      </div>
+      <a href="#cta" class="btn-nm-primary" style="display:block;text-align:center;">0円で出品をはじめる</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-badge fi" style="display:flex;justify-content:center;">FAQ</div>
+    <h2 class="sec-h fi d1" style="text-align:center;">よくあるご質問。</h2>
+    <div class="faq-list fi d2">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">撮影や編集の手間はかかりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>スマホで撮るだけです。編集は一切不要。普段の練習をそのままスマホで録画しアップロードするだけで完了します。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">変なものが映り込んだらどうなりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>公開前に内容を確認できます。本当にまずい瞬間だけを非公開にでき、その分は購入者に自動で返金されます。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">ファンは本当に買いますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>デジタルガチャは国内で約7,000億円規模。推し活ファンの約7割が月1万円以上支出（17LIVE調査）。自社アンケートでも約32%（N=393）が「購入する」と回答しています。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">動画がコピー・転載されませんか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>電子透かしで所有者情報を映像内に刻印。スクリーンショットしても消えません。誰でもLapsellで所有者を検証可能です。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">費用はいくらかかりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>初期費用0円。取引手数料は売れた分だけ（5%〜）。何も売れなければ費用は一切かかりません。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="cta">
+  <div class="container">
+    <div class="nm-card cta-card">
+      <div class="section-badge" style="display:inline-flex;margin-bottom:1.2rem;">早期アクセス</div>
+      <h2 class="cta-h">練習の時間を、<br><span class="accent-text">資産に変えよう。</span></h2>
+      <p class="cta-sub">まだ誰も取っていない市場へ。早期登録者には優先アクセス権をお届けします。</p>
+      <form class="form-nm" onsubmit="handleForm(event)">
+        <input type="email" class="form-email-nm" placeholder="メールアドレスを入力" required id="cta-email">
+        <button type="submit" class="form-btn-nm" id="cta-btn">無料で登録</button>
+      </form>
+      <p class="form-note-nm">スパムは送りません。配信解除はいつでも可能です。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-in">
+    <a href="#" class="footer-logo">Lapsell</a>
+    <div class="footer-copy">© 2026 Lapsell Inc. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a href="#">利用規約</a></li>
+      <li><a href="#">プライバシーポリシー</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cta-btn');
+    btn.textContent = '登録完了 ✓';
+    btn.style.background = '#6ECBA0';
+    document.getElementById('cta-email').disabled = true;
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>

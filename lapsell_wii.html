@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>練習の時間を収益に変える｜Lapsell</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --wii-bg: #F0EEF5;
+      --wii-blue: #5B8FCC;
+      --channel-white: #FFFFFF;
+      --channel-pink: #FFD6E8;
+      --channel-mint: #D6F5E8;
+      --channel-lavender: #E8D6FF;
+      --channel-yellow: #FFF5C0;
+      --channel-sky: #D6EEFF;
+      --channel-peach: #FFE8D6;
+      --wii-gray: #888;
+      --wii-text: #333;
+      --wii-shadow: rgba(0,0,0,0.12);
+      --selection: rgba(91,143,204,0.25);
+    }
+
+    * { cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='36'><path d='M5 1 L5 30 L10 25 L14 34 L17 33 L13 24 L20 24 Z' fill='white' stroke='black' stroke-width='1.5'/></svg>") 5 1, default; }
+
+    body {
+      background: linear-gradient(180deg, #E8F0FF 0%, #F0EEF5 40%, #EEEAFF 100%);
+      min-height: 100vh;
+      font-family: 'Helvetica Neue', 'Arial Rounded MT Bold', Arial, 'Hiragino Maru Gothic ProN', 'ヒラギノ丸ゴ ProN', 'Hiragino Sans', sans-serif;
+      color: var(--wii-text);
+      overflow-x: hidden;
+    }
+
+    /* === WII HEADER === */
+    .wii-header {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.7));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .wii-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--wii-blue);
+      letter-spacing: -0.02em;
+    }
+    .wii-time {
+      font-size: 0.75rem;
+      color: var(--wii-gray);
+      text-align: right;
+    }
+    .wii-time-big { font-size: 1.1rem; font-weight: 700; color: var(--wii-text); display: block; }
+    .wii-back-btn {
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--wii-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wii-back-btn:hover { background: #fff; }
+
+    /* === CHANNEL GRID === */
+    .wii-grid {
+      max-width: 960px;
+      margin: 28px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* === CHANNEL TILE === */
+    .channel {
+      background: var(--channel-white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px var(--wii-shadow), 0 1px 4px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .channel:hover {
+      transform: scale(1.04) translateY(-3px);
+      box-shadow: 0 12px 40px var(--wii-shadow), 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .channel:active { transform: scale(0.97); }
+    .channel.wide { grid-column: span 2; aspect-ratio: auto; min-height: 130px; }
+    .channel.tall { grid-row: span 2; }
+
+    .ch-color {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+    }
+    .ch-icon { font-size: 2rem; margin-bottom: 6px; }
+    .ch-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.6);
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+    .ch-footer {
+      height: 28px;
+      background: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--wii-gray);
+      letter-spacing: 0.05em;
+    }
+
+    .ch-pink    { background: linear-gradient(145deg, #FFE8F4, #FFD0E8); }
+    .ch-mint    { background: linear-gradient(145deg, #E8FFF5, #D0FFE8); }
+    .ch-lavender{ background: linear-gradient(145deg, #F0E8FF, #E0D0FF); }
+    .ch-yellow  { background: linear-gradient(145deg, #FFFAE8, #FFF5D0); }
+    .ch-sky     { background: linear-gradient(145deg, #E8F5FF, #D0EAFF); }
+    .ch-peach   { background: linear-gradient(145deg, #FFF0E8, #FFE4D0); }
+    .ch-blue    { background: linear-gradient(145deg, #E8F0FF, #D0E4FF); }
+    .ch-green   { background: linear-gradient(145deg, #EAFFF5, #D4FFE8); }
+
+    /* === HERO CHANNEL (wide) === */
+    .hero-channel {
+      grid-column: span 4;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #E8EEFF, #F8E8FF, #E8F8FF);
+      box-shadow: 0 4px 20px var(--wii-shadow);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 4px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .hero-channel:hover { transform: translateY(-2px); box-shadow: 0 12px 40px var(--wii-shadow); }
+    .hc-text { flex: 1; }
+    .hc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(91,143,204,0.1);
+      border: 1.5px solid rgba(91,143,204,0.25);
+      color: var(--wii-blue);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .hc-badge-dot { width:6px;height:6px;background:var(--wii-blue);border-radius:50%;animation:blink 1.5s infinite; }
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    h1.hc-h {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--wii-text);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .hc-h .blue { color: var(--wii-blue); }
+    .hc-sub {
+      font-size: 0.9rem;
+      color: var(--wii-gray);
+      line-height: 1.75;
+      max-width: 420px;
+      margin-bottom: 16px;
+    }
+    .hc-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .pill {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--wii-text);
+    }
+    .hc-btns { display: flex; gap: 10px; }
+    .wii-btn {
+      background: linear-gradient(180deg, #FFFFFF, #F0ECFF);
+      border: 2px solid rgba(91,143,204,0.35);
+      border-radius: 24px;
+      color: var(--wii-blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 8px 22px;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      font-family: inherit;
+    }
+    .wii-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(91,143,204,0.2); }
+    .wii-btn-primary {
+      background: linear-gradient(180deg, #7AAEE0, #5B8FCC);
+      border: 2px solid #4A80C0;
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(91,143,204,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    .wii-btn-primary:hover { background: linear-gradient(180deg, #88BCEE, #6A9EDA); }
+
+    .hc-stat {
+      width: 160px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      border: 1.5px solid rgba(0,0,0,0.06);
+      padding: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .hcs-num { font-size: 2.5rem; font-weight: 800; color: var(--wii-blue); line-height: 1; }
+    .hcs-label { font-size: 0.65rem; color: var(--wii-gray); line-height: 1.55; margin-top: 4px; }
+
+    /* === SECTION TITLE === */
+    .wii-section-title {
+      max-width: 960px;
+      margin: 24px auto 8px;
+      padding: 0 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--wii-gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wst-line { flex: 1; height: 1px; background: rgba(0,0,0,0.1); }
+
+    /* === DETAIL CHANNEL CONTENT === */
+    .ch-detail { flex: 1; padding: 14px; display: flex; flex-direction: column; }
+    .ch-detail-h { font-size: 0.85rem; font-weight: 800; color: var(--wii-text); margin-bottom: 5px; }
+    .ch-detail-p { font-size: 0.72rem; color: var(--wii-gray); line-height: 1.65; flex: 1; }
+    .ch-detail-num { font-size: 1.8rem; font-weight: 800; color: var(--wii-blue); line-height: 1; margin-bottom: 4px; }
+
+    /* === STEP NUMBERS === */
+    .step-bubble {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #7AAEE0, #5B8FCC);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      box-shadow: 0 3px 10px rgba(91,143,204,0.4);
+      flex-shrink: 0;
+    }
+
+    /* === SURVEY BAR === */
+    .survey-wii { padding: 0 4px; }
+    .sw-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .sw-label { font-size: 0.62rem; color: var(--wii-gray); width: 80px; flex-shrink: 0; }
+    .sw-track { flex: 1; height: 10px; background: rgba(0,0,0,0.06); border-radius: 5px; overflow: hidden; }
+    .sw-fill { height: 100%; border-radius: 5px; }
+    .swf-buy { background: linear-gradient(90deg, #7AAEE0, #E090C0); }
+    .swf-no  { background: rgba(0,0,0,0.1); }
+    .sw-val { font-size: 0.62rem; font-weight: 700; width: 36px; text-align: right; color: var(--wii-text); }
+
+    /* === CTA CHANNEL === */
+    .cta-channel {
+      grid-column: span 4;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #D8EEFF, #E8D8FF, #FFD8F0);
+      box-shadow: 0 4px 20px var(--wii-shadow);
+      padding: 32px;
+      text-align: center;
+    }
+    .cta-channel h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--wii-text);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .cta-channel .blue { color: var(--wii-blue); }
+    .cta-sub-wii { font-size: 0.9rem; color: var(--wii-gray); margin-bottom: 20px; line-height: 1.7; }
+    .form-wii {
+      display: flex;
+      max-width: 380px;
+      margin: 0 auto;
+      gap: 8px;
+    }
+    .email-wii {
+      flex: 1;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.8);
+      color: var(--wii-text);
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      outline: none;
+      font-family: inherit;
+    }
+    .email-wii:focus { border-color: var(--wii-blue); }
+
+    /* === WII FOOTER === */
+    .wii-footer {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--wii-gray);
+      margin-top: 24px;
+    }
+    .wii-footer-logo { font-weight: 800; color: var(--wii-blue); font-size: 0.9rem; }
+    .wii-footer-links { display: flex; gap: 16px; list-style: none; }
+    .wii-footer-links a { color: var(--wii-gray); text-decoration: none; }
+
+    /* === FAQ CHANNELS === */
+    .faq-channel {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px var(--wii-shadow);
+      overflow: hidden;
+    }
+    .faq-q-wii {
+      width: 100%;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: left;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--wii-text);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .faq-q-wii:hover { background: rgba(91,143,204,0.06); }
+    .faq-a-wii { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
+    .faq-channel.open .faq-a-wii { max-height:200px; }
+    .faq-a-wii p { padding:10px 16px 12px; font-size:0.78rem; color:var(--wii-gray); line-height:1.72; }
+    .faq-arrow-wii { color:var(--wii-blue); transition:transform 0.3s; }
+    .faq-channel.open .faq-arrow-wii { transform:rotate(180deg); }
+
+    @media(max-width:800px){
+      .wii-grid { grid-template-columns:repeat(2,1fr); }
+      .hero-channel,.cta-channel { grid-column:span 2; }
+      .hero-channel { flex-direction:column; }
+      .hc-stat { width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WII HEADER -->
+<header class="wii-header">
+  <div class="wii-logo">Lapsell</div>
+  <div class="wii-time">
+    <span class="wii-time-big" id="wii-clock">00:00</span>
+    <span>アーティスト向けプラットフォーム</span>
+  </div>
+</header>
+
+<!-- MAIN CHANNEL GRID -->
+<div class="wii-grid">
+
+  <!-- HERO CHANNEL -->
+  <div class="hero-channel">
+    <div class="hc-text">
+      <div class="hc-badge"><div class="hc-badge-dot"></div>新しい収益源 — アーティスト向け</div>
+      <h1 class="hc-h">練習の<span class="blue">"時間"</span>が、<br>収益になる。</h1>
+      <p class="hc-sub">捨てていた練習・裏側が、ファンにとって世界に1つのグッズに。撮影はスマホで撮るだけ、編集も不要。</p>
+      <div class="hc-badges">
+        <div class="pill">✓ 初期費用0円</div>
+        <div class="pill">✓ 手数料は売れた分だけ</div>
+        <div class="pill">✓ 撮影はスマホのみ</div>
+      </div>
+      <div class="hc-btns">
+        <button class="wii-btn wii-btn-primary" onclick="document.getElementById('cta-zone').scrollIntoView({behavior:'smooth'})">無料で出品をはじめる</button>
+        <button class="wii-btn" onclick="document.getElementById('how-zone').scrollIntoView({behavior:'smooth'})">仕組みを見る</button>
+      </div>
+    </div>
+    <div class="hc-stat">
+      <div class="hcs-num">32%</div>
+      <div class="hcs-label">自社アンケート（N=393）で「購入する」と回答した割合</div>
+    </div>
+  </div>
+
+  <!-- SECTION: 課題 -->
+</div>
+<div class="wii-section-title"><span>課題チャンネル</span><div class="wst-line"></div></div>
+<div class="wii-grid">
+  <div class="channel" style="background:linear-gradient(145deg,#FFE8F0,#FFD4E4);">
+    <div class="ch-detail">
+      <div style="font-size:1.8rem;margin-bottom:6px;">😰</div>
+      <div class="ch-detail-h">撮影・編集が大変</div>
+      <p class="ch-detail-p">毎日の投稿は手間で続かない。動画を撮っても編集に時間がかかり、本業の練習に集中できない。</p>
+    </div>
+    <div class="ch-footer">PAIN 01</div>
+  </div>
+  <div class="channel" style="background:linear-gradient(145deg,#FFF0D8,#FFE4C0);">
+    <div class="ch-detail">
+      <div style="font-size:1.8rem;margin-bottom:6px;">⚠️</div>
+      <div class="ch-detail-h">配信は事故が怖い</div>
+      <p class="ch-detail-p">失言・映り込みがそのまま流れ取り返しがつかない。ライブ配信は常に一発勝負でリスクが高い。</p>
+    </div>
+    <div class="ch-footer">PAIN 02</div>
+  </div>
+  <div class="channel" style="background:linear-gradient(145deg,#F0E8FF,#E4D8FF);">
+    <div class="ch-detail">
+      <div style="font-size:1.8rem;margin-bottom:6px;">💸</div>
+      <div class="ch-detail-h">裏側は儲からない</div>
+      <p class="ch-detail-p">再生数が取れず手間に見合わないから撮られない。練習風景・舞台裏には価値があるのに収益化されていない。</p>
+    </div>
+    <div class="ch-footer">PAIN 03</div>
+  </div>
+  <div class="channel" style="background:linear-gradient(145deg,#E8F0FF,#D8E8FF);">
+    <div class="ch-detail">
+      <div style="font-size:1.5rem;margin-bottom:4px;">💡</div>
+      <div class="ch-detail-h" style="font-size:0.78rem;">Lapsellが解決します</div>
+      <p class="ch-detail-p">毎日生まれている価値ある時間が、収益化されないまま消えています。それを変えるのがLapsellです。</p>
+    </div>
+    <div class="ch-footer">SOLUTION →</div>
+  </div>
+</div>
+
+<!-- SECTION: 仕組み -->
+<div class="wii-section-title" id="how-zone"><span>仕組みチャンネル</span><div class="wst-line"></div></div>
+<div class="wii-grid">
+  <div class="channel ch-sky">
+    <div class="ch-detail">
+      <div class="step-bubble">1</div>
+      <div class="ch-detail-h">📋 出品</div>
+      <p class="ch-detail-p">練習の日時と価格を決めて出品。販売枠数・1本の長さも自由に設定できます。</p>
+    </div>
+    <div class="ch-footer">STEP 01</div>
+  </div>
+  <div class="channel ch-pink">
+    <div class="ch-detail">
+      <div class="step-bubble">2</div>
+      <div class="ch-detail-h">🎫 購入</div>
+      <p class="ch-detail-p">ファンが時間枠を購入。中身は届くまで分からない——それがガチャの楽しさです。</p>
+    </div>
+    <div class="ch-footer">STEP 02</div>
+  </div>
+  <div class="channel ch-mint">
+    <div class="ch-detail">
+      <div class="step-bubble">3</div>
+      <div class="ch-detail-h">📱 撮影</div>
+      <p class="ch-detail-p">当日はスマホで撮るだけ。編集一切不要。普通の練習そのまま。</p>
+    </div>
+    <div class="ch-footer">STEP 03</div>
+  </div>
+  <div class="channel ch-lavender">
+    <div class="ch-detail">
+      <div class="step-bubble">4</div>
+      <div class="ch-detail-h">🎁 開封</div>
+      <p class="ch-detail-p">映像をセグメントに分割し、各ファンへランダムに配布。世界に1つの一点物が届きます。</p>
+    </div>
+    <div class="ch-footer">STEP 04</div>
+  </div>
+</div>
+
+<!-- SECTION: 根拠 -->
+<div class="wii-section-title"><span>データチャンネル</span><div class="wst-line"></div></div>
+<div class="wii-grid">
+  <div class="channel wide ch-yellow">
+    <div class="ch-detail">
+      <div style="font-size:0.68rem;font-weight:700;color:var(--wii-gray);margin-bottom:4px;">自社アンケート（N=393）購入意向</div>
+      <div class="survey-wii">
+        <div class="sw-row"><div class="sw-label">購入する合計</div><div class="sw-track"><div class="sw-fill swf-buy" style="width:31.9%;"></div></div><div class="sw-val">31.9%</div></div>
+        <div class="sw-row"><div class="sw-label">購入しない</div><div class="sw-track"><div class="sw-fill swf-no" style="width:68.1%;"></div></div><div class="sw-val">68.1%</div></div>
+      </div>
+      <p style="font-size:0.75rem;font-weight:700;color:var(--wii-blue);margin-top:8px;">→ 約3人に1人が「買う」と回答</p>
+    </div>
+    <div class="ch-footer">SURVEY DATA</div>
+  </div>
+  <div class="channel ch-peach">
+    <div class="ch-detail">
+      <div class="ch-detail-num">7,000億円</div>
+      <div class="ch-detail-h">デジタルガチャ市場</div>
+      <p class="ch-detail-p">中身不明への繰り返し課金は実証済みのモデル。</p>
+    </div>
+    <div class="ch-footer">市場データ</div>
+  </div>
+  <div class="channel ch-sky">
+    <div class="ch-detail">
+      <div class="ch-detail-num">約7割</div>
+      <div class="ch-detail-h">推し活月1万円以上</div>
+      <p class="ch-detail-p">ライブ配信の推し活ファンの支出。（17LIVE調査）</p>
+    </div>
+    <div class="ch-footer">支払い意欲</div>
+  </div>
+  <div class="channel ch-mint">
+    <div class="ch-detail">
+      <div class="ch-detail-num">75.3%</div>
+      <div class="ch-detail-h">裏側需要の証明</div>
+      <p class="ch-detail-p">「推しの新たな一面が見えるのは嬉しい」と回答。（ネオマーケ 2024）</p>
+    </div>
+    <div class="ch-footer">需要データ</div>
+  </div>
+</div>
+
+<!-- SECTION: メリット -->
+<div class="wii-section-title"><span>メリットチャンネル</span><div class="wst-line"></div></div>
+<div class="wii-grid">
+  <div class="channel wide ch-lavender">
+    <div class="ch-detail">
+      <div style="font-size:0.62rem;font-weight:700;color:var(--wii-blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;">CORE BENEFIT 01</div>
+      <div class="ch-detail-h" style="font-size:0.9rem;">💰 お金にならなかった時間が、収益になる</div>
+      <p class="ch-detail-p">捨てていた練習・裏側が、そのまま新しい収益源に。初期費用0円、撮るだけ。</p>
+    </div>
+    <div class="ch-footer">BENEFIT 01</div>
+  </div>
+  <div class="channel wide ch-pink">
+    <div class="ch-detail">
+      <div style="font-size:0.62rem;font-weight:700;color:var(--wii-blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;">CORE BENEFIT 02</div>
+      <div class="ch-detail-h" style="font-size:0.9rem;">⭐ 「自分が育てた」とファンに思ってもらえる</div>
+      <p class="ch-detail-p">M!LKは結成11年目で大ブレイク。小さい"今"だからこそ将来価値を見込んでファンが買います。</p>
+    </div>
+    <div class="ch-footer">BENEFIT 02</div>
+  </div>
+  <div class="channel ch-yellow">
+    <div class="ch-detail">
+      <div class="ch-detail-h">📣 拡散</div>
+      <p class="ch-detail-p">"あたり"を引いたファンは拡散したくなります。（副次的効果）</p>
+    </div>
+    <div class="ch-footer">BENEFIT 03</div>
+  </div>
+  <div class="channel ch-mint">
+    <div class="ch-detail">
+      <div class="ch-detail-h">🛡️ 事故防止</div>
+      <p class="ch-detail-p">撮影後アップロードで公開前チェック可能。本当にまずい瞬間だけを省けます。</p>
+    </div>
+    <div class="ch-footer">BENEFIT 04</div>
+  </div>
+  <div class="channel ch-sky">
+    <div class="ch-detail">
+      <div class="ch-detail-h">💃 地下アイドル</div>
+      <p class="ch-detail-p">日々の練習があり、ファンとの距離が近い。</p>
+    </div>
+    <div class="ch-footer">TARGET</div>
+  </div>
+  <div class="channel ch-blue">
+    <div class="ch-detail">
+      <div class="ch-detail-h">🎸 インディーズ</div>
+      <p class="ch-detail-p">リハ・制作風景があり、下積みが将来価値になる。</p>
+    </div>
+    <div class="ch-footer">TARGET</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="wii-section-title"><span>FAQ チャンネル</span><div class="wst-line"></div></div>
+<div style="max-width:960px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:8px;">
+  <div class="faq-channel">
+    <button class="faq-q-wii" onclick="toggleFAQ(this)">撮影や編集の手間はかかりますか？<span class="faq-arrow-wii">▾</span></button>
+    <div class="faq-a-wii"><p>スマホで撮るだけです。編集は一切不要。普段の練習をそのままスマホで録画しアップロードするだけで完了します。</p></div>
+  </div>
+  <div class="faq-channel">
+    <button class="faq-q-wii" onclick="toggleFAQ(this)">変なものが映り込んだらどうなりますか？<span class="faq-arrow-wii">▾</span></button>
+    <div class="faq-a-wii"><p>公開前に内容を確認できます。本当にまずい瞬間だけを非公開にでき、その分は購入者に自動で返金されます。</p></div>
+  </div>
+  <div class="faq-channel">
+    <button class="faq-q-wii" onclick="toggleFAQ(this)">費用はかかりますか？<span class="faq-arrow-wii">▾</span></button>
+    <div class="faq-a-wii"><p>初期費用0円。取引手数料は売れた分だけ（5%〜）。何も売れなければ費用は一切かかりません。</p></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="wii-grid" style="margin-top:16px;" id="cta-zone">
+  <div class="cta-channel">
+    <h2>練習の時間を、<span class="blue">資産に変えよう。</span></h2>
+    <p class="cta-sub-wii">まだ誰も取っていない市場へ。早期登録者には優先アクセス権をお届けします。</p>
+    <form class="form-wii" onsubmit="handleForm(event)">
+      <input type="email" class="email-wii" placeholder="メールアドレスを入力" required id="cta-email">
+      <button type="submit" class="wii-btn wii-btn-primary" id="cta-btn">無料で登録</button>
+    </form>
+    <p style="font-size:0.7rem;color:var(--wii-gray);margin-top:10px;">スパムは送りません。配信解除はいつでも可能です。</p>
+  </div>
+</div>
+
+<!-- WII FOOTER -->
+<footer class="wii-footer">
+  <div class="wii-footer-logo">Lapsell</div>
+  <div>© 2026 Lapsell Inc.</div>
+  <ul class="wii-footer-links">
+    <li><a href="#">利用規約</a></li>
+    <li><a href="#">プライバシー</a></li>
+    <li><a href="#">お問い合わせ</a></li>
+  </ul>
+</footer>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('wii-clock').textContent = `${h}:${m}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-channel');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-channel.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cta-btn');
+    btn.textContent = '登録完了 ✓';
+    btn.style.background = 'linear-gradient(180deg,#80D4A8,#5CB880)';
+    document.getElementById('cta-email').disabled = true;
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>

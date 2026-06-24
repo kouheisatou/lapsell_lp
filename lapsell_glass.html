@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>練習の時間を収益に変える｜Lapsell（ラプセル）｜アイドル・アーティスト向けグッズ販売</title>
+  <meta name="description" content="捨てていた練習・裏側の時間が、世界に1つのデジタルグッズになって売れる。初期費用0円・手数料5%〜。地下アイドル／インディーズアーティストの新しい収益源、Lapsell。">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --purple: #9B59F0;
+      --pink: #F059B0;
+      --cyan: #59D4F0;
+      --mint: #59F0B0;
+      --white: #FFFFFF;
+      --white-dim: rgba(255,255,255,0.7);
+      --white-muted: rgba(255,255,255,0.45);
+      --bg: #08051e;
+      --glass: rgba(255,255,255,0.07);
+      --glass-hover: rgba(255,255,255,0.11);
+      --glass-border: rgba(255,255,255,0.14);
+      --glass-border-bright: rgba(255,255,255,0.25);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Noto Sans JP', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* === ANIMATED BLOBS === */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.55;
+    }
+    .b1 { width:700px;height:700px; background:radial-gradient(circle, #7C3AED, transparent 70%); top:-200px;left:-150px; animation:bm1 22s ease-in-out infinite; }
+    .b2 { width:600px;height:600px; background:radial-gradient(circle, #DB2777, transparent 70%); top:30%;right:-150px; animation:bm2 28s ease-in-out 4s infinite; }
+    .b3 { width:500px;height:500px; background:radial-gradient(circle, #0891B2, transparent 70%); bottom:-100px;left:20%; animation:bm3 20s ease-in-out 8s infinite; }
+    .b4 { width:400px;height:400px; background:radial-gradient(circle, #059669, transparent 70%); bottom:30%;right:10%; animation:bm1 26s ease-in-out 12s infinite reverse; }
+    @keyframes bm1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(60px,-60px) scale(1.1);} 66%{transform:translate(-30px,40px) scale(0.9);} }
+    @keyframes bm2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-50px,50px) scale(1.08);} 66%{transform:translate(30px,-30px) scale(0.95);} }
+    @keyframes bm3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(40px,-40px) scale(1.12);} }
+
+    /* === GLASS MIXIN === */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+    }
+    .glass-bright {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--glass-border-bright);
+      border-radius: 20px;
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,5,30,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      background: linear-gradient(90deg, #C084FC, #F472B6, #67E8F9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--white-muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: linear-gradient(90deg, #9B59F0, #F059B0);
+      color: #fff;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 0 25px rgba(155,89,240,0.4);
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* === LAYOUT === */
+    .section { padding: 7rem 2rem; position: relative; z-index: 1; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(155,89,240,0.15);
+      border: 1px solid rgba(155,89,240,0.35);
+      color: #C084FC;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      margin-bottom: 1.2rem;
+    }
+    h2.sec-h {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .grad-text {
+      background: linear-gradient(90deg, #C084FC, #F472B6, #67E8F9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p.sec-sub { font-size: 1rem; color: var(--white-muted); max-width: 500px; line-height: 1.85; margin-bottom: 3rem; }
+
+    /* === HERO === */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-glass {
+      max-width: 780px;
+      padding: 4rem 3rem;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(192,132,252,0.12);
+      border: 1px solid rgba(192,132,252,0.3);
+      color: #C084FC;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1.8rem;
+    }
+    .kicker-dot { width:7px;height:7px;background:#C084FC;border-radius:50%;animation:blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+    h1.hero-h {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+    }
+    .hero-sub { font-size: 1.05rem; color: var(--white-muted); line-height: 1.85; max-width: 540px; margin: 0 auto 2rem; }
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .badge-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--white-dim);
+      font-size: 0.73rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, #9B59F0, #F059B0);
+      color: #fff;
+      border: none;
+      padding: 1rem 2.4rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+      font-family: inherit;
+      box-shadow: 0 8px 30px rgba(155,89,240,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(155,89,240,0.55); }
+    .btn-glass {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      padding: 1rem 2.4rem;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+    }
+    .btn-glass:hover { background: rgba(255,255,255,0.14); }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollAnim 2s ease-in-out infinite; }
+    @keyframes scrollAnim { 0%,100%{transform:scaleY(1);opacity:1;} 50%{transform:scaleY(0.5);opacity:0.4;} }
+
+    /* === PAIN POINTS === */
+    .pain { background: transparent; }
+    .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .pain-card { padding: 2rem; transition: all 0.3s; cursor: default; }
+    .pain-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-4px); }
+    .pain-icon {
+      width: 52px; height: 52px;
+      background: rgba(240,89,176,0.15);
+      border: 1px solid rgba(240,89,176,0.3);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .pain-h { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--white); }
+    .pain-p { font-size: 0.85rem; color: var(--white-muted); line-height: 1.72; }
+    .pain-verdict {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid #F472B6;
+      background: rgba(244,114,182,0.08);
+      border-radius: 0 12px 12px 0;
+    }
+    .pain-verdict p { font-size: 1rem; font-weight: 600; color: var(--white-dim); line-height: 1.7; }
+
+    /* === SOLUTION === */
+    .solution { }
+    .steps-flow { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2rem; }
+    .step-card {
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .step-card:hover { transform: translateY(-5px); background: var(--glass-hover); }
+    .step-card:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.2);
+      font-size: 1.2rem;
+      z-index: 2;
+    }
+    .step-num {
+      font-size: 0.65rem;
+      font-family: monospace;
+      color: #C084FC;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .step-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .step-h { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step-p { font-size: 0.82rem; color: var(--white-muted); line-height: 1.7; }
+    .step-points {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .step-point {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 40px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.78rem;
+      color: var(--white-dim);
+    }
+
+    /* === PROOF === */
+    .proof { }
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proof-big {
+      padding: 2.5rem;
+      grid-column: 1 / -1;
+    }
+    .proof-stat { padding: 2rem; }
+    .proof-num {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .proof-label { font-size: 0.85rem; color: var(--white-muted); line-height: 1.6; }
+    .proof-source { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; font-family: monospace; }
+    .survey-bar {
+      margin-top: 1.5rem;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .bar-label { font-size: 0.78rem; color: var(--white-muted); width: 120px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 1.5s ease; }
+    .bf-buy { background: linear-gradient(90deg, #9B59F0, #F059B0); }
+    .bf-no  { background: rgba(255,255,255,0.2); }
+    .bar-val { font-size: 0.75rem; color: var(--white-dim); width: 40px; text-align: right; font-family: monospace; }
+
+    /* === BENEFITS === */
+    .benefits { }
+    .benefit-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+    .benefit-card {
+      padding: 2.4rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bc-1::before { background: linear-gradient(135deg, rgba(155,89,240,0.15), transparent); }
+    .bc-2::before { background: linear-gradient(135deg, rgba(240,89,176,0.15), transparent); }
+    .bc-3::before { background: linear-gradient(135deg, rgba(89,212,240,0.12), transparent); }
+    .bc-4::before { background: linear-gradient(135deg, rgba(89,240,176,0.12), transparent); }
+    .benefit-card:hover { transform: translateY(-5px); }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-card > * { position: relative; z-index: 1; }
+    .benefit-num {
+      font-size: 0.6rem;
+      font-family: monospace;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--white-muted);
+      margin-bottom: 0.8rem;
+    }
+    .benefit-h { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem; }
+    .benefit-p { font-size: 0.87rem; color: var(--white-muted); line-height: 1.78; }
+    .benefit-quote {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: var(--white-dim);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* === SAFETY === */
+    .safety { }
+    .safety-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .safety-card { padding: 2.4rem; }
+    .safety-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 1.2rem;
+    }
+    .sf-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+    }
+    .sf-item:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sf-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .sf-label { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+    .sf-desc { font-size: 0.78rem; color: var(--white-muted); margin-top: 0.2rem; line-height: 1.5; }
+
+    /* === TARGET === */
+    .target { }
+    .target-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+    .target-card { padding: 2rem; text-align: center; }
+    .target-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .target-h { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .target-p { font-size: 0.82rem; color: var(--white-muted); line-height: 1.65; }
+    .stat-line {
+      margin-top: 2rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: var(--white-dim);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .stat-line strong { color: #67E8F9; }
+
+    /* === PRICING === */
+    .pricing { }
+    .pricing-card { max-width: 520px; margin: 0 auto; padding: 3rem; text-align: center; }
+    .price-free {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin: 1rem 0 0.3rem;
+    }
+    .price-note { font-size: 0.85rem; color: var(--white-muted); margin-bottom: 2rem; }
+    .price-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .price-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--white-dim);
+    }
+    .pi-check { color: #67E8F9; font-size: 1rem; }
+
+    /* === FAQ === */
+    .faq { }
+    .faq-list { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; }
+    .faq-item { overflow: hidden; }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.3rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.04); }
+    .faq-arrow { font-size: 1rem; transition: transform 0.3s; color: #C084FC; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.3rem; }
+    .faq-a p { font-size: 0.87rem; color: var(--white-muted); line-height: 1.78; }
+
+    /* === CTA === */
+    .cta-sec {
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-glass { max-width: 640px; margin: 0 auto; padding: 4rem 3rem; }
+    h2.cta-h {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .cta-sub { font-size: 1rem; color: var(--white-muted); margin-bottom: 2.5rem; line-height: 1.7; }
+    .form-wrap { display: flex; max-width: 400px; margin: 0 auto; border-radius: 50px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); }
+    .form-email {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: var(--white);
+      padding: 0.9rem 1.3rem;
+      font-size: 0.88rem;
+      outline: none;
+      font-family: inherit;
+    }
+    .form-email::placeholder { color: var(--white-muted); }
+    .form-btn {
+      background: linear-gradient(90deg, #9B59F0, #F059B0);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .form-btn:hover { opacity: 0.88; }
+    .form-note { font-size: 0.72rem; color: var(--white-muted); margin-top: 1rem; }
+
+    /* === FOOTER === */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 3rem;
+    }
+    .footer-in { max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem; }
+    .footer-logo { font-size:1.2rem;font-weight:800;text-decoration:none; background:linear-gradient(90deg,#C084FC,#F472B6); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .footer-copy { font-size:0.72rem;color:rgba(255,255,255,0.3); }
+    .footer-links { display:flex;gap:1.5rem;list-style:none; }
+    .footer-links a { font-size:0.72rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s; }
+    .footer-links a:hover { color:rgba(255,255,255,0.7); }
+
+    /* === SCROLL FX === */
+    .fi { opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease; }
+    .fi.in { opacity:1;transform:translateY(0); }
+    .fi.d1{transition-delay:.1s;}.fi.d2{transition-delay:.2s;}.fi.d3{transition-delay:.3s;}.fi.d4{transition-delay:.4s;}
+
+    /* === RESPONSIVE === */
+    @media(max-width:900px){
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .pain-grid,.steps-flow,.benefit-grid,.safety-grid,.target-grid { grid-template-columns:1fr; }
+      .proof-grid { grid-template-columns:1fr; }
+      .proof-big { grid-column:1; }
+      .steps-flow .step-card::after { display:none; }
+      .section { padding:5rem 1.5rem; }
+      .hero-glass,.cta-glass,.pricing-card { padding:2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BLOBS -->
+<div class="blobs">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Lapsell</a>
+  <ul class="nav-links">
+    <li><a href="#pain">課題</a></li>
+    <li><a href="#solution">仕組み</a></li>
+    <li><a href="#proof">根拠</a></li>
+    <li><a href="#benefits">メリット</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">無料で始める</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glass hero-glass">
+    <div class="hero-kicker"><div class="kicker-dot"></div>アイドル・アーティスト向け新収益プラットフォーム</div>
+    <h1 class="hero-h">練習の<span class="grad-text">"時間"</span>が、<br>収益になる。</h1>
+    <p class="hero-sub">捨てていた練習・裏側が、ファンにとって世界に1つのグッズに。撮影はスマホで撮るだけ、編集も不要。</p>
+    <div class="hero-badges">
+      <div class="badge-pill">✓ 初期費用0円</div>
+      <div class="badge-pill">✓ 手数料は売れた分だけ</div>
+      <div class="badge-pill">✓ 撮影は当日スマホのみ</div>
+    </div>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">無料で出品をはじめる</a>
+      <a href="#solution" class="btn-glass">仕組みを見る</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain section" id="pain">
+  <div class="container">
+    <div class="section-badge fi">課題</div>
+    <h2 class="sec-h fi d1">裏側が一番価値あるのに、<br>お金にならない。</h2>
+    <div class="pain-grid fi d2">
+      <div class="glass pain-card">
+        <div class="pain-icon">😰</div>
+        <div class="pain-h">撮影・編集が大変</div>
+        <p class="pain-p">毎日の投稿は手間で続かない。動画を撮っても編集に時間がかかり、本業の練習に集中できない。</p>
+      </div>
+      <div class="glass pain-card">
+        <div class="pain-icon">⚠️</div>
+        <div class="pain-h">配信は事故が怖い</div>
+        <p class="pain-p">失言・映り込みがそのまま流れ、取り返しがつかない。ライブ配信は常に一発勝負でリスクが高い。</p>
+      </div>
+      <div class="glass pain-card">
+        <div class="pain-icon">💸</div>
+        <div class="pain-h">裏側は儲からない</div>
+        <p class="pain-p">再生数が取れず、手間に見合わないから撮られない。練習風景・舞台裏には価値があるのに収益化できていない。</p>
+      </div>
+    </div>
+    <div class="pain-verdict fi d3">
+      <p>毎日生まれている価値ある時間が、収益化されないまま消えています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution section" id="solution">
+  <div class="container">
+    <div class="section-badge fi">仕組み</div>
+    <h2 class="sec-h fi d1">時間枠を<span class="grad-text">"先に売って"</span>、<br>後から映像を渡す。</h2>
+    <p class="sec-sub fi d2">4ステップで、あなたの練習時間がファンへの一点物グッズになります。</p>
+    <div class="steps-flow fi d2">
+      <div class="glass step-card">
+        <div class="step-num">STEP 01</div>
+        <span class="step-emoji">📋</span>
+        <div class="step-h">出品</div>
+        <p class="step-p">練習の日時と価格を決めて出品。販売枠数・1本の長さも自由に設定できます。</p>
+      </div>
+      <div class="glass step-card">
+        <div class="step-num">STEP 02</div>
+        <span class="step-emoji">🎫</span>
+        <div class="step-h">購入</div>
+        <p class="step-p">ファンが時間枠を購入。中身は届くまで分からない——それがガチャの楽しさです。</p>
+      </div>
+      <div class="glass step-card">
+        <div class="step-num">STEP 03</div>
+        <span class="step-emoji">📱</span>
+        <div class="step-h">撮影</div>
+        <p class="step-p">当日はスマホで練習を撮るだけ。編集は一切不要。普通の練習そのままでOK。</p>
+      </div>
+      <div class="glass step-card">
+        <div class="step-num">STEP 04</div>
+        <span class="step-emoji">🎁</span>
+        <div class="step-h">開封</div>
+        <p class="step-p">映像を短いセグメントに分割し、ファンへランダムに配布。各自が世界に1つの一点物を受け取ります。</p>
+      </div>
+    </div>
+    <div class="step-points fi d3">
+      <div class="step-point">時間を先に売る</div>
+      <div class="step-point">中身は運しだい＝ガチャ体験</div>
+      <div class="step-point">届くのは世界に1つ</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof section" id="proof">
+  <div class="container">
+    <div class="section-badge fi">根拠</div>
+    <h2 class="sec-h fi d1">"素"には、確かに<br><span class="grad-text">需要がある。</span></h2>
+    <p class="sec-sub fi d2">ファンは本当に買うのか？外部データと自社調査が証明します。</p>
+    <div class="proof-grid fi d2">
+      <div class="glass proof-big">
+        <p style="font-size:0.85rem;color:var(--white-muted);margin-bottom:1.5rem;">「このサービスで購入したいか？」自社アンケート（N=393）</p>
+        <div class="survey-bar">
+          <div class="bar-row">
+            <div class="bar-label">購入する（合計）</div>
+            <div class="bar-track"><div class="bar-fill bf-buy" style="width:31.9%;"></div></div>
+            <div class="bar-val">31.9%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">— うち3,001円以上</div>
+            <div class="bar-track"><div class="bar-fill" style="width:15.1%;background:linear-gradient(90deg,#9B59F0,#F059B0);"></div></div>
+            <div class="bar-val">15.1%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">購入しない</div>
+            <div class="bar-track"><div class="bar-fill bf-no" style="width:68.1%;"></div></div>
+            <div class="bar-val">68.1%</div>
+          </div>
+        </div>
+        <p style="margin-top:1.2rem;font-size:0.95rem;font-weight:700;color:var(--white);">→ 約3人に1人が「買う」と回答。</p>
+      </div>
+      <div class="glass proof-stat">
+        <div class="proof-num grad-text">7,000億円</div>
+        <div class="proof-label">デジタルガチャ市場の規模（推計）。中身が分からないものへの繰り返し課金は、すでに実証済みのビジネスモデル。</div>
+        <div class="proof-source">国内スマホゲーム課金 × ガチャ比率 推計</div>
+      </div>
+      <div class="glass proof-stat">
+        <div class="proof-num grad-text">約7割</div>
+        <div class="proof-label">ライブ配信の推し活ファンが月1万円以上を支出。ファンの支払い意欲は確かに高い。</div>
+        <div class="proof-source">17LIVE 推し活実態調査</div>
+      </div>
+      <div class="glass proof-stat">
+        <div class="proof-num grad-text">75.3%</div>
+        <div class="proof-label">「推しの新たな一面が見えるのは嬉しい」と回答。裏側・素の需要は数字が証明。</div>
+        <div class="proof-source">ネオマーケティング 2024</div>
+      </div>
+      <div class="glass proof-stat">
+        <div class="proof-num grad-text">68%</div>
+        <div class="proof-label">推し活を「自己投資」と捉えているファンの割合。推し活は感情消費ではなく、意味ある投資。</div>
+        <div class="proof-source">Liume 調査</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits section" id="benefits">
+  <div class="container">
+    <div class="section-badge fi">導入メリット</div>
+    <h2 class="sec-h fi d1">Lapsellを使う<br>4つの理由。</h2>
+    <div class="benefit-grid fi d2">
+      <div class="glass benefit-card bc-1">
+        <div class="benefit-num">BENEFIT 01 — コア</div>
+        <div class="benefit-h">💰 お金にならなかった時間が、収益になる</div>
+        <p class="benefit-p">捨てていた練習・裏側が、そのまま新しい収益源に。初期費用0円、撮るだけ。すでに確保している練習の時間を資産に変えます。</p>
+      </div>
+      <div class="glass benefit-card bc-2">
+        <div class="benefit-num">BENEFIT 02 — コア</div>
+        <div class="benefit-h">⭐ 「自分が育てた」とファンに思ってもらえる</div>
+        <p class="benefit-p">小さい"今"の推しを支えたファンは、後から「私が見つけて支えた」という誇りを持ち続けます。</p>
+        <div class="benefit-quote">例：M!LKは結成11年目で大ブレイク（紅白初出場）。無名時代の一点物には計り知れない価値があります。</div>
+      </div>
+      <div class="glass benefit-card bc-3">
+        <div class="benefit-num">BENEFIT 03 — 副次的</div>
+        <div class="benefit-h">📣 自然に拡散され、宣伝になる</div>
+        <p class="benefit-p">"あたり"を引いたファンは、それを拡散したくなります。出れば界隈の外まで広がり、新規ファンを呼ぶ副次的な効果も。</p>
+      </div>
+      <div class="glass benefit-card bc-4">
+        <div class="benefit-num">BENEFIT 04</div>
+        <div class="benefit-h">🛡️ 配信事故を、事前に防げる</div>
+        <p class="benefit-p">撮影後にアップロードするため、公開前に内容を確認できます。本当にまずい瞬間だけを省いて、偶然の名場面はそのまま届けます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY + TRUST -->
+<section class="section" id="safety">
+  <div class="container">
+    <div class="section-badge fi">安全性・技術</div>
+    <h2 class="sec-h fi d1">「怖い」を、<br><span class="grad-text">技術で消す。</span></h2>
+    <div class="safety-grid fi d2">
+      <div class="glass safety-card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">事故の瞬間だけを省いて、偶然の名場面は届ける</h3>
+        <div class="safety-flow">
+          <div class="sf-item">
+            <div class="sf-icon">📱</div>
+            <div><div class="sf-label">撮影後にアップロード</div><div class="sf-desc">ライブ配信と違い、撮り終えてからプラットフォームに上げます。</div></div>
+          </div>
+          <div class="sf-item">
+            <div class="sf-icon">👁</div>
+            <div><div class="sf-label">公開前チェック</div><div class="sf-desc">本当にまずい瞬間だけを非公開に設定できます。（その分は自動で返金）</div></div>
+          </div>
+          <div class="sf-item">
+            <div class="sf-icon">✅</div>
+            <div><div class="sf-label">残りをガチャ配布</div><div class="sf-desc">日常も偶然の名場面もそのまま届けます。選別はあなたが行います。</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="glass safety-card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">世界に1つの"本物"を、技術で担保します</h3>
+        <div class="safety-flow">
+          <div class="sf-item">
+            <div class="sf-icon">💾</div>
+            <div><div class="sf-label">購入者がダウンロード保有</div><div class="sf-desc">プラットフォームは長期保管せず、購入者が手元に所持します。スケールしてもコスト増なし。</div></div>
+          </div>
+          <div class="sf-item">
+            <div class="sf-icon">🔏</div>
+            <div><div class="sf-label">電子透かし埋め込み</div><div class="sf-desc">所有者情報を映像内に刻印。スクリーンショットしても消えません。</div></div>
+          </div>
+          <div class="sf-item">
+            <div class="sf-icon">🔍</div>
+            <div><div class="sf-label">所有者を公開検証可能</div><div class="sf-desc">誰でも「今の所有者は誰か」をサイトで確認できます。転載されても出所を追えます。</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section class="target section" id="target">
+  <div class="container">
+    <div class="section-badge fi">こんな方に</div>
+    <h2 class="sec-h fi d1">生身で活動する、<br>中小・個人の作り手へ。</h2>
+    <div class="target-grid fi d2">
+      <div class="glass target-card">
+        <span class="target-icon">💃</span>
+        <div class="target-h">地下アイドル</div>
+        <p class="target-p">日々の練習があり、ファンとの距離が近い。推し活の熱量が高いファン層と相性抜群。</p>
+      </div>
+      <div class="glass target-card">
+        <span class="target-icon">🎸</span>
+        <div class="target-h">インディーズ楽曲アーティスト・バンド</div>
+        <p class="target-p">リハーサル・制作風景があり、下積みが将来価値になる。音楽ファンの熱量を活かせます。</p>
+      </div>
+      <div class="glass target-card">
+        <span class="target-icon">🎤</span>
+        <div class="target-h">インディーズお笑い芸人</div>
+        <p class="target-p">ネタ合わせ・楽屋など裏側のニーズが厚い。笑いの瞬間は拡散力も期待できます。</p>
+      </div>
+    </div>
+    <div class="stat-line fi d3">
+      <strong>「推しの新たな一面が見えるのは嬉しい」75.3%</strong>（ネオマーケティング2024）——裏側への需要は確かに存在します。
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing section" id="pricing">
+  <div class="container">
+    <div class="section-badge fi" style="display:flex;justify-content:center;">料金</div>
+    <div class="glass pricing-card fi d1">
+      <p style="font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);margin-bottom:0.5rem;">初期費用</p>
+      <div class="price-free grad-text">¥0</div>
+      <p class="price-note">リスクなく始められます。</p>
+      <div class="price-items">
+        <div class="price-item"><span class="pi-check">✓</span> 登録・出品：完全無料</div>
+        <div class="price-item"><span class="pi-check">✓</span> 取引手数料：5%〜（売れた分だけ）</div>
+        <div class="price-item"><span class="pi-check">✓</span> 二次流通時もあなたに還元（将来機能）</div>
+        <div class="price-item"><span class="pi-check">✓</span> 導入期は低率で供給を優先</div>
+      </div>
+      <a href="#cta" class="btn-primary" style="display:block;text-align:center;">0円で出品をはじめる</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="section-badge fi" style="display:flex;justify-content:center;">FAQ</div>
+    <h2 class="sec-h fi d1" style="text-align:center;">よくある<br>ご質問。</h2>
+    <div class="faq-list fi d2">
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">撮影や編集の手間はかかりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>スマホで撮るだけです。編集は一切不要。普段の練習をそのままスマホで録画し、アップロードするだけで完了します。</p></div>
+      </div>
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">変なものが映り込んだらどうなりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>公開前に内容を確認できます。本当にまずい瞬間だけを非公開にでき、その分は購入者に自動で返金されます。ライブ配信と違い、事後に確認できるので安心して始められます。</p></div>
+      </div>
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">ファンは本当に買いますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>デジタルガチャは国内で約7,000億円規模。ライブ配信の推し活ファンの約7割が月1万円以上を支出しています（17LIVE調査）。自社アンケートでも約32%（N=393）が「購入する」と回答しています。</p></div>
+      </div>
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">動画がコピー・転載されませんか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>各映像に所有者情報を電子透かしとして埋め込んでいます。スクリーンショットを撮っても透かしは残り、転載されても出所と所有者を追えます。誰でもLapsellで所有者を検証可能です。</p></div>
+      </div>
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">費用はいくらかかりますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>初期費用は0円です。取引手数料は売れた分だけ（5%〜）。何も売れなければ費用は一切かかりません。リスクゼロで始められます。</p></div>
+      </div>
+      <div class="glass faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">どんな人が使っていますか？<span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>地下アイドル、インディーズの楽曲アーティスト・バンド、インディーズお笑い芸人など、生身で活動する中小・個人のアーティストに向けたサービスです。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="cta">
+  <div class="glass-bright cta-glass">
+    <div class="section-badge" style="display:inline-flex;margin-bottom:1.5rem;">早期アクセス</div>
+    <h2 class="cta-h">練習の時間を、<br><span class="grad-text">資産に変えよう。</span></h2>
+    <p class="cta-sub">まだ誰も取っていない市場へ。早期登録者には優先アクセス権をお届けします。</p>
+    <form class="form-wrap" onsubmit="handleForm(event)">
+      <input type="email" class="form-email" placeholder="メールアドレスを入力" required id="cta-email">
+      <button type="submit" class="form-btn" id="cta-btn">無料で登録して、はじめる</button>
+    </form>
+    <p class="form-note">スパムは送りません。配信解除はいつでも可能です。</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-in">
+    <a href="#" class="footer-logo">Lapsell</a>
+    <div class="footer-copy">© 2026 Lapsell Inc. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a href="#">利用規約</a></li>
+      <li><a href="#">プライバシーポリシー</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+  // FAQ toggle
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Form submit
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cta-btn');
+    btn.textContent = '登録完了 ✓';
+    btn.style.background = 'linear-gradient(90deg,#059669,#34D399)';
+    document.getElementById('cta-email').disabled = true;
+    btn.disabled = true;
+  }
+
+  // Bar animation on load
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0';
+      setTimeout(() => { el.style.width = w; }, 100);
+    });
+  }, 500);
+</script>
+</body>
+</html>
