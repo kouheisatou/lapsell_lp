@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapsell — 練習の時間を、収益に変える</title>
+<meta name="description" content="地下アイドル・インディーズアーティスト向け。練習や裏側の時間枠を先に出品して、ファンに世界に1つのグッズとして届ける新しい収益化サービス。初期費用0円、手数料5%〜。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Anton&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  background:#f0ead7;
+  color:#1a1a1a;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(rgba(227,64,42,.16) 1.5px,transparent 1.6px);
+  background-size:6px 6px;
+}
+
+/* ===== TYPOGRAPHY HELPERS ===== */
+.font-bungee{font-family:"Bungee",sans-serif}
+.font-anton{font-family:"Anton",sans-serif;font-weight:400}
+
+/* ===== SECTION LABEL ===== */
+.section-label{
+  display:inline-block;
+  font-family:"Anton",sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-size:13px;
+  background:#1a1a1a;
+  color:#f0ead7;
+  padding:5px 14px;
+  margin-bottom:20px;
+}
+.section-label.red{background:#e3402a;color:#f0ead7}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-block;
+  font-family:"Anton",sans-serif;
+  font-size:16px;
+  letter-spacing:.06em;
+  cursor:pointer;
+  border:2px solid #1a1a1a;
+  padding:14px 28px;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:transform .08s,box-shadow .08s;
+  line-height:1;
+}
+.btn-primary{
+  background:#e3402a;
+  color:#f0ead7;
+  box-shadow:5px 5px 0 #1a1a1a;
+}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #1a1a1a}
+.btn-primary:active{transform:translate(5px,5px);box-shadow:none}
+.btn-secondary{
+  background:#f0ead7;
+  color:#1a1a1a;
+  box-shadow:5px 5px 0 #1a1a1a;
+}
+.btn-secondary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #1a1a1a}
+.btn-secondary:active{transform:translate(5px,5px);box-shadow:none}
+.btn-inverted{
+  background:#f0ead7;
+  color:#1a1a1a;
+  border-color:#f0ead7;
+  box-shadow:5px 5px 0 #e3402a;
+}
+.btn-inverted:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #e3402a}
+.btn-inverted:active{transform:translate(5px,5px);box-shadow:none}
+
+/* ===== NAV ===== */
+nav.topnav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#f0ead7;
+  border-bottom:2.5px solid #1a1a1a;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px;
+  height:58px;
+}
+.wordmark{
+  font-family:"Bungee",sans-serif;
+  font-size:26px;
+  color:#e3402a;
+  text-shadow:2px 2px 0 #1a1a1a;
+  text-decoration:none;
+}
+.nav-links{
+  display:flex;
+  gap:24px;
+  align-items:center;
+}
+.nav-links a{
+  font-family:"Anton",sans-serif;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:#1a1a1a;
+}
+.nav-links a:hover{color:#e3402a}
+.nav-cta{
+  font-size:13px!important;
+  background:#1a1a1a;
+  color:#f0ead7!important;
+  padding:8px 18px;
+  border:2px solid #1a1a1a;
+  box-shadow:3px 3px 0 #e3402a;
+  transition:transform .08s,box-shadow .08s;
+}
+.nav-cta:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #e3402a;color:#f0ead7!important}
+
+/* ===== HERO ===== */
+#hero{
+  padding:60px 40px 50px;
+  position:relative;
+  overflow:hidden;
+  min-height:calc(100vh - 58px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+#hero::before{
+  content:"";
+  position:absolute;
+  left:-40px;top:-40px;
+  width:200px;height:200px;
+  border:14px solid #e3402a;
+  border-radius:50%;
+  opacity:.22;
+}
+.hero-layout{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:48px;
+  align-items:center;
+  max-width:1040px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+.hero-inner{}
+.hero-eyebrow{
+  font-family:"Anton",sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:13px;
+  background:#1a1a1a;
+  color:#f0ead7;
+  display:inline-block;
+  padding:5px 12px;
+  margin-bottom:20px;
+}
+.hero-headline{
+  font-family:"Anton",sans-serif;
+  font-size:clamp(48px,7vw,80px);
+  line-height:1.02;
+  letter-spacing:.01em;
+  margin-bottom:22px;
+}
+.hero-headline b{color:#e3402a}
+.hero-sub{
+  font-size:16px;
+  line-height:1.85;
+  max-width:42ch;
+  margin-bottom:32px;
+  font-weight:500;
+}
+.hero-cta{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-bottom:32px;
+}
+.hero-trust{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  font-family:"Anton",sans-serif;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-top:1.5px dashed #1a1a1a;
+  padding-top:18px;
+}
+.hero-trust span::before{content:"✓ ";color:#e3402a}
+
+/* ===== PHONE MOCK ===== */
+.phone-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:16px;
+}
+.phone-mock{
+  width:220px;
+  border:3px solid #1a1a1a;
+  border-radius:38px;
+  background:#1a1a1a;
+  padding:12px 10px 16px;
+  box-shadow:8px 8px 0 #e3402a;
+  position:relative;
+  flex-shrink:0;
+}
+.phone-notch{
+  width:56px;height:5px;
+  background:#3a3a3a;
+  border-radius:3px;
+  margin:0 auto 10px;
+}
+.phone-screen{
+  background:#f5f0e5;
+  border-radius:26px;
+  overflow:hidden;
+  min-height:360px;
+}
+.ps-header{
+  background:#e3402a;
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.ps-logo{
+  font-family:"Bungee",sans-serif;
+  font-size:15px;
+  color:#f0ead7;
+}
+.ps-body{padding:14px 12px}
+.ps-label{
+  font-family:"Anton",sans-serif;
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#6b6058;
+  margin-bottom:8px;
+}
+.ps-field{
+  border:1.5px solid #1a1a1a;
+  padding:7px 9px;
+  margin-bottom:7px;
+  background:#fff;
+}
+.ps-field-label{font-size:8px;color:#aaa;margin-bottom:2px}
+.ps-field-val{font-size:11px;color:#1a1a1a;font-weight:700}
+.ps-row{display:flex;gap:6px;margin-bottom:7px}
+.ps-row .ps-field{flex:1;margin-bottom:0}
+.ps-btn{
+  background:#e3402a;
+  color:#f0ead7;
+  text-align:center;
+  padding:9px;
+  font-family:"Anton",sans-serif;
+  font-size:11px;
+  letter-spacing:.06em;
+  margin-top:6px;
+  border:1.5px solid #1a1a1a;
+}
+.ps-badge{
+  display:inline-block;
+  background:#1a1a1a;
+  color:#f0ead7;
+  font-family:"Anton",sans-serif;
+  font-size:8px;
+  letter-spacing:.06em;
+  padding:2px 6px;
+  margin-bottom:8px;
+}
+
+/* REC screen */
+.ps-rec{
+  background:#111;
+  min-height:200px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ps-rec-frame{
+  position:absolute;
+  inset:14px;
+  border:1.5px solid rgba(255,255,255,.25);
+}
+.ps-rec-corner{position:absolute;width:10px;height:10px;border-color:#e3402a;border-style:solid}
+.ps-rec-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.ps-rec-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.ps-rec-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.ps-rec-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.ps-rec-label{color:rgba(255,255,255,.7);font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.1em;text-align:center;position:relative;z-index:2}
+.ps-rec-dot{display:inline-block;width:7px;height:7px;background:#e3402a;border-radius:50%;margin-right:5px;vertical-align:middle;animation:blink 1.2s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ps-controls{
+  background:#1a1a1a;
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.ps-rec-time{color:#f0ead7;font-family:"Anton",sans-serif;font-size:10px;letter-spacing:.06em}
+.ps-rec-btn{width:32px;height:32px;border-radius:50%;background:#e3402a;border:2.5px solid #f0ead7}
+.ps-rec-thumb{width:22px;height:22px;border-radius:4px;background:rgba(240,234,215,.2)}
+
+/* ===== SECTION LAYOUT ===== */
+section{padding:80px 40px}
+.section-inner{max-width:1040px;margin:0 auto}
+.section-header{margin-bottom:48px}
+.section-header h2{
+  font-family:"Anton",sans-serif;
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.08;
+  letter-spacing:.02em;
+}
+.section-header h2 b{color:#e3402a}
+.section-header p{font-size:15px;line-height:1.8;margin-top:14px;max-width:56ch;font-weight:500}
+
+/* ===== ICON ===== */
+.icon-box{
+  width:52px;height:52px;
+  border:2px solid currentColor;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+  flex-shrink:0;
+}
+.icon-box svg{display:block}
+
+/* ===== IMAGE PLACEHOLDER ===== */
+.img-ph{
+  background:repeating-linear-gradient(
+    45deg,
+    #d8d0bc,
+    #d8d0bc 10px,
+    #ccc4b0 10px,
+    #ccc4b0 20px
+  );
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#7a7060;
+  font-family:"Anton",sans-serif;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1.5px solid #b8b0a0;
+}
+.img-ph svg{opacity:.4}
+
+/* ===== PAIN SECTION ===== */
+#pain{background:#1a1a1a;color:#f0ead7;background-image:radial-gradient(rgba(240,234,215,.1) 1.5px,transparent 1.6px);background-size:6px 6px}
+#pain .section-label{background:#e3402a}
+#pain .section-header h2{color:#f0ead7}
+#pain .section-header p{color:#c8beac}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pain-card{
+  border:2px solid #f0ead7;
+  box-shadow:5px 5px 0 #e3402a;
+  padding:28px 22px;
+}
+.pain-card .icon-box{color:#e3402a;border-color:#e3402a}
+.pain-card h3{
+  font-family:"Anton",sans-serif;
+  font-size:20px;
+  letter-spacing:.04em;
+  margin-bottom:10px;
+  color:#f0ead7;
+}
+.pain-card p{font-size:14px;line-height:1.75;color:#a89e8c}
+
+/* ===== HOW IT WORKS ===== */
+#how-it-works{background:#f0ead7}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{
+  border:2px solid #1a1a1a;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  position:relative;
+  overflow:hidden;
+}
+.step-img{
+  aspect-ratio:3/4;
+  position:relative;
+}
+.step-body{padding:20px 18px 22px}
+.step-num{
+  font-family:"Bungee",sans-serif;
+  font-size:14px;
+  color:#f0ead7;
+  background:#1a1a1a;
+  display:inline-block;
+  padding:4px 10px;
+  margin-bottom:10px;
+  letter-spacing:.06em;
+}
+.step-num.red{background:#e3402a}
+.step h3{
+  font-family:"Anton",sans-serif;
+  font-size:18px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.step p{font-size:13px;line-height:1.7;color:#4a4540}
+.step-connector{
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Bungee",sans-serif;font-size:22px;color:#e3402a;
+  padding-top:60px;
+  display:none;
+}
+
+/* ===== BENEFITS ===== */
+#benefits{background:#f0ead7}
+.benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.benefit-card{
+  border:2px solid #1a1a1a;
+  box-shadow:5px 5px 0 #1a1a1a;
+  overflow:hidden;
+}
+.benefit-card-body{padding:30px 26px 24px;display:flex;flex-direction:column;gap:10px}
+.benefit-label{
+  font-family:"Anton",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:11px;
+  background:#e3402a;
+  color:#f0ead7;
+  display:inline-block;
+  padding:3px 10px;
+  align-self:flex-start;
+}
+.benefit-card h3{
+  font-family:"Anton",sans-serif;
+  font-size:24px;
+  letter-spacing:.03em;
+}
+.benefit-card h3 b{color:#e3402a}
+.benefit-card p{font-size:14px;line-height:1.75;color:#4a4540}
+
+/* ===== INLINE EVIDENCE ===== */
+.benefit-evidence{
+  background:#1a1a1a;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  border-top:3px solid #e3402a;
+}
+.ev-stat{
+  font-family:"Bungee",sans-serif;
+  font-size:36px;
+  color:#e3402a;
+  line-height:1;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.ev-text{}
+.ev-title{
+  font-family:"Anton",sans-serif;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#f0ead7;
+  margin-bottom:3px;
+}
+.ev-desc{font-size:12px;line-height:1.55;color:#a89e8c}
+
+/* ===== SAFETY ===== */
+#safety{background:#1a1a1a;color:#f0ead7;background-image:radial-gradient(rgba(240,234,215,.08) 1.5px,transparent 1.6px);background-size:6px 6px}
+#safety .section-label{background:#e3402a}
+#safety .section-header h2{color:#f0ead7}
+#safety .section-header p{color:#a89e8c}
+.safety-layout{display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start}
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.safety-card{
+  border:2px solid #f0ead7;
+  box-shadow:5px 5px 0 #e3402a;
+  padding:24px 20px;
+}
+.safety-card h3{
+  font-family:"Anton",sans-serif;
+  font-size:18px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  color:#f0ead7;
+}
+.safety-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.safety-list li{
+  font-size:13px;line-height:1.65;color:#c8beac;
+  padding-left:20px;
+  position:relative;
+}
+.safety-list li::before{
+  content:"▶";
+  position:absolute;left:0;
+  color:#e3402a;
+  font-size:9px;
+  top:4px;
+}
+
+/* ===== TARGET ===== */
+#target{background:#f0ead7}
+.target-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px}
+.target-card{
+  border:2px solid #1a1a1a;
+  box-shadow:5px 5px 0 #1a1a1a;
+  padding:24px 20px;
+}
+.target-type{
+  font-family:"Anton",sans-serif;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  background:#1a1a1a;
+  color:#f0ead7;
+  display:inline-block;
+  padding:3px 10px;
+  margin-bottom:12px;
+}
+.target-card h3{
+  font-family:"Anton",sans-serif;
+  font-size:22px;
+  letter-spacing:.03em;
+  margin-bottom:8px;
+}
+.target-card p{font-size:13px;line-height:1.7;color:#4a4540}
+.target-note{
+  border:1.5px dashed #1a1a1a;
+  padding:18px 22px;
+  font-size:13px;
+  color:#6b6058;
+  line-height:1.7;
+}
+.target-note strong{font-family:"Anton",sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ===== PRICING ===== */
+#pricing{background:#1a1a1a;color:#f0ead7;background-image:radial-gradient(rgba(240,234,215,.08) 1.5px,transparent 1.6px);background-size:6px 6px}
+#pricing .section-label{background:#e3402a;color:#f0ead7}
+#pricing .section-header h2{color:#f0ead7}
+#pricing .section-header h2 b{color:#e3402a}
+.pricing-box{
+  border:3px solid #f0ead7;
+  box-shadow:8px 8px 0 #e3402a;
+  padding:44px 40px;
+  max-width:640px;
+  margin:0 auto;
+  text-align:center;
+}
+.pricing-main{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:28px;
+}
+.pricing-price{
+  font-family:"Bungee",sans-serif;
+  font-size:100px;
+  line-height:1;
+  color:#f0ead7;
+}
+.pricing-unit{font-family:"Anton",sans-serif;font-size:26px;letter-spacing:.04em;color:#f0ead7}
+.pricing-sub{font-size:14px;color:#a89e8c;margin-bottom:28px;line-height:1.7}
+.pricing-items{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:36px;
+}
+.pricing-items li{
+  font-family:"Anton",sans-serif;
+  font-size:15px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#f0ead7;
+  padding:10px 16px;
+  border:1.5px solid rgba(240,234,215,.3);
+  display:flex;align-items:center;gap:10px;
+}
+.pricing-items li::before{content:"✓";color:#e3402a}
+.pricing-note{font-size:12px;color:#6b6058;margin-top:16px}
+
+/* ===== FAQ ===== */
+#faq{background:#f0ead7}
+.faq-list{display:flex;flex-direction:column;gap:0;max-width:780px}
+.faq-item{border:2px solid #1a1a1a;margin-bottom:-2px;position:relative}
+.faq-item:first-child{box-shadow:5px 5px 0 #1a1a1a}
+.faq-q{
+  font-family:"Anton",sans-serif;
+  font-size:17px;
+  letter-spacing:.03em;
+  padding:20px 22px;
+  cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;
+  user-select:none;
+  list-style:none;
+}
+.faq-q::after{
+  content:"＋";
+  font-family:"Bungee",sans-serif;
+  font-size:22px;
+  color:#e3402a;
+  flex-shrink:0;
+  transition:transform .2s;
+}
+details[open] .faq-q::after{transform:rotate(45deg)}
+.faq-a{
+  padding:16px 22px 20px;
+  font-size:14px;
+  line-height:1.8;
+  color:#4a4540;
+  border-top:1.5px dashed #1a1a1a;
+}
+details[open]{
+  box-shadow:5px 5px 0 #e3402a;
+  z-index:1;
+}
+
+/* ===== CLOSING CTA ===== */
+#cta{
+  background:#1a1a1a;
+  color:#f0ead7;
+  text-align:center;
+  padding:100px 40px;
+  position:relative;
+  overflow:hidden;
+}
+#cta::before{
+  content:"";
+  position:absolute;right:-40px;top:-40px;
+  width:220px;height:220px;
+  border:16px solid #e3402a;
+  border-radius:50%;
+  opacity:.18;
+}
+#cta::after{
+  content:"";
+  position:absolute;left:60px;bottom:30px;
+  width:0;height:0;
+  border-left:32px solid transparent;
+  border-right:32px solid transparent;
+  border-bottom:54px solid #f0ead7;
+  transform:rotate(-14deg);
+  opacity:.08;
+}
+.cta-inner{position:relative;z-index:2}
+.cta-label{
+  font-family:"Anton",sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:12px;
+  background:#e3402a;
+  color:#f0ead7;
+  display:inline-block;
+  padding:5px 14px;
+  margin-bottom:24px;
+}
+.cta-headline{
+  font-family:"Anton",sans-serif;
+  font-size:clamp(40px,7vw,72px);
+  line-height:1.06;
+  letter-spacing:.02em;
+  margin-bottom:18px;
+}
+.cta-headline b{color:#e3402a}
+.cta-sub{font-size:15px;line-height:1.8;margin-bottom:40px;color:#a89e8c;max-width:44ch;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.cta-note{font-size:12px;color:#6b6058;font-family:"Anton",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+
+/* ===== STICKY BAR ===== */
+.sticky-bar{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:99;
+  background:#1a1a1a;
+  border-top:2px solid #e3402a;
+  padding:12px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transform:translateY(100%);
+  transition:transform .3s ease;
+}
+.sticky-bar.visible{transform:translateY(0)}
+.sticky-bar-text{
+  font-family:"Anton",sans-serif;
+  font-size:15px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#f0ead7;
+}
+.sticky-bar-text span{color:#e3402a}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#f0ead7;
+  border-top:2.5px solid #1a1a1a;
+  padding:32px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  padding-bottom:80px;
+}
+.footer-wordmark{
+  font-family:"Bungee",sans-serif;
+  font-size:22px;
+  color:#e3402a;
+  text-shadow:2px 2px 0 #1a1a1a;
+}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{
+  font-family:"Anton",sans-serif;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#6b6058;
+  text-decoration:none;
+}
+.footer-links a:hover{color:#e3402a}
+.footer-copy{
+  font-size:11px;
+  color:#8a8070;
+  font-family:"Anton",sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* ===== DIVIDER ===== */
+.thick-rule{border:none;border-top:3px solid #1a1a1a;margin:0}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero-layout{grid-template-columns:1fr;gap:32px}
+  .phone-wrap{justify-content:flex-start}
+  .steps{grid-template-columns:1fr 1fr}
+  .safety-layout{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav.topnav{padding:0 20px;height:52px}
+  .wordmark{font-size:22px}
+  .nav-links .hide-sm{display:none}
+  #hero{padding:44px 22px 40px;min-height:auto}
+  section{padding:60px 22px}
+  .pain-grid{grid-template-columns:1fr}
+  .evidence-grid{grid-template-columns:1fr 1fr}
+  .benefits-grid{grid-template-columns:1fr}
+  .safety-grid{grid-template-columns:1fr}
+  .target-grid{grid-template-columns:1fr}
+  .pricing-box{padding:32px 22px}
+  .pricing-price{font-size:72px}
+  footer{padding:28px 22px 80px}
+  .sticky-bar{padding:10px 20px}
+  .sticky-bar-text{font-size:13px}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .hero-headline{font-size:44px}
+  .ev-stat{font-size:28px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="topnav">
+  <a class="wordmark" href="#">Lapsell</a>
+  <div class="nav-links">
+    <a href="#how-it-works" class="hide-sm">仕組みを見る</a>
+    <a href="#pricing" class="hide-sm">料金</a>
+    <a href="#faq" class="hide-sm">FAQ</a>
+    <a href="#cta" class="nav-cta btn font-anton">無料で出品をはじめる</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-layout">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">For Indie Artists &amp; Idols</div>
+      <h1 class="hero-headline">練習の時間を、<br><b>収益に変える。</b></h1>
+      <p class="hero-sub">
+        捨てていた練習・裏側の時間枠を先に出品。<br>
+        ファンがガチャ感覚で購入し、世界に1つだけのグッズを手に入れる。<br>
+        スマホ撮影のみ、編集不要。初期費用は0円。
+      </p>
+      <div class="hero-cta">
+        <a href="#cta" class="btn btn-primary">無料で出品をはじめる</a>
+        <a href="#how-it-works" class="btn btn-secondary">仕組みを見る</a>
+      </div>
+      <div class="hero-trust">
+        <span>初期費用 ¥0</span>
+        <span>スマホで撮るだけ</span>
+        <span>売れた分だけ手数料</span>
+        <span>編集不要</span>
+      </div>
+    </div>
+    <!-- スマホモック：出品画面 -->
+    <div class="phone-wrap">
+      <div class="phone-mock">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-header">
+            <div class="ps-logo">Lapsell</div>
+          </div>
+          <div class="ps-body">
+            <div class="ps-badge">出品フォーム</div>
+            <div class="ps-field">
+              <div class="ps-field-label">タイトル</div>
+              <div class="ps-field-val">スタジオ練習 2025.06.25</div>
+            </div>
+            <div class="ps-row">
+              <div class="ps-field">
+                <div class="ps-field-label">価格</div>
+                <div class="ps-field-val">¥1,500</div>
+              </div>
+              <div class="ps-field">
+                <div class="ps-field-label">販売数</div>
+                <div class="ps-field-val">50枚</div>
+              </div>
+            </div>
+            <div class="ps-field">
+              <div class="ps-field-label">撮影日時</div>
+              <div class="ps-field-val">6/25（水）18:00〜</div>
+            </div>
+            <div class="ps-btn">出品する →</div>
+            <div style="margin-top:14px;padding:10px;background:#e3402a10;border:1px dashed #e3402a">
+              <div style="font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.06em;color:#e3402a;margin-bottom:4px">ALREADY SOLD</div>
+              <div style="font-size:10px;color:#1a1a1a">23 / 50枚 購入済み</div>
+              <div style="height:5px;background:#e0d8c5;margin-top:6px;border:1px solid #1a1a1a">
+                <div style="width:46%;height:100%;background:#e3402a"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== PAIN POINTS ===== -->
+<section id="pain">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label red">The Problem</div>
+      <h2>その時間、<b>捨てていませんか。</b></h2>
+      <p>アーティスト活動には、収益化できていない「隠れた時間」が山ほど存在する。</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="icon-box">
+          <!-- 動画編集アイコン -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#e3402a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="24" height="16" rx="2"/>
+            <path d="M2 10h24"/>
+            <circle cx="6" cy="8" r="1" fill="#e3402a" stroke="none"/>
+            <circle cx="10" cy="8" r="1" fill="#e3402a" stroke="none"/>
+            <path d="M11 16l6-3-6-3v6z" fill="#e3402a" stroke="none"/>
+          </svg>
+        </div>
+        <h3>撮影・編集が<br>重すぎる</h3>
+        <p>毎日の投稿、SNS用の動画制作、編集作業——消耗するだけで収益に直結しない。</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon-box">
+          <!-- 配信アイコン -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#e3402a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="3"/>
+            <path d="M3.5 3.5a15 15 0 0121 21"/>
+            <path d="M24.5 3.5a15 15 0 01-21 21"/>
+            <path d="M7.5 7.5a9 9 0 0113 13"/>
+            <path d="M20.5 7.5a9 9 0 01-13 13"/>
+          </svg>
+        </div>
+        <h3>配信は<br>事故が怖い</h3>
+        <p>ライブ配信は一度の失言や映り込みが永遠にアーカイブされる。精神的コストが高い。</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon-box">
+          <!-- 時計アイコン -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#e3402a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="11"/>
+            <polyline points="14 7 14 14 19 14"/>
+            <line x1="14" y1="3" x2="14" y2="1" stroke-width="2.5"/>
+            <line x1="14" y1="25" x2="14" y2="27" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <h3>裏側は<br>儲からない</h3>
+        <p>ファンが最も価値を感じる「なれない頃の自分」「練習の素顔」は、今まで無価値だった。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how-it-works">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">How It Works</div>
+      <h2>たった<b>4ステップ</b>で、<br>練習が商品になる。</h2>
+    </div>
+    <div class="steps">
+
+      <!-- Step 1: 出品 -->
+      <div class="step">
+        <div class="step-img">
+          <div class="phone-mock" style="width:100%;border-radius:0;border:none;box-shadow:none;padding:0">
+            <div class="phone-screen" style="border-radius:0;min-height:0;height:100%">
+              <div class="ps-header" style="padding:7px 10px">
+                <div class="ps-logo" style="font-size:11px">Lapsell</div>
+              </div>
+              <div style="padding:10px 10px 10px">
+                <div style="font-family:'Anton',sans-serif;font-size:8px;letter-spacing:.06em;color:#6b6058;margin-bottom:6px;text-transform:uppercase">新規出品</div>
+                <div style="border:1.5px solid #1a1a1a;padding:5px 7px;margin-bottom:5px;background:#fff">
+                  <div style="font-size:7px;color:#aaa">タイトル</div>
+                  <div style="font-size:9px;color:#1a1a1a;font-weight:700">スタジオ練習</div>
+                </div>
+                <div style="display:flex;gap:4px;margin-bottom:5px">
+                  <div style="flex:1;border:1.5px solid #1a1a1a;padding:5px 7px;background:#fff">
+                    <div style="font-size:7px;color:#aaa">価格</div>
+                    <div style="font-size:9px;font-weight:700">¥1,500</div>
+                  </div>
+                  <div style="flex:1;border:1.5px solid #1a1a1a;padding:5px 7px;background:#fff">
+                    <div style="font-size:7px;color:#aaa">販売数</div>
+                    <div style="font-size:9px;font-weight:700">50枚</div>
+                  </div>
+                </div>
+                <div style="background:#e3402a;color:#f0ead7;text-align:center;padding:6px;font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.04em;border:1px solid #1a1a1a">出品する →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-num red">01</div>
+          <h3>出品する</h3>
+          <p>日時・価格・販売数を設定して出品。撮影前でも出品できる。ファンが予約購入する。</p>
+        </div>
+      </div>
+
+      <!-- Step 2: ファンが買う -->
+      <div class="step">
+        <div class="step-img">
+          <div class="phone-mock" style="width:100%;border-radius:0;border:none;box-shadow:none;padding:0">
+            <div class="phone-screen" style="border-radius:0;min-height:0;height:100%">
+              <div class="ps-header" style="padding:7px 10px">
+                <div class="ps-logo" style="font-size:11px">Lapsell</div>
+              </div>
+              <div style="padding:10px">
+                <div style="text-align:center;margin-bottom:8px">
+                  <div style="font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.04em;color:#1a1a1a;margin-bottom:4px">スタジオ練習 6/25</div>
+                  <div style="border:2px solid #1a1a1a;display:inline-block;padding:4px 12px;font-family:'Bungee',sans-serif;font-size:11px;color:#e3402a;background:#f5f0e5">GACHA</div>
+                </div>
+                <div style="border:2px dashed #1a1a1a;padding:10px;text-align:center;margin-bottom:8px;background:rgba(227,64,42,.06)">
+                  <div style="font-size:22px;margin-bottom:4px">🎁</div>
+                  <div style="font-family:'Anton',sans-serif;font-size:8px;letter-spacing:.06em;color:#6b6058">中身を見ずに購入</div>
+                </div>
+                <div style="text-align:center;font-size:10px;color:#1a1a1a;font-weight:700;margin-bottom:6px">¥1,500</div>
+                <div style="background:#1a1a1a;color:#f0ead7;text-align:center;padding:7px;font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.04em">購入する →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-num">02</div>
+          <h3>ファンが買う</h3>
+          <p>ファンは中身を見ずに購入（ガチャ）。「育てた」という特別感がモチベーションになる。</p>
+        </div>
+      </div>
+
+      <!-- Step 3: 撮影 -->
+      <div class="step">
+        <div class="step-img">
+          <div style="background:#1a1a1a;height:100%;display:flex;flex-direction:column">
+            <div class="ps-rec" style="flex:1;min-height:160px">
+              <div class="ps-rec-frame">
+                <div class="ps-rec-corner tl"></div>
+                <div class="ps-rec-corner tr"></div>
+                <div class="ps-rec-corner bl"></div>
+                <div class="ps-rec-corner br"></div>
+              </div>
+              <!-- シルエット的なビジュアル -->
+              <div style="width:60px;height:80px;background:rgba(255,255,255,.05);border-radius:4px;position:relative;z-index:3"></div>
+            </div>
+            <div class="ps-controls">
+              <div class="ps-rec-time"><span class="ps-rec-dot"></span>REC 01:23</div>
+              <div class="ps-rec-btn"></div>
+              <div class="ps-rec-thumb"></div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-num">03</div>
+          <h3>スマホで撮る</h3>
+          <p>当日、練習・裏側をスマホで録画するだけ。編集は不要。気負わず続けられる。</p>
+        </div>
+      </div>
+
+      <!-- Step 4: 開封・お届け -->
+      <div class="step">
+        <div class="step-img">
+          <div class="phone-mock" style="width:100%;border-radius:0;border:none;box-shadow:none;padding:0">
+            <div class="phone-screen" style="border-radius:0;min-height:0;height:100%">
+              <div class="ps-header" style="padding:7px 10px">
+                <div class="ps-logo" style="font-size:11px">Lapsell</div>
+              </div>
+              <div style="padding:10px">
+                <div style="text-align:center;margin-bottom:8px">
+                  <div style="font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.04em;color:#e3402a;margin-bottom:4px">✓ 届きました！</div>
+                </div>
+                <div style="border:1.5px solid #1a1a1a;margin-bottom:6px;background:#111;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center">
+                  <div style="text-align:center">
+                    <div style="width:20px;height:20px;border-radius:50%;background:#e3402a;display:flex;align-items:center;justify-content:center;margin:0 auto 4px">
+                      <div style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid #fff;margin-left:2px"></div>
+                    </div>
+                    <div style="font-family:'Anton',sans-serif;font-size:7px;color:rgba(255,255,255,.5)">あなただけの動画</div>
+                  </div>
+                </div>
+                <div style="border:1px dashed #e3402a;padding:6px 8px;font-size:8px;color:#6b6058;line-height:1.5">
+                  🔒 電子透かし付き<br>あなただけの所有権
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-num red">04</div>
+          <h3>開封・お届け</h3>
+          <p>動画を短く分割しランダムに配布。購入者だけが手に入る世界に1つのグッズに。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== BENEFITS（根拠を統合） ===== -->
+<section id="benefits">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Benefits</div>
+      <h2>アーティストが得る、<br><b>4つのメリット。</b></h2>
+    </div>
+    <div class="benefits-grid">
+
+      <div class="benefit-card">
+        <div class="benefit-card-body">
+          <div class="icon-box">
+            <!-- 収益アイコン -->
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="14" cy="14" r="11"/>
+              <path d="M14 8v12M11 10.5c0-1.4 1.3-2.5 3-2.5s3 1.1 3 2.5-1.3 2.5-3 2.5-3 1.1-3 2.5 1.3 2.5 3 2.5 3-1.1 3-2.5"/>
+            </svg>
+          </div>
+          <div class="benefit-label">Benefit 01</div>
+          <h3>捨ててた時間が<br><b>収益になる</b></h3>
+          <p>練習、リハーサル、スタジオ入り——今まで「無駄だった時間」が全部出品できる。特別な機材もスキルも要らない。スマホを置くだけでいい。</p>
+        </div>
+        <!-- インライン根拠 -->
+        <div class="benefit-evidence">
+          <div class="ev-stat">32%</div>
+          <div class="ev-text">
+            <div class="ev-title">購入意向あり（N=393）</div>
+            <div class="ev-desc">自社アンケートで約32%が購入意向。うち15.1%は3,001円以上でも購入すると回答。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-card-body">
+          <div class="icon-box">
+            <!-- ハートアイコン -->
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 24S2 16 2 8.5A6.5 6.5 0 0114 5 6.5 6.5 0 0126 8.5C26 16 14 24 14 24z"/>
+            </svg>
+          </div>
+          <div class="benefit-label">Benefit 02</div>
+          <h3>「育てた」誇りが<br><b>ファンのロイヤリティになる</b></h3>
+          <p>無名時代の自分を知るファンは、ブレイク後に「私が支えてきた」と誇れる。この感情が最も強い応援の形になる。M!LKは結成11年目で紅白へ——早くから支えたファンの誇りは計り知れない。</p>
+        </div>
+        <div class="benefit-evidence">
+          <div class="ev-stat">75%</div>
+          <div class="ev-text">
+            <div class="ev-title">「新たな一面を見たい」需要</div>
+            <div class="ev-desc">75.3%が「推しの新たな一面が見えるのは嬉しい」と回答。推し活ファンの70%が月1万円以上を支出（17LIVE調査）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-card-body">
+          <div class="icon-box">
+            <!-- シールドアイコン -->
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2L3 7v7c0 6.5 4.7 12.6 11 14 6.3-1.4 11-7.5 11-14V7L14 2z"/>
+              <polyline points="9.5 14 12.5 17 18.5 11"/>
+            </svg>
+          </div>
+          <div class="benefit-label">Benefit 03</div>
+          <h3>配信事故の<br><b>リスクがない</b></h3>
+          <p>ライブ配信と違い、撮影→アップロード→確認という流れ。公開前に必ず確認できるので、本当に困る事故だけを非公開にできる。安心して素の自分を見せられる。</p>
+        </div>
+        <div class="benefit-evidence">
+          <div class="ev-stat" style="font-size:24px;line-height:1.2">公開前<br>確認</div>
+          <div class="ev-text">
+            <div class="ev-title">ライブ配信との決定的な違い</div>
+            <div class="ev-desc">アップロード後に必ず自分でチェック。本当の事故のみ非公開に。「つまらない」は省けない——それ自体が価値。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-card-body">
+          <div class="icon-box">
+            <!-- シェアアイコン -->
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="21" cy="5" r="3"/>
+              <circle cx="7" cy="14" r="3"/>
+              <circle cx="21" cy="23" r="3"/>
+              <line x1="18.2" y1="6.7" x2="9.8" y2="12.3"/>
+              <line x1="9.8" y1="15.7" x2="18.2" y2="21.3"/>
+            </svg>
+          </div>
+          <div class="benefit-label">Benefit 04</div>
+          <h3>ファンが<br><b>拡散してくれる</b></h3>
+          <p>「自分だけが持っている映像」を持つファンは自然とSNSで共有する。クリップがバズれば新規ファンの獲得にもつながる。編集なし・広告費なしでの拡散が期待できる。</p>
+        </div>
+        <div class="benefit-evidence">
+          <div class="ev-stat" style="font-size:22px;line-height:1.2">K-POP<br>実証</div>
+          <div class="ev-text">
+            <div class="ev-title">練習動画が公式MVを超える再生数</div>
+            <div class="ev-desc">K-POPアーティストの練習動画が公式MVを上回るケース続出。bubble（素のコンテンツ）は世界200万人・企業価値780億円超。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== SAFETY ===== -->
+<section id="safety">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label red">Safety &amp; Trust</div>
+      <h2>公開前に<b>必ず確認。</b><br>本物だけが届く。</h2>
+      <p>「変なものが映ったらどうするの？」その不安を仕組みで解決した。</p>
+    </div>
+    <div class="safety-layout">
+      <div class="safety-grid">
+        <div class="safety-card">
+          <h3>公開の流れ</h3>
+          <ul class="safety-list">
+            <li>撮影後にアップロード（ライブ配信ではない）</li>
+            <li>公開前に必ず自分でチェックできる</li>
+            <li>本当の事故（怪我・第三者映り込み等）のみ非公開に</li>
+            <li>「つまらない」「うまくない」は省けない——それが価値になる</li>
+            <li>非公開分は購入者に返金・代替クリップを提供</li>
+          </ul>
+        </div>
+        <div class="safety-card">
+          <h3>所有と真正性</h3>
+          <ul class="safety-list">
+            <li>全動画に電子透かし（NFT技術ベース）を付与</li>
+            <li>所有権は購入者がダウンロードして手元で保管</li>
+            <li>誰でも真贋・所有者を公開検証できる仕組み</li>
+            <li>転載・無断コピーは透かしで即座に検出可能</li>
+            <li>長期クラウド保存コストはアーティスト負担なし</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 確認フローのスマホモック -->
+      <div style="display:flex;justify-content:center">
+        <div class="phone-mock">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-header">
+              <div class="ps-logo">Lapsell</div>
+            </div>
+            <div style="padding:12px">
+              <div style="font-family:'Anton',sans-serif;font-size:9px;letter-spacing:.06em;color:#6b6058;margin-bottom:8px;text-transform:uppercase">アップロード完了</div>
+              <div style="border:1.5px solid #1a1a1a;background:#111;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin-bottom:8px">
+                <div style="color:rgba(255,255,255,.4);font-family:'Anton',sans-serif;font-size:9px">動画プレビュー</div>
+              </div>
+              <div style="font-size:10px;color:#1a1a1a;margin-bottom:10px;line-height:1.5">この動画を公開しますか？<br><span style="font-size:9px;color:#6b6058">公開後は取り消せません</span></div>
+              <div style="display:flex;gap:6px">
+                <div style="flex:1;border:1.5px solid #1a1a1a;padding:7px;text-align:center;font-family:'Anton',sans-serif;font-size:9px;color:#6b6058">非公開</div>
+                <div style="flex:1;background:#e3402a;border:1.5px solid #1a1a1a;padding:7px;text-align:center;font-family:'Anton',sans-serif;font-size:9px;color:#f0ead7">公開する</div>
+              </div>
+              <div style="margin-top:10px;border-top:1px dashed #ccc;padding-top:8px;font-size:9px;color:#6b6058">
+                <span style="color:#e3402a">✓</span> 電子透かし付与済み
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== TARGET ===== -->
+<section id="target">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Who It's For</div>
+      <h2>こんな<b>アーティスト</b>に<br>向いています。</h2>
+    </div>
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="target-type">Type 01</div>
+        <h3>地下アイドル</h3>
+        <p>自主制作・少人数での活動。直撮り文化があり、ファンとの距離が近い。練習・楽屋・振付動画への需要がもともと高い層。</p>
+      </div>
+      <div class="target-card">
+        <div class="target-type">Type 02</div>
+        <h3>インディーズ<br>アーティスト・バンド</h3>
+        <p>スタジオ練習・リハーサルが日常にある。プロモ予算は少ないがコアファンがいる。「無名時代の記録」という価値が特に大きい層。</p>
+      </div>
+      <div class="target-card">
+        <div class="target-type">Type 03</div>
+        <h3>インディーズ<br>お笑い芸人</h3>
+        <p>ネタ作り・稽古・営業前準備——素の面白さをファンが求めている。定期公演を持つ芸人に特に相性がいい。</p>
+      </div>
+    </div>
+    <div class="target-note">
+      <strong>このサービスに向かない方：</strong>
+      TikToker・Instagrammer・VTuber（すでに配信で収益化済みの方）は対象外です。Lapsellは「直撮り文化のある・スマホ撮影で完結できる・コアファンがいる」アーティストに最適化されています。
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== PRICING ===== -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center">
+      <div class="section-label">Pricing</div>
+      <h2>初期費用は、<b>ゼロ。</b></h2>
+    </div>
+    <div class="pricing-box">
+      <div class="pricing-main">
+        <div class="pricing-price">¥0</div>
+        <div class="pricing-unit">で始められる</div>
+      </div>
+      <p class="pricing-sub">
+        売れた時だけ、手数料が発生します。<br>
+        在庫リスクも、月額費用も、一切なし。
+      </p>
+      <ul class="pricing-items">
+        <li>初期費用 ¥0</li>
+        <li>月額費用 ¥0</li>
+        <li>一次販売手数料 5%〜</li>
+        <li>二次流通ロイヤリティ あり（設定可）</li>
+        <li>撮影・編集費用 ¥0（スマホのみ）</li>
+      </ul>
+      <a href="#cta" class="btn btn-inverted" style="font-size:18px;padding:16px 36px;display:inline-block">0円で出品をはじめる</a>
+      <p class="pricing-note">クレジットカード不要 · アカウント作成のみで開始</p>
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2>よくある<b>質問。</b></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q">編集スキルや機材は必要ですか？</summary>
+        <div class="faq-a">
+          必要ありません。スマホで録画したファイルをアップロードするだけです。動画の分割・配布・透かし付与はすべてLapsellが自動で行います。一眼カメラや音響機材は不要で、普段使いのスマホだけで完結します。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">変なものが映ったり、失敗したらどうなりますか？</summary>
+        <div class="faq-a">
+          撮影後にアップロードし、公開前に必ず自分で確認できます。本当に困る場面（怪我・第三者の映り込みなど）のみ非公開にできます。ただし「つまらない」「技術的にうまくない」といった理由では省けません——それ自体がファンにとっての価値だからです。非公開にした部分は購入者に返金対応します。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">本当にファンが買ってくれるのですか？</summary>
+        <div class="faq-a">
+          自社アンケート（N=393）で約32%が購入意向を示し、うち15.1%が3,001円以上でも購入すると回答しています。また、デジタルガチャ市場は約7,000億円規模、推し活ファンの70%が月1万円以上を支出（17LIVE調査）というデータもあります。「中身の分からないものを買う」文化はすでに根付いています。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">転載・コピーされませんか？</summary>
+        <div class="faq-a">
+          全動画に電子透かし（NFT技術ベース）を埋め込みます。誰でも真贋・所有者を公開検証できるため、転載されても「盗品」と証明できます。また所有権の希少性が保たれるため、転載はむしろオリジナルの価値を高める方向に働くことが多いです。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">費用は本当にかかりませんか？</summary>
+        <div class="faq-a">
+          初期費用・月額費用は一切かかりません。売れた場合にのみ、売上の5%〜の手数料が発生します。売れなければ費用ゼロです。二次流通（ファン間の売買）が発生した場合はロイヤリティ収益も得られます。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">どんなアーティストが使えますか？</summary>
+        <div class="faq-a">
+          地下アイドル・インディーズアーティスト・インディーズバンド・お笑い芸人など「直撮り文化がある・スマホで撮影できる・コアファンがいる」方に向いています。TikTokerやInstagrammer、VTuberなど既に配信で収益化している方は対象外です。まずは無料でアカウントを作成してみてください。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<hr class="thick-rule">
+
+<!-- ===== CLOSING CTA ===== -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-label">Start Now — It's Free</div>
+    <h2 class="cta-headline">練習の時間を、<br><b>資産に変えよう。</b></h2>
+    <p class="cta-sub">
+      今日の練習が、10年後に「あの頃の自分を支えてた」と言えるグッズになる。<br>
+      まず0円で始めて、実感してほしい。
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-primary" style="font-size:17px;padding:16px 32px">無料で登録して、はじめる</a>
+      <a href="#" class="btn btn-inverted" style="font-size:17px;padding:16px 32px">お問い合わせ・資料請求</a>
+    </div>
+    <div class="cta-note">クレジットカード不要 · アカウント登録のみで開始</div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-wordmark">Lapsell</div>
+  <div class="footer-links">
+    <a href="#">利用規約</a>
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">特定商取引法</a>
+    <a href="#">お問い合わせ</a>
+  </div>
+  <div class="footer-copy">© 2025 Lapsell</div>
+</footer>
+
+<!-- ===== STICKY BAR ===== -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-text">練習の時間を、<span>収益に変える。</span></div>
+  <a href="#cta" class="btn btn-primary" style="padding:10px 22px;font-size:14px">無料で登録する</a>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById('stickyBar');
+  var hero = document.getElementById('hero');
+  function onScroll(){
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    if(heroBottom < 0){
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+})();
+</script>
+</body>
+</html>
