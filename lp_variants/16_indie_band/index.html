@@ -133,8 +133,8 @@ section{padding:92px 0;position:relative;z-index:2;}
 /* ---------- mechanic (3 hooks) borderless ---------- */
 .hooks{display:grid;grid-template-columns:repeat(3,1fr);gap:42px;margin-top:56px;text-align:left;counter-reset:hk;}
 .hook{position:relative;padding-top:18px;border-top:2px solid var(--amber);}
-.hook .n{font-size:13px;font-weight:900;letter-spacing:.2em;color:var(--amber);}
-.hook h3{font-size:20px;font-weight:900;margin-top:12px;line-height:1.45;}
+.hook .hk-img{width:80px;height:80px;border-radius:10px;object-fit:cover;display:block;margin-bottom:14px;box-shadow:0 10px 24px rgba(0,0,0,.4);}
+.hook h3{font-size:20px;font-weight:900;margin-top:0;line-height:1.45;}
 .hook p{font-size:14.5px;color:var(--mutedd);margin-top:12px;}
 @media(max-width:760px){.hooks{grid-template-columns:1fr;gap:34px;}}
 
@@ -165,55 +165,55 @@ section{padding:92px 0;position:relative;z-index:2;}
 .hero-phone .device{width:252px;border-radius:42px;padding:12px;}
 .device .screen{background:#fff;border-radius:26px;overflow:hidden;aspect-ratio:9/19.5;display:flex;flex-direction:column;position:relative;color:#16110b;}
 .hero-phone .device .screen{border-radius:32px;}
-.device .statusbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;padding:8px 14px 3px;color:#16110b;}
+.device .statusbar{display:flex;justify-content:space-between;align-items:center;font-size:9px;font-weight:800;padding:7px 13px 2px;color:#16110b;}
 .device .statusbar .dots{display:flex;gap:4px;align-items:center;}
-.device .statusbar .dots svg{width:14px;height:10px;}
-.scr-head{display:flex;align-items:center;gap:7px;padding:7px 14px 10px;border-bottom:1px solid #efe6d6;}
-.scr-head .b{font-weight:900;font-size:12px;color:#16110b;}
-.scr-head .sub{font-size:10px;color:#9a8f7d;font-weight:800;}
-.scr-body{flex:1;padding:12px 14px;display:flex;flex-direction:column;overflow:hidden;}
+.device .statusbar .dots svg{width:13px;height:9px;}
+.scr-head{display:flex;align-items:center;gap:7px;padding:6px 13px 8px;border-bottom:1px solid #efe6d6;}
+.scr-head .b{font-weight:900;font-size:11px;color:#16110b;}
+.scr-head .sub{font-size:9px;color:#9a8f7d;font-weight:800;}
+.scr-body{flex:1;padding:10px 13px;display:flex;flex-direction:column;overflow:hidden;}
 
 /* marketplace screen */
-.mkt-search{display:flex;align-items:center;gap:7px;background:#f1ece1;border-radius:999px;padding:7px 12px;margin:0 0 11px;}
-.mkt-search svg{width:13px;height:13px;color:#a89c87;flex:none;}
-.mkt-search span{font-size:10px;color:#a89c87;font-weight:700;}
-.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;overflow:hidden;}
+.mkt-search{display:flex;align-items:center;gap:6px;background:#f1ece1;border-radius:999px;padding:6px 11px;margin:0 0 9px;}
+.mkt-search svg{width:12px;height:12px;color:#a89c87;flex:none;}
+.mkt-search span{font-size:9px;color:#a89c87;font-weight:700;}
+.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:hidden;}
 .mkt-item{border:1px solid #efe6d6;border-radius:9px;overflow:hidden;background:#fff;display:flex;flex-direction:column;}
 .mkt-item .th{position:relative;aspect-ratio:4/3;background:#15110b;overflow:hidden;}
 .mkt-item .th img{width:100%;height:100%;object-fit:cover;}
-.mkt-item .th .pr{position:absolute;left:5px;bottom:5px;background:rgba(20,16,11,.85);color:#fff;font-size:10px;font-weight:900;border-radius:4px;padding:2px 6px;}
-.mkt-item .mt{padding:6px 7px 8px;}
-.mkt-item .mt .tt{font-size:10px;font-weight:900;line-height:1.35;color:#16110b;}
-.mkt-item .mt .rm{font-size:9px;font-weight:700;color:#9a8f7d;margin-top:3px;}
+.mkt-item .th .pr{position:absolute;left:5px;bottom:5px;background:rgba(20,16,11,.85);color:#fff;font-size:9px;font-weight:900;border-radius:4px;padding:2px 6px;}
+.mkt-item .mt{padding:5px 7px 7px;}
+.mkt-item .mt .tt{font-size:9.5px;font-weight:900;line-height:1.35;color:#16110b;}
+.mkt-item .mt .rm{font-size:8.5px;font-weight:700;color:#9a8f7d;margin-top:2px;}
 
 /* listing (出品) screen */
-.lst-cap{position:relative;border-radius:10px;overflow:hidden;background:#16110b;height:84px;display:flex;align-items:center;justify-content:center;margin-bottom:11px;}
-.lst-cap img{height:74px;width:auto;object-fit:contain;border-radius:6px;}
-.lst-card{border:1px solid #efe6d6;border-radius:10px;padding:8px 12px;}
-.lst-row{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;padding:5px 0;color:#16110b;}
+.lst-cap{position:relative;border-radius:10px;overflow:hidden;background:#16110b;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:9px;}
+.lst-cap img{height:80px;width:100%;object-fit:cover;border-radius:6px;}
+.lst-card{border:1px solid #efe6d6;border-radius:10px;padding:7px 11px;}
+.lst-row{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;padding:4px 0;color:#16110b;}
 .lst-row+.lst-row{border-top:1px solid #f3ecde;}
-.lst-row .ic{flex:none;width:15px;height:15px;color:#16110b;}
-.lst-row .v{margin-left:auto;font-size:11px;}
-.lst-row .v.price{font-weight:900;font-size:12px;}
-.pillbtn{margin-top:12px;background:var(--amber);color:#1a0f02;font-weight:900;font-size:12px;text-align:center;border-radius:6px;padding:10px 0;}
-.darkbtn{background:#16110b;color:#fff;font-weight:900;font-size:12px;text-align:center;border-radius:6px;padding:10px 0;}
-.ghostbtn{border:1.5px solid #e0d5c1;color:#16110b;font-weight:900;font-size:12px;text-align:center;border-radius:6px;padding:9px 0;}
+.lst-row .ic{flex:none;width:14px;height:14px;color:#16110b;}
+.lst-row .v{margin-left:auto;font-size:10px;}
+.lst-row .v.price{font-weight:900;font-size:11px;}
+.pillbtn{margin-top:11px;background:var(--amber);color:#1a0f02;font-weight:900;font-size:11px;text-align:center;border-radius:6px;padding:9px 0;}
+.darkbtn{background:#16110b;color:#fff;font-weight:900;font-size:11px;text-align:center;border-radius:6px;padding:9px 0;}
+.ghostbtn{border:1.5px solid #e0d5c1;color:#16110b;font-weight:900;font-size:11px;text-align:center;border-radius:6px;padding:8px 0;}
 
 /* camera (撮影) screen */
 .cam{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;margin:-12px -14px -12px;overflow:hidden;background:#000;}
 .cam>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;}
 .cam .cam-top{position:absolute;top:10px;left:10px;right:10px;display:flex;align-items:center;justify-content:space-between;z-index:2;}
-.cam .rec{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.5);color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:3px 9px;letter-spacing:.04em;}
-.cam .rec .dot{width:8px;height:8px;border-radius:50%;background:#ff3b30;animation:recblink 1.2s steps(1) infinite;}
+.cam .rec{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.5);color:#fff;font-size:9px;font-weight:900;border-radius:999px;padding:3px 8px;letter-spacing:.04em;}
+.cam .rec .dot{width:7px;height:7px;border-radius:50%;background:#ff3b30;animation:recblink 1.2s steps(1) infinite;}
 @keyframes recblink{50%{opacity:.25;}}
-.cam .timer{background:rgba(0,0,0,.5);color:#fff;font-size:10px;font-weight:900;border-radius:5px;padding:3px 8px;font-variant-numeric:tabular-nums;}
-.cam .cam-note{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;color:#fff;font-size:11px;font-weight:900;text-shadow:0 1px 6px rgba(0,0,0,.7);z-index:2;}
-.cam .cam-btn{position:relative;z-index:2;margin:0 14px 14px;background:var(--amber);color:#1a0f02;font-weight:900;font-size:12px;text-align:center;border-radius:6px;padding:10px 0;}
+.cam .timer{background:rgba(0,0,0,.5);color:#fff;font-size:9px;font-weight:900;border-radius:5px;padding:3px 7px;font-variant-numeric:tabular-nums;}
+.cam .cam-note{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;color:#fff;font-size:10px;font-weight:900;text-shadow:0 1px 6px rgba(0,0,0,.7);z-index:2;}
+.cam .cam-btn{position:relative;z-index:2;margin:0 13px 13px;background:var(--amber);color:#1a0f02;font-weight:900;font-size:11px;text-align:center;border-radius:6px;padding:9px 0;}
 
 /* open (開封) screen */
 .open-body{align-items:center;justify-content:center;text-align:center;}
-.open-h{font-size:14px;font-weight:900;line-height:1.5;color:#16110b;}
-.open-sub{font-size:10.5px;color:#9a8f7d;font-weight:800;margin-top:6px;}
+.open-h{font-size:12px;font-weight:900;line-height:1.5;color:#16110b;}
+.open-sub{font-size:9.5px;color:#9a8f7d;font-weight:800;margin-top:5px;}
 .cap-wrap{margin:18px 0;position:relative;display:flex;align-items:center;justify-content:center;}
 .cap-wrap::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.4),transparent 70%);}
 .cap-wrap img{width:120px;height:auto;object-fit:contain;position:relative;border-radius:10px;filter:drop-shadow(0 10px 22px rgba(0,0,0,.45));}
@@ -223,11 +223,11 @@ section{padding:92px 0;position:relative;z-index:2;}
 .player img{width:100%;height:100%;object-fit:cover;opacity:.94;}
 .player .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;}
 .player .play svg{width:19px;height:19px;color:#16110b;margin-left:3px;}
-.player .ts{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:9px;font-weight:800;border-radius:5px;padding:3px 7px;}
-.rcv-cap{font-size:11px;font-weight:900;line-height:1.5;color:#16110b;}
-.chip{display:inline-flex;align-items:center;gap:5px;background:#fff0d8;border:1px solid var(--amber);color:#a05a08;font-size:10px;font-weight:900;border-radius:999px;padding:5px 10px;margin-top:8px;}
-.chip svg{width:12px;height:12px;}
-.rcv-btns{display:flex;gap:8px;margin-top:13px;}
+.player .ts{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:8.5px;font-weight:800;border-radius:5px;padding:2px 7px;}
+.rcv-cap{font-size:10px;font-weight:900;line-height:1.5;color:#16110b;}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#fff0d8;border:1px solid var(--amber);color:#a05a08;font-size:9px;font-weight:900;border-radius:999px;padding:4px 9px;margin-top:7px;}
+.chip svg{width:11px;height:11px;}
+.rcv-btns{display:flex;gap:8px;margin-top:11px;}
 .rcv-btns>div{flex:1;}
 
 /* ---------- 4 appeals ---------- */
@@ -241,6 +241,28 @@ section{padding:92px 0;position:relative;z-index:2;}
 .appeal-txt h3{font-size:clamp(22px,2.8vw,32px);font-weight:900;line-height:1.4;margin-top:14px;}
 .appeal-txt p{font-size:15px;color:#cfc5b2;margin-top:18px;line-height:1.95;}
 @media(max-width:760px){.appeal{grid-template-columns:1fr;gap:26px;}.appeal.rev .appeal-img{order:0;}}
+
+/* ---------- before / after cases (導入イメージ) ---------- */
+.cases{display:flex;flex-direction:column;gap:46px;margin-top:56px;text-align:left;}
+.case{display:grid;grid-template-columns:88px 1fr;gap:24px;align-items:start;}
+.case-photo{width:88px;height:88px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 8px 22px rgba(0,0,0,.4);}
+.case-photo img{width:100%;height:100%;object-fit:cover;}
+.case-name{font-size:19px;font-weight:900;color:var(--paper);line-height:1.3;}
+.case-role{font-size:12.5px;font-weight:800;letter-spacing:.04em;color:var(--amber);margin-top:4px;}
+.case-ba{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin-top:18px;}
+.case-ba .col .lbl{font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--mutedd);margin-bottom:8px;}
+.case-ba .col.after .lbl{color:var(--amber);}
+.case-ba .col p{font-size:14px;line-height:1.8;color:#cfc5b2;}
+.case-ba .col.after p{color:var(--paper);font-weight:700;}
+.case-arrow{color:var(--amber);display:flex;align-items:center;justify-content:center;flex:none;}
+.case-arrow svg{width:30px;height:30px;}
+.case+.case{border-top:1px solid var(--lined);padding-top:46px;}
+@media(max-width:680px){
+  .case{grid-template-columns:1fr;gap:16px;}
+  .case-photo{width:72px;height:72px;}
+  .case-ba{grid-template-columns:1fr;gap:14px;}
+  .case-arrow{transform:rotate(90deg);margin:0;}
+}
 
 /* ---------- charts ---------- */
 .chart-block{max-width:880px;margin:0 auto;}
@@ -483,17 +505,17 @@ section{padding:92px 0;position:relative;z-index:2;}
     <p class="lead">スタジオに入る前に「時間枠」を出品します。当日は撮るだけ。準備も編集もいりません。仕組みは3つです。</p>
     <div class="hooks">
       <div class="hook">
-        <span class="n">HOOK 01</span>
+        <img class="hk-img" src="assets/how1.png" alt="これからやる練習の時間を先に売るイメージ" width="80" height="80">
         <h3>時間を先に売る</h3>
         <p>これからやる練習の時間枠を出品します。当日は撮るだけ。在庫も準備もいりません。</p>
       </div>
       <div class="hook">
-        <span class="n">HOOK 02</span>
+        <img class="hk-img" src="assets/how2.png" alt="中身は届くまで分からないイメージ" width="80" height="80">
         <h3>中身は届くまで分からない</h3>
         <p>何が映るかは、開けるまで分かりません。ファンはどんな瞬間が届くか期待して買います。</p>
       </div>
       <div class="hook">
-        <span class="n">HOOK 03</span>
+        <img class="hk-img" src="assets/how3.png" alt="届くのは世界に1つの一点もののイメージ" width="80" height="80">
         <h3>届くのは世界に1つ</h3>
         <p>買った人だけが持つ、一点もののデジタルグッズです。同じ区間は誰とも被りません。</p>
       </div>
@@ -505,8 +527,8 @@ section{padding:92px 0;position:relative;z-index:2;}
 <section id="flow" class="band-paper center">
   <div class="wrap">
     <span class="eyebrow">How to use</span>
-    <h2 class="sec-h">使い方は、<span class="mk">5ステップだけです。</span></h2>
-    <p class="lead">出品→購入→撮影→開封→受け取りの5ステップです。撮影はスマホで撮るだけ。アプリ画面で流れを見てみてください。</p>
+    <h2 class="sec-h">使い方は、<span class="mk">4ステップだけです。</span></h2>
+    <p class="lead">出品→購入→撮影→受け取りの4ステップです。撮影はスマホで撮るだけ。アプリ画面で流れを見てみてください。</p>
 
     <div class="flow-scroll">
     <div class="flow5">
@@ -519,9 +541,9 @@ section{padding:92px 0;position:relative;z-index:2;}
           <div class="statusbar"><span>18:30</span><span class="dots">
             <svg viewBox="0 0 18 12" fill="none" stroke="#16110b" stroke-width="1.6"><path d="M2 7c4-4 10-4 14 0M5 9.5c2.2-2 4.8-2 7 0"/></svg>
             <svg viewBox="0 0 18 12" fill="#16110b"><rect x="1" y="3" width="13" height="6" rx="1.5"/><rect x="15" y="4.5" width="2" height="3" rx="1"/></svg></span></div>
-          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:10px;">｜出品</span></span></div>
+          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:9px;">｜出品</span></span></div>
           <div class="scr-body">
-            <div class="lst-cap"><img src="assets/mock_capsule.png" alt="封をされた世界に1つの動画クリップ"></div>
+            <div class="lst-cap"><img src="assets/mock_practice.png" alt="これから売り出すスタジオ練習の時間枠"></div>
             <div class="lst-card">
               <div class="lst-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></span>日時<span class="v">6/20(金) 19:00-21:00</span></div>
               <div class="lst-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a2 2 0 0 1 0 4h-3a2 2 0 0 0 0 4h4"/></svg></span>価格<span class="v price">¥400 / 1回</span></div>
@@ -567,7 +589,7 @@ section{padding:92px 0;position:relative;z-index:2;}
           <div class="statusbar"><span>19:42</span><span class="dots">
             <svg viewBox="0 0 18 12" fill="none" stroke="#16110b" stroke-width="1.6"><path d="M2 7c4-4 10-4 14 0M5 9.5c2.2-2 4.8-2 7 0"/></svg>
             <svg viewBox="0 0 18 12" fill="#16110b"><rect x="1" y="3" width="13" height="6" rx="1.5"/><rect x="15" y="4.5" width="2" height="3" rx="1"/></svg></span></div>
-          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:10px;">｜撮影</span></span></div>
+          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:9px;">｜撮影</span></span></div>
           <div class="scr-body">
             <div class="cam">
               <img src="assets/mock_practice.png" alt="撮影中のスタジオ練習のビューファインダー">
@@ -582,36 +604,15 @@ section{padding:92px 0;position:relative;z-index:2;}
 
       <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 
-      <!-- STEP 04 開封 -->
+      <!-- STEP 04 受け取り（届いた瞬間に再生できる） -->
       <div class="flow-cell">
         <span class="flow-tag buyer">購入者</span>
-        <div class="flow-step"><b>Step 04</b><br>開封</div>
-        <div class="device"><div class="screen">
-          <div class="statusbar"><span>21:14</span><span class="dots">
-            <svg viewBox="0 0 18 12" fill="none" stroke="#16110b" stroke-width="1.6"><path d="M2 7c4-4 10-4 14 0M5 9.5c2.2-2 4.8-2 7 0"/></svg>
-            <svg viewBox="0 0 18 12" fill="#16110b"><rect x="1" y="3" width="13" height="6" rx="1.5"/><rect x="15" y="4.5" width="2" height="3" rx="1"/></svg></span></div>
-          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:10px;">｜受け取り箱</span></span></div>
-          <div class="scr-body open-body">
-            <div class="open-h">あなたの区間が<br>届きました</div>
-            <div class="open-sub">6/20(金) スタジオ練習より</div>
-            <div class="cap-wrap"><img src="assets/mock_capsule.png" alt="届いた、封をされた世界に1つの動画クリップ"></div>
-            <div class="darkbtn" style="width:100%;">タップして開ける</div>
-          </div>
-        </div></div>
-        <p class="flow-cap"><b>撮影後、あなたの区間が到着。</b>タップして開けるまで、中身は分からない。</p>
-      </div>
-
-      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-
-      <!-- STEP 05 受け取り -->
-      <div class="flow-cell">
-        <span class="flow-tag buyer">購入者</span>
-        <div class="flow-step"><b>Step 05</b><br>受け取り</div>
+        <div class="flow-step"><b>Step 04</b><br>受け取り</div>
         <div class="device"><div class="screen">
           <div class="statusbar"><span>21:15</span><span class="dots">
             <svg viewBox="0 0 18 12" fill="none" stroke="#16110b" stroke-width="1.6"><path d="M2 7c4-4 10-4 14 0M5 9.5c2.2-2 4.8-2 7 0"/></svg>
             <svg viewBox="0 0 18 12" fill="#16110b"><rect x="1" y="3" width="13" height="6" rx="1.5"/><rect x="15" y="4.5" width="2" height="3" rx="1"/></svg></span></div>
-          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:10px;">｜受け取り</span></span></div>
+          <div class="scr-head"><span class="b">Lapsell<span style="color:#9a8f7d;font-weight:700;font-size:9px;">｜受け取り</span></span></div>
           <div class="scr-body">
             <div class="player">
               <img src="assets/mock_practice.png" alt="スタジオ練習の一場面">
@@ -626,7 +627,7 @@ section{padding:92px 0;position:relative;z-index:2;}
             </div>
           </div>
         </div></div>
-        <p class="flow-cap"><b>練習に思いがけず写る、素の一瞬。</b>世界に一つだけの区間を、再生・シェアできる。</p>
+        <p class="flow-cap"><b>撮影後、世界に一つの区間が届く。</b>中身は届くまで分からない。そのまま再生・シェアできる。</p>
       </div>
 
     </div></div>
@@ -674,6 +675,74 @@ section{padding:92px 0;position:relative;z-index:2;}
           <span class="idx">Reason 04</span>
           <h3>公開前にチェックでき、<span class="fill">配信事故を防げます。</span></h3>
           <p>ライブ配信と違い、撮影してからアップロードします。公開前に内容を確認でき、まずい瞬間は世に出ません。事故の区間だけ非公開・自動返金、名場面はそのまま届きます。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASES (導入イメージ) ============ -->
+<section class="band-stage" id="cases">
+  <div class="wrap center">
+    <span class="eyebrow">導入イメージ</span>
+    <h2 class="sec-h">こんな<span class="mk">変化が起きています。</span></h2>
+    <div class="cases">
+
+      <div class="case">
+        <div class="case-photo"><img src="assets/artist_idol.png" alt="ライブアイドル" width="88" height="88"></div>
+        <div>
+          <div class="case-name">ライブアイドル</div>
+          <div class="case-role">遠方にファンを抱えるソロアイドル</div>
+          <div class="case-ba">
+            <div class="col before">
+              <div class="lbl">これまで</div>
+              <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="col after">
+              <div class="lbl">Lapsell後</div>
+              <p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-photo"><img src="assets/artist_band.png" alt="インディーズバンド" width="88" height="88"></div>
+        <div>
+          <div class="case-name">インディーズバンド</div>
+          <div class="case-role">スタジオで活動する4人組</div>
+          <div class="case-ba">
+            <div class="col before">
+              <div class="lbl">これまで</div>
+              <p>スタジオ代がかさむのにリハを届ける手段がなく固定ファン止まり。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="col after">
+              <div class="lbl">Lapsell後</div>
+              <p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-photo"><img src="assets/artist_comedian.png" alt="インディーズお笑い芸人" width="88" height="88"></div>
+        <div>
+          <div class="case-name">インディーズお笑い芸人</div>
+          <div class="case-role">劇場出番を狙うピン芸人</div>
+          <div class="case-ba">
+            <div class="col before">
+              <div class="lbl">これまで</div>
+              <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="col after">
+              <div class="lbl">Lapsell後</div>
+              <p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p>
+            </div>
+          </div>
         </div>
       </div>
 
