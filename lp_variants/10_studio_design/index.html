@@ -101,6 +101,10 @@ h1,h2,h3,p{margin:0;}
   color:#dfe7ff;letter-spacing:.02em;margin-bottom:26px;
 }
 .badge .laurel{width:18px;height:18px;color:#ffd66b;}
+.badge-no1{padding:8px 18px;gap:11px;}
+.badge-no1 span{color:#eef2ff;font-weight:600;}
+.badge-no1 span b{color:#fff;font-weight:800;}
+.badge-no1 .laurel{width:20px;height:24px;flex:none;}
 .hero h1{
   font-size:clamp(34px,5vw,60px);
   font-weight:800;line-height:1.18;letter-spacing:-.02em;
@@ -119,7 +123,18 @@ h1,h2,h3,p{margin:0;}
 .hero-checks li .ck svg{width:12px;height:12px;color:#9ec2ff;}
 .hero-checks .solve{margin-top:4px;color:#fff;font-weight:800;}
 .hero-checks .solve .arr{color:var(--capsule);}
-.hero-cta{display:flex;gap:18px;margin-top:34px;align-items:center;flex-wrap:wrap;}
+.hero-cta{display:flex;gap:22px;margin-top:34px;align-items:center;flex-wrap:wrap;}
+/* Studio-style high-commit CTA card (白横長カード + アイコン + 補足) */
+.cta-card{display:inline-flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:14px 18px 14px 16px;box-shadow:0 16px 40px rgba(7,102,244,.28);transition:transform .15s,box-shadow .15s;}
+.cta-card:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(7,102,244,.4);}
+.cta-card .cc-ic{flex:none;width:42px;height:42px;border-radius:11px;background:var(--royal);color:#fff;display:flex;align-items:center;justify-content:center;}
+.cta-card .cc-ic svg{width:21px;height:21px;}
+.cta-card .cc-txt{display:flex;flex-direction:column;line-height:1.3;text-align:left;}
+.cta-card .cc-txt b{font-size:15.5px;font-weight:800;color:var(--navy);}
+.cta-card .cc-txt small{font-size:11.5px;font-weight:700;color:var(--muted);margin-top:2px;}
+.cta-card .cc-arr{width:18px;height:18px;color:var(--royal);flex:none;margin-left:4px;}
+.linklike-lo{color:#fff;}
+.linklike-lo svg{width:14px;height:14px;}
 .hero-phone{display:flex;justify-content:center;perspective:1500px;position:relative;}
 .hero-phone .device{transform:rotateY(-12deg) rotate(1.5deg);transform-origin:center;}
 .hero-phone::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(7,102,244,.4),rgba(7,102,244,0) 68%);filter:blur(8px);}
@@ -139,6 +154,16 @@ h1,h2,h3,p{margin:0;}
 .trust .num{font-size:34px;font-weight:800;color:var(--navy);display:flex;align-items:baseline;justify-content:center;gap:2px;letter-spacing:-.01em;}
 .trust .num .u{font-size:.45em;font-weight:800;color:var(--royal);}
 .trust .lbl{font-size:12.5px;color:var(--muted);margin-top:2px;font-weight:600;}
+
+/* ---------- 特大の数字 (Studio big-number band) ---------- */
+.bignum-sec{padding-top:120px;}
+.bignum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px;}
+.bignum{padding:34px 26px;background:#fff;border:1px solid var(--line);border-radius:20px;text-align:center;box-shadow:0 14px 38px rgba(10,15,43,.06);display:flex;flex-direction:column;}
+.bignum .bn-head{font-size:14px;font-weight:700;color:var(--muted);line-height:1.7;min-height:48px;display:flex;align-items:flex-end;justify-content:center;}
+.bignum .bn-v{font-size:clamp(48px,6vw,72px);font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.02em;margin:10px 0;display:flex;align-items:baseline;justify-content:center;gap:3px;}
+.bignum .bn-v .u{font-size:.34em;color:var(--royal);font-weight:800;}
+.bignum .bn-sub{font-size:13.5px;color:#41506b;line-height:1.75;font-weight:600;}
+@media(max-width:760px){.bignum-grid{grid-template-columns:1fr;gap:14px;}.bignum .bn-head{min-height:0;}}
 
 /* ---------- section base ---------- */
 section{padding:96px 0;}
@@ -463,9 +488,10 @@ section{padding:96px 0;}
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="badge">
-        <svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 2-4 5-4 9 0 4 1 7 4 9 3-2 4-5 4-9 0-4-1-7-4-9z"/><path d="M5 8c0 4 3 7 7 8M19 8c0 4-3 7-7 8"/></svg>
-        初期費用0円・撮るだけ・編集不要
+      <div class="badge badge-no1">
+        <svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c-2 4-2.5 8 0 12 1 1.6 2.5 2.8 4 3"/><path d="M17 3c2 4 2.5 8 0 12-1 1.6-2.5 2.8-4 3"/></svg>
+        <span><b>“素の時間”を売る</b>、新しいランダムグッズ市場</span>
+        <svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M7 3c-2 4-2.5 8 0 12 1 1.6 2.5 2.8 4 3"/><path d="M17 3c2 4 2.5 8 0 12-1 1.6-2.5 2.8-4 3"/></svg>
       </div>
       <h1>練習の時間を、<br><span class="hl">収益に変える。</span></h1>
       <p class="sub">毎日の練習・裏側・楽屋の時間が、世界に1つだけのデジタルグッズになって売れる。地下アイドル・インディーズアーティストのための、新しい収益化＆ファングッズ販売アプリ。</p>
@@ -475,10 +501,12 @@ section{padding:96px 0;}
         <li class="solve"><span class="arr">→</span> Lapsellなら、撮るだけで解決できます。</li>
       </ul>
       <div class="hero-cta">
-        <a href="#cta" class="pill lg">無料で出品をはじめる
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <a href="#cta" class="cta-card">
+          <span class="cc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 19h14"/></svg></span>
+          <span class="cc-txt"><b>無料で出品をはじめる</b><small>初期費用0円・登録は最短数分</small></span>
+          <svg class="cc-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#flow" class="linklike" style="color:#fff">使い方を見る
+        <a href="#flow" class="linklike linklike-lo">まず使い方を見る
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -528,7 +556,7 @@ section{padding:96px 0;}
   </div>
 </section>
 
-<!-- ============ TRUST BAR ============ -->
+<!-- ============ TRUST BAR (始めやすさの3指標) ============ -->
 <div class="wrap">
   <div class="trust">
     <div class="trust-in">
@@ -547,6 +575,32 @@ section{padding:96px 0;}
     </div>
   </div>
 </div>
+
+<!-- ============ 特大の数字セクション (Studio signature: big numbers w/ clear heading) ============ -->
+<section class="bignum-sec band-grey">
+  <div class="wrap center">
+    <span class="eyebrow">Why it works</span>
+    <h2 class="sec-h">数字が示す、<span class="hl">「過程」にお金が動く理由。</span></h2>
+    <p class="lead">完成品ではなく“過程”が求められ、人はそこに大きなお金を払っている。だから、練習の時間は収益に変わる。</p>
+    <div class="bignum-grid">
+      <div class="bignum">
+        <p class="bn-head">BLACKPINKの練習動画は、公式MVを超えて</p>
+        <div class="bn-v">20<span class="u">億回</span></div>
+        <p class="bn-sub">YouTubeで視聴された。“素”は、完成品より観られている。</p>
+      </div>
+      <div class="bignum">
+        <p class="bn-head">推し活市場（アイドル＋アニメ）は</p>
+        <div class="bn-v">4,650<span class="u">億円</span></div>
+        <p class="bn-sub">年間規模（矢野経済研 2023）。応援にお金が動く市場は巨大。</p>
+      </div>
+      <div class="bignum">
+        <p class="bn-head">推し活ファンの約3人に1人が</p>
+        <div class="bn-v">31.9<span class="u">%</span></div>
+        <p class="bn-sub">「中身が見えなくても払ってもいい」と回答（自社調査 N=393）。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ 課題提起 ============ -->
 <section id="problem" class="band-grey">
