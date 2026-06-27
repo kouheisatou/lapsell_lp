@@ -102,7 +102,7 @@ a{color:inherit;text-decoration:none}
 .phone{width:264px;background:#0c0e12;border-radius:38px;padding:10px;box-shadow:0 26px 60px rgba(10,20,40,.28);position:relative}
 .phone .notch{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:22px;background:#0c0e12;border-radius:0 0 14px 14px;z-index:5}
 .phone .screen{background:#fff;border-radius:30px;overflow:hidden;aspect-ratio:9/19.2;display:flex;flex-direction:column}
-.scr-bar{height:30px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:10px;font-weight:600}
+.scr-bar{height:28px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:9.5px;font-weight:600}
 .scr-body{flex:1;overflow:hidden;display:flex;flex-direction:column}
 
 /* ---------- section heading ---------- */
@@ -150,6 +150,8 @@ a{color:inherit;text-decoration:none}
   display:grid;place-items:center;margin-bottom:14px}
 .core-card .num.g{background:linear-gradient(135deg,var(--g2),var(--g1))}
 .core-card .num.m{background:linear-gradient(135deg,var(--g3),#ff6fb6)}
+.core-card .how-ic{width:72px;height:72px;border-radius:16px;object-fit:cover;margin-bottom:16px;
+  box-shadow:0 8px 22px rgba(0,62,129,.18);border:0}
 .core-card h3{font-size:18px;margin:0 0 8px;font-weight:800;line-height:1.4}
 .core-card p{font-size:13.5px;color:var(--sub);margin:0}
 @media(max-width:760px){.core-grid{grid-template-columns:1fr}}
@@ -186,15 +188,19 @@ a{color:inherit;text-decoration:none}
 .step-desc{padding:0 18px 14px;font-size:12.5px;color:var(--sub);margin:0}
 .step-shot{margin:0 14px 16px;border-radius:14px;overflow:hidden;background:#0c0e12;padding:8px}
 .mini{background:#fff;border-radius:9px;overflow:hidden;font-size:10px}
-.mini .mbar{background:var(--navy);color:#fff;padding:6px 10px;font-weight:700;font-size:9.5px;display:flex;justify-content:space-between;align-items:center}
-.mini .mbody{padding:10px}
-.mlist-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.mini .mbar{background:var(--navy);color:#fff;padding:5px 9px;font-weight:700;font-size:9px;display:flex;justify-content:space-between;align-items:center}
+.mini .mbody{padding:8px}
+.mlist-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--line);font-size:10px}
 .mlist-row:last-child{border-bottom:0}
 .mlist-row .t{font-weight:700;color:var(--ink)}
 .mlist-row .p{color:var(--magenta);font-weight:800}
-.mini-btn{margin-top:9px;background:var(--navy);color:#fff;text-align:center;padding:7px;border-radius:8px;font-weight:700;font-size:10px}
+.mini-btn{margin-top:8px;background:var(--navy);color:#fff;text-align:center;padding:6px;border-radius:8px;font-weight:700;font-size:11px}
 .mini-btn.m{background:linear-gradient(135deg,var(--g3),#ff6fb6)}
 .mini-thumb{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;margin-bottom:7px}
+.mini-play{position:relative;border-radius:8px;overflow:hidden}
+.mini-play .play-fab{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g3),#ff6fb6);display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.mini-play .play-fab svg{margin-left:2px}
 .capsule-wrap{text-align:center;padding:6px 0}
 .capsule-wrap img{width:78px;margin:0 auto 6px}
 .rec-dot{display:inline-flex;align-items:center;gap:5px;background:#11161d;color:#fff;border-radius:999px;padding:4px 10px;font-size:9px;font-weight:700}
@@ -410,20 +416,20 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
           <div class="notch"></div>
           <div class="screen">
             <div class="scr-bar"><span>Lapsell</span><span>9:41</span></div>
-            <div class="scr-body" style="background:#f3f6fb;padding:12px;gap:10px">
-              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800">
+            <div class="scr-body" style="background:#f3f6fb;padding:9px;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800">
                 <span>練習の時間枠</span><span style="color:var(--magenta)">新着</span>
               </div>
-              <div style="background:#fff;border-radius:12px;padding:11px;border:1px solid var(--line)">
-                <img src="assets/mock_practice.png" alt="練習映像のサムネイル" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-bottom:8px">
-                <div style="font-size:11px;font-weight:800">6/20(金) 19:00-21:00 ダンス練習</div>
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:10.5px;color:var(--sub)">
-                  <span>542 / 720 区間</span><span style="color:var(--magenta);font-weight:800;font-size:13px">¥300 / 1回</span>
+              <div style="background:#fff;border-radius:11px;padding:8px;border:1px solid var(--line)">
+                <img src="assets/mock_practice.png" alt="練習映像のサムネイル" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:7px;margin-bottom:6px">
+                <div style="font-size:10px;font-weight:800">6/20(金) 19:00-21:00 ダンス練習</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:9.5px;color:var(--sub)">
+                  <span>542 / 720 区間</span><span style="color:var(--magenta);font-weight:800;font-size:11px">¥300 / 1回</span>
                 </div>
               </div>
-              <div style="background:#fff;border-radius:12px;padding:11px;border:1px solid var(--line);display:flex;gap:10px;align-items:center">
-                <img src="assets/mock_capsule.png" alt="封印された世界に1つの動画クリップ" style="width:46px;height:46px;object-fit:contain">
-                <div style="font-size:10.5px;line-height:1.5"><b style="font-size:11.5px">中身は届くまで分からない</b><br>封を開けて受け取る</div>
+              <div style="background:#fff;border-radius:11px;padding:8px;border:1px solid var(--line);display:flex;gap:9px;align-items:center">
+                <img src="assets/mock_capsule.png" alt="封印された世界に1つの動画クリップ" style="width:40px;height:40px;object-fit:contain">
+                <div style="font-size:9.5px;line-height:1.45"><b style="font-size:10.5px">中身は届くまで分からない</b><br>封を開けて受け取る</div>
               </div>
               <div class="mini-btn">出品する</div>
             </div>
@@ -500,17 +506,17 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
     </div>
     <div class="core-grid">
       <div class="core-card">
-        <div class="num">1</div>
+        <img class="how-ic" src="assets/how1.png" alt="時間を先に売る仕組みのイメージ">
         <h3>時間を“先に”売る</h3>
         <p>これから行う練習の時間枠を出品。ファンは中身を知る前に購入します。撮るのは当日、スマホで撮るだけです。</p>
       </div>
       <div class="core-card">
-        <div class="num g">2</div>
+        <img class="how-ic" src="assets/how2.png" alt="中身は届くまで分からない楽しみのイメージ">
         <h3>中身は届くまで分からない</h3>
         <p>何が映るかは封を開けるまで分かりません。だから、受け取って開ける瞬間まで楽しみが続きます。</p>
       </div>
       <div class="core-card">
-        <div class="num m">3</div>
+        <img class="how-ic" src="assets/how3.png" alt="世界に1つの一点もののイメージ">
         <h3>届くのは世界に1つ</h3>
         <p>その区間を持っているのは購入者ただ1人。一点もののデジタルグッズとして手元に残ります。</p>
       </div>
@@ -698,7 +704,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 <section class="sec" id="howto">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title">出品から受け取りまで、<span class="nv">5ステップ</span></h2>
+      <h2 class="sec-title">出品から受け取りまで、<span class="nv">4ステップ</span></h2>
       <p class="sec-lead">出品も購入も、アプリの中で完結します。横にスクロールして流れを確認できます。</p>
     </div>
 
@@ -764,41 +770,24 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
         </div>
       </div>
 
-      <!-- step 4 開封 -->
+      <!-- step 4 届く・受け取る(再生できる) -->
       <div class="step-card">
         <div class="step-head">
           <div class="step-num"><small>STEP</small>04</div>
           <span class="role-tag role-buy">ファン</span>
         </div>
-        <div class="step-title">届く・封を開ける</div>
-        <p class="step-desc">後日、届いた封を開けて受け取り。中身は開けてのお楽しみ。</p>
-        <div class="step-shot">
-          <div class="mini">
-            <div class="mbar"><span>受信箱</span><span>9:41</span></div>
-            <div class="mbody capsule-wrap">
-              <img src="assets/mock_capsule.png" alt="届いた封印された世界に1つの動画クリップ">
-              <div style="font-weight:800;font-size:10.5px;margin-bottom:2px">あなたの区間が届きました</div>
-              <div class="mini-btn m">タップして開ける</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- step 5 受け取り -->
-      <div class="step-card">
-        <div class="step-head">
-          <div class="step-num"><small>STEP</small>05</div>
-          <span class="role-tag role-buy">ファン</span>
-        </div>
-        <div class="step-title">世界に1つを受け取る</div>
-        <p class="step-desc">思いがけず写った瞬間を所有。そのままSNSへシェアも。</p>
+        <div class="step-title">届いて、すぐ再生できる</div>
+        <p class="step-desc">後日そのまま届き、世界に1つの区間を所有。再生もシェアもできます。</p>
         <div class="step-shot">
           <div class="mini">
             <div class="mbar"><span>マイグッズ</span><span>9:41</span></div>
             <div class="mbody">
-              <img class="mini-thumb" src="assets/mock_practice.png" alt="受け取った練習映像">
-              <div style="font-size:9.5px;font-weight:700">19:47:30-19:47:40 ダンス練習</div>
-              <div style="font-size:9px;color:var(--sub);margin:3px 0 6px">世界で一つだけ、あなたが所有</div>
+              <div class="mini-play">
+                <img class="mini-thumb" src="assets/mock_practice.png" alt="受け取った練習映像（再生できる状態）" style="margin-bottom:0">
+                <span class="play-fab"><svg viewBox="0 0 24 24" width="14" height="14" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              </div>
+              <div style="font-size:9.5px;font-weight:700;margin-top:7px">19:47:30-19:47:40 ダンス練習</div>
+              <div style="font-size:9px;color:var(--sub);margin:3px 0 6px">中身は届くまで分からない／世界で一つだけ、あなたが所有</div>
               <div style="display:flex;gap:6px"><span class="mini-btn" style="flex:1">再生</span><span class="mini-btn m" style="flex:1">シェア</span></div>
             </div>
           </div>
