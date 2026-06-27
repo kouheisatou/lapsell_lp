@@ -259,6 +259,24 @@ header{
 .val-card h3{font-size:21px;font-weight:700;margin-bottom:11px;line-height:1.5}
 .val-card p{font-size:14.5px;color:var(--muted);line-height:1.85}
 
+/* ---------- cases (導入イメージ) ---------- */
+.cases{background:#fff}
+.case-list{display:flex;flex-direction:column;gap:46px;max-width:960px;margin:0 auto}
+.case-row{display:grid;grid-template-columns:128px 1fr;gap:26px;align-items:center}
+.case-persona{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.case-persona img{width:104px;height:104px;border-radius:50%;object-fit:cover}
+.case-persona .nm{font-size:15px;font-weight:700;color:var(--ink);line-height:1.4}
+.case-persona .ds{font-size:12px;color:var(--muted);line-height:1.5}
+.case-ba{display:grid;grid-template-columns:1fr 52px 1fr;gap:0;align-items:stretch}
+.case-ba .cell{padding:6px 4px}
+.case-ba .lab{font-size:12px;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+.case-ba .before .lab{color:var(--muted)}
+.case-ba .after .lab{color:var(--blue)}
+.case-ba .before p{font-size:14px;color:#56616e;line-height:1.75}
+.case-ba .after p{font-size:14.5px;color:var(--ink);line-height:1.8;font-weight:500}
+.case-ba .arrow{display:flex;align-items:center;justify-content:center;color:var(--orange)}
+.case-ba .arrow .icn{width:30px;height:30px;stroke-width:2.2}
+
 /* ---------- evidence / proof ---------- */
 .proof{background:#fff}
 .proof-block{margin-bottom:46px}
@@ -396,6 +414,11 @@ footer{background:#fff;padding:54px 0 0}
   .mech-three{gap:34px;margin-top:10px}
   .ba{grid-template-columns:1fr}
   .ba .mid{padding:14px}.ba .mid .icn{transform:rotate(90deg)}
+  .case-row{grid-template-columns:1fr;gap:18px}
+  .case-persona{flex-direction:row;justify-content:center;text-align:left;gap:14px}
+  .case-persona img{width:64px;height:64px}
+  .case-ba{grid-template-columns:1fr;gap:6px}
+  .case-ba .arrow .icn{transform:rotate(90deg)}
   .proof-short{grid-template-columns:1fr;max-width:420px}
   .proof-short .ph{max-width:236px;margin:0 auto}
   .sec-title,.final h2{font-size:27px}
@@ -699,6 +722,87 @@ footer{background:#fff;padding:54px 0 0}
           <p>ライブ配信と違い、撮影後にアップロード。公開前に内容を確認でき、まずい瞬間は世に出ません（その区間は非公開＋返金）。</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASES (導入イメージ) ===== -->
+<section class="cases" id="cases">
+  <div class="wrap">
+    <span class="eyebrow">導入イメージ</span>
+    <h2 class="sec-title">こんな変化が起きています</h2>
+    <p class="sec-lead">お金にならなかった練習の時間が、収益とファンに変わる。Lapsellを使う作り手に、こんな変化が生まれています。</p>
+    <div class="case-list">
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_idol.png" alt="ライブアイドル">
+          <div>
+            <div class="nm">ライブアイドル</div>
+            <div class="ds">毎日ダンス・歌唱を練習</div>
+          </div>
+        </div>
+        <div class="case-ba">
+          <div class="cell before">
+            <div class="lab">これまで</div>
+            <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+          </div>
+          <div class="cell arrow">
+            <svg class="icn" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="cell after">
+            <div class="lab">Lapsell後</div>
+            <p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_band.png" alt="インディーズバンド">
+          <div>
+            <div class="nm">インディーズバンド</div>
+            <div class="ds">スタジオでリハを重ねる</div>
+          </div>
+        </div>
+        <div class="case-ba">
+          <div class="cell before">
+            <div class="lab">これまで</div>
+            <p>スタジオ代がかさむのにリハを届ける手段がなく固定ファン止まり。</p>
+          </div>
+          <div class="cell arrow">
+            <svg class="icn" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="cell after">
+            <div class="lab">Lapsell後</div>
+            <p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_comedian.png" alt="インディーズお笑い芸人">
+          <div>
+            <div class="nm">インディーズお笑い芸人</div>
+            <div class="ds">ネタ合わせ・稽古を重ねる</div>
+          </div>
+        </div>
+        <div class="case-ba">
+          <div class="cell before">
+            <div class="lab">これまで</div>
+            <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+          </div>
+          <div class="cell arrow">
+            <svg class="icn" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="cell after">
+            <div class="lab">Lapsell後</div>
+            <p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
