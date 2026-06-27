@@ -68,21 +68,21 @@
   }
   .phone::after{content:"";position:absolute;left:50%;bottom:-34px;width:78%;height:34px;
     transform:translateX(-50%);background:radial-gradient(50% 50% at 50% 50%,rgba(1,73,152,.30),rgba(1,73,152,0) 70%);filter:blur(2px)}
-  .phone-scr{width:100%;height:100%;background:#fff;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;font-size:11px}
+  .phone-scr{width:100%;height:100%;background:#fff;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;font-size:10px}
   .phone-notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:22px;background:#0c1118;border-radius:0 0 14px 14px;z-index:2}
-  .scr-top{background:var(--navy);color:#fff;padding:26px 14px 12px;display:flex;align-items:center;justify-content:space-between}
-  .scr-top b{font-size:13px;letter-spacing:.04em}
-  .scr-top .bal{font-size:10px;opacity:.85}
-  .scr-list{padding:10px 12px;display:flex;flex-direction:column;gap:9px;overflow:hidden;background:#f6fafe;flex:1}
-  .lcard{display:flex;gap:9px;align-items:center;background:#fff;border-radius:12px;padding:8px;border:1px solid var(--line)}
-  .lthumb{width:48px;height:48px;border-radius:9px;object-fit:cover;flex:none}
+  .scr-top{background:var(--navy);color:#fff;padding:24px 12px 10px;display:flex;align-items:center;justify-content:space-between}
+  .scr-top b{font-size:11px;letter-spacing:.04em}
+  .scr-top .bal{font-size:9px;opacity:.85}
+  .scr-list{padding:9px 10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;background:#f6fafe;flex:1}
+  .lcard{display:flex;gap:8px;align-items:center;background:#fff;border-radius:11px;padding:7px;border:1px solid var(--line)}
+  .lthumb{width:44px;height:44px;border-radius:9px;object-fit:cover;flex:none}
   .lmeta{min-width:0}
-  .lmeta .t{font-weight:800;font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .lmeta .s{font-size:9.5px;color:var(--ink2)}
+  .lmeta .t{font-weight:800;font-size:10px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lmeta .s{font-size:9px;color:var(--ink2)}
   .lprice{margin-left:auto;text-align:right;flex:none}
-  .lprice .p{font-weight:900;color:var(--accent);font-size:12px}
-  .lprice .u{font-size:8.5px;color:var(--ink2)}
-  .scr-cta{margin:2px 12px 12px;background:var(--yellow);color:var(--navy);font-weight:900;text-align:center;border-radius:999px;padding:9px;font-size:12px}
+  .lprice .p{font-weight:900;color:var(--accent);font-size:11px}
+  .lprice .u{font-size:8px;color:var(--ink2)}
+  .scr-cta{margin:2px 10px 10px;background:var(--yellow);color:var(--navy);font-weight:900;text-align:center;border-radius:999px;padding:8px;font-size:11px}
 
   .hero-badge{
     position:absolute;top:-10px;right:-6px;width:124px;height:124px;border-radius:50%;
@@ -120,8 +120,8 @@
   .mech{padding:72px 0;background:#fff}
   .mech-list{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:46px}
   .mech-item{text-align:left}
+  .mech-item .mech-ico{width:80px;height:80px;object-fit:contain;margin-bottom:14px}
   .mech-item .step{display:flex;align-items:center;gap:10px;color:var(--accent);font-weight:900;font-size:15px;margin-bottom:10px}
-  .mech-item .step .n{width:30px;height:30px;border-radius:50%;background:var(--pale2);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
   .mech-item h3{font-size:20px;font-weight:900;color:var(--navy);margin-bottom:8px}
   .mech-item p{color:var(--ink2);font-size:15px}
   .mech-flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:48px;color:var(--navy);font-weight:800}
@@ -384,17 +384,20 @@
     </div>
     <div class="mech-list">
       <div class="mech-item">
-        <div class="step"><span class="n">1</span>時間を“先に”売る</div>
+        <img class="mech-ico" src="assets/how1.png" alt="時間を先に売るイメージ">
+        <div class="step">時間を“先に”売る</div>
         <h3>未来の練習を出品</h3>
         <p>「6/20(金) 19:00-21:00 / ¥300」のように、これからの練習の時間枠を価格をつけて出品します。完成品をつくる必要はありません。</p>
       </div>
       <div class="mech-item">
-        <div class="step"><span class="n">2</span>中身は運しだい</div>
+        <img class="mech-ico" src="assets/how2.png" alt="中身は届くまで分からないイメージ">
+        <div class="step">中身は運しだい</div>
         <h3>封を開けるまで分からない</h3>
         <p>ファンは中身を知らずに購入。当日スマホで撮った映像が、封を開けるまで何が映るか分からない“ランダムグッズ”として届きます。</p>
       </div>
       <div class="mech-item">
-        <div class="step"><span class="n">3</span>世界に1つ</div>
+        <img class="mech-ico" src="assets/how3.png" alt="世界に1つのイメージ">
+        <div class="step">世界に1つ</div>
         <h3>その人だけの一点もの</h3>
         <p>届くのは、買った人だけが持つ一点もののデジタルグッズ。同じ瞬間は二つとありません。</p>
       </div>
@@ -403,7 +406,7 @@
       <span>時間枠を出品</span><span class="arr">→</span>
       <span>ファンが購入（中身は不明）</span><span class="arr">→</span>
       <span>当日スマホで撮るだけ</span><span class="arr">→</span>
-      <span>封を開けて受け取る</span>
+      <span>世界に1つのクリップを再生・シェア</span>
     </div>
   </div>
 </section>

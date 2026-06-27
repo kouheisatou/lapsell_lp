@@ -111,21 +111,21 @@ h1,h2,h3,h4,p,figure{margin:0;}
 .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:20px;background:#0a0a0f;border-radius:0 0 14px 14px;z-index:5;}
 .hero-mock::after{content:"";position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);width:230px;height:36px;background:radial-gradient(ellipse,rgba(0,0,0,.5),transparent 70%);filter:blur(8px);}
 /* in-app UI (shared) */
-.app-bar{background:var(--navy);color:#fff;padding:30px 14px 11px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:700;}
+.app-bar{background:var(--navy);color:#fff;padding:26px 12px 9px;display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;}
 .app-bar .pin{display:flex;align-items:center;gap:6px;}
-.app-bar .pin .d{width:7px;height:7px;border-radius:50%;background:var(--royal);}
-.app-bar .ic{display:flex;gap:11px;color:#9fb0d8;}
-.app-bar .ic svg{width:15px;height:15px;}
-.feed{padding:12px;display:flex;flex-direction:column;gap:11px;background:var(--grey);flex:1;overflow:hidden;}
-.feed-h{font-size:11px;font-weight:700;color:var(--muted);display:flex;justify-content:space-between;}
-.lst{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 2px 8px rgba(10,15,43,.07);}
-.lst img{width:100%;height:78px;object-fit:cover;}
-.lst .body{padding:9px 11px;}
-.lst .ttl{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.4;}
-.lst .meta{display:flex;justify-content:space-between;align-items:center;margin-top:7px;}
-.lst .price{font-size:14px;font-weight:800;color:var(--royal);}
-.lst .tag{font-size:9.5px;font-weight:700;color:#fff;background:var(--royal);border-radius:5px;padding:2px 7px;}
-.lst .left{font-size:9.5px;color:var(--muted);}
+.app-bar .pin .d{width:6px;height:6px;border-radius:50%;background:var(--royal);}
+.app-bar .ic{display:flex;gap:10px;color:#9fb0d8;}
+.app-bar .ic svg{width:13px;height:13px;}
+.feed{padding:10px;display:flex;flex-direction:column;gap:9px;background:var(--grey);flex:1;overflow:hidden;}
+.feed-h{font-size:9.5px;font-weight:700;color:var(--muted);display:flex;justify-content:space-between;}
+.lst{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(10,15,43,.07);}
+.lst img{width:100%;height:70px;object-fit:cover;}
+.lst .body{padding:8px 9px;}
+.lst .ttl{font-size:10.5px;font-weight:700;color:var(--ink);line-height:1.4;}
+.lst .meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;}
+.lst .price{font-size:12px;font-weight:800;color:var(--royal);}
+.lst .tag{font-size:9px;font-weight:700;color:#fff;background:var(--royal);border-radius:5px;padding:2px 6px;}
+.lst .left{font-size:9px;color:var(--muted);}
 @media(max-width:880px){
   .hero-grid{grid-template-columns:1fr;gap:46px;}
   .phone{transform:none;}
@@ -189,6 +189,7 @@ h1,h2,h3,h4,p,figure{margin:0;}
 .mech-row:not(:last-child){border-bottom:1px solid var(--line);}
 .mech-row.rev .mtext{order:2;}
 .mn{font-size:clamp(40px,6vw,72px);font-weight:800;color:#e3eafc;line-height:1;letter-spacing:-.02em;}
+.mmark{width:80px;height:80px;border-radius:16px;object-fit:cover;margin-bottom:6px;box-shadow:0 10px 26px rgba(10,15,43,.18);}
 .mtext h3{font-size:clamp(21px,2.6vw,28px);font-weight:800;margin:8px 0 16px;line-height:1.45;}
 .mtext p{font-size:15.5px;color:var(--muted);}
 .mfig{display:flex;justify-content:center;}
@@ -209,25 +210,31 @@ h1,h2,h3,h4,p,figure{margin:0;}
 .flow-hint{text-align:center;font-size:12.5px;color:var(--muted-d);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:7px;}
 .flow-hint svg{width:15px;height:15px;}
 /* in-mock variants */
-.scr-list{background:var(--royal);color:#fff;padding:32px 14px 12px;font-size:12px;font-weight:700;}
+.scr-list{background:var(--royal);color:#fff;padding:26px 12px 10px;font-size:10px;font-weight:700;}
 .cap-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 18px;background:linear-gradient(170deg,#0e1740,#1A2D6B);color:#fff;text-align:center;}
 .cap-screen img{width:120px;}
 .cap-screen .ct{font-size:13px;font-weight:700;}
 .cap-screen .cb{font-size:11px;font-weight:700;color:#0a0f2b;background:var(--gold);border-radius:8px;padding:8px 18px;}
 .rec-screen{flex:1;background:#111;color:#fff;position:relative;display:flex;flex-direction:column;}
 .rec-screen img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85;}
-.rec-screen .recdot{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;z-index:2;}
-.rec-screen .recdot .d{width:9px;height:9px;border-radius:50%;background:#ff4747;}
-.rec-screen .rectime{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;z-index:2;}
+.rec-screen .recdot{position:absolute;top:13px;left:13px;display:flex;align-items:center;gap:5px;font-size:9.5px;font-weight:700;z-index:2;}
+.rec-screen .recdot .d{width:8px;height:8px;border-radius:50%;background:#ff4747;}
+.rec-screen .rectime{position:absolute;top:13px;right:13px;font-size:9.5px;font-weight:700;z-index:2;}
 .play-screen{flex:1;background:#0a0f2b;color:#fff;display:flex;flex-direction:column;}
-.play-screen .video{position:relative;height:180px;background:#000;}
+.play-screen .video{position:relative;height:168px;background:#000;}
 .play-screen .video img{width:100%;height:100%;object-fit:cover;opacity:.9;}
 .play-screen .pbtn{position:absolute;inset:0;margin:auto;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
 .play-screen .pbtn svg{width:18px;height:18px;color:var(--navy);margin-left:2px;}
-.play-screen .pcap{padding:14px 14px 16px;}
-.play-screen .pcap .pt{font-size:11px;color:#9fb0d8;font-weight:700;}
-.play-screen .pcap .pn{font-size:13.5px;font-weight:800;margin:6px 0 12px;}
-.play-screen .pcap .own{font-size:10.5px;font-weight:700;color:#0a0f2b;background:var(--gold);border-radius:6px;padding:5px 10px;display:inline-block;}
+.play-screen .pcap{padding:12px 12px 14px;}
+.play-screen .pcap .pt{font-size:10px;color:#9fb0d8;font-weight:700;}
+.play-screen .pcap .pn{font-size:11.5px;font-weight:800;margin:5px 0 8px;}
+.play-screen .pcap .pmeta{font-size:9.5px;font-weight:700;color:#9fb0d8;margin:-4px 0 10px;}
+.play-screen .pcap .pacts{display:flex;gap:8px;margin-bottom:10px;}
+.play-screen .pcap .pact{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;border-radius:8px;padding:6px 12px;}
+.play-screen .pcap .pact svg{width:12px;height:12px;}
+.play-screen .pcap .pact.play{background:var(--royal);color:#fff;}
+.play-screen .pcap .pact.share{background:rgba(255,255,255,.1);color:#cfe1ff;}
+.play-screen .pcap .own{font-size:10px;font-weight:700;color:#0a0f2b;background:var(--gold);border-radius:6px;padding:5px 10px;display:inline-block;}
 
 /* evidence – screenshots presented bare with conclusion headings (no card wrap) */
 .ev{padding:66px 0;border-bottom:1px solid var(--line);}
@@ -525,7 +532,7 @@ h1,h2,h3,h4,p,figure{margin:0;}
 
     <div class="mech-row">
       <div class="mtext">
-        <div class="mn serif">01</div>
+        <img class="mmark" src="assets/how1.png" alt="時間を先に売る概念のイメージ">
         <h3>時間を“先に”売る</h3>
         <p>完成した動画ではなく、まだ撮っていない未来の練習時間を出品します。ファンは時間枠を購入し、当日あなたはスマホで撮るだけ。撮れた映像が後から届きます。</p>
       </div>
@@ -534,16 +541,16 @@ h1,h2,h3,h4,p,figure{margin:0;}
 
     <div class="mech-row rev">
       <div class="mtext">
-        <div class="mn serif">02</div>
+        <img class="mmark" src="assets/how2.png" alt="中身は届くまで分からない概念のイメージ">
         <h3>中身は、届くまで分からない</h3>
-        <p>何が映るかは、封を開けるまで分かりません。思いがけず写る面白い瞬間も、神がかった一発も。届くのは中身の見えない一本の動画。だからファンは「何が届くか」にワクワクします。</p>
+        <p>何が映るかは、受け取るまで分かりません。思いがけず写る面白い瞬間も、神がかった一発も。届くのは中身の見えない一本の動画。だからファンは「何が届くか」にワクワクします。</p>
       </div>
-      <figure class="mfig"><img src="assets/mock_capsule.png" style="border-radius:16px;max-width:300px;" alt="封がされ、開けるまで中身が分からない一点ものの動画クリップのイラスト"></figure>
+      <figure class="mfig"><img src="assets/how2.png" style="border-radius:16px;max-width:300px;" alt="中身は届くまで分からない、一点ものの動画クリップのイメージ"></figure>
     </div>
 
     <div class="mech-row">
       <div class="mtext">
-        <div class="mn serif">03</div>
+        <img class="mmark" src="assets/how3.png" alt="世界に1つの概念のイメージ">
         <h3>届くのは、世界に1つ</h3>
         <p>同じ瞬間は二度と撮れません。落札者だけが持つ、一点もののデジタルグッズとして届きます。コピー対策の電子透かしで、所有が証明されます。</p>
       </div>
@@ -557,7 +564,7 @@ h1,h2,h3,h4,p,figure{margin:0;}
   <div class="wrap">
     <div class="sec-head on-dark">
       <span class="label on-dark">/ How it works</span>
-      <h2>出品から受け取りまで、5ステップ。</h2>
+      <h2>出品から受け取りまで、4ステップ。</h2>
       <p>横にスクロールして、販売者と購入者の流れを確認できます。</p>
     </div>
   </div>
@@ -570,14 +577,14 @@ h1,h2,h3,h4,p,figure{margin:0;}
       <div class="phone"><span class="notch"></span>
         <div class="phone-screen">
           <div class="scr-list">練習を出品</div>
-          <div class="feed" style="background:#fff;gap:13px;">
-            <div style="font-size:11px;font-weight:700;color:#5b6478;">日時</div>
-            <div style="font-size:14px;font-weight:800;color:#1c2330;">6/20(金) 19:00-21:00</div>
-            <div style="font-size:11px;font-weight:700;color:#5b6478;margin-top:4px;">1区間あたりの価格</div>
-            <div style="font-size:22px;font-weight:800;color:#0766F4;">¥300</div>
-            <div style="font-size:11px;font-weight:700;color:#5b6478;margin-top:4px;">区間数</div>
-            <div style="font-size:14px;font-weight:800;color:#1c2330;">720 区間</div>
-            <div style="margin-top:auto;background:#0766F4;color:#fff;text-align:center;font-size:13px;font-weight:800;border-radius:11px;padding:12px;">出品する</div>
+          <div class="feed" style="background:#fff;gap:10px;">
+            <div style="font-size:10px;font-weight:700;color:#5b6478;">日時</div>
+            <div style="font-size:11.5px;font-weight:800;color:#1c2330;">6/20(金) 19:00-21:00</div>
+            <div style="font-size:10px;font-weight:700;color:#5b6478;margin-top:3px;">1区間あたりの価格</div>
+            <div style="font-size:18px;font-weight:800;color:#0766F4;">¥300</div>
+            <div style="font-size:10px;font-weight:700;color:#5b6478;margin-top:3px;">区間数</div>
+            <div style="font-size:11.5px;font-weight:800;color:#1c2330;">720 区間</div>
+            <div style="margin-top:auto;background:#0766F4;color:#fff;text-align:center;font-size:11px;font-weight:800;border-radius:10px;padding:11px;">出品する</div>
           </div>
         </div>
       </div>
@@ -610,31 +617,22 @@ h1,h2,h3,h4,p,figure{margin:0;}
         </div>
       </div>
     </div>
-    <!-- 4 開封 -->
+    <!-- 4 受け取り（届いた瞬間が再生できる状態） -->
     <div class="flow-step">
       <div class="step-meta"><span class="sn">4</span><span class="who buy">購入者</span></div>
-      <div class="stitle">後日、封を開けて受け取る</div>
-      <div class="phone"><span class="notch"></span>
-        <div class="phone-screen">
-          <div class="cap-screen">
-            <img src="assets/mock_capsule.png" alt="封がされた、開ける前の一点ものの動画クリップ">
-            <div class="ct">あなたの区間が届きました</div>
-            <div class="cb">タップして開ける</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 5 受け取り -->
-    <div class="flow-step">
-      <div class="step-meta"><span class="sn">5</span><span class="who buy">購入者</span></div>
-      <div class="stitle">世界に1つの瞬間を受け取る・所有する</div>
+      <div class="stitle">後日届いた、世界に1つの瞬間を再生・所有する</div>
       <div class="phone"><span class="notch"></span>
         <div class="phone-screen">
           <div class="play-screen">
-            <div class="video"><img src="assets/mock_practice.png" alt="届いた練習動画"><div class="pbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="video"><img src="assets/mock_practice.png" alt="届いて再生できる状態の練習動画"><div class="pbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>
             <div class="pcap">
               <div class="pt">19:47:30 - 19:47:40 ダンス練習</div>
               <div class="pn">思いがけず笑ってしまった瞬間</div>
+              <div class="pmeta">中身は届くまで分からない</div>
+              <div class="pacts">
+                <span class="pact play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>再生</span>
+                <span class="pact share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>シェア</span>
+              </div>
               <span class="own">世界で一つだけ、あなたが所有</span>
             </div>
           </div>
@@ -644,7 +642,7 @@ h1,h2,h3,h4,p,figure{margin:0;}
   </div>
   <div class="wrap"><p class="flow-hint">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-    横にスクロールできます（販売者＝1・3／購入者＝2・4・5）</p></div>
+    横にスクロールできます（販売者＝1・3／購入者＝2・4）</p></div>
 </section>
 
 <!-- ============ VALUE / 4つの理由 (blue band, borderless columns) ============ -->
