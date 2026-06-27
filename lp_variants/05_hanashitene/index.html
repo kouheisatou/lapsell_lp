@@ -111,22 +111,23 @@
   }
   .phone-screen{background:var(--cream);border-radius:32px;overflow:hidden;aspect-ratio:9/19.2;position:relative;display:flex;flex-direction:column}
   .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:96px;height:22px;background:#1d1d1f;border-radius:0 0 14px 14px;z-index:5}
-  .app-top{background:var(--orange);color:#fff;padding:34px 16px 14px;display:flex;align-items:center;justify-content:space-between}
-  .app-top .t{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
-  .app-top .t .dot{width:16px;height:16px;border-radius:5px;background:#fff;position:relative}
-  .app-top .t .dot::before{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);width:0;height:0;border-left:6px solid var(--orange);border-top:4px solid transparent;border-bottom:4px solid transparent}
-  .app-search{margin:12px 14px 8px;background:#fff;border-radius:999px;padding:9px 14px;font-size:11px;color:#9a8a6a;display:flex;align-items:center;gap:8px}
-  .app-search .icn{width:14px;height:14px;color:#c7b48a}
-  .app-list{padding:4px 14px 14px;overflow:hidden}
-  .listing{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .app-top{background:var(--orange);color:#fff;padding:30px 13px 11px;display:flex;align-items:center;justify-content:space-between}
+  .app-top .t{font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px}
+  .app-top .t .dot{width:14px;height:14px;border-radius:5px;background:#fff;position:relative}
+  .app-top .t .dot::before{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);width:0;height:0;border-left:5px solid var(--orange);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+  .app-top .mp{font-size:9px;font-weight:600}
+  .app-search{margin:10px 12px 6px;background:#fff;border-radius:999px;padding:7px 12px;font-size:9.5px;color:#9a8a6a;display:flex;align-items:center;gap:7px}
+  .app-search .icn{width:13px;height:13px;color:#c7b48a}
+  .app-list{padding:3px 12px 12px;overflow:hidden}
+  .listing{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
   .listing .thumb{position:relative}
   .listing .thumb img{width:100%;aspect-ratio:16/10;object-fit:cover}
-  .listing .badge{position:absolute;top:7px;left:7px;background:rgba(240,130,0,.95);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px}
-  .listing .meta{padding:8px 11px}
-  .listing .meta .name{font-size:11px;font-weight:700;color:var(--ink)}
-  .listing .meta .when{font-size:10px;color:#9a8a6a;margin-top:1px}
-  .listing .meta .price{font-size:13px;font-weight:800;color:var(--orange);margin-top:4px;display:flex;justify-content:space-between;align-items:center}
-  .listing .meta .stock{font-size:9px;font-weight:600;color:#9a8a6a}
+  .listing .badge{position:absolute;top:6px;left:6px;background:rgba(240,130,0,.95);color:#fff;font-size:8.5px;font-weight:700;padding:2px 7px;border-radius:999px}
+  .listing .meta{padding:7px 9px}
+  .listing .meta .name{font-size:10px;font-weight:700;color:var(--ink)}
+  .listing .meta .when{font-size:9px;color:#9a8a6a;margin-top:1px}
+  .listing .meta .price{font-size:11px;font-weight:800;color:var(--orange);margin-top:3px;display:flex;justify-content:space-between;align-items:center}
+  .listing .meta .stock{font-size:8.5px;font-weight:600;color:#9a8a6a}
 
   /* ============ generic section ============ */
   section{position:relative}
@@ -164,10 +165,10 @@
   /* ============ 3 KEYS (01/02/03 big orange numbers, borderless) ============ */
   .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:56px}
   .key{text-align:left}
-  .key .num{font-size:64px;font-weight:800;color:var(--orange);line-height:1;letter-spacing:-.02em}
+  .key .key-img{width:120px;height:120px;border-radius:24px;overflow:hidden;background:var(--cream-card);margin-bottom:6px}
+  .key .key-img img{width:100%;height:100%;object-fit:cover}
   .key h3{margin:14px 0 8px}
   .key p{font-size:15px;color:var(--ink-soft)}
-  .key .ic{width:34px;height:34px;color:var(--orange);margin:18px 0 0;stroke-width:1.6}
   @media(max-width:760px){.keys{grid-template-columns:1fr;gap:36px}}
 
   /* ============ FLOW carousel (horizontal scroll, ref signature) ============ */
@@ -183,21 +184,22 @@
   .side.buyer{background:var(--ink);color:#fff}
   .mini-phone{background:#1d1d1f;border-radius:26px;padding:8px;box-shadow:0 14px 30px rgba(80,50,0,.18)}
   .mini-screen{background:#fff;border-radius:20px;overflow:hidden;aspect-ratio:9/18.5;display:flex;flex-direction:column}
-  .ms-head{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:12px 12px 10px;display:flex;align-items:center;gap:6px}
-  .ms-head .dot{width:13px;height:13px;border-radius:4px;background:#fff;position:relative}
-  .ms-head .dot::before{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);width:0;height:0;border-left:5px solid var(--orange);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
-  .ms-body{padding:10px;flex:1;display:flex;flex-direction:column;gap:8px;font-size:10.5px;color:var(--ink)}
-  .ms-row{background:var(--cream-card);border-radius:10px;padding:8px 9px}
-  .ms-row .k{color:#9a8a6a;font-size:9px}
+  .ms-head{background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:10px 10px 8px;display:flex;align-items:center;gap:6px}
+  .ms-head .dot{width:12px;height:12px;border-radius:4px;background:#fff;position:relative}
+  .ms-head .dot::before{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);width:0;height:0;border-left:4.5px solid var(--orange);border-top:3px solid transparent;border-bottom:3px solid transparent}
+  .ms-body{padding:8px;flex:1;display:flex;flex-direction:column;gap:6px;font-size:9.5px;color:var(--ink)}
+  .ms-row{background:var(--cream-card);border-radius:9px;padding:6px 8px}
+  .ms-row .k{color:#9a8a6a;font-size:8.5px}
   .ms-row .v{font-weight:700}
-  .ms-btn{background:var(--orange);color:#fff;text-align:center;font-weight:700;font-size:11px;padding:9px;border-radius:999px;margin-top:auto}
-  .ms-img{border-radius:10px;overflow:hidden}
+  .ms-btn{background:var(--orange);color:#fff;text-align:center;font-weight:700;font-size:10px;padding:8px;border-radius:999px;margin-top:auto}
+  .ms-img{border-radius:9px;overflow:hidden}
   .ms-img img{width:100%;aspect-ratio:16/11;object-fit:cover}
-  .ms-clip{display:flex;align-items:center;justify-content:center;padding:6px}
-  .ms-clip img{width:104px}
+  .ms-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,.92);color:var(--orange-deep);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 8px rgba(80,50,0,.28)}
+  .ms-play svg{width:15px;height:15px;margin-left:2px}
   .flow-card .cap{font-size:13px;color:var(--ink-soft);margin-top:12px;line-height:1.6}
   .flow-card .cap b{color:var(--ink)}
-  .ms-open{background:linear-gradient(160deg,#fff5e2,#ffe7b8);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;font-weight:700;color:var(--orange-deep);font-size:11px;padding:10px}
 
   /* ============ 4 VALUES (borderless feature list, image + text alternating) ============ */
   .value-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:74px}
@@ -321,7 +323,7 @@
     body{font-size:16px}
     .hero h1{font-size:30px}
     .bubbles{grid-template-columns:1fr}
-    .key .num{font-size:54px}
+    .key .key-img{width:104px;height:104px}
   }
 </style>
 </head>
@@ -369,7 +371,7 @@
           <div class="notch"></div>
           <div class="app-top">
             <span class="t"><span class="dot"></span>Lapsell</span>
-            <span style="font-size:11px;font-weight:600">マイページ</span>
+            <span class="mp">マイページ</span>
           </div>
           <div class="app-search">
             <svg class="icn" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
@@ -501,20 +503,17 @@
     <h2 class="center">完成品ではなく、“時間”を先に売る。</h2>
     <div class="keys">
       <div class="key">
-        <div class="num">01</div>
-        <svg class="icn ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+        <div class="key-img"><img src="assets/how1.png" alt="これからの時間を先に売るイメージ"></div>
         <h3>時間を“先に”売る</h3>
         <p>完成品ではなく、これからの練習時間そのものを出品。日時と価格を決めて並べるだけで、未来の“素”を販売できます。</p>
       </div>
       <div class="key">
-        <div class="num">02</div>
-        <svg class="icn ic" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18"/><path d="M12 9V7a2.5 2.5 0 10-5 0M12 9V7a2.5 2.5 0 115 0"/></svg>
+        <div class="key-img"><img src="assets/how2.png" alt="中身は届くまで分からないわくわくのイメージ"></div>
         <h3>中身は届くまで分からない</h3>
         <p>何が映るかは、開けるまで本人にもファンにもわからない。だから封を開ける瞬間が、いつもわくわくします。期待しながら受け取る楽しさが、そのまま体験になります。</p>
       </div>
       <div class="key">
-        <div class="num">03</div>
-        <svg class="icn ic" viewBox="0 0 24 24"><path d="M12 2l3 6 7 .5-5 4.5 1.5 7L12 16l-6.5 4 1.5-7-5-4.5 7-.5z"/></svg>
+        <div class="key-img"><img src="assets/how3.png" alt="世界に1つだけの一点もののイメージ"></div>
         <h3>届くのは世界に1つ</h3>
         <p>その区間を買ったファンだけが持つ、一点もののデジタルグッズ。誰とも同じにならない“自分だけの瞬間”が手に入ります。</p>
       </div>
@@ -527,7 +526,7 @@
   <div class="wrap center">
     <span class="eyebrow">ご利用の流れ</span>
     <h2>出品から開封まで、ぜんぶスマホ1台。</h2>
-    <p class="lead" style="margin-top:12px">よこにスクロールして、5つのステップをご覧ください。</p>
+    <p class="lead" style="margin-top:12px">よこにスクロールして、4つのステップをご覧ください。</p>
   </div>
 
   <div class="flow-scroll">
@@ -574,36 +573,27 @@
       <p class="cap"><b>撮影する。</b>当日スマホを回すだけ。編集はいりません。</p>
     </div>
 
-    <!-- 4 届く・開封 buyer -->
+    <!-- 4 届いて・受け取る（開封済み・再生できる状態） buyer -->
     <div class="flow-card">
       <div class="flow-step-label"><span class="n">04</span><span class="side buyer">購入者</span></div>
       <div class="mini-phone"><div class="mini-screen">
-        <div class="ms-head"><span class="dot"></span>届く・開ける</div>
-        <div class="ms-open">
-          <div class="ms-clip"><img src="assets/mock_capsule.png" alt="封をされた一点ものの動画クリップ"></div>
-          あなたの区間が届きました
-          <div class="ms-btn" style="margin-top:4px">タップして開ける</div>
-        </div>
-      </div></div>
-      <p class="cap"><b>届く・開ける。</b>後日、封をタップして開封。中身は開けるまで分かりません。</p>
-    </div>
-
-    <!-- 5 受け取り buyer -->
-    <div class="flow-card">
-      <div class="flow-step-label"><span class="n">05</span><span class="side buyer">購入者</span></div>
-      <div class="mini-phone"><div class="mini-screen">
-        <div class="ms-head"><span class="dot"></span>受け取る</div>
+        <div class="ms-head"><span class="dot"></span>届いて、受け取る</div>
         <div class="ms-body" style="gap:6px">
-          <div class="ms-img"><img src="assets/mock_practice.png" alt="受け取った映像"></div>
+          <div class="ms-img" style="position:relative">
+            <img src="assets/mock_practice.png" alt="受け取って再生できる映像">
+            <span class="ms-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+            </span>
+          </div>
           <div class="ms-row"><div class="k">19:47:30 – 19:47:40</div><div class="v">ダンス練習</div></div>
-          <div style="text-align:center;font-size:9px;color:var(--orange-deep);font-weight:700">世界で一つだけ、あなたが所有</div>
+          <div style="text-align:center;font-size:8.5px;color:var(--orange-deep);font-weight:700">世界で一つだけ、あなたが所有</div>
           <div style="display:flex;gap:6px;margin-top:auto">
             <div class="ms-btn" style="flex:1">再生</div>
             <div class="ms-btn" style="flex:1;background:var(--ink)">シェア</div>
           </div>
         </div>
       </div></div>
-      <p class="cap"><b>受け取る。</b>思いがけず写った面白い瞬間を、世界に1つとして所有。</p>
+      <p class="cap"><b>届いて、受け取る。</b>届いたクリップをその場で再生・シェア。世界に1つの“素の瞬間”を所有できます。<span style="display:block;font-size:11px;color:var(--ink-soft);margin-top:4px">※中身は届くまで分かりません。</span></p>
     </div>
   </div>
 </section>
