@@ -86,48 +86,6 @@ a{color:inherit;text-decoration:none}
 .tape.top-l{top:-12px;left:-6px;transform:rotate(-26deg)}
 .tape.top-r{top:-12px;right:-6px;transform:rotate(24deg)}
 
-/* ---------- corkboard accent frame (used to FRAME #flow) ---------- */
-.corkframe{
-  position:relative;
-  margin:38px auto 0;
-  border:18px solid;
-  border-image:linear-gradient(135deg,#8a5a2b,#b07d44,#7a4a22 70%,#5f3a1a) 1;
-  border-radius:14px;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,.25) inset,
-    0 22px 46px rgba(40,28,14,.42),
-    0 4px 10px rgba(40,28,14,.3);
-  background:#7a4a22;
-}
-.corkface{
-  background-color:#e4cca0;
-  background-image:
-   radial-gradient(ellipse 70% 60% at 28% 30%, rgba(198,156,104,.32), transparent 60%),
-   radial-gradient(ellipse 80% 70% at 78% 72%, rgba(150,110,64,.28), transparent 62%),
-   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.26' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.42  0 0 0 0 0.27  0 0 0 0 0.10  0 0 0 1.2 -0.5'/></filter><rect width='360' height='360' filter='url(%23g)'/></svg>"),
-   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='0.22' numOctaves='3' seed='5' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.96  0 0 0 0 0.84  0 0 0 0 0.58  0 0 0 1.3 -0.7'/></filter><rect width='320' height='320' filter='url(%23l)'/></svg>");
-  background-size:100% 100%,100% 100%,360px 360px,320px 320px;
-  box-shadow:inset 0 0 90px rgba(120,84,36,.35);
-  border-radius:3px;
-  padding:48px 26px 40px;
-}
-/* hanging string + thumbtack that holds the board on the white wall */
-.corkframe::before{
-  content:"";position:absolute;left:50%;top:-46px;transform:translateX(-50%);
-  width:2px;height:46px;
-  background:linear-gradient(#cdb691,#9c845e);
-  z-index:1;
-}
-.corkpin{
-  position:absolute;left:50%;top:-58px;transform:translateX(-50%);
-  width:30px;height:30px;border-radius:50%;
-  background:radial-gradient(circle at 34% 28%, #ff8a7e, var(--red) 58%, #8c241b);
-  box-shadow:0 6px 10px rgba(0,0,0,.4), inset -3px -3px 5px rgba(0,0,0,.32);
-  z-index:6;
-}
-.corkpin::after{content:"";position:absolute;top:7px;left:8px;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.7)}
-@media(min-width:640px){.corkface{padding:54px 40px 46px}}
-
 /* ---------- header ---------- */
 header{position:sticky;top:0;z-index:90;background:rgba(253,248,238,.93);backdrop-filter:blur(6px);border-bottom:2px solid var(--cork-d)}
 .nav{display:flex;align-items:center;gap:20px;padding:12px 22px;max-width:1180px;margin:0 auto}
@@ -260,6 +218,7 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .hero-phone{max-width:260px;margin:0 auto}
 
 /* ---------- flow strip (taped cheki, horizontal scroll) ---------- */
+.flow-board{margin-top:34px}
 .flow-scroll{margin-top:26px;overflow-x:auto;padding:14px 2px 24px;-webkit-overflow-scrolling:touch}
 .flow-track{display:flex;gap:26px;width:max-content;padding:8px 2px}
 .step{width:230px;flex:0 0 auto;position:relative}
@@ -516,17 +475,14 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   </div>
 </section>
 
-<!-- flow: taped cheki strip pinned to a real corkboard, horizontal scroll -->
+<!-- flow: 4-step horizontal scroll strip on the standard light section background -->
 <section class="sec" id="flow">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h14M13 6l6 6-6 6"/></svg>FLOW</span>
     <h2 class="sec-title">出品から<em>受け取りまでの流れ</em></h2>
     <p class="lead">撮るのはスマホだけで、編集も配信機材も必要ありません。販売者と購入者それぞれの流れを、4つのステップでご紹介します。</p>
 
-    <!-- a real corkboard, hung on the white wall, with the cheki collection pinned to it -->
-    <div class="corkframe">
-      <span class="corkpin"></span>
-      <div class="corkface">
+    <div class="flow-board">
         <div class="scroll-hint">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>横にスクロールできます
         </div>
@@ -586,7 +542,6 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
