@@ -7,7 +7,7 @@
 <meta name="description" content="ライブアイドル・インディーズアーティスト・バンド・お笑い芸人のための収益化アプリ。練習する時間を出品すると、その動画が売れます。ファンには世界に1つだけの動画が届きます。初期費用0円・取引手数料5%〜。練習動画 収益化／推し活 マネタイズ／ファンに直接販売。">
 <meta name="keywords" content="ライブアイドル 収益化,インディーズ アーティスト 収益化,バンド マネタイズ,練習動画 収益化,ファングッズ 販売,デジタルグッズ 販売,推し活 マネタイズ,ファンに直接販売 アプリ">
 <meta property="og:title" content="Lapsell｜練習の時間を、収益に変える">
-<meta property="og:description" content="練習する時間を出品すると、その動画が売れます。ファンには世界に1つだけの動画が届きます。初期費用0円・取引手数料5%〜。">
+<meta property="og:description" content="練習の時間を出品すると、その動画が売れます。ファンには世界に1つだけの動画が届きます。初期費用0円・取引手数料5%〜。">
 <meta property="og:type" content="website">
 <style>
 :root{
@@ -96,7 +96,6 @@ header{position:sticky;top:0;z-index:90;background:rgba(253,248,238,.93);backdro
 .logo small{font-weight:500;font-size:12px;letter-spacing:.12em;color:var(--ink-soft)}
 .nav .links{display:none;gap:20px;margin-left:10px;font-size:14px;font-weight:700;color:var(--ink-soft)}
 .nav .links a:hover{color:var(--red)}
-.nav .cta{margin-left:auto;background:var(--red);color:#fff;font-weight:800;font-size:14px;padding:11px 18px;border-radius:6px;white-space:nowrap;box-shadow:0 4px 0 #9c2c22}
 @media(min-width:980px){.nav .links{display:flex}}
 
 /* ---------- section frame ---------- */
@@ -117,28 +116,49 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .hero-art{position:relative;max-width:430px;margin:18px auto 8px;width:100%}
 .hero-art .cheki{padding:14px 14px 52px}
 .hero-art .scribble{position:absolute;right:-8px;bottom:18px;transform:rotate(-7deg);background:#fff7c8;padding:8px 12px;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:700;font-size:14px;color:#7a5d12;box-shadow:0 5px 12px rgba(60,40,20,.25);z-index:6}
-.hero-copy .kicker{display:inline-block;background:var(--ink);color:var(--paper);font-weight:800;font-size:13px;letter-spacing:.06em;padding:5px 12px;border-radius:4px;transform:rotate(-1.5deg)}
 .hero-copy h1{font-size:clamp(30px,7vw,56px);font-weight:900;line-height:1.3;margin:16px 0 14px;letter-spacing:.01em}
 .hero-copy h1 .hl{background:linear-gradient(transparent 62%, #ffe27a 62% 92%, transparent 92%);padding:0 2px}
 .hero-copy h1 em{font-style:normal;color:var(--red)}
 .hero-copy p{font-size:clamp(15px,2.3vw,18px);font-weight:600;max-width:560px;color:var(--ink)}
-.btnrow{margin-top:24px;display:flex;flex-wrap:wrap;gap:14px}
-.btn-primary{background:var(--red);color:#fff;font-weight:800;padding:16px 30px;border-radius:8px;font-size:16px;display:inline-flex;align-items:center;gap:9px;box-shadow:0 5px 0 #9c2c22}
-.btn-primary:active{transform:translateY(3px);box-shadow:0 2px 0 #9c2c22}
-.btn-ghost{border:2.5px solid var(--ink);color:var(--ink);font-weight:800;padding:13px 24px;border-radius:8px;font-size:15px;background:rgba(253,248,238,.7)}
+.btnrow{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:26px}
+
+/* ---------- handwritten pen-style text links (all CTAs) ---------- */
+.penlink{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:"Yomogi","Kaisei Decol","Hiragino Maru Gothic ProN",sans-serif;
+  font-weight:800;font-size:19px;letter-spacing:.02em;color:var(--red);
+  position:relative;padding:2px 2px 9px;line-height:1.3;
+  background:transparent;border:0;cursor:pointer;
+  transform:rotate(-1deg);transition:color .2s ease,transform .2s ease;
+}
+/* hand-drawn rough underline via layered SVG-ish gradients */
+.penlink::after{
+  content:"";position:absolute;left:-2px;right:6px;bottom:0;height:8px;
+  background-color:var(--red);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5 C30 2 55 7 90 4 C125 1 160 6 199 3' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5 C30 2 55 7 90 4 C125 1 160 6 199 3' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  transition:transform .22s ease,opacity .22s ease;transform-origin:left center;
+}
+.penlink .arr{transition:transform .22s ease}
+.penlink:hover{color:#9c2c22;transform:rotate(-1deg) translateY(-1px)}
+.penlink:hover::after{transform:scaleX(1.06)}
+.penlink:hover .arr{transform:translateX(5px)}
+.penlink:active{transform:rotate(-1deg) translateY(1px)}
+/* secondary link = ink colour, lighter weight */
+.penlink-sub{color:var(--ink);font-weight:700;transform:rotate(.8deg)}
+.penlink-sub::after{background-color:var(--ink)}
+.penlink-sub:hover{color:#000;transform:rotate(.8deg) translateY(-1px)}
+.penlink-sub:active{transform:rotate(.8deg) translateY(1px)}
+/* nav variant = smaller */
+.penlink-nav{margin-left:auto;font-size:15px;white-space:nowrap;padding-bottom:7px}
+/* final CTA variant = larger */
+.penlink-big{font-size:clamp(20px,3.4vw,26px);margin-top:8px}
+@media(prefers-reduced-motion:reduce){.penlink,.penlink:hover{transition:none}}
 @media(min-width:860px){
   .hero-grid{grid-template-columns:1.05fr .95fr;gap:40px}
   .hero-art{order:2;max-width:460px;margin:0 0 0 auto}
   .hero-copy{order:1}
 }
-
-/* ---------- ticker strip (like washi tape running banner) ---------- */
-.ticker{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;font-size:14px;font-weight:700;border-top:2px solid var(--cork-d);border-bottom:2px solid var(--cork-d)}
-.ticker .run{display:inline-block;padding:11px 0;animation:tick 28s linear infinite}
-.ticker .run span{margin:0 30px}
-.ticker .run b{color:#ffe27a}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.dotmark{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:12px;vertical-align:middle}
 
 /* ---------- problem→answer (borderless) ---------- */
 .qa{margin-top:34px;position:relative;z-index:2;max-width:820px}
@@ -346,7 +366,9 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="cta" href="#cta">無料で出品をはじめる</a>
+    <a class="penlink penlink-nav" href="#cta">無料で出品をはじめる
+      <svg class="arr" width="20" height="13" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
+    </a>
   </div>
 </header>
 
@@ -355,15 +377,17 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
-        <span class="kicker">ライブアイドル・バンド・お笑い芸人へ</span>
-        <h1>練習する時間を出品すると、<br><em>その動画が売れます。</em></h1>
-        <p>毎日の練習は、お金にならないまま消えていく時間でした。Lapsellなら、その<span style="font-weight:900">練習の時間</span>を出品して、ファンに届け、収益に変えられます。撮るのはスマホだけ。編集はいりません。</p>
+        <h1>練習の時間を、<br><em>収益に変える。</em></h1>
+        <p>毎日の練習は、これまで収益にならないまま消えていく時間でした。Lapsellなら、その<span style="font-weight:900">練習の時間</span>を出品して、ファンに届け、収益に変えられます。撮るのはスマホだけで、編集も必要ありません。</p>
         <div class="btnrow">
-          <a class="btn-primary" href="#cta">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          <a class="penlink" href="#cta">
             無料で出品をはじめる
+            <svg class="arr" width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
           </a>
-          <a class="btn-ghost" href="#mechanic">仕組みを見る</a>
+          <a class="penlink penlink-sub" href="#mechanic">
+            仕組みを見る
+            <svg class="arr" width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
+          </a>
         </div>
       </div>
       <div class="hero-art">
@@ -378,27 +402,15 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   </div>
 </section>
 
-<!-- ticker -->
-<div class="ticker" aria-hidden="true">
-  <div class="run">
-    <span><span class="dotmark"></span>初期費用<b>0円</b>・取引手数料<b>5%〜</b>でスタートできます</span>
-    <span><span class="dotmark"></span>撮るのは<b>スマホだけ</b>・編集はいりません</span>
-    <span><span class="dotmark"></span>ファンには<b>世界に1つだけ</b>の動画が届きます</span>
-    <span><span class="dotmark"></span>初期費用<b>0円</b>・取引手数料<b>5%〜</b>でスタートできます</span>
-    <span><span class="dotmark"></span>撮るのは<b>スマホだけ</b>・編集はいりません</span>
-    <span><span class="dotmark"></span>ファンには<b>世界に1つだけ</b>の動画が届きます</span>
-  </div>
-</div>
-
 <!-- problem question -> answer -->
 <section class="sec" id="problem">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .8-1 1.7"/><path d="M12 17h.01"/></svg>PROBLEM</span>
-    <h2 class="sec-title">毎日練習しているのに、<br>その時間は<em>お金になっていますか？</em></h2>
+    <h2 class="sec-title">ファンと作り手が<br><em>抱えている課題</em></h2>
 
     <div class="qa">
-      <p class="q">レッスンも、自主練も、楽屋の時間も。<br>本当はファンが見たい<span class="mk">“素の時間”</span>なのに、収益にならないまま消えていく。</p>
-      <p class="a">Lapsellは、その答えになります。<em>練習する時間を出品すると、その動画が売れます。</em></p>
+      <p class="q">レッスンや自主練、楽屋での時間。<br>ファンが本当に見たいのは、こうした<span class="mk">“素の時間”</span>ですが、これまで収益になることはありませんでした。</p>
+      <p class="a">Lapsellは、この課題を解決します。<em>練習する時間を出品すると、その動画が売れます。</em></p>
     </div>
 
     <div class="prob">
@@ -407,11 +419,11 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
           <div class="cheki tilt-l"><span class="pin teal"></span><img src="assets/problem_fan.png" alt="推しの素の練習が見られず寂しげなファンのチェキ風写真"><span class="note cap-hand">届くのは完成品ばかり…</span></div>
         </div>
         <div>
-          <h3><span class="tag">FAN</span>ファンは、“素の時間”に手が届かない。</h3>
+          <h3><span class="tag">FAN</span>ファンは、“素の時間”に手が届かない</h3>
           <ul>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>届くのは完成品ばかり。練習や裏側の素の姿には触れられない。</li>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>会えるのは現場だけ。住んでいる場所や予定に縛られる。</li>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>応援した証が残らない。投げ銭も配信も、流れて消えていく。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>届くのは完成された作品ばかりで、練習や裏側の素の姿にはなかなか触れられません。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>会えるのは現場だけ。住んでいる場所やスケジュールに左右されてしまいます。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7Z"/><circle cx="12" cy="12" r="2.5"/></svg>応援した証が手元に残りません。投げ銭も配信も、その場で流れて消えてしまいます。</li>
           </ul>
         </div>
       </div>
@@ -421,11 +433,11 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
           <div class="cheki tilt-r2"><span class="pin must"></span><img src="assets/problem_artist.png" alt="練習が報われず疲れた若いアーティストのチェキ風写真"><span class="note cap-hand">この時間、お金にならない…</span></div>
         </div>
         <div>
-          <h3><span class="tag">ARTIST</span>作り手は、価値ある“裏側”が収益にならない。</h3>
+          <h3><span class="tag">ARTIST</span>作り手は、価値ある“裏側”を収益にできない</h3>
           <ul>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg>撮影・編集・投稿が大変で、なかなか続かない。</li>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>ライブ配信は事故が怖い。失言や映り込みがそのまま流れる。</li>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>裏側は再生数が取れず儲からない。だから撮られず、捨てられる。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg>撮影・編集・投稿に手間がかかり、なかなか続けられません。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>ライブ配信は、失言や不要な映り込みがそのまま流れてしまうリスクがあります。</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>裏側は再生数につながりにくく収益化が難しいため、撮られないまま捨てられてしまいます。</li>
           </ul>
         </div>
       </div>
@@ -437,21 +449,21 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="mechanic" style="background:rgba(253,248,238,.55)">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.7-1L16.5 3h-4l-.3 2.6a7 7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.3 2.6h4l.3-2.6a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6c.07-.33.1-.66.1-1Z"/></svg>HOW IT WORKS</span>
-    <h2 class="sec-title">Lapsellは、<em>練習の“時間”を先に売る</em>仕組みです。</h2>
-    <p class="lead">完成した動画ではなく、これから生まれる練習の時間そのものを出品します。中身は届くまで分かりません。だから、開ける瞬間まで楽しめます。</p>
+    <h2 class="sec-title">サービスの<em>仕組み</em></h2>
+    <p class="lead">完成した動画ではなく、これから生まれる練習の時間そのものを出品します。中身は届くまで分からないため、開ける瞬間まで楽しめます。</p>
 
     <div class="kimo">
       <div class="item">
         <div class="num"></div>
-        <div><h3>時間を“先に”売る</h3><p>完成した動画ではなく、<span class="sk">これからの練習時間そのもの</span>を時間枠として出品します。当日スマホで撮るだけで、価値になります。</p></div>
+        <div><h3>練習の時間を先に出品する</h3><p>完成した動画ではなく、<span class="sk">これからの練習時間そのもの</span>を時間枠として出品します。当日スマホで撮るだけで、それが価値になります。</p></div>
       </div>
       <div class="item">
         <div class="num"></div>
-        <div><h3>中身は、届くまで分からない</h3><p>何が映るかは、開けるまで分かりません。だから<span class="sk">開ける瞬間まで楽しめます</span>。思いがけない名場面に出会えます。</p></div>
+        <div><h3>中身は届くまで分からない</h3><p>何が映るかは、届いて開けるまで分かりません。だからこそ<span class="sk">開ける瞬間までわくわくを楽しめます</span>。思いがけない名場面に出会えることもあります。</p></div>
       </div>
       <div class="item">
         <div class="num"></div>
-        <div><h3>届くのは、世界に1つ</h3><p>その時間を買えたのは、世界でその人だけ。複製ではない、<span class="sk">世界に1つだけのデジタルグッズ</span>として所有できます。</p></div>
+        <div><h3>届くのは世界に1つだけ</h3><p>その時間を手に入れられるのは、世界でその人だけ。複製ではない、<span class="sk">世界に1つだけのデジタルグッズ</span>として所有できます。</p></div>
       </div>
     </div>
   </div>
@@ -461,8 +473,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="flow" style="background:rgba(58,48,39,.9);color:var(--paper)">
   <div class="wrap">
     <span class="eyebrow" style="color:#ffe27a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h14M13 6l6 6-6 6"/></svg>FLOW</span>
-    <h2 class="sec-title" style="color:var(--paper)">出品から開封まで、<em style="color:#ffe27a">5ステップ</em>。</h2>
-    <p class="lead" style="color:var(--paper)">撮るのはスマホだけ。編集も配信機材もいりません。販売者と購入者、それぞれの動きを順番に。</p>
+    <h2 class="sec-title" style="color:var(--paper)">出品から<em style="color:#ffe27a">受け取りまでの流れ</em></h2>
+    <p class="lead" style="color:var(--paper)">撮るのはスマホだけで、編集も配信機材も必要ありません。販売者と購入者それぞれの流れを、5つのステップでご紹介します。</p>
     <div class="scroll-hint">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>横にスクロールできます
     </div>
@@ -479,7 +491,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
               <div class="pill">出品する</div>
             </div>
           </div></div>
-          <p class="cap">日時と価格を決めて<b>出品</b>するだけ。</p>
+          <p class="cap">日時と価格を決めて<b>出品</b>します。</p>
         </div>
         <!-- step2 -->
         <div class="step">
@@ -493,7 +505,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
               <div class="pill teal">区間を購入</div>
             </div>
           </div></div>
-          <p class="cap">並んだ時間枠から<b>購入</b>。中身はまだ分からない。</p>
+          <p class="cap">並んだ時間枠から気になるものを<b>購入</b>します。中身はまだ分かりません。</p>
         </div>
         <!-- step3 -->
         <div class="step">
@@ -505,7 +517,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
               <img class="thumb" src="assets/mock_practice.png" alt="スマホで撮影中の練習風景" style="aspect-ratio:9/16;height:100%">
             </div>
           </div></div>
-          <p class="cap">当日、<b>スマホで撮るだけ</b>。編集は不要。</p>
+          <p class="cap">当日は<b>スマホで撮るだけ</b>。編集は必要ありません。</p>
         </div>
         <!-- step4 -->
         <div class="step">
@@ -518,7 +530,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
               <div class="pill">開ける</div>
             </div>
           </div></div>
-          <p class="cap"><b>あなたの区間が届きました</b>。タップして開封。</p>
+          <p class="cap"><b>購入した区間が届いたら</b>、タップして開封します。</p>
         </div>
         <!-- step5 -->
         <div class="step">
@@ -531,7 +543,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
               <div style="display:flex;gap:7px"><div class="pill teal" style="flex:1">再生</div><div class="pill" style="flex:1">シェア</div></div>
             </div>
           </div></div>
-          <p class="cap"><b>世界に1つ</b>を所有。面白い瞬間はSNSへ。</p>
+          <p class="cap"><b>世界に1つだけ</b>の動画を所有できます。面白い瞬間はSNSでシェアも。</p>
         </div>
       </div>
     </div>
@@ -542,17 +554,17 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="points">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 14.5 9H22l-6 4.5L18 21l-6-4.3L6 21l2-7.5L2 9h7.5Z"/></svg>POINT</span>
-    <h2 class="sec-title">出品する、<em>4つの理由</em>。</h2>
-    <p class="lead">捨てていた練習時間が収益になり、未来の価値になり、宣伝にもなる。Lapsellを始める理由を、1枚ずつ。</p>
+    <h2 class="sec-title">Lapsellで<em>出品するメリット</em></h2>
+    <p class="lead">これまで活かせなかった練習時間が、収益になり、将来の価値になり、宣伝にもつながります。Lapsellを始めるメリットを、ひとつずつご紹介します。</p>
 
     <div class="points">
       <div class="point">
         <div class="pic"><div class="cheki tilt-l"><span class="pin"></span><img src="assets/appeal1.png" alt="練習の時間が収益になることを表すチェキ風写真"><span class="note cap-hand">捨てていた時間が、お金に</span></div></div>
         <div>
           <span class="pno"><span class="badge">1</span>POINT 01</span>
-          <h3>捨てていた練習時間が、売れる。</h3>
-          <p>これまでお金にならなかった練習や裏側が、新しい収益源になります。“素の時間”には、すでに観たい人がいます。</p>
-          <span class="ev">ファンの約3人に1人が「払ってもいい」</span>
+          <h3>これまでの練習時間が収益になる</h3>
+          <p>これまで収益にならなかった練習や裏側が、新しい収益源になります。“素の時間”を観たいと思っているファンは、すでにたくさんいます。</p>
+          <span class="ev">ファンの約3人に1人が「お金を払ってもいい」</span>
         </div>
       </div>
 
@@ -560,9 +572,9 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
         <div class="pic"><div class="cheki tilt-r"><span class="pin teal"></span><img src="assets/appeal2.png" alt="駆け出しの今が将来の価値になることを表すチェキ風写真"><span class="note cap-hand">小さい今が、宝物になる</span></div></div>
         <div>
           <span class="pno"><span class="badge">2</span>POINT 02</span>
-          <h3>小さい今が、将来の価値になる。</h3>
-          <p>「自分が見つけて支えた」という物語ごと買われます。無名の今の一点ものは、ブレイクとともに価値を増していきます。</p>
-          <span class="ev">育てた証明＝下積みの“あなただけ”の記録</span>
+          <h3>駆け出しの今が、将来の価値になる</h3>
+          <p>「自分が見つけて支えてきた」という物語ごと購入されます。無名の頃の一点ものは、ブレイクとともに価値を増していきます。</p>
+          <span class="ev">支えてきた証＝下積み時代の“あなただけ”の記録</span>
         </div>
       </div>
 
@@ -570,8 +582,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
         <div class="pic"><div class="cheki tilt-r2"><span class="pin must"></span><img src="assets/appeal3.png" alt="面白い瞬間が自然に拡散されることを表すチェキ風写真"><span class="note cap-hand">拡散は、うれしいオマケ</span></div></div>
         <div>
           <span class="pno"><span class="badge">3</span>POINT 03</span>
-          <h3>自然に拡散されて、宣伝になる。</h3>
-          <p>自分だけが知る面白い瞬間を、ファンは誰かに見せたくなります。広まるのは損ではなく、次のファンを呼ぶ“無料の宣伝”です。</p>
+          <h3>自然に拡散され、宣伝になる</h3>
+          <p>自分だけが知る面白い瞬間は、ファンが誰かに見せたくなるものです。拡散はマイナスではなく、次のファンを呼ぶ“無料の宣伝”になります。</p>
           <span class="ev">拡散が、新しいファンの入口になる</span>
         </div>
       </div>
@@ -580,9 +592,9 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
         <div class="pic"><div class="cheki tilt-l2"><span class="pin"></span><img src="assets/appeal4.png" alt="撮影後に内容を確認して事故を防ぐことを表すチェキ風写真"><span class="note cap-hand">出す前に、ちゃんと確認</span></div></div>
         <div>
           <span class="pno"><span class="badge">4</span>POINT 04</span>
-          <h3>事故は、公開前のチェックで防げる。</h3>
-          <p>ライブ配信と違い、撮影してからアップロードします。まずい瞬間は世に出さず、面白い瞬間だけを届けられます。</p>
-          <span class="ev">事故の区間は非公開にして返金できる</span>
+          <h3>公開前のチェックで事故を防げる</h3>
+          <p>ライブ配信と違い、撮影してからアップロードする仕組みです。まずい瞬間は公開せず、面白い瞬間だけを届けられます。</p>
+          <span class="ev">事故が起きた区間は非公開にして返金も可能</span>
         </div>
       </div>
     </div>
@@ -593,13 +605,13 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="evidence" style="background:rgba(253,248,238,.55)">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>EVIDENCE</span>
-    <h2 class="sec-title">“素の時間”は、<em>すでに数字を生んでいます</em>。</h2>
-    <p class="lead">これは構想ではありません。練習や裏側に人が集まり、お金が動いている現実を、実際のデータで。</p>
+    <h2 class="sec-title">市場の<em>データと実績</em></h2>
+    <p class="lead">これは単なる構想ではありません。練習や裏側に人が集まり、実際にお金が動いていることを、データでご紹介します。</p>
 
     <div class="ev-grid">
       <div class="ev-block">
-        <h3>「練習動画」が、公式MVより観られています。</h3>
-        <p>BLACKPINKのダンス練習動画は<span class="hl">20億回視聴</span>。完成品を超える規模で、素の練習が観られています。</p>
+        <h3>練習動画が公式MVを上回ることも</h3>
+        <p>BLACKPINKのダンス練習動画は<span class="hl">20億回視聴</span>を記録しています。完成された作品を超える規模で、素の練習が観られているのです。</p>
       </div>
       <div class="ev-shot tilt-r2"><span class="tape top-l"></span><img src="assets/evidence/blackpink_practice.png" alt="BLACKPINK 練習動画 20億回視聴のスクリーンショット"><div class="cap">ダンス練習動画＝約20億回視聴</div></div>
     </div>
@@ -607,15 +619,15 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
     <div class="ev-grid" style="margin-top:54px">
       <div class="ev-shot tilt-l2" style="order:2"><span class="tape top-r"></span><img src="assets/evidence/milk_mv.png" alt="M!LK イイじゃん 4,175万回視聴のスクリーンショット"><div class="cap">M!LK「イイじゃん」＝4,175万回視聴・紅白歌唱曲</div></div>
       <div class="ev-block" style="order:1">
-        <h3>下積み11年からのブレイク。それが“育てた証明”に。</h3>
-        <p>M!LK「イイじゃん」は<span class="hl">4,175万回視聴</span>、第76回NHK紅白歌合戦の歌唱曲に。無名の頃の一点ものは、ブレイクとともに価値を増します。</p>
+        <h3>下積みからのブレイクが価値になる</h3>
+        <p>M!LK「イイじゃん」は<span class="hl">4,175万回視聴</span>を記録し、第76回NHK紅白歌合戦の歌唱曲にも選ばれました。無名の頃の一点ものは、ブレイクとともに価値を増していきます。</p>
       </div>
     </div>
 
     <div class="ev-grid" style="margin-top:54px">
       <div class="ev-block">
-        <h3>練習風景だけで、人は笑い、拡散します。</h3>
-        <p>「練習風景だけで笑える10年目アイドル #seventeen」は<span class="hl">895,794回再生・高評価2万超</span>。素の瞬間が、そのまま拡散の燃料になります。</p>
+        <h3>練習風景そのものが拡散される</h3>
+        <p>「練習風景だけで笑える10年目アイドル #seventeen」は<span class="hl">895,794回再生・高評価2万超</span>を記録。素の瞬間が、そのまま拡散のきっかけになっています。</p>
       </div>
       <div class="ev-shot short-shot tilt-r"><span class="pin tl"></span><img src="assets/evidence/seventeen_practice.png" alt="SEVENTEEN 練習風景 895,794回再生のスクリーンショット"><div class="cap">縦型ショート＝895,794回再生</div></div>
     </div>
@@ -623,8 +635,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
     <!-- charts -->
     <div class="ev-grid" style="margin-top:60px">
       <div class="ev-block">
-        <h3>ファンの約3人に1人が「払ってもいい」。</h3>
-        <p>推し活ファンへの自社アンケート（N=393）。素の時間に対して、合計<span class="hl">31.9%</span>が支払い意向を示しました。</p>
+        <h3>約3人に1人が支払いに前向き</h3>
+        <p>推し活ファンを対象とした自社アンケート（N=393）では、素の時間に対して合計<span class="hl">31.9%</span>が支払い意向を示しました。</p>
         <div class="donut">
           <svg width="176" height="176" viewBox="0 0 42 42" aria-label="支払い意向ドーナツグラフ">
             <circle cx="21" cy="21" r="15.9" fill="none" stroke="#cdbb96" stroke-width="7"/>
@@ -643,8 +655,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
         </div>
       </div>
       <div class="ev-block">
-        <h3>「ランダム×グッズ」の文化は、すでに巨大です。</h3>
-        <p>ガチャやトレカに、人は当たり前にお金を使っています。Lapsellは、その“中身は届くまで分からない”体験を、練習の時間に持ち込みます。</p>
+        <h3>ランダム性のあるグッズ市場は巨大</h3>
+        <p>トレカなど、中身が分からないグッズに人は当たり前にお金を使っています。Lapsellは、その“中身は届くまで分からない”という体験を、練習の時間に持ち込みます。</p>
         <div class="bars">
           <div class="bar"><div class="lab"><span>デジタルガチャ市場</span><b>約7,000億円</b></div><div class="track"><div class="fill" style="width:100%;background:var(--red)"></div></div></div>
           <div class="bar"><div class="lab"><span>トレカ国内市場(2022)</span><b>約2,349億円</b></div><div class="track"><div class="fill" style="width:34%;background:var(--must)"></div></div></div>
@@ -670,15 +682,15 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="authenticity">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>AUTHENTICITY</span>
-    <h2 class="sec-title">世界に1つであることを、<em>誰でも確かめられます</em>。</h2>
-    <p class="lead">映像そのものに、識別子と所有者の情報を電子透かしで埋め込みます。だから、本物の一点ものであることを後から確認できます。</p>
+    <h2 class="sec-title">世界に1つである<em>証明</em></h2>
+    <p class="lead">映像そのものに、識別子と所有者の情報を電子透かしで埋め込みます。これにより、本物の一点ものであることを後からいつでも確認できます。</p>
 
     <div class="auth">
       <div class="pic"><div class="cheki tilt-r"><span class="pin teal"></span><img src="assets/authenticity.png" alt="チェキの白フチに小さなシリアル番号やシールが押された、世界に1つの証の写真"><span class="note cap-hand">No.0001 / あなただけのもの</span></div></div>
       <ol>
-        <li><span class="b"></span><div><h4>動画はファンが持つ（保管しない設計）</h4><p>動画はダウンロードしてファンが保有します。だからサービス側のストレージコストは増えません。</p></div></li>
-        <li><span class="b"></span><div><h4>透かしは消えません</h4><p>スクショや転載をしても、出所と所有者を追えます。流出しても、偽物が本物になることはありません。</p></div></li>
-        <li><span class="b"></span><div><h4>今の所有者を、誰でも検証できます</h4><p>「今この動画を持っているのは誰か」を専用サイトで確認できます。本物の一点ものだけが、価値を持ちます。</p></div></li>
+        <li><span class="b"></span><div><h4>動画はファンが手元で保有</h4><p>動画はダウンロードしてファンが保有する仕組みです。そのため、サービス側のストレージコストもかかりません。</p></div></li>
+        <li><span class="b"></span><div><h4>電子透かしは消えない</h4><p>スクリーンショットや転載をしても、出所と所有者をたどれます。万一流出しても、偽物が本物になることはありません。</p></div></li>
+        <li><span class="b"></span><div><h4>現在の所有者を誰でも確認できる</h4><p>「今この動画を持っているのは誰か」を専用サイトで確認できます。本物の一点ものだけが、確かな価値を持ちます。</p></div></li>
       </ol>
     </div>
   </div>
@@ -688,8 +700,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="compare" style="background:rgba(253,248,238,.55)">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M9 3v18M15 3v18"/></svg>COMPARISON</span>
-    <h2 class="sec-title">他の手段と、<em>何が違うのか</em>。</h2>
-    <p class="lead">「素の日常」を「世界に1つ」として「収益」にし、しかも「事故を防げる」。これを同時に満たせるのはLapsellだけです。</p>
+    <h2 class="sec-title">他サービスとの<em>違い</em></h2>
+    <p class="lead">「素の日常」を「世界に1つ」のかたちで「収益」にしながら、「事故も防げる」。これらをすべて同時に満たせるのはLapsellだけです。</p>
 
     <div class="cmp-scroll">
       <table class="cmp">
@@ -717,7 +729,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
         </tbody>
       </table>
     </div>
-    <p class="lead" style="margin-top:16px;font-size:13px">○＝満たす／△＝一部／×＝満たさない。現場でしか会えない・残らない・素が届かない、を一度に解きます。</p>
+    <p class="lead" style="margin-top:16px;font-size:13px">○＝満たす／△＝一部／×＝満たさない。「現場でしか会えない」「思い出が残らない」「素の姿が届かない」といった課題を、まとめて解決します。</p>
   </div>
 </section>
 
@@ -725,13 +737,13 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="pricing">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-1.5 2-2.5 2.5s-2.5 1-2.5 2.5a2.5 2.5 0 0 0 5 0"/></svg>PRICE</span>
-    <h2 class="sec-title">はじめるのに、<em>お金はいりません</em>。</h2>
-    <p class="lead">売れた分にだけ手数料がかかる成果報酬型です。リスクなく、今日から試せます。</p>
+    <h2 class="sec-title"><em>料金</em></h2>
+    <p class="lead">売れた分にだけ手数料がかかる、成果報酬型の料金体系です。リスクなく、今日から試せます。</p>
 
     <div class="price-grid">
       <div class="price-figures">
-        <div class="pf"><div class="k">INITIAL COST（初期費用）</div><div class="v">0<small>円</small></div><p>初期費用も月額固定費もかかりません。登録して、練習を出品するだけです。</p></div>
-        <div class="pf"><div class="k">TRANSACTION FEE（取引手数料）</div><div class="v">5%<small>〜</small></div><p>手数料は売れた分のみ。導入期は低い料率で、収益はそのまま作り手へ。</p></div>
+        <div class="pf"><div class="k">INITIAL COST（初期費用）</div><div class="v">0<small>円</small></div><p>初期費用も月額固定費もかかりません。登録して練習を出品するだけで、すぐに始められます。</p></div>
+        <div class="pf"><div class="k">TRANSACTION FEE（取引手数料）</div><div class="v">5%<small>〜</small></div><p>手数料がかかるのは売れた分だけ。導入期は低い料率で、収益の多くがそのまま作り手に残ります。</p></div>
       </div>
       <div class="pic"><div class="cheki tilt-r"><span class="pin"></span><img src="assets/use_listing.png" alt="スマホのアプリで練習の時間枠を出品するチェキ風写真"><span class="note cap-hand">登録は無料・出品もカンタン</span></div></div>
     </div>
@@ -742,31 +754,31 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="targets" style="background:rgba(253,248,238,.55)">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-5-5.9"/></svg>FOR ARTISTS</span>
-    <h2 class="sec-title">こんな<em>作り手のための</em>場所です。</h2>
-    <p class="lead">毎日練習しているのに、その時間が収益にならない――そんな人にこそ向いています。</p>
+    <h2 class="sec-title">対象の<em>アーティスト</em></h2>
+    <p class="lead">毎日練習しているのに、その時間が収益につながらない。そんな作り手にこそ向いているサービスです。</p>
 
     <div class="targets">
       <div class="tgt">
         <div class="pic"><div class="cheki tilt-l"><span class="pin"></span><img src="assets/member1.png" alt="ライブアイドルのチェキ風写真"><span class="note cap-hand">ライブアイドル</span></div></div>
         <h3>ライブアイドル</h3>
         <span class="num">約1,500組・約6,700人</span>
-        <p>レッスンも自主練も、ファンが見たい“素”の宝庫。現場の外でも、近さと所有を届けられます。</p>
+        <p>レッスンも自主練も、ファンが見たい“素”の姿の宝庫です。現場の外でも、近さと所有する喜びを届けられます。</p>
       </div>
       <div class="tgt">
         <div class="pic"><div class="cheki tilt-r"><span class="pin teal"></span><img src="assets/member2.png" alt="インディーズバンドのチェキ風写真"><span class="note cap-hand">バンド・楽曲アーティスト</span></div></div>
         <h3>インディーズバンド・楽曲アーティスト</h3>
         <span class="num">作詞・作曲・リハの時間</span>
-        <p>曲が生まれる過程そのものが価値になります。下積みの記録が、未来のファンの宝物に。</p>
+        <p>曲が生まれる過程そのものが、価値になります。下積み時代の記録が、未来のファンにとっての宝物になります。</p>
       </div>
       <div class="tgt">
         <div class="pic"><div class="cheki tilt-r2"><span class="pin must"></span><img src="assets/member3.png" alt="お笑い芸人のチェキ風写真"><span class="note cap-hand">お笑い芸人</span></div></div>
         <h3>インディーズお笑い芸人</h3>
         <span class="num">ネタ合わせ・楽屋の時間</span>
-        <p>ネタ作りや楽屋の素のやり取りは、観たいのに届かないもの。その時間を、そのまま届けられます。</p>
+        <p>ネタ作りや楽屋での素のやり取りは、観たくてもなかなか届かないものです。その時間を、ありのまま届けられます。</p>
       </div>
     </div>
 
-    <p class="exclude"><b>対象外：</b>TikToker・インスタライバー（すでに配信で収益化）／VTuber（素の対面撮影が構造上できないため非適合）。</p>
+    <p class="exclude"><b>対象外：</b>TikToker・インスタライバー（すでに配信で収益化しているため）／VTuber（素の対面撮影が仕組み上できないため）。</p>
   </div>
 </section>
 
@@ -774,11 +786,11 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="voices">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"/></svg>VOICE</span>
-    <h2 class="sec-title">先に試した、<em>作り手の声</em>。</h2>
+    <h2 class="sec-title">利用者の<em>声</em></h2>
     <div class="voices">
-      <div class="voice"><p>毎日撮っていた練習が、まさか収益になるなんて。編集しなくていいのが、続けられる理由です。</p><div class="who">ライブアイドル・3年目</div></div>
-      <div class="voice"><p>「あなただけが持っている」と言えるのが強いです。ファンとの距離が、一気に近くなりました。</p><div class="who">インディーズバンド・ボーカル</div></div>
-      <div class="voice"><p>配信事故が怖くて裏側を出せませんでした。確認してから届けられるので、安心して出せます。</p><div class="who">お笑いコンビ・ツッコミ</div></div>
+      <div class="voice"><p>毎日撮っていた練習が収益になるとは思いませんでした。編集しなくていいので、無理なく続けられています。</p><div class="who">ライブアイドル・3年目</div></div>
+      <div class="voice"><p>「あなただけが持っている」と伝えられるのが大きな強みです。ファンとの距離が一気に近くなりました。</p><div class="who">インディーズバンド・ボーカル</div></div>
+      <div class="voice"><p>配信事故が怖くて、これまで裏側を出せずにいました。内容を確認してから届けられるので、安心して公開できます。</p><div class="who">お笑いコンビ・ツッコミ</div></div>
     </div>
   </div>
 </section>
@@ -787,12 +799,12 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="sec" id="faq" style="background:rgba(253,248,238,.55)">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .8-1 1.7M12 17h.01"/></svg>FAQ</span>
-    <h2 class="sec-title">よくある<em>質問</em>。</h2>
+    <h2 class="sec-title">よくある<em>質問</em></h2>
     <div class="faq">
       <details><summary><span class="qmark">Q</span>本当に無料で始められますか？</summary><div class="ans">はい。初期費用・月額固定費は0円です。取引手数料5%〜が売れた分にだけかかる成果報酬型なので、リスクなく試せます。</div></details>
       <details><summary><span class="qmark">Q</span>撮影や編集の機材は必要ですか？</summary><div class="ans">スマホ1台で大丈夫です。出品した時間枠で撮るだけ。編集や配信機材はいりません。</div></details>
-      <details><summary><span class="qmark">Q</span>変な瞬間が映ってしまったら？</summary><div class="ans">Lapsellはライブ配信と違い、撮影した後にアップロードします。公開前に内容を確認でき、まずい瞬間は世に出ません。本当の事故の区間は非公開にして返金できます。</div></details>
-      <details><summary><span class="qmark">Q</span>買ってもらえるか不安です。</summary><div class="ans">“素の時間”にはすでに需要があります（練習動画20億回視聴などの実例、ファンの約3人に1人が支払い意向）。時間枠と価格はご自身で設定でき、少額・短い区間から試せます。</div></details>
+      <details><summary><span class="qmark">Q</span>まずい瞬間が映ってしまったら？</summary><div class="ans">Lapsellはライブ配信と違い、撮影した後にアップロードする仕組みです。公開前に内容を確認できるため、まずい瞬間が世に出ることはありません。万一の場合は、その区間を非公開にして返金することもできます。</div></details>
+      <details><summary><span class="qmark">Q</span>買ってもらえるか不安です。</summary><div class="ans">“素の時間”には、すでに十分な需要があります（練習動画20億回視聴などの実例や、ファンの約3人に1人が支払い意向を示したアンケート結果があります）。時間枠と価格はご自身で設定でき、少額・短い区間から気軽に試せます。</div></details>
       <details><summary><span class="qmark">Q</span>映像が流出・転載されたら価値がなくなりませんか？</summary><div class="ans">映像そのものに識別子と所有者情報を電子透かしで埋め込みます。スクショや転載をしても消えず、「今の所有者は誰か」を検証できます。本物の一点ものであることは守られます。</div></details>
       <details><summary><span class="qmark">Q</span>どんなジャンルが向いていますか？</summary><div class="ans">ライブアイドル、インディーズのバンド・楽曲アーティスト、インディーズお笑い芸人など、日々“練習や裏側”が生まれる活動が向いています。</div></details>
     </div>
@@ -803,11 +815,10 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 <section class="finalcta" id="cta">
   <div class="note">
     <span class="pin tl"></span><span class="pin tr teal"></span>
-    <h2>その練習の時間を、<br><em>収益に変えましょう。</em></h2>
-    <p>登録は無料。出品はスマホひとつ。お金にならなかった毎日の時間が、ファンに届く世界に1つのグッズになります。</p>
-    <a class="btn-primary" href="#top">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      無料で出品をはじめる
+    <h2>練習の時間を、<br><em>収益に変えましょう。</em></h2>
+    <p>登録は無料、出品はスマホひとつで完結します。これまで収益にならなかった毎日の時間が、ファンに届く世界に1つのグッズになります。</p>
+    <a class="penlink penlink-big" href="#top">無料で出品をはじめる
+      <svg class="arr" width="26" height="16" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
     </a>
     <div class="cta-note">初期費用0円・取引手数料5%〜（売れた分のみ）</div>
   </div>
@@ -835,7 +846,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   "@type":"Service",
   "name":"Lapsell（ラプセル）",
   "serviceType":"ライブアイドル・インディーズアーティスト向け収益化アプリ",
-  "description":"練習する時間を出品すると、その動画が売れる収益化サービス。動画は中身が届くまで分からない世界に1つのデジタルグッズとしてファンに届く。初期費用0円・取引手数料5%〜。",
+  "description":"練習の時間を出品すると、その動画が売れる収益化サービス。動画は中身が届くまで分からない、世界に1つだけのデジタルグッズとしてファンに届く。初期費用0円・取引手数料5%〜。",
   "areaServed":"JP",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"JPY","description":"初期費用0円・取引手数料5%〜（成果報酬）"},
   "audience":{"@type":"Audience","audienceType":"ライブアイドル、インディーズバンド・楽曲アーティスト、インディーズお笑い芸人"}
@@ -848,7 +859,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   "mainEntity":[
     {"@type":"Question","name":"本当に無料で始められますか？","acceptedAnswer":{"@type":"Answer","text":"初期費用・月額固定費は0円です。取引手数料5%〜が売れた分にだけかかる成果報酬型なので、リスクなく試せます。"}},
     {"@type":"Question","name":"撮影や編集の機材は必要ですか？","acceptedAnswer":{"@type":"Answer","text":"スマホ1台で大丈夫です。出品した時間枠で撮るだけで、編集や配信機材はいりません。"}},
-    {"@type":"Question","name":"変な瞬間が映ってしまったら？","acceptedAnswer":{"@type":"Answer","text":"撮影後にアップロードするため公開前に内容を確認でき、まずい瞬間は世に出ません。事故の区間は非公開にして返金できます。"}},
+    {"@type":"Question","name":"まずい瞬間が映ってしまったら？","acceptedAnswer":{"@type":"Answer","text":"撮影後にアップロードする仕組みのため、公開前に内容を確認でき、まずい瞬間が世に出ることはありません。万一の場合は、その区間を非公開にして返金することもできます。"}},
     {"@type":"Question","name":"買ってもらえるか不安です。","acceptedAnswer":{"@type":"Answer","text":"素の時間にはすでに需要があり、練習動画20億回視聴などの実例やファンの約3人に1人の支払い意向があります。時間枠と価格は自分で設定でき、少額から試せます。"}},
     {"@type":"Question","name":"映像が流出・転載されたら価値がなくなりませんか？","acceptedAnswer":{"@type":"Answer","text":"映像そのものに識別子と所有者情報を電子透かしで埋め込みます。スクショや転載をしても消えず、今の所有者を検証できます。"}},
     {"@type":"Question","name":"どんなジャンルが向いていますか？","acceptedAnswer":{"@type":"Answer","text":"ライブアイドル、インディーズのバンド・楽曲アーティスト、インディーズお笑い芸人など、日々練習や裏側が生まれる活動が向いています。"}}
