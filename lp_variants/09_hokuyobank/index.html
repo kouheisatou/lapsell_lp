@@ -108,6 +108,48 @@ h1,h2,h3,p{margin:0;}
   .hero-cta{justify-content:flex-start;}
   .hero-badge{width:96px;height:96px;right:0;}
 }
+/* hero mascot beside phone (Hokuyobank かわうそ pattern) */
+.hero-phone .mascot{position:absolute;left:-10px;bottom:-6px;width:122px;height:auto;z-index:2;filter:drop-shadow(0 10px 20px rgba(1,73,152,.22));}
+@media(max-width:880px){.hero-phone .mascot{width:92px;left:0;}}
+
+/* ---------- recurring mascot helpers ---------- */
+.sec-head-mascot{display:inline-flex;align-items:flex-end;gap:14px;justify-content:center;}
+.sec-head-mascot img{width:62px;height:auto;flex:none;filter:drop-shadow(0 8px 16px rgba(1,73,152,.18));}
+.mascot-bubble{position:relative;display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--blue);color:var(--navy);
+  border-radius:18px;padding:11px 18px 11px 14px;font-size:14px;font-weight:800;box-shadow:0 8px 22px rgba(1,73,152,.1);}
+.mascot-bubble img{width:54px;height:auto;flex:none;margin:-22px 0 -10px;}
+.band-blue .mascot-bubble,.band-navy .mascot-bubble{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff;}
+
+/* pill tag row reused across sections */
+.taglist{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:22px;}
+.taglist .tg{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--blue);color:var(--navy);
+  background:#fff;border-radius:999px;padding:7px 15px;font-size:13px;font-weight:800;}
+.taglist .tg svg{width:15px;height:15px;color:var(--blue);}
+.band-blue .taglist .tg,.band-navy .taglist .tg{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);color:#fff;}
+.band-blue .taglist .tg svg,.band-navy .taglist .tg svg{color:var(--yellow);}
+
+/* ---------- benefit 3-cards (Hokuyobank 特典カード: yellow rounded + mascot peek) ---------- */
+.benefit-wrap{background:linear-gradient(160deg,var(--blue),var(--mid));}
+.benefit-head{text-align:center;color:#fff;}
+.benefit-head .eyebrow{color:var(--yellow);}
+.benefit-head .sec-h{color:#fff;}
+.benefit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:64px;}
+.bcard{position:relative;background:var(--yellow);border-radius:24px;padding:46px 24px 28px;text-align:center;
+  box-shadow:0 18px 40px rgba(1,73,152,.22);}
+.bcard .peek{position:absolute;top:-46px;left:50%;transform:translateX(-50%);width:84px;height:auto;
+  filter:drop-shadow(0 8px 14px rgba(1,73,152,.25));}
+.bcard .free{display:inline-block;background:var(--navy);color:var(--yellow);font-size:12px;font-weight:800;border-radius:999px;padding:4px 14px;letter-spacing:.04em;}
+.bcard h3{font-size:19px;font-weight:800;color:var(--navy);margin-top:13px;line-height:1.45;}
+.bcard p{font-size:13.5px;color:#5a4600;margin-top:9px;line-height:1.7;font-weight:600;}
+.bcard .big{font-size:30px;font-weight:800;color:var(--navy);line-height:1;margin-top:6px;}
+.bcard .big .u{font-size:.45em;}
+@media(max-width:760px){.benefit-cards{grid-template-columns:1fr;gap:54px;}}
+
+/* mascot floating guide on dark/blue bands (price, final) */
+.guide-row{display:flex;align-items:center;gap:18px;justify-content:center;margin-top:30px;flex-wrap:wrap;}
+.guide-row img{width:88px;height:auto;flex:none;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25));}
+.guide-row .g-txt{font-size:15px;font-weight:800;color:#fff;max-width:360px;text-align:left;}
+.guide-row .g-txt em{font-style:normal;background:var(--yellow);color:var(--navy);padding:0 .14em;border-radius:3px;}
 
 /* device frame (shared) */
 .device{width:262px;margin:0 auto;background:#10243d;border-radius:40px;padding:11px;box-shadow:0 26px 60px rgba(1,73,152,.28);}
@@ -437,6 +479,7 @@ section{padding:80px 0;}
     </div>
     <!-- メルカリ風 marketplace phone mock -->
     <div class="hero-phone">
+      <img class="mascot" src="assets/mascot_wave.png" alt="Lapsellのマスコット・カプセルくんが手を振って案内">
       <div class="hero-badge">
         <span class="t">初期費用</span>
         <span class="b">¥0<span>から</span></span>
@@ -479,6 +522,37 @@ section{padding:80px 0;}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 特典3カード (Hokuyobank 特典カード pattern: yellow rounded + mascot peek) ============ -->
+<section class="benefit-wrap">
+  <div class="wrap">
+    <div class="benefit-head">
+      <span class="eyebrow">3 Benefits</span>
+      <h2 class="sec-h">練習の時間が、<span class="hl">3ついいことに。</span></h2>
+    </div>
+    <div class="benefit-cards">
+      <div class="bcard">
+        <img class="peek" src="assets/mascot_peek.png" alt="">
+        <span class="free">収益に</span>
+        <h3>練習が<br>収益になる</h3>
+        <p>これまで1円も生まなかった練習・裏側の時間が、撮るだけで新しい収入源に。</p>
+      </div>
+      <div class="bcard">
+        <img class="peek" src="assets/mascot_peek.png" alt="">
+        <span class="free">ファンに</span>
+        <h3>会えなくても<br>ファンに届く</h3>
+        <p>遠くのファンにも“素の姿”を。世界に1つだけのデジタルグッズが、その人だけに届く。</p>
+      </div>
+      <div class="bcard">
+        <img class="peek" src="assets/mascot_peek.png" alt="">
+        <span class="free">かんたん</span>
+        <h3>手間ゼロ<br>はじめる費用も</h3>
+        <div class="big">¥0<span class="u">から</span></div>
+        <p>撮るだけ・編集不要。登録も出品も無料で、かかるのは売れたときだけ。</p>
       </div>
     </div>
   </div>
@@ -527,6 +601,11 @@ section{padding:80px 0;}
     <span class="eyebrow">How it works</span>
     <h2 class="sec-h">時間を「先に」売る、<span class="hl">新しいグッズ。</span></h2>
     <p class="lead">完成した動画を売るのではない。これからやる練習の「時間枠」を先に出品する。だから編集も準備もいらない。Lapsellの収益化を支える、3つの肝。</p>
+    <div class="taglist">
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>時間を先に売る</span>
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>中身は運しだい</span>
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.8 5.7 21l2.3-7.1-6-4.5h7.6z"/></svg>世界に1つ</span>
+    </div>
     <div class="hooks">
       <div class="hook">
         <span class="n">1</span>
@@ -553,6 +632,7 @@ section{padding:80px 0;}
     <span class="eyebrow">How to use</span>
     <h2 class="sec-h">出品から受け取りまで、<span class="hl">5ステップ。</span></h2>
     <p class="lead">練習の時間枠を出品し、ファンが一覧から購入。本番をスマホで撮るだけで、区間がガチャのように届き、受け取れる。出品→購入→撮影→開封→受け取りの流れを、アプリ画面で見てみる。</p>
+    <div style="margin-top:22px;"><span class="mascot-bubble"><img src="assets/mascot_point.png" alt="">操作するのは、たった<b style="background:var(--yellow);padding:0 .12em;border-radius:3px;margin:0 .15em;">撮るだけ</b>。あとはおまかせ！</span></div>
 
     <div class="flow-scroll">
     <div class="flow5">
@@ -844,6 +924,11 @@ section{padding:80px 0;}
     <span class="eyebrow">Comparison</span>
     <h2 class="sec-h">既存の手段と、<span class="hl">何が違うのか。</span></h2>
     <p class="lead">“素の日常”と“一点物の所有”。この2つを同時に満たせる手段は、これまで存在しなかった。</p>
+    <div class="taglist">
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>素の日常が買える</span>
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>世界に1つ所有</span>
+      <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>本人に収益が還元</span>
+    </div>
     <div class="cmp-fig"><img src="assets/comparison.png" alt="世界に1つだけのデジタルグッズを大切に持つファンのイラスト" width="800" height="600"></div>
     <div class="cmp-wrap">
       <table class="cmp">
@@ -932,6 +1017,10 @@ section{padding:80px 0;}
       <div class="price-item"><div class="pv">5<span class="u">%〜</span></div><div class="pl">取引手数料</div><div class="pd">売れた分だけ。導入期は低率で応援。</div></div>
       <div class="price-item"><div class="pv">∞</div><div class="pl">将来の価値</div><div class="pd">二次流通ロイヤリティ（本人にも還元）や保管・プレミアムも順次。</div></div>
     </div>
+    <div class="guide-row">
+      <img src="assets/mascot_cheer.png" alt="マスコットが喜んでいる様子">
+      <p class="g-txt">はじめるのに、お金は<em>1円もいりません</em>。まずは気軽に、ひと枠だけ出してみませんか？</p>
+    </div>
     <div class="price-fig"><img src="assets/pricing.png" alt="初期費用0円・リスクなしで始められることを表したイラスト" width="800" height="600"></div>
   </div>
 </section>
@@ -942,6 +1031,7 @@ section{padding:80px 0;}
     <span class="eyebrow">For Artists</span>
     <h2 class="sec-h">毎日積み重ねている、<span class="hl">あなたへ。</span></h2>
     <p class="lead">ステージの裏で誰よりも努力している人ほど、収益化の伸びしろは大きい。</p>
+    <div style="margin-top:22px;"><span class="mascot-bubble"><img src="assets/mascot_point.png" alt="">こんな人に、ぴったりです！</span></div>
     <div class="target-grid" style="text-align:left">
       <div class="target-item">
         <div class="target-fig"><img src="assets/artist_idol.png" alt="地下アイドルのイラスト" width="600" height="600"></div>
@@ -1008,6 +1098,7 @@ section{padding:80px 0;}
 <!-- ============ 最終CTA ============ -->
 <section class="band-blue final" id="cta">
   <div class="wrap">
+    <img src="assets/mascot_wave.png" alt="マスコットが手を振って案内" style="width:104px;height:auto;margin:0 auto 6px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25));">
     <h2>その練習、<br>今日から収益に変えよう。</h2>
     <p>初期費用0円・撮るだけ。捨てていた時間が、ファンにとって世界に1つの宝物になる。</p>
     <div class="cta-row">
