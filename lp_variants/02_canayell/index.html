@@ -121,17 +121,17 @@ header{
 }
 .phone .notch{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:84px;height:6px;background:#000;border-radius:6px;z-index:3}
 .screen{background:#fff;border-radius:28px;overflow:hidden;aspect-ratio:9/19.2;display:flex;flex-direction:column}
-.app-top{background:var(--grad);color:#fff;padding:30px 16px 14px;font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:8px}
-.app-top .icn{width:18px;height:18px;stroke-width:2}
-.app-list{padding:12px;display:flex;flex-direction:column;gap:10px;overflow:hidden;background:#F3F8FD;flex:1}
-.listing{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}
-.listing .thumb{width:54px;height:54px;border-radius:9px;object-fit:cover;flex:none}
+.app-top{background:var(--grad);color:#fff;padding:26px 13px 11px;font-weight:700;font-size:11.5px;display:flex;align-items:center;gap:7px}
+.app-top .icn{width:15px;height:15px;stroke-width:2}
+.app-list{padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;background:#F3F8FD;flex:1}
+.listing{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;display:flex;gap:9px;align-items:center}
+.listing .thumb{width:46px;height:46px;border-radius:8px;object-fit:cover;flex:none}
 .listing .meta{flex:1;min-width:0}
-.listing .tag{display:inline-block;background:var(--paleblue);color:var(--blue);font-size:9px;font-weight:700;border-radius:4px;padding:1px 6px;margin-bottom:3px}
-.listing .ttl{font-size:11.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.listing .when{font-size:10px;color:var(--muted)}
-.listing .price{font-size:13px;font-weight:800;color:var(--blue);white-space:nowrap}
-.app-buy{margin:2px 12px 14px;background:var(--orange);color:#fff;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:13px}
+.listing .tag{display:inline-block;background:var(--paleblue);color:var(--blue);font-size:8.5px;font-weight:700;border-radius:4px;padding:1px 6px;margin-bottom:2px}
+.listing .ttl{font-size:10.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.listing .when{font-size:9px;color:var(--muted)}
+.listing .price{font-size:11.5px;font-weight:800;color:var(--blue);white-space:nowrap}
+.app-buy{margin:2px 10px 12px;background:var(--orange);color:#fff;text-align:center;padding:9px;border-radius:8px;font-weight:700;font-size:11px}
 
 /* floating bubble feature cards */
 .bubble{
@@ -178,15 +178,12 @@ header{
 /* ---------- core mechanic (APPROACH-style) ---------- */
 .mechanic{background:var(--graybg)}
 .mech-three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:42px}
-.mech-card{background:#fff;border-radius:16px;padding:30px 26px;position:relative}
-.mech-card .num{
-  position:absolute;top:-16px;left:26px;width:42px;height:42px;border-radius:11px;
-  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;
+.mech-card{background:#fff;border-radius:16px;padding:26px;position:relative}
+.mech-card .howimg{
+  width:84px;height:84px;border-radius:18px;object-fit:cover;display:block;
+  background:var(--lightblue);
 }
-.mech-card:nth-child(1) .num{background:#1EC8C2}
-.mech-card:nth-child(2) .num{background:#048CF2}
-.mech-card:nth-child(3) .num{background:#7C5CFF}
-.mech-card h3{font-size:19px;font-weight:700;margin:18px 0 10px}
+.mech-card h3{font-size:19px;font-weight:700;margin:16px 0 10px}
 .mech-card p{font-size:14.5px;color:var(--muted);line-height:1.8}
 /* before/after */
 .ba{display:grid;grid-template-columns:1fr 64px 1fr;gap:0;align-items:stretch;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 22px rgba(20,40,70,.06)}
@@ -223,25 +220,26 @@ header{
 /* mini phone */
 .mini-phone{background:#0d1116;border-radius:30px;padding:9px;box-shadow:0 14px 32px rgba(0,30,70,.18)}
 .mini-screen{background:#fff;border-radius:23px;overflow:hidden;aspect-ratio:9/18;display:flex;flex-direction:column}
-.ms-top{background:var(--grad);color:#fff;padding:14px 13px 11px;font-weight:700;font-size:12.5px}
-.ms-body{padding:12px;flex:1;background:#F3F8FD;display:flex;flex-direction:column;gap:9px}
-.ms-field{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+.ms-top{background:var(--grad);color:#fff;padding:11px 11px 9px;font-weight:700;font-size:11px}
+.ms-body{padding:10px;flex:1;background:#F3F8FD;display:flex;flex-direction:column;gap:7px}
+.ms-field{background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 9px}
 .ms-field .lab{font-size:9px;color:var(--muted)}
-.ms-field .val{font-size:13px;font-weight:700;color:var(--ink)}
+.ms-field .val{font-size:10.5px;font-weight:700;color:var(--ink)}
 .ms-photo{width:100%;height:100%;border-radius:0;object-fit:cover}
-.ms-cap{display:flex;justify-content:center;padding:8px 0 2px}
-.ms-cap img{width:80px;height:80px}
-.ms-btn{background:var(--orange);color:#fff;text-align:center;border-radius:9px;padding:10px;font-weight:700;font-size:12.5px}
+.ms-btn{background:var(--orange);color:#fff;text-align:center;border-radius:8px;padding:8px;font-weight:700;font-size:11px}
 .ms-btn.blue{background:var(--blue)}
-.ms-open{text-align:center;color:var(--ink);font-weight:700;font-size:13px;padding:6px 0}
-.ms-open small{display:block;font-weight:500;color:var(--muted);font-size:11px}
 .ms-receive{background:#0d1116;color:#fff;flex:1;display:flex;flex-direction:column}
 .ms-receive .vid{position:relative;flex:1;min-height:0}
 .ms-receive .vid img{width:100%;height:100%;object-fit:cover}
-.ms-receive .play{position:absolute;inset:0;margin:auto;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center}
-.ms-receive .cap{padding:10px 12px;font-size:11px}
-.ms-receive .cap b{font-size:12.5px;display:block}
-.ms-receive .own{color:#1EC8C2;font-weight:700;font-size:10.5px;margin-top:3px}
+.ms-receive .play{position:absolute;inset:0;margin:auto;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center}
+.ms-receive .cap{padding:8px 10px 4px;font-size:9.5px;line-height:1.55;color:rgba(255,255,255,.82)}
+.ms-receive .cap b{font-size:10.5px;display:block;color:#fff;margin-bottom:2px}
+.ms-receive .cap .note{display:block;margin-top:1px}
+.ms-receive .own{color:#1EC8C2;font-weight:700;font-size:10px;margin-top:5px}
+.ms-receive-acts{display:flex;gap:7px;padding:0 10px 11px}
+.ms-receive-acts .rb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:8px;padding:7px 0;font-weight:700;font-size:11px}
+.ms-receive-acts .rb.play{background:var(--blue);color:#fff}
+.ms-receive-acts .rb.share{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
 .flow-hint{text-align:center;color:var(--muted);font-size:13px;margin-top:6px}
 
 /* ---------- VALUE ---------- */
@@ -555,17 +553,17 @@ footer{background:#fff;padding:54px 0 0}
 
     <div class="mech-three">
       <div class="mech-card">
-        <span class="num">1</span>
+        <img class="howimg" src="assets/how1.png" alt="練習の時間を先に売るイメージ">
         <h3>時間を“先に”売る</h3>
         <p>出来上がった作品ではなく、これから過ごす練習の時間枠を先に出品。撮る前に売れるから、撮影のハードルがありません。</p>
       </div>
       <div class="mech-card">
-        <span class="num">2</span>
+        <img class="howimg" src="assets/how2.png" alt="中身は届くまで分からない＝封をされて届くイメージ">
         <h3>中身は、届くまで分からない</h3>
         <p>その時間に何が映るかは、封を開けるまで分かりません。何が届くか分からないワクワクが、再購入を生みます。</p>
       </div>
       <div class="mech-card">
-        <span class="num">3</span>
+        <img class="howimg" src="assets/how3.png" alt="届くのは世界に1つのデジタルグッズというイメージ">
         <h3>届くのは世界に1つ</h3>
         <p>落札者だけが持つ一点もの。同じ瞬間は二つとなく、「自分だけが所有している」という体験が価値になります。</p>
       </div>
@@ -599,8 +597,8 @@ footer{background:#fff;padding:54px 0 0}
 <section class="flow" id="flow">
   <div class="wrap">
     <span class="eyebrow">FLOW</span>
-    <h2 class="sec-title">出品から受け取りまで、5ステップ</h2>
-    <p class="sec-lead">アーティストは出品して撮るだけ。ファンは買って、開けて、受け取る。実際のアプリ画面で流れを見てみましょう。（横にスクロールできます）</p>
+    <h2 class="sec-title">出品から受け取りまで、4ステップ</h2>
+    <p class="sec-lead">アーティストは出品して撮るだけ。ファンは買って、受け取って、その場で再生・シェア。実際のアプリ画面で流れを見てみましょう。（横にスクロールできます）</p>
 
     <div class="flow-scroll">
       <div class="flow-step">
@@ -638,34 +636,27 @@ footer{background:#fff;padding:54px 0 0}
         </div></div>
       </div>
       <div class="flow-step">
-        <div class="flow-head"><span class="no">4</span><span class="role buyer">購入者</span><span class="htxt">届く・開封する</span></div>
-        <div class="mini-phone"><div class="mini-screen">
-          <div class="ms-top">受け取りボックス</div>
-          <div class="ms-body" style="justify-content:center;align-items:center">
-            <div class="ms-cap"><img src="assets/mock_capsule.png" alt="開封前の、封がされた世界に1つの動画クリップ"></div>
-            <div class="ms-open">あなたの区間が届きました<small>タップして開ける</small></div>
-            <div class="ms-btn blue" style="width:100%">開ける</div>
-          </div>
-        </div></div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-head"><span class="no">5</span><span class="role buyer">購入者</span><span class="htxt">受け取る・所有する</span></div>
+        <div class="flow-head"><span class="no">4</span><span class="role buyer">購入者</span><span class="htxt">受け取って、再生・シェア</span></div>
         <div class="mini-phone"><div class="mini-screen">
           <div class="ms-receive">
             <div class="vid">
-              <img src="assets/mock_practice.png" alt="受け取った練習動画">
+              <img src="assets/mock_practice.png" alt="受け取った、世界に1つの練習動画クリップ">
               <span class="play"><svg viewBox="0 0 24 24" width="20" height="20" fill="#048CF2"><path d="M8 5v14l11-7z"/></svg></span>
             </div>
             <div class="cap">
               <b>19:47:30 - 19:47:40 ダンス練習</b>
-              思いがけず写った、面白い瞬間。
-              <div class="own">世界で一つだけ、あなたが所有</div>
+              <span class="note">中身は届くまで分からない。思いがけず写った面白い瞬間が、あなたのもとへ。</span>
+              <div class="own">世界に1つを所有・その場で再生</div>
+            </div>
+            <div class="ms-receive-acts">
+              <div class="rb play"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>再生</div>
+              <div class="rb share"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8 11l8-5M8 13l8 5"/></svg>シェア</div>
             </div>
           </div>
         </div></div>
       </div>
     </div>
-    <p class="flow-hint">①③＝販売者の操作 ／ ②④⑤＝購入者の体験</p>
+    <p class="flow-hint">①③＝販売者の操作 ／ ②④＝購入者の体験</p>
   </div>
 </section>
 
