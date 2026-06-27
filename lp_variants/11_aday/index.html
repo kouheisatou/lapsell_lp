@@ -205,7 +205,7 @@
   .mech{ margin-top:10px; }
   .mrow{ display:flex; gap:24px; padding:30px 0; align-items:flex-start; }
   .mrow + .mrow{ border-top:1px solid rgba(255,255,255,.24); }
-  .mnum{ font-family:"Inter"; font-weight:900; font-size:42px; line-height:1; color:#fff; opacity:.55; flex:0 0 auto; width:56px; }
+  .micon{ width:80px; height:80px; flex:0 0 auto; border-radius:14px; object-fit:cover; background:var(--ivory); }
   .mrow h3{ font-size:22px; font-weight:800; margin-bottom:6px; }
   .mrow p{ font-size:15px; }
 
@@ -223,20 +223,23 @@
   /* 黒枠デバイス */
   .device{ width:228px; aspect-ratio:9/19.5; background:#111; border-radius:30px; padding:9px; box-shadow:0 18px 36px rgba(0,0,0,.28); }
   .screen{ width:100%; height:100%; background:var(--ivory); border-radius:22px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
-  .scr-bar{ height:26px; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 12px; font-size:9px; flex:0 0 auto; }
+  .scr-bar{ height:22px; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 10px; font-size:9px; flex:0 0 auto; }
   .scr-bar b{ font-weight:700; }
-  .scr-body{ flex:1; padding:12px; font-size:11px; color:var(--ink); overflow:hidden; }
-  .scr-body .h{ font-weight:800; font-size:12.5px; margin-bottom:8px; }
-  .listing{ background:#fff; border-radius:10px; padding:8px 10px; margin-bottom:7px; display:flex; justify-content:space-between; align-items:center; }
-  .listing small{ color:#777; font-size:9px; display:block; }
-  .listing .pr{ color:var(--blue); font-weight:800; font-size:11px; }
-  .scr-btn{ background:var(--blue); color:#fff; text-align:center; border-radius:999px; padding:8px; font-weight:700; font-size:11px; margin-top:6px; }
-  .scr-thumb{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; margin-bottom:8px; }
-  .scr-cap{ width:74px; margin:6px auto 8px; }
-  .rec{ display:inline-flex; align-items:center; gap:5px; background:rgba(255,59,59,.18); color:#ff7b7b; font-weight:700; font-size:10px; padding:3px 9px; border-radius:999px; }
+  .scr-body{ flex:1; padding:10px; font-size:10px; color:var(--ink); overflow:hidden; }
+  .scr-body .h{ font-weight:800; font-size:11px; margin-bottom:7px; }
+  .listing{ background:#fff; border-radius:9px; padding:6px 8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; font-size:10px; }
+  .listing small{ color:#777; font-size:8.5px; display:block; }
+  .listing .pr{ color:var(--blue); font-weight:800; font-size:10.5px; }
+  .scr-btn{ background:var(--blue); color:#fff; text-align:center; border-radius:999px; padding:6px; font-weight:700; font-size:11px; margin-top:5px; }
+  .scr-thumb{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; margin-bottom:7px; }
+  /* 再生サムネのプレイ▶オーバーレイ */
+  .thumb-play{ position:relative; line-height:0; }
+  .play-ov{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:34px; height:34px; border-radius:50%; background:rgba(24,35,255,.78); display:flex; align-items:center; justify-content:center; }
+  .play-ov svg{ width:16px; height:16px; }
+  .rec{ display:inline-flex; align-items:center; gap:5px; background:rgba(255,59,59,.18); color:#ff7b7b; font-weight:700; font-size:9.5px; padding:3px 8px; border-radius:999px; }
   .rec b{ width:7px; height:7px; border-radius:50%; background:var(--red); display:inline-block; }
-  .own-line{ font-size:9.5px; color:#666; margin-top:6px; }
-  .scrub{ height:5px; background:#ddd; border-radius:9px; margin:8px 0; position:relative; }
+  .own-line{ font-size:9px; color:#666; margin-top:6px; }
+  .scrub{ height:5px; background:#ddd; border-radius:9px; margin:7px 0; position:relative; }
   .scrub::after{ content:""; position:absolute; left:0; top:0; bottom:0; width:42%; background:var(--blue); border-radius:9px; }
 
   /* 実績：横長スクショ width100%、結論を見出しに */
@@ -299,6 +302,24 @@
   .target .lbl{ font-family:"Inter"; font-size:11px; letter-spacing:.12em; color:var(--blue); font-weight:700; }
   .targets-out{ font-size:13.5px; color:var(--ink-soft); margin-top:22px; }
 
+  /* 導入イメージ：Before/After ケース（枠は最小限） */
+  .cases{ margin-top:26px; }
+  .case{ display:grid; grid-template-columns:200px 1fr; gap:30px; align-items:center; padding:34px 0; }
+  .case + .case{ border-top:1px solid rgba(20,25,29,.12); }
+  .case-persona{ text-align:center; }
+  .case-persona img{ width:128px; height:128px; border-radius:50%; object-fit:cover; margin:0 auto 12px; box-shadow:0 10px 24px rgba(0,0,0,.10); }
+  .case-persona .nm{ font-size:16px; font-weight:800; }
+  .case-persona .ds{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+  .ba{ display:flex; align-items:stretch; gap:18px; }
+  .ba-col{ flex:1 1 0; min-width:0; }
+  .ba-lbl{ font-family:"Inter"; font-size:11px; letter-spacing:.12em; font-weight:700; margin-bottom:6px; }
+  .ba-before .ba-lbl{ color:var(--ink-soft); }
+  .ba-after .ba-lbl{ color:var(--blue); }
+  .ba-col p{ font-size:14px; line-height:1.7; }
+  .ba-after p{ font-weight:600; }
+  .ba-arrow{ flex:0 0 auto; display:flex; align-items:center; color:var(--blue); }
+  .ba-arrow svg{ width:28px; height:28px; }
+
   /* FAQ アコーディオン（機能的に枠OK） */
   .faq-list{ margin-top:18px; max-width:48em; }
   .faq-item{ background:var(--white); border-radius:14px; margin-bottom:12px; overflow:hidden; }
@@ -340,6 +361,9 @@
     .brand h1{ font-size:48px; }
     .logo-script{ position:absolute; }
     .fitem img{ width:80px; height:80px; }
+    .case{ grid-template-columns:1fr; gap:18px; }
+    .ba{ flex-direction:column; gap:14px; }
+    .ba-arrow{ justify-content:center; transform:rotate(90deg); }
   }
   @media (max-width:520px){
     .auth-flow .arrow{ transform:rotate(90deg); width:100%; text-align:center; }
@@ -490,21 +514,21 @@
 
       <div class="mech">
         <div class="mrow">
-          <div class="mnum">01</div>
+          <img class="micon" src="assets/how1.png" alt="練習の時間を先に売るイメージ">
           <div>
             <h3>時間を“先に”売る</h3>
             <p>完成した動画ではなく、これから訪れる練習の「時間枠」を出品。まだ撮っていない未来を、先に収益に変えます。</p>
           </div>
         </div>
         <div class="mrow">
-          <div class="mnum">02</div>
+          <img class="micon" src="assets/how2.png" alt="中身は届くまで分からないイメージ">
           <div>
             <h3>中身は、届くまで分からない</h3>
             <p>何が映るかは封を開けるまで分からない。だからファンは「何が届くか」のワクワクごと購入します。</p>
           </div>
         </div>
         <div class="mrow">
-          <div class="mnum">03</div>
+          <img class="micon" src="assets/how3.png" alt="届くのは世界に1つのイメージ">
           <div>
             <h3>届くのは世界に1つ</h3>
             <p>その区間を持っているのは落札者ただ一人。世界で一つだけの、一点もののデジタルグッズになります。</p>
@@ -516,7 +540,7 @@
     <!-- アプリモック：5ステップ 横スクロール（黒枠スマホ）/ 販売者・購入者タグ -->
     <section class="band-ivory" id="flow">
       <div class="en">APP WALKTHROUGH</div>
-      <h2><span class="jp">アプリでの流れは、<br>出品から開封まで5ステップ。</span></h2>
+      <h2><span class="jp">アプリでの流れは、<br>出品から受け取りまで4ステップ。</span></h2>
       <p class="lead">いつもの練習を撮るだけ。むずかしい操作も、特別な機材もいりません。<span class="lead-strong">→ 横にスワイプして見る</span></p>
 
       <div class="steps-scroll">
@@ -565,36 +589,25 @@
           </div></div>
         </div>
 
-        <!-- 4 届く・開封（購入者） -->
+        <!-- 4 受け取り・再生（購入者）— 届いた時点でもう再生できる一点もの -->
         <div class="stepcol">
           <div class="step-meta"><span class="no">04</span><span class="roletag role-buy">購入者</span></div>
-          <div class="step-title">後日、封を開けて受け取る（中身は開けてのお楽しみ）</div>
-          <div class="device"><div class="screen">
-            <div class="scr-bar"><b>受け取り</b><span>9:41</span></div>
-            <div class="scr-body" style="text-align:center;">
-              <div class="h" style="margin-top:8px;">あなたの区間が届きました</div>
-              <img class="scr-cap" src="assets/mock_capsule.png" alt="封がされた一点ものの動画クリップ（中身は開けるまで分からない）">
-              <div class="scr-btn">タップして開ける</div>
-              <div class="own-line">公開前チェック済み・事故区間は届きません</div>
-            </div>
-          </div></div>
-        </div>
-
-        <!-- 5 所有・シェア（購入者） -->
-        <div class="stepcol">
-          <div class="step-meta"><span class="no">05</span><span class="roletag role-buy">購入者</span></div>
-          <div class="step-title">世界で一つだけを所有し、シェアする</div>
+          <div class="step-title">届いた区間を、その場で再生・シェアする</div>
           <div class="device"><div class="screen">
             <div class="scr-bar"><b>マイグッズ</b><span>9:41</span></div>
             <div class="scr-body">
-              <img class="scr-thumb" src="assets/mock_practice.png" alt="受け取った練習映像">
-              <div style="font-weight:800; font-size:11px;">19:47:30–47:40 ダンス練習</div>
+              <div class="h" style="margin-bottom:6px;">あなたの区間が届きました</div>
+              <div class="thumb-play">
+                <img class="scr-thumb" src="assets/mock_practice.png" alt="受け取った練習映像（再生可能）" style="margin-bottom:0;">
+                <span class="play-ov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              </div>
+              <div style="font-weight:800; font-size:10px; margin-top:6px;">19:47:30–47:40 ダンス練習</div>
               <div class="scrub"></div>
               <div style="display:flex; gap:6px;">
                 <div class="scr-btn" style="flex:1; margin-top:0;">再生</div>
                 <div class="scr-btn" style="flex:1; margin-top:0; background:#fff; color:var(--blue); border:1.5px solid var(--blue);">シェア</div>
               </div>
-              <div class="own-line">世界で一つだけ、あなたが所有</div>
+              <div class="own-line">世界で一つだけ、あなたが所有（中身は届くまで分からない）</div>
             </div>
           </div></div>
         </div>
@@ -642,8 +655,77 @@
       </div>
     </section>
 
+    <!-- 導入イメージ：Before/After ケース（枠は最小限） -->
+    <section class="band-ivory" id="cases">
+      <div class="en">導入イメージ</div>
+      <h2><span class="jp">こんな変化が、起きています。</span></h2>
+      <p class="lead">ジャンルが違っても、流れはひとつ。<span class="lead-strong">練習の“時間”を出品 → ファンが買って撮影 → 一点ものが届く</span>──同じ仕組みが、それぞれの現場でこんな変化を生みます。</p>
+
+      <div class="cases">
+        <!-- ライブアイドル -->
+        <div class="case">
+          <div class="case-persona">
+            <img src="assets/artist_idol.png" alt="ライブアイドルのイラスト">
+            <div class="nm">ライブアイドル</div>
+            <div class="ds">遠方ファンを抱える現場派</div>
+          </div>
+          <div class="ba">
+            <div class="ba-col ba-before">
+              <div class="ba-lbl">これまで</div>
+              <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+            </div>
+            <div class="ba-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col ba-after">
+              <div class="ba-lbl">Lapsell後</div>
+              <p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- インディーズバンド -->
+        <div class="case">
+          <div class="case-persona">
+            <img src="assets/artist_band.png" alt="インディーズバンドのイラスト">
+            <div class="nm">インディーズバンド</div>
+            <div class="ds">スタジオ代に悩む4人組</div>
+          </div>
+          <div class="ba">
+            <div class="ba-col ba-before">
+              <div class="ba-lbl">これまで</div>
+              <p>スタジオ代がかさむのに、リハを届ける手段がなく固定ファン止まり。</p>
+            </div>
+            <div class="ba-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col ba-after">
+              <div class="ba-lbl">Lapsell後</div>
+              <p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- インディーズお笑い芸人 -->
+        <div class="case">
+          <div class="case-persona">
+            <img src="assets/artist_comedian.png" alt="インディーズお笑い芸人のイラスト">
+            <div class="nm">インディーズお笑い芸人</div>
+            <div class="ds">配信事故が怖いコンビ</div>
+          </div>
+          <div class="ba">
+            <div class="ba-col ba-before">
+              <div class="ba-lbl">これまで</div>
+              <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+            </div>
+            <div class="ba-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col ba-after">
+              <div class="ba-lbl">Lapsell後</div>
+              <p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 実績：実スクショ + チャート -->
-    <section class="band-ivory" id="evidence">
+    <section class="band-ivory2" id="evidence">
       <div class="en">EVIDENCE</div>
       <h2><span class="jp">“素の裏側”には、<br>すでに大きな需要がある。</span></h2>
 
