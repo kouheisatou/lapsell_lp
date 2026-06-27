@@ -353,6 +353,26 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 .foot .flinks a:hover{color:#fff}
 .foot .copy{font-size:13px;color:#a99b82}
 
+/* ---------- cases (導入イメージ: before→after, polaroid personas) ---------- */
+.cases{display:grid;grid-template-columns:1fr;gap:54px;margin-top:50px;position:relative;z-index:2}
+.case{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+.case .pic{max-width:280px;width:100%;margin:6px auto 0}
+.case .pic h3{font-size:20px;font-weight:900;text-align:center;margin:16px 0 2px}
+.case .pic .desc{font-size:13px;font-weight:700;color:var(--ink-soft);text-align:center}
+.case .ba{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+.case .stage .k{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:6px}
+.case .stage.after .k{color:var(--red)}
+.case .stage p{font-size:15px;font-weight:600;line-height:1.78}
+.case .stage.after p{font-weight:700}
+.case .ba-arrow{display:flex;align-items:center;justify-content:center;color:var(--red)}
+.case .ba-arrow svg{width:34px;height:34px;transform:rotate(90deg)}
+@media(min-width:760px){
+  .case{grid-template-columns:.78fr 1.22fr;gap:34px}
+  .case.rev .pic{order:2}
+  .case .ba{grid-template-columns:1fr auto 1fr;gap:18px}
+  .case .ba-arrow svg{transform:none}
+}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -591,6 +611,83 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
           <h3>公開前のチェックで事故を防げる</h3>
           <p>ライブ配信と違い、撮影してからアップロードする仕組みです。まずい瞬間は公開せず、面白い瞬間だけを届けられます。</p>
           <span class="ev">事故が起きた区間は非公開にして返金も可能</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- cases: 導入イメージ before→after personas -->
+<section class="sec" id="cases">
+  <div class="wrap">
+    <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>導入イメージ</span>
+    <h2 class="sec-title">こんな<em>変化が起きています</em></h2>
+    <p class="lead">これまで収益にも記録にもならなかった練習の時間が、出品をきっかけにどう変わるのか。3組の出品者の「これまで」と「Lapsell後」をご紹介します。</p>
+
+    <div class="cases">
+      <!-- case 1: ライブアイドル -->
+      <div class="case">
+        <div class="pic">
+          <div class="cheki tilt-l"><span class="pin"></span><span class="tape top-r"></span><img src="assets/member1.png" alt="ライブアイドルのチェキ風ポートレート"></div>
+          <h3>ライブアイドル</h3>
+          <p class="desc">遠方にもファンを抱える</p>
+        </div>
+        <div class="ba">
+          <div class="stage before">
+            <span class="k">これまで</span>
+            <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">
+            <svg viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
+          </div>
+          <div class="stage after">
+            <span class="k">Lapsell後</span>
+            <p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- case 2: インディーズバンド -->
+      <div class="case rev">
+        <div class="pic">
+          <div class="cheki tilt-r"><span class="pin teal"></span><span class="tape t2 top-l"></span><img src="assets/member2.png" alt="インディーズバンドのチェキ風ポートレート"></div>
+          <h3>インディーズバンド</h3>
+          <p class="desc">スタジオで活動する</p>
+        </div>
+        <div class="ba">
+          <div class="stage before">
+            <span class="k">これまで</span>
+            <p>スタジオ代がかさむのにリハを届ける手段がなく固定ファン止まり。</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">
+            <svg viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
+          </div>
+          <div class="stage after">
+            <span class="k">Lapsell後</span>
+            <p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- case 3: インディーズお笑い芸人 -->
+      <div class="case">
+        <div class="pic">
+          <div class="cheki tilt-r2"><span class="pin must"></span><span class="tape top-r"></span><img src="assets/member3.png" alt="インディーズお笑い芸人のチェキ風ポートレート"></div>
+          <h3>インディーズお笑い芸人</h3>
+          <p class="desc">ネタ合わせを重ねる</p>
+        </div>
+        <div class="ba">
+          <div class="stage before">
+            <span class="k">これまで</span>
+            <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+          </div>
+          <div class="ba-arrow" aria-hidden="true">
+            <svg viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.2c4-.4 9 .2 16-.4"/><path d="M13 2.5c2.2 2 3.8 3.4 5 4.6-1.6 1-3.3 2.3-5 4.4"/></svg>
+          </div>
+          <div class="stage after">
+            <span class="k">Lapsell後</span>
+            <p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p>
+          </div>
         </div>
       </div>
     </div>
