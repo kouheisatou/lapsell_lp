@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lapsell（ラプセル）｜練習の“時間”を売る、ライブアイドル・インディーズアーティストの収益化アプリ</title>
-<meta name="description" content="ライブアイドル・インディーズアーティスト・バンド・お笑い芸人のための収益化アプリ。練習の“時間”を先に出品し、撮れた映像をガチャ型のデジタルグッズとしてファンに直接販売。初期費用0円・手数料5%〜。推し活マネタイズ・練習動画 収益化・ファングッズ販売を最短で。">
+<meta name="description" content="ライブアイドル・インディーズアーティスト・バンド・お笑い芸人のための収益化アプリ。練習の“時間”を先に出品し、撮れた映像を「中身は届くまで分からない」一点もののデジタルグッズとしてファンに直接販売。初期費用0円・手数料5%〜。推し活マネタイズ・練習動画 収益化・ファングッズ販売を最短で。">
 <meta name="keywords" content="ライブアイドル 収益化,アイドル 収入 増やす,インディーズ アーティスト 収益化,バンド マネタイズ,練習動画 収益化,ファングッズ 販売,デジタルグッズ 販売,推し活 マネタイズ,ファンに直接販売 アプリ">
 <meta property="og:title" content="Lapsell｜練習の“時間”を売る、新しいファングッズ市場">
-<meta property="og:description" content="加工なしの“裏側”を、ガチャ型デジタルグッズに。初期費用0円・手数料5%〜。">
+<meta property="og:description" content="加工なしの“裏側”を、中身は届くまで分からない一点もののデジタルグッズに。初期費用0円・手数料5%〜。">
 <meta property="og:type" content="website">
 <script type="application/ld+json">
 {
@@ -15,7 +15,7 @@
   "@type": "Service",
   "name": "Lapsell（ラプセル）",
   "serviceType": "ライブアイドル・インディーズアーティスト向け収益化アプリ",
-  "description": "練習の“時間”を先に出品し、撮れた映像をガチャ型のデジタルグッズとしてファンに直接販売できる収益化サービス。初期費用0円・取引手数料5%〜。",
+  "description": "練習の“時間”を先に出品し、撮れた映像を「中身は届くまで分からない」一点もののデジタルグッズとしてファンに直接販売できる収益化サービス。初期費用0円・取引手数料5%〜。",
   "areaServed": "JP",
   "audience": { "@type": "Audience", "audienceType": "ライブアイドル、インディーズアーティスト、バンド、お笑い芸人" },
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY", "description": "初期費用0円・取引手数料5%〜（売れた分のみ）" }
@@ -101,7 +101,7 @@
     color:var(--white);
     letter-spacing:1px;
   }
-  /* マスコット（手描き風カプセルキャラ：SVG） */
+  /* マスコット（手描き風クリップくん：フィルムフレーム＋再生ボタンのキャラ） */
   .mascot{ width:170px; height:150px; margin:0 auto 30px; }
   .eyebrow{ font-size:13px; letter-spacing:.14em; opacity:.92; margin-bottom:8px; font-weight:600;}
   .brand h1{
@@ -360,21 +360,33 @@
   <!-- ===== 左固定パネル：ブランド／マスコット／CTA／SNS ===== -->
   <aside class="pane-left">
     <div class="brand">
-      <!-- 手描き風カプセル・マスコット -->
+      <!-- 手描き風クリップくん：フィルムフレーム＋再生ボタンのマスコット -->
       <svg class="mascot" viewBox="0 0 180 160" fill="none" aria-hidden="true">
-        <ellipse cx="90" cy="146" rx="52" ry="9" fill="rgba(0,0,0,.18)"/>
-        <path d="M48 86a42 42 0 0 1 84 0v18a42 42 0 0 1-84 0Z" fill="#fff" stroke="#111" stroke-width="5"/>
-        <path d="M48 86a42 42 0 0 1 84 0H48Z" fill="#1823FF" stroke="#111" stroke-width="5"/>
-        <path d="M48 92h84" stroke="#111" stroke-width="4"/>
-        <circle cx="76" cy="104" r="4.5" fill="#111"/>
-        <circle cx="104" cy="104" r="4.5" fill="#111"/>
-        <path d="M82 116q8 7 16 0" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <circle cx="66" cy="112" r="5" fill="#FF7a7a" opacity=".6"/>
-        <circle cx="114" cy="112" r="5" fill="#FF7a7a" opacity=".6"/>
-        <path d="M48 100q-12 4-14 16" stroke="#111" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <path d="M132 100q12 4 14 16" stroke="#111" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <path d="M40 50l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff" opacity=".9"/>
-        <path d="M146 36l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff" opacity=".8"/>
+        <ellipse cx="90" cy="148" rx="50" ry="8" fill="rgba(0,0,0,.18)"/>
+        <!-- 体＝丸みのあるフィルムフレーム -->
+        <rect x="46" y="60" width="88" height="74" rx="16" fill="#fff" stroke="#111" stroke-width="5"/>
+        <!-- フィルムの穴（左右のパーフォレーション） -->
+        <rect x="52" y="70" width="9" height="9" rx="2" fill="#1823FF"/>
+        <rect x="52" y="92" width="9" height="9" rx="2" fill="#1823FF"/>
+        <rect x="52" y="114" width="9" height="9" rx="2" fill="#1823FF"/>
+        <rect x="119" y="70" width="9" height="9" rx="2" fill="#1823FF"/>
+        <rect x="119" y="92" width="9" height="9" rx="2" fill="#1823FF"/>
+        <rect x="119" y="114" width="9" height="9" rx="2" fill="#1823FF"/>
+        <!-- 顔（中央のスクリーン部） -->
+        <circle cx="79" cy="92" r="4.5" fill="#111"/>
+        <circle cx="101" cy="92" r="4.5" fill="#111"/>
+        <path d="M82 104q8 7 16 0" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <circle cx="70" cy="100" r="5" fill="#FF7a7a" opacity=".55"/>
+        <circle cx="110" cy="100" r="5" fill="#FF7a7a" opacity=".55"/>
+        <!-- 頭の再生ボタン（クリップの象徴） -->
+        <circle cx="90" cy="42" r="17" fill="#1823FF" stroke="#111" stroke-width="5"/>
+        <path d="M85 35l11 7-11 7z" fill="#fff"/>
+        <!-- 腕 -->
+        <path d="M46 108q-12 4-14 18" stroke="#111" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M134 108q12 4 14 18" stroke="#111" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <!-- きらきら -->
+        <path d="M34 64l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff" opacity=".85"/>
+        <path d="M150 50l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff" opacity=".8"/>
       </svg>
 
       <div class="eyebrow">練習の“時間”を、収益に変える</div>
@@ -474,7 +486,7 @@
     <section class="band-blue" id="how">
       <div class="en">HOW IT WORKS</div>
       <h2><span class="jp">完成品ではなく、<br>未来の“練習の時間”を売る。</span></h2>
-      <p class="lead">時間枠を出品 → ファンが中身を知らずに購入 → 当日スマホで撮るだけ → 撮れた映像が、開けるまで中身の分からない<span class="mark">ランダムグッズ</span>として届く。</p>
+      <p class="lead">時間枠を出品 → ファンが中身を知らずに購入 → 当日スマホで撮るだけ → 撮れた映像が、<span class="mark">中身は届くまで分からない</span>一点もののデジタルグッズとして届く。</p>
 
       <div class="mech">
         <div class="mrow">
@@ -487,8 +499,8 @@
         <div class="mrow">
           <div class="mnum">02</div>
           <div>
-            <h3>中身は運しだい＝ガチャ</h3>
-            <p>何が映るかは届くまで分からない。構造そのものがガチャだから、ファンは「何が当たるか」のワクワクごと購入します。</p>
+            <h3>中身は、届くまで分からない</h3>
+            <p>何が映るかは封を開けるまで分からない。だからファンは「何が届くか」のワクワクごと購入します。</p>
           </div>
         </div>
         <div class="mrow">
@@ -556,12 +568,12 @@
         <!-- 4 届く・開封（購入者） -->
         <div class="stepcol">
           <div class="step-meta"><span class="no">04</span><span class="roletag role-buy">購入者</span></div>
-          <div class="step-title">後日、ガチャのように開けて受け取る</div>
+          <div class="step-title">後日、封を開けて受け取る（中身は開けてのお楽しみ）</div>
           <div class="device"><div class="screen">
             <div class="scr-bar"><b>受け取り</b><span>9:41</span></div>
             <div class="scr-body" style="text-align:center;">
               <div class="h" style="margin-top:8px;">あなたの区間が届きました</div>
-              <img class="scr-cap" src="assets/mock_capsule.png" alt="青白カプセルのガチャ">
+              <img class="scr-cap" src="assets/mock_capsule.png" alt="封がされた一点ものの動画クリップ（中身は開けるまで分からない）">
               <div class="scr-btn">タップして開ける</div>
               <div class="own-line">公開前チェック済み・事故区間は届きません</div>
             </div>
