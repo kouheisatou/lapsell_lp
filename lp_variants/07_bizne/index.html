@@ -97,25 +97,25 @@ svg{display:block;}
 .phone{position:relative;z-index:1;width:248px;background:#0c0c0e;border-radius:38px;padding:9px;box-shadow:0 26px 46px rgba(8,30,52,.5),inset 0 0 0 2px #2b2b2f;transform:perspective(1700px) rotateY(-11deg) rotateX(4deg);}
 .phone-scr{position:relative;background:#fff;border-radius:30px;overflow:hidden;aspect-ratio:9/19.3;}
 .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:78px;height:18px;background:#0c0c0e;border-radius:0 0 12px 12px;z-index:5;}
-.app-top{background:var(--blue);color:#fff;padding:24px 14px 11px;display:flex;align-items:center;justify-content:space-between;}
-.app-top .at-logo{font-weight:900;font-size:14px;letter-spacing:.02em;}
-.app-top .at-ic{display:flex;gap:10px;opacity:.9;}
-.app-top .at-ic svg{width:16px;height:16px;}
-.app-card{margin:9px;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 3px 8px rgba(20,60,100,.06);}
+.app-top{background:var(--blue);color:#fff;padding:22px 12px 9px;display:flex;align-items:center;justify-content:space-between;}
+.app-top .at-logo{font-weight:900;font-size:12px;letter-spacing:.02em;}
+.app-top .at-ic{display:flex;gap:9px;opacity:.9;}
+.app-top .at-ic svg{width:14px;height:14px;}
+.app-card{margin:8px;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 3px 8px rgba(20,60,100,.06);}
 .app-thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:#dfe7ee;}
 .app-thumb img{width:100%;height:100%;object-fit:cover;}
-.app-live{position:absolute;top:7px;left:7px;background:rgba(12,12,14,.78);color:#fff;font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:5px;display:flex;align-items:center;gap:4px;}
+.app-live{position:absolute;top:6px;left:6px;background:rgba(12,12,14,.78);color:#fff;font-size:8px;font-weight:800;padding:2px 6px;border-radius:5px;display:flex;align-items:center;gap:4px;}
 .app-live .dot{width:5px;height:5px;border-radius:50%;background:var(--yellow);}
-.app-body{padding:8px 10px 10px;}
-.app-body .ttl{font-size:10.5px;font-weight:800;color:var(--navy);line-height:1.4;}
-.app-body .meta{font-size:8.5px;color:var(--muted);margin-top:3px;}
-.app-row{display:flex;align-items:flex-end;justify-content:space-between;margin-top:7px;}
-.app-price{font-size:14px;font-weight:900;color:var(--blue);}
+.app-body{padding:7px 9px 9px;}
+.app-body .ttl{font-size:11px;font-weight:800;color:var(--navy);line-height:1.4;}
+.app-body .meta{font-size:9px;color:var(--muted);margin-top:3px;}
+.app-row{display:flex;align-items:flex-end;justify-content:space-between;margin-top:6px;}
+.app-price{font-size:12px;font-weight:900;color:var(--blue);}
 .app-price small{font-size:8px;color:var(--muted);font-weight:700;}
-.app-buy{background:var(--yellow);color:var(--navy);font-size:9px;font-weight:900;padding:5px 11px;border-radius:7px;}
-.app-stat{margin:0 9px 9px;background:var(--feat);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:8px;}
-.app-stat svg{width:18px;height:18px;color:var(--blue);flex:none;}
-.app-stat .t{font-size:8.8px;color:var(--navy);font-weight:700;line-height:1.45;}
+.app-buy{background:var(--yellow);color:var(--navy);font-size:11px;font-weight:900;padding:5px 10px;border-radius:7px;}
+.app-stat{margin:0 8px 8px;background:var(--feat);border-radius:10px;padding:6px 9px;display:flex;align-items:center;gap:7px;}
+.app-stat svg{width:16px;height:16px;color:var(--blue);flex:none;}
+.app-stat .t{font-size:9px;color:var(--navy);font-weight:700;line-height:1.45;}
 .app-stat .t b{color:var(--blue);}
 
 /* laurel badges */
@@ -182,7 +182,8 @@ svg{display:block;}
 .intro-note b{color:var(--blue);}
 .core3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;}
 .core-card{background:#fff;border-radius:14px;padding:22px 20px;border-top:4px solid var(--yellow);}
-.core-card .num{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.06em;}
+.core-card .howimg{width:80px;height:80px;margin-bottom:8px;}
+.core-card .howimg img{width:100%;height:100%;object-fit:contain;}
 .core-card b{display:block;font-size:17px;font-weight:900;color:var(--navy);margin:6px 0 8px;}
 .core-card p{font-size:13.5px;color:#4b535a;}
 
@@ -240,29 +241,35 @@ svg{display:block;}
 .fs-role{font-size:10.5px;font-weight:900;padding:3px 9px;border-radius:6px;}
 .fs-role.seller{background:var(--yellow);color:var(--navy);}
 .fs-role.buyer{background:var(--feat);color:var(--blue-d);border:1px solid #c9e2f4;}
-.fs-screen{margin:13px;border-radius:14px;background:#0c0c0e;padding:7px;}
+.fs-screen{margin:12px;border-radius:14px;background:#0c0c0e;padding:6px;}
 .fs-inner{background:#fff;border-radius:9px;overflow:hidden;min-height:206px;display:flex;flex-direction:column;}
-.fs-bar{background:var(--blue);color:#fff;font-size:9.5px;font-weight:800;padding:8px 10px;display:flex;align-items:center;gap:6px;}
-.fs-bar svg{width:13px;height:13px;}
-.fs-pad{padding:9px 10px;flex:1;}
+.fs-bar{background:var(--blue);color:#fff;font-size:9px;font-weight:800;padding:7px 9px;display:flex;align-items:center;gap:6px;}
+.fs-bar svg{width:12px;height:12px;}
+.fs-pad{padding:8px 9px;flex:1;}
 .fs-cap{padding:0 16px 16px;font-size:12.5px;color:#4b535a;line-height:1.6;}
 .fs-cap b{color:var(--navy);}
 /* mini ui within flow screens */
-.mui-field{border:1px solid var(--line);border-radius:7px;padding:6px 8px;margin-bottom:6px;}
+.mui-field{border:1px solid var(--line);border-radius:7px;padding:5px 7px;margin-bottom:5px;}
 .mui-field small{font-size:8px;color:var(--muted);font-weight:700;display:block;}
 .mui-field b{font-size:11px;color:var(--navy);font-weight:800;}
-.mui-btn{background:var(--yellow);color:var(--navy);font-size:10px;font-weight:900;text-align:center;padding:7px;border-radius:7px;margin-top:4px;}
-.mui-list{display:flex;flex-direction:column;gap:6px;}
-.mui-li{border:1px solid var(--line);border-radius:7px;padding:6px 7px;display:flex;justify-content:space-between;align-items:center;}
+.mui-btn{background:var(--yellow);color:var(--navy);font-size:11px;font-weight:900;text-align:center;padding:6px;border-radius:7px;margin-top:4px;}
+.mui-list{display:flex;flex-direction:column;gap:5px;}
+.mui-li{border:1px solid var(--line);border-radius:7px;padding:5px 7px;display:flex;justify-content:space-between;align-items:center;}
 .mui-li.sel{border-color:var(--blue);background:var(--feat);}
 .mui-li .l small{font-size:8px;color:var(--muted);display:block;}
-.mui-li .l b{font-size:10px;color:var(--navy);}
+.mui-li .l b{font-size:10.5px;color:var(--navy);}
 .mui-li .p{font-size:11px;font-weight:900;color:var(--blue);}
 .mui-rec{position:relative;background:#111;border-radius:8px;aspect-ratio:9/12;overflow:hidden;display:flex;align-items:flex-end;}
 .mui-rec img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.mui-rec .rectag{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font-size:8px;font-weight:800;padding:2px 7px;border-radius:5px;display:flex;align-items:center;gap:4px;z-index:2;}
+.mui-rec .rectag{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font-size:7.5px;font-weight:800;padding:2px 6px;border-radius:5px;display:flex;align-items:center;gap:4px;z-index:2;}
 .mui-rec .rectag .rd{width:5px;height:5px;border-radius:50%;background:#ff4848;}
-.mui-cap{position:relative;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:8.5px;font-weight:700;padding:14px 7px 6px;width:100%;}
+.mui-cap{position:relative;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:8px;font-weight:700;padding:14px 7px 6px;width:100%;}
+.mui-play{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;}
+.mui-play .pb{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.35);}
+.mui-play .pb svg{width:16px;height:16px;color:var(--blue);margin-left:2px;}
+.mui-acts{display:flex;gap:6px;margin-top:7px;}
+.mui-acts .mui-btn{flex:1;margin-top:0;}
+.mui-btn.alt{background:var(--feat);color:var(--blue-d);border:1px solid #c9e2f4;}
 .mui-open{text-align:center;padding:10px 6px;}
 .mui-open .cap-img{width:84px;height:84px;margin:6px auto;}
 .mui-open .cap-img img{width:100%;height:100%;object-fit:contain;}
@@ -590,9 +597,9 @@ svg{display:block;}
     <p class="intro-note">中身は<b>届いて封を開けるまで分からない</b>。同じ映像は2つとなく、買った人だけが所有できます。</p>
 
     <div class="core3">
-      <div class="core-card"><span class="num">POINT 01</span><b>時間を“先に”売る</b><p>完成品ではなく、未来の練習時間を販売。終わってからではなく、これから撮る時間に値段がつきます。</p></div>
-      <div class="core-card"><span class="num">POINT 02</span><b>中身は届くまで分からない</b><p>何が映るかは、封を開けるまで分からない。開封の高揚感が、そのまま購入の動機になります。</p></div>
-      <div class="core-card"><span class="num">POINT 03</span><b>届くのは世界に1つ</b><p>同じ瞬間は二度と撮れません。落札者だけが持つ一点もののデジタルグッズとして手元に残ります。</p></div>
+      <div class="core-card"><span class="howimg"><img src="assets/how1.png" alt="時間を先に売る"></span><b>時間を“先に”売る</b><p>完成品ではなく、未来の練習時間を販売。終わってからではなく、これから撮る時間に値段がつきます。</p></div>
+      <div class="core-card"><span class="howimg"><img src="assets/how2.png" alt="中身は届くまで分からない"></span><b>中身は届くまで分からない</b><p>何が映るかは、封を開けるまで分からない。開封の高揚感が、そのまま購入の動機になります。</p></div>
+      <div class="core-card"><span class="howimg"><img src="assets/how3.png" alt="世界に1つ"></span><b>届くのは世界に1つ</b><p>同じ瞬間は二度と撮れません。落札者だけが持つ一点もののデジタルグッズとして手元に残ります。</p></div>
     </div>
   </div>
 </section>
@@ -705,7 +712,7 @@ svg{display:block;}
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-kicker">利用の流れ</span>
-      <h2 class="sec-title">出品から受け取りまで、<span class="blue">たった5ステップ</span></h2>
+      <h2 class="sec-title">出品から受け取りまで、<span class="blue">たった4ステップ</span></h2>
       <p class="sec-lead">出品も購入も、アプリの中で完結。メルカリのように時間枠が並び、ファンが選んで購入します。</p>
     </div>
 
@@ -754,38 +761,29 @@ svg{display:block;}
         </div>
 
         <div class="flow-step">
-          <div class="fs-head"><span class="fs-no"><span class="b">4</span>届く・開封</span><span class="fs-role buyer">購入者</span></div>
+          <div class="fs-head"><span class="fs-no"><span class="b">4</span>届く・受け取り</span><span class="fs-role buyer">購入者</span></div>
           <div class="fs-screen"><div class="fs-inner">
             <div class="fs-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8l9-5 9 5"/></svg>届きました</div>
-            <div class="mui-open">
-              <div class="cap-img"><img src="assets/mock_capsule.png" alt="封のかかった、世界に1つの映像クリップ"></div>
-              <div class="ot">あなたの区間が届きました</div>
-              <div class="os">タップして開ける</div>
-              <div class="mui-btn">開ける</div>
-            </div>
-          </div></div>
-          <div class="fs-cap"><b>後日、封を開けて受け取り。</b>何が映っているかは、開けてのお楽しみ。</div>
-        </div>
-
-        <div class="flow-step">
-          <div class="fs-head"><span class="fs-no"><span class="b">5</span>受け取り</span><span class="fs-role buyer">購入者</span></div>
-          <div class="fs-screen"><div class="fs-inner">
             <div class="fs-pad" style="padding:9px;">
               <div class="mui-rec">
-                <img src="assets/mock_practice.png" alt="受け取った映像">
+                <img src="assets/mock_practice.png" alt="届いた、世界に1つの映像クリップ">
+                <span class="mui-play"><span class="pb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
                 <span class="mui-cap">19:47:30–19:47:40 ダンス練習<br>世界で一つだけ、あなたが所有</span>
               </div>
-              <div class="mui-btn" style="margin-top:7px;">シェアする</div>
+              <div class="mui-acts">
+                <div class="mui-btn">再生</div>
+                <div class="mui-btn alt">シェア</div>
+              </div>
             </div>
           </div></div>
-          <div class="fs-cap"><b>世界に1つを所有。</b>面白い瞬間はSNSへ。新規ファンの入口になります。</div>
+          <div class="fs-cap"><b>届いたその場で再生＆所有。</b>中身は届くまで分からない。世界に1つを、SNSへ。</div>
         </div>
 
       </div>
     </div>
     <p class="flow-hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      横にスクロールして5ステップを確認できます
+      横にスクロールして4ステップを確認できます
     </p>
   </div>
 </section>
