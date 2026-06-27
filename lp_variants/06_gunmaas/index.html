@@ -126,7 +126,7 @@ section{position:relative;}
 .about-card p{font-size:15px;color:#46514a;margin:14px 0 0;}
 .about-three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .about-pt{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;}
-.about-pt .no{font-family:"Roboto",sans-serif;font-weight:800;color:var(--green);font-size:13px;letter-spacing:.05em;}
+.about-pt .how-ic{width:80px;height:80px;object-fit:contain;display:block;margin:0 0 8px;}
 .about-pt b{display:block;font-size:15px;margin:6px 0 4px;}
 .about-pt span{font-size:12.5px;color:var(--muted);line-height:1.6;}
 @media(max-width:820px){.about-card{grid-template-columns:1fr;padding:30px 24px;}}
@@ -169,37 +169,37 @@ section{position:relative;}
 }
 .phone .screen{background:#fff;border-radius:26px;overflow:hidden;aspect-ratio:9/19.2;display:flex;flex-direction:column;position:relative;}
 .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:62px;height:6px;border-radius:6px;background:#10231a;z-index:5;}
-.ph-bar{background:var(--green);color:#fff;padding:24px 14px 12px;display:flex;align-items:center;gap:8px;}
-.ph-bar .t{font-size:12.5px;font-weight:700;}
-.ph-bar .sp{margin-left:auto;font-size:10px;opacity:.85;}
-.ph-body{flex:1;padding:13px 13px 14px;overflow:hidden;}
-.ph-home{height:5px;width:80px;background:#dfe6df;border-radius:6px;margin:8px auto 10px;}
+.ph-bar{background:var(--green);color:#fff;padding:20px 12px 9px;display:flex;align-items:center;gap:7px;}
+.ph-bar .t{font-size:11px;font-weight:700;}
+.ph-bar .sp{margin-left:auto;font-size:9px;opacity:.85;}
+.ph-body{flex:1;padding:11px 11px 12px;overflow:hidden;}
+.ph-home{height:4px;width:64px;background:#dfe6df;border-radius:6px;margin:7px auto 8px;}
 
 /* listing card (mercari-like) */
-.lst{display:flex;gap:9px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px;margin-bottom:8px;}
-.lst .th{width:48px;height:48px;border-radius:9px;background:var(--tile-l);flex:0 0 auto;overflow:hidden;}
+.lst{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:7px;margin-bottom:7px;}
+.lst .th{width:40px;height:40px;border-radius:8px;background:var(--tile-l);flex:0 0 auto;overflow:hidden;}
 .lst .th img{width:100%;height:100%;object-fit:cover;}
 .lst .meta{flex:1;min-width:0;}
-.lst .meta b{font-size:11px;display:block;}
-.lst .meta span{font-size:10px;color:var(--muted);}
-.lst .pr{font-size:12px;font-weight:800;color:var(--green-d);white-space:nowrap;}
-.ph-field{border:1px solid var(--line);border-radius:9px;padding:8px 10px;margin-bottom:8px;}
-.ph-field .k{font-size:9.5px;color:var(--muted);}
-.ph-field .v{font-size:13px;font-weight:700;}
-.ph-btn{background:var(--green);color:#fff;text-align:center;font-weight:800;font-size:12.5px;padding:11px;border-radius:10px;margin-top:4px;}
+.lst .meta b{font-size:10px;display:block;}
+.lst .meta span{font-size:9px;color:var(--muted);}
+.lst .pr{font-size:10.5px;font-weight:800;color:var(--green-d);white-space:nowrap;}
+.ph-field{border:1px solid var(--line);border-radius:8px;padding:7px 9px;margin-bottom:7px;}
+.ph-field .k{font-size:9px;color:var(--muted);}
+.ph-field .v{font-size:11px;font-weight:700;}
+.ph-btn{background:var(--green);color:#fff;text-align:center;font-weight:800;font-size:11px;padding:9px;border-radius:9px;margin-top:4px;}
 .ph-btn.o{background:var(--orange);}
-.ph-rec{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:#c23;background:#fdecec;border-radius:8px;padding:7px 10px;margin-bottom:8px;}
-.ph-rec .dot{width:8px;height:8px;border-radius:50%;background:#e23b3b;}
+.ph-rec{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:#c23;background:#fdecec;border-radius:8px;padding:6px 9px;margin-bottom:7px;}
+.ph-rec .dot{width:7px;height:7px;border-radius:50%;background:#e23b3b;}
 .ph-media{border-radius:11px;overflow:hidden;background:#000;position:relative;aspect-ratio:9/13;}
 .ph-media img{width:100%;height:100%;object-fit:cover;opacity:.96;}
 .ph-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
 .ph-play .tri{width:0;height:0;border-left:16px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5));margin-left:4px;}
-.ph-open{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;gap:14px;background:linear-gradient(180deg,#eef7f1,#dcefe6);}
-.ph-open .cap{width:120px;}
-.ph-open .msg{font-size:13px;font-weight:800;}
-.ph-open .sm{font-size:10.5px;color:var(--muted);}
-.ph-own{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;color:var(--green-d);margin-top:8px;justify-content:center;}
-.ph-cap2{font-size:10px;color:var(--muted);margin-top:6px;}
+.ph-open{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;gap:12px;background:linear-gradient(180deg,#eef7f1,#dcefe6);}
+.ph-open .cap{width:110px;}
+.ph-open .msg{font-size:11.5px;font-weight:800;}
+.ph-open .sm{font-size:9.5px;color:var(--muted);}
+.ph-own{display:flex;align-items:center;gap:5px;font-size:9.5px;font-weight:700;color:var(--green-d);margin-top:7px;justify-content:center;}
+.ph-cap2{font-size:9px;color:var(--muted);margin-top:5px;}
 
 /* ===== problem (fan & creator) ===== */
 .prob{background:#fff;}
@@ -439,9 +439,9 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
         <p>ファンは中身を知らずに「時間枠」を購入。出品者は当日スマホで撮るだけ。撮れた映像は、開けるまで何が映るか分からない“ランダムグッズ”として、落札者だけに届きます。これまで収益にならず捨てていた時間が、ファンとの新しい接点になります。</p>
       </div>
       <div class="about-three">
-        <div class="about-pt"><span class="no">POINT 01</span><b>時間を“先に”売る</b><span>完成品ではなく、未来の練習時間そのものを出品します。</span></div>
-        <div class="about-pt"><span class="no">POINT 02</span><b>中身は届くまで分からない</b><span>何が映るかは開けるまで不明。それも受け取る楽しみのひとつです。</span></div>
-        <div class="about-pt"><span class="no">POINT 03</span><b>届くのは世界に1つ</b><span>落札者だけが持つ、一点もののデジタルグッズです。</span></div>
+        <div class="about-pt"><img class="how-ic" src="assets/how1.png" alt="練習の時間を先に売るイメージ"><b>時間を“先に”売る</b><span>完成品ではなく、未来の練習時間そのものを出品します。</span></div>
+        <div class="about-pt"><img class="how-ic" src="assets/how2.png" alt="封をされて届くイメージ"><b>中身は届くまで分からない</b><span>何が映るかは開けるまで不明。それも受け取る楽しみのひとつです。</span></div>
+        <div class="about-pt"><img class="how-ic" src="assets/how3.png" alt="世界に1つの一点ものイメージ"><b>届くのは世界に1つ</b><span>落札者だけが持つ、一点もののデジタルグッズです。</span></div>
       </div>
     </div>
   </div>
@@ -452,7 +452,7 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
   <div class="wrap">
     <p class="kicker"><span class="line"></span>How it works<span class="line"></span></p>
     <h2 class="sec-title"><span class="hl">Lapsell</span>でできること</h2>
-    <p class="sec-lead">出品から受け取りまで、アプリひとつで完結します。各機能の使い方を①②③のステップで紹介します。</p>
+    <p class="sec-lead">出品から受け取りまで、アプリひとつで完結します。使い方は出品→購入→撮影→受け取りの4ステップです。</p>
 
     <!-- block A: selling flow -->
     <div class="func-block">
@@ -517,65 +517,37 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
       </div>
     </div>
 
-    <!-- block B: receiving / opening -->
+    <!-- block B: receiving (single final step — clip already playable) -->
     <div class="func-block">
       <div class="func-head">
-        <span class="efn">Open Your Clip</span>
-        <span class="jfn">届いて、開けて、受け取る</span>
+        <span class="efn">Receive Your Clip</span>
+        <span class="jfn">届いた瞬間、世界に1つのクリップが再生できる</span>
       </div>
-      <p class="func-desc">撮影された映像は後日、封をしたまま“世界に1つの動画クリップ”として購入者に届きます。何が映るかは封を開けてのお楽しみ。</p>
+      <p class="func-desc">撮影された映像は後日、“世界に1つの動画クリップ”として購入者に届きます。届いたらそのまま再生・シェアでき、その区間を持つのはあなただけです。</p>
       <div class="steps">
         <div class="step">
-          <div class="head"><span class="circ buy">1</span><span class="ttl">あなたの区間が届く</span><span class="role buy">購入者</span></div>
-          <p>購入した時間枠の映像が、後日封をしたまま届きます。</p>
-        </div>
-        <div class="step">
-          <div class="head"><span class="circ buy">2</span><span class="ttl">タップして開ける</span><span class="role buy">購入者</span></div>
-          <p>開けるまで中身は不明。思いがけない瞬間が映ることも。</p>
-        </div>
-        <div class="step">
-          <div class="head"><span class="circ buy">3</span><span class="ttl">世界に1つを所有</span><span class="role buy">購入者</span></div>
-          <p>その区間を持つのはあなただけ。面白い瞬間はSNSへ。</p>
+          <div class="head"><span class="circ buy">4</span><span class="ttl">届いて、すぐ再生・所有</span><span class="role buy">購入者</span></div>
+          <p>購入した時間枠の映像が後日到着。タップで再生・シェアでき、世界に1つの区間をあなたが所有します。</p>
         </div>
       </div>
       <div class="shots">
         <div class="shot">
           <div class="phone"><div class="screen"><span class="notch"></span>
-            <div class="ph-bar"><span class="t">受信トレイ</span><span class="sp">STEP 1</span></div>
-            <div class="ph-body" style="display:flex;flex-direction:column;justify-content:center;text-align:center;gap:10px;">
-              <img src="assets/mock_capsule.png" alt="封がされたまま届いた動画クリップ" style="width:118px;margin:0 auto;">
-              <div class="msg" style="font-size:13px;font-weight:800;">あなたの区間が届きました</div>
-              <div class="ph-btn">タップして開ける</div>
-            </div><div class="ph-home"></div>
-          </div></div>
-          <p class="shot-cap"><b>①届く</b>購入した区間が到着。</p>
-        </div>
-        <div class="shot">
-          <div class="phone"><div class="screen"><span class="notch"></span>
-            <div class="ph-bar"><span class="t">開封</span><span class="sp">STEP 2</span></div>
+            <div class="ph-bar"><span class="t">受け取り</span><span class="sp">STEP 4</span></div>
             <div class="ph-body">
-              <div class="ph-open">
-                <img class="cap" src="assets/mock_capsule.png" alt="封を開ける動画クリップ">
-                <div class="msg">封を開ける</div>
-                <div class="sm">中身は届くまで分からない</div>
-              </div>
-            </div><div class="ph-home"></div>
-          </div></div>
-          <p class="shot-cap"><b>②開ける</b>中身は届くまで分からない。</p>
-        </div>
-        <div class="shot">
-          <div class="phone"><div class="screen"><span class="notch"></span>
-            <div class="ph-bar"><span class="t">受け取り</span><span class="sp">STEP 3</span></div>
-            <div class="ph-body">
-              <div class="ph-media"><img src="assets/mock_practice.png" alt="受け取った練習映像"><div class="ph-play"><span class="tri"></span></div></div>
+              <div class="ph-media"><img src="assets/mock_practice.png" alt="届いてすぐ再生できる練習映像クリップ"><div class="ph-play"><span class="tri"></span></div></div>
               <div class="ph-cap2">19:47:30 - 19:47:40 ダンス練習</div>
+              <div style="display:flex;gap:7px;margin-top:8px;">
+                <div class="ph-btn" style="flex:1;margin-top:0;">再生</div>
+                <div class="ph-btn o" style="flex:1;margin-top:0;">シェア</div>
+              </div>
               <div class="ph-own">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.4L21 9l-5 4.6L17.3 21 12 17.3 6.7 21 8 13.6 3 9l6.6-.6z"/></svg>
                 世界で一つだけ、あなたが所有
               </div>
             </div><div class="ph-home"></div>
           </div></div>
-          <p class="shot-cap"><b>③受け取り</b>面白い瞬間はシェアできる。</p>
+          <p class="shot-cap"><b>④受け取り</b>届いた瞬間に再生・シェア。中身は届くまで分からない。</p>
         </div>
       </div>
     </div>
