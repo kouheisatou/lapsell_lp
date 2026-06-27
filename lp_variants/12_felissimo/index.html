@@ -28,10 +28,7 @@ body{
   margin:0;
   font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","ヒラギノ明朝 ProN",serif;
   color:var(--ink);
-  background-color:var(--paper);
-  background-image:
-    radial-gradient(circle at 20% 15%, rgba(255,255,255,.35), rgba(255,255,255,0) 55%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-color:#cfc6b2;
   line-height:1.95;
   -webkit-font-smoothing:antialiased;
   font-feature-settings:"palt";
@@ -41,16 +38,49 @@ img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 h1,h2,h3,p{margin:0;}
 .sans{font-family:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Kaku Gothic ProN",sans-serif;}
-.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 28px;}
+.wrap{width:100%;max-width:680px;margin:0 auto;padding:0 40px;}
+.wrap.narrow{max-width:560px;}
 
-/* bookshelf silhouette band (the felissimo motif) */
-.shelf-bg{position:relative;}
-.shelf-bg::before{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:30%;pointer-events:none;opacity:.85;
-  background-repeat:repeat-x;background-position:bottom;background-size:auto 100%;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='200' viewBox='0 0 420 200'%3E%3Cg fill='%233A382F'%3E%3Crect x='0' y='40' width='14' height='160'/%3E%3Crect x='16' y='55' width='10' height='145'/%3E%3Crect x='28' y='30' width='16' height='170'/%3E%3Crect x='46' y='60' width='9' height='140'/%3E%3Crect x='57' y='48' width='13' height='152'/%3E%3Crect x='72' y='66' width='8' height='134'/%3E%3Crect x='82' y='38' width='15' height='162'/%3E%3Crect x='99' y='58' width='10' height='142'/%3E%3Crect x='111' y='44' width='12' height='156'/%3E%3Crect x='125' y='62' width='9' height='138'/%3E%3Crect x='136' y='34' width='16' height='166'/%3E%3Crect x='154' y='56' width='10' height='144'/%3E%3Crect x='166' y='46' width='13' height='154'/%3E%3Crect x='181' y='64' width='8' height='136'/%3E%3Crect x='191' y='40' width='15' height='160'/%3E%3Crect x='208' y='58' width='10' height='142'/%3E%3Crect x='220' y='50' width='12' height='150'/%3E%3Crect x='234' y='66' width='9' height='134'/%3E%3Crect x='245' y='36' width='16' height='164'/%3E%3Crect x='263' y='60' width='10' height='140'/%3E%3Crect x='275' y='44' width='13' height='156'/%3E%3Crect x='290' y='62' width='8' height='138'/%3E%3Crect x='300' y='38' width='15' height='162'/%3E%3Crect x='317' y='56' width='10' height='144'/%3E%3Crect x='329' y='48' width='12' height='152'/%3E%3Crect x='343' y='66' width='9' height='134'/%3E%3Crect x='354' y='34' width='16' height='166'/%3E%3Crect x='372' y='58' width='10' height='142'/%3E%3Crect x='384' y='46' width='13' height='154'/%3E%3Crect x='399' y='62' width='9' height='138'/%3E%3C/g%3E%3C/svg%3E");
+/* ===== full-page BOOKSHELF WALL (the felissimo motif, behind a centered paper column) ===== */
+.shelf-wall{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-color:#cfc6b2;
+  background-repeat:repeat;background-position:top left;background-size:420px 230px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='230' viewBox='0 0 420 230'%3E%3Crect width='420' height='230' fill='%23cfc6b2'/%3E%3Cg fill='%233A382F'%3E%3Crect x='0' y='8' width='420' height='6'/%3E%3Crect x='0' y='116' width='420' height='6'/%3E%3Crect x='0' y='224' width='420' height='6'/%3E%3Crect x='4' y='22' width='13' height='90'/%3E%3Crect x='19' y='34' width='9' height='78'/%3E%3Crect x='30' y='16' width='15' height='96'/%3E%3Crect x='47' y='40' width='8' height='72'/%3E%3Crect x='57' y='28' width='12' height='84'/%3E%3Crect x='71' y='44' width='8' height='68'/%3E%3Crect x='81' y='20' width='14' height='92'/%3E%3Crect x='97' y='38' width='9' height='74'/%3E%3Crect x='108' y='26' width='12' height='86'/%3E%3Crect x='122' y='46' width='8' height='66'/%3E%3Crect x='132' y='18' width='15' height='94'/%3E%3Crect x='149' y='36' width='9' height='76'/%3E%3Crect x='160' y='30' width='12' height='82'/%3E%3Crect x='174' y='48' width='8' height='64'/%3E%3Crect x='184' y='22' width='14' height='90'/%3E%3Cpath d='M200 112V40l40 6v66z'/%3E%3Crect x='246' y='30' width='12' height='82'/%3E%3Crect x='260' y='42' width='8' height='70'/%3E%3Crect x='270' y='24' width='14' height='88'/%3E%3Crect x='286' y='40' width='9' height='72'/%3E%3Crect x='297' y='30' width='12' height='82'/%3E%3Crect x='311' y='46' width='8' height='66'/%3E%3Crect x='321' y='20' width='15' height='92'/%3E%3Crect x='338' y='38' width='9' height='74'/%3E%3Crect x='349' y='28' width='12' height='84'/%3E%3Crect x='363' y='44' width='8' height='68'/%3E%3Crect x='373' y='22' width='14' height='90'/%3E%3Crect x='389' y='40' width='9' height='72'/%3E%3Crect x='400' y='30' width='13' height='82'/%3E%3Crect x='4' y='130' width='12' height='94'/%3E%3Crect x='18' y='146' width='9' height='78'/%3E%3Crect x='29' y='128' width='14' height='96'/%3E%3Crect x='45' y='150' width='8' height='74'/%3E%3Crect x='55' y='134' width='12' height='90'/%3E%3Crect x='69' y='152' width='8' height='72'/%3E%3Cpath d='M80 224l44-8v8z'/%3E%3Crect x='126' y='130' width='14' height='94'/%3E%3Crect x='142' y='148' width='9' height='76'/%3E%3Crect x='153' y='136' width='12' height='88'/%3E%3Crect x='167' y='154' width='8' height='70'/%3E%3Crect x='177' y='128' width='15' height='96'/%3E%3Crect x='194' y='146' width='9' height='78'/%3E%3Crect x='205' y='134' width='12' height='90'/%3E%3Crect x='219' y='152' width='8' height='72'/%3E%3Crect x='229' y='130' width='14' height='94'/%3E%3Crect x='245' y='148' width='9' height='76'/%3E%3Crect x='256' y='136' width='12' height='88'/%3E%3Cpath d='M272 224V148l40 8v68z'/%3E%3Crect x='318' y='132' width='12' height='92'/%3E%3Crect x='332' y='150' width='8' height='74'/%3E%3Crect x='342' y='134' width='14' height='90'/%3E%3Crect x='358' y='152' width='9' height='72'/%3E%3Crect x='369' y='130' width='12' height='94'/%3E%3Crect x='383' y='148' width='8' height='76'/%3E%3Crect x='393' y='136' width='14' height='88'/%3E%3Crect x='409' y='150' width='8' height='74'/%3E%3C/g%3E%3C/svg%3E");
+  opacity:.92;
 }
-.shelf-bg>*{position:relative;z-index:1;}
+.shelf-wall::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(237,232,220,.25), rgba(237,232,220,0) 60%);}
+
+/* the central paper "page" column the whole story is printed on */
+.page-col{
+  position:relative;z-index:1;
+  max-width:760px;margin:0 auto;
+  background:var(--paper);
+  background-image:
+    radial-gradient(circle at 20% 12%, rgba(255,255,255,.4), rgba(255,255,255,0) 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='0.05'/%3E%3C/svg%3E");
+  box-shadow:0 0 0 1px rgba(43,42,38,.06), 0 8px 60px rgba(43,42,38,.18);
+}
+/* left-edge vertical running label, pinned beside the page column */
+.edge-label{
+  position:fixed;left:max(18px,calc((100vw - 760px)/2 - 64px));top:120px;z-index:5;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:12px;letter-spacing:.32em;color:var(--olive);font-weight:600;
+  display:flex;align-items:center;gap:14px;pointer-events:none;
+}
+.edge-label .bk{width:20px;height:15px;writing-mode:horizontal-tb;}
+@media(max-width:1000px){.edge-label{display:none;}}
+
+/* ornamental flourish hairline (felissimo 唐草 rule) */
+.flourish{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--olive);margin:0 auto;}
+.flourish::before,.flourish::after{content:"";height:1px;width:64px;background:var(--line);}
+.flourish svg{width:46px;height:16px;flex:none;opacity:.85;}
+.flourish.wide::before,.flourish.wide::after{width:120px;}
+
+/* tilted polaroid / scrapbook photo */
+.polaroid{background:#fbf8f0;padding:11px 11px 30px;box-shadow:0 18px 44px rgba(43,42,38,.28);border:1px solid #e7e0cf;}
+.polaroid img{width:100%;height:auto;display:block;filter:sepia(.18) contrast(.97);}
+.polaroid .cap{font-family:"Yu Gothic",sans-serif;font-size:11px;color:var(--muted);text-align:center;margin-top:9px;letter-spacing:.06em;}
 
 /* ---------- header ---------- */
 .hdr{
@@ -82,36 +112,32 @@ h1,h2,h3,p{margin:0;}
 .cta-box.lg{padding:15px 32px;font-size:15px;}
 @media(max-width:860px){.nav{display:none;}}
 
-/* ---------- hero ---------- */
-.hero{padding:64px 0 130px;position:relative;}
-.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center;}
-.vlabel{
-  writing-mode:vertical-rl;text-orientation:mixed;
-  font-size:12px;letter-spacing:.34em;color:var(--olive);font-weight:600;
-  display:flex;align-items:center;gap:14px;
-}
-.vlabel .bk{width:22px;height:17px;writing-mode:horizontal-tb;}
-.hero-copy{display:flex;gap:26px;}
+/* ---------- hero (centered editorial column) ---------- */
+.hero{padding:54px 0 70px;position:relative;text-align:center;}
+/* thin ornamental frame around the hero masthead, like the felissimo KV */
+.hero-frame{border:1px solid var(--line);padding:38px 30px 34px;position:relative;}
+.hero-frame::before,.hero-frame::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--olive);opacity:.5;}
+.hero-frame::before{top:7px;left:7px;border-right:none;border-bottom:none;}
+.hero-frame::after{bottom:7px;right:7px;border-left:none;border-top:none;}
+.hero .eyebrow-line{font-size:clamp(13px,1.6vw,16px);color:var(--brown);font-weight:600;line-height:1.9;letter-spacing:.06em;}
+.hero .eyebrow-line .rule{display:block;width:46px;height:1px;background:var(--olive);margin:14px auto 18px;}
+.hero .precap{font-size:clamp(13px,1.7vw,16px);color:var(--olive);font-weight:600;letter-spacing:.1em;margin-bottom:14px;}
 .hero h1{
-  font-size:clamp(32px,5vw,54px);
-  font-weight:600;line-height:1.4;letter-spacing:.04em;color:var(--ink);
+  font-size:clamp(30px,5.4vw,50px);
+  font-weight:600;line-height:1.42;letter-spacing:.06em;color:var(--ink);
 }
-.hero .eyebrow-line{font-size:clamp(14px,1.7vw,17px);color:var(--brown);margin-bottom:20px;font-weight:600;line-height:1.7;}
-.hero .sub{color:var(--brown);font-size:clamp(14px,1.5vw,16px);max-width:520px;margin:28px 0 0;line-height:2.05;}
-.hero-cta{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
-.rule-orn{display:flex;align-items:center;gap:12px;color:var(--olive);margin:22px 0;}
-.rule-orn::before,.rule-orn::after{content:"";height:1px;background:var(--line);flex:1;}
-.rule-orn svg{width:26px;height:14px;flex:none;}
-.hero-phone{display:flex;justify-content:center;}
-.hero-phone .device{transform:rotate(-2deg);}
-@media(max-width:880px){
-  .hero-grid{grid-template-columns:1fr;gap:42px;}
-  .vlabel{writing-mode:horizontal-tb;letter-spacing:.2em;}
-  .hero-copy{flex-direction:column;gap:8px;}
-}
+.hero .sub{color:var(--brown);font-size:clamp(14px,1.5vw,15.5px);max-width:520px;margin:28px auto 0;line-height:2.05;text-align:left;}
+.hero-cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;justify-content:center;}
+/* tilted scrapbook portrait sitting half over the masthead, like felissimo's polaroid */
+.hero-portrait{max-width:228px;margin:-12px auto 0;transform:rotate(-3deg);}
+.hero-mock{margin:46px auto 0;display:flex;justify-content:center;}
+.hero-mock .device{transform:rotate(1.5deg);}
+.hero-selecttheme{margin-top:50px;text-align:center;}
+.hero-selecttheme .lbl{font-size:12px;font-weight:600;letter-spacing:.26em;color:var(--olive);}
+.hero-selecttheme .ttl{font-size:clamp(22px,3.4vw,30px);font-weight:600;color:var(--ink);margin-top:8px;letter-spacing:.05em;}
 
 /* ---------- section base ---------- */
-section{padding:88px 0;}
+section{padding:74px 0;}
 .eyebrow{
   display:inline-block;font-size:12px;font-weight:600;letter-spacing:.3em;
   color:var(--olive);margin-bottom:18px;
@@ -137,16 +163,16 @@ section{padding:88px 0;}
 .band-ink .mk{background:#cdd3b8;color:var(--ink);padding:0 .12em;border-radius:1px;}
 
 /* ---------- 課題 (two cols) ---------- */
-.prob-cols{display:grid;grid-template-columns:1fr 1fr;gap:46px;margin-top:50px;text-align:left;}
-.prob-col .prob-fig{overflow:hidden;margin-bottom:22px;aspect-ratio:4/3;background:rgba(43,42,38,.05);border:1px solid var(--line);}
-.prob-col .prob-fig img{width:100%;height:100%;object-fit:cover;}
+.prob-cols{display:flex;flex-direction:column;gap:0;margin-top:44px;text-align:left;border-top:1px solid var(--line);}
+.prob-col{padding:36px 0;border-bottom:1px solid var(--line);}
+.prob-col .prob-fig{overflow:hidden;margin:0 auto 22px;max-width:340px;aspect-ratio:4/3;background:rgba(43,42,38,.05);border:1px solid var(--line);}
+.prob-col .prob-fig img{width:100%;height:100%;object-fit:cover;filter:sepia(.12);}
 .prob-col .tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--olive);border-bottom:1px solid var(--olive);padding-bottom:3px;}
 .prob-col h3{font-size:21px;font-weight:600;margin-top:16px;line-height:1.6;color:var(--ink);}
 .prob-col .plist{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:15px;}
 .prob-col .plist li{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;line-height:1.85;color:var(--brown);}
 .prob-col .plist li .ic{flex:none;width:22px;height:22px;color:var(--olive);margin-top:4px;}
 .prob-col .punch{margin-top:24px;font-size:15.5px;font-weight:600;line-height:1.85;color:var(--ink);}
-@media(max-width:760px){.prob-cols{grid-template-columns:1fr;gap:48px;}}
 
 /* ---------- 仕組み (3 hooks) ---------- */
 .hooks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:54px;text-align:left;border-top:1px solid var(--line);}
@@ -250,22 +276,46 @@ section{padding:88px 0;}
 .rcv-btns{display:flex;gap:7px;margin-top:12px;}
 .rcv-btns>div{flex:1;}
 
-/* ---------- 4 appeals ---------- */
-.appeals{display:flex;flex-direction:column;gap:74px;margin-top:58px;}
-.appeal{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
-.appeal.rev .appeal-img{order:2;}
-.appeal-img{overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 46px rgba(43,42,38,.13);}
-.appeal-img img{width:100%;height:auto;}
-.appeal-txt .idx{font-size:13px;font-weight:600;letter-spacing:.24em;color:var(--olive);}
-.appeal-txt h3{font-size:clamp(21px,2.5vw,28px);font-weight:600;line-height:1.6;margin-top:14px;color:var(--ink);}
-.appeal-txt p{font-size:15px;color:var(--brown);margin-top:18px;line-height:2.05;}
-@media(max-width:760px){.appeal{grid-template-columns:1fr;gap:26px;}.appeal.rev .appeal-img{order:0;}}
+/* ---------- 4 appeals (editorial, single column, photo as a tipped-in plate) ---------- */
+.appeals{display:flex;flex-direction:column;gap:0;margin-top:48px;}
+.appeal{padding:46px 0;border-top:1px solid var(--line);text-align:center;}
+.appeal:last-child{border-bottom:1px solid var(--line);}
+.appeal-img{overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 38px rgba(43,42,38,.13);max-width:330px;margin:0 auto 26px;}
+.appeal-img img{width:100%;height:auto;filter:sepia(.12);}
+.appeal-txt .idx{font-size:12.5px;font-weight:600;letter-spacing:.26em;color:var(--olive);}
+.appeal-txt h3{font-size:clamp(20px,2.5vw,26px);font-weight:600;line-height:1.6;margin-top:12px;color:var(--ink);}
+.appeal-txt p{font-size:14.5px;color:var(--brown);margin-top:16px;line-height:2.05;text-align:left;max-width:500px;margin-left:auto;margin-right:auto;}
+
+/* ---------- crowdfunding THRESHOLD band (felissimo "1,000人集まれば" framing) ---------- */
+.threshold{background:var(--olive);color:var(--cream);text-align:center;padding:64px 0;}
+.threshold .lbl{font-size:12px;font-weight:600;letter-spacing:.28em;color:#b9c4ad;}
+.threshold .line{font-size:clamp(17px,2.4vw,23px);font-weight:600;line-height:1.7;color:var(--cream);margin-top:16px;letter-spacing:.04em;}
+.threshold .num-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:24px 0 6px;}
+.threshold .num-row .orn{width:30px;height:14px;color:#b9c4ad;flex:none;}
+.threshold .num{font-size:clamp(44px,9vw,80px);font-weight:600;line-height:1;color:var(--cream);letter-spacing:.02em;}
+.threshold .num .u{font-size:.34em;margin-left:.1em;}
+.threshold .note{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:#d6cfbf;margin-top:18px;line-height:1.9;max-width:460px;margin-left:auto;margin-right:auto;}
+/* progress meter */
+.meter{max-width:420px;margin:26px auto 0;}
+.meter .bar{height:12px;background:rgba(246,242,233,.18);overflow:hidden;}
+.meter .bar .fl{height:100%;background:#cdd3b8;width:71%;}
+.meter .cap{display:flex;justify-content:space-between;font-family:"Yu Gothic",sans-serif;font-size:11px;color:#d6cfbf;margin-top:8px;font-weight:700;}
+
+/* ---------- long editorial NARRATIVE (felissimo 選者インタビュー long-read) ---------- */
+.narr{text-align:left;}
+.narr .quote-h{font-size:clamp(20px,3vw,28px);font-weight:600;line-height:1.75;color:var(--ink);letter-spacing:.04em;}
+.narr .quote-rule{width:100%;height:0;border-top:1.5px solid var(--olive);margin:22px 0 28px;}
+.narr p{font-size:15px;color:var(--brown);line-height:2.15;margin-top:0;}
+.narr p+p{margin-top:24px;}
+.narr .drop::first-letter{font-size:2.6em;line-height:1;float:left;margin:6px 10px 0 0;color:var(--olive);font-weight:600;}
+.narr .sign{margin-top:34px;text-align:right;font-size:14px;color:var(--ink);font-weight:600;letter-spacing:.06em;}
+.narr-portrait{max-width:230px;margin:0 auto 36px;transform:rotate(2deg);}
 
 /* ---------- charts ---------- */
-.chart-block{max-width:860px;margin:0 auto;}
+.chart-block{max-width:600px;margin:0 auto;}
 .chart-head{font-size:clamp(19px,2.4vw,26px);font-weight:600;line-height:1.7;text-align:center;color:var(--cream);}
 .chart-note{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:#cfc8b8;text-align:center;margin-top:12px;line-height:1.85;}
-.chart-sep{height:1px;background:rgba(246,242,233,.16);max-width:860px;margin:74px auto;}
+.chart-sep{height:1px;background:rgba(246,242,233,.16);max-width:600px;margin:62px auto;}
 
 /* donut */
 .donut-row{display:flex;gap:44px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:40px;}
@@ -287,14 +337,14 @@ section{padding:88px 0;}
 .hbar .fill.y{background:#b9c4ad;}
 
 /* evidence */
-.ev-cards{display:grid;grid-template-columns:1fr;gap:32px;max-width:840px;margin:40px auto 0;}
+.ev-cards{display:grid;grid-template-columns:1fr;gap:32px;max-width:600px;margin:40px auto 0;}
 .ev-card{background:var(--cream);border:1px solid var(--line);box-shadow:0 14px 36px rgba(43,42,38,.22);}
 .ev-card .take{font-size:clamp(17px,2.1vw,20px);font-weight:600;line-height:1.65;color:var(--ink);padding:24px 26px 0;}
 .ev-card .take .mk{background:linear-gradient(transparent 62%, rgba(46,58,48,.24) 62%);}
 .ev-card .shot{padding:18px 26px 22px;}
 .ev-card .shot img{width:100%;height:auto;border:1px solid var(--line);}
 .ev-card .desc{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:var(--brown);padding:0 26px 24px;line-height:1.9;}
-.ev-portrait{display:grid;grid-template-columns:230px 1fr;gap:46px;align-items:center;max-width:840px;margin:52px auto 0;text-align:left;}
+.ev-portrait{display:grid;grid-template-columns:200px 1fr;gap:38px;align-items:center;max-width:600px;margin:52px auto 0;text-align:left;}
 .ev-portrait .short img{width:222px;border:7px solid #23241f;box-shadow:0 20px 50px rgba(43,42,38,.34);margin:0 auto;}
 .ev-portrait .big{font-size:clamp(21px,2.8vw,30px);font-weight:600;line-height:1.55;color:var(--cream);}
 .ev-portrait .big em{font-style:normal;background:#cdd3b8;color:var(--ink);padding:0 .1em;}
@@ -306,20 +356,19 @@ section{padding:88px 0;}
 /* ---------- authenticity ---------- */
 .auth-fig{max-width:560px;margin:46px auto 10px;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 42px rgba(43,42,38,.16);aspect-ratio:4/3;}
 .auth-fig img{width:100%;height:100%;object-fit:cover;}
-.auth-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:8px;max-width:900px;margin:48px auto 0;}
+.auth-flow{display:grid;grid-template-columns:1fr;align-items:stretch;gap:8px;max-width:560px;margin:48px auto 0;}
 .auth-node{background:var(--cream);border:1px solid var(--line);padding:28px 22px;text-align:center;display:flex;flex-direction:column;}
 .auth-node .ic{width:46px;height:46px;color:var(--olive);margin:0 auto 14px;}
 .auth-node h3{font-size:16px;font-weight:600;color:var(--ink);}
 .auth-node p{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:var(--brown);margin-top:10px;line-height:1.85;}
-.auth-arrow{color:#bcb29c;display:flex;align-items:center;justify-content:center;}
+.auth-arrow{color:#bcb29c;display:flex;align-items:center;justify-content:center;transform:rotate(90deg);margin:6px auto;}
 .auth-arrow svg{width:28px;height:28px;}
-@media(max-width:760px){.auth-flow{grid-template-columns:1fr;}.auth-arrow{transform:rotate(90deg);margin:8px auto;}}
 
 /* ---------- comparison table ---------- */
 .cmp-fig{max-width:520px;margin:36px auto 0;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 42px rgba(43,42,38,.14);aspect-ratio:4/3;}
 .cmp-fig img{width:100%;height:100%;object-fit:cover;}
-.cmp-wrap{max-width:960px;margin:46px auto 0;overflow-x:auto;}
-.cmp{border-collapse:collapse;width:100%;min-width:720px;font-family:"Yu Gothic",sans-serif;font-size:13px;}
+.cmp-wrap{max-width:600px;margin:40px auto 0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.cmp{border-collapse:collapse;width:100%;min-width:560px;font-family:"Yu Gothic",sans-serif;font-size:12.5px;}
 .cmp th,.cmp td{padding:14px 12px;text-align:center;border-bottom:1px solid var(--line);}
 .cmp thead th{font-size:11.5px;font-weight:800;color:var(--muted);line-height:1.45;vertical-align:bottom;}
 .cmp tbody th{text-align:left;font-weight:700;font-size:13.5px;color:var(--ink);white-space:nowrap;}
@@ -338,7 +387,8 @@ section{padding:88px 0;}
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;border-top:1px solid rgba(246,242,233,.2);}
 .price-item{text-align:center;padding:30px 16px;border-bottom:1px solid rgba(246,242,233,.2);}
 .price-item+.price-item{border-left:1px solid rgba(246,242,233,.2);}
-.price-item .pv{font-size:clamp(34px,5vw,52px);font-weight:600;line-height:1;color:var(--cream);}
+.price-item .pv{font-size:clamp(32px,4.4vw,46px);font-weight:600;line-height:1;color:var(--cream);}
+@media(max-width:520px){.price-item .pv{font-size:44px;}}
 .price-item .pv .u{font-size:.4em;}
 .price-item .pl{font-family:"Yu Gothic",sans-serif;font-weight:700;margin-top:12px;color:var(--cream);font-size:14px;}
 .price-item .pd{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:#cfc8b8;margin-top:8px;line-height:1.85;}
@@ -346,15 +396,15 @@ section{padding:88px 0;}
 .price-fig img{width:100%;height:100%;object-fit:cover;}
 @media(max-width:760px){.price-grid{grid-template-columns:1fr;}.price-item+.price-item{border-left:none;}}
 
-/* ---------- target ---------- */
-.target-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:50px;}
-.target-item{display:flex;flex-direction:column;gap:8px;}
-.target-fig{overflow:hidden;aspect-ratio:1/1;background:rgba(43,42,38,.05);border:1px solid var(--line);margin-bottom:8px;}
-.target-fig img{width:100%;height:100%;object-fit:cover;}
+/* ---------- target (catalogue rows, like a bookshelf listing) ---------- */
+.target-grid{display:flex;flex-direction:column;gap:0;margin-top:44px;border-top:1px solid var(--line);}
+.target-item{display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:center;padding:26px 4px;border-bottom:1px solid var(--line);}
+.target-fig{overflow:hidden;aspect-ratio:1/1;background:rgba(43,42,38,.05);border:1px solid var(--line);}
+.target-fig img{width:100%;height:100%;object-fit:cover;filter:sepia(.12);}
 .target-item h3{font-size:18px;font-weight:600;color:var(--ink);}
-.target-item .cnt{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:var(--olive);}
-.target-item p{font-family:"Yu Gothic",sans-serif;font-size:13.5px;color:var(--brown);line-height:1.9;margin-top:4px;}
-@media(max-width:760px){.target-grid{grid-template-columns:1fr;gap:40px;}}
+.target-item .cnt{font-family:"Yu Gothic",sans-serif;font-size:12.5px;color:var(--olive);margin-top:3px;}
+.target-item p{font-family:"Yu Gothic",sans-serif;font-size:13.5px;color:var(--brown);line-height:1.9;margin-top:8px;}
+@media(max-width:520px){.target-item{grid-template-columns:90px 1fr;gap:18px;}}
 
 /* ---------- faq ---------- */
 .faq{max-width:760px;margin:48px auto 0;}
@@ -391,6 +441,16 @@ section{padding:88px 0;}
 </head>
 <body>
 
+<!-- full-page bookshelf wall + left running label (felissimo motif) -->
+<div class="shelf-wall" aria-hidden="true"></div>
+<div class="edge-label" aria-hidden="true">
+  <svg class="bk" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4C9 2 4 2 2 3v13c2-1 7-1 10 1 3-2 8-2 10-1V3c-2-1-7-1-10 1zM12 4v15"/></svg>
+  <span>＠LAPSELL ｜ 練習という時間の保存記録</span>
+</div>
+
+<!-- the central paper "page" the whole story is printed on -->
+<div class="page-col">
+
 <!-- ============ HEADER ============ -->
 <header class="hdr" id="hdr">
   <div class="wrap hdr-in">
@@ -408,29 +468,35 @@ section{padding:88px 0;}
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
-<section class="hero shelf-bg">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="vlabel">
-        <svg class="bk" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4C9 2 4 2 2 3v13c2-1 7-1 10 1 3-2 8-2 10-1V3c-2-1-7-1-10 1zM12 4v15"/></svg>
-        <span>LAPSELL ＠ 練習という時間</span>
-      </div>
-      <div>
-        <p class="eyebrow-line">消えていく練習の時間を、<br>みんなの意思で未来へ残す。</p>
-        <h1>練習の時間を、<br><span class="mk">未来へ残す。</span></h1>
-        <p class="sub">毎日の練習や裏側の時間は、いつもは流れて消えてしまう。その一瞬を、世界に一つだけのデジタルグッズとして残し、収益に変える。地下アイドル・インディーズアーティストのための、静かな収益化とファングッズの場所。</p>
-        <div class="rule-orn"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 7c4-5 8 5 12 0s8-5 12 0"/></svg></div>
-        <div class="hero-cta">
-          <a href="#cta" class="cta-box solid lg">出品をはじめる
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#how" class="cta-box lg">仕組みを知る</a>
+<!-- ============ HERO (centered editorial masthead) ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-frame">
+      <p class="precap">出品者とファンで、未来へ残すプロジェクト</p>
+      <p class="eyebrow-line">いつもは流れて消えてしまう、<br>練習という時間を集めています。<span class="rule"></span></p>
+      <h1>その練習を、<br><span class="mk">お守りになる記録に。</span></h1>
+      <!-- tilted scrapbook portrait, half over the masthead -->
+      <div class="hero-portrait">
+        <div class="polaroid">
+          <img src="assets/artist_idol.png" alt="出番前、楽屋で静かに佇む地下アイドル">
+          <div class="cap">本番前の楽屋にて ── 売られていく、ある練習の時間</div>
         </div>
       </div>
+      <p class="sub">毎日の練習や裏側の時間は、価値があるのに、いつも記録されないまま消えていきます。その一瞬を、世界に一つだけのデジタルグッズとして残し、収益に変える。地下アイドル・インディーズアーティストのための、静かな収益化と、ファンと一緒に時間を残す場所です。</p>
+      <div class="hero-cta">
+        <a href="#cta" class="cta-box solid lg">出品をはじめる
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#how" class="cta-box lg">仕組みを知る</a>
+      </div>
     </div>
-    <!-- メルカリ風 marketplace phone mock -->
-    <div class="hero-phone">
+
+    <!-- 今回のセレクト：メルカリ風 marketplace phone mock -->
+    <div class="hero-selecttheme">
+      <span class="lbl">いま、出品されている時間</span>
+      <p class="ttl">練習の「時間枠」が、棚に並ぶ。</p>
+    </div>
+    <div class="hero-mock">
       <div class="device hero-dev">
         <div class="screen">
           <div class="statusbar">
@@ -477,9 +543,10 @@ section{padding:88px 0;}
 <!-- ============ 課題提起 ============ -->
 <section class="band-paper2" id="problem">
   <div class="wrap center">
-    <span class="eyebrow">THE PROBLEM</span>
+    <span class="eyebrow">いま、起きているすれ違い</span>
     <h2 class="sec-h">価値ある「素の時間」が、<br>誰の得にもならずに消えていく。</h2>
-    <p class="lead">ファンは“素の日常”に手が届かず、アーティストは価値ある“裏側”を収益化できない。両側に、もったいない「すれ違い」が起きている。</p>
+    <div class="flourish" style="margin:20px auto 0;"><svg viewBox="0 0 46 16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M1 8c5-7 10 7 14 0s9-7 14 0 9 7 16 0"/></svg></div>
+    <p class="lead" style="margin-left:auto;margin-right:auto;">ファンは“素の日常”に手が届かず、アーティストは価値ある“裏側”を収益化できない。両側に、もったいない「すれ違い」が起きています。</p>
     <div class="prob-cols">
       <div class="prob-col">
         <div class="prob-fig"><img src="assets/problem_fan.png" alt="ガラス越しに練習する推しを見つめ、素の日常に手が届かないファンの挿絵"></div>
@@ -510,7 +577,7 @@ section{padding:88px 0;}
 <!-- ============ 仕組み (3 hooks) ============ -->
 <section id="how" class="center">
   <div class="wrap">
-    <span class="eyebrow">HOW IT WORKS</span>
+    <span class="eyebrow">この場所の、三つの約束</span>
     <h2 class="sec-h">時間を「先に」売る、<span class="mk">新しいグッズ。</span></h2>
     <p class="lead">完成した動画を売るのではない。これからやる練習の「時間枠」を、先に出品する。だから編集も準備もいらない。Lapsellを支える、三つの肝。</p>
     <div class="hooks">
@@ -536,10 +603,52 @@ section{padding:88px 0;}
   </div>
 </section>
 
+<!-- ============ 長い読み物：物語ナラティブ（選者インタビュー的）============ -->
+<section id="story">
+  <div class="wrap narr">
+    <div class="center" style="margin-bottom:36px;">
+      <span class="eyebrow">なぜ、いま「練習の時間」なのか</span>
+      <div class="flourish wide" style="margin-top:6px;"><svg viewBox="0 0 46 16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M1 8c5-7 10 7 14 0s9-7 14 0 9 7 16 0"/></svg></div>
+    </div>
+    <div class="narr-portrait">
+      <div class="polaroid">
+        <img src="assets/appeal2.png" alt="下積み時代の一枚の写真から、やがて樹が育つ挿絵">
+        <div class="cap">下積みの一枚が、やがて宝物になる</div>
+      </div>
+    </div>
+    <p class="quote-h">いちばん見たいのに、いちばん残らないのが、<br>「うまくいく前」の時間でした。</p>
+    <div class="quote-rule"></div>
+    <p class="drop">完成した一曲、磨き上げたステージ。世に出るのは、いつもその「結果」だけです。けれど本当に心を動かすのは、何度もつまずいた練習や、本番前の楽屋の静けさ、仲間と笑い合うネタ合わせ──まだ誰のものでもない、ありのままの時間ではないでしょうか。</p>
+    <p>その時間には、たしかに価値があります。それなのに、撮るのは大変で、ライブ配信は事故が怖く、裏側は再生数も伸びない。だから記録されず、毎日そのまま消えていく。応援したいファンの側にも、その一瞬を「自分のもの」として手元に残す方法は、これまでありませんでした。</p>
+    <p>絶版になった本を、読みたい人の声が集まれば未来へ残せる――そんな仕組みがあるように、わたしたちは「消えていく練習の時間」を、出品者とファンの意思で未来へ残せるようにしたいと考えました。それが Lapsell です。出品するのは、これからやる練習の<span class="mk">時間そのもの</span>。撮るだけでいい。届くのは、世界に一つだけの記録です。</p>
+    <p>無名の今だからこそ、その一点ものは、ブレイクとともに意味を増していきます。「自分が見つけて、支えた」という物語ごと、ファンが受け取ってくれる。下積みの一瞬が、いつか、誰かのお守りになる。そう信じて、この場所をつくりました。</p>
+    <p class="sign">Lapsell ──「練習という時間」を残す人たちへ</p>
+  </div>
+</section>
+
+<!-- ============ クラウドファンディング的：閾値・支援フレーミング ============ -->
+<section class="threshold" id="threshold">
+  <div class="wrap">
+    <p class="lbl">SUPPORT &amp; KEEP ── 応援が集まると、残せる</p>
+    <p class="line">ひとつの練習の時間枠に、応援が</p>
+    <div class="num-row">
+      <svg class="orn" viewBox="0 0 30 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 7c5-6 9 6 14 0s9-6 14 0"/></svg>
+      <span class="num">720<span class="u">区間</span></span>
+      <svg class="orn" viewBox="0 0 30 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 7c5-6 9 6 14 0s9-6 14 0"/></svg>
+    </div>
+    <p class="line" style="font-size:clamp(15px,2vw,19px);">集まるほど、その時間は「みんなで残した記録」になる。</p>
+    <div class="meter">
+      <div class="bar"><div class="fl"></div></div>
+      <div class="cap"><span>残り178区間</span><span>542 / 720 区間</span></div>
+    </div>
+    <p class="note">完成品を安く売り合うのではなく、ファン一人ひとりの「残したい」という意思で、一つの練習を未来へつなぐ。一区間は、世界に一つ。買った人だけが、その十秒を所有します。</p>
+  </div>
+</section>
+
 <!-- ============ 利用フロー ============ -->
 <section class="band-paper2" id="flow">
   <div class="wrap center">
-    <span class="eyebrow">HOW TO USE</span>
+    <span class="eyebrow">出品から受け取りまでの道のり</span>
     <h2 class="sec-h">出品から受け取りまで、<span class="mk">五つの所作。</span></h2>
     <p class="lead">練習の時間枠を出品し、ファンが一覧から購入。本番をスマホで撮るだけで、区間がガチャのように届き、受け取れる。出品→購入→撮影→開封→受け取りの流れを、アプリ画面で辿ってみる。</p>
 
@@ -672,7 +781,7 @@ section{padding:88px 0;}
 <!-- ============ 4つのアピール ============ -->
 <section id="appeals">
   <div class="wrap center">
-    <span class="eyebrow">FOUR REASONS</span>
+    <span class="eyebrow">この時間が、残すに値する四つの理由</span>
     <h2 class="sec-h">捨てていた時間が、<span class="mk">四つの価値</span>になる。</h2>
     <p class="lead">なぜ練習の時間が収益になるのか。地下アイドル・インディーズアーティストの収益化を支える、四つの理由。</p>
     <div class="appeals">
@@ -721,7 +830,7 @@ section{padding:88px 0;}
 <section class="band-ink" id="proof">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">EVIDENCE &amp; MARKET</span>
+      <span class="eyebrow">数字で確かめる</span>
       <h2 class="sec-h">「素の時間」には、<span class="mk">すでに需要も市場もある。</span></h2>
       <p class="lead" style="margin-left:auto;margin-right:auto;">数字で確かめる。なぜ練習動画の収益化が成り立ち、どれだけの市場が広がっているのか。</p>
     </div>
@@ -808,7 +917,7 @@ section{padding:88px 0;}
 <section id="authenticity">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">AUTHENTICITY</span>
+      <span class="eyebrow">蔵書印のように、本物の証を</span>
       <h2 class="sec-h">保管せずに、<span class="mk">所有と本物を証明する。</span></h2>
       <p class="lead center">映像そのものに識別子と所有者情報を埋め込むから、スクショされても、出所と「誰のものか」を追える。蔵書印のように、本物の証が刻まれる。</p>
     </div>
@@ -838,7 +947,7 @@ section{padding:88px 0;}
 <!-- ============ 他社比較 ============ -->
 <section class="band-paper2" id="positioning">
   <div class="wrap center">
-    <span class="eyebrow">COMPARISON</span>
+    <span class="eyebrow">既存の手段と読みくらべる</span>
     <h2 class="sec-h">既存の手段と、<span class="mk">何が違うのか。</span></h2>
     <p class="lead">“素の日常”と“一点物の所有”。この二つを同時に満たせる手段は、これまで存在しなかった。</p>
     <div class="cmp-fig"><img src="assets/comparison.png" alt="多数の量産品の中で、ただ一つの光を帯びた一点ものを捧げ持つ挿絵"></div>
@@ -879,7 +988,7 @@ section{padding:88px 0;}
 <!-- ============ 料金 ============ -->
 <section class="band-olive" id="price">
   <div class="wrap center">
-    <span class="eyebrow">PRICING</span>
+    <span class="eyebrow">はじめるための、お約束</span>
     <h2 class="sec-h">リスクゼロで、<span class="mk">今日から収益化を始められる。</span></h2>
     <p class="lead" style="margin-left:auto;margin-right:auto;">かかるのは、売れたときだけ。始めるのに、お金は一円もいらない。</p>
     <div class="price-grid">
@@ -894,9 +1003,9 @@ section{padding:88px 0;}
 <!-- ============ 対象アーティスト ============ -->
 <section id="target">
   <div class="wrap center">
-    <span class="eyebrow">FOR ARTISTS</span>
+    <span class="eyebrow">この場所に、あなたを招きたい</span>
     <h2 class="sec-h">毎日積み重ねている、<span class="mk">あなたへ。</span></h2>
-    <p class="lead">舞台の裏で誰よりも努力している人ほど、収益化の伸びしろは大きい。</p>
+    <p class="lead" style="margin-left:auto;margin-right:auto;">舞台の裏で誰よりも努力している人ほど、収益化の伸びしろは大きい。</p>
     <div class="target-grid" style="text-align:left">
       <div class="target-item">
         <div class="target-fig"><img src="assets/artist_idol.png" alt="楽屋で出番前に静かに佇む地下アイドルの肖像"></div>
@@ -986,6 +1095,8 @@ section{padding:88px 0;}
     <div class="copy">© 2026 Lapsell. All rights reserved.</div>
   </div>
 </footer>
+
+</div><!-- /.page-col -->
 
 <!-- ============ JSON-LD ============ -->
 <script type="application/ld+json">
