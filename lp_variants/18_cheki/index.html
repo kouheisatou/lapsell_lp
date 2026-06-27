@@ -86,6 +86,48 @@ a{color:inherit;text-decoration:none}
 .tape.top-l{top:-12px;left:-6px;transform:rotate(-26deg)}
 .tape.top-r{top:-12px;right:-6px;transform:rotate(24deg)}
 
+/* ---------- corkboard accent frame (used to FRAME #flow) ---------- */
+.corkframe{
+  position:relative;
+  margin:38px auto 0;
+  border:18px solid;
+  border-image:linear-gradient(135deg,#8a5a2b,#b07d44,#7a4a22 70%,#5f3a1a) 1;
+  border-radius:14px;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.25) inset,
+    0 22px 46px rgba(40,28,14,.42),
+    0 4px 10px rgba(40,28,14,.3);
+  background:#7a4a22;
+}
+.corkface{
+  background-color:#e4cca0;
+  background-image:
+   radial-gradient(ellipse 70% 60% at 28% 30%, rgba(198,156,104,.32), transparent 60%),
+   radial-gradient(ellipse 80% 70% at 78% 72%, rgba(150,110,64,.28), transparent 62%),
+   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.26' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.42  0 0 0 0 0.27  0 0 0 0 0.10  0 0 0 1.2 -0.5'/></filter><rect width='360' height='360' filter='url(%23g)'/></svg>"),
+   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='0.22' numOctaves='3' seed='5' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.96  0 0 0 0 0.84  0 0 0 0 0.58  0 0 0 1.3 -0.7'/></filter><rect width='320' height='320' filter='url(%23l)'/></svg>");
+  background-size:100% 100%,100% 100%,360px 360px,320px 320px;
+  box-shadow:inset 0 0 90px rgba(120,84,36,.35);
+  border-radius:3px;
+  padding:48px 26px 40px;
+}
+/* hanging string + thumbtack that holds the board on the white wall */
+.corkframe::before{
+  content:"";position:absolute;left:50%;top:-46px;transform:translateX(-50%);
+  width:2px;height:46px;
+  background:linear-gradient(#cdb691,#9c845e);
+  z-index:1;
+}
+.corkpin{
+  position:absolute;left:50%;top:-58px;transform:translateX(-50%);
+  width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%, #ff8a7e, var(--red) 58%, #8c241b);
+  box-shadow:0 6px 10px rgba(0,0,0,.4), inset -3px -3px 5px rgba(0,0,0,.32);
+  z-index:6;
+}
+.corkpin::after{content:"";position:absolute;top:7px;left:8px;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.7)}
+@media(min-width:640px){.corkface{padding:54px 40px 46px}}
+
 /* ---------- header ---------- */
 header{position:sticky;top:0;z-index:90;background:rgba(253,248,238,.93);backdrop-filter:blur(6px);border-bottom:2px solid var(--cork-d)}
 .nav{display:flex;align-items:center;gap:20px;padding:12px 22px;max-width:1180px;margin:0 auto}
@@ -178,10 +220,15 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 @media(min-width:840px){.prob .row{grid-template-columns:.85fr 1.15fr;gap:34px}.prob .row.rev .pic{order:2}}
 
 /* ---------- mechanic (3 hooks, numbered, borderless) ---------- */
-.kimo{display:grid;gap:40px;margin-top:46px;position:relative;z-index:2;counter-reset:k}
-.kimo .item{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
-.kimo .num{counter-increment:k;font-weight:900;font-size:clamp(42px,8vw,68px);line-height:.9;color:#fff;-webkit-text-stroke:2px var(--red);text-stroke:2px var(--red)}
-.kimo .num::before{content:"0" counter(k)}
+.kimo{display:grid;gap:40px;margin-top:46px;position:relative;z-index:2}
+.kimo .item{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+/* concept image, framed in the cheki / handmade style */
+.kimo .howpic{flex:0 0 auto;width:108px;background:#fff;padding:7px 7px 9px;border-radius:2px;
+  box-shadow:0 8px 18px rgba(60,40,20,.26),0 2px 4px rgba(0,0,0,.14);transform:rotate(-2deg)}
+.kimo .item:nth-child(2) .howpic{transform:rotate(1.6deg)}
+.kimo .item:nth-child(3) .howpic{transform:rotate(-1.2deg)}
+.kimo .howpic img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:2px;display:block;filter:saturate(.95) contrast(1.02)}
+@media(min-width:640px){.kimo .howpic{width:132px}}
 .kimo .item h3{font-size:clamp(19px,3vw,24px);font-weight:900;margin-bottom:6px}
 .kimo .item p{font-weight:600;font-size:15px}
 .kimo .item .sk{color:var(--red);font-weight:900}
@@ -189,20 +236,21 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 /* ---------- phone mock (HTML) ---------- */
 .phone{background:#1c1812;border-radius:30px;padding:9px;box-shadow:0 18px 32px rgba(40,28,14,.45)}
 .phone .scr{background:var(--paper);border-radius:22px;overflow:hidden;aspect-ratio:9/19.5;display:flex;flex-direction:column;position:relative}
-.phone .bar{background:var(--ink);color:var(--paper);font-size:10px;font-weight:700;padding:7px 12px;display:flex;justify-content:space-between;letter-spacing:.03em}
-.phone .body{padding:11px;display:flex;flex-direction:column;gap:9px;flex:1;font-size:11px;color:var(--ink)}
-.phone .card{background:#fff;border-radius:10px;padding:9px;display:flex;flex-direction:column;gap:5px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
-.phone .card .ttl{font-weight:900;font-size:12px}
-.phone .muted{color:#9a8d77;font-size:10px}
-.phone .price{font-weight:900;color:var(--red);font-size:15px}
-.phone .pill{background:var(--red);color:#fff;text-align:center;border-radius:8px;padding:7px;font-weight:800;font-size:11px}
+.phone .bar{background:var(--ink);color:var(--paper);font-size:9px;font-weight:700;padding:5px 11px;display:flex;justify-content:space-between;letter-spacing:.03em}
+.phone .body{padding:9px;display:flex;flex-direction:column;gap:7px;flex:1;font-size:10px;color:var(--ink)}
+.phone .card{background:#fff;border-radius:9px;padding:8px;display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.phone .card .ttl{font-weight:900;font-size:11px}
+.phone .muted{color:#9a8d77;font-size:9px}
+.phone .price{font-weight:900;color:var(--red);font-size:13px}
+.phone .pill{background:var(--red);color:#fff;text-align:center;border-radius:8px;padding:6px;font-weight:800;font-size:11px}
 .phone .pill.teal{background:var(--teal)}
 .phone .thumb{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px}
-.phone .listrow{display:flex;gap:8px;align-items:center;background:#fff;border-radius:9px;padding:7px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.phone .listrow .sw{width:34px;height:34px;border-radius:7px;background:var(--teal);flex:0 0 34px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:800}
-.phone .sealwrap{flex:1;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#efe4cf 0 10px,#e7d9bd 10px 20px);border-radius:12px;padding:14px}
+.phone .listrow{display:flex;gap:7px;align-items:center;background:#fff;border-radius:8px;padding:6px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.phone .listrow .sw{width:30px;height:30px;border-radius:7px;background:var(--teal);flex:0 0 30px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:800}
+.phone .listrow .rtt{font-weight:900;font-size:10px}
+.phone .sealwrap{flex:1;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#efe4cf 0 10px,#e7d9bd 10px 20px);border-radius:12px;padding:12px}
 .phone .sealwrap img{width:78%;border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.25);transform:rotate(-3deg)}
-.phone .rec{position:absolute;top:46px;left:11px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.55);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:3}
+.phone .rec{position:absolute;top:42px;left:10px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.55);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:3}
 .phone .rec .dot{width:7px;height:7px;border-radius:50%;background:#ff3b3b;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:.25}}
 .phone .player{position:relative;border-radius:9px;overflow:hidden}
@@ -216,13 +264,13 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .flow-track{display:flex;gap:26px;width:max-content;padding:8px 2px}
 .step{width:230px;flex:0 0 auto;position:relative}
 .step .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.step .stepno{font-weight:900;font-size:14px;letter-spacing:.06em;color:var(--paper);opacity:.85}
+.step .stepno{font-weight:900;font-size:14px;letter-spacing:.06em;color:#4a330f;opacity:.9}
 .step .side{font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px}
 .side.sell{background:#ffe27a;color:var(--ink)}
 .side.buy{background:var(--teal);color:#fff}
-.step .cap{margin-top:13px;font-size:13px;font-weight:700;color:var(--paper)}
-.step .cap b{color:#ffe27a}
-.scroll-hint{position:relative;z-index:2;margin-top:6px;font-size:13px;font-weight:700;color:var(--paper);opacity:.85;display:flex;align-items:center;gap:7px}
+.step .cap{margin-top:13px;font-size:13px;font-weight:700;color:#3a2a12}
+.step .cap b{color:#a13327}
+.scroll-hint{position:relative;z-index:2;margin-top:6px;font-size:13px;font-weight:700;color:#4a330f;opacity:.9;display:flex;align-items:center;gap:7px}
 
 /* ---------- POINT = pinned cheki collage (the structure IS the polaroids) ---------- */
 .points{display:grid;grid-template-columns:1fr;gap:46px;margin-top:52px;position:relative;z-index:2}
@@ -453,96 +501,90 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 
     <div class="kimo">
       <div class="item">
-        <div class="num"></div>
+        <div class="howpic"><img src="assets/how1.png" alt="未来の練習の時間枠を先に出品するコンセプト画像"></div>
         <div><h3>練習の時間を先に出品する</h3><p>完成した動画ではなく、<span class="sk">これからの練習時間そのもの</span>を時間枠として出品します。当日スマホで撮るだけで、それが価値になります。</p></div>
       </div>
       <div class="item">
-        <div class="num"></div>
+        <div class="howpic"><img src="assets/how2.png" alt="封をされた状態で届くが、開ければすぐ見られるコンセプト画像"></div>
         <div><h3>中身は届くまで分からない</h3><p>何が映るかは、届いて開けるまで分かりません。だからこそ<span class="sk">開ける瞬間までわくわくを楽しめます</span>。思いがけない名場面に出会えることもあります。</p></div>
       </div>
       <div class="item">
-        <div class="num"></div>
+        <div class="howpic"><img src="assets/how3.png" alt="自分だけが持つ世界に1つの動画コンセプト画像"></div>
         <div><h3>届くのは世界に1つだけ</h3><p>その時間を手に入れられるのは、世界でその人だけ。複製ではない、<span class="sk">世界に1つだけのデジタルグッズ</span>として所有できます。</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- flow: taped cheki strip, horizontal scroll, on dark cork -->
-<section class="sec" id="flow" style="background:rgba(58,48,39,.9);color:var(--paper)">
+<!-- flow: taped cheki strip pinned to a real corkboard, horizontal scroll -->
+<section class="sec" id="flow">
   <div class="wrap">
-    <span class="eyebrow" style="color:#ffe27a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h14M13 6l6 6-6 6"/></svg>FLOW</span>
-    <h2 class="sec-title" style="color:var(--paper)">出品から<em style="color:#ffe27a">受け取りまでの流れ</em></h2>
-    <p class="lead" style="color:var(--paper)">撮るのはスマホだけで、編集も配信機材も必要ありません。販売者と購入者それぞれの流れを、5つのステップでご紹介します。</p>
-    <div class="scroll-hint">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>横にスクロールできます
-    </div>
+    <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h14M13 6l6 6-6 6"/></svg>FLOW</span>
+    <h2 class="sec-title">出品から<em>受け取りまでの流れ</em></h2>
+    <p class="lead">撮るのはスマホだけで、編集も配信機材も必要ありません。販売者と購入者それぞれの流れを、4つのステップでご紹介します。</p>
 
-    <div class="flow-scroll">
-      <div class="flow-track">
-        <!-- step1 -->
-        <div class="step">
-          <div class="head"><span class="stepno">STEP 01</span><span class="side sell">販売者</span></div>
-          <div class="phone"><div class="scr">
-            <div class="bar"><span>Lapsell</span><span>出品</span></div>
-            <div class="body">
-              <div class="card"><span class="ttl">練習を出品する</span><span class="muted">6/20(金) 19:00–21:00</span><span class="price">¥300 <small style="font-size:11px;color:#9a8d77">/ 1回</small></span><span class="muted">542 / 720 区間</span></div>
-              <div class="pill">出品する</div>
-            </div>
-          </div></div>
-          <p class="cap">日時と価格を決めて<b>出品</b>します。</p>
+    <!-- a real corkboard, hung on the white wall, with the cheki collection pinned to it -->
+    <div class="corkframe">
+      <span class="corkpin"></span>
+      <div class="corkface">
+        <div class="scroll-hint">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>横にスクロールできます
         </div>
-        <!-- step2 -->
-        <div class="step">
-          <div class="head"><span class="stepno">STEP 02</span><span class="side buy">購入者</span></div>
-          <div class="phone"><div class="scr">
-            <div class="bar"><span>Lapsell</span><span>一覧</span></div>
-            <div class="body">
-              <div class="listrow"><span class="sw">19:47</span><div style="flex:1"><div style="font-weight:900">ダンス練習</div><span class="muted">¥300・残り少</span></div></div>
-              <div class="listrow"><span class="sw">20:03</span><div style="flex:1"><div style="font-weight:900">歌の自主練</div><span class="muted">¥300</span></div></div>
-              <div class="listrow"><span class="sw">20:21</span><div style="flex:1"><div style="font-weight:900">休憩トーク</div><span class="muted">¥300</span></div></div>
-              <div class="pill teal">区間を購入</div>
+
+        <div class="flow-scroll">
+          <div class="flow-track">
+            <!-- step1 -->
+            <div class="step">
+              <div class="head"><span class="stepno">STEP 01</span><span class="side sell">販売者</span></div>
+              <div class="phone"><div class="scr">
+                <div class="bar"><span>Lapsell</span><span>出品</span></div>
+                <div class="body">
+                  <div class="card"><span class="ttl">練習を出品する</span><span class="muted">6/20(金) 19:00–21:00</span><span class="price">¥300 <small style="font-size:10px;color:#9a8d77">/ 1回</small></span><span class="muted">542 / 720 区間</span></div>
+                  <div class="pill">出品する</div>
+                </div>
+              </div></div>
+              <p class="cap">日時と価格を決めて<b>出品</b>します。</p>
             </div>
-          </div></div>
-          <p class="cap">並んだ時間枠から気になるものを<b>購入</b>します。中身はまだ分かりません。</p>
-        </div>
-        <!-- step3 -->
-        <div class="step">
-          <div class="head"><span class="stepno">STEP 03</span><span class="side sell">販売者</span></div>
-          <div class="phone"><div class="scr">
-            <div class="bar"><span>Lapsell</span><span>撮影</span></div>
-            <div class="rec"><span class="dot"></span>REC 19:47</div>
-            <div class="body" style="padding:0">
-              <img class="thumb" src="assets/mock_practice.png" alt="スマホで撮影中の練習風景" style="aspect-ratio:9/16;height:100%">
+            <!-- step2 -->
+            <div class="step">
+              <div class="head"><span class="stepno">STEP 02</span><span class="side buy">購入者</span></div>
+              <div class="phone"><div class="scr">
+                <div class="bar"><span>Lapsell</span><span>一覧</span></div>
+                <div class="body">
+                  <div class="listrow"><span class="sw">19:47</span><div style="flex:1"><div class="rtt">ダンス練習</div><span class="muted">¥300・残り少</span></div></div>
+                  <div class="listrow"><span class="sw">20:03</span><div style="flex:1"><div class="rtt">歌の自主練</div><span class="muted">¥300</span></div></div>
+                  <div class="listrow"><span class="sw">20:21</span><div style="flex:1"><div class="rtt">休憩トーク</div><span class="muted">¥300</span></div></div>
+                  <div class="pill teal">区間を購入</div>
+                </div>
+              </div></div>
+              <p class="cap">並んだ時間枠から気になるものを<b>購入</b>します。中身はまだ分かりません。</p>
             </div>
-          </div></div>
-          <p class="cap">当日は<b>スマホで撮るだけ</b>。編集は必要ありません。</p>
-        </div>
-        <!-- step4 -->
-        <div class="step">
-          <div class="head"><span class="stepno">STEP 04</span><span class="side buy">購入者</span></div>
-          <div class="phone"><div class="scr">
-            <div class="bar"><span>Lapsell</span><span>開封</span></div>
-            <div class="body">
-              <div class="sealwrap"><img src="assets/mock_seal.png" alt="マスキングテープで封をされた、中身が分からない一点物の動画クリップ"></div>
-              <div class="card" style="text-align:center"><span class="ttl">あなたの区間が届きました</span><span class="muted">タップして開ける</span></div>
-              <div class="pill">開ける</div>
+            <!-- step3 -->
+            <div class="step">
+              <div class="head"><span class="stepno">STEP 03</span><span class="side sell">販売者</span></div>
+              <div class="phone"><div class="scr">
+                <div class="bar"><span>Lapsell</span><span>撮影</span></div>
+                <div class="rec"><span class="dot"></span>REC 19:47</div>
+                <div class="body" style="padding:0">
+                  <img class="thumb" src="assets/mock_practice.png" alt="スマホで撮影中の練習風景" style="aspect-ratio:9/16;height:100%">
+                </div>
+              </div></div>
+              <p class="cap">当日は<b>スマホで撮るだけ</b>。編集は必要ありません。</p>
             </div>
-          </div></div>
-          <p class="cap"><b>購入した区間が届いたら</b>、タップして開封します。</p>
-        </div>
-        <!-- step5 -->
-        <div class="step">
-          <div class="head"><span class="stepno">STEP 05</span><span class="side buy">購入者</span></div>
-          <div class="phone"><div class="scr">
-            <div class="bar"><span>Lapsell</span><span>受け取り</span></div>
-            <div class="body">
-              <div class="player"><img class="thumb" src="assets/mock_practice.png" alt="受け取った練習映像" style="aspect-ratio:16/11"><span class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7Z"/></svg></span></div>
-              <div class="card"><span class="ttl">19:47:30–19:47:40 ダンス練習</span><span class="muted">世界で一つだけ、あなたが所有</span></div>
-              <div style="display:flex;gap:7px"><div class="pill teal" style="flex:1">再生</div><div class="pill" style="flex:1">シェア</div></div>
+            <!-- step4: received & already playable (merged 開封+受け取り, no "?") -->
+            <div class="step">
+              <div class="head"><span class="stepno">STEP 04</span><span class="side buy">購入者</span></div>
+              <div class="phone"><div class="scr">
+                <div class="bar"><span>Lapsell</span><span>受け取り</span></div>
+                <div class="body">
+                  <div class="player"><img class="thumb" src="assets/mock_practice.png" alt="届いてすぐ再生できる、受け取った練習映像" style="aspect-ratio:16/11"><span class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7Z"/></svg></span></div>
+                  <div class="card"><span class="ttl">19:47:30–19:47:40 ダンス練習</span><span class="muted">届いてすぐ再生・世界で一つだけ、あなたが所有</span></div>
+                  <div style="display:flex;gap:7px"><div class="pill teal" style="flex:1">再生</div><div class="pill" style="flex:1">シェア</div></div>
+                </div>
+              </div></div>
+              <p class="cap">あなたの区間が届いたら<b>すぐに再生</b>できます。何が映っているかは開けてのお楽しみ。<b>世界に1つだけ</b>の動画を所有できます。</p>
             </div>
-          </div></div>
-          <p class="cap"><b>世界に1つだけ</b>の動画を所有できます。面白い瞬間はSNSでシェアも。</p>
+          </div>
         </div>
       </div>
     </div>
