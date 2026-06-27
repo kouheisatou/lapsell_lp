@@ -169,6 +169,7 @@
   .reel .step:not(:last-child)::after{content:"";position:absolute;top:54px;right:-14px;width:26px;height:26px;border-top:3px solid rgba(255,255,255,.45);border-right:3px solid rgba(255,255,255,.45);transform:rotate(45deg);}
   .reel .num{font-size:13px;font-weight:800;letter-spacing:.2em;color:var(--c-yellow);}
   .reel .ico{width:60px;height:60px;margin:14px auto 16px;color:#fff;}
+  .reel .howimg{width:80px;height:80px;margin:14px auto 16px;object-fit:contain;border-radius:12px;}
   .reel h3{font-size:19px;margin:0 0 .4em;}
   .reel p{font-size:14px;font-weight:600;opacity:.92;margin:0;}
   @media(max-width:780px){.reel{grid-template-columns:1fr;gap:40px;}.reel .step:not(:last-child)::after{display:none;}}
@@ -188,31 +189,27 @@
   .phone{width:240px;aspect-ratio:9/19.5;background:#111;border-radius:30px;padding:9px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);}
   .phone .screen{width:100%;height:100%;border-radius:23px;overflow:hidden;background:var(--paper);position:relative;display:flex;flex-direction:column;}
   .phone .notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:78px;height:18px;background:#111;border-radius:0 0 12px 12px;z-index:5;}
-  .scr-top{background:var(--red);color:#fff;padding:18px 14px 12px;font-size:12px;font-weight:800;letter-spacing:.04em;}
-  .scr-top small{display:block;font-weight:600;opacity:.85;font-size:10px;letter-spacing:.02em;margin-top:2px;}
-  .scr-body{flex:1;padding:12px;display:flex;flex-direction:column;gap:9px;overflow:hidden;}
-  .scr-field{font-size:10.5px;font-weight:700;display:flex;justify-content:space-between;border-bottom:1px solid rgba(35,24,21,.12);padding-bottom:6px;}
+  .scr-top{background:var(--red);color:#fff;padding:15px 12px 10px;font-size:11px;font-weight:800;letter-spacing:.04em;}
+  .scr-top small{display:block;font-weight:600;opacity:.85;font-size:9px;letter-spacing:.02em;margin-top:2px;}
+  .scr-body{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+  .scr-field{font-size:10px;font-weight:700;display:flex;justify-content:space-between;border-bottom:1px solid rgba(35,24,21,.12);padding-bottom:5px;}
   .scr-field b{color:var(--red);}
-  .scr-btn{margin-top:auto;background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:800;padding:9px;border-radius:8px;letter-spacing:.04em;}
-  .listrow{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;padding:7px 0;border-bottom:1px solid rgba(35,24,21,.1);}
-  .listrow .thmb{width:34px;height:34px;border-radius:6px;flex:0 0 auto;object-fit:cover;}
+  .scr-btn{margin-top:auto;background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:800;padding:8px;border-radius:8px;letter-spacing:.04em;}
+  .listrow{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;padding:6px 0;border-bottom:1px solid rgba(35,24,21,.1);}
+  .listrow .thmb{width:32px;height:32px;border-radius:6px;flex:0 0 auto;object-fit:cover;}
   .listrow .price{margin-left:auto;color:var(--red);font-weight:800;}
   .rec-screen{background:#000;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;position:relative;}
   .rec-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.78;}
-  .rec-dot{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.45);padding:5px 11px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.1em;}
-  .rec-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);}
-  .open-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;background:radial-gradient(circle at 50% 35%,#fff,var(--paper-2));padding:14px;}
-  .open-screen img{width:60%;}
-  .open-screen .t1l{font-size:12px;font-weight:800;}
-  .open-screen .t2l{font-size:10.5px;font-weight:700;color:var(--red);}
+  .rec-dot{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.45);padding:4px 10px;border-radius:99px;font-size:9px;font-weight:800;letter-spacing:.1em;}
+  .rec-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);}
   .recv-screen{flex:1;display:flex;flex-direction:column;background:#111;color:#fff;}
   .recv-player{position:relative;aspect-ratio:9/12;overflow:hidden;}
   .recv-player img{width:100%;height:100%;object-fit:cover;}
-  .recv-player .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;}
-  .recv-meta{padding:10px;font-size:10px;font-weight:700;}
-  .recv-meta b{display:block;color:var(--c-yellow);font-size:11px;margin-bottom:3px;}
-  .recv-actions{display:flex;gap:7px;padding:0 10px 12px;}
-  .recv-actions span{flex:1;text-align:center;background:rgba(255,255,255,.12);border-radius:7px;font-size:10px;font-weight:800;padding:7px 0;}
+  .recv-player .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;}
+  .recv-meta{padding:9px;font-size:9px;font-weight:700;}
+  .recv-meta b{display:block;color:var(--c-yellow);font-size:10.5px;margin-bottom:3px;}
+  .recv-actions{display:flex;gap:6px;padding:0 9px 10px;}
+  .recv-actions span{flex:1;text-align:center;background:rgba(255,255,255,.12);border-radius:7px;font-size:10px;font-weight:800;padding:6px 0;}
 
   /* ===== 4つの理由（枠なしフィーチャーリスト） ===== */
   .reasons .item{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;padding:44px 0;}
@@ -286,6 +283,28 @@
   .target h3{font-size:18px;margin:.7em 0 .25em;}
   .target p{font-size:14px;font-weight:600;opacity:.85;margin:0;}
   .target .cnt{font-size:12.5px;font-weight:800;color:var(--red);letter-spacing:.04em;}
+
+  /* ===== 導入イメージ（Before/After） ===== */
+  .cases{display:flex;flex-direction:column;gap:0;max-width:920px;margin:0 auto;}
+  .case-row{display:grid;grid-template-columns:104px 1fr;gap:26px;align-items:center;padding:34px 0;}
+  .case-row+.case-row{border-top:1.5px dashed rgba(35,24,21,.18);}
+  .case-persona{text-align:center;}
+  .case-persona img{width:96px;height:96px;border-radius:14px;object-fit:cover;margin:0 auto 10px;box-shadow:0 12px 22px -16px rgba(0,0,0,.45);}
+  .case-persona .pn{font-size:15px;font-weight:800;line-height:1.35;}
+  .case-persona .pd{font-size:12px;font-weight:700;color:var(--red);margin-top:3px;}
+  .case-ba{display:grid;grid-template-columns:1fr 30px 1fr;gap:18px;align-items:center;}
+  .case-ba .ba-before .lab,.case-ba .ba-after .lab{font-size:11px;font-weight:800;letter-spacing:.1em;margin-bottom:6px;}
+  .case-ba .ba-before .lab{color:rgba(35,24,21,.5);}
+  .case-ba .ba-after .lab{color:var(--red);}
+  .case-ba p{margin:0;font-weight:600;font-size:14px;line-height:1.7;}
+  .case-ba .ba-before p{opacity:.72;}
+  .case-arrow{width:30px;height:30px;color:var(--red);margin:22px auto 0;}
+  @media(max-width:760px){
+    .case-row{grid-template-columns:1fr;gap:18px;text-align:center;}
+    .case-persona img{width:84px;height:84px;}
+    .case-ba{grid-template-columns:1fr;gap:14px;text-align:left;}
+    .case-arrow{margin:0 auto;transform:rotate(90deg);}
+  }
 
   /* ===== FAQ ===== */
   .faq-list{max-width:760px;margin:0 auto;}
@@ -447,19 +466,19 @@
     <div class="reel">
       <div class="step">
         <div class="num">01</div>
-        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="32" height="22" rx="3"/><circle cx="18" cy="25" r="4"/><circle cx="30" cy="25" r="4"/><path d="M14 14V11a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v3"/></svg>
+        <img class="howimg" src="assets/how1.png" alt="未来の練習の時間を先に売るイメージ">
         <h3>時間を“先に”売る</h3>
         <p>完成品ではなく、未来の練習の時間枠を出品。ファンは中身を知らずに購入します。</p>
       </div>
       <div class="step">
         <div class="num">02</div>
-        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8"/><circle cx="24" cy="24" r="4"/></svg>
+        <img class="howimg" src="assets/how2.png" alt="中身は届くまで分からないイメージ">
         <h3>中身は運しだい</h3>
         <p>当日スマホで撮るだけ。何が映るかは届くまで不明。だから1本ごとが特別になります。</p>
       </div>
       <div class="step">
         <div class="num">03</div>
-        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l4 8 9 1-6.5 6 1.5 9-8-4.5L16 30l1.5-9L11 15l9-1z"/></svg>
+        <img class="howimg" src="assets/how3.png" alt="届くのは世界に1つの一点もののイメージ">
         <h3>届くのは世界に1つ</h3>
         <p>落札した人だけが持つ、一点もののデジタルグッズ。同じものは、世界に二つとありません。</p>
       </div>
@@ -473,7 +492,7 @@
 <section class="band" id="flow">
   <div class="wrap">
     <div class="sec-eyebrow"><span class="ln"></span>HOW IT WORKS<span class="ln"></span></div>
-    <h2 class="sec-title">出品から受け取りまで、5ステップ。</h2>
+    <h2 class="sec-title">出品から受け取りまで、4ステップ。</h2>
     <p class="sec-sub">横にスワイプして、出品者と購入者、両方の画面を見てみてください。</p>
   </div>
   <div class="wrap">
@@ -523,28 +542,16 @@
       <div class="flow-card">
         <div class="flow-head"><span class="flow-step-no">04</span><span class="tag tag-buy">購入者</span></div>
         <div class="phone"><div class="screen"><span class="notch"></span>
-          <div class="open-screen">
-            <img src="assets/mock_capsule.png" alt="リボンで封をされたカセット型デジタルグッズ。中身は開けるまで分からない">
-            <span class="t1l">あなたの区間が届きました</span>
-            <span class="t2l">タップして開ける</span>
-          </div>
-        </div></div>
-        <p class="flow-cap">届く・開ける<span>封を開けて受け取り。中身は開けるまで分からない。</span></p>
-      </div>
-
-      <div class="flow-card">
-        <div class="flow-head"><span class="flow-step-no">05</span><span class="tag tag-buy">購入者</span></div>
-        <div class="phone"><div class="screen"><span class="notch"></span>
           <div class="recv-screen">
             <div class="recv-player">
-              <img src="assets/mock_practice.png" alt="受け取ったダンス練習の映像">
+              <img src="assets/mock_practice.png" alt="受け取ったダンス練習の映像。タップして再生できる">
               <span class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#231815"><path d="M8 5v14l11-7z"/></svg></span>
             </div>
             <div class="recv-meta"><b>19:47:30 - 19:47:40 ダンス練習</b>世界で一つだけ、あなたが所有</div>
             <div class="recv-actions"><span>再生</span><span>シェア</span></div>
           </div>
         </div></div>
-        <p class="flow-cap">世界に1つを所有<span>面白い瞬間はSNSへ＝次のファンの入口。</span></p>
+        <p class="flow-cap">届いて、すぐ再生できる<span>中身は届くまで分からない。面白い瞬間はSNSへ＝次のファンの入口。</span></p>
       </div>
 
     </div>
@@ -774,8 +781,59 @@
   </div>
 </section>
 
+<!-- ============ 導入イメージ（Before/After） ============ -->
+<section class="band band-paper2" id="cases">
+  <div class="wrap">
+    <div class="sec-eyebrow"><span class="ln"></span>導入イメージ<span class="ln"></span></div>
+    <h2 class="sec-title">こんな変化が起きています。</h2>
+    <p class="sec-sub">捨てていた時間が収益とファンに変わる。3組の“これまで”と“Lapsell後”。</p>
+    <div class="cases">
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_idol.png" alt="ライブアイドル">
+          <div class="pn">ライブアイドル</div>
+          <div class="pd">遠方ファンと距離がある</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-before"><div class="lab">これまで</div><p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p></div>
+          <svg class="case-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <div class="ba-after"><div class="lab">Lapsell後</div><p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p></div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_band.png" alt="インディーズバンド">
+          <div class="pn">インディーズバンド</div>
+          <div class="pd">スタジオ代がかさむ</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-before"><div class="lab">これまで</div><p>スタジオ代がかさむのにリハを届ける手段がなく固定ファン止まり。</p></div>
+          <svg class="case-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <div class="ba-after"><div class="lab">Lapsell後</div><p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p></div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_comedian.png" alt="インディーズお笑い芸人">
+          <div class="pn">インディーズお笑い芸人</div>
+          <div class="pd">配信事故が怖い</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-before"><div class="lab">これまで</div><p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p></div>
+          <svg class="case-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <div class="ba-after"><div class="lab">Lapsell後</div><p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
-<section class="band band-paper2" id="faq">
+<section class="band" id="faq">
   <div class="wrap">
     <div class="sec-eyebrow"><span class="ln"></span>FAQ<span class="ln"></span></div>
     <h2 class="sec-title">よくある質問</h2>
