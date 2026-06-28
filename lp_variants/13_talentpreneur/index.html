@@ -179,7 +179,7 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 /* ---------- reach / 購入導線 (borderless line-icon figures) ---------- */
 .reach{display:grid;grid-template-columns:1fr;gap:38px;margin-top:48px;position:relative;z-index:2}
 .rch{display:grid;gap:14px}
-.rch>svg{width:54px;height:54px;color:var(--indigo)}
+.rch>img{width:100%;height:auto;border-radius:8px}
 .rch h3{font-size:clamp(17px,2.8vw,20px);font-weight:800;line-height:1.45}
 .rch p{font-size:14px;font-weight:500}
 .reach-note{position:relative;z-index:2;margin-top:38px;font-size:14px;font-weight:700;color:var(--indigo)}
@@ -201,12 +201,13 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 .legend{display:grid;gap:10px;font-size:14px;font-weight:600}
 .legend i{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:9px;vertical-align:middle}
 .legend .big{font-family:"Josefin Sans",sans-serif;font-weight:700;font-size:15px}
-/* purchase reasons (borderless feature list) */
-.reasons{display:grid;grid-template-columns:1fr;gap:30px;margin-top:36px;position:relative;z-index:2}
-.reason{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
-.reason>svg{width:30px;height:30px;flex:0 0 30px;color:var(--yellow);margin-top:3px}
+/* purchase reasons (borderless feature list, with image) */
+.reasons{display:grid;grid-template-columns:1fr;gap:34px;margin-top:36px;position:relative;z-index:2}
+.reason{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start}
+.reason>img{width:100%;height:auto;border-radius:8px;grid-row:span 1}
 .reason h4{font-size:clamp(16px,2.6vw,19px);font-weight:800;line-height:1.5;margin-bottom:6px;color:#fff}
 .reason p{font-size:14px;font-weight:500;opacity:.92}
+.reason p em{font-style:normal;font-weight:800;background:var(--yellow);color:var(--indigo);padding:1px 6px;border-radius:3px}
 .reason .src{display:block;margin-top:7px;font-size:11.5px;font-weight:500;opacity:.6}
 @media(min-width:760px){.reasons{grid-template-columns:1fr 1fr;column-gap:46px}}
 
@@ -527,29 +528,19 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
 
     <div class="reach">
       <div class="rch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M5 14v-3h3"/>
-          <rect x="14" y="3" width="7" height="7" rx="1"/><path d="M14 14h3v3"/><path d="M21 14v7h-7"/><path d="M17.5 17.5h.01"/>
-          <rect x="3" y="3" width="7" height="7" rx="1"/>
-        </svg>
+        <img src="assets/deliver_qr.png" alt="物販ブースのグッズの横にQRコードを並べて出品リンクを案内するイラスト">
         <h3>① 物販ブースにQRを並べる</h3>
         <p>会場の物販で、グッズの横にQRコードを置くだけ。チェキやTシャツと同じ列に「練習の時間」も並べて売れる。</p>
       </div>
 
       <div class="rch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/>
-          <path d="M18.5 6.5 21 4M21 4h-3M21 4v3"/>
-        </svg>
+        <img src="assets/deliver_sns.png" alt="X・Instagramのプロフィールやストーリーに出品リンクを貼って告知するイラスト">
         <h3>② SNSで告知する</h3>
         <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。いつものフォロワーが、そのまま買い手になる。</p>
       </div>
 
       <div class="rch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M3 11a2 2 0 0 1 2-2h2l3-2v10l-3-2H5a2 2 0 0 1-2-2Z"/>
-          <path d="M14 8a4 4 0 0 1 0 8M16.5 5.5a7.5 7.5 0 0 1 0 13"/>
-        </svg>
+        <img src="assets/deliver_mc.png" alt="ライブのMCや特典会・ファンクラブで出品を案内するイラスト">
         <h3>③ ライブMC・特典会で案内</h3>
         <p>ライブのMCや特典会で一言、ファンクラブ・LINEで通知。直接届く接点に乗せれば、いまのファンにそのまま届く。</p>
       </div>
@@ -668,46 +659,46 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
 
     <div class="reasons">
       <div class="reason">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <img src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファンのイラスト">
         <div>
-          <h4>ライブ物販＝“現場で所有する”は定着</h4>
-          <p>ライブ参加者のグッズ購入は<span class="hl">年平均 約22,000円</span>。アイドル系の購入率は<span class="hl">75.4%</span>。手元に残る一点物への支払いは、もう当たり前の行動。</p>
+          <h4>ファンが実際に払っている額</h4>
+          <p>ライブ参加者がグッズ購入に使う額は1年で<em>平均 約22,000円</em>にのぼり、アイドル系の購入率は<em>75.4%</em>に達します。手元に残る一点物にお金を払うのは、もう当たり前の行動になっています。</p>
           <span class="src">出典：ぴあ総研／インテージ（要再確認）</span>
         </div>
       </div>
 
       <div class="reason">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6 9.5 3h5L16 6"/></svg>
+        <img src="assets/reason_cheki.png" alt="その場で撮るチェキを手にするファンのイラスト">
         <div>
-          <h4>チェキ＝その場の一点物が、主収入</h4>
-          <p>チェキ1枚は<span class="hl">約1,500円</span>で、ライブアイドルの収入の柱。文化全体でも累計1億台・年<span class="hl">約1,500億円</span>。Lapsellは「動く・本人の本物の時間版チェキ」。</p>
+          <h4>その場の一点物に払う額</h4>
+          <p>チェキは1枚<em>約1,500円</em>で売れ、ライブアイドルの収入の柱になっています。文化全体でも累計<em>1億台</em>が普及し、市場は年<em>約1,500億円</em>。Lapsellは、その「動く・本人の本物の時間版チェキ」にあたります。</p>
           <span class="src">出典：富士フイルム公式 ほか</span>
         </div>
       </div>
 
       <div class="reason">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        <img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めるファンのイラスト">
         <div>
-          <h4>推し活グッズに、年 約4万円</h4>
-          <p>推し活層が1年でグッズにかけるのは<span class="hl">平均 約4万円</span>。“好き”に払う土台は、すでにある。</p>
+          <h4>推し活に払う年間の額</h4>
+          <p>推し活をする人が1年でグッズにかける額は、<em>平均 約4万円</em>といわれています。“好き”にお金を払う土台は、すでにできあがっています。</p>
           <span class="src">出典：Oshicoco 調査（要再確認）</span>
         </div>
       </div>
 
       <div class="reason">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg>
+        <img src="assets/reason_cd.png" alt="CDや特典映像をコレクションするファンのイラスト">
         <div>
-          <h4>買う理由の1位は「収集」</h4>
-          <p>CD購入理由の1位は<span class="hl">「収集」54.7%</span>。所有・コレクションが動機の中心。特典映像目当ての音楽ビデオも<span class="hl">562億円</span>残る。</p>
+          <h4>所有・収集の文化</h4>
+          <p>CDを買う理由でいちばん多いのは「収集」で<em>54.7%</em>を占め、所有やコレクションが動機の中心になっています。特典映像を目当てに買われる音楽ビデオも、いまだ年<em>562億円</em>の市場が残っています。</p>
           <span class="src">出典：CD購入理由調査（要再確認）／RIAJ</span>
         </div>
       </div>
 
       <div class="reason">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.1A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        <img src="assets/reason_bubble.png" alt="本人から素のメッセージが届くアプリのイラスト">
         <div>
-          <h4>“素の日常”そのものへの課金も成立</h4>
-          <p>bubbleは<span class="hl">月額約500円</span>で本人の素のメッセージが届く。<span class="hl">200万人超</span>が課金、2024年売上は約80億円との見方も。素の日常への支払いは先行事例として確立。</p>
+          <h4>本人とのつながりに払う額</h4>
+          <p>bubbleでは<em>月額 約500円</em>で本人の素のメッセージが届き、すでに<em>200万人</em>を超える人が課金しています。2024年の売上は<em>約80億円</em>との見方もあり、素の日常へお金を払う行動は先行事例として確立しています。</p>
           <span class="src">出典：bubble（DearU）報道（要再確認）</span>
         </div>
       </div>
