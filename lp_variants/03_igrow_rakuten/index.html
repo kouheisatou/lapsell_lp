@@ -221,25 +221,21 @@ header{
 .src{font-size:11.5px;color:var(--ink-faint);font-weight:300;margin-top:5px;line-height:1.6}
 @media(max-width:760px){.chart-grid{grid-template-columns:1fr}}
 
-/* Purchase reasons (borderless list) */
+/* Purchase reasons (borderless list, with per-item image) */
 .reasons{margin-top:46px;display:flex;flex-direction:column}
-.reason{display:grid;grid-template-columns:30px 1fr;gap:18px;padding:26px 0;align-items:start}
+.reason{display:grid;grid-template-columns:200px 1fr;gap:30px;padding:34px 0;align-items:center}
 .reason:not(:last-child){border-bottom:1px solid var(--line)}
-.reason .ico{width:24px;height:24px;color:var(--brand);margin-top:3px}
-.reason h4{font-size:17px;font-weight:600;line-height:1.55;margin-bottom:6px}
-.reason h4 .fig{color:var(--brand);font-weight:700}
-.reason p{font-size:14px;color:var(--ink-soft);font-weight:300;line-height:1.85}
-.reason .src{margin-top:6px}
-
-/* bubble precedent callout */
-.precedent{margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 32px;display:grid;grid-template-columns:1fr;gap:8px}
-.precedent .lab{font-size:12.5px;font-weight:700;color:var(--brand);letter-spacing:.06em}
-.precedent h4{font-size:18px;font-weight:600;line-height:1.55}
-.precedent .figs{display:flex;flex-wrap:wrap;gap:28px;margin-top:14px}
-.precedent .fg{display:flex;flex-direction:column}
-.precedent .fg .n{font-size:24px;font-weight:700;color:var(--ink);line-height:1.3}
-.precedent .fg .k{font-size:12.5px;color:var(--ink-faint);font-weight:300}
-.precedent .src{margin-top:12px}
+.reason.flip .r-img{order:2}
+.reason .r-img{display:flex;justify-content:center}
+.reason .r-img img{width:100%;max-width:200px;height:auto;display:block}
+.reason h4{font-size:17px;font-weight:600;line-height:1.55;margin-bottom:8px}
+.reason p{font-size:14px;color:var(--ink-soft);font-weight:300;line-height:1.9}
+.reason .src{margin-top:8px}
+@media(max-width:760px){
+  .reason,.reason.flip{grid-template-columns:1fr;gap:16px}
+  .reason.flip .r-img{order:0}
+  .reason .r-img img{max-width:160px}
+}
 
 /* Reach: how to deliver to existing fans (borderless, hairline) */
 .reach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:46px}
@@ -248,16 +244,9 @@ header{
 .reach-col .n{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.1em;margin-bottom:18px}
 .reach-col h4{font-size:17px;font-weight:600;line-height:1.55;margin:0 0 8px}
 .reach-col p{font-size:14px;color:var(--ink-soft);font-weight:300;line-height:1.85}
-.reach-fig{height:120px;display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:18px}
+.reach-fig{margin-bottom:18px;display:flex;align-items:center;justify-content:center}
+.reach-fig img{width:100%;max-width:240px;height:auto;display:block}
 .reach-col .ico{color:var(--brand)}
-.qr{width:88px;height:88px}
-.qr rect{fill:var(--ink)}
-.qr .bg{fill:#fff;stroke:var(--line);stroke-width:1}
-.qr-cap{font-size:11px;color:var(--ink-faint);font-weight:400;text-align:center}
-.sns-fig{display:flex;flex-direction:column;align-items:center;gap:10px}
-.sns-icons{display:flex;gap:14px}
-.sns-icons .ico{width:30px;height:30px}
-.sns-link{font-size:11px;color:var(--ink-faint);border:1px solid var(--line);border-radius:20px;padding:4px 12px;font-weight:400}
 .reach-note{text-align:center;margin-top:42px;font-size:16px;color:var(--ink);font-weight:400}
 @media(max-width:760px){
   .reach-grid{grid-template-columns:1fr}
@@ -717,44 +706,54 @@ footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)
       </div>
     </div>
 
-    <!-- Purchase reasons: borderless list -->
+    <!-- Purchase reasons: natural sentences, one image per item -->
     <div class="reasons">
+
       <div class="reason">
-        <svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <div class="r-img"><img src="assets/reason_merch.png" alt="ライブの物販ブースでグッズを買うファン"></div>
         <div>
-          <h4>チェキは1枚 <span class="fig">約1,500円</span>。ライブアイドルの主収入になっている。</h4>
-          <p>「スマホ写真は誰でもコピーできるが、チェキは一点もの」——ファンは“その場でしか撮れない一点もの”に払います。チェキ（instax）は累計1億台突破、年約1,500億円規模。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+          <h4>ライブで「持ち帰る」のは、もう当たり前の行動</h4>
+          <p>ライブ物販を買うファンは、1年で平均22,000円ほどを使います。アイドル系では会場でのグッズ購入率が75.4%にのぼり、現場でグッズを“持ち帰る”行動はすでに日常です。Lapsellの「練習の時間」も、同じ感覚でその接点に並べられます。</p>
+          <div class="src">出典：ぴあ総研／インテージ n=916・2019年（要再確認）</div>
+        </div>
+      </div>
+
+      <div class="reason flip">
+        <div class="r-img"><img src="assets/reason_cheki.png" alt="その場でしか撮れない一点もののチェキを手にするファン"></div>
+        <div>
+          <h4>“その場でしか撮れない一点もの”に、ファンは払う</h4>
+          <p>チェキは1枚およそ1,500円ながら、ライブアイドルの主な収入源になっています。スマホ写真は誰でもコピーできても、チェキは一点もの。チェキ（instax）は累計1億台を超え、年およそ1,500億円規模に達しています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
           <div class="src">出典：Business Insider Japan／中日新聞 2024（要再確認）、富士フイルム公式 2025</div>
         </div>
       </div>
+
       <div class="reason">
-        <svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+        <div class="r-img"><img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクションを並べて楽しむ様子"></div>
         <div>
-          <h4>推し活グッズに、ファンは年 平均 <span class="fig">約4万円</span>。</h4>
-          <p>「手元に残る一点もの」への支払いは、すでに当たり前の行動です。Lapsellの“素の一点もの”も、この延長線上で買われます。</p>
+          <h4>ファンが実際に払っている額</h4>
+          <p>推し活グッズに、ファンは1年で平均およそ4万円を使っています。「手元に残る一点もの」へお金を払うことは、すでに当たり前の行動です。Lapsellの“素の一点もの”も、この延長線上で買われます。</p>
           <div class="src">出典：Oshicoco n=210・2024年（要再確認）</div>
         </div>
       </div>
-      <div class="reason">
-        <svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+
+      <div class="reason flip">
+        <div class="r-img"><img src="assets/reason_cd.png" alt="CDを集めているコレクション"></div>
         <div>
-          <h4>CDを買う理由の1位は「収集」<span class="fig">54.7%</span>。</h4>
-          <p>購入動機の中心は“所有・コレクション”です。特典映像付きの所有メディア（音楽ビデオ）も国内 562億円規模で、「持っておきたい」需要が残っています。</p>
+          <h4>所有・収集の文化</h4>
+          <p>CDを買う理由の1位は「収集」で、54.7%を占めます。購入の中心にあるのは“所有・コレクション”という動機です。特典映像が付く所有メディア（音楽ビデオ）も国内でおよそ562億円規模が残り、「持っておきたい」という需要は今も健在です。</p>
           <div class="src">出典：Appliv／ナイル調べ 2023年（要再確認）、音楽ビデオ：RIAJ公式 2024年</div>
         </div>
       </div>
-    </div>
 
-    <!-- bubble: precedent for paying for "raw daily life" -->
-    <div class="precedent">
-      <div class="lab">先行事例</div>
-      <h4>「本人の“素の日常”そのもの」に、すでにお金は払われている。</h4>
-      <div class="figs">
-        <div class="fg"><span class="n">月額 約500円</span><span class="k">本人の素の日常メッセージ（bubble）</span></div>
-        <div class="fg"><span class="n">200万人超</span><span class="k">が課金</span></div>
-        <div class="fg"><span class="n">約80億円</span><span class="k">2024年 売上規模</span></div>
+      <div class="reason">
+        <div class="r-img"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読む手元"></div>
+        <div>
+          <h4>「本人の“素の日常”そのもの」には、すでにお金が払われている</h4>
+          <p>本人から届く素の日常メッセージ（bubble）は月額およそ500円。それでも200万人を超えるファンが課金し、2024年にはおよそ80億円の売上規模に達したと報じられています。“素の日常”に払う行動は、もう実在します。</p>
+          <div class="src">出典：bubble（DearU）。韓国企業のため売上はウォン建て・報道に幅あり（要再確認）</div>
+        </div>
       </div>
-      <div class="src">出典：bubble（DearU）。韓国企業のため売上はウォン建て・報道に幅あり（要再確認）</div>
+
     </div>
   </div>
 </section>
@@ -770,28 +769,7 @@ footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)
       <div class="reach-col">
         <div class="n">01</div>
         <div class="reach-fig">
-          <div class="sns-fig">
-            <svg class="qr" viewBox="0 0 88 88" aria-label="物販ブースに置くQRコードのイメージ">
-              <rect class="bg" x="0" y="0" width="88" height="88" rx="6"/>
-              <rect x="10" y="10" width="22" height="22"/>
-              <rect x="15" y="15" width="12" height="12" fill="#fff"/>
-              <rect x="18" y="18" width="6" height="6"/>
-              <rect x="56" y="10" width="22" height="22"/>
-              <rect x="61" y="15" width="12" height="12" fill="#fff"/>
-              <rect x="64" y="18" width="6" height="6"/>
-              <rect x="10" y="56" width="22" height="22"/>
-              <rect x="15" y="61" width="12" height="12" fill="#fff"/>
-              <rect x="18" y="64" width="6" height="6"/>
-              <rect x="40" y="12" width="5" height="5"/><rect x="48" y="12" width="5" height="5"/>
-              <rect x="40" y="22" width="5" height="5"/><rect x="40" y="40" width="5" height="5"/>
-              <rect x="50" y="40" width="5" height="5"/><rect x="60" y="42" width="5" height="5"/>
-              <rect x="70" y="40" width="5" height="5"/><rect x="42" y="52" width="5" height="5"/>
-              <rect x="56" y="56" width="5" height="5"/><rect x="66" y="60" width="5" height="5"/>
-              <rect x="42" y="66" width="5" height="5"/><rect x="52" y="70" width="5" height="5"/>
-              <rect x="62" y="70" width="5" height="5"/><rect x="72" y="66" width="5" height="5"/>
-            </svg>
-            <span class="qr-cap">物販ブースに設置</span>
-          </div>
+          <img src="assets/deliver_qr.png" alt="物販ブースのグッズの横にQRコードのスタンドを並べて置くイメージ">
         </div>
         <h4>物販ブースに、QRを並べて置く。</h4>
         <p>チェキやグッズと同じテーブルに、出品ページのQRコードを置くだけ。会場で買ってくれるファンが、その場で“練習の時間”も買えます。</p>
@@ -800,13 +778,7 @@ footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)
       <div class="reach-col">
         <div class="n">02</div>
         <div class="reach-fig">
-          <div class="sns-fig">
-            <div class="sns-icons">
-              <svg class="ico" viewBox="0 0 24 24" aria-label="X"><path d="M4 4l16 16M20 4L4 20"/></svg>
-              <svg class="ico" viewBox="0 0 24 24" aria-label="Instagram"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-            </div>
-            <span class="sns-link">プロフィール / ストーリーに出品リンク</span>
-          </div>
+          <img src="assets/deliver_sns.png" alt="スマホでSNSの告知投稿を見せるイメージ">
         </div>
         <h4>SNSで、告知する。</h4>
         <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。日々のフォロワーが、そのまま購入者になります。</p>
@@ -815,13 +787,7 @@ footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)
       <div class="reach-col">
         <div class="n">03</div>
         <div class="reach-fig">
-          <div class="sns-fig">
-            <div class="sns-icons">
-              <svg class="ico" viewBox="0 0 24 24" aria-label="ライブMC・特典会"><path d="M12 3a3 3 0 013 3v5a3 3 0 01-6 0V6a3 3 0 013-3z"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>
-              <svg class="ico" viewBox="0 0 24 24" aria-label="ファンクラブ・LINE通知"><path d="M21 11.5a8 8 0 01-11.5 7.2L4 20l1.3-4A8 8 0 1121 11.5z"/></svg>
-            </div>
-            <span class="sns-link">ライブMC・特典会 / FC・LINE通知</span>
-          </div>
+          <img src="assets/deliver_mc.png" alt="ライブのステージでMC中にファンへ案内するイメージ">
         </div>
         <h4>ライブMC・特典会で、案内する。</h4>
         <p>本番のMCや特典会のひと言で十分。ファンクラブやLINEの通知に乗せれば、いちばん熱量の高いファンへまっすぐ届きます。</p>
