@@ -262,7 +262,6 @@ a{color:inherit;text-decoration:none}
 @media(max-width:760px){.ev-flex{grid-template-columns:1fr}.ev-tall{max-width:240px;margin:0 auto}}
 
 /* charts */
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 .chart-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
 .chart-card h4{font-size:15.5px;font-weight:800;margin:0 0 4px;line-height:1.5}
 .chart-card .cdesc{font-size:12.5px;color:var(--sub);margin:0 0 18px}
@@ -274,44 +273,38 @@ a{color:inherit;text-decoration:none}
 .legend{font-size:12px;display:flex;flex-direction:column;gap:7px}
 .legend .li{display:flex;align-items:center;gap:8px}
 .legend .sw{width:11px;height:11px;border-radius:3px;flex:0 0 11px}
-.bars{display:flex;flex-direction:column;gap:14px}
-.bar-row .blab{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;font-weight:600;gap:10px}
-.bar-row .blab .amt{color:var(--navy);font-weight:800;white-space:nowrap}
-.bar-row .src{font-size:10.5px;color:var(--sub);font-weight:500;margin-top:4px}
-.track{height:13px;background:#eef1f6;border-radius:999px;overflow:hidden}
-.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--g1),var(--g3))}
-.fill.cy{background:linear-gradient(90deg,var(--g2),var(--g1))}
-.ev-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-.ev-facts .v-fact{margin-top:0;font-weight:600;line-height:1.6}
-.ev-facts .v-fact b{font-weight:800}
-@media(max-width:760px){.chart-grid{grid-template-columns:1fr}.ev-facts{grid-template-columns:1fr}}
+
+/* ---------- reason (購入される理由) ---------- */
+.donut-card{margin-bottom:36px}
+.donut-card .donut-row{align-items:center;gap:34px}
+.donut-text h4{font-size:17px;font-weight:800;margin:0 0 8px;line-height:1.5}
+.donut-text .cdesc{font-size:14px;color:var(--ink);margin:0 0 14px;line-height:1.8}
+.donut-text .legend{flex-direction:row;flex-wrap:wrap;gap:8px 18px}
+.reason-list{display:flex;flex-direction:column;gap:34px}
+.reason-item{display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:center}
+.reason-item.rev .reason-text{order:2}
+.reason-item.rev img{order:1}
+.reason-item img{width:100%;height:auto;border-radius:var(--radius)}
+.reason-text h4{font-size:18px;font-weight:800;color:var(--navy);margin:0 0 8px;line-height:1.5}
+.reason-text p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.9}
+.src{display:block;font-size:11.5px;color:var(--sub);font-weight:500;margin-top:8px;line-height:1.6}
+.reason-close{text-align:center;font-size:15px;color:var(--ink);font-weight:700;max-width:40em;margin:38px auto 0;line-height:1.9}
+@media(max-width:760px){
+  .donut-card .donut-row{flex-direction:column;text-align:center;gap:20px}
+  .donut-text .legend{justify-content:center}
+  .reason-item,.reason-item.rev .reason-text,.reason-item.rev img{grid-template-columns:1fr;order:0}
+  .reason-item img{order:-1}
+}
 
 /* ---------- reach (ファンへの届け方) ---------- */
 .reach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:8px}
 .reach-item{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.reach-fig{width:100%;height:148px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);display:grid;place-items:center}
+.reach-img{width:100%;height:auto;border-radius:var(--radius);margin-bottom:2px}
 .reach-step{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:var(--navy)}
 .reach-step .ic{width:30px;height:30px;border-radius:9px;background:#eaf3fc;display:grid;place-items:center;flex:0 0 30px}
 .reach-step .ic .icon{width:18px;height:18px}
 .reach-item h3{font-size:16px;font-weight:800;margin:0;line-height:1.5}
 .reach-item p{font-size:13px;color:var(--sub);margin:0;line-height:1.7}
-.qr-fig{width:88px;height:88px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:3px}
-.qr-fig span{background:var(--navy);border-radius:2px}
-.qr-fig span.o{background:transparent}
-.qr-cap{font-size:11px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px;margin-top:10px}
-.qr-cap .icon{width:14px;height:14px}
-.sns-fig{display:flex;flex-direction:column;gap:8px;width:84%}
-.sns-row{display:flex;align-items:center;gap:9px;background:#f4f7fb;border-radius:10px;padding:8px 11px}
-.sns-row .av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g2));flex:0 0 24px}
-.sns-row .ln{flex:1;height:7px;border-radius:99px;background:#d7dfea}
-.sns-row .ln.s{width:60%}
-.sns-link{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--navy);background:#eaf3fc;border-radius:8px;padding:7px 10px}
-.sns-link .icon{width:14px;height:14px;flex:0 0 14px}
-.mc-fig{display:flex;flex-direction:column;gap:9px;align-items:center;color:var(--navy)}
-.mc-fig .mic{width:46px;height:46px;border-radius:13px;background:#eaf3fc;display:grid;place-items:center}
-.mc-fig .mic .icon{width:26px;height:26px}
-.mc-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.mc-chips span{font-size:10.5px;font-weight:700;color:var(--navy);background:#f4f7fb;border-radius:99px;padding:5px 11px}
 @media(max-width:760px){.reach-grid{grid-template-columns:1fr;gap:26px}}
 
 /* ---------- authenticity ---------- */
@@ -759,8 +752,8 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 <section class="sec alt" id="evidence">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title">なぜ、<span class="nv">買われるのか</span>。</h2>
-      <p class="sec-lead">ファンは「一点もの・素のコンテンツ・本人とのつながり」に、すでに実際のお金を払っています。Lapsellの“素の一点もの”も、同じ理由で買われます。</p>
+      <h2 class="sec-title">購入される<span class="nv">理由</span></h2>
+      <p class="sec-lead">ファンが実際に何にお金を払っているのか。データと一緒に、ひとつずつ見ていきます。</p>
     </div>
 
     <div class="ev-block">
@@ -795,18 +788,18 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
       </div>
     </div>
 
-    <div class="chart-grid">
-      <div class="chart-card">
-        <h4>ファンの約3人に1人が「払ってもいい」</h4>
-        <p class="cdesc">推し活ファンへの自社アンケート（N=393）。素の日常への支払い意向。</p>
-        <div class="donut-row">
-          <div class="donut">
-            <svg viewBox="0 0 42 42" width="130" height="130">
-              <circle cx="21" cy="21" r="15.9" fill="none" stroke="#eef1f6" stroke-width="7"></circle>
-              <circle cx="21" cy="21" r="15.9" fill="none" stroke="#e2229f" stroke-width="7" stroke-dasharray="31.9 68.1" stroke-dashoffset="25" stroke-linecap="butt"></circle>
-            </svg>
-            <div class="center"><b>31.9%</b><small>払ってもいい</small></div>
-          </div>
+    <div class="chart-card donut-card">
+      <div class="donut-row">
+        <div class="donut">
+          <svg viewBox="0 0 42 42" width="130" height="130">
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#eef1f6" stroke-width="7"></circle>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#e2229f" stroke-width="7" stroke-dasharray="31.9 68.1" stroke-dashoffset="25" stroke-linecap="butt"></circle>
+          </svg>
+          <div class="center"><b>31.9%</b><small>払ってもいい</small></div>
+        </div>
+        <div class="donut-text">
+          <h4>払ってもいいと答えた割合</h4>
+          <p class="cdesc">推し活ファンの約3人に1人（31.9%）が、素の日常に「お金を払ってもいい」と答えています。<span class="src">推し活ファンへの自社アンケート（N=393）</span></p>
           <div class="legend">
             <div class="li"><span class="sw" style="background:#e2229f"></span>3,001円以上 15.1%</div>
             <div class="li"><span class="sw" style="background:#f06fc0"></span>1,001〜3,000円 7.9%</div>
@@ -815,35 +808,47 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="chart-card">
-        <h4>“素の一点もの”に、ファンはもう払っている</h4>
-        <p class="cdesc">ライブ物販・チェキ・推し活グッズ。現場で本人から一点ものを買う行動は、すでに定着しています。</p>
-        <div class="bars">
-          <div class="bar-row">
-            <div class="blab"><span>ライブ物販グッズ（年・1人あたり）</span><span class="amt">約22,000円</span></div>
-            <div class="track"><div class="fill" style="width:100%"></div></div>
-            <div class="src">アイドル系の購入率75.4%（ぴあ総研／2019・要再確認）</div>
-          </div>
-          <div class="bar-row">
-            <div class="blab"><span>推し活グッズ（年・1人あたり）</span><span class="amt">約40,000円</span></div>
-            <div class="track"><div class="fill cy" style="width:100%"></div></div>
-            <div class="src">推し活層の平均（Oshicoco／2024・要再確認）</div>
-          </div>
-          <div class="bar-row">
-            <div class="blab"><span>チェキ1枚（その場の一点もの）</span><span class="amt">約1,500円</span></div>
-            <div class="track"><div class="fill cy" style="width:6.8%"></div></div>
-            <div class="src">ライブアイドルの主収入。instax累計1億台・年約1,500億円（富士フイルム）</div>
-          </div>
+    <div class="reason-list">
+      <div class="reason-item">
+        <img src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファン">
+        <div class="reason-text">
+          <h4>購入される割合</h4>
+          <p>ライブ物販を買うファンは、1年で平均22,000円ほどを使います。アイドル系では購入率が75.4%にのぼり、現場でグッズを“持ち帰る”行動はすでに当たり前です。<span class="src">出典：ぴあ総研／2019・要再確認</span></p>
         </div>
-        <p class="price-note">CD購入理由1位は「収集のため」54.7%（要再確認）。特典映像が動機の音楽ビデオは年562億円（RIAJ）。“集める・所有する”が購入の中心です。</p>
+      </div>
+      <div class="reason-item rev">
+        <img src="assets/reason_cheki.png" alt="その場の一点ものチェキを手にするファン">
+        <div class="reason-text">
+          <h4>その場の一点ものに払う額</h4>
+          <p>チェキは、ライブアイドルの主な収入源です。1枚1,500円ほどで本人からその場で受け取る“一点もの”で、instaxは累計1億台・年約1,500億円が売れています。<span class="src">出典：富士フイルム・要再確認</span></p>
+        </div>
+      </div>
+      <div class="reason-item">
+        <img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクション">
+        <div class="reason-text">
+          <h4>ファンが実際に払っている額</h4>
+          <p>推し活をするファンは、グッズに1年で平均40,000円ほどを使っています。好きなアーティストのために、これだけのお金が毎年動いています。<span class="src">出典：Oshicoco／2024・要再確認</span></p>
+        </div>
+      </div>
+      <div class="reason-item rev">
+        <img src="assets/reason_cd.png" alt="集められたCDのコレクション">
+        <div class="reason-text">
+          <h4>所有・収集の文化</h4>
+          <p>CDを買う理由の1位は「収集のため」で54.7%。特典映像が動機になりやすい音楽ビデオも、年562億円が売れています。“集めて手元に持つ”ことが、ファンの購入の中心にあります。<span class="src">出典：日本レコード協会（RIAJ）・要再確認</span></p>
+        </div>
+      </div>
+      <div class="reason-item">
+        <img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読む手元">
+        <div class="reason-text">
+          <h4>本人とのつながりに払う額</h4>
+          <p>本人の“素の日常メッセージ”が届くbubbleには、月額約500円で世界200万人超が課金しています。2024年の売上は約80億円との見方もあり、本人との距離の近さそのものにお金が動いています。<span class="src">出典：DearU・要再確認</span></p>
+        </div>
       </div>
     </div>
 
-    <div class="ev-facts">
-      <div class="v-fact"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.7-.9L3 20l1-3.7A8.4 8.4 0 1 1 21 11.5z"/></svg><span>本人の“素の日常メッセージ”が届くbubbleは、<b>月額約500円</b>で世界<b>200万人超</b>が課金。2024年売上は<b>約80億円</b>との見方も（DearU・要再確認）。</span></div>
-      <div class="v-fact"><svg class="icon" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>ファンの<b>75.3%</b>が「推しの“新しい一面”を見るのが好き」。裏側への需要は、確かに存在します（ネオマーケティング2024）。</span></div>
-    </div>
+    <p class="reason-close">ファンは「素の一点もの・本人とのつながり」に、すでに実際のお金を払っています。Lapsellの“素の一点もの”も、同じ理由で買われます。</p>
   </div>
 </section>
 
@@ -857,45 +862,21 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 
     <div class="reach-grid">
       <div class="reach-item">
-        <div class="reach-fig">
-          <div>
-            <div class="qr-fig">
-              <span></span><span></span><span></span><span class="o"></span><span></span><span></span><span></span>
-              <span></span><span class="o"></span><span></span><span class="o"></span><span class="o"></span><span class="o"></span><span></span>
-              <span></span><span class="o"></span><span></span><span class="o"></span><span></span><span class="o"></span><span></span>
-              <span class="o"></span><span class="o"></span><span class="o"></span><span></span><span></span><span></span><span class="o"></span>
-              <span></span><span></span><span class="o"></span><span></span><span class="o"></span><span class="o"></span><span></span>
-              <span></span><span class="o"></span><span></span><span class="o"></span><span></span><span></span><span class="o"></span>
-              <span></span><span></span><span></span><span class="o"></span><span></span><span class="o"></span><span></span>
-            </div>
-            <div class="qr-cap"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9V5a2 2 0 0 1 2-2h4M15 3h4a2 2 0 0 1 2 2v4M21 15v4a2 2 0 0 1-2 2h-4M9 21H5a2 2 0 0 1-2-2v-4"/></svg>かざして出品ページへ</div>
-          </div>
-        </div>
+        <img class="reach-img" src="assets/deliver_qr.png" alt="ライブ物販ブースにQRコードを並べて置くイメージ">
         <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM21 14v3M17 21h4M14 21h0"/></svg></span>ライブ物販ブースに置く</div>
         <h3>物販と一緒に、その場で。</h3>
         <p>QRコードを物販ブースに並べて置くだけ。グッズを買う流れのまま、ファンが時間枠を購入できます。</p>
       </div>
 
       <div class="reach-item">
-        <div class="reach-fig">
-          <div class="sns-fig">
-            <div class="sns-row"><span class="av"></span><span class="ln"></span></div>
-            <div class="sns-row"><span class="av"></span><span class="ln s"></span></div>
-            <div class="sns-link"><svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>lapsell.app/your-stage</div>
-          </div>
-        </div>
+        <img class="reach-img" src="assets/deliver_sns.png" alt="SNSのプロフィールやストーリーで出品リンクを告知するイメージ">
         <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z"/></svg></span>SNSで告知する</div>
         <h3>プロフィールとストーリーに。</h3>
         <p>出品リンクをプロフィールやストーリーに貼るだけ。いつもフォローしてくれているファンに、まっすぐ届きます。</p>
       </div>
 
       <div class="reach-item">
-        <div class="reach-fig">
-          <div class="mc-fig">
-            <div class="mic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/></svg></div>
-            <div class="mc-chips"><span>ライブMC</span><span>特典会</span><span>ファンクラブ</span><span>LINE通知</span></div>
-          </div>
-        </div>
+        <img class="reach-img" src="assets/deliver_mc.png" alt="ライブMCや特典会でファンに直接案内するイメージ">
         <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg></span>ライブ・FCで案内する</div>
         <h3>ステージから、直接ひとこと。</h3>
         <p>MCや特典会でひとこと添えるだけ。ファンクラブやLINEの通知に乗せれば、熱量の高いファンへ確実に伝わります。</p>
