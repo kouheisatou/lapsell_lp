@@ -256,36 +256,45 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .short-shot{max-width:300px}
 @media(min-width:880px){.ev-grid{grid-template-columns:1fr 1fr;align-items:center}}
 
-/* ---------- purchase-reason list (borderless, cheki accent on チェキ) ---------- */
-.reasons{margin-top:44px;position:relative;z-index:2;display:grid;gap:30px}
-.reason{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
-.reason .ic{flex:0 0 auto;width:42px;height:42px;color:var(--red);transform:rotate(-3deg)}
-.reason .ic svg{width:42px;height:42px}
+/* ---------- purchase-reason list (borderless, polaroid photo per item) ---------- */
+.reasons{margin-top:44px;position:relative;z-index:2;display:grid;gap:38px}
+.reason{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+/* polaroid-framed reason photo (white border + slight rotation + soft shadow) */
+.reason .rpic{flex:0 0 auto;width:128px;background:#fff;padding:7px 7px 9px;border-radius:2px;
+  box-shadow:0 8px 18px rgba(60,40,20,.26),0 2px 4px rgba(0,0,0,.14);transform:rotate(-2deg);position:relative}
+.reason:nth-child(2) .rpic{transform:rotate(1.6deg)}
+.reason:nth-child(3) .rpic{transform:rotate(-1.4deg)}
+.reason:nth-child(4) .rpic{transform:rotate(1.3deg)}
+.reason:nth-child(5) .rpic{transform:rotate(-1deg)}
+.reason .rpic img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:2px;display:block;filter:saturate(.95) contrast(1.02)}
+@media(min-width:640px){.reason .rpic{width:152px}}
 .reason h3{font-size:clamp(17px,2.7vw,21px);font-weight:900;line-height:1.45;margin-bottom:4px}
-.reason h3 .num{color:var(--red)}
 .reason p{font-size:15px;font-weight:600}
+.reason p em{font-style:normal;font-weight:900;color:var(--red)}
 .reason .src{display:block;margin-top:5px;font-size:11.5px;font-weight:700;color:var(--ink-soft);font-style:italic;line-height:1.6}
-/* チェキ = featured: handwritten note look on a paper-tinted band, taped */
-.reason.cheki-feat{grid-template-columns:auto 1fr;gap:20px;background:#fff7c8;
-  padding:22px 22px 20px;box-shadow:0 8px 18px rgba(60,40,20,.22);transform:rotate(-.6deg);position:relative}
-.reason.cheki-feat .ic{color:#a13327}
+/* チェキ = featured (this LP is チェキ-themed): larger photo + washi tape, no heavy box */
+.reason.cheki-feat .rpic{width:170px;transform:rotate(-2.4deg)}
+@media(min-width:640px){.reason.cheki-feat .rpic{width:210px}}
 .reason.cheki-feat h3{font-size:clamp(19px,3vw,24px)}
-.reason.cheki-feat .src{color:#7a5d12}
-@media(min-width:760px){.reasons{grid-template-columns:1fr 1fr;gap:34px 40px;align-items:start}
+.reason.cheki-feat p em{color:#a13327}
+@media(min-width:760px){.reasons{grid-template-columns:1fr 1fr;gap:40px 44px;align-items:start}
   .reason.cheki-feat{grid-column:1 / -1}}
 
-/* ---------- 届け方 (購入導線): 3 borderless line-icon mini-figures ---------- */
+/* ---------- 届け方 (購入導線): 3 borderless items, polaroid photo each ---------- */
 .deliver{display:grid;grid-template-columns:1fr;gap:38px;margin-top:46px;position:relative;z-index:2}
 .deliver .d{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;text-align:left}
-.deliver .d .fig{flex:0 0 auto;width:96px;height:96px;color:var(--ink);transform:rotate(-2deg)}
-.deliver .d:nth-child(2) .fig{transform:rotate(1.5deg)}
-.deliver .d:nth-child(3) .fig{transform:rotate(-1deg)}
-.deliver .d .fig svg{width:96px;height:96px}
+/* polaroid-framed delivery photo */
+.deliver .d .dpic{flex:0 0 auto;width:118px;background:#fff;padding:7px 7px 9px;border-radius:2px;
+  box-shadow:0 8px 18px rgba(60,40,20,.26),0 2px 4px rgba(0,0,0,.14);transform:rotate(-2deg);position:relative}
+.deliver .d:nth-child(2) .dpic{transform:rotate(1.6deg)}
+.deliver .d:nth-child(3) .dpic{transform:rotate(-1.2deg)}
+.deliver .d .dpic img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:2px;display:block;filter:saturate(.95) contrast(1.02)}
 .deliver .d .dno{font-weight:900;font-size:13px;letter-spacing:.06em;color:var(--red)}
 .deliver .d h3{font-size:clamp(17px,2.6vw,20px);font-weight:900;line-height:1.45;margin:4px 0 5px}
 .deliver .d p{font-size:14.5px;font-weight:600}
 @media(min-width:820px){.deliver{grid-template-columns:repeat(3,1fr);gap:34px}
-  .deliver .d{grid-template-columns:1fr;justify-items:start;gap:12px}}
+  .deliver .d{grid-template-columns:1fr;justify-items:start;gap:14px}
+  .deliver .d .dpic{width:150px}}
 
 /* donut */
 .donut{display:flex;flex-wrap:wrap;align-items:center;gap:26px;margin-top:8px}
@@ -736,17 +745,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 
     <div class="deliver">
       <div class="d">
-        <span class="fig" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 78V46a4 4 0 0 1 4-4h60a4 4 0 0 1 4 4v32"/>
-            <path d="M10 78h76"/>
-            <path d="M30 42v-6M66 42v-6"/>
-            <rect x="34" y="48" width="24" height="24" rx="2"/>
-            <path d="M40 54h2M46 54h2M52 54h2M40 60h2M46 60h2M52 60h2M40 66h2M52 66h2"/>
-            <path d="M22 30c0-4 3.5-7 8-7s8 3 8 7"/>
-            <circle cx="30" cy="20" r="4"/>
-          </svg>
-        </span>
+        <div class="dpic"><span class="tape t2 top-l"></span><img src="assets/deliver_qr.png" alt="ライブ物販ブースにグッズと一緒にLapsellのQRコードを並べて置いている様子"></div>
         <div>
           <span class="dno">届け方 01</span>
           <h3>物販ブースにQRを並べる</h3>
@@ -755,15 +754,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       </div>
 
       <div class="d">
-        <span class="fig" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="40" cy="26" r="9"/>
-            <path d="M24 60c0-9 7-16 16-16s16 7 16 16"/>
-            <rect x="56" y="40" width="26" height="34" rx="3"/>
-            <path d="M62 48h14M62 55h14M62 62h9"/>
-            <path d="M48 30c8-2 14 1 18 6M52 24c10-1 17 3 22 10" opacity=".8"/>
-          </svg>
-        </span>
+        <div class="dpic"><span class="tape top-r"></span><img src="assets/deliver_sns.png" alt="X・Instagramのプロフィールやストーリーに出品リンクを貼って告知している様子"></div>
         <div>
           <span class="dno">届け方 02</span>
           <h3>SNSで告知する</h3>
@@ -772,16 +763,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       </div>
 
       <div class="d">
-        <span class="fig" aria-hidden="true">
-          <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="42" cy="24" r="9"/>
-            <path d="M26 58c0-9 7-16 16-16s16 7 16 16"/>
-            <rect x="50" y="20" width="9" height="20" rx="4.5"/>
-            <path d="M62 26c4 0 7 3 7 8s-3 8-7 8M68 22c6 0 11 5 11 12s-5 12-11 12" opacity=".85"/>
-            <path d="M62 70h22l-5 8H67z"/>
-            <path d="M67 74h12" opacity=".7"/>
-          </svg>
-        </span>
+        <div class="dpic"><span class="tape t2 top-l"></span><img src="assets/deliver_mc.png" alt="ライブのMCや特典会・ファンクラブ／LINEで出品を案内している様子"></div>
         <div>
           <span class="dno">届け方 03</span>
           <h3>ライブMC・特典会・FC/LINEで案内</h3>
@@ -854,62 +836,52 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       </div>
     </div>
 
-    <!-- purchase reasons: borderless figure list, チェキ featured -->
+    <!-- purchase reasons: borderless, plain titles, natural sentences, polaroid photo per item -->
     <div class="reasons">
       <!-- チェキ = featured (this LP is チェキ-themed) -->
       <div class="reason cheki-feat">
-        <span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="14" rx="1.5"/><rect x="5.5" y="6" width="13" height="8.5"/><path d="M3.5 18v2h17v-2"/><circle cx="17" cy="8" r="0.8" fill="currentColor"/></svg>
-        </span>
+        <div class="rpic"><span class="tape top-l"></span><img src="assets/reason_cheki.png" alt="ライブアイドルの物販で買われる、その場で撮った一点もののチェキ写真"></div>
         <div>
-          <h3>チェキ＝“その場の一点もの”が、ライブアイドルの主収入</h3>
-          <p>1枚 約1,500円。ライブアイドルの収入の半分以上をチェキが支えます。スマホ写真は誰でもコピーできるが、チェキは世界に1枚。Lapsellは、これを“動く・本人の本物の時間”にしたものです。</p>
-          <p style="margin-top:8px;font-weight:700">チェキ（instax）は累計<span class="hl">1億台</span>突破、年間売上は過去最高<span class="hl">約1,500億円</span>。「一点ものの写真を所有する」文化そのものが、巨大です。</p>
+          <h3>チェキという「一点もの」の文化</h3>
+          <p>ファンはその場で撮った一点もののチェキに、1枚<em>およそ1,500円</em>を払っています。ライブアイドルの収入の半分以上をチェキが支えており、スマホ写真と違って世界に1枚しかないことに価値が置かれています。Lapsellは、この「一点もの」を“動く・本人の本物の時間”にしたものです。</p>
+          <p style="margin-top:8px">チェキ（instax）は累計<em>1億台</em>を超え、年間売上は過去最高の<em>約1,500億円</em>に達しました。「一点ものの写真を所有する」という文化そのものが、それだけ大きく根づいています。</p>
           <span class="src">出典：富士フイルム公式（2025／累計・売上）／Business Insider Japan・中日新聞（2024／単価・収入比率, 取材記事＝要再確認）</span>
         </div>
       </div>
 
       <div class="reason">
-        <span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h14l3 3v7H3z"/><path d="M3 11h14"/><circle cx="7" cy="14" r="1.3"/><path d="M11 13h6M11 16h4"/></svg>
-        </span>
+        <div class="rpic"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買うファンの様子"></div>
         <div>
-          <h3>ライブ物販＝“現場で所有する”行動が、すでに定着</h3>
-          <p>ライブ参加者のグッズ購入額は年平均 約22,000円。アイドル系の購入率は75.4%と特に高く、手元に残る一点ものへの支払いは当たり前の行動です。</p>
+          <h3>ファンが実際に払っている額</h3>
+          <p>ライブ物販を買うファンは1年でおよそ<em>22,000円</em>を使っており、アイドル系では購入率が<em>75.4%</em>にのぼります。手元に残る一点ものにお金を払うことは、すでに当たり前の行動になっています。</p>
           <span class="src">出典：ぴあ総研（インテージ委託, n=916, 2019）＝やや古く要再確認</span>
         </div>
       </div>
 
       <div class="reason">
-        <span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.5A2 2 0 0 0 19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l3 3 3-3h5a2 2 0 0 0 2-2z"/><path d="M9 11h6M9 14h3"/></svg>
-        </span>
+        <div class="rpic"><img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めて飾っているファンの部屋の様子"></div>
         <div>
-          <h3>本人の“素の日常”そのものに、もう課金されている</h3>
-          <p>bubbleは月額約500円で本人の素の日常メッセージが届くサービス。世界200万人超が課金し、2024年の売上は約80億円とも。“素の日常”に金が払われる行動は、先行事例で確立済みです。</p>
-          <span class="src">出典：bubble（DearU, 2024）＝ウォン建て・報道差あり要再確認</span>
+          <h3>本人に紐づく一点ものに払う額</h3>
+          <p>推し活をするファンは、1年でグッズに平均<em>およそ4万円</em>を使っています。“推しに紐づく一点もの”への支出は、すでに大きな日常の出費になっています。</p>
+          <span class="src">出典：Oshicoco 調査（n=210, 2024）＝単一調査・要再確認</span>
         </div>
       </div>
 
       <div class="reason">
-        <span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></svg>
-        </span>
+        <div class="rpic"><img src="assets/reason_cd.png" alt="集めたCDや特典映像つきメディアを並べてコレクションしている様子"></div>
         <div>
-          <h3>購入動機の中心は「収集・所有」</h3>
-          <p>CD購入理由の1位は「収集（コレクション）のため」で54.7%。特典映像つきの所有メディアの需要も根強く、音楽ビデオの国内生産額は562億円にのぼります。</p>
+          <h3>所有・収集の文化</h3>
+          <p>CDを買う理由でいちばん多いのは「収集（コレクション）のため」で<em>54.7%</em>を占めます。特典映像つきの所有メディアの需要も根強く、音楽ビデオの国内生産額は<em>562億円</em>にのぼります。</p>
           <span class="src">出典：Appliv／ナイル調べ（2023, 収集54.7%＝単一調査・要再確認）／RIAJ公式統計（2024, 音楽ビデオ562億円）</span>
         </div>
       </div>
 
       <div class="reason">
-        <span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/><circle cx="17" cy="18" r="3.2" fill="#fff7c8"/><path d="m15.6 18 1 1 1.8-2"/></svg>
-        </span>
+        <div class="rpic"><img src="assets/reason_bubble.png" alt="スマホに届く本人からの素の日常メッセージを読むファンの様子"></div>
         <div>
-          <h3>推し活グッズには、年 約4万円</h3>
-          <p>推し活層が1年間にグッズへかける金額は平均 約4万円。“推しに紐づく一点もの”への支出は、すでに大きな日常支出になっています。</p>
-          <span class="src">出典：Oshicoco 調査（n=210, 2024）＝単一調査・要再確認</span>
+          <h3>本人とのつながりに払う額</h3>
+          <p>本人の素の日常メッセージが届くbubbleには、月<em>およそ500円</em>を払う人が世界で<em>200万人</em>を超え、2024年の売上は<em>約80億円</em>とも言われます。“素の日常”や本人とのつながりにお金が払われることは、先行する事例で確かめられています。</p>
+          <span class="src">出典：bubble（DearU, 2024）＝ウォン建て・報道差あり要再確認</span>
         </div>
       </div>
     </div>
