@@ -8,3 +8,5 @@ _recent_generated_contact_sheet.png
 _sample_*.png
 .codex_*_test.txt
 .how*.png
+.DS_Store
+.idea/
