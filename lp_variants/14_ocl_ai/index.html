@@ -176,6 +176,18 @@ section{padding:78px 0}
 .step-meta p{font-size:12.5px;color:var(--ink-soft);margin-top:4px;max-width:230px;margin-inline:auto}
 .scroll-hint{text-align:center;font-size:12px;color:var(--ink-soft);margin-top:6px}
 
+/* 届け方 (購入導線) — borderless 3 cols, line icons */
+.deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:50px}
+.deliver-col{text-align:center}
+.deliver-col .dnum{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.1em}
+.deliver-col .dic{width:84px;height:84px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;margin:14px auto 18px;color:var(--blue-dark)}
+.deliver-col .dic .ico{width:40px;height:40px;stroke-width:1.6}
+.deliver-col h3{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.deliver-col p{font-size:14px;color:var(--ink-soft)}
+.deliver-note{display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:var(--blue);color:#fff;font-weight:800;font-size:15px;padding:10px 22px;border-radius:50px}
+.deliver-note .ico{width:20px;height:20px;stroke:#fff}
+@media(max-width:880px){.deliver{grid-template-columns:1fr;gap:34px}}
+
 /* feature rows (2-col alternating, borderless) */
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:60px}
 .frow:first-of-type{margin-top:46px}
@@ -216,6 +228,17 @@ section{padding:78px 0}
 .chart-h .em{color:var(--blue)}
 .chart-sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
 @media(max-width:880px){.charts{grid-template-columns:1fr;gap:40px}}
+
+/* purchase reasons — borderless line-icon list */
+.reasons{display:grid;grid-template-columns:1fr 1fr;gap:34px 48px;margin-top:50px}
+.reason{display:flex;gap:16px;align-items:flex-start}
+.reason .ric{width:46px;height:46px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--blue-dark);flex:none}
+.reason .ric .ico{width:24px;height:24px}
+.reason h3{font-size:17px;font-weight:800;color:var(--ink);line-height:1.5;margin-bottom:5px}
+.reason h3 .em{color:var(--blue)}
+.reason p{font-size:14px;color:var(--ink-soft)}
+.reason .src{font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.6}
+@media(max-width:880px){.reasons{grid-template-columns:1fr;gap:26px}}
 
 /* authenticity diagram */
 .auth-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;margin-top:40px}
@@ -489,7 +512,7 @@ footer{background:var(--bg);padding:54px 0 40px}
     <div class="center">
       <span class="eyebrow">Lapsellの仕組み</span>
       <h2 class="h2">完成品ではなく、<span class="em">“これからの練習時間”</span>を売る。</h2>
-      <p class="sec-lead">Lapsellは「練習の“時間”」を売る、新しい形のランダムグッズ市場です。撮ってから売るのではなく、時間を先に売ってから撮ります。</p>
+      <p class="sec-lead">Lapsellは「練習の“時間”」を売る、新しい形のデジタルグッズです。撮ってから売るのではなく、時間を先に売ってから撮ります。</p>
     </div>
     <div class="hooks">
       <div class="hook">
@@ -595,6 +618,40 @@ footer{background:var(--bg);padding:54px 0 40px}
   </div>
 </section>
 
+<!-- ===== 届け方 (購入導線) ===== -->
+<section id="deliver">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">ファンへの届け方</span>
+      <h2 class="h2">新規集客は、<span class="em">いりません。</span></h2>
+      <p class="sec-lead">いまのファンとの接点に、そのまま乗せて売れます。新しく人を集めなくても、いつもの場所で「練習の時間」を届けられます。</p>
+    </div>
+    <div class="deliver">
+      <div class="deliver-col">
+        <div class="dnum">届け方 01</div>
+        <div class="dic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-3M21 14v0"/></svg></div>
+        <h3>物販ブースにQRを並べる</h3>
+        <p>会場の物販と一緒に、出品リンクのQRコードを置くだけ。グッズと並べて「練習の時間」も売れます。</p>
+      </div>
+      <div class="deliver-col">
+        <div class="dnum">届け方 02</div>
+        <div class="dic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z"/><path d="M8 9h8M8 12h5"/></svg></div>
+        <h3>SNSで告知する</h3>
+        <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。フォロワーへそのまま届きます。</p>
+      </div>
+      <div class="deliver-col">
+        <div class="dnum">届け方 03</div>
+        <div class="dic"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 3z"/><path d="M9 9.5a2 2 0 113.2 1.6c-.7.5-1.2.9-1.2 1.9M11 15h0"/></svg></div>
+        <h3>ライブMC・特典会／FC・LINEで案内</h3>
+        <p>MCや特典会でひと言、ファンクラブ・LINEで通知するだけ。いまの接点が、そのまま販売の入口に。</p>
+      </div>
+    </div>
+    <div class="center" style="margin-top:36px">
+      <span class="deliver-note"><svg class="ico" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>新規集客ゼロでも、いまのファンにそのまま届く。</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FEATURE ROWS (alternating, borderless) ===== -->
 <section id="value">
   <div class="wrap">
@@ -661,9 +718,9 @@ footer{background:var(--bg);padding:54px 0 40px}
 <section id="evidence" class="band">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">根拠データ</span>
-      <h2 class="h2">“素”の時間は、<span class="em">すでに数字を生んでいる。</span></h2>
-      <p class="sec-lead">「裏側に需要なんてあるの?」——その答えは、すでに起きている事実の中にあります。</p>
+      <span class="eyebrow">購入される理由</span>
+      <h2 class="h2">なぜ、“素”の時間が<span class="em">買われるのか。</span></h2>
+      <p class="sec-lead">ファンはすでに「一点もの・素のコンテンツ・本人とのつながり」に実際のお金を払っています。Lapsellの「素の一点もの」も、同じ理由で買われます。</p>
     </div>
 
     <div class="ev-grid">
@@ -691,9 +748,9 @@ footer{background:var(--bg);padding:54px 0 40px}
       </figcaption>
     </div>
 
-    <div class="charts">
+    <div class="charts" style="grid-template-columns:1fr">
       <div>
-        <div class="chart-h">ファンの<span class="em">約3人に1人</span>が「払ってもいい」</div>
+        <div class="chart-h">そして、ファンの<span class="em">約3人に1人</span>が「払ってもいい」と答えた</div>
         <div class="chart-sub">推し活ファン N=393 への自社アンケート。“素の日常”への支払い意向。</div>
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 42 42">
@@ -712,13 +769,56 @@ footer{background:var(--bg);padding:54px 0 40px}
           </div>
         </div>
       </div>
-      <div>
-        <div class="chart-h">「ランダムで一点もの」の市場は、<span class="em">すでに大きい。</span></div>
-        <div class="chart-sub">ガチャやトレカなど、運で当てる文化はファングッズの定番です（金額は市場規模）。</div>
-        <div class="bar-row"><span class="lab">デジタルガチャ</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#1951A5">約7,000億円</div></div></div>
-        <div class="bar-row"><span class="lab">トレカ国内市場</span><div class="bar-track"><div class="bar-fill" style="width:36%;background:#458BF5">約2,349億円</div></div></div>
-        <div class="bar-row"><span class="lab">ライブBlu-ray/DVD</span><div class="bar-track"><div class="bar-fill" style="width:11%;background:#7FB0F8;padding-right:6px">558億円</div></div></div>
-        <p class="ev-p" style="margin-top:14px">さらに、ファンの<strong>75.3%</strong>が「推しの“新しい一面”を見るのが好き」と回答。Lapsellは、この需要と市場の真ん中に立っています。</p>
+    </div>
+
+    <div class="reasons">
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><path d="M20 7H4a1 1 0 00-1 1v9a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span>
+        <div>
+          <h3>“現場で所有する”は、<span class="em">もう当たり前の行動。</span></h3>
+          <p>ライブ参加者のグッズ支出は年平均 約22,000円。アイドル系では購入率75.4%と特に高く、手元に残る一点ものへの支払いはすでに定着しています。</p>
+          <p class="src">出典：ぴあ総研／インテージ（2019、やや古く要再確認）</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.5-2h5L16 6"/></svg></span>
+        <div>
+          <h3>チェキ＝“その場の一点もの”は、<span class="em">主収入になっている。</span></h3>
+          <p>チェキ1枚 約1,500円で、ライブアイドルの収入の半分以上を占める例も。累計1億台・年 約1,500億円——「一点ものの写真を持つ」文化そのものが巨大です。Lapsellは、その“動く・本物の時間”版。</p>
+          <p class="src">出典：富士フイルム公式（2025）ほか取材記事（要再確認）</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5 5 0 0112 5a5 5 0 019.5 7C19 16.5 12 21 12 21z"/></svg></span>
+        <div>
+          <h3>推し活グッズには、<span class="em">年 約4万円が動く。</span></h3>
+          <p>推し活層がグッズにかける金額は年 平均 約4万円。「好きを形にして持つ」ことに、ファンはすでに継続的にお金を使っています。</p>
+          <p class="src">出典：Oshicoco 調査 n=210（2024、単一調査につき要再確認）</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><path d="M4 19V5a1 1 0 011-1h4v16H5a1 1 0 01-1-1z"/><path d="M9 4h10a1 1 0 011 1v14a1 1 0 01-1 1H9"/><path d="M13 8h4M13 12h4"/></svg></span>
+        <div>
+          <h3>買う動機の1位は、<span class="em">「集めて所有したい」。</span></h3>
+          <p>CD購入理由の1位は「収集のため」54.7%。ライブ映像（音楽ビデオ）は年 562億円規模で、特典映像など“所有できるメディア”への需要は今も残っています。</p>
+          <p class="src">出典：Appliv／ナイル調べ（2023、要再確認）／RIAJ公式（2024）</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><path d="M21 11.5a8 8 0 01-11.6 7.1L4 20l1.4-5A8 8 0 1121 11.5z"/></svg></span>
+        <div>
+          <h3>“本人の素の日常”そのものに、<span class="em">課金は成立している。</span></h3>
+          <p>本人の素の日常メッセージが届く bubble は、月額 約500円で世界200万人超が課金。2024年売上 約80億円との見方も。「素の瞬間」に払う行動は、すでに先行事例として確立しています。</p>
+          <p class="src">出典：bubble（DearU）公開情報。売上はウォン建て・報道差あり（要再確認）</p>
+        </div>
+      </div>
+      <div class="reason">
+        <span class="ric"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div>
+          <h3>Lapsellは、その<span class="em">真ん中に立つ。</span></h3>
+          <p>「一点もの」「素のコンテンツ」「本人とのつながり」——ファンが実際に払ってきた3つを、同時に満たすのがLapsellの“封をされた練習の時間”です。</p>
+          <p class="src">上記の購入行動を踏まえた、Lapsellのポジション</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1131,7 +1231,7 @@ var fp=document.getElementById('floatPanel');
 document.getElementById('floatClose').addEventListener('click',function(){fp.style.display='none';});
 // fade-in on scroll
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target);}});},{threshold:.12});
-document.querySelectorAll('.cloud,.hook,.frow,.ev-wide,.ba-item,.case,.target,.io-node,.auth-step').forEach(function(el){el.style.opacity=0;el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease, transform .6s ease';io.observe(el);});
+document.querySelectorAll('.cloud,.hook,.frow,.ev-wide,.ba-item,.case,.target,.io-node,.auth-step,.reason,.deliver-col').forEach(function(el){el.style.opacity=0;el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease, transform .6s ease';io.observe(el);});
 </script>
 </body>
 </html>
