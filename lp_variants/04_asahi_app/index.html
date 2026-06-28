@@ -275,12 +275,44 @@ a{color:inherit;text-decoration:none}
 .legend .li{display:flex;align-items:center;gap:8px}
 .legend .sw{width:11px;height:11px;border-radius:3px;flex:0 0 11px}
 .bars{display:flex;flex-direction:column;gap:14px}
-.bar-row .blab{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;font-weight:600}
-.bar-row .blab .amt{color:var(--navy);font-weight:800}
+.bar-row .blab{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;font-weight:600;gap:10px}
+.bar-row .blab .amt{color:var(--navy);font-weight:800;white-space:nowrap}
+.bar-row .src{font-size:10.5px;color:var(--sub);font-weight:500;margin-top:4px}
 .track{height:13px;background:#eef1f6;border-radius:999px;overflow:hidden}
 .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--g1),var(--g3))}
 .fill.cy{background:linear-gradient(90deg,var(--g2),var(--g1))}
-@media(max-width:760px){.chart-grid{grid-template-columns:1fr}}
+.ev-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.ev-facts .v-fact{margin-top:0;font-weight:600;line-height:1.6}
+.ev-facts .v-fact b{font-weight:800}
+@media(max-width:760px){.chart-grid{grid-template-columns:1fr}.ev-facts{grid-template-columns:1fr}}
+
+/* ---------- reach (ファンへの届け方) ---------- */
+.reach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:8px}
+.reach-item{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.reach-fig{width:100%;height:148px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);display:grid;place-items:center}
+.reach-step{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:var(--navy)}
+.reach-step .ic{width:30px;height:30px;border-radius:9px;background:#eaf3fc;display:grid;place-items:center;flex:0 0 30px}
+.reach-step .ic .icon{width:18px;height:18px}
+.reach-item h3{font-size:16px;font-weight:800;margin:0;line-height:1.5}
+.reach-item p{font-size:13px;color:var(--sub);margin:0;line-height:1.7}
+.qr-fig{width:88px;height:88px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:3px}
+.qr-fig span{background:var(--navy);border-radius:2px}
+.qr-fig span.o{background:transparent}
+.qr-cap{font-size:11px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px;margin-top:10px}
+.qr-cap .icon{width:14px;height:14px}
+.sns-fig{display:flex;flex-direction:column;gap:8px;width:84%}
+.sns-row{display:flex;align-items:center;gap:9px;background:#f4f7fb;border-radius:10px;padding:8px 11px}
+.sns-row .av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g2));flex:0 0 24px}
+.sns-row .ln{flex:1;height:7px;border-radius:99px;background:#d7dfea}
+.sns-row .ln.s{width:60%}
+.sns-link{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--navy);background:#eaf3fc;border-radius:8px;padding:7px 10px}
+.sns-link .icon{width:14px;height:14px;flex:0 0 14px}
+.mc-fig{display:flex;flex-direction:column;gap:9px;align-items:center;color:var(--navy)}
+.mc-fig .mic{width:46px;height:46px;border-radius:13px;background:#eaf3fc;display:grid;place-items:center}
+.mc-fig .mic .icon{width:26px;height:26px}
+.mc-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.mc-chips span{font-size:10.5px;font-weight:700;color:var(--navy);background:#f4f7fb;border-radius:99px;padding:5px 11px}
+@media(max-width:760px){.reach-grid{grid-template-columns:1fr;gap:26px}}
 
 /* ---------- authenticity ---------- */
 .auth-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:34px;align-items:center}
@@ -393,8 +425,9 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
     <a href="#" class="brand"><span class="mark">L</span>Lapsell</a>
     <nav class="hnav">
       <a href="#about">できること</a>
+      <a href="#evidence">買われる理由</a>
+      <a href="#reach">届け方</a>
       <a href="#howto">使い方</a>
-      <a href="#evidence">実績</a>
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
       <a href="#cta" class="hcta">無料で出品をはじめる</a>
@@ -726,8 +759,8 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 <section class="sec alt" id="evidence">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title">“素”には、<span class="nv">すでに需要がある</span>。</h2>
-      <p class="sec-lead">「練習なんて売れるの？」という不安を、実際の数字でつぶしていきます。</p>
+      <h2 class="sec-title">なぜ、<span class="nv">買われるのか</span>。</h2>
+      <p class="sec-lead">ファンは「一点もの・素のコンテンツ・本人とのつながり」に、すでに実際のお金を払っています。Lapsellの“素の一点もの”も、同じ理由で買われます。</p>
     </div>
 
     <div class="ev-block">
@@ -784,30 +817,95 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
       </div>
 
       <div class="chart-card">
-        <h4>ランダム・裏側の市場は、すでに大きい</h4>
-        <p class="cdesc">ガチャやトレカ、ライブ映像など、関連市場の規模（年間）。</p>
+        <h4>“素の一点もの”に、ファンはもう払っている</h4>
+        <p class="cdesc">ライブ物販・チェキ・推し活グッズ。現場で本人から一点ものを買う行動は、すでに定着しています。</p>
         <div class="bars">
           <div class="bar-row">
-            <div class="blab"><span>デジタルガチャ</span><span class="amt">約7,000億円</span></div>
+            <div class="blab"><span>ライブ物販グッズ（年・1人あたり）</span><span class="amt">約22,000円</span></div>
             <div class="track"><div class="fill" style="width:100%"></div></div>
+            <div class="src">アイドル系の購入率75.4%（ぴあ総研／2019・要再確認）</div>
           </div>
           <div class="bar-row">
-            <div class="blab"><span>トレカ国内市場(2022)</span><span class="amt">約2,349億円</span></div>
-            <div class="track"><div class="fill cy" style="width:33.6%"></div></div>
+            <div class="blab"><span>推し活グッズ（年・1人あたり）</span><span class="amt">約40,000円</span></div>
+            <div class="track"><div class="fill cy" style="width:100%"></div></div>
+            <div class="src">推し活層の平均（Oshicoco／2024・要再確認）</div>
           </div>
           <div class="bar-row">
-            <div class="blab"><span>ライブBlu-ray・DVD(2024)</span><span class="amt">約558億円</span></div>
-            <div class="track"><div class="fill cy" style="width:8%"></div></div>
+            <div class="blab"><span>チェキ1枚（その場の一点もの）</span><span class="amt">約1,500円</span></div>
+            <div class="track"><div class="fill cy" style="width:6.8%"></div></div>
+            <div class="src">ライブアイドルの主収入。instax累計1億台・年約1,500億円（富士フイルム）</div>
           </div>
         </div>
-        <p class="price-note">推し活市場（アイドル＋アニメ）は約4,650億円/年（矢野経済研究所2023）。ランダム封入や舞台裏は、すでに購入の決め手になっています。</p>
+        <p class="price-note">CD購入理由1位は「収集のため」54.7%（要再確認）。特典映像が動機の音楽ビデオは年562億円（RIAJ）。“集める・所有する”が購入の中心です。</p>
+      </div>
+    </div>
+
+    <div class="ev-facts">
+      <div class="v-fact"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.7-.9L3 20l1-3.7A8.4 8.4 0 1 1 21 11.5z"/></svg><span>本人の“素の日常メッセージ”が届くbubbleは、<b>月額約500円</b>で世界<b>200万人超</b>が課金。2024年売上は<b>約80億円</b>との見方も（DearU・要再確認）。</span></div>
+      <div class="v-fact"><svg class="icon" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>ファンの<b>75.3%</b>が「推しの“新しい一面”を見るのが好き」。裏側への需要は、確かに存在します（ネオマーケティング2024）。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== reach (ファンへの届け方) ===== -->
+<section class="sec" id="reach">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title">ファンへの<span class="nv">届け方</span></h2>
+      <p class="sec-lead">新しい集客は必要ありません。いまあるファンとの接点に乗せるだけで、すぐに売れます。</p>
+    </div>
+
+    <div class="reach-grid">
+      <div class="reach-item">
+        <div class="reach-fig">
+          <div>
+            <div class="qr-fig">
+              <span></span><span></span><span></span><span class="o"></span><span></span><span></span><span></span>
+              <span></span><span class="o"></span><span></span><span class="o"></span><span class="o"></span><span class="o"></span><span></span>
+              <span></span><span class="o"></span><span></span><span class="o"></span><span></span><span class="o"></span><span></span>
+              <span class="o"></span><span class="o"></span><span class="o"></span><span></span><span></span><span></span><span class="o"></span>
+              <span></span><span></span><span class="o"></span><span></span><span class="o"></span><span class="o"></span><span></span>
+              <span></span><span class="o"></span><span></span><span class="o"></span><span></span><span></span><span class="o"></span>
+              <span></span><span></span><span></span><span class="o"></span><span></span><span class="o"></span><span></span>
+            </div>
+            <div class="qr-cap"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9V5a2 2 0 0 1 2-2h4M15 3h4a2 2 0 0 1 2 2v4M21 15v4a2 2 0 0 1-2 2h-4M9 21H5a2 2 0 0 1-2-2v-4"/></svg>かざして出品ページへ</div>
+          </div>
+        </div>
+        <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM21 14v3M17 21h4M14 21h0"/></svg></span>ライブ物販ブースに置く</div>
+        <h3>物販と一緒に、その場で。</h3>
+        <p>QRコードを物販ブースに並べて置くだけ。グッズを買う流れのまま、ファンが時間枠を購入できます。</p>
+      </div>
+
+      <div class="reach-item">
+        <div class="reach-fig">
+          <div class="sns-fig">
+            <div class="sns-row"><span class="av"></span><span class="ln"></span></div>
+            <div class="sns-row"><span class="av"></span><span class="ln s"></span></div>
+            <div class="sns-link"><svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>lapsell.app/your-stage</div>
+          </div>
+        </div>
+        <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z"/></svg></span>SNSで告知する</div>
+        <h3>プロフィールとストーリーに。</h3>
+        <p>出品リンクをプロフィールやストーリーに貼るだけ。いつもフォローしてくれているファンに、まっすぐ届きます。</p>
+      </div>
+
+      <div class="reach-item">
+        <div class="reach-fig">
+          <div class="mc-fig">
+            <div class="mic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/></svg></div>
+            <div class="mc-chips"><span>ライブMC</span><span>特典会</span><span>ファンクラブ</span><span>LINE通知</span></div>
+          </div>
+        </div>
+        <div class="reach-step"><span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg></span>ライブ・FCで案内する</div>
+        <h3>ステージから、直接ひとこと。</h3>
+        <p>MCや特典会でひとこと添えるだけ。ファンクラブやLINEの通知に乗せれば、熱量の高いファンへ確実に伝わります。</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== howto (numbered steps, mirrors Asahi HOWTO 01-04) ===== -->
-<section class="sec" id="howto">
+<section class="sec alt" id="howto">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">出品から受け取りまで、<span class="nv">4ステップ</span></h2>
@@ -908,7 +1006,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 </section>
 
 <!-- ===== authenticity ===== -->
-<section class="sec alt">
+<section class="sec">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">保管せずに、<span class="nv">所有と本物を守る</span>。</h2>
@@ -935,7 +1033,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 </section>
 
 <!-- ===== comparison ===== -->
-<section class="sec">
+<section class="sec alt">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">他の手段との<span class="nv">ちがい</span></h2>
@@ -995,7 +1093,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 </section>
 
 <!-- ===== pricing ===== -->
-<section class="sec alt" id="pricing">
+<section class="sec" id="pricing">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title"><span class="nv">はじめやすい</span>料金です</h2>
@@ -1018,7 +1116,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 </section>
 
 <!-- ===== target artists ===== -->
-<section class="sec">
+<section class="sec alt">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">こんな<span class="nv">アーティスト</span>に</h2>
@@ -1058,7 +1156,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
 </section>
 
 <!-- ===== faq ===== -->
-<section class="sec alt" id="faq">
+<section class="sec" id="faq">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">よくある<span class="nv">ご質問</span></h2>
@@ -1120,7 +1218,7 @@ details[open] .faq-q .chev{transform:rotate(180deg)}
         <a href="#cta">無料ではじめる</a>
       </div>
     </div>
-    <p class="foot-copy">練習の“時間”を売る、新しい形のランダムグッズ市場。ライブアイドル・インディーズアーティスト・バンドの収益化を応援します。<br>© Lapsell</p>
+    <p class="foot-copy">練習の“時間”を売る、世界に1つの動く一点ものグッズ。ライブアイドル・インディーズアーティスト・バンドの収益化を応援します。<br>© Lapsell</p>
   </div>
 </footer>
 
