@@ -1,0 +1,1751 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>練習時間を、収益に変える。｜Lapsell（ラプセル）</title>
+  <meta name="description" content="Lapsellは、地下アイドル・インディーズアーティスト・バンドの練習や裏側の時間を、世界に1つの短い動画グッズとして販売できるサービスです。初期費用0円、撮影後アップロード、公開前チェック対応。">
+  <meta name="keywords" content="地下アイドル 収益化, アイドル 収入 増やす, インディーズアーティスト 収益化, バンド マネタイズ, ファングッズ 販売, 練習動画 収益化, 物販以外の収入">
+  <meta property="og:title" content="練習時間を、収益に変える。｜Lapsell">
+  <meta property="og:description" content="練習・リハーサル・ネタ合わせの時間を、ファンが手元に残せる一点物の動画グッズへ。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/generated/lapsell-hero-rehearsal.png">
+  <link rel="preload" href="assets/generated/lapsell-hero-rehearsal.png" as="image">
+  <style>
+    :root {
+      --ink: #20212c;
+      --muted: #616476;
+      --soft: #848899;
+      --paper: #fffdf7;
+      --paper-2: #f7f4ec;
+      --mint: #b7eadf;
+      --mint-2: #e3f8f2;
+      --blue: #b9ddf4;
+      --blue-2: #e7f4fb;
+      --lavender: #d7c6f0;
+      --lavender-2: #f0eaf9;
+      --pink: #f7b7c8;
+      --pink-2: #fde9ef;
+      --yellow: #ffe9a8;
+      --line: rgba(32, 33, 44, .16);
+      --line-strong: rgba(32, 33, 44, .28);
+      --shadow: 0 22px 70px rgba(35, 32, 50, .15);
+      --radius: 8px;
+      --header-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url("assets/generated/lapsell-bg-texture.png");
+      background-size: cover;
+      background-position: center;
+      opacity: .26;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 247, .72), rgba(255, 253, 247, .96) 42%, rgba(255, 253, 247, .9));
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      z-index: 50;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--ink);
+      border-radius: var(--radius);
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      background: rgba(255, 253, 247, .86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(32, 33, 44, .08);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.12rem;
+      line-height: 1;
+    }
+
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      border: 1px solid rgba(32, 33, 44, .18);
+      border-radius: 7px;
+      box-shadow: 3px 3px 0 rgba(32, 33, 44, .12);
+    }
+
+    .brand-mark svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      transition: color .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 18px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      box-shadow: 4px 4px 0 rgba(32, 33, 44, .18);
+      font-weight: 700;
+      line-height: 1.2;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 6px 6px 0 rgba(32, 33, 44, .18);
+    }
+
+    .btn-primary {
+      background: var(--mint);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 253, 247, .78);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 720px;
+      height: 84svh;
+      max-height: 820px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-bg,
+    .hero-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bg img {
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.03);
+      animation: heroDrift 18s ease-in-out infinite alternate;
+    }
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 253, 247, .97) 0%, rgba(255, 253, 247, .9) 39%, rgba(255, 253, 247, .28) 67%, rgba(255, 253, 247, .06) 100%),
+        linear-gradient(180deg, rgba(255, 253, 247, .32), rgba(255, 253, 247, .78) 100%);
+      z-index: 1;
+    }
+
+    @keyframes heroDrift {
+      from {
+        transform: scale(1.03) translate3d(0, 0, 0);
+      }
+      to {
+        transform: scale(1.06) translate3d(-1.2%, .6%, 0);
+      }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 560px) minmax(280px, 1fr);
+      gap: 64px;
+      align-items: end;
+      padding: 72px 0 58px;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 4.8rem;
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .hero-lead {
+      max-width: 560px;
+      margin: 24px 0 0;
+      font-size: 1.18rem;
+      line-height: 1.9;
+      color: #343643;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 24px;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .hero-notes li {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-notes svg {
+      width: 16px;
+      height: 16px;
+      color: #2b8d7a;
+    }
+
+    .hero-preview {
+      justify-self: end;
+      width: min(360px, 100%);
+      transform: translateY(18px);
+    }
+
+    .video-shell {
+      overflow: hidden;
+      background: rgba(255, 253, 247, .9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .video-window {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: #1c1d24;
+    }
+
+    .video-window img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-window::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18, 18, 24, 0) 35%, rgba(18, 18, 24, .55));
+    }
+
+    .play-button {
+      position: absolute;
+      left: 20px;
+      bottom: 46px;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--mint);
+      border: 1px solid rgba(255, 255, 255, .65);
+      border-radius: 50%;
+    }
+
+    .play-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .progress {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 24px;
+      z-index: 2;
+      height: 4px;
+      background: rgba(255, 255, 255, .42);
+      overflow: hidden;
+      border-radius: 999px;
+    }
+
+    .progress span {
+      display: block;
+      width: 42%;
+      height: 100%;
+      background: var(--mint);
+      animation: progressMove 3.8s ease-in-out infinite;
+    }
+
+    @keyframes progressMove {
+      0% {
+        width: 18%;
+      }
+      50% {
+        width: 72%;
+      }
+      100% {
+        width: 18%;
+      }
+    }
+
+    .preview-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 16px;
+      font-size: .84rem;
+      line-height: 1.5;
+      color: var(--muted);
+      background: rgba(255, 253, 247, .92);
+    }
+
+    .preview-caption strong {
+      display: block;
+      color: var(--ink);
+      font-size: .95rem;
+    }
+
+    .intro-strip {
+      padding: 28px 0;
+      background: rgba(255, 253, 247, .88);
+      border-top: 1px solid rgba(32, 33, 44, .08);
+      border-bottom: 1px solid rgba(32, 33, 44, .08);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .intro-title {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .mini-fact {
+      padding-left: 18px;
+      border-left: 1px solid var(--line);
+    }
+
+    .mini-fact span {
+      display: block;
+      color: var(--muted);
+      font-size: .83rem;
+      font-weight: 700;
+    }
+
+    .mini-fact strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section.tight {
+      padding-top: 70px;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 46px;
+    }
+
+    .section-head.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 3rem;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .section-head p:not(.eyebrow) {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .92fr);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .split.reverse {
+      grid-template-columns: minmax(320px, .95fr) minmax(0, 1fr);
+    }
+
+    .image-block {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--paper-2);
+    }
+
+    .image-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-block.landscape {
+      aspect-ratio: 16 / 10;
+    }
+
+    .image-block.portrait {
+      aspect-ratio: 4 / 5;
+    }
+
+    .text-list {
+      display: grid;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .text-list li {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 16px;
+      padding: 0 0 22px;
+      border-bottom: 1px solid rgba(32, 33, 44, .1);
+    }
+
+    .text-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .line-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--mint-2);
+      border-radius: 7px;
+    }
+
+    .line-icon.pink {
+      background: var(--pink-2);
+    }
+
+    .line-icon.lavender {
+      background: var(--lavender-2);
+    }
+
+    .line-icon.blue {
+      background: var(--blue-2);
+    }
+
+    .line-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .text-list h3 {
+      margin: 0 0 6px;
+      font-size: 1.22rem;
+      line-height: 1.45;
+    }
+
+    .text-list p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .target-line {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 34px;
+      margin-top: 48px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .target-line h3 {
+      margin: 0 0 8px;
+      font-size: 1.16rem;
+    }
+
+    .target-line p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .section-band {
+      background: rgba(247, 244, 236, .7);
+    }
+
+    .mechanism-visual {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .diagram {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--paper);
+    }
+
+    .diagram img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .steps {
+      display: grid;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 16px;
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--yellow);
+      border: 1px solid rgba(32, 33, 44, .14);
+      border-radius: 50%;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .steps h3 {
+      margin: 0 0 4px;
+      font-size: 1.12rem;
+      line-height: 1.45;
+    }
+
+    .steps p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .flow {
+      display: grid;
+      gap: 86px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: minmax(340px, .95fr) minmax(0, 1fr);
+      gap: 58px;
+      align-items: center;
+    }
+
+    .flow-row:nth-child(even) {
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .95fr);
+    }
+
+    .flow-row:nth-child(even) .flow-media {
+      order: 2;
+    }
+
+    .flow-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--paper-2);
+    }
+
+    .flow-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .flow-media.wide {
+      aspect-ratio: 16 / 11;
+    }
+
+    .flow-media.phone {
+      max-width: 440px;
+      aspect-ratio: 5 / 7;
+      justify-self: center;
+    }
+
+    .flow-copy .flow-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .flow-copy .flow-dot {
+      width: 9px;
+      height: 9px;
+      background: var(--pink);
+      border-radius: 50%;
+    }
+
+    .flow-copy h3 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.3;
+    }
+
+    .flow-copy p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .flow-copy .inline-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(32, 33, 44, .12);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .buyer-path {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr);
+      gap: 58px;
+      align-items: center;
+    }
+
+    .path-list {
+      display: grid;
+      gap: 0;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .path-list li {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr);
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .path-list strong {
+      line-height: 1.45;
+    }
+
+    .path-list p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .evidence-layout {
+      display: grid;
+      grid-template-columns: minmax(360px, .95fr) minmax(0, 1.05fr);
+      gap: 64px;
+      align-items: start;
+    }
+
+    .evidence-image {
+      position: sticky;
+      top: calc(var(--header-height) + 28px);
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--paper-2);
+    }
+
+    .evidence-image img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .evidence-list {
+      display: grid;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .evidence-item {
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(32, 33, 44, .12);
+    }
+
+    .evidence-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .evidence-item h3 {
+      margin: 0 0 9px;
+      font-size: 1.28rem;
+      line-height: 1.45;
+    }
+
+    .evidence-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .evidence-item .source-line {
+      display: block;
+      margin-top: 10px;
+      color: var(--soft);
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+
+    .small-note {
+      margin-top: 26px;
+      color: var(--soft);
+      font-size: .84rem;
+      line-height: 1.7;
+    }
+
+    .safety-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .85fr);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .safety-copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .safety-rule {
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .safety-rule strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.12rem;
+    }
+
+    .safety-rule p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pricing-band {
+      position: relative;
+      overflow: hidden;
+      padding: 86px 0;
+      background: rgba(227, 248, 242, .72);
+      border-top: 1px solid rgba(32, 33, 44, .08);
+      border-bottom: 1px solid rgba(32, 33, 44, .08);
+    }
+
+    .pricing-inner {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+      gap: 62px;
+      align-items: center;
+    }
+
+    .pricing-lines {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .pricing-lines li {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 28px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pricing-lines strong {
+      font-size: 1.35rem;
+      line-height: 1.35;
+    }
+
+    .pricing-lines p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pricing-emphasis {
+      font-size: 2.4rem;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+
+    .pricing-emphasis span {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 1.02rem;
+      font-weight: 500;
+      line-height: 1.9;
+    }
+
+    .faq {
+      max-width: 920px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+    }
+
+    summary {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+      font-weight: 800;
+      font-size: 1.08rem;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      transition: transform .2s ease;
+    }
+
+    details[open] summary svg {
+      transform: rotate(45deg);
+    }
+
+    details p {
+      margin: 0;
+      padding: 0 0 24px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .cta {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 247, .74), rgba(255, 253, 247, .94)),
+        url("assets/generated/lapsell-bg-texture.png");
+      background-size: cover;
+      background-position: center;
+      border-top: 1px solid rgba(32, 33, 44, .08);
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      margin: 0;
+      font-size: 3.1rem;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .cta p {
+      margin: 16px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .site-footer {
+      padding: 36px 0 48px;
+      color: var(--muted);
+      background: rgba(255, 253, 247, .94);
+      border-top: 1px solid rgba(32, 33, 44, .08);
+      font-size: .9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        height: auto;
+        max-height: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 38px;
+        padding: 88px 0 54px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-preview {
+        justify-self: start;
+        width: min(300px, 72vw);
+        transform: none;
+      }
+
+      .intro-grid,
+      .split,
+      .split.reverse,
+      .mechanism-visual,
+      .buyer-path,
+      .evidence-layout,
+      .safety-layout,
+      .pricing-inner,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-grid {
+        gap: 18px;
+      }
+
+      .mini-fact {
+        padding-left: 0;
+        padding-top: 14px;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .target-line {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .flow-row,
+      .flow-row:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .flow-row:nth-child(even) .flow-media {
+        order: 0;
+      }
+
+      .evidence-image {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 64px;
+      }
+
+      .container {
+        width: min(100% - 32px, 1180px);
+      }
+
+      .site-header {
+        height: var(--header-height);
+      }
+
+      .brand {
+        font-size: 1rem;
+      }
+
+      .header-inner > .btn {
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: .86rem;
+      }
+
+      .hero-inner {
+        padding: 62px 0 42px;
+      }
+
+      .hero h1 {
+        font-size: 2.78rem;
+      }
+
+      .hero-lead {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .section.tight {
+        padding-top: 56px;
+      }
+
+      .section-head h2,
+      .cta h2 {
+        font-size: 2.18rem;
+      }
+
+      .flow-copy h3 {
+        font-size: 1.58rem;
+      }
+
+      .path-list li,
+      .pricing-lines li {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .pricing-emphasis {
+        font-size: 2rem;
+      }
+
+      .preview-caption {
+        display: block;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Lapsell",
+      "alternateName": "ラプセル",
+      "serviceType": "アイドル・アーティスト向けデジタルグッズ販売サービス",
+      "description": "練習やリハーサルの時間を、世界に1つの短い動画グッズとして販売できるサービス。",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "地下アイドル、インディーズアーティスト、バンド、小規模事務所、マネージャー"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY",
+        "description": "初期費用0円。販売成立時に取引手数料5%から。"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "練習動画を売ると安売りに見えませんか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "完成品ではなく、ファンが応援の証として持てる一点物の短い動画グッズとして販売します。価格や販売枠数をコントロールできるため、通常の投稿とは役割を分けられます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "撮影や編集の手間はどれくらいですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "スマホで練習やリハーサルを撮影し、アップロードする流れを想定しています。短いセグメントへの分割や配布はサービス側で扱うため、編集前提の運用ではありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "公開したくない瞬間が映った場合はどうなりますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ライブ配信ではなく撮影後アップロードのため、公開前に確認できます。本当に映ってはいけない事故の瞬間だけを非公開にし、該当購入者には返金する設計です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ファンは本当に購入しますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ライブ物販、チェキ、本人の素の日常を受け取る課金サービスなど、一点物や本人との近さに支払いが起きている行動を前提に検証します。Lapsellはその延長にある、動く一点物グッズです。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Lapsell ホーム">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 6.5h8.8c2.9 0 5.2 2.3 5.2 5.2S16.7 17 13.8 17H8.2"></path>
+            <path d="M8.2 17H5V6.5"></path>
+            <path d="M13.4 10.2l2 1.5-2 1.5"></path>
+          </svg>
+        </span>
+        <span>Lapsell</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="#mechanism">仕組み</a>
+        <a href="#flow">利用フロー</a>
+        <a href="#evidence">購入根拠</a>
+        <a href="#safety">安全性</a>
+        <a href="#pricing">料金</a>
+      </nav>
+      <a class="btn btn-primary js-apply" data-apply-link href="https://example.com/apply">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="M13 6l6 6-6 6"></path>
+        </svg>
+        申し込み
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/generated/lapsell-hero-rehearsal.png" alt="" fetchpriority="high">
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow">地下アイドル・インディーズアーティスト・バンド向け</p>
+          <h1 id="hero-title">練習時間を、<br>収益に変える。</h1>
+          <p class="hero-lead">
+            Lapsellは、リハーサル、ネタ合わせ、制作の途中にある時間を、ファンが手元に残せる短い動画グッズとして販売できるサービスです。完成品ではなく、今しか撮れない本物の時間を届けます。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary js-apply" data-apply-link href="https://example.com/apply">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="M13 6l6 6-6 6"></path>
+              </svg>
+              無料で出品相談する
+            </a>
+            <a class="btn btn-secondary" href="#mechanism">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M10 8l6 4-6 4V8z"></path>
+              </svg>
+              仕組みを見る
+            </a>
+          </div>
+          <ul class="hero-notes" aria-label="Lapsellの特徴">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              初期費用0円
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              スマホで撮るだけ
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              公開前チェック
+            </li>
+          </ul>
+        </div>
+        <div class="hero-preview" aria-label="短尺動画グッズのプレビュー">
+          <div class="video-shell">
+            <div class="video-window">
+              <img src="assets/generated/lapsell-flow-fan-receive.png" alt="ファンがスマホで短い練習動画を受け取る様子">
+              <span class="play-button" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+              </span>
+              <span class="progress" aria-hidden="true"><span></span></span>
+            </div>
+            <div class="preview-caption">
+              <span><strong>短い動画グッズ</strong>練習後に届く、自分だけの一瞬</span>
+              <span>one of one</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="intro-strip" aria-label="サービス概要">
+      <div class="container intro-grid">
+        <p class="intro-title">ライブや特典会の外にある時間を、ファンが買える一点物に。</p>
+        <div class="mini-fact">
+          <span>販売するもの</span>
+          <strong>未来の練習時間枠</strong>
+        </div>
+        <div class="mini-fact">
+          <span>届けるもの</span>
+          <strong>短い動画の断片</strong>
+        </div>
+        <div class="mini-fact">
+          <span>ファンの価値</span>
+          <strong>世界に1つの所有</strong>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">課題</p>
+          <h2 id="problem-title">収益源の限界</h2>
+          <p>活動の裏側には、ファンが知りたい時間がある。それでも多くの作り手にとって、収益になるのはライブ、特典会、物販、配信の一部に限られています。</p>
+        </div>
+        <div class="split">
+          <ul class="text-list">
+            <li>
+              <span class="line-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V8l7-4 7 4v12"></path><path d="M9 20v-6h6v6"></path></svg>
+              </span>
+              <div>
+                <h3>練習は見えない</h3>
+                <p>毎週のリハ、ネタ合わせ、制作途中の確認。活動の大部分を占める時間なのに、通常はファンの手に届きません。</p>
+              </div>
+            </li>
+            <li>
+              <span class="line-icon lavender" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M4 12h10"></path><path d="M4 17h16"></path><path d="M18 10l2 2-2 2"></path></svg>
+              </span>
+              <div>
+                <h3>投稿すると資産になりにくい</h3>
+                <p>SNSに出すと拡散は狙えますが、誰でも見られるものになります。ファンが「自分だけのもの」として持つ価値とは別物です。</p>
+              </div>
+            </li>
+            <li>
+              <span class="line-icon pink" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10H7z"></path><path d="M4 4l3 3"></path><path d="M20 4l-3 3"></path><path d="M4 20l3-3"></path><path d="M20 20l-3-3"></path></svg>
+              </span>
+              <div>
+                <h3>配信は事故が怖い</h3>
+                <p>リアルタイム配信は、映り込みや切り忘れを止められません。裏側を見せたい気持ちと、安全に出したい気持ちがぶつかります。</p>
+              </div>
+            </li>
+          </ul>
+          <div>
+            <div class="image-block landscape">
+              <img src="assets/generated/lapsell-flow-filming.png" alt="スタジオでバンド練習をスマホ撮影している様子" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="target-line" aria-label="対象ユーザー">
+          <div>
+            <h3>ライブアイドル</h3>
+            <p>練習頻度が高く、ファンとの距離が近い。チェキや物販の延長として説明しやすい層です。</p>
+          </div>
+          <div>
+            <h3>インディーズアーティスト</h3>
+            <p>リハーサル、制作、音合わせが将来の証になります。完成前の時間に価値があります。</p>
+          </div>
+          <div>
+            <h3>小規模事務所・マネージャー</h3>
+            <p>新しい売り物を増やしたいが、撮影や編集に大きな運用負荷をかけたくないチームに向いています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-band" id="mechanism" aria-labelledby="mechanism-title">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">仕組み</p>
+          <h2 id="mechanism-title">時間を先に売り、あとから動画で届ける</h2>
+          <p>販売するのは、まだ撮影されていない未来の練習時間枠です。購入されたあとに撮影し、短い動画の断片として購入者へ一意に配布します。</p>
+        </div>
+        <div class="mechanism-visual">
+          <div class="diagram">
+            <img src="assets/generated/lapsell-diagram-segments.png" alt="長い練習動画が短い断片に分割され、それぞれ別のファンのスマホに届く説明図" loading="lazy">
+          </div>
+          <ol class="steps">
+            <li>
+              <div>
+                <h3>練習時間枠を出品</h3>
+                <p>日時、販売枠数、価格、1本あたりの長さを決めます。</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>ファンが購入</h3>
+                <p>中身は届くまで分かりません。ファンは未来の時間に参加する感覚で買います。</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>スマホで撮影</h3>
+                <p>当日の練習をいつも通り撮ります。編集して作り込む前提ではありません。</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>断片を配布</h3>
+                <p>承認された短い区間が、購入者ごとに違う一点物として届きます。</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flow" aria-labelledby="flow-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">利用フロー</p>
+          <h2 id="flow-title">出品から受け取りまで</h2>
+          <p>重要なのは、ファンが買う前に撮影や編集をしなくていいことです。先に販売して、購入された時間を撮影し、確認してから届けます。</p>
+        </div>
+        <div class="flow">
+          <div class="flow-row">
+            <div class="flow-media phone">
+              <img src="assets/generated/lapsell-app-listing.png" alt="Lapsellの出品画面をイメージしたスマホアプリモック" loading="lazy">
+            </div>
+            <div class="flow-copy">
+              <span class="flow-kicker"><span class="flow-dot"></span>販売者側</span>
+              <h3>練習の予定を、販売枠にする</h3>
+              <p>たとえば「来週火曜19時のリハーサル」を出品します。ファンは、その時間から切り出された短い動画のどれかを受け取ります。</p>
+              <p class="inline-note">作る商品は、完成品ではなく「今しかない時間」です。</p>
+            </div>
+          </div>
+
+          <div class="flow-row">
+            <div class="flow-media wide">
+              <img src="assets/generated/lapsell-flow-filming.png" alt="スマホを三脚に置いてバンド練習を撮影している様子" loading="lazy">
+            </div>
+            <div class="flow-copy">
+              <span class="flow-kicker"><span class="flow-dot"></span>撮影</span>
+              <h3>当日はスマホで撮るだけ</h3>
+              <p>特別な編集や演出を前提にしません。練習の前後、リハの一部、ネタ合わせの様子など、いつもの活動をそのまま撮影します。</p>
+              <p class="inline-note">「ちゃんと作った動画」ではなく、「本物の時間」が価値になります。</p>
+            </div>
+          </div>
+
+          <div class="flow-row">
+            <div class="flow-media phone">
+              <img src="assets/generated/lapsell-app-review.png" alt="公開前に動画セグメントを確認するスマホアプリモック" loading="lazy">
+            </div>
+            <div class="flow-copy">
+              <span class="flow-kicker"><span class="flow-dot"></span>公開前チェック</span>
+              <h3>事故だけ止めて、偶然は残す</h3>
+              <p>撮影後にアップロードし、公開前に確認します。本当に映ってはいけない区間だけを止め、それ以外の普通の瞬間や偶然の一瞬は、そのまま届けます。</p>
+              <p class="inline-note">当たりだけを選ぶ仕組みではありません。真正性を守ります。</p>
+            </div>
+          </div>
+
+          <div class="flow-row">
+            <div class="flow-media wide">
+              <img src="assets/generated/lapsell-flow-fan-receive.png" alt="ファンが部屋でスマホに届いた練習動画を見ている様子" loading="lazy">
+            </div>
+            <div class="flow-copy">
+              <span class="flow-kicker"><span class="flow-dot"></span>ファン側</span>
+              <h3>自分だけの短い動画として受け取る</h3>
+              <p>ファンに届くのは、誰とも被らない短い断片です。手元に保存し、あとから見返せる「動く一点物グッズ」になります。</p>
+              <p class="inline-note">推しが大きくなったとき、初期の時間を持っている証になります。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-band" id="buyer" aria-labelledby="buyer-title">
+      <div class="container buyer-path">
+        <div>
+          <p class="eyebrow">購入導線</p>
+          <h2 id="buyer-title">ファンが迷わず買える流れ</h2>
+          <p>ファンにとって分かりやすい導線は、「時間を見つける」「購入する」「届くまで待つ」「受け取って保有する」の4段階です。くじの刺激よりも、手元に残る一点物としての納得感を先に伝えます。</p>
+          <ul class="path-list">
+            <li>
+              <strong>見つける</strong>
+              <p>アーティストが出した練習予定を一覧で見る。</p>
+            </li>
+            <li>
+              <strong>買う</strong>
+              <p>価格、販売数、届く予定だけを確認して購入する。</p>
+            </li>
+            <li>
+              <strong>待つ</strong>
+              <p>撮影日まで待つ。中身はこの時点ではまだ存在しない。</p>
+            </li>
+            <li>
+              <strong>受け取る</strong>
+              <p>自分だけの短い動画を保存し、所有者情報を確認できる。</p>
+            </li>
+          </ul>
+        </div>
+        <div class="image-block portrait">
+          <img src="assets/generated/lapsell-flow-fan-receive.png" alt="ファンがスマホで一点物の動画グッズを受け取る写真風イメージ" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evidence" aria-labelledby="evidence-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">購入根拠</p>
+          <h2 id="evidence-title">なぜ、練習の断片が買われるのか</h2>
+          <p>根拠は「市場規模が大きい」ではありません。ファンがすでに、一点物、素のコンテンツ、本人との近さに支払っていることです。</p>
+        </div>
+        <div class="evidence-layout">
+          <div class="evidence-image">
+            <img src="assets/generated/lapsell-evidence-merch.png" alt="ライブ会場の物販でファンがチェキ風写真やグッズを手に取っている様子" loading="lazy">
+          </div>
+          <ul class="evidence-list">
+            <li class="evidence-item">
+              <h3>一点物への支払いは、物販で定着している</h3>
+              <p>ライブ物販やチェキでは、ファンは「その場で手に入る」「自分だけの記録になる」ことに支払っています。Lapsellは、写真ではなく練習時間の短い動画で同じ所有体験を作ります。</p>
+              <span class="source-line">設計資料では、ライブ物販、チェキ単価、チェキ依存度の調査・取材情報を根拠として整理。</span>
+            </li>
+            <li class="evidence-item">
+              <h3>素の時間にも、課金行動がある</h3>
+              <p>完成されたMVや告知だけではなく、本人の素の日常、制作の裏側、普段の会話に価値を感じるファンはいます。練習動画は、その延長にある「近さ」の商品です。</p>
+              <span class="source-line">設計資料では、本人の日常メッセージ課金サービスや推し活支出の事例を参照。</span>
+            </li>
+            <li class="evidence-item">
+              <h3>中身の面白さだけに依存しない</h3>
+              <p>たまたま面白い瞬間が映れば拡散される可能性はあります。ただし主価値はそこではありません。普通の練習風景でも、自分だけが持つ本物の時間であることに価値があります。</p>
+            </li>
+            <li class="evidence-item">
+              <h3>自社アンケートでも購入意向が見えている</h3>
+              <p>設計資料では、自社アンケートN=393において、約3人に1人が何らかの購入意向を示したと整理されています。MVPでは、この意向を実際の購入で検証します。</p>
+              <span class="source-line">公開前には、設問、対象、実施時期、最新値の明記が必要です。</span>
+            </li>
+          </ul>
+        </div>
+        <p class="small-note">※このLPでは、設計資料にある根拠を販売者が理解しやすい表現に整理しています。外部公開時は、掲載数値と出典の最新確認を行ってください。</p>
+      </div>
+    </section>
+
+    <section class="section section-band" id="safety" aria-labelledby="safety-title">
+      <div class="container safety-layout">
+        <div class="safety-copy">
+          <div class="section-head">
+            <p class="eyebrow">安全性</p>
+            <h2 id="safety-title">ライブ配信ではなく、撮影後アップロード</h2>
+            <p>裏側を出したい。でも、切り忘れや映り込みは怖い。Lapsellはリアルタイム配信ではないため、公開前に止められます。</p>
+          </div>
+          <div class="safety-rule">
+            <strong>止めるのは、事故だけ。</strong>
+            <p>「当たりだけ選んで届ける」と、ランダム性と一点物の真正性が壊れます。だから、通常の練習や偶然の瞬間は残し、本当に出せない区間だけを非公開にします。</p>
+          </div>
+          <ul class="text-list">
+            <li>
+              <span class="line-icon blue" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M7 7v10"></path><path d="M17 7v10"></path><path d="M4 17h16"></path></svg>
+              </span>
+              <div>
+                <h3>公開前チェック</h3>
+                <p>動画を出す前に確認できるため、リアルタイムの配信事故を避けられます。</p>
+              </div>
+            </li>
+            <li>
+              <span class="line-icon pink" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 5-3.4 7.5-8 8-4.6-.5-8-3-8-8V7l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+              </span>
+              <div>
+                <h3>所有者の確認</h3>
+                <p>購入者が保有する前提で、透かしや所有者確認の仕組みを設計します。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="image-block portrait">
+          <img src="assets/generated/lapsell-app-review.png" alt="動画公開前チェック画面のスマホアプリモック" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-band" id="pricing" aria-labelledby="pricing-title">
+      <div class="container pricing-inner">
+        <div>
+          <p class="eyebrow">料金</p>
+          <h2 id="pricing-title" class="pricing-emphasis">はじめる費用を抑え、売れた分だけ手数料。</h2>
+        </div>
+        <ul class="pricing-lines">
+          <li>
+            <strong>初期費用 0円</strong>
+            <p>出品者はノーリスクで試せます。まずは小さな練習枠から検証できます。</p>
+          </li>
+          <li>
+            <strong>手数料 5%〜</strong>
+            <p>販売成立時のみ手数料が発生します。導入期は供給を増やしやすい低率から始める想定です。</p>
+          </li>
+          <li>
+            <strong>将来の収益源</strong>
+            <p>二次流通ロイヤリティや保管機能は将来拡張として扱い、MVPでは一次販売の検証に集中します。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">よくある質問</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>
+              練習動画を売ると、安売りに見えませんか？
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </summary>
+            <p>通常投稿とは分けて、販売数や価格を決めた一点物グッズとして扱います。完成品を安く出すのではなく、ファンが「今しかない時間」を持てるようにする商品です。</p>
+          </details>
+          <details>
+            <summary>
+              編集の手間は増えませんか？
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </summary>
+            <p>前提は、スマホで撮ってアップロードするだけです。動画を作り込んでから売るのではなく、先に時間枠を販売し、撮影後に短い断片として届けます。</p>
+          </details>
+          <details>
+            <summary>
+              まずい瞬間が映ったらどうなりますか？
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </summary>
+            <p>公開前チェックで、本当に映ってはいけない区間だけを止めます。該当区間に割り当たった購入者には返金する設計です。</p>
+          </details>
+          <details>
+            <summary>
+              中身が普通でもファンは買いますか？
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </summary>
+            <p>狙いは、面白い瞬間だけを売ることではありません。普通の練習でも、自分だけが持つ本物の時間であること、将来見返せる証になることに価値があります。</p>
+          </details>
+          <details>
+            <summary>
+              VTuberやインスタライバーにも向いていますか？
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </summary>
+            <p>主対象は、生身で練習や制作を撮影できる地下アイドル、インディーズアーティスト、バンド、小規模事務所です。日常や練習の直撮りと相性が悪い活動形態は優先対象から外します。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container cta-inner">
+        <div>
+          <p class="eyebrow">出品相談</p>
+          <h2 id="cta-title">最初の練習枠から、検証を始める。</h2>
+          <p>売れるかどうかは、実際に小さく出して確かめるのが一番早い。まずは1回分の練習時間を、ファンが買える商品にするところから始めます。</p>
+        </div>
+        <a class="btn btn-primary js-apply" data-apply-link href="https://example.com/apply">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="M13 6l6 6-6 6"></path>
+          </svg>
+          申し込みへ進む
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand" aria-label="Lapsell">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 6.5h8.8c2.9 0 5.2 2.3 5.2 5.2S16.7 17 13.8 17H8.2"></path>
+            <path d="M8.2 17H5V6.5"></path>
+            <path d="M13.4 10.2l2 1.5-2 1.5"></path>
+          </svg>
+        </span>
+        <span>Lapsell</span>
+      </div>
+      <div class="footer-links">
+        <a href="#mechanism">仕組み</a>
+        <a href="#evidence">購入根拠</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const APPLY_URL = "https://example.com/apply";
+
+    document.querySelectorAll("[data-apply-link]").forEach((link) => {
+      link.href = APPLY_URL;
+      link.rel = "noopener";
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        const id = anchor.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  </script>
+</body>
+</html>
