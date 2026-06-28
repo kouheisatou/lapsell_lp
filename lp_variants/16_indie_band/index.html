@@ -301,21 +301,19 @@ section{padding:92px 0;position:relative;z-index:2;}
 
 /* purchase-reason figures (borderless, clarity-first) */
 .reasons-block{max-width:900px;margin:0 auto;}
-.reasons{display:grid;grid-template-columns:1fr 1fr;gap:38px 48px;margin-top:42px;text-align:left;}
-.rfig{display:flex;flex-direction:column;gap:7px;}
-.rfig .rmean{font-size:15.5px;line-height:1.8;color:#d7cdba;}
-.rfig .rmean b{color:var(--paper);font-weight:900;}
-.rfig .rnum{font-weight:900;line-height:1.05;color:var(--amber);font-size:clamp(26px,3.4vw,34px);}
-.rfig .rnum .u{font-size:.42em;color:var(--paper);font-weight:900;margin-left:.12em;}
-.rfig .rnum .pre{font-size:.46em;color:var(--paper);font-weight:900;margin-right:.12em;}
+.reasons{display:grid;grid-template-columns:1fr 1fr;gap:42px 48px;margin-top:42px;text-align:left;}
+.rfig{display:flex;flex-direction:column;gap:10px;}
+.rfig .rfig-img{width:100%;height:auto;display:block;border-radius:6px;}
+.rfig .rfig-h{font-size:18px;font-weight:900;line-height:1.45;color:var(--paper);}
+.rfig .rmean{font-size:15px;line-height:1.85;color:#d7cdba;}
+.rfig .rmean em{font-style:normal;font-weight:900;color:var(--amber);}
 .rfig .rsrc{font-size:11.5px;color:#8d8270;line-height:1.55;margin-top:1px;}
-@media(max-width:680px){.reasons{grid-template-columns:1fr;gap:34px;}}
+@media(max-width:680px){.reasons{grid-template-columns:1fr;gap:38px;}}
 
 /* ---------- 購入導線 (ファンへの届け方) borderless 3-col ---------- */
 .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 44px;margin-top:54px;text-align:left;}
 .d-item{display:flex;flex-direction:column;gap:14px;}
-.d-item .d-ic{width:46px;height:46px;border-radius:12px;background:var(--amber);color:#1a0f02;display:flex;align-items:center;justify-content:center;flex:none;}
-.d-item .d-ic svg{width:24px;height:24px;}
+.d-item .d-img{width:100%;height:auto;display:block;border-radius:6px;}
 .d-item h3{font-size:18px;font-weight:900;line-height:1.45;}
 .d-item p{font-size:14px;color:#cfc5b2;line-height:1.85;}
 .d-item p b{color:var(--paper);font-weight:900;}
@@ -809,33 +807,38 @@ section{padding:92px 0;position:relative;z-index:2;}
       <div class="reasons">
 
         <div class="rfig">
-          <div class="rnum"><span class="pre">年</span>約22,000<span class="u">円</span></div>
-          <div class="rmean">ライブ物販＝<b>現場で“所有する”</b>行動が定着。グッズ購入者の年間平均額。アイドル系のグッズ購入率は<b>75.4%</b>。</div>
-          <div class="rsrc">ぴあ総研（インテージ委託, n=916）。要再確認</div>
+          <img class="rfig-img" src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファン">
+          <h3 class="rfig-h">ファンが物販に払っている額</h3>
+          <p class="rmean">ライブ物販を買うファンは1年でおよそ<em>22,000円</em>を使い、アイドル系のグッズ購入率は<em>75.4%</em>にのぼります。現場で「所有する」という行動が、すでに定着しています。</p>
+          <p class="rsrc">ぴあ総研（インテージ委託, n=916）。要再確認</p>
         </div>
 
         <div class="rfig">
-          <div class="rnum"><span class="pre">1枚</span>約1,500<span class="u">円</span></div>
-          <div class="rmean"><b>チェキ＝その場の一点物</b>が、ライブアイドルの主収入。累計1億台突破、年間 約<b>1,500億円</b>の規模に。</div>
-          <div class="rsrc">富士フイルム公式（累計・年間売上）</div>
+          <img class="rfig-img" src="assets/reason_cheki.png" alt="その場で撮るチェキの一点物">
+          <h3 class="rfig-h">ファンが実際に払っている額</h3>
+          <p class="rmean">その場かぎりの一点物であるチェキは1枚<em>約1,500円</em>で、ライブアイドルの主な収入になっています。カメラは累計<em>1億台</em>を超え、市場は年間<em>約1,500億円</em>の規模です。</p>
+          <p class="rsrc">富士フイルム公式（累計・年間売上）</p>
         </div>
 
         <div class="rfig">
-          <div class="rnum"><span class="pre">年</span>約4<span class="u">万円</span></div>
-          <div class="rmean"><b>推し活グッズへの実支出。</b>ファンは1年間で、平均このくらいをグッズに使っています。</div>
-          <div class="rsrc">Oshicoco 調査（n=210, 2024）。要再確認</div>
+          <img class="rfig-img" src="assets/reason_oshikatsu.png" alt="推し活グッズに囲まれたファン">
+          <h3 class="rfig-h">推し活グッズへの年間支出</h3>
+          <p class="rmean">ファンは推し活グッズに、1年でおよそ<em>4万円</em>を使っています。応援のために手元へ残るものを買うことは、特別なことではありません。</p>
+          <p class="rsrc">Oshicoco 調査（n=210, 2024）。要再確認</p>
         </div>
 
         <div class="rfig">
-          <div class="rnum">54.7<span class="u">%</span></div>
-          <div class="rmean">CDを買う理由の1位は<b>「収集のため」</b>。所有・収集そのものが、購入の動機。音楽ビデオの生産は <b>562億円</b>で、特典映像が動機になっています。</div>
-          <div class="rsrc">CD理由＝要再確認／音楽ビデオ＝日本レコード協会（RIAJ, 2024）</div>
+          <img class="rfig-img" src="assets/reason_cd.png" alt="CDや特典映像を集めるコレクション">
+          <h3 class="rfig-h">所有・収集の文化</h3>
+          <p class="rmean">CDを買う理由の1位は「収集のため」で、その割合は<em>54.7%</em>にのぼります。所有・収集そのものが購入の動機で、音楽ビデオの生産も年間<em>562億円</em>と、特典映像が大きな動機になっています。</p>
+          <p class="rsrc">CD理由＝要再確認／音楽ビデオ＝日本レコード協会（RIAJ, 2024）</p>
         </div>
 
         <div class="rfig">
-          <div class="rnum"><span class="pre">月</span>約500<span class="u">円</span></div>
-          <div class="rmean"><b>本人の“素の日常”への課金が成立。</b>bubbleは世界<b>200万人超</b>が課金、2024年の売上は約80億円との見方も。</div>
-          <div class="rsrc">bubble（DearU）。売上は要再確認</div>
+          <img class="rfig-img" src="assets/reason_bubble.png" alt="アーティストとメッセージでつながるアプリ">
+          <h3 class="rfig-h">本人とのつながりに払う額</h3>
+          <p class="rmean">本人の素の日常に課金する文化も成立しています。bubbleは月<em>約500円</em>で世界<em>200万人</em>超が課金し、2024年の売上は<em>約80億円</em>との見方もあります。</p>
+          <p class="rsrc">bubble（DearU）。売上は要再確認</p>
         </div>
 
       </div>
@@ -899,7 +902,7 @@ section{padding:92px 0;position:relative;z-index:2;}
 
       <!-- ① ライブ物販・グッズにQRを並列 -->
       <div class="d-item">
-        <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v.01M17 21h.01M21 17h.01"/></svg></span>
+        <img class="d-img" src="assets/deliver_qr.png" alt="ライブ物販ブースに出品ページのQRコードを並べて置く様子">
         <span class="d-num">01</span>
         <h3>ライブ物販・グッズに、QRを並べて置く</h3>
         <p>ライブハウスやスタジオの物販ブースに、出品ページのQRコードを置くだけ。<b>CD・チェキ・グッズと一緒に「練習の時間」も買える</b>。並んでいるファンが、その場で手に取れます。</p>
@@ -907,7 +910,7 @@ section{padding:92px 0;position:relative;z-index:2;}
 
       <!-- ② SNSで告知 -->
       <div class="d-item">
-        <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4 11 15M22 4l-7 18-4-9-9-4 20-5z"/></svg></span>
+        <img class="d-img" src="assets/deliver_sns.png" alt="X・Instagramのプロフィールやストーリーで出品リンクを告知する様子">
         <span class="d-num">02</span>
         <h3>SNSで、いつもの告知に乗せる</h3>
         <p>X・Instagramのプロフィールやストーリーに、出品リンクを貼るだけ。<b>新曲やライブの告知と同じ流れ</b>で、今日のスタジオの時間枠を知らせられます。</p>
@@ -915,7 +918,7 @@ section{padding:92px 0;position:relative;z-index:2;}
 
       <!-- ③ ライブMC・対バン・FC/LINE通知 -->
       <div class="d-item">
-        <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 0 1-5.8-1.6"/></svg></span>
+        <img class="d-img" src="assets/deliver_mc.png" alt="ライブMCや特典会・ファンクラブで練習の時間を案内する様子">
         <span class="d-num">03</span>
         <h3>ライブMC・対バン・FC/LINEで案内</h3>
         <p>ライブのMCや対バンの場で一声かける、ファンクラブやLINEで通知する。<b>すでに届いている相手に知らせるだけ</b>。新しい接点を作る必要はありません。</p>
