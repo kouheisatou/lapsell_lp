@@ -209,13 +209,15 @@
   .qa li{ position:relative; padding-left:20px; font-size:14.5px; margin-bottom:6px; }
   .qa li::before{ content:""; position:absolute; left:0; top:11px; width:8px; height:8px; border-radius:50%; background:var(--blue); }
 
-  /* 3つの肝：番号＋見出し＋本文、枠なし、縦並び */
-  .mech{ margin-top:10px; }
-  .mrow{ display:flex; gap:24px; padding:30px 0; align-items:flex-start; }
-  .mrow + .mrow{ border-top:1px solid rgba(255,255,255,.24); }
-  .micon{ width:80px; height:80px; flex:0 0 auto; border-radius:14px; object-fit:cover; background:var(--ivory); }
-  .mrow h3{ font-size:22px; font-weight:800; margin-bottom:6px; }
-  .mrow p{ font-size:15px; }
+  /* サービスの仕組み：3ステップ 横スクロール */
+  .mech{ margin-top:18px; display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding-bottom:14px; }
+  .mech::-webkit-scrollbar{ height:8px; }
+  .mech::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.3); border-radius:8px; }
+  .mrow{ flex:0 0 auto; width:clamp(280px,82vw,340px); scroll-snap-align:start; padding:24px 22px; align-items:flex-start; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:16px; }
+  .micon{ width:80px; height:80px; flex:0 0 auto; border-radius:14px; object-fit:cover; background:var(--ivory); margin-bottom:14px; }
+  .stepno{ display:inline-block; background:var(--red); color:#fff; font-family:"Inter",sans-serif; font-weight:800; font-size:11px; letter-spacing:.1em; padding:4px 12px; border-radius:999px; margin-bottom:12px; }
+  .mrow h3{ font-size:20px; font-weight:800; margin-bottom:6px; }
+  .mrow p{ font-size:14.5px; }
 
   /* アプリモック（黒枠スマホ）— 横スクロールのステップ列 */
   .steps-scroll{ display:flex; gap:24px; overflow-x:auto; padding:14px 4px 28px; scroll-snap-type:x mandatory; }
@@ -396,6 +398,7 @@
     .case{ grid-template-columns:1fr; gap:18px; }
     .ba{ flex-direction:column; gap:14px; }
     .ba-arrow{ justify-content:center; transform:rotate(90deg); }
+    .mrow{ width:clamp(260px,84vw,320px); }
   }
   @media (max-width:520px){
     .auth-flow .arrow{ transform:rotate(90deg); width:100%; text-align:center; }
@@ -544,28 +547,31 @@
     <section class="band-blue" id="how">
       <div class="en">HOW IT WORKS</div>
       <h2><span class="jp">完成品ではなく、<br>未来の“練習の時間”を売る。</span></h2>
-      <p class="lead">時間枠を出品 → ファンが中身を知らずに購入 → 当日スマホで撮るだけ → 撮れた映像が、<span class="mark">中身は届くまで分からない</span>一点もののデジタルグッズとして届く。</p>
+      <p class="lead">練習の時間を出品 → 本番をスマホで撮るだけ → ファンに届いて収益になる。<span class="mark">たった3ステップ</span>で、まだ撮っていない未来が一点もののデジタルグッズになります。<span class="lead-strong">（横にスクロールできます）</span></p>
 
       <div class="mech">
         <div class="mrow">
-          <img class="micon" src="assets/how1.png" alt="練習の時間を先に売るイメージ">
+          <img class="micon" src="assets/how1.png" alt="練習の時間を出品するイメージ">
           <div>
-            <h3>時間を“先に”売る</h3>
-            <p>完成した動画ではなく、これから訪れる練習の「時間枠」を出品。まだ撮っていない未来を、先に収益に変えます。</p>
+            <span class="stepno">STEP 1</span>
+            <h3>練習の時間を出品する</h3>
+            <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p>
           </div>
         </div>
         <div class="mrow">
-          <img class="micon" src="assets/how2.png" alt="中身は届くまで分からないイメージ">
+          <img class="micon" src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ">
           <div>
-            <h3>中身は、届くまで分からない</h3>
-            <p>何が映るかは封を開けるまで分からない。だからファンは「何が届くか」のワクワクごと購入します。</p>
+            <span class="stepno">STEP 2</span>
+            <h3>本番をスマホで撮るだけ</h3>
+            <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
           </div>
         </div>
         <div class="mrow">
-          <img class="micon" src="assets/how3.png" alt="届くのは世界に1つのイメージ">
+          <img class="micon" src="assets/how3.png" alt="ファンに届いて収益になるイメージ">
           <div>
-            <h3>届くのは世界に1つ</h3>
-            <p>その区間を持っているのは落札者ただ一人。世界で一つだけの、一点もののデジタルグッズになります。</p>
+            <span class="stepno">STEP 3</span>
+            <h3>ファンに届いて収益になる</h3>
+            <p>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</p>
           </div>
         </div>
       </div>
