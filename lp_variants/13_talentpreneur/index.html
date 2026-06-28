@@ -176,6 +176,15 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 @media(min-width:720px){.points{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1040px){.points{grid-template-columns:repeat(4,1fr)}}
 
+/* ---------- reach / 購入導線 (borderless line-icon figures) ---------- */
+.reach{display:grid;grid-template-columns:1fr;gap:38px;margin-top:48px;position:relative;z-index:2}
+.rch{display:grid;gap:14px}
+.rch>svg{width:54px;height:54px;color:var(--indigo)}
+.rch h3{font-size:clamp(17px,2.8vw,20px);font-weight:800;line-height:1.45}
+.rch p{font-size:14px;font-weight:500}
+.reach-note{position:relative;z-index:2;margin-top:38px;font-size:14px;font-weight:700;color:var(--indigo)}
+@media(min-width:760px){.reach{grid-template-columns:repeat(3,1fr);gap:40px}}
+
 /* ---------- evidence / charts ---------- */
 .ev-grid{display:grid;grid-template-columns:1fr;gap:46px;margin-top:48px;position:relative;z-index:2}
 .ev-block h3{font-size:clamp(18px,3vw,24px);font-weight:800;line-height:1.5;margin-bottom:10px}
@@ -192,12 +201,14 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 .legend{display:grid;gap:10px;font-size:14px;font-weight:600}
 .legend i{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:9px;vertical-align:middle}
 .legend .big{font-family:"Josefin Sans",sans-serif;font-weight:700;font-size:15px}
-/* bar chart */
-.bars{display:grid;gap:16px;margin-top:6px}
-.bar .lab{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:5px}
-.bar .lab b{font-family:"Josefin Sans",sans-serif}
-.bar .track{height:16px;border-radius:8px;background:rgba(255,255,255,.16);overflow:hidden}
-.bar .fill{height:100%;border-radius:8px}
+/* purchase reasons (borderless feature list) */
+.reasons{display:grid;grid-template-columns:1fr;gap:30px;margin-top:36px;position:relative;z-index:2}
+.reason{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
+.reason>svg{width:30px;height:30px;flex:0 0 30px;color:var(--yellow);margin-top:3px}
+.reason h4{font-size:clamp(16px,2.6vw,19px);font-weight:800;line-height:1.5;margin-bottom:6px;color:#fff}
+.reason p{font-size:14px;font-weight:500;opacity:.92}
+.reason .src{display:block;margin-top:7px;font-size:11.5px;font-weight:500;opacity:.6}
+@media(min-width:760px){.reasons{grid-template-columns:1fr 1fr;column-gap:46px}}
 
 /* ---------- authenticity (figure, no nested boxes) ---------- */
 .auth{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin-top:46px;position:relative;z-index:2}
@@ -504,6 +515,50 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
   </div>
 </section>
 
+<hr class="rule">
+
+<!-- ファンへの届け方（購入導線） -->
+<section class="sec band-cream" id="reach">
+  <span class="ghost en">REACH</span>
+  <div class="wrap">
+    <span class="eyebrow"><span class="gl">✦</span>ファンへの届け方</span>
+    <h2 class="sec-title">新規集客は、<em>いらない</em>。</h2>
+    <p class="lead">いまのファンとの接点に、そのまま乗せて売れる。物販・SNS・ライブ――もう持っている場所に、練習の“時間”を並べるだけ。</p>
+
+    <div class="reach">
+      <div class="rch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M5 14v-3h3"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/><path d="M14 14h3v3"/><path d="M21 14v7h-7"/><path d="M17.5 17.5h.01"/>
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+        </svg>
+        <h3>① 物販ブースにQRを並べる</h3>
+        <p>会場の物販で、グッズの横にQRコードを置くだけ。チェキやTシャツと同じ列に「練習の時間」も並べて売れる。</p>
+      </div>
+
+      <div class="rch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/>
+          <path d="M18.5 6.5 21 4M21 4h-3M21 4v3"/>
+        </svg>
+        <h3>② SNSで告知する</h3>
+        <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。いつものフォロワーが、そのまま買い手になる。</p>
+      </div>
+
+      <div class="rch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M3 11a2 2 0 0 1 2-2h2l3-2v10l-3-2H5a2 2 0 0 1-2-2Z"/>
+          <path d="M14 8a4 4 0 0 1 0 8M16.5 5.5a7.5 7.5 0 0 1 0 13"/>
+        </svg>
+        <h3>③ ライブMC・特典会で案内</h3>
+        <p>ライブのMCや特典会で一言、ファンクラブ・LINEで通知。直接届く接点に乗せれば、いまのファンにそのまま届く。</p>
+      </div>
+    </div>
+
+    <p class="reach-note">＝集客し直す必要はありません。いま応援してくれている人に、いる場所のまま届けられます。</p>
+  </div>
+</section>
+
 <!-- 4 Points (cards = reference uses cards in Point section) -->
 <section class="sec band-yellow" id="points">
   <span class="ghost en">POINT</span>
@@ -602,14 +657,59 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
         </div>
       </div>
       <div class="ev-block">
-        <h3>「ランダム×グッズ」の文化は、すでに巨大。</h3>
-        <p>ガチャやトレカに人はお金を使う。Lapsellは、その“ランダム封入”の体験を練習の時間に持ち込む。</p>
-        <div class="bars">
-          <div class="bar"><div class="lab"><span>デジタルガチャ市場</span><b>約7,000億円</b></div><div class="track"><div class="fill" style="width:100%;background:var(--pink)"></div></div></div>
-          <div class="bar"><div class="lab"><span>トレカ国内市場(2022)</span><b>約2,349億円</b></div><div class="track"><div class="fill" style="width:34%;background:var(--violet)"></div></div></div>
-          <div class="bar"><div class="lab"><span>ライブBlu-ray/DVD(2024)</span><b>約558億円</b></div><div class="track"><div class="fill" style="width:8%;background:var(--blue)"></div></div></div>
+        <h3>その31.9%は、急に現れた数字じゃない。</h3>
+        <p>同じ「素・一点もの・本人とのつながり」に、ファンは<span class="hl">もう実際に払っている</span>。理由は市場の大きさではなく、この支払いがすでに起きていること。</p>
+      </div>
+    </div>
+
+    <!-- 購入される理由（なぜ買われるのか） -->
+    <h3 class="sec-title" style="margin-top:64px">購入される理由<em>（なぜ買われるのか）</em>。</h3>
+    <p class="lead">論点は「市場が大きいか」ではない。ファンは“一点もの・素のもの・本人とのつながり”に、もう実際の金額を払っている。Lapsellの「素の一点もの」も、同じ行動原理で買われる。</p>
+
+    <div class="reasons">
+      <div class="reason">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <div>
+          <h4>ライブ物販＝“現場で所有する”は定着</h4>
+          <p>ライブ参加者のグッズ購入は<span class="hl">年平均 約22,000円</span>。アイドル系の購入率は<span class="hl">75.4%</span>。手元に残る一点物への支払いは、もう当たり前の行動。</p>
+          <span class="src">出典：ぴあ総研／インテージ（要再確認）</span>
         </div>
-        <p style="margin-top:14px">背景には、推し活市場<span class="hl">約4,650億円/年</span>（アイドル＋アニメ）という大きな関心がある。</p>
+      </div>
+
+      <div class="reason">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6 9.5 3h5L16 6"/></svg>
+        <div>
+          <h4>チェキ＝その場の一点物が、主収入</h4>
+          <p>チェキ1枚は<span class="hl">約1,500円</span>で、ライブアイドルの収入の柱。文化全体でも累計1億台・年<span class="hl">約1,500億円</span>。Lapsellは「動く・本人の本物の時間版チェキ」。</p>
+          <span class="src">出典：富士フイルム公式 ほか</span>
+        </div>
+      </div>
+
+      <div class="reason">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        <div>
+          <h4>推し活グッズに、年 約4万円</h4>
+          <p>推し活層が1年でグッズにかけるのは<span class="hl">平均 約4万円</span>。“好き”に払う土台は、すでにある。</p>
+          <span class="src">出典：Oshicoco 調査（要再確認）</span>
+        </div>
+      </div>
+
+      <div class="reason">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg>
+        <div>
+          <h4>買う理由の1位は「収集」</h4>
+          <p>CD購入理由の1位は<span class="hl">「収集」54.7%</span>。所有・コレクションが動機の中心。特典映像目当ての音楽ビデオも<span class="hl">562億円</span>残る。</p>
+          <span class="src">出典：CD購入理由調査（要再確認）／RIAJ</span>
+        </div>
+      </div>
+
+      <div class="reason">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.1A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        <div>
+          <h4>“素の日常”そのものへの課金も成立</h4>
+          <p>bubbleは<span class="hl">月額約500円</span>で本人の素のメッセージが届く。<span class="hl">200万人超</span>が課金、2024年売上は約80億円との見方も。素の日常への支払いは先行事例として確立。</p>
+          <span class="src">出典：bubble（DearU）報道（要再確認）</span>
+        </div>
       </div>
     </div>
   </div>
@@ -896,7 +996,7 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
 })();
 // scroll reveal
 (function(){
-  var els=document.querySelectorAll('.sec .wrap > *, .prob .row, .kimo .item, .point, .ev-grid, .tgt, .voice, .auth, .price-grid, .step, .case');
+  var els=document.querySelectorAll('.sec .wrap > *, .prob .row, .kimo .item, .point, .ev-grid, .reason, .rch, .tgt, .voice, .auth, .price-grid, .step, .case');
   els.forEach(function(e){e.classList.add('reveal');});
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
