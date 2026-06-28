@@ -192,6 +192,15 @@
   .fitem .lbl{ font-family:"Inter"; font-size:11px; letter-spacing:.16em; color:var(--blue); font-weight:700; margin-bottom:2px; }
   .fitem p{ font-size:15px; }
 
+  /* ファンへの届け方（購入導線）：3カラム ライン・アイコン（枠なし） */
+  .deliver{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:26px; }
+  .dcol .dno{ font-family:"Inter"; font-weight:900; font-size:13px; letter-spacing:.12em; color:var(--blue); margin-bottom:10px; }
+  .dcol .dic{ width:54px; height:54px; color:var(--blue); margin-bottom:14px; }
+  .dcol .dic svg{ width:54px; height:54px; }
+  .dcol h3{ font-size:18px; font-weight:800; line-height:1.5; margin-bottom:6px; }
+  .dcol p{ font-size:14.5px; }
+  @media (max-width:900px){ .deliver{ grid-template-columns:1fr; gap:26px; } }
+
   /* 課題：写真＋テキストを交互、枠なし */
   .qa{ display:grid; grid-template-columns:1fr 1fr; gap:38px; align-items:center; margin-top:14px; }
   .qa img{ border-radius:14px; }
@@ -265,6 +274,17 @@
   .bars .bl{ display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px; font-weight:600; }
   .bars .track{ height:14px; background:rgba(24,35,255,.12); border-radius:999px; overflow:hidden; }
   .bars .fill{ height:100%; background:var(--blue); border-radius:999px; }
+
+  /* 購入される理由：根拠リスト（枠なし・1文の中に数字・出典は極小） */
+  .reasons{ margin-top:6px; }
+  .reason{ display:flex; gap:16px; padding:22px 0; align-items:flex-start; }
+  .reason + .reason{ border-top:1px solid rgba(20,25,29,.12); }
+  .reason .ic{ flex:0 0 auto; width:40px; height:40px; color:var(--blue); }
+  .reason .ic svg{ width:40px; height:40px; }
+  .reason h3{ font-size:17px; font-weight:800; line-height:1.5; margin-bottom:4px; }
+  .reason p{ font-size:14.5px; }
+  .reason .src{ display:block; font-size:11px; color:#8a847c; margin-top:5px; letter-spacing:.01em; }
+  .reason .num{ color:var(--blue); font-weight:800; }
 
   /* 真贋：横ステップ（矢印）枠なし */
   .auth-flow{ display:flex; align-items:flex-start; gap:14px; margin-top:24px; flex-wrap:wrap; }
@@ -614,6 +634,42 @@
       </div>
     </section>
 
+    <!-- ファンへの届け方（購入導線）：新規集客不要・いまのファン接点に乗せる -->
+    <section class="band-ivory" id="deliver">
+      <div class="en">HOW TO REACH FANS ／ ファンへの届け方</div>
+      <h2><span class="jp">新規集客は、いりません。</span></h2>
+      <p class="lead"><span class="lead-strong">いまあるファン接点に“乗せる”だけ。</span>物販・SNS・ライブMCといった、すでにファンと触れている場所にそのまま並べれば売れます。新しい集客は不要です。</p>
+
+      <div class="deliver">
+        <div class="dcol">
+          <div class="dno">01</div>
+          <span class="dic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-3"/></svg>
+          </span>
+          <h3>物販ブースにQRを並べて置く</h3>
+          <p>グッズと一緒に、出品ページのQRコードを物販で並列に。チェキやTシャツを買う流れのまま「練習の時間」も買えます。</p>
+        </div>
+
+        <div class="dcol">
+          <div class="dno">02</div>
+          <span class="dic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4 11 13"/><path d="M22 4l-7 18-4-9-9-4z"/></svg>
+          </span>
+          <h3>SNSで告知する</h3>
+          <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。いつもの告知に1行足すだけで、フォロワーにそのまま届きます。</p>
+        </div>
+
+        <div class="dcol">
+          <div class="dno">03</div>
+          <span class="dic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </span>
+          <h3>ライブMC・特典会／FC・LINEで案内</h3>
+          <p>ライブのMCや特典会でひと声、ファンクラブやLINEで通知。目の前のファン・濃いファンに、確実に伝わります。</p>
+        </div>
+      </div>
+    </section>
+
     <!-- 4つの価値：borderless feature list（枠なし）+ イラスト -->
     <section class="band-ivory2" id="value">
       <div class="en">WHY LAPSELL</div>
@@ -724,10 +780,11 @@
       </div>
     </section>
 
-    <!-- 実績：実スクショ + チャート -->
+    <!-- 購入される理由：なぜ買われるのか（市場規模ではなく購入行動） -->
     <section class="band-ivory2" id="evidence">
-      <div class="en">EVIDENCE</div>
-      <h2><span class="jp">“素の裏側”には、<br>すでに大きな需要がある。</span></h2>
+      <div class="en">WHY FANS BUY ／ 購入される理由</div>
+      <h2><span class="jp">なぜ、買われるのか。</span></h2>
+      <p class="lead">大事なのは「市場が大きいか」ではありません。<span class="lead-strong">ファンは“一点もの・素のコンテンツ・本人とのつながり”に、すでに実際のお金を払っている。</span>Lapsellの「素の一点もの」も、同じ行動原理で買われます。</p>
 
       <div class="ev ev-wide">
         <h3>「練習動画」が、公式MVを超えて観られている。</h3>
@@ -778,22 +835,56 @@
           </div>
         </div>
 
-        <div class="chart bars">
-          <h3>ランダム×グッズ文化は、すでに巨大。</h3>
-          <p class="csub">“何が当たるか分からない”は、日本のファン文化の定番。</p>
-          <div class="bar-row">
-            <div class="bl"><span>デジタルガチャ市場</span><span>約7,000億円</span></div>
-            <div class="track"><div class="fill" style="width:100%"></div></div>
+        <div class="chart">
+          <h3>“素の一点もの”に、ファンはもう払っている。</h3>
+          <p class="csub">市場の大きさではなく、いまファンが実際にお金を出している「購入の理由」。</p>
+          <div class="reasons">
+            <!-- ライブ物販 -->
+            <div class="reason">
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+              <div>
+                <h3>現場でグッズを“所有する”行動は、もう定着している。</h3>
+                <p>ライブ参加のグッズ購入者は<span class="num">年平均 約22,000円</span>を使い、アイドル系の購入率は<span class="num">75.4%</span>。手元に残る一点ものへの支払いは、すでに当たり前の行動です。
+                  <span class="src">出典：ぴあ総研／インテージ n=916・2019年（やや古く要再確認）</span></p>
+              </div>
+            </div>
+            <!-- チェキ -->
+            <div class="reason">
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M7 6l1.5-2h7L17 6"/></svg></span>
+              <div>
+                <h3>チェキ＝“その場の一点もの”が、主収入になっている。</h3>
+                <p>チェキは1枚<span class="num">約1,500円</span>でライブアイドルの主収入。累計<span class="num">1億台</span>・年<span class="num">約1,500億円</span>と、“一点ものを所有する”文化そのものが巨大です。Lapsellは、その動く版。
+                  <span class="src">出典：富士フイルム公式 2025（相場・主収入は取材記事につき要再確認）</span></p>
+              </div>
+            </div>
+            <!-- 推し活グッズ -->
+            <div class="reason">
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.3-8.6C1.3 9.8 2.6 6.5 5.7 6c1.9-.3 3.4.7 4.3 2 .9-1.3 2.4-2.3 4.3-2 3.1.5 4.4 3.8 3 6.4C19 16.6 12 21 12 21z"/></svg></span>
+              <div>
+                <h3>推し活には、もともと年4万円が動いている。</h3>
+                <p>推し活層が1年でグッズにかける額は<span class="num">平均 約4万円</span>。応援にお金を払う習慣が、すでにファンの中にあります。
+                  <span class="src">出典：Oshicoco n=210・2024年（単一調査につき要再確認）</span></p>
+              </div>
+            </div>
+            <!-- 収集・所有 -->
+            <div class="reason">
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v16"/></svg></span>
+              <div>
+                <h3>買う動機の一位は「集めたいから」。</h3>
+                <p>CD購入理由の1位は<span class="num">「収集」54.7%</span>。音楽ビデオは<span class="num">562億円</span>規模で、特典映像・メイキングが“持っておきたい”動機になっています。
+                  <span class="src">出典：Appliv／ナイル調べ 2023（要再確認）／RIAJ 2024</span></p>
+              </div>
+            </div>
+            <!-- bubble：素の日常への課金 -->
+            <div class="reason">
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span>
+              <div>
+                <h3>“素の日常”そのものに、毎月課金が成立している。</h3>
+                <p>本人の素のメッセージを受け取れるbubbleは<span class="num">月額約500円</span>で<span class="num">200万人超</span>が課金、2024年売上<span class="num">約80億円</span>。素の日常への課金は、もう成り立っています。
+                  <span class="src">出典：bubble（DearU）2024（ウォン建て・報道差あり、要再確認）</span></p>
+              </div>
+            </div>
           </div>
-          <div class="bar-row">
-            <div class="bl"><span>トレカ国内市場(2022)</span><span>約2,349億円</span></div>
-            <div class="track"><div class="fill" style="width:34%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bl"><span>ライブBlu-ray/DVD(2024)</span><span>約558億円</span></div>
-            <div class="track"><div class="fill" style="width:8%"></div></div>
-          </div>
-          <p class="csub" style="margin-top:8px;">参考：推し活市場（アイドル＋アニメ）は年 <strong>約4,650億円</strong>（矢野経済研2023）。</p>
         </div>
       </div>
     </section>
