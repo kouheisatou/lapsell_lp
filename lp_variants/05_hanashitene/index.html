@@ -162,14 +162,17 @@
   .solution .hl{color:var(--orange)}
   .solution-img{max-width:420px;margin:30px auto 0}
 
-  /* ============ 3 KEYS (01/02/03 big orange numbers, borderless) ============ */
-  .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:56px}
-  .key{text-align:left}
+  /* ============ 3 KEYS → 3 STEP horizontal scroll ============ */
+  .keys{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;margin-top:56px}
+  .keys::-webkit-scrollbar{height:8px}
+  .keys::-webkit-scrollbar-thumb{background:rgba(240,130,0,.4);border-radius:8px}
+  .key{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;text-align:left}
+  .stepno{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;background:var(--orange);color:#fff;border-radius:999px;padding:4px 12px;margin-bottom:8px}
   .key .key-img{width:120px;height:120px;border-radius:24px;overflow:hidden;background:var(--cream-card);margin-bottom:6px}
   .key .key-img img{width:100%;height:100%;object-fit:cover}
   .key h3{margin:14px 0 8px}
   .key p{font-size:15px;color:var(--ink-soft)}
-  @media(max-width:760px){.keys{grid-template-columns:1fr;gap:36px}}
+  @media(max-width:760px){.key{width:clamp(260px,84vw,320px)}}
 
   /* ============ FLOW carousel (horizontal scroll, ref signature) ============ */
   .flow-scroll{display:flex;gap:22px;overflow-x:auto;padding:8px 24px 28px;scroll-snap-type:x mandatory;
@@ -548,23 +551,27 @@
 <!-- ===== 3 KEYS (big orange numbers, borderless) ===== -->
 <section class="pad" id="keys">
   <div class="wrap">
-    <p class="center" style="color:var(--ink-soft);margin-bottom:4px">いちばん大切な、3つの仕組み</p>
+    <p class="center" style="color:var(--ink-soft);margin-bottom:4px">出品から収益まで、たった3ステップ</p>
     <h2 class="center">完成品ではなく、“時間”を先に売る。</h2>
+    <p class="center lead" style="margin-top:12px">出品する → 撮るだけ → 収益になる。むずかしい準備はいりません。（横にスクロールできます）</p>
     <div class="keys">
       <div class="key">
-        <div class="key-img"><img src="assets/how1.png" alt="これからの時間を先に売るイメージ"></div>
-        <h3>時間を“先に”売る</h3>
-        <p>完成品ではなく、これからの練習時間そのものを出品。日時と価格を決めて並べるだけで、未来の“素”を販売できます。</p>
+        <span class="stepno">STEP 1</span>
+        <div class="key-img"><img src="assets/how1.png" alt="これからの時間を先に出品するイメージ"></div>
+        <h3>練習の時間を出品する</h3>
+        <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p>
       </div>
       <div class="key">
-        <div class="key-img"><img src="assets/how2.png" alt="中身は届くまで分からないわくわくのイメージ"></div>
-        <h3>中身は届くまで分からない</h3>
-        <p>何が映るかは、開けるまで本人にもファンにもわからない。だから封を開ける瞬間が、いつもわくわくします。期待しながら受け取る楽しさが、そのまま体験になります。</p>
+        <span class="stepno">STEP 2</span>
+        <div class="key-img"><img src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ"></div>
+        <h3>本番をスマホで撮るだけ</h3>
+        <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
       </div>
       <div class="key">
-        <div class="key-img"><img src="assets/how3.png" alt="世界に1つだけの一点もののイメージ"></div>
-        <h3>届くのは世界に1つ</h3>
-        <p>その区間を買ったファンだけが持つ、一点もののデジタルグッズ。誰とも同じにならない“自分だけの瞬間”が手に入ります。</p>
+        <span class="stepno">STEP 3</span>
+        <div class="key-img"><img src="assets/how3.png" alt="ファンに届いて収益になるイメージ"></div>
+        <h3>ファンに届いて収益になる</h3>
+        <p>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</p>
       </div>
     </div>
   </div>
