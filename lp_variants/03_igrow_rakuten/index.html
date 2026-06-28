@@ -113,15 +113,14 @@ header{
 
 /* core mechanic */
 .mech{padding:84px 0}
-.mech-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:42px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
-.mech-flow .cell{padding:34px 28px;position:relative}
-.mech-flow .cell:not(:last-child){border-right:1px solid var(--line)}
+.mech-flow{display:flex;gap:18px;margin-top:42px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px}
+.mech-flow .cell{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;padding:30px 26px;position:relative;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
 .mech-flow .n{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.1em}
 .mech-flow .h{font-size:18px;font-weight:600;margin:10px 0 8px}
 .mech-flow .b{font-size:14px;color:var(--ink-soft);font-weight:300}
 .mech-flow .ico{width:26px;height:26px;color:var(--brand);margin-bottom:6px}
 .mech-flow .how-img{width:84px;height:84px;object-fit:contain;margin-bottom:12px}
-@media(max-width:760px){.mech-flow{grid-template-columns:1fr}.mech-flow .cell:not(:last-child){border-right:none;border-bottom:1px solid var(--line)}}
+@media(max-width:760px){.mech-flow .cell{width:clamp(260px,84vw,320px)}}
 
 /* Problem */
 .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
@@ -420,22 +419,25 @@ footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)
   <div class="wrap">
     <span class="eyebrow">How it works</span>
     <h2 class="sec-title">「完成品」ではなく、「練習の時間」を先に売ります。</h2>
-    <p class="sec-lead">毎日生まれているのに、収益にならず捨てられている時間があります。Lapsellは、その時間そのものを商品にする、新しいランダムグッズの仕組みです。</p>
+    <p class="sec-lead">出品して、撮って、届くだけ。3ステップで、捨てられていた練習の時間が、世界に1つのデジタルグッズになります。（横にスクロールできます）</p>
     <div class="mech-flow">
       <div class="cell">
-        <img class="how-img" src="assets/how1.png" alt="時間を先に売るコンセプト">
-        <div class="h">時間を“先に”売る</div>
-        <div class="b">完成した動画ではなく、これから行う練習の「時間枠」を出品します。ファンは中身を知らずに購入します。</div>
+        <div class="n">STEP 1</div>
+        <img class="how-img" src="assets/how1.png" alt="練習の時間を出品するイメージ">
+        <div class="h">練習の時間を出品する</div>
+        <div class="b">これから行う練習やリハの「時間枠」を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</div>
       </div>
       <div class="cell">
-        <img class="how-img" src="assets/how2.png" alt="中身は届くまで分からないコンセプト">
-        <div class="h">中身は届くまで分からない</div>
-        <div class="b">当日スマホで撮るだけ。何が映るかは、受け取るまで分かりません。だからこそ届いた瞬間の楽しみがあります。</div>
+        <div class="n">STEP 2</div>
+        <img class="how-img" src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ">
+        <div class="h">本番をスマホで撮るだけ</div>
+        <div class="b">当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</div>
       </div>
       <div class="cell">
-        <img class="how-img" src="assets/how3.png" alt="世界に1つのコンセプト">
-        <div class="h">届くのは世界に1つ</div>
-        <div class="b">撮れた映像は、落札者だけが所有する一点もののデジタルグッズとして届きます。</div>
+        <div class="n">STEP 3</div>
+        <img class="how-img" src="assets/how3.png" alt="ファンに届いて収益になるイメージ">
+        <div class="h">ファンに届いて収益になる</div>
+        <div class="b">購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして所有されます。</div>
       </div>
     </div>
   </div>
