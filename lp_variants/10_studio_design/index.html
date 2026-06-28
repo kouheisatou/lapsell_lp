@@ -184,16 +184,17 @@ h1,h2,h3,h4,p,figure{margin:0;}
 .col img.illo{width:100%;border-radius:14px;margin-bottom:20px;}
 @media(max-width:820px){.cols,.cols.two{grid-template-columns:1fr;gap:40px;}}
 
-/* mechanic – 3 hooks, alternating image/text rows, no boxes */
-.mech-row{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center;padding:54px 0;}
-.mech-row:not(:last-child){border-bottom:1px solid var(--line);}
-.mech-row.rev .mtext{order:2;}
-.mn{font-size:clamp(40px,6vw,72px);font-weight:800;color:#e3eafc;line-height:1;letter-spacing:-.02em;}
-.mmark{width:80px;height:80px;border-radius:16px;object-fit:cover;margin-bottom:6px;box-shadow:0 10px 26px rgba(10,15,43,.18);}
-.mtext h3{font-size:clamp(21px,2.6vw,28px);font-weight:800;margin:8px 0 16px;line-height:1.45;}
-.mtext p{font-size:15.5px;color:var(--muted);}
-.mfig{display:flex;justify-content:center;}
-@media(max-width:820px){.mech-row,.mech-row.rev .mtext{grid-template-columns:1fr;order:0;}.mfig{order:-1;}}
+/* mechanic – 3 usage steps as horizontal-scroll cards (dark, matches 01-05) */
+.mech-flow{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;}
+.mech-flow::-webkit-scrollbar{height:8px;}
+.mech-flow::-webkit-scrollbar-thumb{background:rgba(10,15,43,.22);border-radius:8px;}
+.mech-card{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;display:flex;flex-direction:column;background:linear-gradient(168deg,#0d1538,#16245c);border:1px solid var(--line-d);border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(10,15,43,.22);}
+.mech-card .mimg{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;display:block;filter:brightness(.96) contrast(1.03) saturate(1.02);}
+.mech-card .mbody{padding:22px 22px 24px;}
+.stepno{display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;letter-spacing:.04em;color:#fff;background:var(--royal);border-radius:999px;padding:5px 14px;margin-bottom:14px;}
+.mech-card h3{font-size:18px;font-weight:800;color:#f4f7ff;line-height:1.5;margin-bottom:12px;}
+.mech-card p{font-size:14px;color:#d6def6;line-height:1.8;}
+@media(max-width:820px){.mech-card{width:clamp(260px,84vw,320px);}}
 
 /* flow – horizontal scroll of phone mocks */
 .flow-scroll{display:flex;gap:26px;overflow-x:auto;padding:8px 24px 30px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
@@ -570,34 +571,36 @@ h1,h2,h3,h4,p,figure{margin:0;}
     <div class="sec-head">
       <span class="label">/ Solution</span>
       <h2>完成品ではなく、<br>「これから撮る練習の時間」を先に売る。</h2>
-      <p>Lapsellの仕組みは、3つの考え方でできています。</p>
+      <p>出品から収益まで、3ステップ。（横にスクロールできます）</p>
     </div>
 
-    <div class="mech-row">
-      <div class="mtext">
-        <img class="mmark" src="assets/how1.png" alt="時間を先に売る概念のイメージ">
-        <h3>時間を“先に”売る</h3>
-        <p>完成した動画ではなく、まだ撮っていない未来の練習時間を出品します。ファンは時間枠を購入し、当日あなたはスマホで撮るだけ。撮れた映像が後から届きます。</p>
+    <div class="mech-flow">
+      <div class="mech-card">
+        <img class="mimg" src="assets/how1.png" alt="練習の時間を出品するイメージ">
+        <div class="mbody">
+          <span class="stepno">STEP 1</span>
+          <h3>練習の時間を出品する</h3>
+          <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p>
+        </div>
       </div>
-      <figure class="mfig"><img src="assets/appeal1.png" style="border-radius:16px;" alt="未来の練習時間を先に売る仕組みのイラスト"></figure>
-    </div>
 
-    <div class="mech-row rev">
-      <div class="mtext">
-        <img class="mmark" src="assets/how2.png" alt="中身は届くまで分からない概念のイメージ">
-        <h3>中身は、届くまで分からない</h3>
-        <p>何が映るかは、受け取るまで分かりません。思いがけず写る面白い瞬間も、神がかった一発も。届くのは中身の見えない一本の動画。だからファンは「何が届くか」にワクワクします。</p>
+      <div class="mech-card">
+        <img class="mimg" src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ">
+        <div class="mbody">
+          <span class="stepno">STEP 2</span>
+          <h3>本番をスマホで撮るだけ</h3>
+          <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
+        </div>
       </div>
-      <figure class="mfig"><img src="assets/how2.png" style="border-radius:16px;max-width:300px;" alt="中身は届くまで分からない、一点ものの動画クリップのイメージ"></figure>
-    </div>
 
-    <div class="mech-row">
-      <div class="mtext">
-        <img class="mmark" src="assets/how3.png" alt="世界に1つの概念のイメージ">
-        <h3>届くのは、世界に1つ</h3>
-        <p>同じ瞬間は二度と撮れません。落札者だけが持つ、一点もののデジタルグッズとして届きます。コピー対策の電子透かしで、所有が証明されます。</p>
+      <div class="mech-card">
+        <img class="mimg" src="assets/how3.png" alt="ファンに届いて収益になるイメージ">
+        <div class="mbody">
+          <span class="stepno">STEP 3</span>
+          <h3>ファンに届いて収益になる</h3>
+          <p>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</p>
+        </div>
       </div>
-      <figure class="mfig"><img src="assets/appeal2.png" style="border-radius:16px;" alt="世界に1つのデジタルグッズとして届くイラスト"></figure>
     </div>
   </div>
 </section>
