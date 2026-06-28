@@ -177,8 +177,9 @@ header{
 
 /* ---------- core mechanic (APPROACH-style) ---------- */
 .mechanic{background:var(--graybg)}
-.mech-three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:42px}
-.mech-card{background:#fff;border-radius:16px;padding:26px;position:relative}
+.mech-three{display:flex;gap:22px;margin-bottom:42px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px}
+.mech-card{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;background:#fff;border-radius:16px;padding:26px;position:relative}
+.mech-card .stepno{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;background:var(--blue);color:#fff;border-radius:999px;padding:4px 12px;margin-bottom:4px}
 .mech-card .howimg{
   width:84px;height:84px;border-radius:18px;object-fit:cover;display:block;
   background:var(--lightblue);
@@ -603,23 +604,26 @@ footer{background:#fff;padding:54px 0 0}
   <div class="wrap">
     <span class="eyebrow">HOW IT WORKS</span>
     <h2 class="sec-title">Lapsellは「練習の“時間”を売る」仕組みです</h2>
-    <p class="sec-lead">完成品ではなく、これから生まれる練習の“時間”を先に売る。中身は届くまで分からない、世界に1つのデジタルグッズになります。</p>
+    <p class="sec-lead">出品して、撮って、届くだけ。3ステップで、これから生まれる練習の“時間”が、世界に1つのデジタルグッズになります。（横にスクロールできます）</p>
 
     <div class="mech-three">
       <div class="mech-card">
-        <img class="howimg" src="assets/how1.png" alt="練習の時間を先に売るイメージ">
-        <h3>時間を“先に”売る</h3>
-        <p>出来上がった作品ではなく、これから過ごす練習の時間枠を先に出品。撮る前に売れるから、撮影のハードルがありません。</p>
+        <span class="stepno">STEP 1</span>
+        <img class="howimg" src="assets/how1.png" alt="練習の時間を出品するイメージ">
+        <h3>練習の時間を出品する</h3>
+        <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品。完成品も在庫もいりません。</p>
       </div>
       <div class="mech-card">
-        <img class="howimg" src="assets/how2.png" alt="中身は届くまで分からない＝封をされて届くイメージ">
-        <h3>中身は、届くまで分からない</h3>
-        <p>その時間に何が映るかは、封を開けるまで分かりません。何が届くか分からないワクワクが、再購入を生みます。</p>
+        <span class="stepno">STEP 2</span>
+        <img class="howimg" src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ">
+        <h3>本番をスマホで撮るだけ</h3>
+        <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
       </div>
       <div class="mech-card">
-        <img class="howimg" src="assets/how3.png" alt="届くのは世界に1つのデジタルグッズというイメージ">
-        <h3>届くのは世界に1つ</h3>
-        <p>落札者だけが持つ一点もの。同じ瞬間は二つとなく、「自分だけが所有している」という体験が価値になります。</p>
+        <span class="stepno">STEP 3</span>
+        <img class="howimg" src="assets/how3.png" alt="ファンに届いて収益になるイメージ">
+        <h3>ファンに届いて収益になる</h3>
+        <p>購入したファンに動画が届き、そのまま収益に。1つずつ違う一点ものだから、特別な宝物になります。</p>
       </div>
     </div>
 
