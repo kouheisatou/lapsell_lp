@@ -124,12 +124,16 @@ section{position:relative;}
 .about-card .lead{font-size:clamp(19px,2.1vw,25px);font-weight:800;line-height:1.6;}
 .about-card .lead .mk{background:linear-gradient(transparent 60%, #ffe08a 60%);padding:0 .1em;}
 .about-card p{font-size:15px;color:#46514a;margin:14px 0 0;}
-.about-three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.about-pt{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;}
+.about-three{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;}
+.about-three::-webkit-scrollbar{height:7px;}
+.about-three::-webkit-scrollbar-thumb{background:var(--ygreen);border-radius:8px;}
+.about-three::-webkit-scrollbar-track{background:transparent;}
+.about-pt{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 16px;}
+.about-pt .stepno{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;background:var(--green);color:#fff;border-radius:999px;padding:4px 12px;margin-bottom:8px;}
 .about-pt .how-ic{width:80px;height:80px;object-fit:contain;display:block;margin:0 0 8px;}
 .about-pt b{display:block;font-size:15px;margin:6px 0 4px;}
 .about-pt span{font-size:12.5px;color:var(--muted);line-height:1.6;}
-@media(max-width:820px){.about-card{grid-template-columns:1fr;padding:30px 24px;}}
+@media(max-width:820px){.about-card{grid-template-columns:1fr;padding:30px 24px;}.about-pt{width:clamp(260px,84vw,320px);}}
 
 /* ===== bilingual function block (signature GunMaaS pattern) ===== */
 .func{background:var(--grey);}
@@ -491,7 +495,7 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
   <div class="wrap">
     <p class="kicker"><span class="line"></span>About Lapsell<span class="line"></span></p>
     <h2 class="sec-title"><span class="hl">Lapsell</span>とは？</h2>
-    <p class="sec-lead">「練習の“時間”」を売る、新しい形のランダムグッズ市場です。加工なしの“日常・裏側”を、中身が届くまで分からないデジタルグッズとして売買できます。</p>
+    <p class="sec-lead">「練習の“時間”」を売る、新しい形のグッズ市場です。出品→撮影→収益化の3ステップだけで、加工なしの“日常・裏側”が世界に1つのデジタルグッズになります。（横にスクロールできます）</p>
 
     <div class="about-card">
       <div>
@@ -499,9 +503,9 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
         <p>ファンは中身を知らずに「時間枠」を購入。出品者は当日スマホで撮るだけ。撮れた映像は、開けるまで何が映るか分からない“ランダムグッズ”として、落札者だけに届きます。これまで収益にならず捨てていた時間が、ファンとの新しい接点になります。</p>
       </div>
       <div class="about-three">
-        <div class="about-pt"><img class="how-ic" src="assets/how1.png" alt="練習の時間を先に売るイメージ"><b>時間を“先に”売る</b><span>完成品ではなく、未来の練習時間そのものを出品します。</span></div>
-        <div class="about-pt"><img class="how-ic" src="assets/how2.png" alt="封をされて届くイメージ"><b>中身は届くまで分からない</b><span>何が映るかは開けるまで不明。それも受け取る楽しみのひとつです。</span></div>
-        <div class="about-pt"><img class="how-ic" src="assets/how3.png" alt="世界に1つの一点ものイメージ"><b>届くのは世界に1つ</b><span>落札者だけが持つ、一点もののデジタルグッズです。</span></div>
+        <div class="about-pt"><span class="stepno">STEP 1</span><img class="how-ic" src="assets/how1.png" alt="練習の時間を出品するイメージ"><b>練習の時間を出品する</b><span>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</span></div>
+        <div class="about-pt"><span class="stepno">STEP 2</span><img class="how-ic" src="assets/how2.png" alt="本番をスマホで撮るイメージ"><b>本番をスマホで撮るだけ</b><span>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</span></div>
+        <div class="about-pt"><span class="stepno">STEP 3</span><img class="how-ic" src="assets/how3.png" alt="ファンに届いて収益になるイメージ"><b>ファンに届いて収益になる</b><span>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</span></div>
       </div>
     </div>
   </div>
