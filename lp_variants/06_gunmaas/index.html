@@ -284,10 +284,21 @@ section{position:relative;}
 .legend .li{display:flex;align-items:center;gap:8px;margin:5px 0;}
 .legend .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto;}
 .legend b{color:var(--ink);}
-.bars .bar-row{display:grid;grid-template-columns:120px 1fr 84px;align-items:center;gap:12px;margin:11px 0;font-size:12.5px;}
-.bars .track{height:18px;background:#eef3ea;border-radius:9px;overflow:hidden;}
-.bars .fill{height:100%;border-radius:9px;}
-.bars .amt{text-align:right;font-weight:800;color:var(--green-d);}
+/* purchase-reason list (borderless: image + natural sentence, number inline) */
+.reasons{margin-top:36px;display:flex;flex-direction:column;gap:34px;}
+.reason{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;}
+.reason:nth-child(even){grid-template-columns:1fr 300px;}
+.reason:nth-child(even) .reason-pic{order:2;}
+.reason-pic{border-radius:16px;overflow:hidden;background:var(--tile-l);}
+.reason-pic img{width:100%;height:auto;display:block;}
+.reason-body h3{font-size:16.5px;font-weight:800;margin:0 0 8px;color:var(--ink);}
+.reason-body p{font-size:14.5px;line-height:1.85;color:#46514a;margin:0;}
+.reason-body p em{font-style:normal;font-weight:800;color:var(--green-d);}
+.reason-body .src{display:block;font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+@media(max-width:760px){
+  .reason,.reason:nth-child(even){grid-template-columns:1fr;gap:14px;}
+  .reason:nth-child(even) .reason-pic{order:0;}
+}
 
 /* ===== deliver to fans (purchase channel) ===== */
 .deliver{background:#fff;}
@@ -297,18 +308,8 @@ section{position:relative;}
 .dlv .ic{width:30px;height:30px;color:var(--green);flex:0 0 auto;}
 .dlv h3{font-size:17px;font-weight:800;margin:14px 0 8px;}
 .dlv p{font-size:13.5px;color:#46514a;margin:0;}
-.dlv .figbox{margin-top:16px;display:flex;align-items:center;gap:14px;min-height:96px;}
-/* mini QR (css grid squares, decorative) */
-.qr{width:84px;height:84px;flex:0 0 auto;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;padding:7px;background:#fff;border:2px solid var(--green-d);border-radius:10px;}
-.qr i{background:var(--green-d);border-radius:1px;}
-.qr i.o{background:transparent;}
-.dlv .figcap{font-size:12px;color:var(--muted);line-height:1.6;}
-.dlv .figcap b{color:var(--ink);display:block;font-size:12.5px;}
-/* mini sns / fanclub diagram */
-.minidia{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
-.minidia .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--green-d);background:var(--grey);border-radius:30px;padding:7px 13px;}
-.minidia .chip svg{width:15px;height:15px;flex:0 0 auto;}
-.minidia .arr{color:var(--green);font-weight:800;}
+.dlv .dlv-pic{margin-top:16px;border-radius:14px;overflow:hidden;background:var(--tile-l);}
+.dlv .dlv-pic img{width:100%;height:auto;display:block;}
 .dlv-note{margin-top:34px;font-size:13.5px;color:#46514a;display:flex;align-items:flex-start;gap:10px;}
 .dlv-note svg{flex:0 0 auto;margin-top:3px;color:var(--green);}
 .dlv-note b{color:var(--green-d);}
@@ -806,61 +807,54 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
       </div>
     </div>
 
-    <!-- purchase reasons: fans already pay for live goods / cheki / oshikatsu -->
-    <div class="evi-two">
-      <div class="chart-card">
-        <h4>ファンは「現場で所有する一点もの」に、すでに払っている</h4>
-        <p class="cl">ライブの物販・チェキ・推し活グッズ。手元に残る“一点もの”への支払いは、もう当たり前の行動です。</p>
-        <div class="bars">
-          <div class="bar-row"><span>ライブ物販</span><span class="track"><span class="fill" style="width:55%;background:#089942"></span></span><span class="amt">年 約2.2万円</span></div>
-          <div class="bar-row"><span>推し活グッズ</span><span class="track"><span class="fill" style="width:100%;background:#3fb56e"></span></span><span class="amt">年 約4万円</span></div>
-          <div class="bar-row"><span>チェキ 1枚</span><span class="track"><span class="fill" style="width:3.8%;background:#CDC58B"></span></span><span class="amt">約1,500円</span></div>
+    <!-- purchase reasons: fans already pay (natural sentences, number inline) -->
+    <div class="reasons">
+      <div class="reason">
+        <div class="reason-pic"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買うファン"></div>
+        <div class="reason-body">
+          <h3>ライブ物販に払っている額</h3>
+          <p>ライブに参加するファンは、グッズの購入に1年で平均 <em>約22,000円</em> を使っています。とくにアイドル系では参加者の <em>75.4%</em> が物販を購入しており、手元に残るものへの支払いはすでに当たり前の行動です。<span class="src">出典：ぴあ総研（要再確認）</span></p>
         </div>
-        <p class="evi-mini">ライブ参加者のグッズ購入＝年平均 約22,000円（アイドル系の購入率75.4%）／推し活グッズ＝年 平均 約4万円／チェキ＝1枚 約1,500円。出典：ぴあ総研、Oshicoco ほか（要再確認）。</p>
       </div>
-      <div class="chart-card">
-        <h4>「素の日常・本人とのつながり」にも、もう課金されている</h4>
-        <p class="cl">本人の“素のメッセージ”を受け取れるファン課金サービスには、世界で多くの人が払っています。</p>
-        <div class="donut-wrap">
-          <svg class="donut" width="142" height="142" viewBox="0 0 42 42" aria-label="月額500円・200万人課金のイメージ">
-            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3ea" stroke-width="7"/>
-            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#089942" stroke-width="7" stroke-dasharray="88 12" stroke-dashoffset="25" stroke-linecap="round"/>
-            <text x="21" y="19.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#089942">月500円</text>
-            <text x="21" y="26" text-anchor="middle" font-size="3" fill="#6f7a6f">で“素の日常”に課金</text>
-          </svg>
-          <div class="legend">
-            <div class="li"><span class="sw" style="background:#089942"></span><b>世界 200万人超</b>が課金</div>
-            <div class="li"><span class="sw" style="background:#3fb56e"></span><b>2024年売上 約80億円</b>規模との見方も</div>
-            <div class="li" style="color:var(--muted)">＝“素の日常”そのものに払う行動が先行</div>
-          </div>
+
+      <div class="reason">
+        <div class="reason-pic"><img src="assets/reason_cheki.png" alt="特典会で撮影したチェキを手にするイメージ"></div>
+        <div class="reason-body">
+          <h3>チェキが生む一点ものの売上</h3>
+          <p>特典会で撮るチェキは1枚 <em>約1,500円</em> で、ライブアイドルの主な収入のひとつになっています。チェキのカメラは累計 <em>1億台</em> 超を出荷し、関連市場は年 <em>約1,500億円</em> 規模。その場かぎりの一点ものに、ファンは日常的にお金を払っています。<span class="src">出典：富士フイルム</span></p>
         </div>
-        <p class="evi-mini">bubble（DearU）：月額 約500円／世界200万人超が課金／2024年売上 約80億円との見方も（ウォン建て・報道差あり、要再確認）。</p>
+      </div>
+
+      <div class="reason">
+        <div class="reason-pic"><img src="assets/reason_oshikatsu.png" alt="推し活グッズに囲まれたファンの部屋のイメージ"></div>
+        <div class="reason-body">
+          <h3>推し活グッズへの年間支出</h3>
+          <p>推し活をするファンがグッズに使う金額は、1年で平均 <em>約4万円</em> にのぼります。「好きな相手にまつわるものを手元に置きたい」という欲求は、すでに大きな支出として現れています。<span class="src">出典：Oshicoco（要再確認）</span></p>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="reason-pic"><img src="assets/reason_cd.png" alt="集めて並べたCD・コレクションのイメージ"></div>
+        <div class="reason-body">
+          <h3>所有・収集の文化</h3>
+          <p>完成品であるCDを買うときですら、購入理由の1位は「収集のため」で <em>54.7%</em> を占めます。特典映像やメイキングを含む音楽ビデオの国内生産も年 <em>562億円</em> 規模あり、「集めて所有する」こと自体が購入の中心的な動機になっています。<span class="src">CD購入理由（要再確認）／音楽ビデオ：RIAJ 2024</span></p>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="reason-pic"><img src="assets/reason_bubble.png" alt="本人から届く素のメッセージを受け取るスマホ画面のイメージ"></div>
+        <div class="reason-body">
+          <h3>本人とのつながりに払う額</h3>
+          <p>本人の“素のメッセージ”が届くファン課金サービスbubbleには、月 <em>約500円</em> を <em>200万人超</em> が払っています。2024年の売上は <em>約80億円</em> 規模との見方もあり、加工されていない本人とのつながりそのものに、すでに多くの人が課金しています。<span class="src">bubble（DearU）／ウォン建て・報道差あり（要再確認）</span></p>
+        </div>
       </div>
     </div>
 
-    <!-- collection / ownership is the buying motive + future value(milk) -->
-    <div class="evi-two">
-      <div class="chart-card">
-        <h4>買う理由の中心は「集める・所有する」こと</h4>
-        <p class="cl">完成品を買うときですら、購入理由のトップは“収集（コレクション）”です。一点ものなら、その動機はさらに強く働きます。</p>
-        <div class="donut-wrap">
-          <svg class="donut" width="142" height="142" viewBox="0 0 42 42" aria-label="CD購入理由1位は収集 54.7%">
-            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3ea" stroke-width="7"/>
-            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#089942" stroke-width="7" stroke-dasharray="54.7 45.3" stroke-dashoffset="25" stroke-linecap="round"/>
-            <text x="21" y="20" text-anchor="middle" font-size="7.5" font-weight="800" fill="#089942">54.7%</text>
-            <text x="21" y="26.5" text-anchor="middle" font-size="3" fill="#6f7a6f">が「収集」目的</text>
-          </svg>
-          <div class="legend">
-            <div class="li"><span class="sw" style="background:#089942"></span><b>CD購入理由1位「収集」</b> 54.7%</div>
-            <div class="li" style="margin-top:10px;"><span class="sw" style="background:#3fb56e"></span><b>音楽ビデオ 562億円</b></div>
-            <div class="li" style="color:var(--muted)">特典映像・メイキングが購入動機に</div>
-          </div>
-        </div>
-        <p class="evi-mini">CD購入理由1位「収集のため」54.7%（要再確認）／音楽ビデオ 国内生産 562億円・特典映像が所有需要を支える（RIAJ 2024）。</p>
-      </div>
+    <!-- future value (milk) — real screenshot kept (horizontal, full width) -->
+    <div style="margin-top:34px;">
       <div class="evi-block">
         <h3>下積みの“今”だから、将来の価値を見込んで買われる</h3>
-        <p class="sub">M!LK「イイじゃん」は4,175万回視聴、第76回NHK紅白歌合戦の歌唱曲に。無名の頃の一点ものは、「自分が育てた」物語ごと、ブレイクとともに意味を増します。</p>
+        <p class="sub">M!LK「イイじゃん」は4,175万回視聴、第76回NHK紅白歌合戦の歌唱曲になりました。無名の頃の一点ものは、「自分が育てた」という物語ごと、ブレイクとともに意味を増していきます。</p>
         <div class="evi-shot"><img src="assets/evidence/milk_mv.png" alt="M!LK イイじゃん 4,175万回視聴・第76回NHK紅白歌合戦歌唱曲"></div>
         <p class="evi-mini">出典：YouTube 公開再生数（実画面）。</p>
       </div>
@@ -893,18 +887,7 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
         </div>
         <h3>ライブ物販ブースで一緒に売る</h3>
         <p>物販テーブルにQRコードを並べて置くだけ。チェキやグッズを買う流れのまま、その場で時間枠が売れます。</p>
-        <div class="figbox">
-          <div class="qr" aria-hidden="true">
-            <i></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i>
-            <i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i></i>
-            <i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i><i></i>
-            <i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i>
-            <i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i>
-            <i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i>
-            <i></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i>
-          </div>
-          <p class="figcap"><b>QRを置くだけ</b>読み取り→出品ページへ。物販と同じ導線で購入。</p>
-        </div>
+        <div class="dlv-pic"><img src="assets/deliver_qr.png" alt="ライブ物販ブースにQRコードを並べて置き、その場で時間枠を販売する様子"></div>
       </div>
 
       <!-- 2: SNS announce -->
@@ -915,16 +898,7 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
         </div>
         <h3>SNSで告知する</h3>
         <p>プロフィールやストーリーに出品リンクを置くだけ。フォロワーがそのままタップして購入できます。</p>
-        <div class="figbox">
-          <div class="minidia" aria-hidden="true">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>プロフィール</span>
-            <span class="arr">→</span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>出品リンク</span>
-            <span class="arr">→</span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>購入</span>
-          </div>
-          <p class="figcap"><b>ストーリー・プロフ</b>に貼るだけで届く。</p>
-        </div>
+        <div class="dlv-pic"><img src="assets/deliver_sns.png" alt="X・Instagramのプロフィールやストーリーに出品リンクを置いて告知する様子"></div>
       </div>
 
       <!-- 3: MC / fanclub / LINE -->
@@ -935,13 +909,7 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
         </div>
         <h3>MC・特典会・ファンクラブで案内する</h3>
         <p>ライブのMCや特典会でひと言。ファンクラブやLINEの通知に乗せれば、来てくれている人へ直接届きます。</p>
-        <div class="figbox">
-          <div class="minidia" aria-hidden="true">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>ライブMC</span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/></svg>FC・LINE通知</span>
-          </div>
-          <p class="figcap"><b>来ている人へ直接</b>ひと言・通知で案内。</p>
-        </div>
+        <div class="dlv-pic"><img src="assets/deliver_mc.png" alt="ライブのMCや特典会、ファンクラブ・LINE通知で出品を案内する様子"></div>
       </div>
     </div>
 
