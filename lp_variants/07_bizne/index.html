@@ -312,14 +312,15 @@ svg{display:block;}
 .bar-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--blue-l),var(--blue));}
 .bar-fill.y{background:linear-gradient(90deg,var(--yellow),var(--yellow-d));}
 /* purchase-reason facts (borderless: image + natural sentence) */
-.reasonfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 30px;margin-bottom:34px;}
-.rf{display:flex;flex-direction:column;gap:12px;}
-.rf-img{width:100%;height:auto;border-radius:10px;}
+/* purchase-reason cards: intentional internal horizontal scroller */
+.reasonfacts{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:4px 2px 16px;margin-bottom:30px;}
+.rf{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px;}
+.rf-img{width:100%;aspect-ratio:4/3;object-fit:cover;height:auto;border-radius:10px;}
 .rf .donut{margin:0;}
 .rf-ttl{font-size:14.5px;font-weight:900;color:var(--navy);line-height:1.5;}
 .rf-mean{font-size:13px;color:#4b535a;line-height:1.85;}
 .rf-mean em{font-style:normal;font-weight:900;color:var(--blue-d);}
-.rf-src{font-size:11px;color:var(--muted);margin-top:2px;}
+.rf-src{font-size:11px;color:var(--muted);margin-top:auto;}
 
 /* ---------- deliver (how to reach fans / purchase route) ---------- */
 .deliver{background:var(--feat);}
@@ -432,7 +433,6 @@ svg{display:block;}
   .intro-diagram{grid-template-columns:1fr;}
   .idg-arrow{transform:rotate(90deg);}
   .auth-grid,.price-grid,.ev-lead-card,.ev-grid{grid-template-columns:1fr;}
-  .reasonfacts{grid-template-columns:1fr 1fr;}
   .deliver-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto;}
   .tgt-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto;}
   .final-in{grid-template-columns:1fr;text-align:center;}
@@ -450,7 +450,6 @@ svg{display:block;}
   .sec{padding:54px 0;}
   .ev-short{grid-template-columns:1fr;}
   .ev-short .vbox{max-width:200px;margin:0 auto;}
-  .reasonfacts{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -866,19 +865,6 @@ svg{display:block;}
         <p class="rf-mean">本人の“素の日常”が届くメッセージサービスには、世界で<em>200万人</em>を超える人が月<em>500円</em>ほどを払い、2024年の売上は約<em>80億円</em>でした。飾らない日常そのものに、すでにお金が払われています。</p>
         <p class="rf-src">出典：bubble（DearU・要再確認）</p>
       </div>
-      <div class="rf">
-        <svg class="donut" viewBox="0 0 36 36" role="img" aria-label="推しの新しい一面が見えるのは嬉しいと答えた人 75.3%">
-          <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e6ecf2" stroke-width="5"></circle>
-          <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1b75b2" stroke-width="5"
-            stroke-dasharray="75.3 24.7" stroke-dashoffset="25" stroke-linecap="round"
-            transform="rotate(-90 18 18)"></circle>
-          <text class="donut-center" x="18" y="17" text-anchor="middle" font-size="7" font-weight="900" fill="#10324c">75.3%</text>
-          <text x="18" y="23" text-anchor="middle" font-size="2.6" fill="#6f7680">が嬉しいと回答</text>
-        </svg>
-        <h3 class="rf-ttl">素・裏側を見たいという気持ち</h3>
-        <p class="rf-mean">「“推し”の新しい一面が見えるのは嬉しい」と答えた人は<em>75.3%</em>。飾らない素や裏側を見たいという気持ちは、はっきりと存在しています。</p>
-        <p class="rf-src">出典：ネオマーケティング（要再確認）</p>
-      </div>
     </div>
 
     <div class="ev-grid">
@@ -909,6 +895,24 @@ svg{display:block;}
         <div class="ev-short">
           <div class="vbox"><img src="assets/evidence/seventeen_practice.png" alt="SEVENTEEN 練習風景 89万回再生"></div>
           <p style="font-size:13px;color:#4b535a;">「練習風景だけで笑える 10年目アイドル」は<b style="color:var(--blue-d)">895,794回再生・高評価2万超</b>。素の瞬間ほど、ファンは広めたくなります。</p>
+        </div>
+      </div>
+
+      <div class="ev-cell">
+        <h4>素・裏側を見たいという気持ちは<span class="blue">確かにある</span></h4>
+        <p class="sub">「“推し”の新しい一面が見えるのは嬉しい」と答えた人</p>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 36 36" role="img" aria-label="推しの新しい一面が見えるのは嬉しいと答えた人 75.3%">
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e6ecf2" stroke-width="5"></circle>
+            <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1b75b2" stroke-width="5"
+              stroke-dasharray="75.3 24.7" stroke-dashoffset="25" stroke-linecap="round"
+              transform="rotate(-90 18 18)"></circle>
+            <text class="donut-center" x="18" y="17" text-anchor="middle" font-size="7" font-weight="900" fill="#10324c">75.3%</text>
+            <text x="18" y="23" text-anchor="middle" font-size="2.6" fill="#6f7680">が嬉しいと回答</text>
+          </svg>
+          <div class="donut-legend">
+            <p style="font-size:13px;color:#4b535a;line-height:1.85;">飾らない素や裏側を見たいという気持ちは、はっきりと存在しています。<br><span style="font-size:11px;color:var(--muted);">出典：ネオマーケティング（要再確認）</span></p>
+          </div>
         </div>
       </div>
     </div>

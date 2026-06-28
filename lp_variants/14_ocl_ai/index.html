@@ -229,16 +229,18 @@ section{padding:78px 0}
 @media(max-width:880px){.charts{grid-template-columns:1fr;gap:40px}}
 
 /* purchase reasons — borderless list, with supporting image */
-.reasons{display:grid;grid-template-columns:1fr 1fr;gap:38px 48px;margin-top:50px}
-.reason{display:flex;flex-direction:column;gap:14px}
-.reason .rimg{width:100%;height:auto;border-radius:14px;display:block}
-.reason h3{font-size:17px;font-weight:800;color:var(--ink);line-height:1.5;margin-bottom:5px}
+.reasons{display:flex;gap:24px;margin-top:50px;overflow-x:auto;padding:6px 4px 22px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.reason{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.reason .rimg{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;display:block}
+.reason h3{font-size:17px;font-weight:800;color:var(--ink);line-height:1.5;margin-bottom:2px}
 .reason h3 .em{color:var(--blue)}
 .reason em{font-style:normal;font-weight:800;color:var(--blue-dark)}
 .reason p{font-size:14px;color:var(--ink-soft)}
-.reason .src{font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.6}
-.reason.lead-pos{grid-column:1 / -1}
-@media(max-width:880px){.reasons{grid-template-columns:1fr;gap:30px}}
+.reason .src{font-size:11.5px;color:#94a3b8;margin-top:auto;padding-top:6px;line-height:1.6}
+.reasons-note{margin-top:8px;padding-top:22px;border-top:1px solid var(--line)}
+.reasons-note h3{font-size:19px;font-weight:800;color:var(--blue-dark);line-height:1.5;margin-bottom:8px}
+.reasons-note p{font-size:14.5px;color:var(--ink-soft);max-width:720px}
+.reasons-note .src{font-size:11.5px;color:#94a3b8;margin-top:8px}
 
 /* authenticity diagram */
 .auth-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;margin-top:40px}
@@ -802,11 +804,12 @@ footer{background:var(--bg);padding:54px 0 40px}
         <p>本人の素の日常メッセージが届くアプリ「bubble」は、月額 <em>約500円</em> で世界 <em>200万人</em> 以上が課金し、2024年の売上は <em>約80億円</em> との見方もあります。「素の瞬間」や「本人とのつながり」にお金を払う行動は、先行事例としてすでに確立しています。</p>
         <p class="src">出典：bubble（DearU）公開情報。売上はウォン建て・報道差あり（要再確認）</p>
       </div>
-      <div class="reason lead-pos">
-        <h3>Lapsellの立ち位置</h3>
-        <p>「一点もの」「素のコンテンツ」「本人とのつながり」——ファンがこれまで実際にお金を払ってきた3つを、同時に満たすのがLapsellの“封をされた練習の時間”です。</p>
-        <p class="src">上記の購入行動を踏まえた、Lapsellのポジション</p>
-      </div>
+    </div>
+
+    <div class="reasons-note">
+      <h3>Lapsellの立ち位置</h3>
+      <p>「一点もの」「素のコンテンツ」「本人とのつながり」——ファンがこれまで実際にお金を払ってきた3つを、同時に満たすのがLapsellの“封をされた練習の時間”です。</p>
+      <p class="src">上記の購入行動を踏まえた、Lapsellのポジション</p>
     </div>
   </div>
 </section>

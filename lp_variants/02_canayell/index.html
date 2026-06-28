@@ -298,19 +298,25 @@ header{
 .bar-it .bl{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:6px}
 .bar-track{height:16px;background:#EEF2F6;border-radius:9px;overflow:hidden}
 .bar-fill{height:100%;border-radius:9px;background:var(--grad)}
-/* purchase-reason list (borderless, natural sentences, per-item image) */
-.reasons{max-width:880px;margin:0 auto;display:flex;flex-direction:column}
-.reason{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line)}
-.reason:last-child{border-bottom:none}
-.reason:nth-child(even){direction:rtl}
-.reason:nth-child(even)>*{direction:ltr}
-.reason .rimg{border-radius:16px;overflow:hidden;width:200px}
-.reason .rimg img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover}
-.reason .rtxt .rlabel{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.02em;margin-bottom:7px}
-.reason .rtxt .rlabel .icn{width:18px;height:18px}
-.reason .rtxt p.rbody{font-size:15px;font-weight:500;line-height:1.9;color:#2c3744;margin-bottom:6px}
+/* purchase-reason cards (horizontal scroller: title + image + desc + source) */
+.reasons{
+  display:flex;gap:20px;overflow-x:auto;
+  padding:8px 4px 22px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+}
+.reasons::-webkit-scrollbar{height:7px}
+.reasons::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
+.reason{
+  flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:13px;
+}
+.reason .rlabel{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--ink);line-height:1.5}
+.reason .rlabel .icn{width:20px;height:20px;color:var(--blue);flex:none}
+.reason .rimg{border-radius:16px;overflow:hidden;width:100%}
+.reason .rimg img{width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover}
+.reason .rtxt p.rbody{font-size:14px;font-weight:500;line-height:1.85;color:#2c3744;margin-bottom:8px}
 .reason .rtxt p.rbody em{font-style:normal;font-weight:700;color:var(--blue)}
-.reason .src{font-size:12px;color:var(--muted);line-height:1.6}
+.reason .src{font-size:11.5px;color:var(--muted);line-height:1.6}
 .proof-short{display:grid;grid-template-columns:236px 1fr;gap:30px;align-items:center;max-width:780px;margin:0 auto}
 .proof-short .ph{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .proof-short .ph img{width:100%;height:auto}
@@ -445,9 +451,6 @@ footer{background:#fff;padding:54px 0 0}
   .case-ba .arrow .icn{transform:rotate(90deg)}
   .proof-short{grid-template-columns:1fr;max-width:420px}
   .proof-short .ph{max-width:236px;margin:0 auto}
-  .reason{grid-template-columns:1fr;gap:16px}
-  .reason:nth-child(even){direction:ltr}
-  .reason .rimg{width:100%;max-width:320px}
   .reach-grid{grid-template-columns:1fr}
   .sec-title,.final h2{font-size:27px}
   section{padding:62px 0}
@@ -880,50 +883,50 @@ footer{background:#fff;padding:54px 0 0}
 
     <div class="proof-block">
       <h3 class="proof-h">ファンが、実際にお金を払っているもの</h3>
-      <p class="proof-sub">完成品やランダム性が理由ではありません。「手元に残る一点もの」「素の日常」「本人の本物の時間」——その所有に、ファンはすでにお金を払い続けています。</p>
+      <p class="proof-sub">完成品やランダム性が理由ではありません。「手元に残る一点もの」「素の日常」「本人の本物の時間」——その所有に、ファンはすでにお金を払い続けています。（横にスクロールできます）</p>
 
       <div class="reasons">
 
         <div class="reason">
+          <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7V6a3 3 0 013-3h6a3 3 0 013 3v1M4 7h16l-1 13a1 1 0 01-1 1H6a1 1 0 01-1-1z"/></svg>ライブ物販を買う割合と金額</div>
           <div class="rimg"><img src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファン"></div>
           <div class="rtxt">
-            <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7V6a3 3 0 013-3h6a3 3 0 013 3v1M4 7h16l-1 13a1 1 0 01-1 1H6a1 1 0 01-1-1z"/></svg>ライブ物販を買う割合と金額</div>
             <p class="rbody">ライブ物販を買うファンは、1年で平均<em>2万円ほど</em>をグッズに使っています。アイドル系のライブでは購入率が<em>75.4%</em>にのぼり、現場でグッズを手に入れて“持ち帰る”行動は、すでに当たり前のものになっています。</p>
             <p class="src">出典：ぴあ総研（インテージ委託）n=916／2019年・やや古いため要再確認</p>
           </div>
         </div>
 
         <div class="reason">
+          <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M3 9h3"/></svg>チェキという“一点もの文化”</div>
           <div class="rimg"><img src="assets/reason_cheki.png" alt="その場でしか撮れない一点もののチェキを手にするファン"></div>
           <div class="rtxt">
-            <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M3 9h3"/></svg>チェキという“一点もの文化”</div>
             <p class="rbody">ライブアイドルの主な収入を支えているチェキは、<em>1枚およそ1,500円</em>。その場でしか撮れない一枚を手元に残す文化は、チェキカメラの累計出荷が<em>1億台</em>を超え、年間<em>約1,500億円</em>の市場になるほど根づいています。Lapsellは、いわば「動く・本人の本物の時間版チェキ」です。</p>
             <p class="src">出典：富士フイルム公式 2025／日経クロストレンド 2025・要再確認</p>
           </div>
         </div>
 
         <div class="reason">
+          <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5 6 .5-4.6 4 1.4 5.9L12 16l-5.3 2.9 1.4-5.9-4.6-4 6-.5z"/></svg>推し活にかける金額</div>
           <div class="rimg"><img src="assets/reason_oshikatsu.png" alt="机や棚いっぱいの推し活グッズのコレクション"></div>
           <div class="rtxt">
-            <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5 6 .5-4.6 4 1.4 5.9L12 16l-5.3 2.9 1.4-5.9-4.6-4 6-.5z"/></svg>推し活にかける金額</div>
             <p class="rbody">推し活を楽しむファンは、グッズだけで<em>1年に約4万円</em>を使っています。「好きな相手にお金を払って応援する」ことは、すでに生活の一部になっています。</p>
             <p class="src">出典：Oshicoco 調査 n=210／2024年・単一調査につき要再確認</p>
           </div>
         </div>
 
         <div class="reason">
+          <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2"/></svg>所有・収集という動機</div>
           <div class="rimg"><img src="assets/reason_cd.png" alt="集めて積み上げられたCDのコレクション"></div>
           <div class="rtxt">
-            <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2"/></svg>所有・収集という動機</div>
             <p class="rbody">CDを買う理由の1位は「収集（コレクション）」で、<em>54.7%</em>のファンが“集めて所有すること”を目的に挙げています。ライブ映像などの音楽ビデオも国内で年間<em>約562億円</em>が生産され、特典映像そのものが購入の動機になっています。</p>
             <p class="src">出典：CD購入理由＝Appliv／ナイル調べ 2023年・要再確認／音楽ビデオ＝日本レコード協会（RIAJ）公式 2024年</p>
           </div>
         </div>
 
         <div class="reason">
+          <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1121 11.5z"/></svg>“素の日常”への課金</div>
           <div class="rimg"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読む手元"></div>
           <div class="rtxt">
-            <div class="rlabel"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1121 11.5z"/></svg>“素の日常”への課金</div>
             <p class="rbody">本人の素の日常をメッセージで届けるサービスには、世界で<em>200万人超</em>のファンが<em>月およそ500円</em>を払っています。2024年の売上は<em>約80億円</em>にのぼり、「本人の素の時間」にお金を払う文化は、すでに先行事例として成立しています。</p>
             <p class="src">出典：bubble（DearU）。売上はウォン建て・報道差につき要再確認</p>
           </div>

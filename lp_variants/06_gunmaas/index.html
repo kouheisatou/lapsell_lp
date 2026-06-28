@@ -284,21 +284,25 @@ section{position:relative;}
 .legend .li{display:flex;align-items:center;gap:8px;margin:5px 0;}
 .legend .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto;}
 .legend b{color:var(--ink);}
-/* purchase-reason list (borderless: image + natural sentence, number inline) */
-.reasons{margin-top:36px;display:flex;flex-direction:column;gap:34px;}
-.reason{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;}
-.reason:nth-child(even){grid-template-columns:1fr 300px;}
-.reason:nth-child(even) .reason-pic{order:2;}
-.reason-pic{border-radius:16px;overflow:hidden;background:var(--tile-l);}
-.reason-pic img{width:100%;height:auto;display:block;}
-.reason-body h3{font-size:16.5px;font-weight:800;margin:0 0 8px;color:var(--ink);}
-.reason-body p{font-size:14.5px;line-height:1.85;color:#46514a;margin:0;}
-.reason-body p em{font-style:normal;font-weight:800;color:var(--green-d);}
-.reason-body .src{display:block;font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
-@media(max-width:760px){
-  .reason,.reason:nth-child(even){grid-template-columns:1fr;gap:14px;}
-  .reason:nth-child(even) .reason-pic{order:0;}
+/* purchase-reason cards — horizontal scroller (title + image + sentence + source) */
+.reasons{
+  margin-top:36px;display:flex;gap:20px;
+  overflow-x:auto;padding:6px 2px 16px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
 }
+.reasons::-webkit-scrollbar{height:7px;}
+.reasons::-webkit-scrollbar-thumb{background:var(--ygreen);border-radius:8px;}
+.reasons::-webkit-scrollbar-track{background:transparent;}
+.reason{
+  flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;
+  display:flex;flex-direction:column;
+}
+.reason-body h3{font-size:16px;font-weight:800;margin:0 0 12px;color:var(--ink);line-height:1.45;}
+.reason-pic{border-radius:16px;overflow:hidden;background:var(--tile-l);margin-bottom:14px;}
+.reason-pic img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;display:block;}
+.reason-body p{font-size:13.5px;line-height:1.8;color:#46514a;margin:0;}
+.reason-body p em{font-style:normal;font-weight:800;color:var(--green-d);}
+.reason-body .src{display:block;font-size:11px;color:var(--muted);margin-top:10px;line-height:1.55;}
 
 /* ===== deliver to fans (purchase channel) ===== */
 .deliver{background:#fff;}
@@ -810,41 +814,41 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
     <!-- purchase reasons: fans already pay (natural sentences, number inline) -->
     <div class="reasons">
       <div class="reason">
+        <div class="reason-body"><h3>ライブ物販に払っている額</h3></div>
         <div class="reason-pic"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買うファン"></div>
         <div class="reason-body">
-          <h3>ライブ物販に払っている額</h3>
           <p>ライブに参加するファンは、グッズの購入に1年で平均 <em>約22,000円</em> を使っています。とくにアイドル系では参加者の <em>75.4%</em> が物販を購入しており、手元に残るものへの支払いはすでに当たり前の行動です。<span class="src">出典：ぴあ総研（要再確認）</span></p>
         </div>
       </div>
 
       <div class="reason">
+        <div class="reason-body"><h3>チェキが生む一点ものの売上</h3></div>
         <div class="reason-pic"><img src="assets/reason_cheki.png" alt="特典会で撮影したチェキを手にするイメージ"></div>
         <div class="reason-body">
-          <h3>チェキが生む一点ものの売上</h3>
           <p>特典会で撮るチェキは1枚 <em>約1,500円</em> で、ライブアイドルの主な収入のひとつになっています。チェキのカメラは累計 <em>1億台</em> 超を出荷し、関連市場は年 <em>約1,500億円</em> 規模。その場かぎりの一点ものに、ファンは日常的にお金を払っています。<span class="src">出典：富士フイルム</span></p>
         </div>
       </div>
 
       <div class="reason">
+        <div class="reason-body"><h3>推し活グッズへの年間支出</h3></div>
         <div class="reason-pic"><img src="assets/reason_oshikatsu.png" alt="推し活グッズに囲まれたファンの部屋のイメージ"></div>
         <div class="reason-body">
-          <h3>推し活グッズへの年間支出</h3>
           <p>推し活をするファンがグッズに使う金額は、1年で平均 <em>約4万円</em> にのぼります。「好きな相手にまつわるものを手元に置きたい」という欲求は、すでに大きな支出として現れています。<span class="src">出典：Oshicoco（要再確認）</span></p>
         </div>
       </div>
 
       <div class="reason">
+        <div class="reason-body"><h3>所有・収集の文化</h3></div>
         <div class="reason-pic"><img src="assets/reason_cd.png" alt="集めて並べたCD・コレクションのイメージ"></div>
         <div class="reason-body">
-          <h3>所有・収集の文化</h3>
           <p>完成品であるCDを買うときですら、購入理由の1位は「収集のため」で <em>54.7%</em> を占めます。特典映像やメイキングを含む音楽ビデオの国内生産も年 <em>562億円</em> 規模あり、「集めて所有する」こと自体が購入の中心的な動機になっています。<span class="src">CD購入理由（要再確認）／音楽ビデオ：RIAJ 2024</span></p>
         </div>
       </div>
 
       <div class="reason">
+        <div class="reason-body"><h3>本人とのつながりに払う額</h3></div>
         <div class="reason-pic"><img src="assets/reason_bubble.png" alt="本人から届く素のメッセージを受け取るスマホ画面のイメージ"></div>
         <div class="reason-body">
-          <h3>本人とのつながりに払う額</h3>
           <p>本人の“素のメッセージ”が届くファン課金サービスbubbleには、月 <em>約500円</em> を <em>200万人超</em> が払っています。2024年の売上は <em>約80億円</em> 規模との見方もあり、加工されていない本人とのつながりそのものに、すでに多くの人が課金しています。<span class="src">bubble（DearU）／ウォン建て・報道差あり（要再確認）</span></p>
         </div>
       </div>

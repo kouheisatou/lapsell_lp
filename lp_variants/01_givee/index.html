@@ -18,9 +18,10 @@
   --muted:#6b6b6b;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
 body{
   margin:0;
+  overflow-x:hidden;
   font-family:"游ゴシック体","Yu Gothic",YuGothic,"ヒラギノ角ゴ ProN","Hiragino Kaku Gothic ProN",sans-serif;
   color:var(--black);
   background:var(--grey);
@@ -368,6 +369,32 @@ section{padding:84px 0;}
 .fig .ffig{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:rgba(255,255,255,.04);margin-bottom:4px;}
 .fig .ffig img{width:100%;height:auto;display:block;}
 @media(max-width:680px){.figs{grid-template-columns:1fr;gap:26px;}}
+
+/* purchase-reason horizontal card rail (intentional internal scroller; page never scrolls horizontally) */
+.reason-rail-wrap{margin-top:38px;}
+.reason-rail{
+  display:flex;flex-wrap:nowrap;align-items:stretch;
+  gap:18px;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  padding:2px 2px 16px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:#777 transparent;
+}
+.reason-rail::-webkit-scrollbar{height:8px;}
+.reason-rail::-webkit-scrollbar-track{background:transparent;}
+.reason-rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:999px;}
+.reason-rail::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.45);}
+.reason-card{
+  flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:10px;text-align:left;
+  background:rgba(255,255,255,.05);border-radius:16px;padding:16px 16px 18px;
+}
+.reason-card .rc-title{font-size:16px;font-weight:800;color:#fff;line-height:1.5;}
+.reason-card .rc-fig{border-radius:11px;overflow:hidden;aspect-ratio:4/3;background:rgba(255,255,255,.04);}
+.reason-card .rc-fig img{width:100%;height:100%;object-fit:cover;display:block;}
+.reason-card .rc-desc{font-size:14.5px;line-height:1.8;color:#e6e6e6;}
+.reason-card .rc-desc .n{color:var(--yellow);font-weight:800;}
+.reason-card .rc-src{font-size:11px;color:#9a9a9a;line-height:1.55;margin-top:auto;padding-top:2px;}
 
 /* ---------- 購入導線 (ファンへの届け方) ---------- */
 .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 44px;margin-top:50px;text-align:left;}
@@ -963,53 +990,42 @@ section{padding:84px 0;}
 
     <div class="chart-sep"></div>
 
-    <!-- 購入される理由：すでに払われている実額 -->
+    <!-- 購入される根拠：すでに払われている実額・実例（横スクロールのカード列） -->
     <div class="chart-block">
-      <p class="chart-head">ファンが実際に払っている額。</p>
-      <p class="chart-note">ライブ物販・チェキ・推し活グッズ・CD。手元に残る「一点もの」に、ファンは毎年これだけのお金を使っています。</p>
-      <div class="figs">
-        <div class="fig">
-          <div class="ffig"><img src="assets/reason_merch.png" alt="ライブの物販ブースでグッズを買って受け取るファンのイラスト" loading="lazy"></div>
-          <div class="fmean">ライブ物販でグッズを買うファンは、<span class="n">1年で平均22,000円ほど</span>を使っています。アイドル系では購入率が<span class="n">75.4%</span>にのぼり、現場でグッズを“持ち帰る”行動はすでに当たり前です。</div>
-          <div class="fsrc">ぴあ総研／インテージ（n=916, 2019）。やや古く要再確認</div>
-        </div>
-        <div class="fig">
-          <div class="ffig"><img src="assets/reason_cheki.png" alt="その場で撮った一点もののチェキを手にするファンのイラスト" loading="lazy"></div>
-          <div class="fmean">チェキは<span class="n">1枚およそ1,500円</span>で売れ、ライブアイドルの主な収入を支えています。その場でしか手に入らず、コピーできない“一点もの”だからこそ、ファンはお金を払います。</div>
-          <div class="fsrc">Business Insider Japan 2024／中日新聞 2024（取材記事）。要再確認</div>
-        </div>
-        <div class="fig">
-          <div class="ffig"><img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクションが棚いっぱいに並ぶイラスト" loading="lazy"></div>
-          <div class="fmean">推し活をする人は、<span class="n">1年でおよそ4万円</span>をグッズに使っています。応援した証を手元に残すために、ファンは継続してお金を払い続けています。</div>
-          <div class="fsrc">Oshicoco（n=210, 2024）。単一調査につき要再確認</div>
-        </div>
-        <div class="fig">
-          <div class="ffig"><img src="assets/reason_cd.png" alt="集めたCDが積まれたコレクションのイラスト" loading="lazy"></div>
-          <div class="fmean">CDを買う理由の第1位は<span class="n">「収集（コレクション）のため」で54.7%</span>。買う動機の中心は、聴くことよりも“所有して集めること”に移っています。</div>
-          <div class="fsrc">Appliv／ナイル調べ 2023。単一調査につき要再確認</div>
-        </div>
-        <div class="fig">
-          <div class="fmean">チェキ（instax）は累計<span class="n">1億台</span>を出荷し、年間売上は<span class="n">約1,500億円</span>。“一点ものの写真を所有する”という文化そのものが、すでに巨大な市場になっています。</div>
-          <div class="fsrc">富士フイルム公式 2025／日経クロストレンド 2025</div>
-        </div>
-        <div class="fig">
-          <div class="fmean">ライブ映像などの音楽ビデオは、国内で<span class="n">年562億円</span>分が生産されています（うちBlu-ray 399億円）。特典映像やメイキングが購入の決め手になり、“手元に持つ”メディアの需要はいまも残っています。</div>
-          <div class="fsrc">RIAJ 公式 2024</div>
-        </div>
-      </div>
+      <p class="chart-head">ファンが、すでに払っている実例。</p>
+      <p class="chart-note">手元に残る「一点もの」や「素のコンテンツ」に、ファンはもう実際にお金を使っています。横にスクロールして、それぞれの根拠を見てください。</p>
     </div>
-
-    <div class="chart-sep"></div>
-
-    <!-- bubble：素の日常に課金が成立 -->
-    <div class="chart-block">
-      <p class="chart-head">“素の日常”に払われているお金。</p>
-      <p class="chart-note">本人からの素のメッセージを受け取れるサービスに、世界で200万人を超える人が課金しています。「素の時間」への支払いは、先行事例として確立しています。</p>
-      <div class="figs one">
-        <div class="fig">
-          <div class="ffig"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読むファンの手元のイラスト" loading="lazy"></div>
-          <div class="fmean">bubble（DearU）は、本人の“素の日常メッセージ”を受け取れるサービスです。<span class="n">月額およそ500円</span>で世界<span class="n">200万人超</span>が課金し、<span class="n">2024年の売上は約80億円</span>との見方もあります。完成された作品ではなく“素の時間”そのものに、人はお金を払います。</div>
-          <div class="fsrc">bubble（DearU）。売上80億円はウォン建て・報道差あり、要再確認</div>
+    <div class="reason-rail-wrap">
+      <div class="reason-rail">
+        <div class="reason-card">
+          <div class="rc-title">ライブ物販で使うお金</div>
+          <div class="rc-fig"><img src="assets/reason_merch.png" alt="ライブの物販ブースでグッズを買って受け取るファンのイラスト" loading="lazy"></div>
+          <div class="rc-desc">ライブ物販でグッズを買うファンは、<span class="n">1年で平均22,000円ほど</span>を使っています。アイドル系では購入率が<span class="n">75.4%</span>にのぼり、現場でグッズを“持ち帰る”行動はすでに当たり前です。</div>
+          <div class="rc-src">ぴあ総研／インテージ（n=916, 2019）。やや古く要再確認</div>
+        </div>
+        <div class="reason-card">
+          <div class="rc-title">チェキという“一点もの”</div>
+          <div class="rc-fig"><img src="assets/reason_cheki.png" alt="その場で撮った一点もののチェキを手にするファンのイラスト" loading="lazy"></div>
+          <div class="rc-desc">チェキは<span class="n">1枚およそ1,500円</span>で売れ、ライブアイドルの主な収入を支えています。その場でしか手に入らず、コピーできない“一点もの”だからこそ、ファンはお金を払います。</div>
+          <div class="rc-src">Business Insider Japan 2024／中日新聞 2024（取材記事）。要再確認</div>
+        </div>
+        <div class="reason-card">
+          <div class="rc-title">推し活グッズへの年間支出</div>
+          <div class="rc-fig"><img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクションが棚いっぱいに並ぶイラスト" loading="lazy"></div>
+          <div class="rc-desc">推し活をする人は、<span class="n">1年でおよそ4万円</span>をグッズに使っています。応援した証を手元に残すために、ファンは継続してお金を払い続けています。</div>
+          <div class="rc-src">Oshicoco（n=210, 2024）。単一調査につき要再確認</div>
+        </div>
+        <div class="reason-card">
+          <div class="rc-title">CDを買う理由は“収集”</div>
+          <div class="rc-fig"><img src="assets/reason_cd.png" alt="集めたCDが積まれたコレクションのイラスト" loading="lazy"></div>
+          <div class="rc-desc">CDを買う理由の第1位は<span class="n">「収集（コレクション）のため」で54.7%</span>。買う動機の中心は、聴くことよりも“所有して集めること”に移っています。</div>
+          <div class="rc-src">Appliv／ナイル調べ 2023。単一調査につき要再確認</div>
+        </div>
+        <div class="reason-card">
+          <div class="rc-title">“素の日常”への課金</div>
+          <div class="rc-fig"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読むファンの手元のイラスト" loading="lazy"></div>
+          <div class="rc-desc">bubble（DearU）は、本人の“素の日常メッセージ”を受け取れるサービスです。<span class="n">月額およそ500円</span>で世界<span class="n">200万人超</span>が課金し、<span class="n">2024年の売上は約80億円</span>との見方もあります。完成された作品ではなく“素の時間”そのものに、人はお金を払います。</div>
+          <div class="rc-src">bubble（DearU）。売上80億円はウォン建て・報道差あり、要再確認</div>
         </div>
       </div>
     </div>

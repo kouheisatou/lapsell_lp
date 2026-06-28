@@ -27,6 +27,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
+  overflow-x:hidden;
   font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","ヒラギノ明朝 ProN",serif;
   color:var(--ink);
   background-color:#cfc6b2;
@@ -264,17 +265,26 @@ section{padding:70px 0;}
 .legend .li{display:flex;align-items:center;gap:11px;}
 .legend .sw{width:13px;height:13px;border-radius:2px;flex:none;}
 .legend b{color:var(--ink);font-weight:700;}.band-ink .legend b{color:var(--cream);}
-/* why-buy editorial list — plain title + natural sentence (number inline), image, source */
-.why{margin-top:24px;display:flex;flex-direction:column;}
-.why .r{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center;padding:34px 0;border-top:1px solid rgba(255,255,255,.14);}
-.why .r:last-child{border-bottom:1px solid rgba(255,255,255,.14);}
-.why .r .fig{margin:0;}
-.why .r .fig img{width:100%;height:auto;filter:sepia(.12) contrast(.98);}
-.why .r .tx h4{font-size:clamp(16px,2.2vw,19px);font-weight:600;color:var(--cream);line-height:1.7;}
-.why .r .tx p{font-size:14.5px;color:#cfc8b8;line-height:2.1;margin-top:12px;}
+/* why-buy — title + image + sentence + source, in an intentional horizontal scroller (internal only) */
+.why{
+  display:flex;gap:26px;margin:24px -44px 0;padding:8px 44px 26px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+}
+.why::-webkit-scrollbar{height:7px;}
+.why::-webkit-scrollbar-thumb{background:rgba(255,255,255,.22);border-radius:4px;}
+.why .r{
+  flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;
+  display:flex;flex-direction:column;
+  padding-top:26px;border-top:1px solid rgba(255,255,255,.22);
+}
+.why .r .tx:last-child{display:flex;flex-direction:column;flex:1;}
+.why .r .tx h4{font-size:clamp(16px,2.2vw,18px);font-weight:600;color:var(--cream);line-height:1.7;}
+.why .r .fig{margin:16px 0 0;}
+.why .r .fig img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;filter:sepia(.12) contrast(.98);}
+.why .r .tx p{font-size:14px;color:#cfc8b8;line-height:2.0;margin-top:14px;}
 .why .r .tx p em{font-style:normal;font-weight:700;color:var(--cream);}
-.why .r .tx .src{font-family:"Yu Gothic",sans-serif;font-size:10.5px;color:#a59d8d;margin-top:11px;letter-spacing:.02em;line-height:1.7;}
-@media(max-width:680px){.why .r{grid-template-columns:1fr;gap:18px;}.why .r .fig{max-width:280px;}}
+.why .r .tx .src{font-family:"Yu Gothic",sans-serif;font-size:10.5px;color:#a59d8d;margin-top:auto;padding-top:11px;letter-spacing:.02em;line-height:1.7;}
 /* bars */
 .bars{margin-top:22px;display:flex;flex-direction:column;gap:16px;font-family:"Yu Gothic",sans-serif;}
 .bar .bl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--brown);margin-bottom:6px;}
@@ -728,41 +738,41 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
         <p class="src" style="margin-top:14px;">市場の大きさではなく、ファンの“買う理由”そのものを並べます。どれも、Lapsellの「練習の時間」が買われるのと同じ行動です。</p>
         <div class="why">
           <div class="r">
+            <div class="tx"><h4>ライブ物販を買っている人が、実際に払っている額。</h4></div>
             <figure class="fig"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買い求めるファンの様子"></figure>
             <div class="tx">
-              <h4>ライブ物販を買っている人が、実際に払っている額。</h4>
               <p>ライブ参加者がグッズに使う額は1年で平均<em>およそ22,000円</em>、アイドル系の購入率は<em>75.4％</em>にのぼります。手元に残る一点ものへの支払いは、ファンにとってすでに当たり前の行動です。</p>
               <p class="src">ぴあ総研／インテージ（n=916, 2019年・要再確認）</p>
             </div>
           </div>
           <div class="r">
+            <div class="tx"><h4>その場でしか撮れない一点もの（チェキ）の文化。</h4></div>
             <figure class="fig"><img src="assets/reason_cheki.png" alt="特典会でチェキを手にするファンとライブアイドルの様子"></figure>
             <div class="tx">
-              <h4>その場でしか撮れない一点もの（チェキ）の文化。</h4>
               <p>チェキはライブアイドルの主収入のひとつで、相場は<em>1枚およそ1,500円</em>。累計<em>1億台</em>が売れ、<em>年およそ1,500億円</em>の市場をつくっています。Lapsellは、いわば「動く・本人の本物の時間版チェキ」にあたります。</p>
               <p class="src">チェキ相場・主収入＝取材記事（要再確認）／累計1億台・年約1,500億円＝富士フイルム公式</p>
             </div>
           </div>
           <div class="r">
+            <div class="tx"><h4>推し活に、ファンがかけているお金。</h4></div>
             <figure class="fig"><img src="assets/reason_oshikatsu.png" alt="推しのグッズに囲まれて応援を楽しむファンの様子"></figure>
             <div class="tx">
-              <h4>推し活に、ファンがかけているお金。</h4>
               <p>推し活層が1年でグッズにかける額は平均<em>およそ4万円</em>。応援のためにお金を使うことは、特別なことではなく、すでに日常の一部になっています。</p>
               <p class="src">Oshicoco 調査（n=210, 2024年・要再確認）</p>
             </div>
           </div>
           <div class="r">
+            <div class="tx"><h4>「集めて、所有したい」という気持ち。</h4></div>
             <figure class="fig"><img src="assets/reason_cd.png" alt="集めたCDや音楽メディアを並べて所有を楽しむファンの様子"></figure>
             <div class="tx">
-              <h4>「集めて、所有したい」という気持ち。</h4>
               <p>CDを買う理由の1位は「収集のため」で<em>54.7％</em>を占め、特典映像つきの所有メディアの需要も根強く、音楽ビデオの生産は<em>年562億円</em>にのぼります。所有・収集そのものが、買う動機になっています。</p>
               <p class="src">CD購入理由＝Appliv／ナイル調べ（2023年・要再確認）／音楽ビデオ562億円＝RIAJ公式</p>
             </div>
           </div>
           <div class="r">
+            <div class="tx"><h4>本人とのつながりに、ファンが払っている額。</h4></div>
             <figure class="fig"><img src="assets/reason_bubble.png" alt="スマホで本人からの素のメッセージを受け取るファンの様子"></figure>
             <div class="tx">
-              <h4>本人とのつながりに、ファンが払っている額。</h4>
               <p>本人の素のメッセージが届くbubbleは<em>月額およそ500円</em>で世界<em>200万人</em>超が課金し、2024年の売上は<em>およそ80億円</em>との見方もあります。派手な完成品ではなく“素”に払う行動が、すでに成立しています。</p>
               <p class="src">bubble（DearU）。売上はウォン建て・報道差あり（要再確認）</p>
             </div>
