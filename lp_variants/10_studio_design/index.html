@@ -286,16 +286,16 @@ h1,h2,h3,h4,p,figure{margin:0;}
 .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--royal),var(--royal2));}
 @media(max-width:820px){.chart-grid{grid-template-columns:1fr;gap:44px;}}
 
-/* purchase-reason – horizontal scroller of dark cards (title→image→body→source) */
+/* purchase-reason – horizontal scroller of dark cards (image→title→desc→source) */
 .reasons{display:flex;gap:24px;overflow-x:auto;padding:6px 4px 26px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;}
 .reasons::-webkit-scrollbar{height:8px;}
 .reasons::-webkit-scrollbar-thumb{background:rgba(10,15,43,.22);border-radius:8px;}
-.reason{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;background:linear-gradient(168deg,#0d1538,#16245c);border-radius:18px;padding:22px 22px 24px;box-shadow:0 18px 44px rgba(10,15,43,.22);}
-.reason .rh{order:1;font-size:16px;font-weight:800;color:#f4f7ff;line-height:1.5;margin-bottom:14px;}
-.reason .rimg{order:2;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:12px;margin-bottom:16px;filter:brightness(.96) contrast(1.03) saturate(1.02);}
-.reason .rbody{order:3;font-size:14px;color:#d6def6;line-height:1.8;}
+.reason{flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;background:linear-gradient(168deg,#0d1538,#16245c);border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(10,15,43,.22);}
+.reason .rimg{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;display:block;filter:brightness(.96) contrast(1.03) saturate(1.02);}
+.reason .rh{font-size:17px;font-weight:800;color:#f4f7ff;line-height:1.5;margin:22px 22px 12px;}
+.reason .rbody{font-size:13.5px;color:#d6def6;line-height:1.7;margin:0 22px;}
 .reason .rbody em{font-style:normal;font-weight:800;color:#8fbaff;}
-.reason .rsrc{order:4;font-size:11px;color:#9aa7cc;font-weight:600;margin-top:auto;padding-top:12px;letter-spacing:.01em;}
+.reason .rsrc{font-size:11px;color:#9aa7cc;font-weight:600;margin:auto 22px 0;padding:14px 0 22px;letter-spacing:.01em;}
 
 /* delivery / 届け方 – minimal line-icon mini-figures, borderless */
 .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:46px;}
@@ -876,32 +876,32 @@ h1,h2,h3,h4,p,figure{margin:0;}
     <!-- 実在する支払い行動：所有・一点もの・素の日常（自然な一文＋数字はinline） -->
     <div class="reasons">
       <div class="reason">
-        <div class="rh">ファンが実際に払っている額</div>
         <img class="rimg" src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買うファン">
+        <div class="rh">ファンが実際に払っている額</div>
         <div class="rbody">ライブ物販を買うファンは1年で平均<em>22,000円</em>ほどを使い、アイドル系の購入率は<em>75.4%</em>にのぼります。会場で「自分のものにする」行動は、すでに当たり前になっています。</div>
         <div class="rsrc">出典：ぴあ総研（要再確認）</div>
       </div>
       <div class="reason">
-        <div class="rh">所有・収集の文化</div>
         <img class="rimg" src="assets/reason_cheki.png" alt="特典会でチェキを受け取るファン">
+        <div class="rh">所有・収集の文化</div>
         <div class="rbody">チェキは1枚<em>約1,500円</em>で、ライブアイドルの主な収入源になっています。累計<em>1億台</em>を超え、年<em>約1,500億円</em>規模に育った、その場の一点ものを買う文化です。</div>
         <div class="rsrc">出典：富士フイルム ほか（要再確認）</div>
       </div>
       <div class="reason">
-        <div class="rh">推し活への年間支出</div>
         <img class="rimg" src="assets/reason_oshikatsu.png" alt="集めた推し活グッズを手元に並べるファン">
+        <div class="rh">推し活への年間支出</div>
         <div class="rbody">ファンが1年間に推し活グッズへ使う額は平均<em>約4万円</em>です。「応援したい・手元に置きたい」という気持ちが、継続的な支出として現れています。</div>
         <div class="rsrc">出典：Oshicoco（要再確認）</div>
       </div>
       <div class="reason">
-        <div class="rh">所有・収集の文化（音楽でも）</div>
         <img class="rimg" src="assets/reason_cd.png" alt="集めたCDや音楽ビデオを所有しているイメージ">
+        <div class="rh">所有・収集の文化（音楽でも）</div>
         <div class="rbody">CDを買う理由の1位は「収集のため」で<em>54.7%</em>。特典映像が動機になりやすい音楽ビデオも年<em>562億円</em>の市場で、「持っていたい」が購入の中心にあります。</div>
         <div class="rsrc">出典：CD購入理由調査（要再確認）／音楽ビデオ：RIAJ</div>
       </div>
       <div class="reason">
-        <div class="rh">本人とのつながりに払う額</div>
         <img class="rimg" src="assets/reason_bubble.png" alt="スマホに届く本人からの日常メッセージ">
+        <div class="rh">本人とのつながりに払う額</div>
         <div class="rbody">本人の日常メッセージが届くbubbleは月<em>約500円</em>で、利用者は<em>200万人</em>を超え、2024年の売上は<em>約80億円</em>とも言われます。素の日常そのものに、人はお金を払っています。</div>
         <div class="rsrc">出典：bubble関連報道（要再確認）</div>
       </div>

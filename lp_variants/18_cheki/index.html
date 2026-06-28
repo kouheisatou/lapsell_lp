@@ -266,7 +266,7 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .reasons::-webkit-scrollbar{height:8px}
 .reasons::-webkit-scrollbar-thumb{background:rgba(120,90,55,.32);border-radius:4px}
 /* polaroid-framed card (white border + slight rotation + soft shadow) */
-.reason{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;
+.reason{flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;
   background:#fff;padding:12px 12px 18px;border-radius:2px;
   box-shadow:0 10px 22px rgba(60,40,20,.24),0 2px 5px rgba(0,0,0,.14);
   transform:rotate(-1.6deg);position:relative}
@@ -274,14 +274,14 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(25px,4.8vw,40px);font-w
 .reason:nth-child(3){transform:rotate(-1.2deg)}
 .reason:nth-child(4){transform:rotate(1.2deg)}
 .reason:nth-child(5){transform:rotate(-1deg)}
-.reason .rpic{position:relative;margin-bottom:11px}
-.reason .rpic img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:1px;display:block;filter:saturate(.95) contrast(1.02)}
+.reason .rpic{position:relative;margin-bottom:13px}
+.reason .rpic img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:1px;display:block;filter:saturate(.95) contrast(1.02)}
 .reason h3{font-size:clamp(16px,2.4vw,19px);font-weight:900;line-height:1.4;margin-bottom:6px}
-.reason p{font-size:13.5px;font-weight:600;line-height:1.66}
+.reason p{font-size:13.5px;font-weight:600;line-height:1.7}
 .reason p em{font-style:normal;font-weight:900;color:var(--red)}
-.reason .src{display:block;margin-top:7px;font-size:10.5px;font-weight:700;color:var(--ink-soft);font-style:italic;line-height:1.55}
+.reason .src{display:block;margin-top:8px;font-size:11px;font-weight:700;color:var(--ink-soft);font-style:italic;line-height:1.55}
 /* チェキ = featured (this LP is チェキ-themed): a touch wider + washi tape kept */
-.reason.cheki-feat{width:clamp(252px,76vw,318px);transform:rotate(-2deg)}
+.reason.cheki-feat{width:clamp(320px,86vw,396px);transform:rotate(-2deg)}
 .reason.cheki-feat h3{font-size:clamp(17px,2.6vw,21px)}
 .reason.cheki-feat p em{color:#a13327}
 
@@ -841,41 +841,41 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       </div>
     </div>
 
-    <!-- purchase reasons: horizontal scroller of polaroid cards (title→image→text→source) -->
+    <!-- purchase reasons: horizontal scroller of polaroid cards (image→title→text→source) -->
     <p class="lead" style="margin-top:34px;font-size:14px">ファンが“一点もの・素の姿・本人とのつながり”に払っている根拠を、横にスワイプして見てください。<span style="opacity:.6">→</span></p>
     <div class="reasons">
       <!-- チェキ = featured (this LP is チェキ-themed) -->
       <div class="reason cheki-feat">
-        <h3>チェキという「一点もの」の文化</h3>
         <div class="rpic"><span class="tape top-l"></span><img src="assets/reason_cheki.png" alt="ライブアイドルの物販で買われる、その場で撮った一点もののチェキ写真"></div>
+        <h3>チェキという「一点もの」の文化</h3>
         <p>ファンはその場で撮った一点もののチェキに、1枚<em>およそ1,500円</em>を払っています。ライブアイドルの収入の半分以上をチェキが支え、スマホ写真と違い世界に1枚しかないことに価値が置かれます。チェキ（instax）は累計<em>1億台</em>を超え、年間売上は過去最高の<em>約1,500億円</em>に。Lapsellは、この「一点もの」を“動く・本人の本物の時間”にしたものです。</p>
         <span class="src">出典：富士フイルム公式（2025／累計・売上）／Business Insider Japan・中日新聞（2024／単価・収入比率, 取材記事＝要再確認）</span>
       </div>
 
       <div class="reason">
-        <h3>ファンが実際に払っている額</h3>
         <div class="rpic"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買うファンの様子"></div>
+        <h3>ファンが実際に払っている額</h3>
         <p>ライブ物販を買うファンは1年でおよそ<em>22,000円</em>を使っており、アイドル系では購入率が<em>75.4%</em>にのぼります。手元に残る一点ものにお金を払うことは、すでに当たり前の行動になっています。</p>
         <span class="src">出典：ぴあ総研（インテージ委託, n=916, 2019）＝やや古く要再確認</span>
       </div>
 
       <div class="reason">
-        <h3>本人に紐づく一点ものに払う額</h3>
         <div class="rpic"><img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めて飾っているファンの部屋の様子"></div>
+        <h3>本人に紐づく一点ものに払う額</h3>
         <p>推し活をするファンは、1年でグッズに平均<em>およそ4万円</em>を使っています。“推しに紐づく一点もの”への支出は、すでに大きな日常の出費になっています。</p>
         <span class="src">出典：Oshicoco 調査（n=210, 2024）＝単一調査・要再確認</span>
       </div>
 
       <div class="reason">
-        <h3>所有・収集の文化</h3>
         <div class="rpic"><img src="assets/reason_cd.png" alt="集めたCDや特典映像つきメディアを並べてコレクションしている様子"></div>
+        <h3>所有・収集の文化</h3>
         <p>CDを買う理由でいちばん多いのは「収集（コレクション）のため」で<em>54.7%</em>を占めます。特典映像つきの所有メディアの需要も根強く、音楽ビデオの国内生産額は<em>562億円</em>にのぼります。</p>
         <span class="src">出典：Appliv／ナイル調べ（2023, 収集54.7%＝単一調査・要再確認）／RIAJ公式統計（2024, 音楽ビデオ562億円）</span>
       </div>
 
       <div class="reason">
-        <h3>本人とのつながりに払う額</h3>
         <div class="rpic"><img src="assets/reason_bubble.png" alt="スマホに届く本人からの素の日常メッセージを読むファンの様子"></div>
+        <h3>本人とのつながりに払う額</h3>
         <p>本人の素の日常メッセージが届くbubbleには、月<em>およそ500円</em>を払う人が世界で<em>200万人</em>を超え、2024年の売上は<em>約80億円</em>とも言われます。“素の日常”や本人とのつながりにお金が払われることは、先行する事例で確かめられています。</p>
         <span class="src">出典：bubble（DearU, 2024）＝ウォン建て・報道差あり要再確認</span>
       </div>

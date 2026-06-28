@@ -396,6 +396,60 @@ section{padding:84px 0;}
 .reason-card .rc-desc .n{color:var(--yellow);font-weight:800;}
 .reason-card .rc-src{font-size:11px;color:#9a9a9a;line-height:1.55;margin-top:auto;padding-top:2px;}
 
+/* ---------- 横スクロール: STEP / 利用イメージ (light変種) ---------- */
+.h-rail-wrap{margin-top:50px;}
+.h-rail{
+  display:flex;flex-wrap:nowrap;align-items:stretch;
+  gap:18px;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  padding:2px 2px 16px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:#bbb transparent;
+  text-align:left;
+}
+.h-rail::-webkit-scrollbar{height:8px;}
+.h-rail::-webkit-scrollbar-track{background:transparent;}
+.h-rail::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:999px;}
+.h-rail::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.3);}
+
+/* STEPカード */
+.step-card{
+  flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:14px;
+  background:#fff;border-radius:18px;padding:30px 26px;
+  box-shadow:0 12px 34px rgba(0,0,0,.06);
+}
+.step-card .step-top{display:flex;align-items:center;gap:14px;}
+.step-card .step-no{
+  flex:none;font-size:12px;font-weight:800;letter-spacing:.08em;
+  background:var(--black);color:var(--yellow);
+  border-radius:999px;padding:6px 13px;line-height:1;
+}
+.step-card .step-ic{
+  width:54px;height:54px;border-radius:14px;flex:none;
+  background:var(--yellow);color:var(--black);
+  display:flex;align-items:center;justify-content:center;margin-left:auto;
+}
+.step-card .step-ic svg{width:28px;height:28px;}
+.step-card h3{font-size:19px;font-weight:800;line-height:1.45;}
+.step-card p{font-size:14px;color:var(--muted);line-height:1.8;}
+.step-card p b{background:var(--yellow);color:#111;padding:0 .12em;font-weight:800;}
+
+/* 利用イメージ（before/after）カード */
+.case-card{
+  flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:0;
+  background:#fff;border-radius:18px;padding:26px 24px 24px;
+  box-shadow:0 12px 34px rgba(0,0,0,.06);
+}
+.case-card .case-persona{flex-direction:row;align-items:center;text-align:left;gap:14px;}
+.case-card .case-persona .ph{width:64px;height:64px;}
+.case-card .case-persona .pname{font-size:16px;}
+.case-card .case-ba{grid-template-columns:1fr;gap:14px;margin-top:18px;text-align:left;}
+.case-card .case-ba .ba-col{align-items:flex-start;}
+.case-card .case-arrow{transform:rotate(90deg);}
+.case-card .case-ba .ba-col p{font-size:13.5px;line-height:1.75;}
+
 /* ---------- 購入導線 (ファンへの届け方) ---------- */
 .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 44px;margin-top:50px;text-align:left;}
 .deliver .d-item{display:flex;flex-direction:column;gap:14px;}
@@ -644,22 +698,46 @@ section{padding:84px 0;}
   <div class="wrap">
     <span class="eyebrow">How it works</span>
     <h2 class="sec-h">時間を「先に」売る、<span class="hl">新しいグッズ。</span></h2>
-    <p class="lead">完成した動画を売るのではない。これからやる練習の「時間枠」を先に出品する。だから編集も準備もいらない。Lapsellの収益化を支える、3つの肝。</p>
-    <div class="hooks">
-      <div class="hook">
-        <span class="concept"><img src="assets/how1.png" alt="未来の練習の時間枠を先に出品するイメージ"></span>
-        <h3>時間を“先に”売る</h3>
-        <p>完成品ではなく、これからやる未来の練習時間を出品する。だから撮るだけ・編集不要。準備も在庫もいらない。</p>
-      </div>
-      <div class="hook">
-        <span class="concept"><img src="assets/how2.png" alt="封をされた状態で届き、中身は届くまで分からないイメージ"></span>
-        <h3>中身は、届くまで分からない</h3>
-        <p>何が映るかは封を開けるまで分からない。ランダムで届く一点ものだから、ファンは「何が届くか」のワクワクごと購入する。</p>
-      </div>
-      <div class="hook">
-        <span class="concept"><img src="assets/how3.png" alt="自分だけが持つ世界に1つの一点ものの動画イメージ"></span>
-        <h3>届くのは世界に1つ</h3>
-        <p>落札者だけが持つ、一点もののデジタルグッズ。同じ10秒は誰とも被らない。「自分だけが所有」する価値が生まれる。</p>
+    <p class="lead">完成した動画を売るのではない。これからやる練習の「時間枠」を先に出品する。だから編集も準備もいらない。たった3ステップで、捨てていた時間が収益になる。横にスクロールして、使い方の流れを見てください。</p>
+    <div class="h-rail-wrap">
+      <div class="h-rail">
+
+        <!-- STEP1 出品 -->
+        <div class="step-card">
+          <div class="step-top">
+            <span class="step-no">STEP 1</span>
+            <span class="step-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M12 12v6M9 15h6"/></svg>
+            </span>
+          </div>
+          <h3>練習の時間を出品する</h3>
+          <p>これからやる練習の<b>時間枠を先に出品</b>するだけ。完成品も在庫もいらない。日時と価格を決めれば、未来の時間がそのまま商品になる。</p>
+        </div>
+
+        <!-- STEP2 撮るだけ -->
+        <div class="step-card">
+          <div class="step-top">
+            <span class="step-no">STEP 2</span>
+            <span class="step-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-2h8l2 2h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg>
+            </span>
+          </div>
+          <h3>本番をスマホで撮るだけ</h3>
+          <p>当日は<b>スマホで撮るだけ</b>。編集も準備もいらない。撮った映像は自動で区間に分割され、まずい瞬間は公開前に外せる。</p>
+        </div>
+
+        <!-- STEP3 届いて収益に -->
+        <div class="step-card">
+          <div class="step-top">
+            <span class="step-no">STEP 3</span>
+            <span class="step-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M12 22V3"/><path d="M12 3a3 3 0 0 0-3-3"/></svg>
+            </span>
+          </div>
+          <h3>ファンに届いて収益になる</h3>
+          <p>区間がランダムでファンに届き、<b>世界に1つの動画</b>として売れる。同じ10秒は誰とも被らない。捨てていた時間が、そのまま収入になる。</p>
+        </div>
+
       </div>
     </div>
   </div>
@@ -885,75 +963,77 @@ section{padding:84px 0;}
   <div class="wrap center">
     <span class="eyebrow">導入イメージ</span>
     <h2 class="sec-h">こんな<span class="hl">変化が起きています。</span></h2>
-    <p class="lead">出品 → 購入 → 撮るだけ。同じ流れが、ジャンルを問わずそのまま機能する。あなたの活動に置き換えると、こんな変化が起きる。</p>
-    <div class="cases" style="text-align:left">
+    <p class="lead">出品 → 購入 → 撮るだけ。同じ流れが、ジャンルを問わずそのまま機能する。あなたの活動に置き換えると、こんな変化が起きる。横にスクロールして見てください。</p>
+    <div class="h-rail-wrap">
+      <div class="h-rail">
 
-      <!-- ライブアイドル -->
-      <div class="case-row">
-        <div class="case-persona">
-          <div class="ph"><img src="assets/artist_idol.png" alt="ライブアイドルのイラスト" width="280" height="280"></div>
-          <div>
-            <div class="pname">ライブアイドル</div>
-            <div class="pdesc">遠方ファンを抱えるグループ</div>
+        <!-- ライブアイドル -->
+        <div class="case-card">
+          <div class="case-persona">
+            <div class="ph"><img src="assets/artist_idol.png" alt="ライブアイドルのイラスト" width="280" height="280"></div>
+            <div>
+              <div class="pname">ライブアイドル</div>
+              <div class="pdesc">遠方ファンを抱えるグループ</div>
+            </div>
+          </div>
+          <div class="case-ba">
+            <div class="ba-col before">
+              <span class="ba-lbl"><span class="dot"></span>これまで</span>
+              <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col after">
+              <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
+              <p>練習の時間枠を出品。遠方のファンも<b>“自分だけの一区間”</b>を買え、練習が収入になった。</p>
+            </div>
           </div>
         </div>
-        <div class="case-ba">
-          <div class="ba-col before">
-            <span class="ba-lbl"><span class="dot"></span>これまで</span>
-            <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+
+        <!-- インディーズバンド -->
+        <div class="case-card">
+          <div class="case-persona">
+            <div class="ph"><img src="assets/artist_band.png" alt="インディーズバンドのイラスト" width="280" height="280"></div>
+            <div>
+              <div class="pname">インディーズバンド</div>
+              <div class="pdesc">スタジオ代に悩む4人組</div>
+            </div>
           </div>
-          <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="ba-col after">
-            <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
-            <p>練習の時間枠を出品。遠方のファンも<b>“自分だけの一区間”</b>を買え、練習が収入になった。</p>
+          <div class="case-ba">
+            <div class="ba-col before">
+              <span class="ba-lbl"><span class="dot"></span>これまで</span>
+              <p>スタジオ代がかさむのにリハを届ける手段がなく、固定ファン止まり。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col after">
+              <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
+              <p>リハ風景を出品。買ったファンが拡散し、<b>スタジオ代の足しと新規ファン</b>を同時に得た。</p>
+            </div>
           </div>
         </div>
+
+        <!-- インディーズお笑い芸人 -->
+        <div class="case-card">
+          <div class="case-persona">
+            <div class="ph"><img src="assets/artist_comedian.png" alt="インディーズお笑い芸人のイラスト" width="280" height="280"></div>
+            <div>
+              <div class="pname">インディーズお笑い芸人</div>
+              <div class="pdesc">配信に踏み出せないコンビ</div>
+            </div>
+          </div>
+          <div class="case-ba">
+            <div class="ba-col before">
+              <span class="ba-lbl"><span class="dot"></span>これまで</span>
+              <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+            </div>
+            <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="ba-col after">
+              <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
+              <p>ネタ合わせを出品。撮影後に確認して公開でき安心。<b>偶然の名場面だけ</b>が届いた。</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- インディーズバンド -->
-      <div class="case-row">
-        <div class="case-persona">
-          <div class="ph"><img src="assets/artist_band.png" alt="インディーズバンドのイラスト" width="280" height="280"></div>
-          <div>
-            <div class="pname">インディーズバンド</div>
-            <div class="pdesc">スタジオ代に悩む4人組</div>
-          </div>
-        </div>
-        <div class="case-ba">
-          <div class="ba-col before">
-            <span class="ba-lbl"><span class="dot"></span>これまで</span>
-            <p>スタジオ代がかさむのにリハを届ける手段がなく、固定ファン止まり。</p>
-          </div>
-          <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="ba-col after">
-            <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
-            <p>リハ風景を出品。買ったファンが拡散し、<b>スタジオ代の足しと新規ファン</b>を同時に得た。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- インディーズお笑い芸人 -->
-      <div class="case-row">
-        <div class="case-persona">
-          <div class="ph"><img src="assets/artist_comedian.png" alt="インディーズお笑い芸人のイラスト" width="280" height="280"></div>
-          <div>
-            <div class="pname">インディーズお笑い芸人</div>
-            <div class="pdesc">配信に踏み出せないコンビ</div>
-          </div>
-        </div>
-        <div class="case-ba">
-          <div class="ba-col before">
-            <span class="ba-lbl"><span class="dot"></span>これまで</span>
-            <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
-          </div>
-          <div class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-          <div class="ba-col after">
-            <span class="ba-lbl"><span class="dot"></span>Lapsell後</span>
-            <p>ネタ合わせを出品。撮影後に確認して公開でき安心。<b>偶然の名場面だけ</b>が届いた。</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>

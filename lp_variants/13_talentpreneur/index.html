@@ -203,14 +203,14 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 .legend .big{font-family:"Josefin Sans",sans-serif;font-weight:700;font-size:15px}
 /* purchase reasons (horizontal scroller of cards) */
 .reasons{display:flex;gap:20px;margin-top:36px;position:relative;z-index:2;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:4px 2px 22px}
-.reason{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.reason{flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:11px;border-radius:14px;overflow:hidden}
+.reason>img{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;display:block;border-radius:12px}
 .reason .rno{font-family:"Josefin Sans",sans-serif;font-weight:700;letter-spacing:.1em;font-size:13px;color:var(--yellow);display:flex;align-items:center;gap:7px}
 .reason .rno .gl{color:var(--pink)}
 .reason h4{font-size:clamp(16px,2.6vw,19px);font-weight:800;line-height:1.45;color:#fff}
-.reason>img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:10px}
-.reason p{font-size:13.5px;font-weight:500;opacity:.92;line-height:1.75}
+.reason p{font-size:13.5px;font-weight:500;opacity:.92;line-height:1.7}
 .reason p em{font-style:normal;font-weight:800;background:var(--yellow);color:var(--indigo);padding:1px 6px;border-radius:3px}
-.reason .src{display:block;margin-top:auto;padding-top:4px;font-size:11.5px;font-weight:500;opacity:.6}
+.reason .src{display:block;margin-top:auto;padding-top:4px;font-size:11px;font-weight:500;opacity:.6}
 
 /* ---------- authenticity (figure, no nested boxes) ---------- */
 .auth{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin-top:46px;position:relative;z-index:2}
@@ -663,41 +663,41 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
 
     <div class="reasons">
       <div class="reason">
+        <img src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファンのイラスト">
         <span class="rno"><span class="gl">✦</span>01</span>
         <h4>ファンが実際に払っている額</h4>
-        <img src="assets/reason_merch.png" alt="ライブ物販ブースでグッズを買うファンのイラスト">
         <p>ライブ参加者がグッズ購入に使う額は1年で<em>平均 約22,000円</em>にのぼり、アイドル系の購入率は<em>75.4%</em>に達します。手元に残る一点物にお金を払うのは、もう当たり前の行動になっています。</p>
         <span class="src">出典：ぴあ総研／インテージ（要再確認）</span>
       </div>
 
       <div class="reason">
+        <img src="assets/reason_cheki.png" alt="その場で撮るチェキを手にするファンのイラスト">
         <span class="rno"><span class="gl">✦</span>02</span>
         <h4>その場の一点物に払う額</h4>
-        <img src="assets/reason_cheki.png" alt="その場で撮るチェキを手にするファンのイラスト">
         <p>チェキは1枚<em>約1,500円</em>で売れ、ライブアイドルの収入の柱になっています。文化全体でも累計<em>1億台</em>が普及し、市場は年<em>約1,500億円</em>。Lapsellは、その「動く・本人の本物の時間版チェキ」にあたります。</p>
         <span class="src">出典：富士フイルム公式 ほか</span>
       </div>
 
       <div class="reason">
+        <img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めるファンのイラスト">
         <span class="rno"><span class="gl">✦</span>03</span>
         <h4>推し活に払う年間の額</h4>
-        <img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めるファンのイラスト">
         <p>推し活をする人が1年でグッズにかける額は、<em>平均 約4万円</em>といわれています。“好き”にお金を払う土台は、すでにできあがっています。</p>
         <span class="src">出典：Oshicoco 調査（要再確認）</span>
       </div>
 
       <div class="reason">
+        <img src="assets/reason_cd.png" alt="CDや特典映像をコレクションするファンのイラスト">
         <span class="rno"><span class="gl">✦</span>04</span>
         <h4>所有・収集の文化</h4>
-        <img src="assets/reason_cd.png" alt="CDや特典映像をコレクションするファンのイラスト">
         <p>CDを買う理由でいちばん多いのは「収集」で<em>54.7%</em>を占め、所有やコレクションが動機の中心になっています。特典映像を目当てに買われる音楽ビデオも、いまだ年<em>562億円</em>の市場が残っています。</p>
         <span class="src">出典：CD購入理由調査（要再確認）／RIAJ</span>
       </div>
 
       <div class="reason">
+        <img src="assets/reason_bubble.png" alt="本人から素のメッセージが届くアプリのイラスト">
         <span class="rno"><span class="gl">✦</span>05</span>
         <h4>本人とのつながりに払う額</h4>
-        <img src="assets/reason_bubble.png" alt="本人から素のメッセージが届くアプリのイラスト">
         <p>bubbleでは<em>月額 約500円</em>で本人の素のメッセージが届き、すでに<em>200万人</em>を超える人が課金しています。2024年の売上は<em>約80億円</em>との見方もあり、素の日常へお金を払う行動は先行事例として確立しています。</p>
         <span class="src">出典：bubble（DearU）報道（要再確認）</span>
       </div>

@@ -241,12 +241,13 @@
   .donut-legend{font-size:13.5px;font-weight:700;line-height:2;}
   .lg{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px;vertical-align:middle;}
   /* 購入される理由（横スクロールのカード列） */
-  .reasonbuy{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:6px 4px 22px;margin:0 -4px;scrollbar-width:thin;}
-  .rb-item{flex:0 0 auto;width:clamp(240px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;}
-  .rb-body h3{font-size:clamp(16px,2vw,19px);margin:0 0 12px;line-height:1.45;}
+  .reasonbuy{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:6px 4px 22px;margin:0 -4px;scrollbar-width:thin;max-width:100%;}
+  .rb-item{flex:0 0 auto;width:clamp(300px,84vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;}
+  .rb-item h3{font-size:clamp(16px,2vw,19px);margin:0 0 10px;line-height:1.45;}
   .rb-media{margin:0 0 14px;}
-  .rb-media img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;}
-  .rb-body p{font-weight:600;margin:0 0 .6em;opacity:.92;font-size:14px;line-height:1.7;}
+  .rb-media img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block;}
+  .rb-body{display:flex;flex-direction:column;flex:1 1 auto;}
+  .rb-body p{font-weight:600;margin:0 0 .6em;opacity:.92;font-size:13.5px;line-height:1.7;}
   .rb-body p em{color:var(--red);font-weight:800;font-style:normal;}
   .rb-src{display:block;font-size:11px;font-weight:700;opacity:.55;letter-spacing:.01em;line-height:1.5;margin-top:auto;}
   .rb-hint{font-size:12px;font-weight:700;color:var(--red);opacity:.7;letter-spacing:.04em;margin:-4px 0 14px;}
@@ -709,40 +710,40 @@
     <p class="rb-hint">← 横にスクロールして見る →</p>
     <div class="reasonbuy">
       <div class="rb-item">
-        <h3>ライブで物販を買う額</h3>
         <div class="rb-media"><img src="assets/reason_merch.png" alt="ライブ物販で一点もののグッズを手にするファンのイメージ"></div>
+        <h3>ライブで物販を買う額</h3>
         <div class="rb-body">
           <p>ライブに行くファンはグッズに1年で平均<em>約22,000円</em>を使っていて、なかでもアイドル系の購入率は<em>75.4%</em>にのぼります。手元に残る一点ものにお金を払うのは、もう当たり前の行動になっています。</p>
           <span class="rb-src">出典：ぴあ総研／インテージ（2019, n=916・やや古く要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <h3>チェキに払っている額</h3>
         <div class="rb-media"><img src="assets/reason_cheki.png" alt="その場で撮るチェキ＝一点ものを買うファンのイメージ"></div>
+        <h3>チェキに払っている額</h3>
         <div class="rb-body">
           <p>チェキは1枚<em>約1,500円</em>ほどで、ライブアイドルの収入の半分以上を支えています。コピーできない“その場の一点もの”だから払われ、instaxは<em>累計1億台</em>・年 約1,500億円規模の文化に育ちました。</p>
           <span class="rb-src">出典：富士フイルム公式（2025）ほか取材記事（要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <h3>推し活グッズに使う額</h3>
         <div class="rb-media"><img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めて飾るファンのイメージ"></div>
+        <h3>推し活グッズに使う額</h3>
         <div class="rb-body">
           <p>推し活をしている人は、1年間でグッズに平均<em>約4万円</em>ほどを使っています。応援を“かたち”にして手元に残すことに、ファンはすでにお金を払っています。</p>
           <span class="rb-src">出典：Oshicoco 調査（2024, n=210・要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <h3>所有・収集の文化</h3>
         <div class="rb-media"><img src="assets/reason_cd.png" alt="CDや映像メディアを集めて所有するイメージ"></div>
+        <h3>所有・収集の文化</h3>
         <div class="rb-body">
           <p>CDを買う理由でいちばん多いのは「収集のため」で<em>54.7%</em>を占め、特典映像つきの音楽ビデオも年<em>562億円</em>ほどがつくられています。“集めたい・映像を所有したい”は、いまも強い購入の動機です。</p>
           <span class="rb-src">出典：収集54.7%＝Appliv／ナイル調べ（要再確認）／562億円＝RIAJ公式（2024）</span>
         </div>
       </div>
       <div class="rb-item">
-        <h3>本人とのつながりに払う額</h3>
         <div class="rb-media"><img src="assets/reason_bubble.png" alt="本人からの素のメッセージが毎日届くアプリのイメージ"></div>
+        <h3>本人とのつながりに払う額</h3>
         <div class="rb-body">
           <p>本人の素のメッセージが届くbubbleには<em>月額約500円</em>を<em>200万人超</em>が払っていて、2024年の売上は<em>約80億円</em>とも言われます。素の日常そのものに、毎月お金を払う習慣はすでに成立しています。</p>
           <span class="rb-src">出典：bubble（DearU）／売上はウォン建て・報道差あり（要再確認）</span>
