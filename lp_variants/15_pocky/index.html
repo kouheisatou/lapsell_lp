@@ -241,20 +241,20 @@
   .donut-legend{font-size:13.5px;font-weight:700;line-height:2;}
   .lg{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px;vertical-align:middle;}
   /* 購入される理由（枠なしリスト） */
-  .reasonbuy{max-width:760px;margin:0 auto;}
-  .rb-item{display:flex;gap:22px;align-items:flex-start;padding:26px 0;}
+  .reasonbuy{max-width:840px;margin:0 auto;}
+  .rb-item{display:grid;grid-template-columns:132px 1fr;gap:26px;align-items:flex-start;padding:30px 0;}
   .rb-item+.rb-item{border-top:1.5px dashed rgba(35,24,21,.18);}
-  .rb-ico{width:40px;height:40px;flex:0 0 auto;color:var(--red);margin-top:4px;}
+  .rb-media img{width:100%;height:auto;border-radius:10px;}
   .rb-body h3{font-size:clamp(17px,2.2vw,21px);margin:0 0 .4em;line-height:1.5;}
   .rb-body p{font-weight:600;margin:0 0 .5em;opacity:.92;font-size:14.5px;}
-  .rb-body p strong{color:var(--red);font-weight:800;}
+  .rb-body p em{color:var(--red);font-weight:800;font-style:normal;}
   .rb-src{display:block;font-size:11.5px;font-weight:700;opacity:.55;letter-spacing:.01em;}
-  @media(max-width:560px){.rb-item{gap:14px;}.rb-ico{width:32px;height:32px;}}
+  @media(max-width:560px){.rb-item{grid-template-columns:1fr;gap:14px;}.rb-media img{max-width:200px;}}
 
   /* ファンへの届け方（購入導線） */
   .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:38px 30px;max-width:920px;margin:0 auto;}
   @media(max-width:720px){.deliver{grid-template-columns:1fr;max-width:420px;gap:32px;}}
-  .dv .dv-ico{width:72px;height:72px;color:var(--red);margin-bottom:14px;}
+  .dv .dv-img{width:100%;height:auto;border-radius:10px;margin-bottom:16px;}
   .dv .dv-no{font-size:12px;font-weight:800;letter-spacing:.18em;color:var(--red);}
   .dv h3{font-size:18px;margin:.35em 0 .4em;line-height:1.5;}
   .dv p{font-weight:600;font-size:14px;opacity:.88;margin:0;line-height:1.7;}
@@ -581,28 +581,19 @@
     <div class="deliver">
       <div class="dv">
         <div class="dv-no">01</div>
-        <svg class="dv-ico" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="10" y="38" width="22" height="22" rx="2"/><path d="M15 43h4v4h-4zM23 43h4v4h-4zM15 51h4v4h-4zM27 51v4M23 51h0"/>
-          <rect x="40" y="14" width="22" height="32" rx="3"/><path d="M46 40h10"/><circle cx="51" cy="24" r="4"/>
-        </svg>
+        <img class="dv-img" src="assets/deliver_qr.png" alt="物販ブースにグッズと並べて出品リンクのQRコードを置くイメージ">
         <h3>物販ブースにQRを並べて置く</h3>
         <p>チェキやグッズの隣に出品リンクのQRを1枚。物販と一緒に「練習の時間」も買ってもらえます。</p>
       </div>
       <div class="dv">
         <div class="dv-no">02</div>
-        <svg class="dv-ico" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 40v8a4 4 0 0 0 4 4h12"/><path d="M22 40V26a4 4 0 0 1 4-4h6"/>
-          <path d="M40 20l16-6-4 16-6-2-3 8-3-12z"/><circle cx="46" cy="44" r="3"/>
-        </svg>
+        <img class="dv-img" src="assets/deliver_sns.png" alt="X・Instagramのプロフィールやストーリーで出品リンクを告知するイメージ">
         <h3>SNSで告知する</h3>
         <p>X・Instagramのプロフィールやストーリーに出品リンクを。いつものフォロワーに、そのままお知らせ。</p>
       </div>
       <div class="dv">
         <div class="dv-no">03</div>
-        <svg class="dv-ico" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="30" y="14" width="12" height="24" rx="6"/><path d="M22 32a14 14 0 0 0 28 0M36 46v8M28 54h16"/>
-          <path d="M52 22h10v8h-6l-4 3z"/>
-        </svg>
+        <img class="dv-img" src="assets/deliver_mc.png" alt="ライブのMCや特典会、ファンクラブ・LINEの通知で案内するイメージ">
         <h3>ライブMC・特典会／FC・LINEで案内</h3>
         <p>ステージのMCや特典会でひとこと。ファンクラブやLINEの通知に乗せれば、熱量の高い人へ確実に届きます。</p>
       </div>
@@ -716,42 +707,42 @@
     <p class="sec-sub">大事なのは「市場が大きいか」ではありません。ファンはすでに、<span class="mark">“一点もの・素のもの・本人とのつながり”</span>に実際のお金を払っています。Lapsellの「素の一点もの」も、同じ理由で買われます。</p>
     <div class="reasonbuy">
       <div class="rb-item">
-        <svg class="rb-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h20l-2 14H8z"/><path d="M11 12V8a5 5 0 0 1 10 0v4"/></svg>
+        <div class="rb-media"><img src="assets/reason_merch.png" alt="ライブ物販で一点もののグッズを手にするファンのイメージ"></div>
         <div class="rb-body">
-          <h3>現場で“所有する”行動は、もう当たり前。</h3>
-          <p>ライブ参加者のグッズ購入は<strong>年平均 約22,000円</strong>、なかでもアイドル系の購入率は<strong>75.4%</strong>。手元に残る一点ものへの支払いは、すでに定着した行動です。</p>
+          <h3>ライブで物販を買う額</h3>
+          <p>ライブに行くファンはグッズに1年で平均<em>約22,000円</em>を使っていて、なかでもアイドル系の購入率は<em>75.4%</em>にのぼります。手元に残る一点ものにお金を払うのは、もう当たり前の行動になっています。</p>
           <span class="rb-src">出典：ぴあ総研／インテージ（2019, n=916・やや古く要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <svg class="rb-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="22" height="18" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M9 11h2"/></svg>
+        <div class="rb-media"><img src="assets/reason_cheki.png" alt="その場で撮るチェキ＝一点ものを買うファンのイメージ"></div>
         <div class="rb-body">
-          <h3>チェキ＝“その場の一点もの”が、ライブアイドルの主収入。</h3>
-          <p>チェキ1枚は<strong>約1,500円</strong>で、収入の半分以上を支える存在。「コピーできない一点もの」だから払われます。instaxは<strong>累計1億台</strong>、年 約1,500億円規模の文化です。</p>
+          <h3>チェキに払っている額</h3>
+          <p>チェキは1枚<em>約1,500円</em>ほどで、ライブアイドルの収入の半分以上を支えています。コピーできない“その場の一点もの”だから払われ、instaxは<em>累計1億台</em>・年 約1,500億円規模の文化に育ちました。</p>
           <span class="rb-src">出典：富士フイルム公式（2025）ほか取材記事（要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <svg class="rb-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 28s-11-6.5-11-14a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 7.5-11 14-11 14z"/></svg>
+        <div class="rb-media"><img src="assets/reason_oshikatsu.png" alt="推し活グッズを集めて飾るファンのイメージ"></div>
         <div class="rb-body">
-          <h3>推し活グッズには、年 約4万円を使っている。</h3>
-          <p>推し活層が1年間でグッズにかける金額は<strong>平均 約4万円</strong>。応援を“かたち”にして手元に残すことに、人はすでにお金を払っています。</p>
+          <h3>推し活グッズに使う額</h3>
+          <p>推し活をしている人は、1年間でグッズに平均<em>約4万円</em>ほどを使っています。応援を“かたち”にして手元に残すことに、ファンはすでにお金を払っています。</p>
           <span class="rb-src">出典：Oshicoco 調査（2024, n=210・要再確認）</span>
         </div>
       </div>
       <div class="rb-item">
-        <svg class="rb-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="20" height="20" rx="2"/><path d="M11 11h10M11 16h10M11 21h6"/></svg>
+        <div class="rb-media"><img src="assets/reason_cd.png" alt="CDや映像メディアを集めて所有するイメージ"></div>
         <div class="rb-body">
-          <h3>「集めたい」「映像を所有したい」が、購入の動機。</h3>
-          <p>CD購入理由の1位は<strong>「収集のため」54.7%</strong>。特典映像つきの所有メディア（音楽ビデオ）も<strong>562億円</strong>の生産規模。“集める・所有する”は今も強い動機です。</p>
+          <h3>所有・収集の文化</h3>
+          <p>CDを買う理由でいちばん多いのは「収集のため」で<em>54.7%</em>を占め、特典映像つきの音楽ビデオも年<em>562億円</em>ほどがつくられています。“集めたい・映像を所有したい”は、いまも強い購入の動機です。</p>
           <span class="rb-src">出典：収集54.7%＝Appliv／ナイル調べ（要再確認）／562億円＝RIAJ公式（2024）</span>
         </div>
       </div>
       <div class="rb-item">
-        <svg class="rb-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21a6 6 0 1 1 6-6"/><path d="M16 6v9l6 3"/><circle cx="16" cy="15" r="11"/></svg>
+        <div class="rb-media"><img src="assets/reason_bubble.png" alt="本人からの素のメッセージが毎日届くアプリのイメージ"></div>
         <div class="rb-body">
-          <h3>“素の日常”そのものに、毎月お金が払われている。</h3>
-          <p>本人の素のメッセージが届くbubbleは<strong>月額約500円・200万人超</strong>が課金し、<strong>2024年売上 約80億円</strong>との見方も。素の日常への日常的な課金は、すでに成立しています。</p>
+          <h3>本人とのつながりに払う額</h3>
+          <p>本人の素のメッセージが届くbubbleには<em>月額約500円</em>を<em>200万人超</em>が払っていて、2024年の売上は<em>約80億円</em>とも言われます。素の日常そのものに、毎月お金を払う習慣はすでに成立しています。</p>
           <span class="rb-src">出典：bubble（DearU）／売上はウォン建て・報道差あり（要再確認）</span>
         </div>
       </div>
