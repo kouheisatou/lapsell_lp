@@ -298,11 +298,33 @@ header{
 .bar-it .bl{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:6px}
 .bar-track{height:16px;background:#EEF2F6;border-radius:9px;overflow:hidden}
 .bar-fill{height:100%;border-radius:9px;background:var(--grad)}
+/* purchase-reason figure list (borderless) */
+.reasons{max-width:820px;margin:0 auto;display:flex;flex-direction:column}
+.reason{display:grid;grid-template-columns:46px 1fr;gap:18px;align-items:start;padding:22px 0;border-bottom:1px solid var(--line)}
+.reason:last-child{border-bottom:none}
+.reason .ri{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(30,200,194,.14),rgba(4,140,242,.16));color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
+.reason .ri .icn{width:23px;height:23px}
+.reason .rtxt h4{font-size:17px;font-weight:700;line-height:1.55;margin-bottom:7px;color:var(--ink)}
+.reason .figs{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:6px}
+.reason .fig{display:flex;align-items:baseline;gap:7px;font-size:14.5px;color:#3a4654;line-height:1.6}
+.reason .fig .n{font-size:19px;font-weight:800;color:var(--blue);letter-spacing:-.01em}
+.reason .src{font-size:12px;color:var(--muted);line-height:1.6}
 .proof-short{display:grid;grid-template-columns:236px 1fr;gap:30px;align-items:center;max-width:780px;margin:0 auto}
 .proof-short .ph{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .proof-short .ph img{width:100%;height:auto}
 .proof-short p{font-size:15px;line-height:1.9;color:#3a4654}
 .proof-short b{color:var(--ink)}
+
+/* ---------- reach (ファンへの届け方) ---------- */
+.reach{background:var(--graybg)}
+.reach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px;max-width:980px;margin:0 auto}
+.reach-it{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.reach-fig{width:128px;height:128px;display:flex;align-items:center;justify-content:center;color:var(--blue)}
+.reach-fig svg{width:100%;height:100%}
+.reach-it .step{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--turq)}
+.reach-it h4{font-size:17px;font-weight:700;line-height:1.5;color:var(--ink)}
+.reach-it p{font-size:14px;color:var(--muted);line-height:1.8}
+.reach-note{text-align:center;margin-top:38px;font-size:16px;font-weight:700;color:var(--ink);line-height:1.7}
 
 /* ---------- authenticity ---------- */
 .auth{background:linear-gradient(135deg,rgba(30,200,194,.08),rgba(4,140,242,.1))}
@@ -421,6 +443,8 @@ footer{background:#fff;padding:54px 0 0}
   .case-ba .arrow .icn{transform:rotate(90deg)}
   .proof-short{grid-template-columns:1fr;max-width:420px}
   .proof-short .ph{max-width:236px;margin:0 auto}
+  .reason{grid-template-columns:40px 1fr;gap:14px}
+  .reach-grid{grid-template-columns:1fr}
   .sec-title,.final h2{font-size:27px}
   section{padding:62px 0}
 }
@@ -810,9 +834,9 @@ footer{background:#fff;padding:54px 0 0}
 <!-- ===== PROOF ===== -->
 <section class="proof" id="proof">
   <div class="wrap">
-    <span class="eyebrow">EVIDENCE</span>
-    <h2 class="sec-title">“素”は、すでに数字を生んでいる</h2>
-    <p class="sec-lead">「練習なんて売れるの?」——その答えは、すでに世界中のファンが出しています。実際のデータと事例で確かめてください。</p>
+    <span class="eyebrow">購入される理由</span>
+    <h2 class="sec-title">なぜ買われるのか</h2>
+    <p class="sec-lead">論点は「市場が大きいか」ではありません。ファンはすでに“一点もの・素のコンテンツ・本人とのつながり”に実際のお金を払っています。Lapsellの「素の一点もの」も、同じ行動原理で買われます。</p>
 
     <div class="proof-block">
       <h3 class="proof-h">「練習動画」が、公式MVを超えて観られている</h3>
@@ -830,7 +854,7 @@ footer{background:#fff;padding:54px 0 0}
 
     <div class="proof-block">
       <h3 class="proof-h">ファンの約3人に1人が「払ってもいい」</h3>
-      <p class="proof-sub">推し活ファンへの自社アンケート（N=393）。“素の裏側”への支払い意向は計31.9%にのぼります。</p>
+      <p class="proof-sub">そもそも「“推し”の新たな一面が見えるのは嬉しい」と答えた人は75.3%（ネオマーケティング 2024・要再確認）。裏側への需要は確かにあり、推し活ファンへの自社アンケート（N=393）でも“素の裏側”への支払い意向は計31.9%（約3人に1人）にのぼります。</p>
       <div class="chart-row">
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 42 42" aria-label="支払い意向ドーナツ">
@@ -851,12 +875,69 @@ footer{background:#fff;padding:54px 0 0}
     </div>
 
     <div class="proof-block">
-      <h3 class="proof-h">「中身は届くまで分からない」文化は、すでに巨大な市場</h3>
-      <p class="proof-sub">何が出るか分からないランダム性は、日本のファン文化に深く根づいています。Lapsellも、中身は届くまで分からない仕組みです。</p>
-      <div class="bars">
-        <div class="bar-it"><div class="bl"><span>デジタルガチャ</span><span>約7,000億円</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
-        <div class="bar-it"><div class="bl"><span>トレカ国内市場（2022年）</span><span>約2,349億円</span></div><div class="bar-track"><div class="bar-fill" style="width:33.6%"></div></div></div>
-        <div class="bar-it"><div class="bl"><span>ライブBlu-ray・DVD（2024年）</span><span>約558億円</span></div><div class="bar-track"><div class="bar-fill" style="width:8%"></div></div></div>
+      <h3 class="proof-h">ファンは“一点もの・素・本人とのつながり”に、すでに払っている</h3>
+      <p class="proof-sub">完成品やランダム性が理由ではありません。「手元に残る一点もの」「素の日常」「本人の本物の時間」——その所有に、ファンはお金を払い続けています。</p>
+      <div class="reasons">
+
+        <div class="reason">
+          <span class="ri"><svg class="icn" viewBox="0 0 24 24"><path d="M6 7V6a3 3 0 013-3h6a3 3 0 013 3v1M4 7h16l-1 13a1 1 0 01-1 1H6a1 1 0 01-1-1z"/></svg></span>
+          <div class="rtxt">
+            <h4>ライブ物販＝“現場で一点ものを所有する”行動が定着している</h4>
+            <div class="figs">
+              <span class="fig"><span class="n">約22,000円</span>グッズ購入者の年間平均支出</span>
+              <span class="fig"><span class="n">75.4%</span>アイドル系ライブの購入率</span>
+            </div>
+            <p class="src">出典：ぴあ総研（インテージ委託）n=916／2019年・やや古いため要再確認</p>
+          </div>
+        </div>
+
+        <div class="reason">
+          <span class="ri"><svg class="icn" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M3 9h3"/></svg></span>
+          <div class="rtxt">
+            <h4>チェキ＝“その場でしか撮れない一点もの”が、ライブアイドルの主収入を支える</h4>
+            <div class="figs">
+              <span class="fig"><span class="n">約1,500円</span>チェキ1枚の相場（主収入を支える）</span>
+              <span class="fig"><span class="n">累計1億台・年約1,500億円</span>“一点ものの写真を所有する”文化</span>
+            </div>
+            <p class="src">出典：富士フイルム公式 2025／日経クロストレンド 2025。Lapsellは「動く・本人の本物の時間版チェキ」。</p>
+          </div>
+        </div>
+
+        <div class="reason">
+          <span class="ri"><svg class="icn" viewBox="0 0 24 24"><path d="M12 3l2.5 5.5 6 .5-4.6 4 1.4 5.9L12 16l-5.3 2.9 1.4-5.9-4.6-4 6-.5z"/></svg></span>
+          <div class="rtxt">
+            <h4>推し活グッズには、実際に大きな金額がかけられている</h4>
+            <div class="figs">
+              <span class="fig"><span class="n">約4万円</span>推し活層が1年間にグッズへかける平均</span>
+            </div>
+            <p class="src">出典：Oshicoco 調査 n=210／2024年・単一調査につき要再確認</p>
+          </div>
+        </div>
+
+        <div class="reason">
+          <span class="ri"><svg class="icn" viewBox="0 0 24 24"><path d="M4 7h13l3 3v7a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1z"/><path d="M8 7V5a1 1 0 011-1h6"/></svg></span>
+          <div class="rtxt">
+            <h4>所有・収集こそが、購入動機の中心になっている</h4>
+            <div class="figs">
+              <span class="fig"><span class="n">54.7%</span>CD購入理由1位は「収集（コレクション）」</span>
+              <span class="fig"><span class="n">562億円</span>音楽ビデオ（ライブ映像）の国内生産金額</span>
+            </div>
+            <p class="src">出典：CD購入理由＝Appliv／ナイル調べ 2023年・要再確認／音楽ビデオ＝日本レコード協会（RIAJ）公式 2024年（特典映像が購入動機）</p>
+          </div>
+        </div>
+
+        <div class="reason">
+          <span class="ri"><svg class="icn" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1121 11.5z"/></svg></span>
+          <div class="rtxt">
+            <h4>“素の日常”そのものへの課金は、すでに成立している</h4>
+            <div class="figs">
+              <span class="fig"><span class="n">月額約500円</span>本人の“素の日常”メッセージ</span>
+              <span class="fig"><span class="n">世界200万人超</span>が課金（2024売上 約80億円）</span>
+            </div>
+            <p class="src">出典：bubble（DearU）。売上はウォン建て・報道差につき要再確認。“素の日常”課金が先行事例として確立。</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -868,6 +949,68 @@ footer{background:#fff;padding:54px 0 0}
         <p><b>「練習風景だけで笑える 10年目アイドル #seventeen」｜895,794回再生・高評価2万超。</b><br>作り込んでいない素の瞬間ほど、ファンは「これ見て!」と広めたくなります。漏れて広まるのは損ではなく、無料の宣伝です。</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== REACH (ファンへの届け方) ===== -->
+<section class="reach" id="reach">
+  <div class="wrap">
+    <span class="eyebrow">DELIVERY</span>
+    <h2 class="sec-title">ファンへの届け方</h2>
+    <p class="sec-lead">新規集客は要りません。いまあるファン接点にそのまま乗せて売れます。物販・SNS・現場での案内——使い慣れた場所で、いつもの応援の延長として届きます。</p>
+    <div class="reach-grid">
+
+      <div class="reach-it">
+        <div class="reach-fig" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="14" y="14" width="34" height="34" rx="4"/>
+            <rect x="25" y="25" width="12" height="12" rx="2" fill="currentColor" stroke="none"/>
+            <rect x="80" y="14" width="34" height="34" rx="4"/>
+            <rect x="91" y="25" width="12" height="12" rx="2" fill="currentColor" stroke="none"/>
+            <rect x="14" y="80" width="34" height="34" rx="4"/>
+            <rect x="25" y="91" width="12" height="12" rx="2" fill="currentColor" stroke="none"/>
+            <path d="M80 80h10v10M114 80v10M80 104v10h10M104 104h10"/>
+            <rect x="98" y="98" width="8" height="8" rx="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <span class="step">01 物販ブース</span>
+        <h4>物販と一緒に、QRを並べて置くだけ</h4>
+        <p>ライブ物販ブースにQRコードを立てるだけ。グッズを買う流れのまま、その場で“時間枠”も手に取ってもらえます。</p>
+      </div>
+
+      <div class="reach-it">
+        <div class="reach-fig" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="40" y="10" width="48" height="92" rx="9"/>
+            <circle cx="64" cy="30" r="7"/>
+            <rect x="50" y="44" width="28" height="6" rx="3" fill="currentColor" stroke="none"/>
+            <rect x="50" y="56" width="20" height="5" rx="2.5" fill="currentColor" stroke="none"/>
+            <path d="M50 74h28v18a2 2 0 01-2 2H52a2 2 0 01-2-2z"/>
+            <path d="M58 84l6 5 8-8" stroke-width="3"/>
+            <path d="M94 60c10 0 18 6 18 14s-8 14-18 14h-3l-7 5 1-6c-5-3-9-7-9-13"/>
+          </svg>
+        </div>
+        <span class="step">02 SNSで告知</span>
+        <h4>X・Instagramのプロフィールやストーリーに</h4>
+        <p>出品リンクをプロフィールやストーリーに貼るだけ。いつもの投稿の延長で、フォロワーに直接届きます。</p>
+      </div>
+
+      <div class="reach-it">
+        <div class="reach-fig" aria-hidden="true">
+          <svg viewBox="0 0 128 128" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M30 44h44l22-14v52L74 68H30a8 8 0 01-8-8V52a8 8 0 018-8z"/>
+            <path d="M40 80c0 8 3 14 7 18" />
+            <circle cx="100" cy="92" r="14"/>
+            <path d="M94 92l4 4 8-8" stroke-width="3"/>
+          </svg>
+        </div>
+        <span class="step">03 現場・FCで案内</span>
+        <h4>ライブMC・特典会、ファンクラブ／LINEで通知</h4>
+        <p>MCや特典会でひと言伝える、ファンクラブやLINEで通知する。会えるファンにも、会えないファンにも届きます。</p>
+      </div>
+
+    </div>
+    <p class="reach-note">集客をやり直さなくていい。いまのファン接点に乗せるだけで、販売がはじまります。</p>
   </div>
 </section>
 
