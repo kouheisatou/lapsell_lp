@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapsell（ラプセル）｜練習の時間を、収益に変えるアプリ｜ライブアイドル・インディーズアーティストの収益化</title>
+<meta name="description" content="ライブアイドル・インディーズアーティスト・バンド本人のためのアプリ。練習の“時間”を出品し、加工なしの裏側をランダムデジタルグッズとして販売。初期費用0円・取引手数料5%〜。スマホで撮るだけ、編集不要。">
+<meta name="keywords" content="ライブアイドル 収益化,アイドル 収入 増やす,インディーズ アーティスト 収益化,バンド マネタイズ,練習動画 収益化,ファングッズ 販売,デジタルグッズ 販売,推し活 マネタイズ,ファンに直接販売 アプリ">
+<meta property="og:title" content="Lapsell（ラプセル）｜練習の時間を、収益に変えるアプリ">
+<meta property="og:description" content="練習の“時間”を出品し、加工なしの裏側をランダムデジタルグッズとして販売。初期費用0円・取引手数料5%〜。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e1e1e;
+  --ink-soft:#5a5a5a;
+  --ink-faint:#8c8c8c;
+  --line:#ebebeb;
+  --line-soft:#f2f2f2;
+  --bg:#ffffff;
+  --bg-grey:#f7f7f7;
+  --brand:#bf0000;
+  --brand-soft:#fbeaea;
+  --link:#0556b3;
+  --radius:8px;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  font-weight:300;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+.eyebrow{
+  font-size:14px;font-weight:700;color:var(--brand);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;
+  display:block;text-align:center;
+}
+.sec-title{
+  font-size:28px;font-weight:600;text-align:center;line-height:1.5;
+  letter-spacing:.01em;color:var(--ink);
+}
+.sec-lead{
+  text-align:center;color:var(--ink-soft);max-width:680px;margin:18px auto 0;
+  font-size:15.5px;font-weight:300;
+}
+section{padding:84px 0}
+.grey{background:var(--bg-grey)}
+
+.ico{width:22px;height:22px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line);
+}
+.hbar{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-size:21px;font-weight:700;letter-spacing:.02em}
+.logo b{color:var(--brand);font-weight:700}
+.hnav{display:flex;align-items:center;gap:26px}
+.hnav a{font-size:14px;color:var(--ink-soft);font-weight:400}
+.hnav a:hover{color:var(--ink)}
+.btn-outline{
+  border:1.5px solid var(--brand);color:var(--brand);border-radius:4px;
+  padding:9px 18px;font-size:14px;font-weight:500;background:#fff;white-space:nowrap;
+}
+.btn-outline:hover{background:var(--brand-soft)}
+.hnav .links{display:flex;gap:26px}
+@media(max-width:860px){.hnav .links{display:none}}
+
+/* Hero */
+.hero{padding:64px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:40px;font-weight:600;line-height:1.45;letter-spacing:.005em;margin-bottom:22px}
+.hero h1 .mk{background:var(--brand);color:#fff;padding:.04em .22em;border-radius:3px;font-weight:600}
+.hero p.sub{font-size:17px;color:var(--ink-soft);font-weight:300;margin-bottom:30px;line-height:1.9}
+.dl-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.dl-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:6px;padding:13px 22px;font-size:15px;font-weight:400}
+.dl-btn.alt{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.dl-btn:hover{opacity:.9}
+.hero-note{margin-top:18px;font-size:13px;color:var(--ink-faint);display:flex;align-items:center;gap:8px}
+.hero-note .ico{width:17px;height:17px;color:var(--brand)}
+
+/* phone mock */
+.phone{width:268px;aspect-ratio:9/19.3;background:#0c0c0c;border-radius:38px;padding:11px;margin:0 auto;box-shadow:0 30px 60px -28px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.06);position:relative}
+.phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:74px;height:6px;background:#262626;border-radius:4px}
+.screen{width:100%;height:100%;background:#fff;border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+.s-status{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 5px;font-size:9.5px;color:var(--ink-faint);font-weight:500}
+.s-head{padding:3px 14px 10px;border-bottom:1px solid var(--line-soft)}
+.s-head .t{font-size:12px;font-weight:600}
+.s-head .d{font-size:10px;color:var(--ink-faint)}
+.s-body{flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:9px}
+.listing{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.listing .thumb{width:100%;aspect-ratio:16/10;object-fit:cover}
+.listing .meta{padding:7px 9px}
+.listing .meta .row{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.listing .ti{font-size:10.5px;font-weight:600}
+.listing .price{font-size:11.5px;font-weight:700;color:var(--brand);white-space:nowrap}
+.listing .sub{font-size:9.5px;color:var(--ink-faint);margin-top:2px}
+.tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--brand-soft);color:var(--brand)}
+.s-cta{margin:auto 12px 12px;background:var(--ink);color:#fff;text-align:center;border-radius:8px;padding:9px;font-size:11px;font-weight:500}
+
+/* core mechanic */
+.mech{padding:84px 0}
+.mech-flow{display:flex;gap:18px;margin-top:42px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px}
+.mech-flow .cell{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;padding:30px 26px;position:relative;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+.mech-flow .n{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.1em}
+.mech-flow .h{font-size:18px;font-weight:600;margin:10px 0 8px}
+.mech-flow .b{font-size:14px;color:var(--ink-soft);font-weight:300}
+.mech-flow .ico{width:26px;height:26px;color:var(--brand);margin-bottom:6px}
+.mech-flow .how-img{width:84px;height:84px;object-fit:contain;margin-bottom:12px}
+@media(max-width:760px){.mech-flow .cell{width:clamp(260px,84vw,320px)}}
+
+/* Problem */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.prob-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.prob-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#fafafa}
+.prob-card .pc{padding:26px 28px 30px}
+.prob-card .who{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.06em}
+.prob-card h3{font-size:20px;font-weight:600;margin:8px 0 14px;line-height:1.5}
+.prob-card ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.prob-card li{display:flex;gap:11px;font-size:14.5px;color:var(--ink-soft);font-weight:300}
+.prob-card li .ico{width:19px;height:19px;color:var(--ink-faint);flex-shrink:0;margin-top:3px}
+.prob-note{text-align:center;margin-top:36px;font-size:16px;color:var(--ink);font-weight:400}
+@media(max-width:760px){.prob-grid{grid-template-columns:1fr}}
+
+/* Function numbered list */
+.func-item{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center;padding:56px 0}
+.func-item:not(:last-child){border-bottom:1px solid var(--line)}
+.func-item.flip .ftext{order:2}
+.func-num{font-size:14px;font-weight:700;color:var(--brand);letter-spacing:.08em;margin-bottom:12px}
+.func-item h3{font-size:24px;font-weight:600;line-height:1.5;margin-bottom:16px}
+.func-item p{font-size:15.5px;color:var(--ink-soft);font-weight:300;line-height:1.95}
+.func-item .ev{margin-top:18px;font-size:13.5px;color:var(--ink);background:var(--bg-grey);border-left:3px solid var(--brand);padding:12px 16px;border-radius:4px;font-weight:400}
+.func-img-wrap{display:flex;justify-content:center}
+.func-img-wrap img{border-radius:var(--radius);width:100%;max-width:440px}
+@media(max-width:760px){.func-item,.func-item.flip{grid-template-columns:1fr;gap:26px}.func-item.flip .ftext{order:0}}
+
+/* Cases (Before/After) */
+.cases-list{margin-top:54px;display:flex;flex-direction:column;gap:0}
+.case-row{display:grid;grid-template-columns:96px 1fr;gap:30px;align-items:start;padding:38px 0}
+.case-row:not(:last-child){border-bottom:1px solid var(--line)}
+.case-persona img{width:96px;height:96px;border-radius:50%;object-fit:cover;background:var(--bg-grey)}
+.case-persona .pname{margin-top:12px;font-size:15px;font-weight:600;color:var(--ink);text-align:center}
+.case-persona .pdesc{margin-top:2px;font-size:12.5px;color:var(--ink-faint);font-weight:300;text-align:center;line-height:1.6}
+.case-ba{display:grid;grid-template-columns:1fr 40px 1fr;gap:20px;align-items:center}
+.case-ba .ba-col .lab{font-size:12px;font-weight:700;letter-spacing:.08em;margin-bottom:8px}
+.case-ba .before .lab{color:var(--ink-faint)}
+.case-ba .after .lab{color:var(--brand)}
+.case-ba .ba-col p{font-size:14.5px;font-weight:300;line-height:1.85}
+.case-ba .before p{color:var(--ink-soft)}
+.case-ba .after p{color:var(--ink)}
+.case-arrow{display:flex;align-items:center;justify-content:center;color:var(--brand)}
+.case-arrow .ico{width:30px;height:30px;stroke-width:1.6}
+@media(max-width:760px){
+  .case-row{grid-template-columns:1fr;gap:20px;text-align:left}
+  .case-persona{display:flex;align-items:center;gap:14px}
+  .case-persona img{width:60px;height:60px}
+  .case-persona .pname{margin-top:0;text-align:left}
+  .case-persona .pdesc{margin-top:2px;text-align:left}
+  .case-ba{grid-template-columns:1fr;gap:14px}
+  .case-arrow{justify-content:flex-start;transform:rotate(90deg);width:30px}
+}
+
+/* Flow mocks */
+.flow-mocks{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:48px;margin-top:46px;justify-content:center}
+.flow-mocks .phone{margin:0 auto;width:240px}
+.flow-cap{text-align:center;margin-top:16px;font-size:14px;color:var(--ink-soft)}
+.flow-cap b{font-weight:600;color:var(--ink)}
+.flow-subcap{display:block;margin-top:5px;font-size:12px;color:var(--ink-faint);font-weight:300}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+.play-btn svg{width:20px;height:20px;margin-left:2px}
+.flow-actions{display:flex;gap:8px;margin:auto 14px 14px}
+.fa-btn{flex:1;text-align:center;border-radius:8px;padding:9px;font-size:11px;font-weight:600;background:#f2f2f2;color:var(--ink)}
+.fa-btn.primary{background:var(--ink);color:#fff}
+@media(max-width:760px){.flow-mocks{grid-template-columns:1fr}}
+
+/* Evidence */
+.ev-lead{font-size:16px;color:var(--ink-soft);text-align:center;max-width:640px;margin:16px auto 0;font-weight:300}
+.ev-block{margin-top:46px}
+.ev-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:flex-start}
+.ev-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.ev-card .cap{padding:18px 22px 22px}
+.ev-card h4{font-size:17px;font-weight:600;line-height:1.5;margin-bottom:6px}
+.ev-card p{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+.ev-wide img{width:100%;height:auto;display:block}
+.ev-short{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:30px}
+.ev-short img{width:200px;height:auto;border-radius:6px}
+.ev-short h4{font-size:18px;font-weight:600;margin-bottom:8px;line-height:1.5}
+.ev-short p{font-size:14.5px;color:var(--ink-soft);font-weight:300}
+@media(max-width:760px){.ev-row{grid-template-columns:1fr}.ev-short{grid-template-columns:1fr;text-align:center}.ev-short img{margin:0 auto}}
+
+/* charts */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:30px}
+.chart-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px}
+.chart-card .h{font-size:17px;font-weight:600;margin-bottom:4px;line-height:1.5}
+.chart-card .l{font-size:13px;color:var(--ink-faint);font-weight:300;margin-bottom:22px}
+.donut-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.donut{width:140px;height:140px;flex-shrink:0}
+.legend{display:flex;flex-direction:column;gap:9px;font-size:13px;font-weight:300}
+.legend .li{display:flex;align-items:center;gap:9px;color:var(--ink-soft)}
+.legend .sw{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.legend b{font-weight:600;color:var(--ink)}
+.bar-row{display:flex;flex-direction:column;gap:16px}
+.bar-item .top{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.bar-item .top .v{font-weight:600}
+.bar-track{height:12px;background:var(--line-soft);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;background:var(--brand);border-radius:6px}
+.src{font-size:11.5px;color:var(--ink-faint);font-weight:300;margin-top:5px;line-height:1.6}
+@media(max-width:760px){.chart-grid{grid-template-columns:1fr}}
+
+/* Purchase reasons (horizontal scroller of title+image+text+source cards) */
+.reasons{
+  margin-top:38px;
+  display:flex;gap:22px;
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  padding:4px 0 18px;
+  scrollbar-width:thin;
+}
+.reason{
+  flex:0 0 auto;
+  width:clamp(240px,72vw,300px);
+  scroll-snap-align:start;
+  display:flex;flex-direction:column;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.reason .r-img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bg-grey)}
+.reason .r-head{font-size:16px;font-weight:600;line-height:1.55;padding:18px 22px 0}
+.reason .r-body{padding:12px 22px 22px;display:flex;flex-direction:column;flex:1}
+.reason p{font-size:13.5px;color:var(--ink-soft);font-weight:300;line-height:1.85}
+.reason .src{margin-top:auto;padding-top:12px}
+.reasons-hint{margin-top:6px;font-size:12.5px;color:var(--ink-faint);font-weight:300;display:flex;align-items:center;gap:7px}
+.reasons-hint .ico{width:16px;height:16px;color:var(--brand);flex-shrink:0}
+
+/* Reach: how to deliver to existing fans (borderless, hairline) */
+.reach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:46px}
+.reach-col{padding:0 30px}
+.reach-col:not(:last-child){border-right:1px solid var(--line)}
+.reach-col .n{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.1em;margin-bottom:18px}
+.reach-col h4{font-size:17px;font-weight:600;line-height:1.55;margin:0 0 8px}
+.reach-col p{font-size:14px;color:var(--ink-soft);font-weight:300;line-height:1.85}
+.reach-fig{margin-bottom:18px;display:flex;align-items:center;justify-content:center}
+.reach-fig img{width:100%;max-width:240px;height:auto;display:block}
+.reach-col .ico{color:var(--brand)}
+.reach-note{text-align:center;margin-top:42px;font-size:16px;color:var(--ink);font-weight:400}
+@media(max-width:760px){
+  .reach-grid{grid-template-columns:1fr}
+  .reach-col{padding:30px 0}
+  .reach-col:not(:last-child){border-right:none;border-bottom:1px solid var(--line)}
+}
+
+/* Authenticity */
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:44px}
+.auth-grid img{border-radius:var(--radius);width:100%;max-width:440px;margin:0 auto}
+.auth-list{list-style:none;display:flex;flex-direction:column;gap:22px}
+.auth-list li{display:flex;gap:16px}
+.auth-list .ico{width:24px;height:24px;color:var(--brand);flex-shrink:0;margin-top:3px}
+.auth-list h4{font-size:16.5px;font-weight:600;margin-bottom:4px}
+.auth-list p{font-size:14px;color:var(--ink-soft);font-weight:300}
+@media(max-width:760px){.auth-grid{grid-template-columns:1fr}}
+
+/* Comparison table */
+.cmp-wrap{margin-top:42px;border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto;background:#fff}
+table.cmp{width:100%;border-collapse:collapse;min-width:620px}
+table.cmp th,table.cmp td{padding:16px 18px;text-align:center;font-size:14px;border-bottom:1px solid var(--line);font-weight:300}
+table.cmp thead th{font-weight:600;color:var(--ink);background:var(--bg-grey);font-size:13.5px}
+table.cmp tbody th{text-align:left;font-weight:500;color:var(--ink);background:#fff}
+table.cmp .lap{background:var(--brand-soft)}
+table.cmp .lap-h{background:var(--brand);color:#fff;font-weight:600}
+table.cmp td .ico{width:19px;height:19px}
+.yes{color:var(--brand)}.no{color:var(--ink-faint)}
+.cmp-img{margin-top:30px;text-align:center}
+.cmp-img img{max-width:260px;margin:0 auto}
+
+/* Pricing */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:44px}
+.price-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:40px 42px}
+.price-row{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.price-row:last-child{border-bottom:none}
+.price-row .k{font-size:15px;color:var(--ink-soft);font-weight:300}
+.price-row .v{font-size:26px;font-weight:600;color:var(--ink)}
+.price-row .v small{font-size:14px;font-weight:400;color:var(--ink-soft)}
+.price-note{font-size:13px;color:var(--ink-faint);margin-top:18px;font-weight:300;line-height:1.8}
+.price-img img{border-radius:var(--radius);width:100%;max-width:380px;margin:0 auto}
+@media(max-width:760px){.price-grid{grid-template-columns:1fr}}
+
+/* Target */
+.target-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.target-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-align:center}
+.target-card img{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--bg-grey);padding:14px}
+.target-card .tc{padding:22px 24px 26px}
+.target-card h4{font-size:17px;font-weight:600;margin-bottom:8px}
+.target-card p{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+.target-out{margin-top:30px;text-align:center;font-size:13.5px;color:var(--ink-faint);font-weight:300}
+@media(max-width:760px){.target-grid{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq-list{max-width:760px;margin:42px auto 0;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 4px;font-size:16px;font-weight:600;color:var(--ink);font-family:inherit}
+.faq-q .ico{width:20px;height:20px;color:var(--brand);flex-shrink:0;transition:transform .25s}
+.faq-item.open .faq-q .ico{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.faq-a .inner{padding:0 4px 22px;font-size:14.5px;color:var(--ink-soft);font-weight:300;line-height:1.95}
+
+/* CTA */
+.cta{background:var(--ink);color:#fff;text-align:center;padding:80px 0}
+.cta h2{font-size:30px;font-weight:600;line-height:1.5;margin-bottom:14px}
+.cta p{color:#cfcfcf;font-size:16px;font-weight:300;margin-bottom:30px}
+.cta .dl-row{justify-content:center}
+.cta .dl-btn{background:#fff;color:var(--ink)}
+.cta .dl-btn.alt{background:transparent;color:#fff;border-color:#fff}
+.cta .note{margin-top:22px;font-size:13px;color:#9a9a9a;font-weight:300}
+
+/* Footer */
+footer{background:var(--bg-grey);padding:44px 0;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot .logo{font-size:18px}
+.foot .fl{display:flex;gap:22px;font-size:13px;color:var(--ink-soft);font-weight:300}
+.foot small{display:block;margin-top:20px;color:var(--ink-faint);font-size:12px;font-weight:300;line-height:1.7}
+
+@media(max-width:760px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:31px}
+  .sec-title{font-size:23px}
+  section{padding:64px 0}
+  .cta h2{font-size:24px}
+}
+.mech-flow .cell,.prob-card,.ev-card,.ev-short,.chart-card,.reason,.cmp-wrap,
+.price-box,.target-card,.listing,.phone{
+  border:0!important;
+  box-shadow:none!important;
+}
+.mech-flow .cell,.prob-card,.ev-card,.ev-short,.chart-card,.reason,.price-box,.target-card,.listing{
+  background:transparent!important;
+}
+.cmp-wrap{border-radius:0!important;}
+
+/* v2 final policy: whitespace and imagery separate content; framed card styling and big-number charts are suppressed. */
+:is(.card,.about-card,.app-card,.add-box,.core-card,.prob-card,.step-card,.chart-card,.reason-card,.reason,.case,.flow-step,.ev-card,.ev-cell,.ev-shot,.auth-step,.price-card,.price-item,.pricebox,.target-card,.tg-card,.faq-item,.q,.hook,.panel,.box,.metric,.stat,.badge,.benefit,.threshold-card,.letter-card,.mech-card,.val-card,.art-card,.bcard,.lcard,.rcard,.ph-card,.phone,.device,.store,details,table){
+  border:0!important;
+  box-shadow:none!important;
+}
+:is(.chart-card,.ev-card,.reason,.case,.price-card,.price-item,.target-card,.tg-card,.faq-item,.hook,.panel,.box,.metric,.stat,.badge,.benefit,.threshold-card,.letter-card,.mech-card,.val-card,.art-card,.bcard,.lcard,.rcard){
+  background:transparent!important;
+}
+:is(.donut,.donut-wrap svg,svg.donut,.chart-sep){display:none!important;}
+:is(.chart-row,.charts,.donut-row){display:block!important;}
+:is(.chart-head,.proof-sub,.chart-note){font-size:16px!important;line-height:1.9!important;text-align:left!important;max-width:760px!important;margin-left:0!important;margin-right:auto!important;}
+:is(.b-num,.pp-num,.pv,.big-n,.price-line .big,.adopt .big,.rn,.donut-center,.donut .ctr,.donut .center b,.donut .hole .big){font-size:inherit!important;display:inline!important;}
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="wrap hbar">
+    <div class="logo">Lap<b>sell</b></div>
+    <nav class="hnav">
+      <div class="links">
+        <a href="#mechanic">仕組み</a>
+        <a href="#function">できること</a>
+        <a href="#evidence">購入理由</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">よくある質問</a>
+      </div>
+      <a href="#cta" class="btn-outline">無料で出品をはじめる</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>練習時間出品アプリ</h1>
+      <p class="sub">Lapsellは、練習やリハの時間枠をスマホから出品できるアプリです。ファンは中身を知らずに購入し、撮影後に世界に1つのクリップを受け取れます。難しい設定や編集は必要ありません。</p>
+      <div class="dl-row">
+        <a href="#cta" class="dl-btn">
+          <svg class="ico" viewBox="0 0 24 24" style="color:#fff;width:18px;height:18px"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          無料で出品をはじめる
+        </a>
+        <a href="#mechanic" class="dl-btn alt">仕組みをみる</a>
+      </div>
+      <div class="hero-note">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-5"/></svg>
+        初期費用0円・取引手数料5%〜／まず1枠から試せます
+      </div>
+    </div>
+
+    <!-- HTML phone mock: 時間枠一覧 -->
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="s-status"><span>9:41</span><span>Lapsell</span></div>
+          <div class="s-head">
+            <div class="t">出品中の時間枠</div>
+            <div class="d">推しの“練習の時間”を購入する</div>
+          </div>
+          <div class="s-body">
+            <div class="listing">
+              <img class="thumb" src="assets/thumb_vocal.png" alt="ボーカル練習の時間枠">
+              <div class="meta">
+                <div class="row"><span class="ti">6/20(金) 19:00-21:00 ボーカル練習</span></div>
+                <div class="row"><span class="sub">542 / 720 区間</span><span class="price">¥300<small style="font-size:9px;color:#8c8c8c;font-weight:400"> / 1回</small></span></div>
+              </div>
+            </div>
+            <div class="listing">
+              <img class="thumb" src="assets/thumb_band.png" alt="バンド合わせの時間枠">
+              <div class="meta">
+                <div class="row"><span class="ti">6/21(土) 14:00-16:00 バンド合わせ</span></div>
+                <div class="row"><span class="sub">残りわずか</span><span class="price">¥500<small style="font-size:9px;color:#8c8c8c;font-weight:400"> / 1回</small></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="s-cta">この時間枠を購入する</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core mechanic -->
+<section class="mech grey" id="mechanic">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2 class="sec-title">仕組み</h2>
+    <p class="sec-lead">日時・価格を決めて出品し、当日撮影するだけ。金融アプリのように、機能を迷わず選べるシンプルな流れにしています。（横にスクロールできます）</p>
+    <div class="mech-flow">
+      <div class="cell">
+        <div class="n">STEP 1</div>
+        <img class="how-img" src="assets/how1.png" alt="練習の時間を出品するイメージ">
+        <div class="h">練習の時間を出品する</div>
+        <div class="b">これから行う練習やリハの「時間枠」を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</div>
+      </div>
+      <div class="cell">
+        <div class="n">STEP 2</div>
+        <img class="how-img" src="assets/how2.png" alt="本番をスマホで撮るだけのイメージ">
+        <div class="h">本番をスマホで撮るだけ</div>
+        <div class="b">当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</div>
+      </div>
+      <div class="cell">
+        <div class="n">STEP 3</div>
+        <img class="how-img" src="assets/how3.png" alt="ファンに届いて収益になるイメージ">
+        <div class="h">ファンに届いて収益になる</div>
+        <div class="b">購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして所有されます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section id="problem">
+  <div class="wrap">
+    <span class="eyebrow">Background</span>
+    <h2 class="sec-title">課題</h2>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <img src="assets/problem_fan.png" alt="ファンが推しの素の日常に近づけない様子">
+        <div class="pc">
+          <span class="who">ファンの困りごと</span>
+          <h3>素の日常</h3>
+          <ul>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>完成品しか届かず、見たい裏側が見られない。</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>現場でしか会えず、地理と時間に縛られる。</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>応援した証が、投げ銭も配信も流れて消える。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prob-card">
+        <img src="assets/problem_artist.png" alt="アーティストが裏側を収益化できない様子">
+        <div class="pc">
+          <span class="who">作り手の困りごと</span>
+          <h3>裏側の価値</h3>
+          <ul>
+            <li><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9l4-2v10l-4-2"/></svg>撮影・編集・投稿が大変で、続かない。</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2 18a2 2 0 001.7 3h16.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>ライブ配信は、失言や映り込みの事故が怖い。</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>裏側は再生数が取れず、だから撮られない。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="prob-note">「近さ」と「自分だけの所有」を、同時に満たす手段がこれまでありませんでした。</p>
+  </div>
+</section>
+
+<!-- Function (numbered, iGrow signature) -->
+<section class="grey" id="function">
+  <div class="wrap">
+    <span class="eyebrow">Function</span>
+    <h2 class="sec-title">機能</h2>
+    <p class="sec-lead">出品、撮影、受け取り、所有証明までをアプリの中で完結。初めてでも分かる機能単位で整理しました。</p>
+
+    <div class="func-item">
+      <div class="ftext">
+        <div class="func-num">01｜出品</div>
+        <h3>収益化</h3>
+        <p>練習の日時と価格を決めて出品するだけ。捨てていた練習や裏側が、新しい収益源になります。撮影は当日スマホで行い、編集はいりません。</p>
+        <div class="ev">“素”の時間には支払い意向があり、購入理由のセクションでもその根拠を確認できます。</div>
+      </div>
+      <div class="func-img-wrap"><img src="assets/appeal1.png" alt="練習の時間が収益になるイメージ"></div>
+    </div>
+
+    <div class="func-item flip">
+      <div class="ftext">
+        <div class="func-num">02｜将来価値</div>
+        <h3>将来価値</h3>
+        <p>「自分が見つけて支えた」という体験ごと、ファンは購入します。無名の今の一点ものが、ブレイクとともに価値を増していきます。</p>
+        <div class="ev">M!LKが下積み時代だった頃の練習風景を“あなただけ”が持っていたら——その重みが、将来価値です。</div>
+      </div>
+      <div class="func-img-wrap"><img src="assets/appeal2.png" alt="将来価値が上がるイメージ"></div>
+    </div>
+
+    <div class="func-item">
+      <div class="ftext">
+        <div class="func-num">03｜自然な拡散</div>
+        <h3>自然拡散</h3>
+        <p>ファンは自分だけが知る面白い瞬間を、シェアしたくなります。広まることは損ではなく、次のファンを呼ぶ“無料の宣伝”になります。</p>
+        <div class="ev">練習風景のショート動画が拡散され、新しいファンの入口になっています（実例は下のデータをご覧ください）。</div>
+      </div>
+      <div class="func-img-wrap"><img src="assets/appeal3.png" alt="SNSで拡散されるイメージ"></div>
+    </div>
+
+    <div class="func-item flip">
+      <div class="ftext">
+        <div class="func-num">04｜事故を防ぐ</div>
+        <h3>撮影</h3>
+        <p>ライブ配信と違い、撮影後にアップロードします。公開前に内容を確認できるので、まずい瞬間が世に出ることはありません。偶然の名場面だけが届きます。</p>
+        <div class="ev">本当の事故の瞬間は非公開＋返金、思いがけない良い瞬間はそのまま届く設計です。</div>
+      </div>
+      <div class="func-img-wrap"><img src="assets/appeal4.png" alt="配信事故を防ぐイメージ"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Cases (Before/After) -->
+<section id="cases">
+  <div class="wrap">
+    <span class="eyebrow">導入イメージ</span>
+    <h2 class="sec-title">導入イメージ</h2>
+    <p class="sec-lead">毎日の練習やリハ、ネタ合わせ。これまで収益にならなかった時間が、Lapsellでどう変わるのかをご紹介します。</p>
+
+    <div class="cases-list">
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_idol.png" alt="ライブアイドル">
+          <div class="pname">ライブアイドル</div>
+          <div class="pdesc">日々の練習・リハーサル</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-col before">
+            <div class="lab">これまで</div>
+            <p>遠方のファンとは現場でしか会えず、練習はただ過ぎていく。</p>
+          </div>
+          <div class="case-arrow" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="ba-col after">
+            <div class="lab">Lapsell後</div>
+            <p>練習の時間枠を出品。遠方のファンも“自分だけの一区間”を買え、練習が収入になった。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_band.png" alt="インディーズバンド">
+          <div class="pname">インディーズバンド</div>
+          <div class="pdesc">スタジオでの音合わせ</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-col before">
+            <div class="lab">これまで</div>
+            <p>スタジオ代がかさむのにリハを届ける手段がなく固定ファン止まり。</p>
+          </div>
+          <div class="case-arrow" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="ba-col after">
+            <div class="lab">Lapsell後</div>
+            <p>リハ風景を出品。買ったファンが拡散し、スタジオ代の足しと新規ファンを同時に得た。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-persona">
+          <img src="assets/artist_comedian.png" alt="インディーズお笑い芸人">
+          <div class="pname">インディーズお笑い芸人</div>
+          <div class="pdesc">ネタ合わせ・楽屋裏</div>
+        </div>
+        <div class="case-ba">
+          <div class="ba-col before">
+            <div class="lab">これまで</div>
+            <p>ネタ合わせは誰にも届かず収益ゼロ。配信は事故が怖い。</p>
+          </div>
+          <div class="case-arrow" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="ba-col after">
+            <div class="lab">Lapsell後</div>
+            <p>ネタ合わせを出品。撮影後に確認して公開でき安心。偶然の名場面だけが届いた。</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Usage flow phone mocks -->
+<section id="flow">
+  <div class="wrap">
+    <span class="eyebrow">Flow</span>
+    <h2 class="sec-title">利用方法</h2>
+    <p class="sec-lead">出品者は撮るだけ、購入者は受け取って再生するだけ。シンプルな2画面でご紹介します。</p>
+    <div class="flow-mocks">
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="s-status"><span>19:47</span><span style="color:#bf0000">● REC</span></div>
+            <div class="s-head"><div class="t">撮影中</div><div class="d">スマホで撮るだけ・編集不要</div></div>
+            <div class="s-body" style="padding:0">
+              <img src="assets/mock_practice.png" alt="練習を撮影している画面" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div class="s-cta">撮影を終了する</div>
+          </div>
+        </div>
+        <p class="flow-cap"><span class="tag">販売者</span><br><b>①撮影</b>　当日その場で撮るだけ。</p>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="s-status"><span>9:41</span><span>Lapsell</span></div>
+            <div class="s-head"><div class="t">19:47:30 - 19:47:40</div><div class="d">ダンス練習・あなたが所有</div></div>
+            <div class="s-body" style="padding:0;position:relative">
+              <img src="assets/thumb_backstage.png" alt="受け取った練習映像（再生可能）" style="width:100%;height:100%;object-fit:cover">
+              <span class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </div>
+            <div class="flow-actions">
+              <span class="fa-btn primary">▶ 再生</span>
+              <span class="fa-btn">シェア</span>
+            </div>
+          </div>
+        </div>
+        <p class="flow-cap"><span class="tag">購入者</span><br><b>②受け取り・再生</b>　届いたその場で再生・シェア。<span class="flow-subcap">中身は届くまで分からない。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Evidence + charts -->
+<section class="grey" id="evidence">
+  <div class="wrap">
+    <span class="eyebrow">Why it sells</span>
+    <h2 class="sec-title">購入理由</h2>
+    <p class="ev-lead">見るべきなのは、すでに起きている購入行動です。ファンはすでに“一点もの・素のコンテンツ・本人とのつながり”に、実際にお金を払っています。Lapsellの「素の一点もの」も、同じ理由で買われます。</p>
+
+    <div class="ev-block">
+      <div class="ev-row">
+        <div class="ev-card">
+          <div class="ev-wide"><img src="assets/evidence/blackpink_practice.png" alt="BLACKPINK ダンス練習動画 20億回視聴"></div>
+          <div class="cap">
+            <h4>視聴実例</h4>
+            <p>BLACKPINKのダンス練習動画は20億回視聴。素のパフォーマンスにこそ需要があることを示しています。</p>
+          </div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-wide"><img src="assets/evidence/milk_mv.png" alt="M!LK イイじゃん 4,175万回視聴 第76回NHK紅白歌合戦歌唱曲"></div>
+          <div class="cap">
+            <h4>将来価値</h4>
+            <p>M!LK「イイじゃん」は4,175万回視聴、第76回NHK紅白歌合戦の歌唱曲。今の一点ものが、将来価値になります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ev-short">
+        <img src="assets/evidence/seventeen_practice.png" alt="練習風景だけで笑える 10年目アイドル seventeen 895,794回再生">
+        <div>
+          <h4>自然拡散</h4>
+          <p>「練習風景だけで笑える 10年目アイドル #seventeen」は895,794回再生・高評価2万超。面白い瞬間は、自然に広まり新規ファンを呼びます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="h">“素の一点もの”への支払い意向</div>
+        <div class="l">“素の一点もの”への支払い意向</div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 42 42" aria-label="支払い意向ドーナツ：払ってもいい31.9%">
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#ebebeb" stroke-width="6"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#bf0000" stroke-width="6" stroke-dasharray="31.9 68.1" stroke-dashoffset="25"/>
+            <text x="21" y="20.5" text-anchor="middle" font-size="4" font-weight="700" fill="#1e1e1e">支払い</text>
+            <text x="21" y="26.5" text-anchor="middle" font-size="3" fill="#8c8c8c">意向あり</text>
+          </svg>
+          <div class="legend">
+            <div class="li"><span class="sw" style="background:#bf0000"></span>支払い意向あり（計31.9%）</div>
+            <div class="li" style="padding-left:21px;font-size:12px">1〜1,000円 8.9%／1,001〜3,000円 7.9%／3,001円〜 15.1%</div>
+            <div class="li"><span class="sw" style="background:#ebebeb"></span>購入しない 68.1%</div>
+          </div>
+        </div>
+        <div class="src">出典：自社アンケート（推し活ファン N=393）</div>
+      </div>
+
+      <div class="chart-card">
+        <div class="h">アイドルのファンは、すでに“現場で所有”している。</div>
+        <div class="l">ライブ参加者のグッズ購入率（アイドル系）</div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 42 42" aria-label="アイドル系ライブ参加者のグッズ購入率75.4%">
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#ebebeb" stroke-width="6"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#bf0000" stroke-width="6" stroke-dasharray="75.4 24.6" stroke-dashoffset="25"/>
+            <text x="21" y="20.5" text-anchor="middle" font-size="4" font-weight="700" fill="#1e1e1e">物販</text>
+            <text x="21" y="26.5" text-anchor="middle" font-size="3" fill="#8c8c8c">購入あり</text>
+          </svg>
+          <div class="legend">
+            <div class="li"><span class="sw" style="background:#bf0000"></span><b>75.4%</b>　グッズを購入（アイドル系）</div>
+            <div class="li" style="padding-left:21px;font-size:12px">購入者は年平均 約22,000円を支出</div>
+            <div class="li"><span class="sw" style="background:#ebebeb"></span>購入しない 24.6%</div>
+          </div>
+        </div>
+        <div class="src">出典：ぴあ総研／インテージ n=916・2019年</div>
+      </div>
+    </div>
+
+    <!-- Purchase reasons: horizontal scroller of cards (title→image→text→source) -->
+    <p class="reasons-hint">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+      横にスクロールして、5つの根拠をご覧ください
+    </p>
+    <div class="reasons">
+
+      <div class="reason">
+        <div class="r-head">ライブで「持ち帰る」のは、もう当たり前の行動</div>
+        <div class="r-img"><img src="assets/reason_merch.png" alt="ライブの物販ブースでグッズを買うファン"></div>
+        <div class="r-body">
+          <p>ライブ物販を買うファンは、1年で平均22,000円ほどを使います。アイドル系では会場でのグッズ購入率が75.4%にのぼり、現場でグッズを“持ち帰る”行動はすでに日常です。Lapsellの「練習の時間」も、同じ感覚でその接点に並べられます。</p>
+          <div class="src">出典：ぴあ総研／インテージ n=916・2019年</div>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="r-head">“その場でしか撮れない一点もの”に、ファンは払う</div>
+        <div class="r-img"><img src="assets/reason_cheki.png" alt="その場でしか撮れない一点もののチェキを手にするファン"></div>
+        <div class="r-body">
+          <p>チェキは1枚<em>およそ1,500円</em>で売られ、ライブアイドルの主な収入源になっています。誰でもコピーできるスマホ写真ではなく、その場で本人から受け取る一点ものだから、ファンは実際にお金を払っています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+          <div class="src">出典：チェキ相場・ライブアイドル収入に関する取材記事／富士フイルム公式</div>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="r-head">ファンが実際に払っている額</div>
+        <div class="r-img"><img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクションを並べて楽しむ様子"></div>
+        <div class="r-body">
+          <p>推し活グッズに、ファンは1年で平均およそ4万円を使っています。「手元に残る一点もの」へお金を払うことは、すでに当たり前の行動です。Lapsellの“素の一点もの”も、この延長線上で買われます。</p>
+          <div class="src">出典：Oshicoco n=210・2024年</div>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="r-head">所有・収集の文化</div>
+        <div class="r-img"><img src="assets/reason_cd.png" alt="CDを集めているコレクション"></div>
+        <div class="r-body">
+          <p>CDを買う理由の1位は「収集のため」で<em>54.7%</em>。聴くためだけでなく、集めて所有することが購入理由になっています。特典映像やメイキングを手元に残したい気持ちも、同じ所有欲の延長にあります。</p>
+          <div class="src">出典：Appliv／ナイル調べ／日本レコード協会（RIAJ）</div>
+        </div>
+      </div>
+
+      <div class="reason">
+        <div class="r-head">「本人の“素の日常”そのもの」には、すでにお金が払われている</div>
+        <div class="r-img"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読む手元"></div>
+        <div class="r-body">
+          <p>本人から届く素の日常メッセージ（bubble）は月額およそ500円。それでも200万人を超えるファンが課金し、2024年にはおよそ80億円の売上規模に達したと報じられています。“素の日常”に払う行動は、もう実在します。</p>
+          <div class="src">出典：bubble（DearU）。売上はウォン建て・報道差あり</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Reach: how to deliver to existing fans -->
+<section id="reach">
+  <div class="wrap">
+    <span class="eyebrow">How to deliver</span>
+    <h2 class="sec-title">届け方</h2>
+    <p class="sec-lead">新しい集客は必要ありません。いまあるファンとの接点に乗せるだけで売れます。物販・SNS・ライブの現場に、出品リンクを置くだけです。</p>
+
+    <div class="reach-grid">
+      <div class="reach-col">
+        <div class="n">01</div>
+        <div class="reach-fig">
+          <img src="assets/deliver_qr.png" alt="物販ブースのグッズの横にQRコードのスタンドを並べて置くイメージ">
+        </div>
+        <h4>物販導線</h4>
+        <p>チェキやグッズと同じテーブルに、出品ページのQRコードを置くだけ。会場で買ってくれるファンが、その場で“練習の時間”も買えます。</p>
+      </div>
+
+      <div class="reach-col">
+        <div class="n">02</div>
+        <div class="reach-fig">
+          <img src="assets/deliver_sns.png" alt="スマホでSNSの告知投稿を見せるイメージ">
+        </div>
+        <h4>自然拡散</h4>
+        <p>X・Instagramのプロフィールやストーリーに出品リンクを貼るだけ。日々のフォロワーが、そのまま購入者になります。</p>
+      </div>
+
+      <div class="reach-col">
+        <div class="n">03</div>
+        <div class="reach-fig">
+          <img src="assets/deliver_mc.png" alt="ライブのステージでMC中にファンへ案内するイメージ">
+        </div>
+        <h4>現場導線</h4>
+        <p>本番のMCや特典会のひと言で十分。ファンクラブやLINEの通知に乗せれば、いちばん熱量の高いファンへまっすぐ届きます。</p>
+      </div>
+    </div>
+
+    <p class="reach-note">集客はそのまま。いまのファン接点に「出品リンク」を1つ足すだけで、販売がはじまります。</p>
+  </div>
+</section>
+
+<!-- Authenticity -->
+<section id="authenticity">
+  <div class="wrap">
+    <span class="eyebrow">Ownership</span>
+    <h2 class="sec-title">所有証明</h2>
+    <div class="auth-grid">
+      <img src="assets/authenticity.png" alt="映像に電子透かしを埋め込み所有者を照合する図">
+      <ul class="auth-list">
+        <li>
+          <svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M10 11l2 2 3-3"/></svg>
+          <div><h4>映像そのものに識別子を埋め込む</h4><p>所有者・権利情報を電子透かしとして映像に直接埋め込みます。動画はファンの手元に保管され、ストレージコストも増えません。</p></div>
+        </li>
+        <li>
+          <svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><h4>スクショしても透かしは消えない</h4><p>転載・流出しても、出所と所有者をたどれます。だから漏れても、それは“無料の宣伝”として機能します。</p></div>
+        </li>
+        <li>
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          <div><h4>「今の所有者は誰か」を誰でも検証</h4><p>当社サイトで現在の所有者を確認できます。一点ものの価値が、きちんと裏づけられます。</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison table -->
+<section class="grey" id="comparison">
+  <div class="wrap">
+    <span class="eyebrow">Comparison</span>
+    <h2 class="sec-title">比較</h2>
+    <p class="sec-lead">「素の日常」と「自分だけの所有」を同時に満たせるのが、Lapsellの特徴です。</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th></th>
+            <th>ライブ配信<br>（投げ銭）</th>
+            <th>チェキ・特典会</th>
+            <th>既存グッズ</th>
+            <th class="lap-h">Lapsell</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>加工なしの素の日常</th>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td class="lap"><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+          </tr>
+          <tr>
+            <th>自分だけが所有できる</th>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td class="lap"><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+          </tr>
+          <tr>
+            <th>場所を問わず受け取れる</th>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td class="lap"><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+          </tr>
+          <tr>
+            <th>事故を防げる（事前確認）</th>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td class="lap"><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+          </tr>
+          <tr>
+            <th>手間がかからない（撮るだけ）</th>
+            <td><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td><svg class="ico no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></td>
+            <td class="lap"><svg class="ico yes" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cmp-img"><img src="assets/comparison.png" alt="ランダムグッズを開けるイメージ"></div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="sec-title">料金</h2>
+    <p class="sec-lead">はじめるのにお金はかかりません。手数料は売れた取引にのみ、5%〜いただきます。</p>
+    <div class="price-grid">
+      <div class="price-box">
+        <div class="price-row"><span class="k">初期費用</span><span class="v">0<small>円</small></span></div>
+        <div class="price-row"><span class="k">月額・固定費</span><span class="v">0<small>円</small></span></div>
+        <div class="price-row"><span class="k">取引手数料</span><span class="v">5<small>%〜（売れた分のみ）</small></span></div>
+        <p class="price-note">導入期は低率でご利用いただけます。将来的に、二次流通時のロイヤリティ（本人にも還元）や、保管・プレミアム機能の月額をご用意予定です。</p>
+      </div>
+      <div class="price-img"><img src="assets/pricing.png" alt="料金のイメージ"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Target artists -->
+<section class="grey" id="target">
+  <div class="wrap">
+    <span class="eyebrow">For artists</span>
+    <h2 class="sec-title">対象</h2>
+    <div class="target-grid">
+      <div class="target-card">
+        <img src="assets/artist_idol.png" alt="ライブアイドル">
+        <div class="tc"><h4>ライブアイドル</h4><p>日々の練習やリハーサルを、ファンに届ける一点ものとして収益化できます。</p></div>
+      </div>
+      <div class="target-card">
+        <img src="assets/artist_band.png" alt="インディーズバンド">
+        <div class="tc"><h4>インディーズバンド</h4><p>スタジオでの音合わせや制作風景を、ファンへ直接届けて収益化できます。</p></div>
+      </div>
+      <div class="target-card">
+        <img src="assets/artist_comedian.png" alt="インディーズお笑い芸人">
+        <div class="tc"><h4>インディーズお笑い芸人</h4><p>ネタ合わせや楽屋裏の素の時間に、すでに大きな需要があります。</p></div>
+      </div>
+    </div>
+    <p class="target-out">※ TikToker・インスタライバー（すでに配信で収益化）や、素の対面撮影が難しいVTuberの方は対象外です。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="sec-title">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">はじめるのに費用はかかりますか？<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">初期費用・月額は0円です。手数料は売れた取引にのみ5%〜いただきます。登録は最短3分で完了します。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">撮影や編集の手間が心配です。<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">当日スマホで撮るだけです。編集は不要で、加工なしの“素のまま”が商品になります。出品は日時と価格を決めるだけです。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">配信中の失言や映り込みが不安です。<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">ライブ配信と違い、撮影後にアップロードします。公開前に内容を確認できるため、まずい瞬間が世に出ることはありません。本当の事故の瞬間は非公開＋返金、偶然の良い瞬間だけが届きます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">動画がコピー・転載されたらどうなりますか？<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">映像そのものに所有者情報を電子透かしで埋め込みます。スクショや転載をしても透かしは消えず、出所と所有者をたどれます。広まることはむしろ新規ファンを呼ぶ宣伝になります。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">本当に売れるのか不安です。<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">練習動画は公式MVを超える規模で観られています。推し活ファンへの自社アンケート（N=393）でも31.9%が支払い意向を示しており、“素の日常”には需要があります。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">どんな人が利用できますか？<svg class="ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><div class="inner">ライブアイドル、インディーズバンド、インディーズお笑い芸人の本人・小規模事務所の方を想定しています。すでに配信で収益化しているTikToker・インスタライバー、素の対面撮影が難しいVTuberの方は対象外です。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <h2>開始</h2>
+    <p>初期費用0円・取引手数料5%〜。登録は最短3分。今日の練習から、はじめられます。</p>
+    <div class="dl-row">
+      <a href="#" class="dl-btn">無料で出品をはじめる</a>
+      <a href="#function" class="dl-btn alt">できることをもう一度みる</a>
+    </div>
+    <div class="note">無名の今だからこそ生まれる一点ものを、ファンと一緒に育てていきましょう。</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="logo" style="color:var(--ink)">Lap<b style="color:var(--brand)">sell</b></div>
+      <nav class="fl">
+        <a href="#mechanic">仕組み</a>
+        <a href="#function">できること</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+    </div>
+    <small>Lapsell（ラプセル）｜練習の“時間”を売る、新しい形のランダムグッズ。<br>© Lapsell. ライブアイドル・インディーズアーティストの収益化を支援します。</small>
+  </div>
+</footer>
+
+<!-- FAQPage JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"はじめるのに費用はかかりますか？","acceptedAnswer":{"@type":"Answer","text":"初期費用・月額は0円です。手数料は売れた取引にのみ5%〜いただきます。登録は最短3分で完了します。"}},
+    {"@type":"Question","name":"撮影や編集の手間が心配です。","acceptedAnswer":{"@type":"Answer","text":"当日スマホで撮るだけです。編集は不要で、加工なしの素のままが商品になります。出品は日時と価格を決めるだけです。"}},
+    {"@type":"Question","name":"配信中の失言や映り込みが不安です。","acceptedAnswer":{"@type":"Answer","text":"ライブ配信と違い、撮影後にアップロードします。公開前に内容を確認できるため、まずい瞬間が世に出ることはありません。本当の事故の瞬間は非公開と返金、偶然の良い瞬間だけが届きます。"}},
+    {"@type":"Question","name":"動画がコピー・転載されたらどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"映像そのものに所有者情報を電子透かしで埋め込みます。スクショや転載をしても透かしは消えず、出所と所有者をたどれます。広まることはむしろ新規ファンを呼ぶ宣伝になります。"}},
+    {"@type":"Question","name":"本当に売れるのか不安です。","acceptedAnswer":{"@type":"Answer","text":"練習動画は公式MVを超える規模で観られています。推し活ファンへの自社アンケート（N=393）でも31.9%が支払い意向を示しており、素の日常には需要があります。"}},
+    {"@type":"Question","name":"どんな人が利用できますか？","acceptedAnswer":{"@type":"Answer","text":"ライブアイドル、インディーズバンド、インディーズお笑い芸人の本人・小規模事務所の方を想定しています。すでに配信で収益化しているTikToker・インスタライバー、素の対面撮影が難しいVTuberの方は対象外です。"}}
+  ]
+}
+</script>
+<!-- Service JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"Lapsell（ラプセル）",
+  "serviceType":"練習の時間を販売するランダムデジタルグッズアプリ",
+  "description":"ライブアイドル・インディーズアーティスト本人が、練習の時間を出品し、加工なしの裏側をランダムデジタルグッズとして販売できるアプリ。初期費用0円・取引手数料5%〜。",
+  "areaServed":"JP",
+  "audience":{"@type":"Audience","audienceType":"ライブアイドル・インディーズアーティスト・バンド・お笑い芸人"},
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"JPY","description":"初期費用0円・取引手数料5%〜"}
+}
+</script>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(function(b){
+  b.addEventListener('click',function(){
+    var item=b.parentElement;
+    var a=b.nextElementSibling;
+    if(item.classList.contains('open')){item.classList.remove('open');a.style.maxHeight=null;}
+    else{item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+  });
+});
+</script>
+</body>
+</html>

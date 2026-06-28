@@ -3,3 +3,8 @@ server*.log
 *.log
 *.resized.png
 *.tmp.png
+*.tmp*.png
+_recent_generated_contact_sheet.png
+_sample_*.png
+.codex_*_test.txt
+.how*.png
