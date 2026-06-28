@@ -355,16 +355,18 @@ section{padding:84px 0;}
 .legend .sw{width:14px;height:14px;border-radius:4px;flex:none;}
 .legend .lg-item b{margin-left:auto;font-weight:800;}
 
-/* purchase-reason figure list (borderless: number + meaning + source) */
-.figs{margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:30px 48px;text-align:left;}
-.figs.one{grid-template-columns:1fr;max-width:640px;margin-left:auto;margin-right:auto;}
-.fig{display:flex;flex-direction:column;gap:5px;}
-.fig .fnum{font-size:clamp(24px,3vw,32px);font-weight:800;line-height:1.15;color:#fff;}
-.fig .fnum .u{font-size:.5em;font-weight:800;margin-left:.1em;}
-.fig .fnum .hl{background:var(--yellow);color:#111;padding:0 .12em;border-radius:3px;}
-.fig .fmean{font-size:14.5px;line-height:1.7;color:#e6e6e6;}
+/* purchase-reason list (borderless: natural sentence + source). numbers are inline emphasis, NOT giant headings */
+.figs{margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:32px 48px;text-align:left;}
+.figs.one{grid-template-columns:1fr;max-width:680px;margin-left:auto;margin-right:auto;}
+.fig{display:flex;flex-direction:column;gap:7px;}
+.fig .fmean{font-size:15.5px;line-height:1.85;color:#e6e6e6;}
 .fig .fmean b{color:#fff;font-weight:800;}
+/* numbers live inside the sentence: subtle yellow text emphasis, never a big block heading */
+.fig .fmean .n{color:var(--yellow);font-weight:800;}
 .fig .fsrc{font-size:11px;color:#9a9a9a;line-height:1.55;margin-top:1px;}
+/* per-item imagination-aid image, sits above the sentence */
+.fig .ffig{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:rgba(255,255,255,.04);margin-bottom:4px;}
+.fig .ffig img{width:100%;height:auto;display:block;}
 @media(max-width:680px){.figs{grid-template-columns:1fr;gap:26px;}}
 
 /* ---------- 購入導線 (ファンへの届け方) ---------- */
@@ -372,6 +374,9 @@ section{padding:84px 0;}
 .deliver .d-item{display:flex;flex-direction:column;gap:14px;}
 .deliver .d-ic{width:46px;height:46px;border-radius:13px;background:var(--black);color:var(--yellow);display:flex;align-items:center;justify-content:center;flex:none;}
 .deliver .d-ic svg{width:24px;height:24px;}
+/* channel image (imagination aid) */
+.deliver .d-photo{border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:rgba(255,255,255,.04);}
+.deliver .d-photo img{width:100%;height:auto;display:block;}
 .deliver h3{font-size:18px;font-weight:800;line-height:1.45;}
 .deliver p{font-size:14px;color:#3a3a3a;line-height:1.8;}
 .deliver p b{background:var(--yellow);padding:0 .1em;font-weight:800;}
@@ -931,8 +936,8 @@ section{padding:84px 0;}
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">Why fans buy</span>
-      <h2 class="sec-h" style="color:#fff">なぜ買われるのか。<span style="color:var(--yellow)">ファンはもう、払っている。</span></h2>
-      <p class="lead muted">論点は「市場が大きいか」ではない。ファンは“一点もの・素のコンテンツ・本人とのつながり”に、すでに実際の金額を払っている。Lapsellの「素の一点もの」も、同じ理由で買われる。</p>
+      <h2 class="sec-h" style="color:#fff">ファンが、すでにお金を払っている理由。</h2>
+      <p class="lead muted">ファンは「一点もの」「素のコンテンツ」「本人とのつながり」に、すでに実際の金額を払っています。Lapsellの「素の一点もの」も、それと同じ理由で買われます。実際に払われている割合と金額を、データで見ていきます。</p>
     </div>
 
     <!-- 支払い意向 donut -->
@@ -960,38 +965,36 @@ section{padding:84px 0;}
 
     <!-- 購入される理由：すでに払われている実額 -->
     <div class="chart-block">
-      <p class="chart-head">“一点もの・素・所有”には、<span class="hl">すでにお金が払われている。</span></p>
-      <p class="chart-note">ライブ物販・チェキ・推し活グッズ。ファンは「手元に残る一点もの」に、毎年これだけ払っている。</p>
+      <p class="chart-head">ファンが実際に払っている額。</p>
+      <p class="chart-note">ライブ物販・チェキ・推し活グッズ・CD。手元に残る「一点もの」に、ファンは毎年これだけのお金を使っています。</p>
       <div class="figs">
         <div class="fig">
-          <div class="fnum">年<span class="hl">22,000</span><span class="u">円</span></div>
-          <div class="fmean">ライブ物販＝<b>現場で“所有する”</b>行動が定着。グッズ購入者の年間平均額。アイドル系のグッズ購入率は<b>75.4%</b>。</div>
+          <div class="ffig"><img src="assets/reason_merch.png" alt="ライブの物販ブースでグッズを買って受け取るファンのイラスト" loading="lazy"></div>
+          <div class="fmean">ライブ物販でグッズを買うファンは、<span class="n">1年で平均22,000円ほど</span>を使っています。アイドル系では購入率が<span class="n">75.4%</span>にのぼり、現場でグッズを“持ち帰る”行動はすでに当たり前です。</div>
           <div class="fsrc">ぴあ総研／インテージ（n=916, 2019）。やや古く要再確認</div>
         </div>
         <div class="fig">
-          <div class="fnum">1枚 <span class="hl">約1,500</span><span class="u">円</span></div>
-          <div class="fmean">チェキ＝<b>その場の一点物</b>。ライブアイドルの主な収入を支える。「コピーできない一点物」だから払われる。</div>
+          <div class="ffig"><img src="assets/reason_cheki.png" alt="その場で撮った一点もののチェキを手にするファンのイラスト" loading="lazy"></div>
+          <div class="fmean">チェキは<span class="n">1枚およそ1,500円</span>で売れ、ライブアイドルの主な収入を支えています。その場でしか手に入らず、コピーできない“一点もの”だからこそ、ファンはお金を払います。</div>
           <div class="fsrc">Business Insider Japan 2024／中日新聞 2024（取材記事）。要再確認</div>
         </div>
         <div class="fig">
-          <div class="fnum">累計<span class="hl">1億</span><span class="u">台</span></div>
-          <div class="fmean">チェキ（instax）累計出荷。年間売上は<b>約1,500億円</b>。“一点物の写真を所有する”文化そのものが巨大。</div>
-          <div class="fsrc">富士フイルム公式 2025／日経クロストレンド 2025</div>
-        </div>
-        <div class="fig">
-          <div class="fnum">年 約<span class="hl">4万</span><span class="u">円</span></div>
-          <div class="fmean">推し活層が<b>1年間でグッズにかける平均額</b>。応援の証を手元に残すことに、継続して支出している。</div>
+          <div class="ffig"><img src="assets/reason_oshikatsu.png" alt="推し活グッズのコレクションが棚いっぱいに並ぶイラスト" loading="lazy"></div>
+          <div class="fmean">推し活をする人は、<span class="n">1年でおよそ4万円</span>をグッズに使っています。応援した証を手元に残すために、ファンは継続してお金を払い続けています。</div>
           <div class="fsrc">Oshicoco（n=210, 2024）。単一調査につき要再確認</div>
         </div>
         <div class="fig">
-          <div class="fnum"><span class="hl">54.7%</span></div>
-          <div class="fmean">CDを買う理由の第1位は<b>「収集（コレクション）のため」</b>。買う動機の中心は、聴くことより“所有・収集”。</div>
+          <div class="ffig"><img src="assets/reason_cd.png" alt="集めたCDが積まれたコレクションのイラスト" loading="lazy"></div>
+          <div class="fmean">CDを買う理由の第1位は<span class="n">「収集（コレクション）のため」で54.7%</span>。買う動機の中心は、聴くことよりも“所有して集めること”に移っています。</div>
           <div class="fsrc">Appliv／ナイル調べ 2023。単一調査につき要再確認</div>
         </div>
         <div class="fig">
-          <div class="fnum">国内 <span class="hl">562</span><span class="u">億円</span></div>
-          <div class="fmean">音楽ビデオ（ライブ映像）の国内生産額。<b>特典映像・メイキングが購入の決め手</b>になる、所有メディア需要が残る。</div>
-          <div class="fsrc">RIAJ 公式 2024（うちBlu-ray 399億円）</div>
+          <div class="fmean">チェキ（instax）は累計<span class="n">1億台</span>を出荷し、年間売上は<span class="n">約1,500億円</span>。“一点ものの写真を所有する”という文化そのものが、すでに巨大な市場になっています。</div>
+          <div class="fsrc">富士フイルム公式 2025／日経クロストレンド 2025</div>
+        </div>
+        <div class="fig">
+          <div class="fmean">ライブ映像などの音楽ビデオは、国内で<span class="n">年562億円</span>分が生産されています（うちBlu-ray 399億円）。特典映像やメイキングが購入の決め手になり、“手元に持つ”メディアの需要はいまも残っています。</div>
+          <div class="fsrc">RIAJ 公式 2024</div>
         </div>
       </div>
     </div>
@@ -1000,12 +1003,12 @@ section{padding:84px 0;}
 
     <!-- bubble：素の日常に課金が成立 -->
     <div class="chart-block">
-      <p class="chart-head">“素の日常”そのものに、<span class="hl">もう月額で払われている。</span></p>
-      <p class="chart-note">本人の素のメッセージを受け取れるサービスに、世界で200万人超が課金。「素の時間」への支払いは、先行事例として確立済み。</p>
+      <p class="chart-head">“素の日常”に払われているお金。</p>
+      <p class="chart-note">本人からの素のメッセージを受け取れるサービスに、世界で200万人を超える人が課金しています。「素の時間」への支払いは、先行事例として確立しています。</p>
       <div class="figs one">
         <div class="fig">
-          <div class="fnum">月額 約<span class="hl">500</span><span class="u">円</span> ／ <span class="hl">200万</span><span class="u">人超</span></div>
-          <div class="fmean">bubble（DearU）は、本人の<b>“素の日常メッセージ”</b>を受け取れるサービス。世界200万人超が課金し、<b>2024年売上 約80億円</b>との見方も。完成品ではなく“素の時間”に、人はお金を払う。</div>
+          <div class="ffig"><img src="assets/reason_bubble.png" alt="スマホで本人からの素の日常メッセージを読むファンの手元のイラスト" loading="lazy"></div>
+          <div class="fmean">bubble（DearU）は、本人の“素の日常メッセージ”を受け取れるサービスです。<span class="n">月額およそ500円</span>で世界<span class="n">200万人超</span>が課金し、<span class="n">2024年の売上は約80億円</span>との見方もあります。完成された作品ではなく“素の時間”そのものに、人はお金を払います。</div>
           <div class="fsrc">bubble（DearU）。売上80億円はウォン建て・報道差あり、要再確認</div>
         </div>
       </div>
@@ -1075,6 +1078,7 @@ section{padding:84px 0;}
       <div class="d-item">
         <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v.01M17 21h.01M21 17h.01"/></svg></span>
         <h3>物販ブースに、QRを並べて置く</h3>
+        <div class="d-photo"><img src="assets/deliver_qr.png" alt="物販テーブルにグッズとQRコードのスタンドを並べて置いたイラスト" loading="lazy"></div>
         <div class="d-fig">
           <span class="d-qr" aria-hidden="true">
             <i></i><i></i><i></i><i class="o"></i><i></i>
@@ -1093,6 +1097,7 @@ section{padding:84px 0;}
       <div class="d-item">
         <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span>
         <h3>SNSのプロフィール・ストーリーで告知</h3>
+        <div class="d-photo"><img src="assets/deliver_sns.png" alt="スマホでSNSの告知投稿画面を表示している手元のイラスト" loading="lazy"></div>
         <div class="d-fig">
           <span class="d-sns" aria-hidden="true">
             <span class="d-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4 4 20"/></svg>X</span>
@@ -1107,6 +1112,7 @@ section{padding:84px 0;}
       <div class="d-item">
         <span class="d-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a1 1 0 0 1 1-1h2l2-5h6l2 5h2a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><path d="M9 20h6"/><path d="M12 5V2"/></svg></span>
         <h3>ライブMC・特典会・FC・LINEで案内</h3>
+        <div class="d-photo"><img src="assets/deliver_mc.png" alt="小さなライブハウスのステージでマイクを持ちファンに語りかける演者のイラスト" loading="lazy"></div>
         <div class="d-fig">
           <span class="d-sns" aria-hidden="true">
             <span class="d-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a1 1 0 0 1 1-1h2l2-5h6l2 5h2a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></svg>MC・特典会</span>
