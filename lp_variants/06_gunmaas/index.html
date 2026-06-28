@@ -289,6 +289,31 @@ section{position:relative;}
 .bars .fill{height:100%;border-radius:9px;}
 .bars .amt{text-align:right;font-weight:800;color:var(--green-d);}
 
+/* ===== deliver to fans (purchase channel) ===== */
+.deliver{background:#fff;}
+.dlv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px;margin-top:42px;}
+.dlv .ic-wrap{display:flex;align-items:center;gap:12px;}
+.dlv .num{font-family:"Roboto",sans-serif;font-weight:800;font-size:13px;color:var(--green);letter-spacing:.04em;}
+.dlv .ic{width:30px;height:30px;color:var(--green);flex:0 0 auto;}
+.dlv h3{font-size:17px;font-weight:800;margin:14px 0 8px;}
+.dlv p{font-size:13.5px;color:#46514a;margin:0;}
+.dlv .figbox{margin-top:16px;display:flex;align-items:center;gap:14px;min-height:96px;}
+/* mini QR (css grid squares, decorative) */
+.qr{width:84px;height:84px;flex:0 0 auto;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;padding:7px;background:#fff;border:2px solid var(--green-d);border-radius:10px;}
+.qr i{background:var(--green-d);border-radius:1px;}
+.qr i.o{background:transparent;}
+.dlv .figcap{font-size:12px;color:var(--muted);line-height:1.6;}
+.dlv .figcap b{color:var(--ink);display:block;font-size:12.5px;}
+/* mini sns / fanclub diagram */
+.minidia{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.minidia .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--green-d);background:var(--grey);border-radius:30px;padding:7px 13px;}
+.minidia .chip svg{width:15px;height:15px;flex:0 0 auto;}
+.minidia .arr{color:var(--green);font-weight:800;}
+.dlv-note{margin-top:34px;font-size:13.5px;color:#46514a;display:flex;align-items:flex-start;gap:10px;}
+.dlv-note svg{flex:0 0 auto;margin-top:3px;color:var(--green);}
+.dlv-note b{color:var(--green-d);}
+@media(max-width:860px){.dlv-grid{grid-template-columns:1fr;gap:30px;}}
+
 /* ===== authenticity ===== */
 .auth{background:var(--grey);}
 .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;margin-top:34px;}
@@ -400,7 +425,8 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
       <a href="#about">Lapsellとは</a>
       <a href="#func">できること</a>
       <a href="#value">導入する理由</a>
-      <a href="#evidence">実績データ</a>
+      <a href="#evidence">なぜ買われるか</a>
+      <a href="#deliver">届け方</a>
       <a href="#price">料金</a>
       <a href="#target">対象</a>
       <a href="#faq">FAQ</a>
@@ -745,15 +771,15 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
 <!-- ===== EVIDENCE ===== -->
 <section class="evi sec-pad" id="evidence">
   <div class="wrap">
-    <p class="kicker"><span class="line"></span>Evidence ／ 実績データ<span class="line"></span></p>
-    <h2 class="sec-title">“素”は、すでに数字を生んでいる</h2>
-    <p class="sec-lead">完成品より「練習・裏側」が観られ、ファンは実際に支払っています。</p>
+    <p class="kicker"><span class="line"></span>Why It Sells ／ なぜ買われるのか<span class="line"></span></p>
+    <h2 class="sec-title">なぜ、<span class="hl">これが買われる</span>のか</h2>
+    <p class="sec-lead">論点は「市場が大きいか」ではありません。ファンは“一点もの・素のコンテンツ・本人とのつながり”に、すでに実際の金額を払っています。Lapsellの「素の一点もの」も、同じ理由で買われます。</p>
 
     <!-- blackpink -->
     <div class="evi-row">
       <div class="evi-block">
-        <h3>「練習動画」が、公式MVを超える規模で観られている</h3>
-        <p class="sub">BLACKPINKのダンス練習動画は20億回視聴。加工なしの“素”に、強い需要があることを示しています。</p>
+        <h3>“素”そのものに、すでに需要がある</h3>
+        <p class="sub">BLACKPINKのダンス練習動画は20億回視聴。完成品ではなく加工なしの“素”が、これだけ求められています。Lapsellが売るのも、この“素”の一点ものです。</p>
         <div class="evi-shot"><img src="assets/evidence/blackpink_practice.png" alt="BLACKPINK ダンス練習動画 20億回視聴"></div>
         <p class="evi-mini">出典：YouTube 公開再生数（実画面）。練習動画＝20億回視聴。</p>
       </div>
@@ -780,21 +806,61 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
       </div>
     </div>
 
-    <!-- two charts: random culture + future value(milk) -->
+    <!-- purchase reasons: fans already pay for live goods / cheki / oshikatsu -->
     <div class="evi-two">
       <div class="chart-card">
-        <h4>「中身は届くまで分からない」文化は、すでに巨大な市場</h4>
-        <p class="cl">何が当たるか分からないランダム型のグッズは、推し活で広く親しまれています。</p>
+        <h4>ファンは「現場で所有する一点もの」に、すでに払っている</h4>
+        <p class="cl">ライブの物販・チェキ・推し活グッズ。手元に残る“一点もの”への支払いは、もう当たり前の行動です。</p>
         <div class="bars">
-          <div class="bar-row"><span>デジタルガチャ</span><span class="track"><span class="fill" style="width:100%;background:#089942"></span></span><span class="amt">約7,000億円</span></div>
-          <div class="bar-row"><span>トレカ市場</span><span class="track"><span class="fill" style="width:33.6%;background:#3fb56e"></span></span><span class="amt">約2,349億円</span></div>
-          <div class="bar-row"><span>ライブBD/DVD</span><span class="track"><span class="fill" style="width:8%;background:#CDC58B"></span></span><span class="amt">約558億円</span></div>
+          <div class="bar-row"><span>ライブ物販</span><span class="track"><span class="fill" style="width:55%;background:#089942"></span></span><span class="amt">年 約2.2万円</span></div>
+          <div class="bar-row"><span>推し活グッズ</span><span class="track"><span class="fill" style="width:100%;background:#3fb56e"></span></span><span class="amt">年 約4万円</span></div>
+          <div class="bar-row"><span>チェキ 1枚</span><span class="track"><span class="fill" style="width:3.8%;background:#CDC58B"></span></span><span class="amt">約1,500円</span></div>
         </div>
-        <p class="evi-mini">デジタルガチャ約7,000億円規模／トレカ国内約2,349億円(2022)／ライブBlu-ray・DVD約558億円(2024)。</p>
+        <p class="evi-mini">ライブ参加者のグッズ購入＝年平均 約22,000円（アイドル系の購入率75.4%）／推し活グッズ＝年 平均 約4万円／チェキ＝1枚 約1,500円。出典：ぴあ総研、Oshicoco ほか（要再確認）。</p>
+      </div>
+      <div class="chart-card">
+        <h4>「素の日常・本人とのつながり」にも、もう課金されている</h4>
+        <p class="cl">本人の“素のメッセージ”を受け取れるファン課金サービスには、世界で多くの人が払っています。</p>
+        <div class="donut-wrap">
+          <svg class="donut" width="142" height="142" viewBox="0 0 42 42" aria-label="月額500円・200万人課金のイメージ">
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3ea" stroke-width="7"/>
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#089942" stroke-width="7" stroke-dasharray="88 12" stroke-dashoffset="25" stroke-linecap="round"/>
+            <text x="21" y="19.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#089942">月500円</text>
+            <text x="21" y="26" text-anchor="middle" font-size="3" fill="#6f7a6f">で“素の日常”に課金</text>
+          </svg>
+          <div class="legend">
+            <div class="li"><span class="sw" style="background:#089942"></span><b>世界 200万人超</b>が課金</div>
+            <div class="li"><span class="sw" style="background:#3fb56e"></span><b>2024年売上 約80億円</b>規模との見方も</div>
+            <div class="li" style="color:var(--muted)">＝“素の日常”そのものに払う行動が先行</div>
+          </div>
+        </div>
+        <p class="evi-mini">bubble（DearU）：月額 約500円／世界200万人超が課金／2024年売上 約80億円との見方も（ウォン建て・報道差あり、要再確認）。</p>
+      </div>
+    </div>
+
+    <!-- collection / ownership is the buying motive + future value(milk) -->
+    <div class="evi-two">
+      <div class="chart-card">
+        <h4>買う理由の中心は「集める・所有する」こと</h4>
+        <p class="cl">完成品を買うときですら、購入理由のトップは“収集（コレクション）”です。一点ものなら、その動機はさらに強く働きます。</p>
+        <div class="donut-wrap">
+          <svg class="donut" width="142" height="142" viewBox="0 0 42 42" aria-label="CD購入理由1位は収集 54.7%">
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#eef3ea" stroke-width="7"/>
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="#089942" stroke-width="7" stroke-dasharray="54.7 45.3" stroke-dashoffset="25" stroke-linecap="round"/>
+            <text x="21" y="20" text-anchor="middle" font-size="7.5" font-weight="800" fill="#089942">54.7%</text>
+            <text x="21" y="26.5" text-anchor="middle" font-size="3" fill="#6f7a6f">が「収集」目的</text>
+          </svg>
+          <div class="legend">
+            <div class="li"><span class="sw" style="background:#089942"></span><b>CD購入理由1位「収集」</b> 54.7%</div>
+            <div class="li" style="margin-top:10px;"><span class="sw" style="background:#3fb56e"></span><b>音楽ビデオ 562億円</b></div>
+            <div class="li" style="color:var(--muted)">特典映像・メイキングが購入動機に</div>
+          </div>
+        </div>
+        <p class="evi-mini">CD購入理由1位「収集のため」54.7%（要再確認）／音楽ビデオ 国内生産 562億円・特典映像が所有需要を支える（RIAJ 2024）。</p>
       </div>
       <div class="evi-block">
-        <h3>下積みからのブレイクが、“育てた証明”になる</h3>
-        <p class="sub">M!LK「イイじゃん」は4,175万回視聴、第76回NHK紅白歌合戦の歌唱曲に。無名の頃の一点ものは、ブレイクとともに意味を増します。</p>
+        <h3>下積みの“今”だから、将来の価値を見込んで買われる</h3>
+        <p class="sub">M!LK「イイじゃん」は4,175万回視聴、第76回NHK紅白歌合戦の歌唱曲に。無名の頃の一点ものは、「自分が育てた」物語ごと、ブレイクとともに意味を増します。</p>
         <div class="evi-shot"><img src="assets/evidence/milk_mv.png" alt="M!LK イイじゃん 4,175万回視聴・第76回NHK紅白歌合戦歌唱曲"></div>
         <p class="evi-mini">出典：YouTube 公開再生数（実画面）。</p>
       </div>
@@ -804,10 +870,85 @@ footer{background:var(--orange);color:#fff;padding:48px 0 30px;}
     <div class="evi-short">
       <div class="vert"><img src="assets/evidence/seventeen_practice.png" alt="練習風景だけで笑える 10年目アイドル 895,794回再生"></div>
       <div>
-        <h3>「練習風景だけで笑える」が、自然に拡散される</h3>
-        <p>SEVENTEENの練習風景の動画は895,794回再生・高評価2万超。完璧な本番でなく、素の瞬間にこそ拡散の力があります。Lapsellで生まれる面白い瞬間も、同じように次のファンを呼びます。</p>
+        <h3>「練習風景だけで笑える」から、自分だけが知る瞬間を広めたくなる</h3>
+        <p>SEVENTEENの練習風景の動画は895,794回再生・高評価2万超。完璧な本番でなく、素の瞬間にこそ広めたくなる力があります。Lapsellで手に入れた“自分だけの一点もの”も、同じように次のファンを呼びます。</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== DELIVER TO FANS (purchase channel) ===== -->
+<section class="deliver sec-pad" id="deliver">
+  <div class="wrap">
+    <p class="kicker"><span class="line"></span>Reach Your Fans ／ ファンへの届け方<span class="line"></span></p>
+    <h2 class="sec-title">新規集客は、<span class="hl">不要</span>です</h2>
+    <p class="sec-lead">いまあるファンとの接点に“乗せる”だけ。物販ブース・SNS・特典会など、すでにある場所でそのまま売れます。</p>
+
+    <div class="dlv-grid">
+      <!-- 1: live goods booth + QR -->
+      <div class="dlv">
+        <div class="ic-wrap">
+          <span class="num">01</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h.01M21 21v-4M17 21h0"/></svg>
+        </div>
+        <h3>ライブ物販ブースで一緒に売る</h3>
+        <p>物販テーブルにQRコードを並べて置くだけ。チェキやグッズを買う流れのまま、その場で時間枠が売れます。</p>
+        <div class="figbox">
+          <div class="qr" aria-hidden="true">
+            <i></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i>
+            <i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i></i>
+            <i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i><i></i>
+            <i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i>
+            <i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i>
+            <i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i>
+            <i></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i>
+          </div>
+          <p class="figcap"><b>QRを置くだけ</b>読み取り→出品ページへ。物販と同じ導線で購入。</p>
+        </div>
+      </div>
+
+      <!-- 2: SNS announce -->
+      <div class="dlv">
+        <div class="ic-wrap">
+          <span class="num">02</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>
+        </div>
+        <h3>SNSで告知する</h3>
+        <p>プロフィールやストーリーに出品リンクを置くだけ。フォロワーがそのままタップして購入できます。</p>
+        <div class="figbox">
+          <div class="minidia" aria-hidden="true">
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>プロフィール</span>
+            <span class="arr">→</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>出品リンク</span>
+            <span class="arr">→</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>購入</span>
+          </div>
+          <p class="figcap"><b>ストーリー・プロフ</b>に貼るだけで届く。</p>
+        </div>
+      </div>
+
+      <!-- 3: MC / fanclub / LINE -->
+      <div class="dlv">
+        <div class="ic-wrap">
+          <span class="num">03</span>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8l-4 3z"/></svg>
+        </div>
+        <h3>MC・特典会・ファンクラブで案内する</h3>
+        <p>ライブのMCや特典会でひと言。ファンクラブやLINEの通知に乗せれば、来てくれている人へ直接届きます。</p>
+        <div class="figbox">
+          <div class="minidia" aria-hidden="true">
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>ライブMC</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/></svg>FC・LINE通知</span>
+          </div>
+          <p class="figcap"><b>来ている人へ直接</b>ひと言・通知で案内。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="dlv-note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      <span>あたらしくファンを集める必要はありません。<b>いまのファン接点にそのまま乗せる</b>だけで、練習の時間が収益に変わります。</span>
+    </p>
   </div>
 </section>
 
