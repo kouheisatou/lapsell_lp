@@ -175,16 +175,17 @@ section{padding:70px 0;}
   .feat .item:nth-child(even) .fig{order:2;}
 }
 
-/* ---------- mechanic (3 hooks) — borderless, divided by single rules ---------- */
-.hooks{display:flex;flex-direction:column;margin-top:8px;}
-.hook{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:34px 0;border-top:1px solid var(--line);align-items:start;}
-.hook:last-child{border-bottom:1px solid var(--line);}
-.hook .n{font-size:clamp(30px,5vw,46px);font-weight:600;color:var(--olive);line-height:1;opacity:.6;font-feature-settings:"palt" off;}
-.hook .howimg{width:80px;height:80px;flex:none;}
+/* ---------- mechanic (3 steps) — horizontal-scroll row ---------- */
+.hooks{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;margin-top:8px;}
+.hooks::-webkit-scrollbar{height:7px;}
+.hooks::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px;}
+.hook{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.hook .stepno{display:inline-block;background:var(--olive);color:#fff;font-family:"Yu Gothic",sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;padding:4px 13px;border-radius:13px;}
+.hook .howimg{width:80px;height:80px;flex:none;margin-top:18px;}
 .hook .howimg img{width:100%;height:100%;object-fit:contain;filter:sepia(.12) contrast(.98);mix-blend-mode:multiply;}
-@media(max-width:560px){.hook .howimg{width:64px;height:64px;}}
-.hook h3{font-size:clamp(18px,2.4vw,22px);font-weight:600;color:var(--ink);line-height:1.6;}
+.hook h3{font-size:clamp(18px,2.4vw,22px);font-weight:600;color:var(--ink);line-height:1.6;margin-top:16px;}
 .hook p{color:var(--brown);font-size:14.5px;line-height:2.05;margin-top:12px;}
+@media(max-width:560px){.hook{width:clamp(260px,84vw,320px);}.hook .howimg{width:64px;height:64px;}}
 
 /* ---------- phone mock (HTML, black frame) ---------- */
 .device{width:248px;background:#14130f;border-radius:38px;padding:11px;box-shadow:0 24px 60px rgba(43,42,38,.34);flex:none;}
@@ -451,29 +452,26 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
   <div class="wrap">
     <span class="eyebrow">仕組み</span>
     <h2 class="sec-h">完成品ではなく、<br>練習の“時間”を先に売る。</h2>
-    <p class="lead">Lapsellが残すのは、できあがった作品ではありません。これから生まれる練習の「時間枠」を先に出品し、ファンがそれを買う。当日はスマホで撮るだけ。撮れた映像が、開けるまで中身のわからない“世界に一つのグッズ”として届きます。</p>
+    <p class="lead">Lapsellの使い方は、たった三つのステップ。練習の時間を出品し、本番はスマホで撮るだけ。撮れた映像が、世界に一つのグッズとしてファンに届き、そのまま収益になります。（横にスクロールできます）</p>
 
     <div class="hooks">
       <div class="hook">
-        <figure class="howimg"><img src="assets/how1.png" alt="これから訪れる練習の時間そのものを先に手渡すイメージ"></figure>
-        <div>
-          <h3>時間を、“先に”売る。</h3>
-          <p>練習の日時と価格を決めて出品。完成品ではなく、これからの時間そのものに値段がつきます。撮影は当日スマホで撮るだけ、編集もいりません。</p>
-        </div>
+        <span class="stepno">STEP 1</span>
+        <figure class="howimg"><img src="assets/how1.png" alt="これからやる練習やリハの時間枠を先に出品するイメージ"></figure>
+        <h3>練習の時間を出品する。</h3>
+        <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p>
       </div>
       <div class="hook">
-        <figure class="howimg"><img src="assets/how2.png" alt="中身は届くまで分からない、封をされた包みのイメージ"></figure>
-        <div>
-          <h3>中身は、運しだい。</h3>
-          <p>何が映るかは、届くまで分かりません。思いがけず写った面白い瞬間も、真剣な横顔も、受け取るその時の楽しみになります。</p>
-        </div>
+        <span class="stepno">STEP 2</span>
+        <figure class="howimg"><img src="assets/how2.png" alt="本番当日にスマホで撮るだけのイメージ"></figure>
+        <h3>本番をスマホで撮るだけ。</h3>
+        <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
       </div>
       <div class="hook">
-        <figure class="howimg"><img src="assets/how3.png" alt="世界に一つだけの一点ものの記録のイメージ"></figure>
-        <div>
-          <h3>届くのは、世界に一つ。</h3>
-          <p>その時間を買えたのは、あなただけ。誰とも同じでない一点ものの記録として手元に残り、所有者があなたであることも証明されます。</p>
-        </div>
+        <span class="stepno">STEP 3</span>
+        <figure class="howimg"><img src="assets/how3.png" alt="購入したファンに動画が届き収益になるイメージ"></figure>
+        <h3>ファンに届いて収益になる。</h3>
+        <p>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</p>
       </div>
     </div>
   </div>
@@ -690,7 +688,7 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
 <!-- ============ THRESHOLD band (felissimo's deep-green numeric panel) ============ -->
 <div class="threshold">
   <div class="wrap">
-    <p class="pre">市場が大きいから、ではありません</p>
+    <p class="pre">すでに起きている購入行動を見る</p>
     <div class="big"><span class="deco"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7c4-5 8-5 8 0M16 7c4 5 8 5 8 0"/></svg></span><span>75.4</span><span class="unit">％</span><span class="deco"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7c4-5 8-5 8 0M16 7c4 5 8 5 8 0"/></svg></span></div>
     <p class="post">ライブ参加者のうち、アイドル系のグッズ購入率。<span class="mk">ファンは「素のいま・本人とのつながり・一点もの」に、すでにお金を払っています。</span></p>
   </div>
@@ -701,7 +699,7 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
   <div class="wrap">
     <span class="eyebrow">購入される理由</span>
     <h2 class="sec-h">なぜ、買われるのか。</h2>
-    <p class="lead">「市場が大きいから」ではありません。ファンはもう、完成品ではない「素のいま・本人とのつながり・世界に一つの一点もの」に、現実のお金を払っています。Lapsellの「練習の時間」も、その同じ理由で買われます。</p>
+    <p class="lead">見るべきなのは、すでに起きている購入行動です。ファンはもう、完成品ではない「素のいま・本人とのつながり・世界に一つの一点もの」に、現実のお金を払っています。Lapsellの「練習の時間」も、その同じ理由で買われます。</p>
 
     <div class="ev">
       <!-- blackpink -->
@@ -736,7 +734,7 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
       <!-- 購入される理由（一点もの・素のもの・本人とのつながりに、すでに払われている） -->
       <div class="blk">
         <h3>ファンはもう、「素の一点もの」に払っている。</h3>
-        <p class="src" style="margin-top:14px;">市場の大きさではなく、ファンの“買う理由”そのものを並べます。どれも、Lapsellの「練習の時間」が買われるのと同じ行動です。</p>
+        <p class="src" style="margin-top:14px;">ファンの“買う理由”そのものを並べます。どれも、Lapsellの「練習の時間」が買われるのと同じ行動です。</p>
         <div class="why">
           <div class="r">
             <figure class="fig"><img src="assets/reason_merch.png" alt="ライブ会場の物販ブースでグッズを買い求めるファンの様子"></figure>
@@ -747,11 +745,11 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
             </div>
           </div>
           <div class="r">
-            <figure class="fig"><img src="assets/reason_cheki.png" alt="特典会でチェキを手にするファンとライブアイドルの様子"></figure>
+            <figure class="fig"><img src="assets/reason_cheki.png" alt="その場で撮る一点もののチェキを手にするファンの様子"></figure>
             <div class="tx">
-              <h4>その場でしか撮れない一点もの（チェキ）の文化。</h4>
-              <p>チェキはライブアイドルの主収入のひとつで、相場は<em>1枚およそ1,500円</em>。累計<em>1億台</em>が売れ、<em>年およそ1,500億円</em>の市場をつくっています。Lapsellは、いわば「動く・本人の本物の時間版チェキ」にあたります。</p>
-              <p class="src">チェキ相場・主収入＝取材記事（要再確認）／累計1億台・年約1,500億円＝富士フイルム公式</p>
+              <h4>チェキに払っている額。</h4>
+              <p>チェキは1枚<em>およそ1,500円</em>で売られ、ライブアイドルの主な収入源になっています。誰でもコピーできるスマホ写真ではなく、その場で本人から受け取る一点ものだから、ファンは実際にお金を払っています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+              <p class="src">チェキ相場・ライブアイドル収入に関する取材記事／富士フイルム公式（要再確認）</p>
             </div>
           </div>
           <div class="r">
@@ -763,11 +761,11 @@ footer .cp{font-family:"Yu Gothic",sans-serif;font-size:11px;color:#857c6c;margi
             </div>
           </div>
           <div class="r">
-            <figure class="fig"><img src="assets/reason_cd.png" alt="集めたCDや音楽メディアを並べて所有を楽しむファンの様子"></figure>
+            <figure class="fig"><img src="assets/reason_cd.png" alt="集めて所有するCDや特典映像つきメディアの様子"></figure>
             <div class="tx">
-              <h4>「集めて、所有したい」という気持ち。</h4>
-              <p>CDを買う理由の1位は「収集のため」で<em>54.7％</em>を占め、特典映像つきの所有メディアの需要も根強く、音楽ビデオの生産は<em>年562億円</em>にのぼります。所有・収集そのものが、買う動機になっています。</p>
-              <p class="src">CD購入理由＝Appliv／ナイル調べ（2023年・要再確認）／音楽ビデオ562億円＝RIAJ公式</p>
+              <h4>所有・収集の文化。</h4>
+              <p>CDを買う理由の1位は「収集のため」で<em>54.7%</em>。聴くためだけでなく、集めて所有することが購入理由になっています。特典映像やメイキングを手元に残したい気持ちも、同じ所有欲の延長にあります。</p>
+              <p class="src">Appliv／ナイル調べ（収集54.7%、要再確認）／日本レコード協会（RIAJ）</p>
             </div>
           </div>
           <div class="r">

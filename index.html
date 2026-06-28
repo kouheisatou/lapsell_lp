@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lapsell LP案一覧</title>
+  <style>
+    :root{
+      --bg:#f6f3ed;
+      --paper:#fffdf8;
+      --ink:#24211c;
+      --muted:#706a61;
+      --line:#ded6c9;
+      --red:#d64b3f;
+      --teal:#168278;
+      --mustard:#c99a2e;
+      --navy:#25365f;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(90deg,rgba(214,75,63,.08) 0 1px,transparent 1px 100%),
+        linear-gradient(0deg,rgba(37,54,95,.06) 0 1px,transparent 1px 100%),
+        var(--bg);
+      background-size:36px 36px;
+      line-height:1.75;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1180px;margin:0 auto;padding:36px 22px 52px}
+    header{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:22px;
+      align-items:end;
+      border-bottom:1px solid var(--line);
+      padding-bottom:24px;
+      margin-bottom:28px;
+    }
+    .brand{display:flex;flex-direction:column;gap:8px}
+    .mark{display:flex;align-items:center;gap:12px;font-weight:900;font-size:15px;letter-spacing:.08em}
+    .mark::before{
+      content:"";
+      width:28px;
+      height:28px;
+      border:2px solid var(--ink);
+      border-radius:6px;
+      background:linear-gradient(135deg,var(--red) 0 42%,var(--teal) 42% 70%,var(--mustard) 70%);
+      box-shadow:3px 3px 0 rgba(36,33,28,.16);
+    }
+    h1{font-size:clamp(32px,6vw,56px);line-height:1.15;margin:0;letter-spacing:0;font-weight:900}
+    .lead{margin:0;color:var(--muted);font-size:15px;max-width:690px}
+    .count{
+      border:1px solid var(--line);
+      background:var(--paper);
+      border-radius:8px;
+      padding:12px 16px;
+      min-width:118px;
+      text-align:center;
+    }
+    .count b{display:block;font-size:30px;line-height:1;color:var(--red)}
+    .count span{display:block;font-size:12px;font-weight:800;color:var(--muted);margin-top:5px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+    }
+    .card:hover{transform:translateY(-3px);box-shadow:0 18px 34px rgba(36,33,28,.12);border-color:#cfc2b1}
+    .thumb{aspect-ratio:16/9;background:#e7dfd2;overflow:hidden;border-bottom:1px solid var(--line)}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .body{display:flex;flex-direction:column;gap:12px;padding:16px;flex:1}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .num{font-weight:900;font-size:13px;letter-spacing:.12em;color:var(--red)}
+    .style{font-size:12px;color:var(--muted);font-weight:800}
+    .title{margin:0;font-size:17px;line-height:1.55;font-weight:900}
+    .open{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:900;color:var(--teal);padding-top:8px;border-top:1px solid var(--line)}
+    .open::after{content:"→";font-size:18px;line-height:1}
+    @media(max-width:940px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){
+      .wrap{padding:28px 16px 42px}
+      header{grid-template-columns:1fr;align-items:start}
+      .count{width:118px}
+      .grid{grid-template-columns:1fr}
+      .title{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="mark">LAPSELL LP VARIANTS</div>
+        <h1>Lapsell LP案一覧</h1>
+        <p class="lead">各案のデザイン方向を確認するための一覧です。カードを選ぶと、それぞれのLP案を開きます。</p>
+      </div>
+      <div class="count" aria-label="18案">
+        <b>18</b>
+        <span>LP案</span>
+      </div>
+    </header>
+
+    <main class="grid" aria-label="LP案一覧">
+      <a class="card" href="lp_variants/01_givee/index.html">
+        <div class="thumb"><img src="lp_variants/01_givee/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">01</span><span class="style">givee</span></div><h2 class="title">練習動画の収益化アプリ</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/02_canayell/index.html">
+        <div class="thumb"><img src="lp_variants/02_canayell/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">02</span><span class="style">canayell</span></div><h2 class="title">練習の時間を収益に変える市場型LP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/03_igrow_rakuten/index.html">
+        <div class="thumb"><img src="lp_variants/03_igrow_rakuten/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">03</span><span class="style">igrow rakuten</span></div><h2 class="title">練習の時間を収益化するアプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/04_asahi_app/index.html">
+        <div class="thumb"><img src="lp_variants/04_asahi_app/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">04</span><span class="style">asahi app</span></div><h2 class="title">ファングッズ販売として見せるLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/05_hanashitene/index.html">
+        <div class="thumb"><img src="lp_variants/05_hanashitene/assets/hero.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">05</span><span class="style">hanashitene</span></div><h2 class="title">練習の時間を収益に変える親しみ系LP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/06_gunmaas/index.html">
+        <div class="thumb"><img src="lp_variants/06_gunmaas/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">06</span><span class="style">gunmaas</span></div><h2 class="title">なぜ買われるかを前面に出すLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/07_bizne/index.html">
+        <div class="thumb"><img src="lp_variants/07_bizne/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">07</span><span class="style">bizne</span></div><h2 class="title">練習の時間を収益に変える実務型LP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/08_03plus/index.html">
+        <div class="thumb"><img src="lp_variants/08_03plus/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">08</span><span class="style">03plus</span></div><h2 class="title">練習の時間を売るアプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/09_hokuyobank/index.html">
+        <div class="thumb"><img src="lp_variants/09_hokuyobank/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">09</span><span class="style">hokuyobank</span></div><h2 class="title">インディーズ向け収益化LP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/10_studio_design/index.html">
+        <div class="thumb"><img src="lp_variants/10_studio_design/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">10</span><span class="style">studio design</span></div><h2 class="title">収益化プラットフォームLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/11_aday/index.html">
+        <div class="thumb"><img src="lp_variants/11_aday/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">11</span><span class="style">aday</span></div><h2 class="title">練習の時間を売るアプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/12_felissimo/index.html">
+        <div class="thumb"><img src="lp_variants/12_felissimo/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">12</span><span class="style">felissimo</span></div><h2 class="title">練習の時間を未来へ残すLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/13_talentpreneur/index.html">
+        <div class="thumb"><img src="lp_variants/13_talentpreneur/assets/hero_anime.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">13</span><span class="style">talentpreneur</span></div><h2 class="title">練習の時間を収益に変えるポップLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/14_ocl_ai/index.html">
+        <div class="thumb"><img src="lp_variants/14_ocl_ai/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">14</span><span class="style">ocl ai</span></div><h2 class="title">ファンに直接販売できるアプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/15_pocky/index.html">
+        <div class="thumb"><img src="lp_variants/15_pocky/assets/mock_practice.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">15</span><span class="style">pocky</span></div><h2 class="title">世界に1つのカセット風キャンペーンLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/16_indie_band/index.html">
+        <div class="thumb"><img src="lp_variants/16_indie_band/assets/hero.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">16</span><span class="style">indie band</span></div><h2 class="title">インディーズバンド向け収益化LP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/17_kr_mono/index.html">
+        <div class="thumb"><img src="lp_variants/17_kr_mono/assets/hero.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">17</span><span class="style">kr mono</span></div><h2 class="title">モノトーン系の収益化アプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+      <a class="card" href="lp_variants/18_cheki/index.html">
+        <div class="thumb"><img src="lp_variants/18_cheki/assets/hero.png" alt=""></div>
+        <div class="body"><div class="meta"><span class="num">18</span><span class="style">cheki</span></div><h2 class="title">チェキ風ビジュアルの収益化アプリLP</h2><span class="open">この案を開く</span></div>
+      </a>
+    </main>
+  </div>
+</body>
+</html>

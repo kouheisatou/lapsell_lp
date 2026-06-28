@@ -398,26 +398,26 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
 .foot .flinks a:hover{color:#fff}
 .foot .copy{font-size:13px;color:#a99b82}
 
-/* ---------- cases (導入イメージ: before→after, polaroid personas) ---------- */
+/* ---------- cases (導入イメージ: left photo, right before/after) ---------- */
 .cases{display:grid;grid-template-columns:1fr;gap:54px;margin-top:50px;position:relative;z-index:2}
 .case{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
 .case .pic{max-width:280px;width:100%;margin:6px auto 0}
 .case .pic h3{font-size:20px;font-weight:900;text-align:center;margin:16px 0 2px}
 .case .pic .desc{font-size:13px;font-weight:700;color:var(--ink-soft);text-align:center}
-/* before(上) → arrow(下向き) → after(下) を常に縦並びに */
 .case .ba{display:flex;flex-direction:column;gap:14px;align-items:stretch}
-.case .stage{background:#fff;border-radius:10px;padding:16px 18px;box-shadow:0 3px 12px rgba(60,40,20,.10)}
-.case .stage.before{background:#f4f1ea}
-.case .stage.after{background:#fff;border:2px solid var(--red)}
+.case .stage{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none}
+.case .stage.before{background:transparent}
+.case .stage.after{background:transparent}
 .case .stage .k{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:6px}
 .case .stage.after .k{color:var(--red)}
 .case .stage p{font-size:15px;font-weight:600;line-height:1.78}
 .case .stage.after p{font-weight:700}
-.case .ba-arrow{display:flex;align-items:center;justify-content:center;color:var(--red);margin:-4px 0}
+.case .ba-arrow{display:flex;align-items:center;justify-content:flex-start;color:var(--red);margin:-4px 0}
 .case .ba-arrow svg{width:30px;height:30px;transform:rotate(90deg)}
 @media(min-width:760px){
-  .case{grid-template-columns:.72fr 1.28fr;gap:40px}
-  .case.rev .pic{order:2}
+  .case{grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:44px}
+  .case .pic{margin:0}
+  .case.rev .pic{order:0}
 }
 
 /* reveal */
@@ -664,7 +664,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   </div>
 </section>
 
-<!-- cases: 導入イメージ before→after personas -->
+<!-- cases: 導入イメージ left photo + before/after -->
 <section class="sec" id="cases">
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>導入イメージ</span>
@@ -786,7 +786,7 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
   <div class="wrap">
     <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>WHY IT SELLS</span>
     <h2 class="sec-title">なぜ、<em>買われるのか</em></h2>
-    <p class="lead">「市場が大きいから」ではありません。ファンは“一点もの・素の姿・本人とのつながり”に、すでに実際のお金を払っています。Lapsellの「練習の時間」も、同じ動機で買われます。チェキ文化が、その確かな証拠です。</p>
+    <p class="lead">見るべきなのは、すでに起きている購入行動です。ファンは“一点もの・素の姿・本人とのつながり”に、すでに実際のお金を払っています。Lapsellの「練習の時間」も、同じ動機で買われます。チェキ文化が、その確かな証拠です。</p>
 
     <div class="ev-grid">
       <div class="ev-block">
@@ -848,8 +848,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       <div class="reason cheki-feat">
         <div class="rpic"><span class="tape top-l"></span><img src="assets/reason_cheki.png" alt="ライブアイドルの物販で買われる、その場で撮った一点もののチェキ写真"></div>
         <h3>チェキという「一点もの」の文化</h3>
-        <p>ファンはその場で撮った一点もののチェキに、1枚<em>およそ1,500円</em>を払っています。ライブアイドルの収入の半分以上をチェキが支え、スマホ写真と違い世界に1枚しかないことに価値が置かれます。チェキ（instax）は累計<em>1億台</em>を超え、年間売上は過去最高の<em>約1,500億円</em>に。Lapsellは、この「一点もの」を“動く・本人の本物の時間”にしたものです。</p>
-        <span class="src">出典：富士フイルム公式（2025／累計・売上）／Business Insider Japan・中日新聞（2024／単価・収入比率, 取材記事＝要再確認）</span>
+        <p>チェキは1枚<em>およそ1,500円</em>で売られ、ライブアイドルの主な収入源になっています。誰でもコピーできるスマホ写真ではなく、その場で本人から受け取る一点ものだから、ファンは実際にお金を払っています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+        <span class="src">出典：チェキ相場・ライブアイドル収入に関する取材記事／富士フイルム公式（要再確認）</span>
       </div>
 
       <div class="reason">
@@ -869,8 +869,8 @@ footer{background:var(--ink);color:var(--paper);padding:48px 22px 34px;border-to
       <div class="reason">
         <div class="rpic"><img src="assets/reason_cd.png" alt="集めたCDや特典映像つきメディアを並べてコレクションしている様子"></div>
         <h3>所有・収集の文化</h3>
-        <p>CDを買う理由でいちばん多いのは「収集（コレクション）のため」で<em>54.7%</em>を占めます。特典映像つきの所有メディアの需要も根強く、音楽ビデオの国内生産額は<em>562億円</em>にのぼります。</p>
-        <span class="src">出典：Appliv／ナイル調べ（2023, 収集54.7%＝単一調査・要再確認）／RIAJ公式統計（2024, 音楽ビデオ562億円）</span>
+        <p>CDを買う理由の1位は「収集のため」で<em>54.7%</em>。聴くためだけでなく、集めて所有することが購入理由になっています。特典映像やメイキングを手元に残したい気持ちも、同じ所有欲の延長にあります。</p>
+        <span class="src">出典：Appliv／ナイル調べ（収集54.7%、要再確認）／日本レコード協会（RIAJ）</span>
       </div>
 
       <div class="reason">

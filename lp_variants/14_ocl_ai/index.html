@@ -137,10 +137,10 @@ section{padding:78px 0}
 .cloud p{font-size:13.5px;color:var(--ink-soft)}
 @media(max-width:880px){.clouds{grid-template-columns:1fr;gap:20px}.pain-head img.who{width:100%}}
 
-/* mechanic — borderless 3 hooks */
-.hooks{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:50px}
-.hook{text-align:center}
-.hook .step{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.1em}
+/* mechanic — 3 STEP cards, horizontal scroll */
+.hooks{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;margin-top:50px}
+.hook{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;text-align:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 26px}
+.hook .step{display:inline-block;font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.1em;background:var(--bg);border-radius:30px;padding:5px 16px;margin-bottom:14px}
 .hook .ring{width:64px;height:64px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;margin:14px auto 16px;color:var(--blue-dark)}
 .hook .ring .ico{width:30px;height:30px}
 .hook .hook-img{width:80px;height:80px;object-fit:contain;margin:0 auto 18px}
@@ -149,7 +149,7 @@ section{padding:78px 0}
 .flow-arrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:44px;font-size:15px;font-weight:700;color:var(--blue-dark);flex-wrap:wrap}
 .flow-arrow span{display:inline-flex;align-items:center;gap:8px}
 .flow-arrow .ar{color:var(--blue)}
-@media(max-width:880px){.hooks{grid-template-columns:1fr;gap:34px}}
+@media(max-width:880px){.hook{width:clamp(260px,84vw,320px)}}
 
 /* steps horizontal scroll */
 .steps-scroll{display:flex;gap:18px;overflow-x:auto;padding:8px 4px 24px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
@@ -514,23 +514,26 @@ footer{background:var(--bg);padding:54px 0 40px}
     <div class="center">
       <span class="eyebrow">Lapsellの仕組み</span>
       <h2 class="h2">完成品ではなく、<span class="em">“これからの練習時間”</span>を売る。</h2>
-      <p class="sec-lead">Lapsellは「練習の“時間”」を売る、新しい形のデジタルグッズです。撮ってから売るのではなく、時間を先に売ってから撮ります。</p>
+      <p class="sec-lead">Lapsellは「練習の“時間”」を売る、新しい形のデジタルグッズです。出品・撮影・販売の3ステップで、お金にならなかった練習が収益になります。（横にスクロールできます）</p>
     </div>
     <div class="hooks">
       <div class="hook">
-        <img class="hook-img" src="assets/how1.png" alt="時間を先に売る">
-        <h3>時間を“先に”売る</h3>
-        <p>完成品ではなく、これから始まる練習の時間枠を出品。日時と価格を決めるだけで販売できます。</p>
+        <span class="step">STEP 1</span>
+        <img class="hook-img" src="assets/how1.png" alt="練習の時間を出品する">
+        <h3>練習の時間を出品する</h3>
+        <p>これからやる練習やリハの時間枠を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p>
       </div>
       <div class="hook">
-        <img class="hook-img" src="assets/how2.png" alt="中身は届くまで分からない">
-        <h3>中身は、届くまで分からない</h3>
-        <p>何が映るかは受け取るまで分からない。だから受け取って再生する瞬間が、いちばん楽しい。</p>
+        <span class="step">STEP 2</span>
+        <img class="hook-img" src="assets/how2.png" alt="本番をスマホで撮るだけ">
+        <h3>本番をスマホで撮るだけ</h3>
+        <p>当日はスマホで撮るだけ。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p>
       </div>
       <div class="hook">
-        <img class="hook-img" src="assets/how3.png" alt="世界に1つ">
-        <h3>届くのは世界に1つ</h3>
-        <p>その時間を買ったファンだけが持つ、一点もののデジタルグッズ。複製のない“あなただけ”の所有。</p>
+        <span class="step">STEP 3</span>
+        <img class="hook-img" src="assets/how3.png" alt="ファンに届いて収益になる">
+        <h3>ファンに届いて収益になる</h3>
+        <p>購入したファンに動画が届き、そのまま収益になります。1つずつ違う一点ものとして手元に残ります。</p>
       </div>
     </div>
     <div class="flow-arrow">
@@ -781,10 +784,10 @@ footer{background:var(--bg);padding:54px 0 40px}
         <p class="src">出典：ぴあ総研／インテージ（2019、やや古く要再確認）</p>
       </div>
       <div class="reason">
-        <img class="rimg" src="assets/reason_cheki.png" alt="ライブの特典会で撮るチェキ（インスタント写真）">
-        <h3>一点ものの写真を持つ文化</h3>
-        <p>その場で撮るチェキは1枚 <em>約1,500円</em> ほどで、ライブアイドルの収入の半分以上を占める例もあります。本体は累計 <em>1億台</em>、市場は年 <em>約1,500億円</em> と、「一点ものの写真を持つ」文化そのものがすでに大きな広がりを見せています。Lapsellは、その“動く・本物の時間”版です。</p>
-        <p class="src">出典：富士フイルム公式（2025）ほか取材記事（要再確認）</p>
+        <img class="rimg" src="assets/reason_cheki.png" alt="その場で撮る一点もののチェキを手にするファン">
+        <h3>チェキに払っている額</h3>
+        <p>チェキは1枚<em>およそ1,500円</em>で売られ、ライブアイドルの主な収入源になっています。誰でもコピーできるスマホ写真ではなく、その場で本人から受け取る一点ものだから、ファンは実際にお金を払っています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+        <p class="src">出典：チェキ相場・ライブアイドル収入に関する取材記事／富士フイルム公式（要再確認）</p>
       </div>
       <div class="reason">
         <img class="rimg" src="assets/reason_oshikatsu.png" alt="集めた推し活グッズを並べて楽しむファン">
@@ -793,10 +796,10 @@ footer{background:var(--bg);padding:54px 0 40px}
         <p class="src">出典：Oshicoco 調査 n=210（2024、単一調査につき要再確認）</p>
       </div>
       <div class="reason">
-        <img class="rimg" src="assets/reason_cd.png" alt="集めたCDや特典映像を所有して楽しむ様子">
+        <img class="rimg" src="assets/reason_cd.png" alt="集めて所有するCDや特典映像つきメディア">
         <h3>所有・収集の文化</h3>
-        <p>CDを買う理由の1位は「収集のため」で <em>54.7%</em>。ライブ映像（音楽ビデオ）も年 <em>562億円</em> 規模あり、特典映像のような“手元に所有できるメディア”への需要は今も根強く残っています。</p>
-        <p class="src">出典：Appliv／ナイル調べ（2023、要再確認）／RIAJ公式（2024）</p>
+        <p>CDを買う理由の1位は「収集のため」で<em>54.7%</em>。聴くためだけでなく、集めて所有することが購入理由になっています。特典映像やメイキングを手元に残したい気持ちも、同じ所有欲の延長にあります。</p>
+        <p class="src">出典：Appliv／ナイル調べ（収集54.7%、要再確認）／日本レコード協会（RIAJ）</p>
       </div>
       <div class="reason">
         <img class="rimg" src="assets/reason_bubble.png" alt="本人から素の日常メッセージが届くファン向けアプリ">

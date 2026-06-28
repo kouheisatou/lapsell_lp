@@ -121,13 +121,15 @@ h2.sec-title{position:relative;z-index:2;font-size:clamp(26px,5vw,42px);font-wei
 .prob li svg{flex:0 0 22px;margin-top:3px;color:var(--indigo)}
 @media(min-width:840px){.prob .row{grid-template-columns:1fr 1fr}.prob .row.rev img{order:2}}
 
-/* ---------- mechanic (three kimo, no boxes) ---------- */
-.kimo{display:grid;gap:46px;margin-top:50px;position:relative;z-index:2}
-.kimo .item{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+/* ---------- mechanic (three steps, horizontal scroll) ---------- */
+.kimo{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:14px;margin-top:50px;position:relative;z-index:2}
+.kimo .item{flex:0 0 auto;width:clamp(280px,82vw,340px);scroll-snap-align:start;display:flex;flex-direction:column;gap:14px;background:#fff;border-radius:14px;box-shadow:0 12px 26px rgba(36,28,92,.14);padding:24px 22px 26px}
 .kimo .howimg{width:80px;height:80px;flex:0 0 80px;border-radius:14px;object-fit:cover;background:var(--indigo);box-shadow:0 10px 22px rgba(36,28,92,.22)}
-.kimo .item h3{font-size:clamp(19px,3vw,24px);font-weight:800;margin-bottom:8px}
+.kimo .item .stepno{font-family:"Josefin Sans",sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;color:var(--pink)}
+.kimo .item h3{font-size:clamp(19px,3vw,24px);font-weight:800;margin-bottom:6px}
 .kimo .item p{font-weight:500;font-size:15px}
 .kimo .item .sk{color:var(--pink);font-weight:800}
+@media(max-width:639px){.kimo .item{width:clamp(260px,84vw,320px)}}
 
 /* ---------- flow / app mocks (functional cards OK) ---------- */
 .flow-scroll{margin-top:30px;overflow-x:auto;padding:6px 0 22px;-webkit-overflow-scrolling:touch}
@@ -428,21 +430,24 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
   <span class="ghost en">MECHANIC</span>
   <div class="wrap">
     <span class="eyebrow"><span class="gl">✦</span>HOW IT WORKS</span>
-    <h2 class="sec-title">Lapsellは、<em>練習の“時間”を先に売る</em>。</h2>
-    <p class="lead">完成品ではなく、これから生まれる未来の練習時間を出品する。中身は届くまで分からない。だから、開ける瞬間まで楽しい。</p>
+    <h2 class="sec-title">Lapsellは、<em>たった3ステップ</em>。</h2>
+    <p class="lead">完成品も在庫もいらない。練習の“時間”を出品し、当日スマホで撮るだけで、ファンに届いて収益になる。順に見ていきましょう。<br>（横にスクロールできます）</p>
 
     <div class="kimo">
       <div class="item">
-        <img class="howimg" src="assets/how1.png" alt="時間を先に売る概念のアイコン">
-        <div><h3>時間を“先に”売る</h3><p>完成した動画ではなく、<span class="sk">これからの練習時間そのもの</span>を時間枠として出品。当日スマホで撮るだけで、価値になる。</p></div>
+        <img class="howimg" src="assets/how1.png" alt="練習の時間を出品する概念のアイコン">
+        <span class="stepno">STEP 1</span>
+        <div><h3>練習の時間を出品する</h3><p>これからやる<span class="sk">練習やリハの時間枠</span>を、日時と価格を決めて先に出品します。完成品も在庫もいりません。</p></div>
       </div>
       <div class="item">
-        <img class="howimg" src="assets/how2.png" alt="中身は届くまで分からない概念のアイコン">
-        <div><h3>中身は、届くまで分からない</h3><p>何が映るかは、封を開けるまで分からない。だから<span class="sk">開ける瞬間まで楽しい</span>。思いがけない名場面に出会える。</p></div>
+        <img class="howimg" src="assets/how2.png" alt="本番をスマホで撮るだけの概念のアイコン">
+        <span class="stepno">STEP 2</span>
+        <div><h3>本番をスマホで撮るだけ</h3><p>当日は<span class="sk">スマホで撮るだけ</span>。編集も準備もいりません。自動で区間に分かれ、世界に1つの動画になります。</p></div>
       </div>
       <div class="item">
-        <img class="howimg" src="assets/how3.png" alt="世界に1つの一点もの概念のアイコン">
-        <div><h3>届くのは、世界に1つ</h3><p>その区間を買えたのは、世界でその人だけ。複製ではない、<span class="sk">一点もののデジタルグッズ</span>として所有できる。</p></div>
+        <img class="howimg" src="assets/how3.png" alt="ファンに届いて収益になる概念のアイコン">
+        <span class="stepno">STEP 3</span>
+        <div><h3>ファンに届いて収益になる</h3><p>購入したファンに動画が届き、<span class="sk">そのまま収益になります</span>。1つずつ違う一点ものとして手元に残ります。</p></div>
       </div>
     </div>
   </div>
@@ -650,13 +655,13 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
       </div>
       <div class="ev-block">
         <h3>その31.9%は、急に現れた数字じゃない。</h3>
-        <p>同じ「素・一点もの・本人とのつながり」に、ファンは<span class="hl">もう実際に払っている</span>。理由は市場の大きさではなく、この支払いがすでに起きていること。</p>
+        <p>同じ「素・一点もの・本人とのつながり」に、ファンは<span class="hl">もう実際に払っている</span>。理由は、この支払いがすでに起きていること。</p>
       </div>
     </div>
 
     <!-- 購入される理由（なぜ買われるのか） -->
     <h3 class="sec-title" style="margin-top:64px">購入される理由<em>（なぜ買われるのか）</em>。</h3>
-    <p class="lead">論点は「市場が大きいか」ではない。ファンは“一点もの・素のもの・本人とのつながり”に、もう実際の金額を払っている。Lapsellの「素の一点もの」も、同じ行動原理で買われる。</p>
+    <p class="lead">見るべきなのは、すでに起きている購入行動。ファンは“一点もの・素のもの・本人とのつながり”に、もう実際の金額を払っている。Lapsellの「素の一点もの」も、同じ行動原理で買われる。</p>
     <div class="scroll-hint">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>横にスクロールできます
     </div>
@@ -671,11 +676,11 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
       </div>
 
       <div class="reason">
-        <img src="assets/reason_cheki.png" alt="その場で撮るチェキを手にするファンのイラスト">
+        <img src="assets/reason_cheki.png" alt="その場で撮る一点もののチェキを手にするファンのイラスト">
         <span class="rno"><span class="gl">✦</span>02</span>
-        <h4>その場の一点物に払う額</h4>
-        <p>チェキは1枚<em>約1,500円</em>で売れ、ライブアイドルの収入の柱になっています。文化全体でも累計<em>1億台</em>が普及し、市場は年<em>約1,500億円</em>。Lapsellは、その「動く・本人の本物の時間版チェキ」にあたります。</p>
-        <span class="src">出典：富士フイルム公式 ほか</span>
+        <h4>チェキに払っている額</h4>
+        <p>チェキは1枚<em>およそ1,500円</em>で売られ、ライブアイドルの主な収入源になっています。誰でもコピーできるスマホ写真ではなく、その場で本人から受け取る一点ものだから、ファンは実際にお金を払っています。Lapsellは、その「動く・本人の本物の時間版」です。</p>
+        <span class="src">出典：チェキ相場・ライブアイドル収入に関する取材記事／富士フイルム公式（要再確認）</span>
       </div>
 
       <div class="reason">
@@ -687,11 +692,11 @@ footer{background:var(--yellow);padding:54px 24px 38px;border-top:4px solid var(
       </div>
 
       <div class="reason">
-        <img src="assets/reason_cd.png" alt="CDや特典映像をコレクションするファンのイラスト">
+        <img src="assets/reason_cd.png" alt="集めて所有するCDや特典映像つきメディアのイラスト">
         <span class="rno"><span class="gl">✦</span>04</span>
         <h4>所有・収集の文化</h4>
-        <p>CDを買う理由でいちばん多いのは「収集」で<em>54.7%</em>を占め、所有やコレクションが動機の中心になっています。特典映像を目当てに買われる音楽ビデオも、いまだ年<em>562億円</em>の市場が残っています。</p>
-        <span class="src">出典：CD購入理由調査（要再確認）／RIAJ</span>
+        <p>CDを買う理由の1位は「収集のため」で<em>54.7%</em>。聴くためだけでなく、集めて所有することが購入理由になっています。特典映像やメイキングを手元に残したい気持ちも、同じ所有欲の延長にあります。</p>
+        <span class="src">出典：Appliv／ナイル調べ（収集54.7%、要再確認）／日本レコード協会（RIAJ）</span>
       </div>
 
       <div class="reason">
