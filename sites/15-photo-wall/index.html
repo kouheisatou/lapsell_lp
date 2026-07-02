@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lapsell — あなたの練習が、みんなの壁に並ぶ。</title>
+<style>
+  :root{
+    --ground:#F3EEE4;      /* bone plaster wall */
+    --ground-deep:#EAE2D2;
+    --text:#2B2723;        /* warm ink */
+    --text-soft:#6B635A;
+    --accent:#E1503C;      /* push-pin coral-red */
+    --accent-2:#E8B84B;    /* masking-tape mustard */
+    --tape:rgba(232,184,75,.62);
+    --tape-blue:rgba(120,170,190,.55);
+    --tape-pink:rgba(224,150,160,.55);
+    --paper:#FFFDF8;
+    --shadow:rgba(40,30,20,.20);
+    --maxw:1120px;
+    --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Yu Gothic Medium","Meiryo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --disp:"Arial Black","Hiragino Kaku Gothic ProN","Yu Gothic",var(--sans);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.75;
+    font-size:16px;
+    letter-spacing:.01em;
+    overflow-x:hidden;
+    /* faint plaster grain */
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(255,255,255,.5), transparent 42%),
+      radial-gradient(circle at 82% 78%, rgba(214,203,182,.4), transparent 46%);
+  }
+  img{display:block;max-width:100%;height:auto;}
+  a{color:inherit;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+
+  /* ---------- shared photo look ---------- */
+  .photo{
+    background:var(--paper);
+    padding:9px 9px 9px;
+    box-shadow:0 10px 22px -8px var(--shadow), 0 2px 5px rgba(0,0,0,.08);
+    position:relative;
+  }
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  /* white bottom border like an instant print */
+  .polaroid{padding:10px 10px 46px;}
+  .polaroid .cap{
+    position:absolute;left:0;right:0;bottom:9px;
+    text-align:center;font-size:13px;color:#4a423a;
+    font-style:italic;letter-spacing:.02em;
+  }
+  /* a pushpin */
+  .pin{
+    position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    width:20px;height:20px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #ff8a72, var(--accent) 60%, #a8321f);
+    box-shadow:0 4px 6px rgba(0,0,0,.32);
+    z-index:3;
+  }
+  .pin.y{background:radial-gradient(circle at 35% 30%,#ffe08a,var(--accent-2) 60%,#b6821f);}
+  .pin.b{background:radial-gradient(circle at 35% 30%,#bfe0ec,#5aa0b8 60%,#376b7d);}
+  /* a strip of masking tape */
+  .tape{
+    position:absolute;width:76px;height:26px;
+    background:var(--tape);
+    top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    box-shadow:0 1px 2px rgba(0,0,0,.12);
+    opacity:.9;
+  }
+  .tape.pink{background:var(--tape-pink);}
+  .tape.blue{background:var(--tape-blue);}
+  .tape::before,.tape::after{
+    content:"";position:absolute;top:0;bottom:0;width:6px;
+    background:repeating-linear-gradient(90deg,transparent 0 2px,rgba(255,255,255,.35) 2px 3px);
+  }
+  .tape::before{left:0;} .tape::after{right:0;}
+
+  /* eyebrow label */
+  .eyebrow{
+    display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.24em;
+    color:var(--accent);text-transform:uppercase;margin:0 0 14px;
+  }
+  .eyebrow.mut{color:var(--text-soft);}
+
+  h2.sec{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(30px,6.4vw,54px);
+    line-height:1.08;
+    letter-spacing:.01em;
+    margin:0 0 18px;
+  }
+  h2.sec .u{
+    box-shadow:inset 0 -.28em 0 rgba(232,184,75,.55);
+  }
+  .lead{font-size:clamp(16px,2.4vw,19px);color:#413a33;max-width:40em;margin:0 0 6px;}
+
+  section{position:relative;}
+  .band{padding:96px 0;}
+  .band.tight{padding:70px 0;}
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;align-items:flex-end;
+    overflow:hidden;
+    color:#fff;
+  }
+  .hero__bg{position:absolute;inset:0;}
+  .hero__bg img{width:100%;height:100%;object-fit:cover;}
+  .hero__bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(20,14,10,.28) 0%,rgba(20,14,10,.10) 34%,rgba(20,14,10,.60) 78%,rgba(20,14,10,.86) 100%);
+  }
+  .hero__inner{position:relative;z-index:2;width:100%;padding-bottom:56px;}
+  .hero__mark{
+    position:absolute;top:26px;left:0;z-index:3;
+    font-family:var(--disp);font-weight:900;font-size:23px;letter-spacing:.04em;
+    color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5);
+  }
+  .hero h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(34px,8.6vw,80px);
+    line-height:1.04;
+    margin:0 0 20px;
+    letter-spacing:.005em;
+    text-shadow:0 3px 22px rgba(0,0,0,.55);
+  }
+  .hero h1 .hl{color:var(--accent-2);}
+  .hero__sub{
+    font-size:clamp(15px,2.5vw,20px);
+    max-width:30em;line-height:1.7;
+    text-shadow:0 2px 12px rgba(0,0,0,.6);
+    margin:0 0 30px;color:#f6f1e9;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+
+  /* the CTA: a printed photo tag pinned on, not a gradient pill */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--sans);font-weight:800;font-size:16px;
+    text-decoration:none;cursor:pointer;border:0;
+    padding:15px 26px;
+    background:var(--accent);color:#fff;
+    box-shadow:0 8px 18px -6px rgba(180,50,30,.7);
+    position:relative;letter-spacing:.02em;
+    transition:transform .16s ease, box-shadow .16s ease;
+  }
+  .btn::before{ /* pushpin on the button */
+    content:"";width:13px;height:13px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff6e8,#ffe08a 55%,#c99a24);
+    box-shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+  .btn:hover{transform:translateY(-2px) rotate(-.5deg);box-shadow:0 12px 22px -6px rgba(180,50,30,.75);}
+  .btn.ghost{
+    background:rgba(255,255,255,.9);color:var(--text);
+    box-shadow:0 8px 18px -8px rgba(0,0,0,.5);
+  }
+  .btn.ghost::before{background:radial-gradient(circle at 35% 30%,#ff8a72,var(--accent) 60%,#a8321f);}
+  .btn.dark{background:var(--text);color:var(--ground);box-shadow:0 8px 18px -8px rgba(0,0,0,.5);}
+
+  .hero__note{
+    margin-top:18px;font-size:13px;color:#e7ddcf;letter-spacing:.02em;
+    text-shadow:0 1px 6px rgba(0,0,0,.6);
+  }
+  .scrollcue{
+    position:absolute;right:22px;bottom:26px;z-index:3;
+    font-size:11px;letter-spacing:.28em;color:#f0e8db;writing-mode:vertical-rl;
+    text-transform:uppercase;opacity:.85;
+  }
+
+  /* =========================================================
+     COUNT / one becomes many  (物量)
+  ========================================================= */
+  .count{background:var(--ground-deep);text-align:center;overflow:hidden;}
+  .count .kick{font-size:clamp(19px,3.4vw,27px);font-weight:800;line-height:1.5;margin:0 auto 8px;max-width:20em;}
+  .count .kick b{color:var(--accent);}
+  .count .sub{color:var(--text-soft);max-width:30em;margin:0 auto 40px;font-size:15px;}
+
+  /* the fan-out row: one photo -> many */
+  .fanout{position:relative;height:230px;margin:0 auto;max-width:960px;}
+  .fanout .seed{
+    position:absolute;left:50%;top:8px;transform:translateX(-50%) rotate(-2deg);
+    width:130px;z-index:5;
+  }
+  .fanout .seed .photo{padding:7px 7px 30px;}
+  .fanout .seed .lab{
+    position:absolute;bottom:8px;left:0;right:0;text-align:center;
+    font-size:11px;color:#5a5148;font-style:italic;
+  }
+  .fanout .arms{position:absolute;inset:0;pointer-events:none;}
+  .mini{
+    position:absolute;width:58px;background:var(--paper);padding:4px 4px 4px;
+    box-shadow:0 6px 12px -5px var(--shadow);
+    opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(var(--r,0deg));
+  }
+  .mini img{width:100%;height:44px;object-fit:cover;}
+  .revealed .mini{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--r,0deg));}
+  .mini{transition:opacity .6s ease, transform .7s cubic-bezier(.2,.8,.25,1);transition-delay:var(--d,0s);}
+
+  /* =========================================================
+     WALL STRIP (marquee of dense walls)
+  ========================================================= */
+  .wallstrip{padding:0;background:var(--text);overflow:hidden;}
+  .wallstrip__track{display:flex;width:max-content;animation:slide 44s linear infinite;}
+  .wallstrip__track img{height:min(46vw,320px);width:auto;flex:0 0 auto;object-fit:cover;}
+  @keyframes slide{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .wallstrip:hover .wallstrip__track{animation-play-state:paused;}
+
+  /* =========================================================
+     VALUE — pinned photos over wall
+  ========================================================= */
+  .value .grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:54px 46px;margin-top:46px;
+  }
+  .val{position:relative;}
+  .val .ph{position:relative;margin:0 auto 20px;width:min(320px,92%);}
+  .val .ph .photo{transform:rotate(var(--tilt,-2deg));}
+  .val h3{font-size:20px;font-weight:800;margin:0 0 8px;line-height:1.4;}
+  .val h3 .n{color:var(--accent);font-family:var(--disp);margin-right:.4em;}
+  .val p{color:#4b433b;margin:0;font-size:15px;}
+
+  /* tools divider */
+  .tools{background:var(--ground);padding:16px 0 8px;}
+  .tools__row{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:26px;align-items:center;}
+  .tools__ph{margin:0;}
+  .tools__ph img{width:100%;box-shadow:0 12px 26px -12px var(--shadow);}
+  .tools__txt{text-align:center;}
+  .tools__txt p:not(.eyebrow){margin:0;color:#4b433b;font-size:15.5px;line-height:1.7;}
+  @media(max-width:760px){
+    .tools__row{grid-template-columns:1fr 1fr;gap:16px;}
+    .tools__txt{grid-column:1 / -1;order:-1;}
+  }
+
+  /* =========================================================
+     STEPS — a photo's journey (real sequence)
+  ========================================================= */
+  .steps{background:var(--ground-deep);}
+  .steps .row{
+    display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:start;
+    padding:26px 0;border-bottom:1px dashed rgba(90,80,66,.35);
+  }
+  .steps .row:last-child{border-bottom:0;}
+  .steps .no{
+    font-family:var(--disp);font-weight:900;font-size:46px;color:var(--accent);
+    line-height:1;position:relative;
+  }
+  .steps .no small{display:block;font-family:var(--sans);font-size:11px;font-weight:700;
+    letter-spacing:.22em;color:var(--text-soft);margin-top:6px;}
+  .steps h3{font-size:19px;margin:2px 0 6px;font-weight:800;}
+  .steps p{margin:0;color:#4b433b;font-size:15px;max-width:42em;}
+  .steps .row .thumb{margin-top:14px;width:min(300px,100%);}
+  .steps .row .thumb .photo{transform:rotate(-1.5deg);}
+  .steps .row .thumb.duo{display:flex;gap:16px;width:min(520px,100%);}
+  .steps .row .thumb.duo .photo{flex:1 1 0;min-width:0;}
+  .steps .row .thumb.duo .photo:nth-child(2){transform:rotate(2deg);}
+
+  /* =========================================================
+     PROOF / fan reasons
+  ========================================================= */
+  .proof .lead{margin-bottom:34px;}
+  .proof .cols{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
+  .proof .facts{list-style:none;margin:0;padding:0;}
+  .proof .facts li{
+    display:flex;gap:16px;padding:18px 0;border-top:1px solid rgba(90,80,66,.22);
+  }
+  .proof .facts li:first-child{border-top:0;}
+  .proof .facts .big{
+    font-family:var(--disp);font-weight:900;font-size:30px;color:var(--text);
+    line-height:1.1;flex:0 0 auto;min-width:112px;
+  }
+  .proof .facts .txt{font-size:14.5px;color:#4b433b;line-height:1.65;}
+  .proof .facts .txt b{color:var(--accent);font-weight:800;}
+  .proof__ph{position:relative;}
+  .proof__ph .photo{transform:rotate(1.6deg);}
+
+  /* the M!LK style note */
+  .storynote{
+    margin-top:48px;background:var(--paper);padding:26px 26px;position:relative;
+    box-shadow:0 14px 30px -14px var(--shadow);
+    border-left:5px solid var(--accent-2);
+  }
+  .storynote p{margin:0;font-size:15px;color:#463e36;}
+  .storynote b{color:var(--text);}
+
+  /* =========================================================
+     SAFETY
+  ========================================================= */
+  .safety{background:var(--text);color:var(--ground);}
+  .safety .eyebrow{color:var(--accent-2);}
+  .safety h2.sec{color:var(--ground);}
+  .safety .lead{color:#d9d0c3;}
+  .safety .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:34px;}
+  .safety .two h3{color:var(--accent-2);font-size:17px;margin:0 0 8px;}
+  .safety .two p{color:#cfc6b8;font-size:15px;margin:0;}
+
+  /* =========================================================
+     PRICING
+  ========================================================= */
+  .price{text-align:center;}
+  .price .plate{
+    display:inline-block;background:var(--paper);padding:34px 44px;margin-top:26px;
+    box-shadow:0 18px 40px -18px var(--shadow);position:relative;
+    transform:rotate(-1deg);
+  }
+  .price .plate .tape{width:120px;}
+  .price .line{font-size:16px;color:#4b433b;margin:6px 0;}
+  .price .line b{font-family:var(--disp);font-size:22px;color:var(--text);}
+  .price .free{font-family:var(--disp);font-size:clamp(26px,6vw,40px);color:var(--accent);margin:0 0 4px;}
+
+  /* =========================================================
+     FINAL CTA
+  ========================================================= */
+  .final{position:relative;overflow:hidden;color:#fff;text-align:center;}
+  .final__bg{position:absolute;inset:0;}
+  .final__bg img{width:100%;height:100%;object-fit:cover;}
+  .final__bg::after{content:"";position:absolute;inset:0;background:rgba(24,17,12,.62);}
+  .final__in{position:relative;z-index:2;padding:104px 0;}
+  .final h2{font-family:var(--disp);font-weight:900;font-size:clamp(28px,6.4vw,52px);margin:0 0 16px;text-shadow:0 3px 20px rgba(0,0,0,.5);}
+  .final p{max-width:26em;margin:0 auto 30px;color:#f0e8db;text-shadow:0 2px 10px rgba(0,0,0,.5);}
+
+  footer{background:var(--text);color:#b8ad9d;font-size:13px;padding:30px 0 40px;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+  footer .logo{font-family:var(--disp);color:var(--ground);font-size:18px;}
+
+  /* faq */
+  .faq details{border-top:1px solid rgba(90,80,66,.25);padding:16px 0;}
+  .faq details:last-child{border-bottom:1px solid rgba(90,80,66,.25);}
+  .faq summary{font-weight:800;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";color:var(--accent);font-family:var(--disp);font-size:22px;line-height:1;}
+  .faq details[open] summary::after{content:"–";}
+  .faq p{margin:12px 0 0;color:#4b433b;font-size:15px;}
+
+  /* =========================================================
+     APP SCREENS — phones pinned to the wall like prints
+  ========================================================= */
+  .screens{background:var(--ground-deep);overflow:hidden;}
+  .screens .wall{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:34px 26px;margin-top:52px;
+    justify-items:center;
+  }
+  /* each phone sits on a paper mat, pinned, tilted — a print on the wall */
+  .shot{position:relative;width:100%;max-width:270px;}
+  .shot .mat{
+    background:var(--paper);
+    padding:14px 14px 44px;
+    box-shadow:0 16px 30px -14px var(--shadow),0 3px 7px rgba(0,0,0,.08);
+    transform:rotate(var(--tilt,-2deg));
+    transition:transform .2s ease;
+  }
+  .shot:hover .mat{transform:rotate(0deg) translateY(-4px);}
+  .shot .mat .cap{
+    position:absolute;left:0;right:0;bottom:14px;text-align:center;
+    font-size:13px;color:#4a423a;font-style:italic;letter-spacing:.01em;
+  }
+  .shot .pin{top:-9px;}
+  .shot .tape{width:88px;}
+
+  /* the phone itself — the SCREEN is a corner of the wall/board */
+  .ph-dev{background:#141210;border-radius:26px;padding:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4);}
+  .ph-scr{
+    border-radius:21px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:434px;
+    /* plaster-wall surface inside the phone, matching the LP ground */
+    background:
+      radial-gradient(circle at 20% 12%, rgba(255,255,255,.55), transparent 40%),
+      radial-gradient(circle at 84% 82%, rgba(214,203,182,.45), transparent 44%),
+      var(--ground);
+  }
+  .ph-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:64px;height:15px;background:#141210;border-radius:0 0 10px 10px;z-index:6;}
+  .ph-sb{height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:9px;font-weight:700;color:var(--text);flex:0 0 auto;position:relative;z-index:5;}
+  .ph-sb .ic{display:flex;gap:4px;align-items:center;letter-spacing:.5px;}
+  .ph-sb .ic b{width:14px;height:7px;border:1px solid var(--text);border-radius:2px;display:inline-block;position:relative;}
+  .ph-sb .ic b::after{content:"";position:absolute;inset:1px;right:3px;background:var(--text);border-radius:1px;}
+
+  /* app bar = a strip of masking tape across the top of the board */
+  .ph-bar{flex:0 0 auto;position:relative;margin:0 0 4px;padding:9px 13px 10px;display:flex;align-items:center;gap:8px;
+    background:linear-gradient(180deg,rgba(232,184,75,.30),rgba(232,184,75,.16));
+    border-bottom:1px dashed rgba(154,69,48,.32);}
+  .ph-bar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+    background:repeating-linear-gradient(90deg,transparent 0 5px,rgba(255,255,255,.5) 5px 7px);}
+  .ph-bar .bk{width:20px;height:20px;border-radius:50%;background:var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.18);display:grid;place-items:center;color:var(--accent);font-size:12px;flex:0 0 auto;}
+  .ph-bar > span:not(.sp):not(.tag):not(.bk){display:flex;flex-direction:column;min-width:0;}
+  .ph-bar .tt{display:block;font-size:12.5px;font-weight:900;letter-spacing:.01em;line-height:1.25;white-space:nowrap;}
+  .ph-bar .su{display:block;font-size:8.5px;color:#7a6f52;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ph-bar .sp{flex:1;}
+  .ph-bar .tag{font-size:8.5px;color:#fff;font-weight:800;background:var(--accent);padding:3px 8px;white-space:nowrap;box-shadow:0 2px 4px rgba(154,69,48,.4);transform:rotate(-2deg);}
+  .ph-bar .tag.g{background:var(--accent-2);color:#5a4410;}
+  .ph-body{flex:1;overflow:hidden;padding:12px 13px 12px;position:relative;font-size:11px;}
+
+  /* fields = index-card slips taped to the board */
+  .ph-fl{margin-bottom:11px;}
+  .ph-fl label{display:block;font-size:9px;font-weight:800;color:#6b5f4a;margin-bottom:4px;letter-spacing:.02em;}
+  .ph-fl label i{color:#a99c88;font-style:normal;font-weight:600;}
+  .ph-in{position:relative;background:var(--paper);padding:9px 11px;font-size:11px;font-weight:700;display:flex;justify-content:space-between;align-items:center;
+    box-shadow:0 4px 9px -5px var(--shadow),0 1px 2px rgba(0,0,0,.08);}
+  .ph-in::before{content:"";position:absolute;top:-6px;left:14px;width:30px;height:11px;background:var(--tape);transform:rotate(-4deg);box-shadow:0 1px 1px rgba(0,0,0,.08);}
+  .ph-in .u{color:#9a938a;font-size:9px;font-weight:600;}
+  /* length choice = 3 little tabs on paper */
+  .ph-seg{display:flex;gap:5px;}
+  .ph-seg span{flex:1;text-align:center;font-size:9.5px;font-weight:800;color:#7a6f5a;padding:7px 0;background:rgba(255,253,248,.7);box-shadow:inset 0 0 0 1px rgba(154,132,90,.25);}
+  .ph-seg span.on{background:var(--paper);color:var(--accent);box-shadow:0 3px 7px -3px var(--shadow),inset 0 0 0 1.5px var(--accent);}
+  /* stepper on a slip */
+  .ph-step{display:flex;align-items:center;justify-content:space-between;background:var(--paper);padding:5px 9px;box-shadow:0 4px 9px -5px var(--shadow),0 1px 2px rgba(0,0,0,.08);}
+  .ph-step .b{width:24px;height:24px;background:var(--accent);color:#fff;font-size:15px;font-weight:800;display:grid;place-items:center;}
+  .ph-step .v{font-size:15px;font-weight:900;}
+  .ph-step .v small{font-size:9px;color:#9a938a;font-weight:700;}
+  /* note = handwritten memo on a torn strip */
+  .ph-note{background:rgba(255,253,248,.85);padding:8px 10px;font-size:9px;color:#7a4030;line-height:1.5;display:flex;gap:6px;margin-top:2px;border-left:3px solid var(--accent-2);box-shadow:0 3px 8px -5px var(--shadow);}
+  .ph-note b{font-weight:900;flex:0 0 auto;color:var(--accent);}
+  /* summary = the receipt slip, ink on dark like a stamped tag */
+  .ph-sum{position:relative;background:var(--text);color:#f6f0e6;padding:11px 12px 12px;margin-top:11px;box-shadow:0 8px 16px -8px var(--shadow);}
+  .ph-sum::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(2deg);width:44px;height:13px;background:var(--tape-blue);}
+  .ph-sum .st{font-size:8px;color:#c9bda8;letter-spacing:.08em;margin-bottom:7px;text-transform:uppercase;}
+  .ph-sum .ln{display:flex;justify-content:space-between;font-size:9.5px;padding:4px 0;border-bottom:1px dashed rgba(255,255,255,.16);}
+  .ph-sum .ln:last-child{border:0;}
+  .ph-sum .big{font-size:17px;font-weight:900;color:var(--accent-2);}
+  .ph-sum .mut{color:#c9bda8;}
+  /* CTA = the printed-tag-with-pin button, same family as the LP */
+  .ph-cta{position:relative;width:100%;border:0;background:var(--accent);color:#fff;font-size:11px;font-weight:800;padding:11px;margin-top:11px;letter-spacing:.02em;
+    box-shadow:0 7px 13px -6px rgba(180,50,30,.7);display:flex;align-items:center;justify-content:center;gap:7px;}
+  .ph-cta::before{content:"";width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6e8,#ffe08a 55%,#c99a24);box-shadow:0 1px 2px rgba(0,0,0,.35);}
+  .ph-cta.gold{background:var(--accent-2);color:#5a4410;box-shadow:0 7px 13px -6px rgba(168,134,47,.6);}
+  .ph-cta.gold::before{background:radial-gradient(circle at 35% 30%,#ff8a72,var(--accent) 60%,#a8321f);}
+
+  /* earnings = a bold stamped tag pinned up */
+  .ph-earn{position:relative;background:var(--text);padding:13px 13px 12px;color:#f6f0e6;margin-bottom:13px;box-shadow:0 10px 20px -10px var(--shadow);}
+  .ph-earn::before{content:"";position:absolute;top:-8px;right:16px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a72,var(--accent) 60%,#a8321f);box-shadow:0 3px 5px rgba(0,0,0,.35);}
+  .ph-earn .lb{font-size:8.5px;color:#c9bda8;letter-spacing:.04em;}
+  .ph-earn .amt{font-size:25px;font-weight:900;margin:2px 0 1px;color:var(--accent-2);}
+  .ph-earn .sub{font-size:8.5px;color:#a99c88;}
+  .ph-earn .chips{display:flex;gap:6px;margin-top:10px;}
+  .ph-earn .chip{flex:1;background:rgba(255,255,255,.07);padding:6px 7px;}
+  .ph-earn .chip .k{font-size:7.5px;color:#bcae9c;}
+  .ph-earn .chip .v{font-size:12px;font-weight:900;margin-top:1px;}
+  .ph-kick{font-size:8.5px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:2px 0 9px;}
+  /* each sold listing = a pinned polaroid print */
+  .ph-lc{position:relative;background:var(--paper);padding:8px 8px 9px;margin-bottom:12px;transform:rotate(var(--lt,-1deg));box-shadow:0 8px 15px -8px var(--shadow),0 2px 4px rgba(0,0,0,.08);}
+  .ph-lc::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe08a,var(--accent-2) 60%,#b6821f);box-shadow:0 2px 3px rgba(0,0,0,.3);}
+  .ph-lc .top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .ph-lc .dt{font-size:11px;font-weight:900;}
+  .ph-lc .pl{font-size:8px;color:#9a938a;margin-top:1px;}
+  .ph-bd{font-size:8px;font-weight:800;padding:2px 7px;white-space:nowrap;transform:rotate(2deg);}
+  .ph-bd.soon{background:var(--accent);color:#fff;}
+  .ph-bd.live{background:#3f7a52;color:#fff;}
+  .ph-bd.done{background:#d8cfbf;color:#5a5148;}
+  /* sold progress = a row of pins that fill up (物量, not a flat bar) */
+  .ph-pins{display:flex;flex-wrap:wrap;gap:3px;margin:8px 0 5px;}
+  .ph-pins i{width:8px;height:8px;border-radius:50%;background:#dcd3c2;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
+  .ph-pins i.f{background:radial-gradient(circle at 35% 30%,#ff8a72,var(--accent) 60%,#a8321f);box-shadow:0 1px 2px rgba(0,0,0,.25);}
+  .ph-pins i.g{background:radial-gradient(circle at 35% 30%,#7fce9a,#3f7a52 60%,#2c5a3b);box-shadow:0 1px 2px rgba(0,0,0,.25);}
+  .ph-sold{display:flex;justify-content:space-between;font-size:8.5px;color:#6b635a;font-weight:700;}
+  .ph-lc .ft{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(90,80,66,.3);}
+  .ph-lc .rev{font-size:13px;font-weight:900;}
+  .ph-lc .rev small{font-size:8px;color:#9a938a;font-weight:700;}
+
+  /* split grid = tiny prints being pinned to the board */
+  .ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px 7px;}
+  .ph-tile{position:relative;background:var(--paper);padding:3px 3px 12px;transform:rotate(var(--tr,-2deg));box-shadow:0 5px 10px -6px var(--shadow),0 1px 2px rgba(0,0,0,.08);}
+  .ph-tile .im{position:relative;overflow:hidden;aspect-ratio:1/1;background:linear-gradient(160deg,#4a4237,#2b271f);}
+  .ph-tile .im .fg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40%;height:62%;background:#6b6153;border-radius:9px 9px 0 0;}
+  .ph-tile .no{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:8px;font-weight:800;color:#5a5148;font-style:italic;}
+  .ph-tile .len{position:absolute;top:6px;right:6px;font-size:7px;color:#fff;background:rgba(0,0,0,.45);padding:1px 4px;border-radius:4px;}
+  .ph-tile::before{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#bfe0ec,#5aa0b8 60%,#376b7d);box-shadow:0 1px 2px rgba(0,0,0,.3);}
+  .ph-tile.hid .im::before{content:"";position:absolute;inset:0;background:rgba(28,26,23,.66);z-index:1;}
+  .ph-tile.hid .flag{position:absolute;z-index:2;inset:0 0 12px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:2px;font-size:7.5px;font-weight:800;}
+
+  /* mystery = a wrapped print waiting to be opened */
+  .ph-myst{position:relative;aspect-ratio:1/.94;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f3ecd6;text-align:center;
+    background:radial-gradient(90% 70% at 50% 35%,#6b5f4c,#3a332b 60%,#211d18);
+    box-shadow:0 10px 20px -10px var(--shadow);}
+  .ph-myst::after{content:"";position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:34px;background:var(--tape);opacity:.55;}
+  .ph-myst .seal{position:absolute;top:10px;left:10px;z-index:2;font-size:7.5px;letter-spacing:.08em;color:#e5d9bd;border:1px solid rgba(229,217,189,.4);padding:3px 7px;}
+  .ph-myst .qm{position:relative;z-index:2;font-size:44px;font-weight:900;line-height:1;opacity:.95;}
+  .ph-myst .cp{position:relative;z-index:2;font-size:9px;color:#e6dabf;margin-top:9px;max-width:80%;line-height:1.55;}
+  /* meta = three little tabs */
+  .ph-mini{display:flex;gap:7px;margin:11px 0 0;}
+  .ph-mini .m{flex:1;background:var(--paper);padding:8px 4px;text-align:center;box-shadow:0 4px 9px -6px var(--shadow),0 1px 2px rgba(0,0,0,.07);}
+  .ph-mini .m .k{font-size:7.5px;color:#9a938a;}
+  .ph-mini .m .v{font-size:12px;font-weight:900;margin-top:1px;color:var(--accent);}
+  .ph-mini .m .v small{font-size:7.5px;color:#9a938a;font-weight:700;}
+
+  @media(max-width:980px){.screens .wall{grid-template-columns:repeat(2,1fr);gap:40px 22px;}}
+  @media(max-width:520px){.screens .wall{grid-template-columns:1fr;gap:44px;max-width:300px;margin-left:auto;margin-right:auto;}}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.25,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------------- responsive ---------------- */
+  @media(max-width:760px){
+    .band{padding:64px 0;}
+    .value .grid{grid-template-columns:1fr;gap:44px;}
+    .proof .cols{grid-template-columns:1fr;gap:30px;}
+    .safety .two{grid-template-columns:1fr;gap:26px;}
+    .steps .row{grid-template-columns:60px 1fr;gap:14px;}
+    .steps .no{font-size:34px;}
+    .fanout{height:200px;}
+    .hero__mark{font-size:20px;}
+    .scrollcue{display:none;}
+    .proof .facts .big{min-width:92px;font-size:25px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none !important;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .mini{opacity:1 !important;transform:translate(-50%,-50%) scale(1) rotate(var(--r,0deg)) !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero">
+  <div class="hero__bg">
+    <img src="images/hero-wall.png" alt="ライブハウスの壁一面を埋め尽くした、無数の練習・ライブ写真" />
+  </div>
+  <div class="hero__mark">Lapsell</div>
+  <div class="hero__inner">
+    <div class="wrap">
+      <h1>あなたの練習が、<br><span class="hl">みんなの壁</span>に並ぶ。</h1>
+      <p class="hero__sub">これからやる練習の時間を、先に売る。撮った10秒の断片は、世界に1つずつファンの手へ。1本の練習が、この壁みたいに何十・何百人の宝物になる。</p>
+      <div class="cta-row">
+        <a class="btn" href="#start">練習を出品してみる</a>
+        <a class="btn ghost" href="#how">仕組みを見る</a>
+      </div>
+      <p class="hero__note">初期費用0円・手数料5%〜／編集不要、当日スマホで撮るだけ。</p>
+    </div>
+  </div>
+  <div class="scrollcue">Scroll ↓</div>
+</header>
+
+<!-- ======================= 物量: one becomes many ======================= -->
+<section class="band count">
+  <div class="wrap">
+    <p class="eyebrow mut reveal">一点物</p>
+    <p class="kick reveal">1本の練習を <b>300枠</b> で出品すると、<br>世界に1つの断片が <b>300人</b> の手に渡る。</p>
+    <p class="sub reveal">同じ映像は2人と持っていない。撮った練習は約10秒ずつに分けられ、購入者へランダムに、1つずつ配られる。だからこの壁みたいに「みんな違う1枚」が積み上がっていく。</p>
+
+    <div class="fanout reveal" id="fanout">
+      <div class="seed">
+        <div class="photo polaroid" style="padding:8px 8px 30px;">
+          <img src="images/single-photo.png" alt="出品する1本の練習映像を表す、1枚の一点物の写真" loading="lazy" />
+          <span class="lab">あなたの練習 1本</span>
+        </div>
+      </div>
+      <div class="arms" id="arms"><!-- minis injected --></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= WALL MARQUEE ======================= -->
+<section class="wallstrip" aria-label="ファンの壁を埋め尽くす練習写真の数々">
+  <div class="wallstrip__track">
+    <img src="images/wall-fill-2.png" alt="ライブ・リハの写真で埋め尽くされた壁" loading="lazy" />
+    <img src="images/hero-wall.png" alt="ライブハウスの壁一面を埋める無数の写真" loading="lazy" />
+    <img src="images/fan-wall.png" alt="自室の壁に一点物をびっしり飾ったファンのコレクション" loading="lazy" />
+    <!-- duplicate for seamless loop -->
+    <img src="images/wall-fill-2.png" alt="" aria-hidden="true" loading="lazy" />
+    <img src="images/hero-wall.png" alt="" aria-hidden="true" loading="lazy" />
+    <img src="images/fan-wall.png" alt="" aria-hidden="true" loading="lazy" />
+  </div>
+</section>
+
+<!-- ======================= VALUE ======================= -->
+<section class="band value" id="value">
+  <div class="wrap">
+    <p class="eyebrow reveal">出品する理由</p>
+    <h2 class="sec reveal">お金にならなかった時間が、<span class="u">売れる。</span></h2>
+    <p class="lead reveal">ライブでもレコーディングでもない、いつもの練習・リハ・ネタ合わせ。今まで消えていたその時間が、そのまま収益になる。</p>
+
+    <div class="grid">
+      <article class="val reveal">
+        <div class="ph"><div class="photo" style="--tilt:-2.5deg;"><span class="pin"></span><img src="images/person-shooting.png" alt="練習室でスマホを立てて自分のダンス練習を撮るライブアイドル" loading="lazy" /></div></div>
+        <h3><span class="n">01</span>撮るのは、いつもの練習だけ</h3>
+        <p>特別な準備も編集もいらない。稽古場に着いて、スマホを立てて回すだけ。いつもの1時間が、そのまま商品になる。</p>
+      </article>
+
+      <article class="val reveal">
+        <div class="ph"><div class="photo" style="--tilt:2deg;"><span class="pin y"></span><img src="images/fan-wall.png" alt="自室の壁に受け取った一点物を飾って眺めるファン" loading="lazy" /></div></div>
+        <h3><span class="n">02</span>小さい"今"だから、将来価値で買われる</h3>
+        <p>「まだ無名の頃の練習を持っている」——それ自体が物語になる。ファンはあなたを育てた証として、今の断片を手に入れる。</p>
+      </article>
+
+      <article class="val reveal">
+        <div class="ph"><div class="photo" style="--tilt:-1.5deg;"><span class="pin b"></span><img src="images/fan-pin.png" alt="受け取った一点物を自分の壁に1枚ずつ貼り足すファンの手" loading="lazy" /></div></div>
+        <h3><span class="n">03</span>1本が、たくさんの壁に飾られる</h3>
+        <p>1対1の物販では見えにくい"広がり"が、目に見える。あなたの練習1本が、何十・何百という壁に、それぞれ違う1枚として並ぶ。</p>
+      </article>
+
+      <article class="val reveal">
+        <div class="ph"><div class="photo" style="--tilt:2.5deg;"><span class="pin"></span><img src="images/person-upload.png" alt="スマホでLapsellを操作し、練習映像をアップロードする様子" loading="lazy" /></div></div>
+        <h3><span class="n">04</span>ノーリスクで、今日から</h3>
+        <p>初期費用0円。売れた時の手数料5%〜だけ。在庫も発送もなし。まず1枠、次の練習を出品してみるところから。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TOOLS divider ======================= -->
+<section class="tools" aria-label="壁に貼るための道具たち">
+  <div class="tools__row">
+    <figure class="tools__ph reveal"><img src="images/polaroid-stack.png" alt="白フチのプリント写真の束と、マスキングテープ、画鋲" loading="lazy" /></figure>
+    <div class="tools__txt reveal">
+      <p class="eyebrow">壁のつくりかた</p>
+      <p>受け取った断片は、それぞれの手で貼られていく。<br>画鋲、マステ、糸。1枚ずつ、その人だけの並びで。</p>
+    </div>
+    <figure class="tools__ph reveal"><img src="images/pushpins.png" alt="色とりどりの画鋲・マスキングテープ・糸" loading="lazy" /></figure>
+  </div>
+</section>
+
+<!-- ======================= STEPS ======================= -->
+<section class="band steps" id="how">
+  <div class="wrap">
+    <p class="eyebrow reveal">1枚がたどる道</p>
+    <h2 class="sec reveal">撮って、分けて、<span class="u">みんなの手へ。</span></h2>
+    <p class="lead reveal" style="margin-bottom:36px;">1本の練習が、それぞれ違う一点物になって、それぞれの壁に貼られるまで。全部スマホの中で完結する。</p>
+
+    <div class="row reveal">
+      <div class="no">01<small>出品</small></div>
+      <div>
+        <h3>未来の練習を、先に出す</h3>
+        <p>日時・価格・販売枠数（＝配る本数）・1本の長さを決めて出品。中身はまだ撮ってもいない。「次の水曜のリハ、300枠」——それだけ。</p>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">02<small>購入</small></div>
+      <div>
+        <h3>ファンが枠を買う</h3>
+        <p>届くまで中身は誰にも分からない。だからこそ「何が来るんだろう」の期待ごと売れる。開封前のワクワクまでが商品。</p>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">03<small>撮影</small></div>
+      <div>
+        <h3>当日、スマホで撮るだけ</h3>
+        <p>編集も演出もいらない。いつも通り練習して、スマホで回すだけ。バンドのリハも、お笑いのネタ合わせも、素のあなたがいちばん価値になる。</p>
+        <div class="thumb duo">
+          <div class="photo"><span class="pin y"></span><img src="images/band-rehearsal.png" alt="練習スタジオでスマホの三脚を立ててリハを撮るインディーズバンド" loading="lazy" /></div>
+          <div class="photo"><span class="pin"></span><img src="images/comedian-neta.png" alt="楽屋でスマホを立ててネタ合わせを撮るお笑い芸人コンビ" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">04<small>分割</small></div>
+      <div>
+        <h3>アップすると、約10秒ずつに分かれる</h3>
+        <p>撮った映像をアップロードすれば、自動で短い断片に分割。手作業はいらない。1本の練習が、たくさんの一点物になる瞬間。</p>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">05<small>確認</small></div>
+      <div>
+        <h3>公開前に、あなたが中身を見る</h3>
+        <p>ライブ配信と違って、出るのは撮影のあと。まずい瞬間があれば、その断片だけ非公開にできる（該当者には自動で返金）。</p>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">06<small>配布</small></div>
+      <div>
+        <h3>1つずつ、別々の人へ</h3>
+        <p>承認された断片が、購入者へランダムに、重複なく配られる。同じ1枚は世界に2つとない。誰がどれを受け取るかは、届いてのお楽しみ。</p>
+        <div class="thumb"><div class="photo"><span class="pin b"></span><img src="images/fan-receive.png" alt="スマホで自分だけの一点物の断片を受け取り喜ぶファン" loading="lazy" /></div></div>
+      </div>
+    </div>
+
+    <div class="row reveal">
+      <div class="no">07<small>所有</small></div>
+      <div>
+        <h3>それぞれの壁に、飾られる</h3>
+        <p>ファンは自分だけの断片を受け取って、手元に持ち続ける。あなたの1本の練習が、こうしてたくさんの壁に並んでいく。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= APP SCREENS (phones pinned to wall) ======================= -->
+<section class="band screens" id="app" aria-label="Lapsellアプリの画面">
+  <div class="wrap">
+    <p class="eyebrow reveal">アプリの画面</p>
+    <h2 class="sec reveal">全部、この<span class="u">スマホの中</span>で。</h2>
+    <p class="lead reveal">出品も、売れ行きの確認も、当日の撮影も。実際の画面はこんなふうに動きます。壁に貼った1枚みたいに、順番に見てください。</p>
+
+    <div class="wall">
+
+      <!-- 1. 出品 -->
+      <div class="shot reveal" style="--tilt:-2.2deg;">
+        <div class="mat">
+          <span class="pin"></span>
+          <div class="ph-dev"><div class="ph-scr">
+            <div class="ph-notch"></div>
+            <div class="ph-sb"><span>9:41</span><span class="ic">▪▪▪ <b></b></span></div>
+            <div class="ph-bar"><span class="bk">‹</span><span><span class="tt">練習枠を出品</span><span class="su">未来の練習を先に売る</span></span><span class="sp"></span><span class="tag">下書き</span></div>
+            <div class="ph-body">
+              <div class="ph-fl"><label>練習の日時</label><div class="ph-in"><span>7月12日（日）19:00</span><span>📅</span></div></div>
+              <div class="ph-fl"><label>1枠（1本）の価格</label><div class="ph-in"><span style="font-size:12px">¥ 1,500</span><span class="u">/ 本</span></div></div>
+              <div class="ph-fl"><label>販売枠数 <i>＝ 配る本数</i></label><div class="ph-step"><span class="b">−</span><span class="v">30 <small>本</small></span><span class="b">＋</span></div></div>
+              <div class="ph-fl"><label>1本の長さ</label><div class="ph-seg"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div></div>
+              <div class="ph-sum">
+                <div class="st">出品プレビュー</div>
+                <div class="ln"><span class="mut">売上（満枠時）</span><span>¥45,000</span></div>
+                <div class="ln"><span class="mut">受け取り見込み</span><span class="big">¥42,750</span></div>
+              </div>
+              <button class="ph-cta">この内容で出品する</button>
+            </div>
+          </div></div>
+          <span class="cap">① 出品する</span>
+        </div>
+      </div>
+
+      <!-- 2. 売れ行き -->
+      <div class="shot reveal" style="--tilt:1.8deg;">
+        <div class="mat">
+          <span class="pin y"></span>
+          <div class="ph-dev"><div class="ph-scr">
+            <div class="ph-notch"></div>
+            <div class="ph-sb"><span>9:41</span><span class="ic">▪▪▪ <b></b></span></div>
+            <div class="ph-bar"><span><span class="tt">マイ出品</span><span class="su">こんにちは、彩夏さん</span></span><span class="sp"></span><span class="tag g">出金</span></div>
+            <div class="ph-body">
+              <div class="ph-earn">
+                <div class="lb">今月の収益（手数料差引後）</div>
+                <div class="amt">¥128,400</div>
+                <div class="sub">先月比 +38% ／ 出金可能 ¥96,200</div>
+                <div class="chips">
+                  <div class="chip"><div class="k">販売本数</div><div class="v">102本</div></div>
+                  <div class="chip"><div class="k">出品中</div><div class="v">3件</div></div>
+                  <div class="chip"><div class="k">平均単価</div><div class="v">¥1,480</div></div>
+                </div>
+              </div>
+              <div class="ph-kick">出品中の枠</div>
+              <div class="ph-lc" style="--lt:-1.4deg">
+                <div class="top"><div><div class="dt">7/12（日）19:00</div><div class="pl">下北沢スタジオ／新曲リハ</div></div><span class="ph-bd soon">販売中</span></div>
+                <div class="ph-pins">
+                  <i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i>
+                  <i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i>
+                  <i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <div class="ph-sold"><span>22 / 30 本 売れました</span><span>残り8枠</span></div>
+                <div class="ft"><span style="font-size:8.5px;color:#9a938a">¥1,500 / 本</span><span class="rev">¥33,000 <small>売上</small></span></div>
+              </div>
+              <div class="ph-lc" style="--lt:1.3deg">
+                <div class="top"><div><div class="dt">7/8（火）21:00</div><div class="pl">配信前リハ／ダンス通し</div></div><span class="ph-bd live">撮影日</span></div>
+                <div class="ph-pins">
+                  <i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i>
+                  <i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i>
+                  <i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i>
+                </div>
+                <div class="ph-sold"><span>25 / 25 本 完売</span><span style="color:#3f7a52;font-weight:800">今日 撮影</span></div>
+              </div>
+            </div>
+          </div></div>
+          <span class="cap">② 売れていく</span>
+        </div>
+      </div>
+
+      <!-- 3. 分割・公開前チェック -->
+      <div class="shot reveal" style="--tilt:-1.4deg;">
+        <div class="mat">
+          <span class="pin b"></span>
+          <div class="ph-dev"><div class="ph-scr">
+            <div class="ph-notch"></div>
+            <div class="ph-sb"><span>19:48</span><span class="ic">▪▪▪ <b></b></span></div>
+            <div class="ph-bar"><span class="bk">‹</span><span><span class="tt">公開前チェック</span><span class="su">7/12 新曲リハ</span></span><span class="sp"></span><span class="tag">3 / 4</span></div>
+            <div class="ph-body">
+              <div class="ph-note"><b>i</b><span>映像は約10秒ずつに自動分割。<b>事故の瞬間だけ</b>非公開にできます（該当者へ自動返金）。</span></div>
+              <div class="ph-kick" style="margin-top:9px">セグメント一覧（30本）</div>
+              <div class="ph-grid">
+                <div class="ph-tile" style="--tr:-3deg"><div class="im"><div class="fg"></div><span class="len">0:10</span></div><span class="no">#01</span></div>
+                <div class="ph-tile" style="--tr:2deg"><div class="im"><div class="fg"></div><span class="len">0:10</span></div><span class="no">#02</span></div>
+                <div class="ph-tile hid" style="--tr:-1.5deg"><div class="im"><div class="fg"></div><span class="flag"><span style="font-size:13px">🚫</span>非公開</span></div><span class="no">#03</span></div>
+                <div class="ph-tile" style="--tr:2.5deg"><div class="im"><div class="fg"></div><span class="len">0:09</span></div><span class="no">#04</span></div>
+                <div class="ph-tile" style="--tr:-2deg"><div class="im"><div class="fg"></div><span class="len">0:10</span></div><span class="no">#05</span></div>
+                <div class="ph-tile" style="--tr:1.5deg"><div class="im"><div class="fg"></div><span class="len">0:11</span></div><span class="no">#06</span></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8.5px;color:#6b635a;margin:9px 2px 0;font-weight:700"><span>公開 29本</span><span style="color:#9a4530">非公開 1本（自動返金）</span></div>
+              <button class="ph-cta">この内容で公開・配布する</button>
+            </div>
+          </div></div>
+          <span class="cap">③ 分けて、確かめる</span>
+        </div>
+      </div>
+
+      <!-- 4. 受け取り（ファン側・開封） -->
+      <div class="shot reveal" style="--tilt:2.4deg;">
+        <div class="mat">
+          <span class="pin"></span>
+          <div class="ph-dev"><div class="ph-scr">
+            <div class="ph-notch"></div>
+            <div class="ph-sb"><span>19:50</span><span class="ic">▪▪▪ <b></b></span></div>
+            <div class="ph-bar"><span class="bk">‹</span><span><span class="tt">断片が届きました</span><span class="su">彩夏 ・ 7/12 新曲リハ</span></span></div>
+            <div class="ph-body">
+              <div class="ph-myst">
+                <span class="seal">SEALED ・ 開封前</span>
+                <div class="qm">?</div>
+                <div class="cp">世界に1つ。あなたに割り当てられた約10秒の断片。</div>
+              </div>
+              <div class="ph-mini">
+                <div class="m"><div class="k">通し番号</div><div class="v">#017<small>/29</small></div></div>
+                <div class="m"><div class="k">長さ</div><div class="v">0:10</div></div>
+                <div class="m"><div class="k">発行</div><div class="v" style="font-size:10px">世界に1</div></div>
+              </div>
+              <button class="ph-cta gold">開封する</button>
+              <p style="font-size:8.5px;color:#9a938a;text-align:center;margin:10px 0 0;line-height:1.6">この断片はあなただけのもの。<br>所有証明つきで手元に保管されます。</p>
+            </div>
+          </div></div>
+          <span class="cap">④ ファンの手に届く</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="lead reveal" style="margin:44px auto 0;text-align:center;max-width:34em;color:#6b635a;font-size:15px;">
+      ——この④が、壁の1枚。それが何十・何百と集まって、あの壁になる。
+    </p>
+  </div>
+</section>
+
+<!-- ======================= PROOF ======================= -->
+<section class="band proof" id="proof">
+  <div class="wrap">
+    <p class="eyebrow reveal">本当に売れるの？</p>
+    <h2 class="sec reveal">ファンは、もう<span class="u">"素の一点物"</span>に払っている。</h2>
+    <p class="lead reveal">Lapsellが新しく作る行動じゃない。ファンが今すでにやっていることを、あなたの練習に向けるだけ。</p>
+
+    <div class="cols">
+      <ul class="facts reveal">
+        <li>
+          <span class="big">2.2<small style="font-size:14px;font-family:var(--sans);">万円</small></span>
+          <span class="txt">ライブ物販でグッズを買う人の<b>年間平均支出</b>。すでにこれだけの熱量が動いている。</span>
+        </li>
+        <li>
+          <span class="big">75%</span>
+          <span class="txt">アイドル系ファンの<b>グッズ購入率</b>。「応援する＝手元に持つ」はもう当たり前の行動。</span>
+        </li>
+        <li>
+          <span class="big">¥1,500</span>
+          <span class="txt">チェキ1枚のおおよその価格。この"一点物1枚"がライブアイドルの<b>収入の過半</b>を支えることも。</span>
+        </li>
+        <li>
+          <span class="big">200<small style="font-size:14px;font-family:var(--sans);">万人</small></span>
+          <span class="txt">本人の"素の日常"に課金するサービスの<b>世界の購読者数</b>。素であるほど価値になる時代。</span>
+        </li>
+      </ul>
+
+      <div class="proof__ph reveal">
+        <div class="photo"><span class="pin"></span><img src="images/wall-fill-2.png" alt="ファンが集めた練習・ライブ写真で埋め尽くされた壁" loading="lazy" /></div>
+      </div>
+    </div>
+
+    <div class="storynote reveal">
+      <span class="tape blue" style="left:36px;transform:rotate(-6deg);"></span>
+      <p><b>たとえば。</b> 結成11年目でブレイクして紅白に出たグループがいる。もし下積み時代の練習を、一点物で持っていたら——。今のあなたの"まだ小さい練習"は、その頃の1枚になり得る。それを分かっているファンが、先に手に入れておく。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SAFETY ======================= -->
+<section class="band safety" id="safety">
+  <div class="wrap">
+    <p class="eyebrow reveal">事故を防ぐ</p>
+    <h2 class="sec reveal">出す前に、自分で確かめられる。</h2>
+    <p class="lead reveal">「変な瞬間が世に出たらどうしよう」——その不安には、仕組みで答える。</p>
+    <div class="two">
+      <div class="reveal">
+        <h3>撮影は、公開のあと</h3>
+        <p>生配信ではないから、撮ってからアップするまでに必ずあなたの目が入る。リアルタイムで事故が流れることはない。</p>
+      </div>
+      <div class="reveal">
+        <h3>まずい断片だけ、非公開に</h3>
+        <p>分割された断片を1つずつ確認し、出したくない瞬間だけ止められる。止めた分は、該当の購入者へ自動で返金される。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PRICING ======================= -->
+<section class="band tight price" id="price">
+  <div class="wrap">
+    <p class="eyebrow reveal">料金</p>
+    <h2 class="sec reveal">始めるのに、お金はいらない。</h2>
+    <div class="plate reveal">
+      <span class="tape" style="transform:translateX(-50%) rotate(-4deg);"></span>
+      <p class="free">初期費用 0円</p>
+      <p class="line">売れたときだけ、手数料 <b>5%〜</b></p>
+      <p class="line" style="color:#7a7066;font-size:14px;">在庫なし・発送なし・審査は当日中。<br>まず次の練習を1枠、出してみるだけ。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="band tight faq" id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <p class="eyebrow reveal">よくある質問</p>
+    <h2 class="sec reveal" style="margin-bottom:24px;">気になること。</h2>
+    <div class="reveal">
+      <details><summary>どんな練習を出せばいい？</summary><p>ダンスや歌の稽古、バンドのリハ、ネタ合わせ、発声、振り入れ——普段やっていることで十分です。特別なことをする必要はありません。素のままがいちばん売れます。</p></details>
+      <details><summary>撮影や編集の技術は必要？</summary><p>いりません。スマホを立てて回すだけ。分割は自動で行われます。手ブレや生活感は、むしろ"本物"の証としてファンに喜ばれます。</p></details>
+      <details><summary>そんなに枠が売れるか不安です。</summary><p>枠数は自分で決められます。まずは少なめの枠・手頃な価格で試して、反応を見ながら増やしていけます。売れ残りのリスクを抱えず始められます。</p></details>
+      <details><summary>同じ映像が複数の人に渡ることはある？</summary><p>ありません。断片は購入者へ重複なく1つずつ配られます。全員が違う1枚を持つ——それがこのサービスの核です。</p></details>
+      <details><summary>顔出しNGの瞬間が映ってしまったら？</summary><p>公開前チェックで、その断片だけ非公開にできます。止めた分は購入者へ自動返金されるので、あなたに負担は残りません。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FINAL CTA ======================= -->
+<section class="final" id="start">
+  <div class="final__bg">
+    <img src="images/wall-fill-2.png" alt="練習・ライブ写真が壁一面に貼られた様子" loading="lazy" />
+  </div>
+  <div class="final__in">
+    <div class="wrap">
+      <h2>次の練習を、<br>誰かの壁に。</h2>
+      <p>撮って、分けて、届けるだけ。あなたの1本が、たくさんの一点物になる。</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn" href="#">練習を出品してみる</a>
+        <a class="btn ghost" href="#how">もう一度、仕組みを見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">Lapsell</span>
+    <span>練習の時間を、収益に変える。 © 2026 Lapsell</span>
+  </div>
+</footer>
+
+<script>
+  // ---- scroll reveal ----
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  })();
+
+  // ---- fan-out: one photo multiplies into many minis ----
+  (function(){
+    var arms = document.getElementById('arms');
+    var fan  = document.getElementById('fanout');
+    if(!arms||!fan) return;
+    var srcs = ['images/wall-fill-1.png','images/wall-fill-2.png','images/wall-fill-3.png',
+                'images/fan-receive.png','images/band-rehearsal.png','images/comedian-neta.png',
+                'images/person-shooting.png'];
+    var N = 26;
+    for(var i=0;i<N;i++){
+      var m = document.createElement('div');
+      m.className='mini';
+      // spread across width, weighted toward center-bottom fanning out
+      var t = (i/(N-1));                       // 0..1
+      var x = 8 + t*84 + (Math.random()*6-3);  // percent
+      var y = 40 + Math.sin(t*Math.PI)*-8 + Math.random()*70; // percent
+      var r = (Math.random()*20-10);
+      m.style.left = x+'%';
+      m.style.top  = y+'%';
+      m.style.setProperty('--r', r+'deg');
+      m.style.setProperty('--d', (0.05 + t*0.5).toFixed(2)+'s');
+      var img = document.createElement('img');
+      img.src = srcs[i % srcs.length];
+      img.alt = '';
+      img.setAttribute('aria-hidden','true');
+      img.loading='lazy';
+      m.appendChild(img);
+      arms.appendChild(m);
+    }
+    if(!('IntersectionObserver' in window)){fan.classList.add('revealed');return;}
+    var io = new IntersectionObserver(function(e){
+      if(e[0].isIntersecting){fan.classList.add('revealed');io.disconnect();}
+    },{threshold:.4});
+    io.observe(fan);
+  })();
+</script>
+
+</body>
+</html>

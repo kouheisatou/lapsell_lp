@@ -1,0 +1,1166 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapsell — 無名の"今"を、収蔵する。</title>
+<style>
+  :root{
+    --paper:#efe7d6;        /* 生成りの標本紙 */
+    --paper-2:#e6dcc6;
+    --ink:#2b2620;          /* 活版インク */
+    --ink-soft:#5c5342;
+    --line:#c3b79a;         /* 罫線 */
+    --line-soft:#d6cbb0;
+    --forest:#243027;       /* こげ深緑キャビネット */
+    --forest-2:#1b241d;
+    --brass:#9a7b32;        /* 真鍮 */
+    --brass-lite:#c6a24e;
+    --amber:#c8791a;        /* 琥珀 */
+    --amber-deep:#a8590d;
+    --cream:#f6f0e2;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(rgba(120,105,72,.035) 1px, transparent 1px),
+      radial-gradient(rgba(120,105,72,.03) 1px, transparent 1px);
+    background-size:5px 5px, 11px 11px;
+    background-position:0 0, 3px 4px;
+    font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro","HGS明朝E",serif;
+    line-height:1.85;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* 等幅ラベル：収蔵番号・キャプション見出し */
+  .mono{
+    font-family:"SFMono-Regular","Consolas","Liberation Mono",Menlo,"Courier New",monospace;
+    letter-spacing:.08em;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{position:relative}
+
+  /* ── 展示キャプションの見出し体裁 ───────────── */
+  .cap-no{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    color:var(--brass);
+    text-transform:uppercase;
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .cap-no::after{
+    content:"";
+    height:1px;flex:1;
+    background:linear-gradient(90deg,var(--brass) 0%, transparent 100%);
+    opacity:.5;
+  }
+  .cap-no.center{justify-content:center}
+  .cap-no.center::after{display:none}
+
+  h2.cap-title{
+    font-size:clamp(26px,5vw,38px);
+    line-height:1.32;
+    font-weight:600;
+    margin:0 0 6px;
+    letter-spacing:.02em;
+  }
+  .cap-sub{
+    font-size:13px;
+    letter-spacing:.16em;
+    color:var(--ink-soft);
+    margin:0 0 26px;
+  }
+  p{margin:0 0 18px}
+  .lead{font-size:18.5px;color:var(--ink-soft)}
+
+  /* 罫線区切り（枠ではなく線で整理） */
+  .rule{
+    max-width:var(--maxw);
+    margin:0 auto;
+    height:1px;
+    background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px);
+    opacity:.7;
+  }
+
+  /* ─────────────  ヘッダー  ───────────── */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(239,231,214,.92);
+    backdrop-filter:saturate(120%) blur(4px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:baseline;gap:12px}
+  .brand .logo{
+    font-size:22px;letter-spacing:.14em;font-weight:600;
+  }
+  .brand .logo b{color:var(--amber-deep);font-weight:600}
+  .brand .tag{
+    font-size:10.5px;letter-spacing:.24em;color:var(--brass);
+    font-family:"SFMono-Regular","Consolas",monospace;
+    display:none;
+  }
+  .nav-cta{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12.5px;letter-spacing:.12em;
+    text-decoration:none;color:var(--cream);
+    background:var(--forest);
+    padding:9px 16px;
+    border:1px solid var(--forest-2);
+    box-shadow:inset 0 0 0 1px rgba(198,162,78,.35);
+    white-space:nowrap;
+  }
+  @media(min-width:560px){ .brand .tag{display:block} }
+
+  /* ─────────────  ヒーロー  ───────────── */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(27,36,29,.0) 0%, rgba(27,36,29,.0) 60%, rgba(239,231,214,1) 100%),
+      radial-gradient(120% 90% at 70% 20%, #33362b 0%, #23281f 45%, #191d16 100%);
+    color:var(--cream);
+    padding:0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1fr;
+    gap:0;
+    padding:0 24px;
+  }
+  .hero-txt{padding:54px 0 26px}
+  .hero .cap-no{color:var(--brass-lite)}
+  .hero .cap-no::after{background:linear-gradient(90deg,var(--brass-lite),transparent);opacity:.55}
+  .hero h1{
+    font-size:clamp(34px,8.5vw,62px);
+    line-height:1.24;
+    font-weight:600;
+    margin:0 0 22px;
+    letter-spacing:.01em;
+  }
+  .hero h1 .amber{color:var(--amber);}
+  .hero .sub{
+    font-size:clamp(15px,2.4vw,18px);
+    color:#d8cfb8;
+    max-width:34em;
+    margin:0 0 30px;
+  }
+  .hero-figure{position:relative;margin:0 -24px}
+  .hero-figure img{width:100%;height:auto;display:block}
+  .hero-figure .plate{
+    position:absolute;left:16px;bottom:22px;
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11px;letter-spacing:.14em;color:#e9dcbe;
+    background:rgba(20,26,19,.6);
+    padding:6px 10px;
+    border-left:2px solid var(--brass-lite);
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding-bottom:8px}
+
+  .btn-brass{
+    display:inline-block;
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:14px;letter-spacing:.1em;
+    text-decoration:none;
+    color:#231c07;
+    background:linear-gradient(180deg,#e4c56e 0%,#c6a24e 46%,#9a7b32 100%);
+    padding:15px 30px;
+    border:1px solid #7c631f;
+    box-shadow:0 1px 0 #f4e6bc inset, 0 2px 5px rgba(0,0,0,.25);
+    position:relative;
+  }
+  .btn-brass:active{transform:translateY(1px)}
+  .btn-ghost{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:13px;letter-spacing:.1em;
+    text-decoration:none;color:#d8cfb8;
+    border-bottom:1px solid rgba(198,162,78,.5);
+    padding-bottom:2px;
+  }
+  @media(min-width:820px){
+    .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;padding:0 24px}
+    .hero-txt{padding:76px 0}
+    .hero-figure{margin:0}
+    .hero-figure img{border:1px solid rgba(198,162,78,.35)}
+  }
+
+  /* ─────────────  一般セクション余白  ───────────── */
+  .sec{padding:66px 0}
+  .sec.tight{padding:48px 0}
+
+  /* 導入：琥珀の比喩 */
+  .intro-grid{display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+  .intro-fig figcaption{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11.5px;color:var(--ink-soft);letter-spacing:.08em;
+    margin-top:10px;padding-left:14px;border-left:2px solid var(--brass);
+  }
+  @media(min-width:820px){
+    .intro-grid{grid-template-columns:.92fr 1.08fr;gap:52px}
+    .intro-grid.flip .intro-fig{order:2}
+  }
+
+  /* ─────────────  博物学フロー（採集→記録→収蔵→貸与）  ───────────── */
+  .flow{background:linear-gradient(180deg,var(--paper) 0%, var(--paper-2) 100%)}
+  .flow-steps{
+    display:grid;grid-template-columns:1fr;gap:0;
+    margin-top:14px;
+  }
+  .step{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:20px;
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step-no{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12px;letter-spacing:.12em;color:var(--brass);
+    padding-top:5px;
+    white-space:nowrap;
+  }
+  .step-body h3{
+    font-size:20px;font-weight:600;margin:0 0 4px;letter-spacing:.02em;
+  }
+  .step-body h3 .term{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11.5px;color:var(--ink-soft);letter-spacing:.14em;
+    margin-left:12px;
+    text-transform:uppercase;
+  }
+  .step-body p{margin:0;color:var(--ink-soft);font-size:15.5px}
+  .step-body .plate-line{
+    margin-top:12px;font-size:13.5px;color:var(--amber-deep);
+    font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.04em;
+  }
+  @media(min-width:720px){
+    .step{grid-template-columns:130px 1fr;gap:34px;padding:30px 0}
+  }
+
+  /* ─────────────  価値の4項（キャプション列）  ───────────── */
+  .values .val{
+    display:grid;grid-template-columns:1fr;gap:14px;
+    padding:34px 0;
+    border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .val .val-no{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12px;letter-spacing:.16em;color:var(--brass);
+  }
+  .val h3{font-size:22px;font-weight:600;margin:6px 0 10px;line-height:1.4}
+  .val p{margin:0;color:var(--ink-soft);font-size:16px}
+  .val .fig img{border:1px solid var(--line);filter:saturate(.96)}
+  .val .fig figcaption{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11px;color:var(--ink-soft);letter-spacing:.06em;margin-top:8px;
+  }
+  @media(min-width:760px){
+    .values .val{grid-template-columns:1fr 340px;gap:40px}
+    .values .val.flip .fig{order:-1}
+  }
+
+  /* ─────────────  データ帯（なぜ買われるか）  ───────────── */
+  .demand{background:radial-gradient(120% 120% at 20% 0%, #2b352c 0%, #202a21 60%, #191f18 100%);color:var(--cream)}
+  .demand .cap-no{color:var(--brass-lite)}
+  .demand .cap-no::after{background:linear-gradient(90deg,var(--brass-lite),transparent);opacity:.5}
+  .demand h2.cap-title{color:var(--cream)}
+  .demand .cap-sub{color:#c3bca6}
+  .ledger{
+    margin-top:16px;
+    border-top:1px solid rgba(198,162,78,.35);
+  }
+  .ledger .row{
+    display:grid;grid-template-columns:1fr;gap:2px;
+    padding:20px 0;
+    border-bottom:1px solid rgba(198,162,78,.18);
+  }
+  .ledger .row .what{font-size:16px;color:#e7ddc4}
+  .ledger .row .fig{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:15px;color:var(--brass-lite);letter-spacing:.04em;
+  }
+  .ledger .row .note{font-size:13.5px;color:#a9a48f;grid-column:1/-1}
+  @media(min-width:680px){
+    .ledger .row{grid-template-columns:1fr auto;align-items:baseline;column-gap:26px}
+    .ledger .row .note{grid-column:1/2;margin-top:4px}
+  }
+  .demand .closing{
+    margin-top:28px;font-size:17px;color:#e7ddc4;max-width:40em;
+  }
+
+  /* ─────────────  将来価値（無名→貴重資料）  ───────────── */
+  .future-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+  .future-fig img{border:1px solid var(--line)}
+  .future-fig figcaption{
+    font-family:"SFMono-Regular","Consolas",monospace;font-size:11.5px;
+    color:var(--ink-soft);letter-spacing:.06em;margin-top:10px;
+    padding-left:14px;border-left:2px solid var(--brass);
+  }
+  blockquote.museum{
+    margin:0;padding:0 0 0 22px;
+    border-left:3px solid var(--brass);
+    font-size:19px;line-height:1.7;color:var(--ink);
+  }
+  blockquote.museum cite{
+    display:block;margin-top:12px;font-style:normal;
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12px;letter-spacing:.1em;color:var(--ink-soft);
+  }
+  @media(min-width:820px){
+    .future-grid{grid-template-columns:1.05fr .95fr;gap:50px}
+  }
+
+  /* ─────────────  一意性（収蔵番号）  ───────────── */
+  .unique{background:linear-gradient(180deg,var(--paper-2),var(--paper))}
+  .chips{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px;
+    max-width:640px;
+  }
+  .chip{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12.5px;letter-spacing:.06em;
+    padding:12px 14px;
+    color:var(--forest);
+    background:
+      repeating-linear-gradient(0deg,rgba(120,105,72,.04) 0 3px,transparent 3px 6px),
+      var(--cream);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .chip b{color:var(--amber-deep);font-weight:600}
+  @media(min-width:640px){ .chips{grid-template-columns:repeat(4,1fr)} }
+
+  /* ─────────────  料金  ───────────── */
+  .fee-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:12px}
+  .fee-row{
+    display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;
+    padding:22px 0;border-top:1px solid var(--line);
+  }
+  .fee-row:last-child{border-bottom:1px solid var(--line)}
+  .fee-row .k{font-size:16.5px}
+  .fee-row .k small{display:block;color:var(--ink-soft);font-size:13.5px;margin-top:2px}
+  .fee-row .v{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:18px;color:var(--amber-deep);letter-spacing:.02em;white-space:nowrap;
+  }
+
+  /* ─────────────  FAQ  ───────────── */
+  .faq details{
+    border-top:1px solid var(--line);
+    padding:6px 0;
+  }
+  .faq details:last-of-type{border-bottom:1px solid var(--line)}
+  .faq summary{
+    list-style:none;cursor:pointer;
+    padding:16px 30px 16px 0;
+    font-size:16.5px;position:relative;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::before{
+    content:"問";
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11px;color:var(--brass);letter-spacing:.1em;
+    margin-right:12px;
+  }
+  .faq summary::after{
+    content:"+";position:absolute;right:4px;top:14px;
+    font-family:monospace;color:var(--brass);font-size:20px;
+    transition:transform .2s;
+  }
+  .faq details[open] summary::after{content:"–"}
+  .faq .ans{padding:0 0 18px 34px;color:var(--ink-soft);font-size:15.5px}
+  .faq .ans::before{
+    content:"答  ";
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11px;color:var(--ink-soft);letter-spacing:.1em;margin-left:-30px;margin-right:8px;
+  }
+
+  /* ─────────────  最終CTA  ───────────── */
+  .final{
+    background:
+      linear-gradient(180deg, rgba(25,31,22,.86), rgba(25,31,22,.92)),
+      radial-gradient(90% 120% at 80% 10%, #3a3d2f, #1c231a);
+    color:var(--cream);text-align:center;padding:76px 0 84px;
+  }
+  .final .cap-no{color:var(--brass-lite);justify-content:center}
+  .final .cap-no::after{display:none}
+  .final h2{
+    font-size:clamp(28px,6vw,44px);line-height:1.34;font-weight:600;margin:0 0 18px;
+  }
+  .final h2 .amber{color:var(--amber)}
+  .final p{color:#d8cfb8;max-width:32em;margin:0 auto 30px}
+  .final .btn-brass{font-size:16px;padding:17px 40px}
+  .final .fineprint{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11.5px;letter-spacing:.08em;color:#9a957f;margin-top:22px;
+  }
+
+  footer{background:var(--forest-2);color:#a49f89;padding:34px 0;font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:center;justify-content:space-between}
+  footer .fbrand{font-size:16px;letter-spacing:.14em;color:var(--cream)}
+  footer .mono{font-size:11px;letter-spacing:.14em}
+
+  /* 補助：写真の下の博物館プレート */
+  .fig-plate{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11px;letter-spacing:.07em;color:var(--ink-soft);
+    margin-top:9px;padding-left:13px;border-left:2px solid var(--brass);
+  }
+
+  /* 小見出しの飾り罫（活版風） */
+  .eyebrow{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:11.5px;letter-spacing:.2em;color:var(--brass);text-transform:uppercase;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     スマホUIモック（博物館・標本ラベルの世界観にアレンジ）
+     ═══════════════════════════════════════════════════════ */
+  .mock{background:linear-gradient(180deg,var(--forest) 0%, var(--forest-2) 100%);color:var(--cream)}
+  .mock .cap-no{color:var(--brass-lite)}
+  .mock .cap-no::after{background:linear-gradient(90deg,var(--brass-lite),transparent);opacity:.5}
+  .mock h2.cap-title{color:var(--cream)}
+  .mock .cap-sub{color:#c3bca6}
+  .mock .mock-intro{color:#d8cfb8;max-width:42em;font-size:16px}
+
+  .mocks{
+    display:grid;grid-template-columns:1fr;gap:44px 28px;margin-top:34px;justify-items:center;
+  }
+  @media(min-width:640px){ .mocks{grid-template-columns:repeat(2,1fr)} }
+  @media(min-width:980px){ .mocks{grid-template-columns:repeat(4,1fr);gap:30px 22px} }
+
+  .mockslot{width:100%;max-width:320px;display:flex;flex-direction:column;align-items:center}
+  .mockcap{text-align:center;margin-bottom:16px;min-height:70px}
+  .mockcap .mno{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:10.5px;letter-spacing:.16em;color:var(--brass-lite);display:block;margin-bottom:6px;
+  }
+  .mockcap h3{font-size:17px;font-weight:600;letter-spacing:.02em;color:var(--cream);margin:0 0 4px}
+  .mockcap p{font-size:12px;color:#a9a48f;margin:0;line-height:1.55}
+
+  /* 端末フレーム：真鍮の縁取り／黒木の筐体 */
+  .phone{
+    width:100%;max-width:300px;
+    background:linear-gradient(155deg,#1a1712,#2a251d);
+    border-radius:34px;padding:8px;
+    box-shadow:0 26px 46px -22px rgba(0,0,0,.7), inset 0 0 0 1px rgba(198,162,78,.4);
+    position:relative;
+  }
+  .phone .screen{
+    background:var(--cream);
+    border-radius:27px;overflow:hidden;height:560px;
+    display:flex;flex-direction:column;position:relative;
+    color:var(--ink);
+  }
+  .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:90px;height:19px;background:#1a1712;border-radius:0 0 12px 12px;z-index:6}
+
+  /* 標本紙の地の質感 */
+  .mscreen-paper{
+    background-color:var(--cream);
+    background-image:radial-gradient(rgba(120,105,72,.05) 1px,transparent 1px);
+    background-size:6px 6px;
+  }
+
+  /* ステータスバー */
+  .mstat{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px;flex:0 0 auto;z-index:4}
+  .mstat .mtime{font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.04em;color:var(--ink)}
+  .mstat .micons{display:flex;align-items:center;gap:5px;font-family:"SFMono-Regular","Consolas",monospace;font-size:10px;color:var(--ink-soft);letter-spacing:.06em}
+
+  /* アプリ上部：収蔵室ヘッダ（ラベル台紙風） */
+  .mhead{flex:0 0 auto;padding:4px 16px 12px;border-bottom:1px solid var(--line-soft)}
+  .mhead .mkick{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:9.5px;letter-spacing:.16em;color:var(--brass);text-transform:uppercase;
+  }
+  .mhead .mttl{font-size:16px;font-weight:600;letter-spacing:.02em;margin-top:2px}
+  .mhead .mttl .maccn{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:10px;color:var(--brass);letter-spacing:.1em;float:right;margin-top:5px;
+  }
+  .mhead .msub{font-size:11px;color:var(--ink-soft);margin-top:1px}
+
+  .mbody{flex:1;overflow:hidden;padding:12px 16px 14px;position:relative}
+
+  /* ラベル項目（罫線で整理・枠に入れない） */
+  .mfield{padding:9px 0;border-bottom:1px solid var(--line-soft)}
+  .mfield:first-child{padding-top:2px}
+  .mlab{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:9.5px;letter-spacing:.1em;color:var(--brass);text-transform:uppercase;margin-bottom:3px;
+  }
+  .mval{font-size:14px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .mval .mnum{font-family:"SFMono-Regular","Consolas",monospace}
+  .mval .munit{font-size:10.5px;color:var(--ink-soft);font-weight:400}
+
+  /* セグメント選択（活版のトグル） */
+  .mseg{display:flex;gap:6px;margin-top:3px}
+  .mseg span{
+    flex:1;text-align:center;font-size:11px;padding:6px 0;
+    border:1px solid var(--line);color:var(--ink-soft);
+    font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.02em;
+  }
+  .mseg span.on{background:var(--forest);color:var(--cream);border-color:var(--forest)}
+
+  /* 収蔵見積り台帳（黒地の帳簿） */
+  .mledger{
+    margin-top:12px;background:var(--forest);color:var(--cream);
+    padding:12px 13px;border:1px solid var(--brass);
+  }
+  .mledger .lt{
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:9.5px;letter-spacing:.14em;color:var(--brass-lite);margin-bottom:8px;text-transform:uppercase;
+  }
+  .mledger .lr{display:flex;justify-content:space-between;font-size:11.5px;padding:4px 0;color:#d8cfb8}
+  .mledger .lr b{font-family:"SFMono-Regular","Consolas",monospace;color:var(--cream);font-weight:600}
+  .mledger .lr.big{border-top:1px solid rgba(198,162,78,.35);margin-top:4px;padding-top:8px}
+  .mledger .lr.big b{font-size:18px;color:var(--brass-lite)}
+
+  /* 真鍮ボタン（端末内） */
+  .mbtn{
+    display:block;width:100%;text-align:center;margin-top:12px;
+    font-family:"SFMono-Regular","Consolas",monospace;
+    font-size:12.5px;letter-spacing:.06em;color:#231c07;
+    background:linear-gradient(180deg,#e4c56e,#c6a24e 55%,#9a7b32);
+    padding:11px 0;border:1px solid #7c631f;
+    box-shadow:0 1px 0 #f4e6bc inset;
+  }
+  .mbtn.dark{background:var(--forest);color:var(--cream);border-color:var(--forest-2);box-shadow:inset 0 0 0 1px rgba(198,162,78,.4)}
+
+  .mnote{
+    display:flex;gap:7px;font-size:10.5px;line-height:1.5;color:var(--ink-soft);margin-top:11px;
+    padding-left:10px;border-left:2px solid var(--brass);
+  }
+
+  /* 撮影画面（採集の現場） */
+  .mcam{position:absolute;inset:0;display:flex;flex-direction:column;
+    background:radial-gradient(120% 80% at 35% 25%, #3f382d 0%, #241f18 55%, #16130e 100%)}
+  .mcam .cstage{position:absolute;inset:0;background:repeating-linear-gradient(118deg,rgba(255,255,255,.03) 0 7px,transparent 7px 20px)}
+  .mcam .cfig{position:absolute;bottom:34%;left:50%;transform:translateX(-50%);width:52px}
+  .mcam .cfig .h{width:22px;height:22px;border-radius:50%;background:#5b5346;margin:0 auto}
+  .mcam .cfig .b{width:38px;height:74px;border-radius:18px 18px 12px 12px;background:#4d463a;margin:5px auto 0}
+  .mcam .cfloor{position:absolute;left:0;right:0;bottom:34%;height:1px;background:rgba(255,255,255,.1)}
+  .mcam .ctop{position:absolute;top:36px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 16px;z-index:3}
+  .mcam .crec{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.42);padding:5px 11px;color:#fff;font-size:11px;font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.06em}
+  .mcam .crec .cd{width:8px;height:8px;border-radius:50%;background:#c8791a;box-shadow:0 0 0 4px rgba(200,121,26,.25)}
+  .mcam .cframe{position:absolute;inset:44px 14px auto 14px;height:auto;bottom:120px;border:1px solid rgba(198,162,78,.35);pointer-events:none}
+  .mcam .cguide{position:absolute;bottom:118px;left:0;right:0;text-align:center;z-index:3}
+  .mcam .cguide b{display:inline-block;background:rgba(20,17,12,.6);border:1px solid rgba(198,162,78,.4);padding:5px 12px;font-size:10.5px;color:#e9dcbe;font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.04em;font-weight:400}
+  .mcam .cctrl{position:absolute;bottom:0;left:0;right:0;height:104px;display:flex;align-items:center;justify-content:space-around;padding-bottom:14px}
+  .mcam .cside{width:44px;text-align:center;font-size:9px;color:#e9dcbe;line-height:1.3;font-family:-apple-system,sans-serif}
+  .mcam .shutter{width:60px;height:60px;border-radius:50%;border:3px solid #e9dcbe;display:grid;place-items:center}
+  .mcam .shutter b{width:20px;height:20px;border-radius:5px;background:#c8791a}
+
+  /* 分割グリッド（標本トレイ） */
+  .mtray{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+  .mcell{position:relative;aspect-ratio:9/12;overflow:hidden;
+    background:linear-gradient(160deg,#4a4237,#2b271f);border:1px solid var(--line)}
+  .mcell .cno{position:absolute;top:4px;left:5px;font-size:8.5px;font-family:"SFMono-Regular","Consolas",monospace;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px;letter-spacing:.04em}
+  .mcell .clen{position:absolute;bottom:4px;right:5px;font-size:8px;font-family:"SFMono-Regular","Consolas",monospace;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px}
+  .mcell .cfg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:50%;background:#5b5346;border-radius:9px 9px 0 0}
+  .mcell.seal::before{content:"";position:absolute;inset:0;background:rgba(28,26,23,.72);z-index:1}
+  .mcell.seal{border-color:var(--amber)}
+  .mcell.seal .sealtag{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f3ecd6;gap:2px;font-size:8.5px;font-family:"SFMono-Regular","Consolas",monospace}
+  .mtally{display:flex;justify-content:space-between;font-size:10px;font-family:"SFMono-Regular","Consolas",monospace;color:var(--ink-soft);margin:9px 1px 0;letter-spacing:.02em}
+  .mtally .hide{color:var(--amber-deep)}
+
+  /* 受け取り：封緘された標本 */
+  .mseal-card{
+    position:relative;aspect-ratio:1/1;overflow:hidden;
+    background:radial-gradient(85% 70% at 50% 38%, #6b5f4c 0%, #3a332b 60%, #201c16 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f3ecd6;text-align:center;
+    border:1px solid var(--brass);
+  }
+  .mseal-card .sealstamp{
+    position:absolute;top:11px;left:11px;font-size:8.5px;letter-spacing:.12em;color:#e5d9bd;
+    border:1px solid rgba(229,217,189,.45);padding:3px 8px;font-family:"SFMono-Regular","Consolas",monospace;
+  }
+  .mseal-card .qm{
+    width:60px;height:60px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 35% 30%,#d8b24e,#a8862f 60%,#7c611f);
+    color:#231c07;font-size:30px;font-weight:600;line-height:1;
+    box-shadow:0 5px 14px -5px rgba(168,134,47,.7);
+  }
+  .mseal-card .qm::after{content:"";position:absolute;width:74px;height:74px;border:1px dashed rgba(229,217,189,.5);border-radius:50%}
+  .mseal-card .qc{font-size:10.5px;color:#d8cbb0;margin-top:11px;max-width:80%;line-height:1.55}
+  .minforow{display:flex;gap:6px;margin:12px 0}
+  .minforow .mi{flex:1;text-align:center;padding:8px 4px;border:1px solid var(--line)}
+  .minforow .mi .mik{font-size:9px;color:var(--ink-soft);font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.04em}
+  .minforow .mi .miv{font-size:14px;font-weight:600;margin-top:2px;font-family:"SFMono-Regular","Consolas",monospace}
+  .minforow .mi .miv small{font-size:9px;color:var(--ink-soft);font-weight:400}
+
+  /* 収蔵証（真正性の台帳） */
+  .maccnrow{padding:7px 0;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;font-size:11px;gap:8px}
+  .maccnrow .k{color:var(--ink-soft);font-family:"SFMono-Regular","Consolas",monospace;font-size:9.5px;letter-spacing:.06em;padding-top:2px}
+  .maccnrow .v{font-weight:600;text-align:right}
+  .maccnrow .v.ser{font-family:"SFMono-Regular","Consolas",monospace;letter-spacing:.02em}
+</style>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">Laps<b>e</b>ll</span>
+      <span class="tag mono">練習時間 収蔵室</span>
+    </div>
+    <a class="nav-cta" href="#final">出品して収蔵する →</a>
+  </div>
+</header>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-txt">
+      <p class="cap-no">Lapsell — Specimen No.0001</p>
+      <h1>練習時間を、<br><span class="amber">収蔵する。</span></h1>
+      <p class="sub">
+        まだ誰にも知られていない、今日のあなたの練習。その一瞬を、時が経つほど価値を持つ「収蔵品」として保存する。
+        <br>撮るのは、当日スマホで練習を回すだけ。
+      </p>
+      <div class="hero-cta">
+        <a class="btn-brass" href="#final">練習の時間枠を出品する</a>
+        <a class="btn-ghost" href="#flow">収蔵のしくみを見る →</a>
+      </div>
+    </div>
+    <figure class="hero-figure">
+      <img src="images/hero.png" width="1200" height="800"
+           alt="生成りの標本紙の上に置かれ、博物館の照明で温かく輝く一片の琥珀。内部に小さな断片が閉じ込められている。">
+      <span class="plate mono">琥珀標本 ／ 内包物：ある日の一瞬 ／ 収蔵 No.0001</span>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ 導入：琥珀の比喩 ══════════════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div class="intro-txt">
+        <p class="cap-no">解説 01 ／ Lapsell とは</p>
+        <h2 class="cap-title">太古の一瞬が、宝石になる。</h2>
+        <p class="cap-sub mono">AMBER — 樹脂に閉じ込められた「その瞬間」の保存</p>
+        <p class="lead">
+          琥珀は、何千万年も前のある一瞬 ―― 木から滴った樹脂が、たまたまそこにあった羽虫や葉を包み込み、そのまま固まったものです。
+        </p>
+        <p>
+          誰も特別だとは思わなかった、ありふれた一瞬。それが時を経て、二つとない標本になり、宝石として扱われるようになりました。
+        </p>
+        <p>
+          <b>Lapsell がすることも、これと同じです。</b>
+          あなたが今日おこなう練習 ―― 今はまだ、お金にもならず、誰も見ていない時間。それを一片ずつ「収蔵品」として保存し、ファンの手元に永久に残します。
+        </p>
+      </div>
+      <figure class="intro-fig">
+        <img src="images/amber-macro.png" loading="lazy" width="900" height="700"
+             alt="真鍮のピンの隣に置かれた、内部に小さな断片を閉じ込めた蜂蜜色の琥珀のマクロ写真。">
+        <figcaption>内包物のマクロ観察 ／ 一点として同じものは存在しない</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══════════════════ サービスの中身 ══════════════════ -->
+<section class="sec tight">
+  <div class="wrap">
+    <p class="cap-no">解説 02 ／ 収蔵品の正体</p>
+    <h2 class="cap-title">出品するのは、これからやる練習の「時間枠」。</h2>
+    <p class="cap-sub mono">THE SPECIMEN — 世界に1つの、動く一点物</p>
+    <p class="lead">
+      アーティストは「◯月◯日◯時から練習します」という<b>未来の時間枠</b>を先に出品します。
+    </p>
+    <p>
+      ファンはその枠を買う。中身はまだ撮影すらされていないので、届くまで分かりません。当日あなたがスマホで撮った練習映像は、自動で約10秒の短い断片に分割され、
+      <b>一人ひとりに違う一片が、世界にただ1つずつ配られます。</b>
+      チェキや生写真の延長にある、いわば <b>"動くチェキ"</b>。違うのは「動く・本人の本物の練習時間・世界に1つ」であること。
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════ 博物学フロー ══════════════════ -->
+<section class="sec flow" id="flow">
+  <div class="wrap">
+    <p class="cap-no">展示順路 ／ Process</p>
+    <h2 class="cap-title">採集から、貸与まで。</h2>
+    <p class="cap-sub mono">出品者がやることは、当日スマホで練習を撮るだけ。</p>
+
+    <div class="flow-steps">
+      <div class="step">
+        <div class="step-no">工程 01</div>
+        <div class="step-body">
+          <h3>出品<span class="term">Register</span></h3>
+          <p>これからやる練習の時間枠を登録する。日時・価格・配布本数（＝販売枠数）・1本の長さを、あなたが決めます。</p>
+          <p class="plate-line">→ まだ撮っていない時間に、収蔵番号の枠が用意される</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 02</div>
+        <div class="step-body">
+          <h3>購入<span class="term">Acquire</span></h3>
+          <p>ファンが時間枠を買う。中身は未撮影。「何が届くか分からない」まま、あなたの練習に先に投資してくれます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 03</div>
+        <div class="step-body">
+          <h3>採集 ・ 撮影<span class="term">Collect</span></h3>
+          <p>当日、いつも通り練習する。それをスマホで回すだけ。編集も、特別な機材も要りません。</p>
+          <p class="plate-line">→ 現場そのものが、標本の元になる</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 04</div>
+        <div class="step-body">
+          <h3>記録 ・ 分割<span class="term">Catalogue</span></h3>
+          <p>撮った映像をアップすると、自動で約10秒の短い断片に分割・整理される。あなたは何もしなくて構いません。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 05</div>
+        <div class="step-body">
+          <h3>公開前チェック<span class="term">Curate</span></h3>
+          <p>配布前に、あなた自身が中身を確認。本当にまずい「事故」の瞬間だけは非公開にできます（該当者には自動返金）。世に出るのは、あなたが承認した一瞬だけ。</p>
+          <p class="plate-line">→ 撮影後アップロードだから、ライブ配信のような事故が起きない</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 06</div>
+        <div class="step-body">
+          <h3>収蔵 ・ 配布<span class="term">Distribute</span></h3>
+          <p>承認された断片が、購入者へランダムかつ一意に割り当てられる。各人が受け取るのは、世界に1つの一片です。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-no">工程 07</div>
+        <div class="step-body">
+          <h3>貸与 ・ 所有<span class="term">Hold</span></h3>
+          <p>ファンは自分だけの一片を受け取り、手元に保有する。収蔵番号が、その真正性（本物であること・世界に1つであること）を担保します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ スマホUIモック（収蔵の実際の操作） ══════════════════ -->
+<section class="sec mock" id="app">
+  <div class="wrap">
+    <p class="cap-no">実物資料 ／ The Instrument</p>
+    <h2 class="cap-title">手の中の、小さな収蔵室。</h2>
+    <p class="cap-sub mono">出品も撮影も配布も、この画面の中で完結する。</p>
+    <p class="mock-intro">
+      特別な道具はいりません。いつも持っているスマートフォンが、そのまま出品台であり、採集の記録器であり、収蔵証の発行所になります。実際の4つの画面を、順にご覧ください。
+    </p>
+
+    <div class="mocks">
+
+      <!-- 画面1：出品 -->
+      <div class="mockslot">
+        <div class="mockcap">
+          <span class="mno">工程 01 ／ REGISTER</span>
+          <h3>練習の時間枠を出品する</h3>
+          <p>日時・価格・配布本数・長さを決めるだけ。</p>
+        </div>
+        <div class="phone"><div class="notch"></div>
+          <div class="screen mscreen-paper">
+            <div class="mstat"><span class="mtime">9:41</span><span class="micons">●●●● ⌂ ▮▮</span></div>
+            <div class="mhead">
+              <span class="mkick">Lapsell 収蔵室 ／ 新規出品</span>
+              <div class="mttl">練習枠を出品<span class="maccn">No.—</span></div>
+              <div class="msub">まだ撮っていない未来の時間を、先に販売します</div>
+            </div>
+            <div class="mbody">
+              <div class="mfield">
+                <div class="mlab">採集予定日時 ／ Date</div>
+                <div class="mval"><span>2026年7月12日（日）19:00</span><span class="munit">📅</span></div>
+              </div>
+              <div class="mfield">
+                <div class="mlab">場所・メモ ／ Note</div>
+                <div class="mval"><span>下北沢スタジオ／新曲リハ</span></div>
+              </div>
+              <div class="mfield">
+                <div class="mlab">1本の価格 ／ Price</div>
+                <div class="mval"><span class="mnum">¥ 1,500</span><span class="munit">／ 本</span></div>
+              </div>
+              <div class="mfield">
+                <div class="mlab">配布本数 ／ Editions</div>
+                <div class="mval"><span class="mnum">30</span><span class="munit">本（＝販売枠数）</span></div>
+              </div>
+              <div class="mfield">
+                <div class="mlab">1本の長さ ／ Length</div>
+                <div class="mseg"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div>
+              </div>
+              <div class="mledger">
+                <div class="lt">収蔵見積り ／ Estimate</div>
+                <div class="lr"><span>売上（満枠時）</span><b>¥45,000</b></div>
+                <div class="lr"><span>手数料 5%</span><b>− ¥2,250</b></div>
+                <div class="lr big"><span>受け取り見込み</span><b>¥42,750</b></div>
+              </div>
+              <span class="mbtn">この内容で出品する</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面2：撮影 -->
+      <div class="mockslot">
+        <div class="mockcap">
+          <span class="mno">工程 03 ／ COLLECT</span>
+          <h3>当日、スマホで撮るだけ</h3>
+          <p>編集も機材も不要。いつもの練習を回すだけ。</p>
+        </div>
+        <div class="phone"><div class="notch"></div>
+          <div class="screen">
+            <div class="mcam">
+              <div class="cstage"></div>
+              <div class="cfloor"></div>
+              <div class="cfig"><div class="h"></div><div class="b"></div></div>
+              <div class="ctop">
+                <span class="crec"><span class="cd"></span>採集中 00:38</span>
+                <span style="color:#e9dcbe;font-family:'SFMono-Regular',Consolas,monospace;font-size:11px;">⟲</span>
+              </div>
+              <div class="cframe"></div>
+              <div class="cguide"><b>7/12 新曲リハ ・ 30本ぶんの枠</b></div>
+              <div class="cctrl">
+                <div class="cside">ライブ<br>フォト</div>
+                <div class="shutter"><b></b></div>
+                <div class="cside">アルバム<br>から選ぶ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面3：公開前チェック -->
+      <div class="mockslot">
+        <div class="mockcap">
+          <span class="mno">工程 05 ／ CURATE</span>
+          <h3>公開前チェック</h3>
+          <p>自動で約10秒に分割。事故だけ非公開にできる。</p>
+        </div>
+        <div class="phone"><div class="notch"></div>
+          <div class="screen mscreen-paper">
+            <div class="mstat"><span class="mtime">19:48</span><span class="micons">●●●● ⌂ ▮▮</span></div>
+            <div class="mhead">
+              <span class="mkick">Lapsell 収蔵室 ／ 記録・照合</span>
+              <div class="mttl">公開前チェック<span class="maccn">3 / 4</span></div>
+              <div class="msub">7/12 新曲リハ ・ 30本に自動分割 完了</div>
+            </div>
+            <div class="mbody">
+              <div class="mfield" style="border:none;padding-top:2px">
+                <div class="mlab">アップロード ／ Catalogue</div>
+                <div class="mval" style="font-size:12.5px"><span>IMG_4821.MOV ・ 05:12</span><span class="munit" style="color:var(--forest)">✓ 分割完了</span></div>
+              </div>
+              <div class="mnote">映像は約10秒ずつに自動整理されました。事故の一片だけ「非公開」にでき、そのぶんは購入者へ自動返金されます。</div>
+              <div class="mlab" style="margin-top:12px">セグメント一覧（30本）</div>
+              <div class="mtray">
+                <div class="mcell"><span class="cno">#01</span><div class="cfg"></div><span class="clen">0:10</span></div>
+                <div class="mcell"><span class="cno">#02</span><div class="cfg"></div><span class="clen">0:10</span></div>
+                <div class="mcell seal"><span class="cno">#03</span><div class="cfg"></div><span class="clen">0:10</span><span class="sealtag">🚫<span>非公開</span></span></div>
+                <div class="mcell"><span class="cno">#04</span><div class="cfg"></div><span class="clen">0:09</span></div>
+                <div class="mcell"><span class="cno">#05</span><div class="cfg"></div><span class="clen">0:10</span></div>
+                <div class="mcell"><span class="cno">#06</span><div class="cfg"></div><span class="clen">0:11</span></div>
+              </div>
+              <div class="mtally"><span>公開 29本</span><span class="hide">非公開 1本（自動返金）</span></div>
+              <span class="mbtn">この内容で公開・配布する</span>
+              <span class="mbtn dark">もう一度確認する</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面4：受け取り（開封）＋収蔵証 -->
+      <div class="mockslot">
+        <div class="mockcap">
+          <span class="mno">工程 07 ／ HOLD</span>
+          <h3>ファンが受け取る（開封）</h3>
+          <p>収蔵番号つき。世界に1つの一片が届く。</p>
+        </div>
+        <div class="phone"><div class="notch"></div>
+          <div class="screen mscreen-paper">
+            <div class="mstat"><span class="mtime">19:50</span><span class="micons">●●●● ⌂ ▮▮</span></div>
+            <div class="mhead">
+              <span class="mkick">Lapsell 公式レジストリ ／ 収蔵証</span>
+              <div class="mttl">断片が届きました<span class="maccn">No.017</span></div>
+              <div class="msub">彩夏 ・ 7/12 新曲リハ</div>
+            </div>
+            <div class="mbody">
+              <div class="mseal-card">
+                <span class="sealstamp">SEALED ・ 開封前</span>
+                <div class="qm">?</div>
+                <div class="qc">世界に1つ。あなたに割り当てられた約10秒の断片。</div>
+              </div>
+              <div class="minforow">
+                <div class="mi"><div class="mik">収蔵番号</div><div class="miv">#017<small>/29</small></div></div>
+                <div class="mi"><div class="mik">長さ</div><div class="miv">0:10</div></div>
+                <div class="mi"><div class="mik">発行数</div><div class="miv">1<small>点のみ</small></div></div>
+              </div>
+              <span class="mbtn">開封して収蔵する</span>
+              <div class="mlab" style="margin-top:14px">真正性の記録 ／ Provenance</div>
+              <div class="maccnrow"><span class="k">証明ID</span><span class="v ser">LPS-7C4F-19A2</span></div>
+              <div class="maccnrow"><span class="k">発行者</span><span class="v">彩夏 本人 ・ 7/12 19:48</span></div>
+              <div class="maccnrow" style="border:none"><span class="k">現所有者</span><span class="v">あなた（保有中）</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══════════════════ 価値の4項 ══════════════════ -->
+<section class="sec values">
+  <div class="wrap">
+    <p class="cap-no">所蔵の意義 ／ Why exhibit</p>
+    <h2 class="cap-title">捨てていた時間に、値がつく。</h2>
+    <p class="cap-sub mono">出品者が受け取る4つの価値</p>
+
+    <div class="val">
+      <div class="val-txt">
+        <p class="val-no">価値 No.01</p>
+        <h3>お金にならなかった時間が、そのまま売れる。</h3>
+        <p>
+          これまで捨てていた練習・リハ・ネタ合わせ・楽屋の時間。それが、そのまま新しい収益源になります。
+          初期費用は0円、手数料は5%〜。在庫も、事前の作り込みも要りません。ノーリスクで、今日から始められます。
+        </p>
+      </div>
+      <figure class="fig">
+        <img src="images/practice-idol.png" loading="lazy" width="900" height="520"
+             alt="鏡張りのスタジオで練習するライブアイドルたち。隅の三脚に立てたスマホが練習を撮影している。">
+        <figcaption>採集現場 ／ ライブアイドルの練習 ・ 三脚のスマホで記録中</figcaption>
+      </figure>
+    </div>
+
+    <div class="val flip">
+      <div class="val-txt">
+        <p class="val-no">価値 No.02</p>
+        <h3>小さい"今"だから、将来の価値上昇を見込んで買われる。</h3>
+        <p>
+          ファンが買うのは、映像そのものだけではありません。「無名だった頃を、自分が持っていた」という物語ごと収蔵します。
+          今この一瞬が小さいほど、あとで振り返ったときの価値は大きくなる ―― それが、下積みの時間が持つ本当の資産価値です。
+        </p>
+      </div>
+      <figure class="fig">
+        <img src="images/loupe.png" loading="lazy" width="900" height="600"
+             alt="ルーペで琥珀の標本を丁寧に覗き込む若い日本人。">
+        <figcaption>収蔵品の観察 ／ ルーペで一片を確かめる来館者</figcaption>
+      </figure>
+    </div>
+
+    <div class="val">
+      <div class="val-txt">
+        <p class="val-no">価値 No.03</p>
+        <h3>配信事故を、事前に防げる。</h3>
+        <p>
+          ライブ配信と違い、Lapsell は「撮影 → アップロード」の順です。公開前に必ず自分で中身を確認できるので、
+          言い間違い・映り込み・トラブルなど、まずい瞬間が不意に世に出ることがありません。安心して、素のまま撮れます。
+        </p>
+      </div>
+      <figure class="fig">
+        <img src="images/label-tag.png" loading="lazy" width="900" height="600"
+             alt="真鍮のピンで留められた、経年した標本ラベル。ラベルには罫線と活版のような印字。">
+        <figcaption>公開前の照合 ／ 一片ずつラベルを確認してから収蔵する</figcaption>
+      </figure>
+    </div>
+
+    <div class="val flip">
+      <div class="val-txt">
+        <p class="val-no">価値 No.04</p>
+        <h3>手元に木の引き出しがなくても、収蔵庫はここにある。</h3>
+        <p>
+          出品・分割・配布・真正性の担保まで、すべて Lapsell が引き受けます。あなたは練習をスマホで撮るだけ。
+          あとの整理は、この収蔵庫が静かに済ませておきます。
+        </p>
+      </div>
+      <figure class="fig">
+        <img src="images/cabinet.png" loading="lazy" width="900" height="600"
+             alt="真鍮の取っ手が並ぶ、深い緑とこげ茶の古い木製標本キャビネット。引き出しが一段開いている。">
+        <figcaption>収蔵庫 ／ 番号で整理された標本の引き出し</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ なぜ買われるか（データ） ══════════════════ -->
+<section class="sec demand">
+  <div class="wrap">
+    <p class="cap-no">来歴と需要 ／ Provenance</p>
+    <h2 class="cap-title">「本当に売れるの？」への、事実の答え。</h2>
+    <p class="cap-sub mono">ファンは既に「素の一点物」に、お金を払っている。</p>
+    <p style="color:#d8cfb8;max-width:40em;">
+      Lapsell が売るのは新しい行動ではありません。ファンがすでにお金を払っている「一点物・素のコンテンツ・本人とのつながり」を、そのまま収蔵品にするだけです。次の数字は、その需要がすでに存在している証拠です。
+    </p>
+
+    <div class="ledger">
+      <div class="row">
+        <span class="what">ライブ物販でのグッズ購入額（購入者一人あたり・年間平均）</span>
+        <span class="fig">約 22,000 円 ／ 年</span>
+      </div>
+      <div class="row">
+        <span class="what">アイドル系ファンのグッズ購入率</span>
+        <span class="fig">75.4 %</span>
+      </div>
+      <div class="row">
+        <span class="what">チェキ1枚の相場（ライブアイドル収入の過半を支える）</span>
+        <span class="fig">約 1,500 円 ／ 枚</span>
+      </div>
+      <div class="row">
+        <span class="what">本人の"素の日常"に課金する購読サービスの購読者数（世界）</span>
+        <span class="fig">200 万人 超</span>
+      </div>
+    </div>
+
+    <p class="closing">
+      チェキ1枚が1,500円で売れ、素の日常に世界200万人が課金する。ならば、<b>動いて・本物で・世界に1つ</b>のあなたの練習の一片も、同じ理由で買われます。
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════ 将来価値（無名→貴重資料） ══════════════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="future-grid">
+      <div class="future-txt">
+        <p class="cap-no">後年の再評価 ／ Retrospective</p>
+        <h2 class="cap-title">無名時代の標本ほど、後で貴重になる。</h2>
+        <p class="cap-sub mono">RETROSPECTIVE — 「あの頃を持っていた」という資産</p>
+        <p>
+          博物館では、無名のうちに採られた一点ものの標本が、時が経ってから「この時期の記録はこれしか残っていない」と、最も貴重な資料になることがあります。
+        </p>
+        <p>
+          アーティストも同じです。たとえば結成から11年目にブレイクし、紅白初出場を果たしたグループがいます。もし ―― その下積み時代の、ある日の練習の一瞬を、世界に1つの一点物として持っていたら。
+        </p>
+        <blockquote class="museum">
+          今日のあなたの練習は、未来の来館者にとっての、貴重な収蔵品になる。
+          <cite>収蔵方針 ／ Lapsell Curatorial Note</cite>
+        </blockquote>
+      </div>
+      <figure class="future-fig">
+        <img src="images/label-tag.png" loading="lazy" width="900" height="600"
+             alt="経年して変色した標本ラベルが真鍮のピンで留められている。当時は無名だった一点が、時を経て貴重な資料になることの象徴。">
+        <figcaption>採集当時は無名の一片 ／ 後年、二つとない標本として再評価される</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 一意性（収蔵番号） ══════════════════ -->
+<section class="sec tight unique">
+  <div class="wrap">
+    <p class="cap-no">真正性 ／ Accession</p>
+    <h2 class="cap-title">収蔵番号が、「世界に1つ」を保証する。</h2>
+    <p class="cap-sub mono">標本の番号＝電子透かし・真正性の担保</p>
+    <p class="lead" style="max-width:40em;">
+      同じ練習から生まれた断片でも、一片ずつに固有の収蔵番号が刻まれます。誰の手元にあるどの一片も、二つとして同じものはありません。
+    </p>
+    <div class="chips">
+      <div class="chip">No.<b>0001</b><br>Take A / 00:00–00:10</div>
+      <div class="chip">No.<b>0002</b><br>Take A / 00:10–00:20</div>
+      <div class="chip">No.<b>0003</b><br>Take B / 01:04–01:14</div>
+      <div class="chip">No.<b>0004</b><br>Take C / 02:31–02:41</div>
+    </div>
+    <p style="margin-top:22px;color:var(--ink-soft);font-size:15px;">
+      配布はランダムかつ一意。だから「自分の一片は、世界で自分だけのもの」という所有の実感が、そのまま価値になります。
+    </p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══════════════════ 料金 ══════════════════ -->
+<section class="sec">
+  <div class="wrap">
+    <p class="cap-no">収蔵にかかる費用 ／ Fees</p>
+    <h2 class="cap-title">始めるのに、費用はかからない。</h2>
+    <p class="cap-sub mono">売れたぶんにだけ、手数料。</p>
+    <div class="fee-grid">
+      <div class="fee-row">
+        <span class="k">初期費用・登録料<small>アカウント作成も出品も無料</small></span>
+        <span class="v">0 円</span>
+      </div>
+      <div class="fee-row">
+        <span class="k">月額固定費<small>毎月の負担なし</small></span>
+        <span class="v">0 円</span>
+      </div>
+      <div class="fee-row">
+        <span class="k">販売手数料<small>売上が立ったときだけ</small></span>
+        <span class="v">5 % 〜</span>
+      </div>
+      <div class="fee-row">
+        <span class="k">撮影・編集の機材費<small>いつものスマホでそのまま撮る</small></span>
+        <span class="v">0 円</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;color:var(--ink-soft);font-size:15px;">
+      在庫を抱えることも、先に何かを作り込むこともありません。売れなければ費用は発生しない ―― だから、ノーリスクで試せます。
+    </p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══════════════════ FAQ ══════════════════ -->
+<section class="sec faq">
+  <div class="wrap" style="max-width:820px">
+    <p class="cap-no">来館者からの問い ／ FAQ</p>
+    <h2 class="cap-title">よくある質問。</h2>
+    <p class="cap-sub mono">出品する前に、気になること。</p>
+
+    <details>
+      <summary>撮影や編集の知識がなくても大丈夫ですか。</summary>
+      <div class="ans">はい。当日、いつも通りの練習をスマホで撮るだけです。分割・整理・配布はすべて自動で行われるので、編集も特別な機材も要りません。</div>
+    </details>
+    <details>
+      <summary>変な瞬間が、勝手に配られてしまいませんか。</summary>
+      <div class="ans">配布の前に、必ずあなた自身が中身を確認できます。まずい「事故」の瞬間だけを非公開にでき、その分は購入者へ自動返金されます。世に出るのは、あなたが承認した一片だけです。</div>
+    </details>
+    <details>
+      <summary>まだファンが少なくても、意味はありますか。</summary>
+      <div class="ans">むしろ、無名の"今"だからこそ価値があります。小さいうちの一瞬ほど、後年ふり返ったときに希少な収蔵品になります。少人数のファンとの距離が近い今こそ、始めどきです。</div>
+    </details>
+    <details>
+      <summary>ライブアイドル以外でも使えますか。</summary>
+      <div class="ans">はい。インディーズの楽曲アーティスト・バンドのリハや制作風景、お笑い芸人のネタ合わせや楽屋など、「お金にならなかった裏側の時間」があれば、どんな作り手にも向いています。</div>
+    </details>
+    <details>
+      <summary>配布された一片は、本当に「世界に1つ」なのですか。</summary>
+      <div class="ans">はい。一片ごとに固有の収蔵番号が刻まれ、ランダムかつ一意に割り当てられます。この番号が電子透かしとして真正性を担保し、二つとして同じものが存在しないことを保証します。</div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════════════ 最終CTA ══════════════════ -->
+<section class="final" id="final">
+  <div class="wrap">
+    <p class="cap-no">出品受付 ／ Now accepting</p>
+    <h2>今日の練習に、<span class="amber">収蔵番号 No.0001</span> を。</h2>
+    <p>
+      未来の練習の時間枠を1つ出品するところから、始められます。初期費用0円・手数料5%〜。
+      撮るのは、当日スマホで練習を回すだけ。
+    </p>
+    <a class="btn-brass" href="#">練習の時間枠を出品する</a>
+    <p class="fineprint">Lapsell — 練習時間を、収益に変える。／ 無名の"今"を、収蔵する。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="fbrand">Lapsell</span>
+    <span class="mono">練習時間 収蔵室 ／ SPECIMEN ARCHIVE</span>
+    <span class="mono">© Lapsell</span>
+  </div>
+</footer>

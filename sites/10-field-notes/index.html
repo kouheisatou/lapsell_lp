@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapsell 観測記録 — 練習時間を、収益に変える。</title>
+<style>
+  :root{
+    --paper:#f4f1e8;          /* 生成りの紙 */
+    --paper-2:#ece7da;
+    --grid:#c9d6dd;           /* 方眼のうすい水色 */
+    --grid-soft:#d8e0e4;
+    --ink:#2b2b2b;           /* 鉛筆の濃いグレー */
+    --ink-2:#555049;         /* 本文グレー */
+    --pencil:#6f6a61;        /* 走り書き */
+    --stamp:#b23a2e;         /* 日付スタンプの赤 */
+    --stamp-black:#20201d;
+    --tape:rgba(214,203,164,.65);
+    --line:#cfc7b3;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",system-ui,sans-serif;
+    background:var(--paper);
+    line-height:1.9;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    /* 方眼を下地に */
+    background-image:
+      linear-gradient(var(--grid-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px);
+    background-size:26px 26px;
+    background-position:-1px -1px;
+  }
+  .mono{font-family:"SFMono-Regular",Consolas,"Courier New",monospace;}
+  img{display:block;max-width:100%;height:auto;}
+
+  /* ---- 綴じ／ページ余白 ---- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+  .page{position:relative;}
+
+  /* ---- 日付スタンプ（章見出し） ---- */
+  .stamp{
+    display:inline-flex;align-items:baseline;gap:.5em;
+    font-family:"SFMono-Regular",Consolas,"Courier New",monospace;
+    font-weight:700;letter-spacing:.06em;
+    border:2px solid var(--stamp);
+    color:var(--stamp);
+    padding:.28em .6em;
+    transform:rotate(-1.2deg);
+    background:rgba(244,241,232,.6);
+    font-size:.82rem;
+    text-transform:uppercase;
+    box-shadow:0 0 0 1px rgba(178,58,46,.15) inset;
+  }
+  .stamp .no{font-size:1.05em;}
+  .stamp.black{border-color:var(--stamp-black);color:var(--stamp-black);}
+
+  h1,h2,h3{font-weight:700;line-height:1.35;letter-spacing:.01em;}
+  h2{font-size:1.9rem;margin:.2em 0 .1em;}
+  h3{font-size:1.2rem;margin:1.4em 0 .3em;}
+  p{margin:.6em 0;color:var(--ink-2);}
+  .lead{font-size:1.06rem;color:var(--ink);}
+
+  /* 手書き風の走り書き（等幅を斜体で代替、システムフォント縛りのため） */
+  .scribble{
+    font-family:"SFMono-Regular",Consolas,"Courier New",monospace;
+    color:var(--pencil);
+    font-size:.9rem;
+    transform:rotate(-.6deg);
+    display:inline-block;
+  }
+
+  section{padding:64px 0;position:relative;}
+  .divider{height:0;border:0;border-top:1.5px solid var(--line);
+    max-width:var(--maxw);margin:0 auto;opacity:.8;}
+
+  /* ---- 貼り込み写真（washiテープ風） ---- */
+  .snap{
+    background:#fff;
+    padding:8px 8px 14px;
+    box-shadow:0 6px 18px rgba(60,54,40,.16);
+    position:relative;
+    display:inline-block;
+  }
+  .snap img{background:var(--paper-2);min-height:60px;}
+  .snap.tilt{transform:rotate(-1.6deg);}
+  .snap.tilt2{transform:rotate(1.4deg);}
+  .snap::before,.snap::after{
+    content:"";position:absolute;width:74px;height:22px;
+    background:var(--tape);
+    top:-9px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+  }
+  .snap.corners::before{left:12px;top:-8px;transform:rotate(-24deg);width:56px;}
+  .snap.corners::after{left:auto;right:12px;top:-8px;transform:rotate(22deg);width:56px;}
+  .snap .cap{
+    display:block;margin-top:8px;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:.72rem;color:var(--pencil);text-align:center;letter-spacing:.02em;
+  }
+
+  /* ================= HERO ================= */
+  .hero{padding:0;position:relative;overflow:hidden;background:var(--paper-2);}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;display:grid;
+    grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;min-height:88vh;}
+  .hero-photo{position:relative;}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;min-height:340px;}
+  .hero-text{padding:46px 40px;display:flex;flex-direction:column;justify-content:center;
+    position:relative;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:26px 26px;background-color:var(--paper);}
+  .hero-text .kicker{font-family:"SFMono-Regular",Consolas,monospace;font-size:.78rem;
+    color:var(--pencil);letter-spacing:.14em;margin-bottom:18px;}
+  .hero-text h1{font-size:2.7rem;line-height:1.28;margin:0 0 .35em;color:var(--ink);}
+  .hero-text h1 .u{background:linear-gradient(transparent 62%,#f2d9a0 62%,#f2d9a0 92%,transparent 92%);}
+  .hero-text .sub{font-size:1.05rem;color:var(--ink-2);max-width:30em;}
+  .brand{position:absolute;top:26px;left:40px;font-weight:700;letter-spacing:.14em;
+    font-size:1rem;display:flex;align-items:center;gap:9px;z-index:3;}
+  .brand .dot{width:9px;height:9px;background:var(--stamp);border-radius:50%;box-shadow:0 0 0 3px rgba(178,58,46,.15);}
+  .hero .stamp{position:absolute;top:20px;right:22px;z-index:3;}
+
+  /* ---- CTA（インデックスカード / ラベル型・グラデ禁止） ---- */
+  .cta{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:inherit;font-weight:700;font-size:1rem;
+    color:#fff;background:var(--stamp-black);
+    padding:15px 26px;border:none;cursor:pointer;
+    text-decoration:none;letter-spacing:.03em;
+    box-shadow:3px 3px 0 rgba(43,43,43,.18);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .cta:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(43,43,43,.2);}
+  .cta .arrow{font-family:monospace;}
+  .cta.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);box-shadow:none;}
+  .cta.ghost:hover{background:rgba(43,43,43,.05);}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:28px;}
+  .note-under{font-family:"SFMono-Regular",Consolas,monospace;font-size:.78rem;color:var(--pencil);}
+
+  /* ================= 汎用グリッド ================= */
+  .cols{display:grid;gap:34px;}
+  .c2{grid-template-columns:1fr 1fr;}
+  .c3{grid-template-columns:repeat(3,1fr);}
+  .sec-head{max-width:38em;margin-bottom:20px;}
+  .sec-head p{font-size:1.02rem;}
+
+  /* ---- 課題（見えない努力）---- */
+  .problem{background:var(--paper-2);}
+  .problem .cols{align-items:center;}
+  .marginnote{border-left:3px solid var(--stamp);padding-left:14px;margin:26px 0;
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:.92rem;color:var(--ink);}
+
+  /* ---- 観測手順（7ステップ）---- */
+  .steps{counter-reset:step;}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start;
+    padding:22px 0;border-bottom:1px dashed var(--line);}
+  .step:last-child{border-bottom:0;}
+  .step .num{
+    counter-increment:step;
+    font-family:"SFMono-Regular",Consolas,monospace;
+    font-weight:700;color:var(--stamp);font-size:.8rem;
+    border:2px solid var(--stamp);width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    line-height:1;transform:rotate(-3deg);text-align:center;
+  }
+  .step .num::before{content:"OBS";font-size:.5rem;letter-spacing:.08em;display:block;margin-bottom:2px;}
+  .step .num::after{content:counter(step,decimal-leading-zero);font-size:1.1rem;}
+  .step h3{margin:.1em 0 .2em;}
+  .step .tag{font-family:"SFMono-Regular",Consolas,monospace;font-size:.72rem;
+    color:var(--pencil);letter-spacing:.1em;text-transform:uppercase;}
+
+  /* ---- 価値（記録が資産に）---- */
+  .value{background:var(--paper-2);}
+  .valrow{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;
+    padding:26px 0;border-bottom:1px dashed var(--line);}
+  .valrow:last-child{border-bottom:0;}
+  .valrow .k{font-family:"SFMono-Regular",Consolas,monospace;font-size:.82rem;
+    color:var(--stamp);font-weight:700;white-space:nowrap;padding-top:4px;letter-spacing:.06em;}
+  .valrow h3{margin:0 0 .2em;}
+
+  /* ---- データ（ファンはなぜ買うのか）---- */
+  .data-item{padding:20px 0;border-bottom:1px dashed var(--line);}
+  .data-item:last-child{border-bottom:0;}
+  .data-item .fact{font-size:1.05rem;color:var(--ink);}
+  .data-item .fact b{background:linear-gradient(transparent 60%,#dfe6c9 60%);font-weight:700;}
+  .data-item .src{font-family:"SFMono-Regular",Consolas,monospace;font-size:.74rem;color:var(--pencil);margin-top:4px;}
+
+  /* ---- 料金 ---- */
+  .fee{background:var(--paper-2);}
+  .fee-card{background:var(--paper);border:1.5px solid var(--ink);padding:34px 30px;position:relative;
+    box-shadow:5px 5px 0 rgba(43,43,43,.08);}
+  .fee-card .stamp{position:absolute;top:-14px;right:22px;}
+  .fee-list{list-style:none;padding:0;margin:16px 0 0;}
+  .fee-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;
+    border-bottom:1px dashed var(--line);align-items:baseline;}
+  .fee-list li:last-child{border-bottom:0;}
+  .fee-list .lab{color:var(--ink);}
+  .fee-list .val{font-family:"SFMono-Regular",Consolas,monospace;font-weight:700;color:var(--ink);font-size:1.05rem;white-space:nowrap;}
+
+  /* ---- 安全・信頼 ---- */
+  .trust ul{list-style:none;padding:0;margin:0;}
+  .trust li{padding:16px 0 16px 34px;border-bottom:1px dashed var(--line);position:relative;}
+  .trust li:last-child{border-bottom:0;}
+  .trust li::before{content:"✓";position:absolute;left:0;top:16px;color:var(--stamp);font-weight:700;
+    font-family:monospace;}
+  .trust li b{color:var(--ink);}
+
+  /* ---- FAQ ---- */
+  .faq details{border-bottom:1px dashed var(--line);padding:6px 0;}
+  .faq summary{cursor:pointer;font-weight:700;padding:14px 30px 14px 0;position:relative;
+    list-style:none;color:var(--ink);}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";position:absolute;right:6px;top:12px;font-family:monospace;
+    font-size:1.3rem;color:var(--pencil);}
+  .faq details[open] summary::after{content:"–";}
+  .faq details p{padding:0 0 16px;margin:0;}
+
+  /* ---- 図解の帯 ---- */
+  .figband{background:var(--paper);}
+  .figband .snap{width:100%;display:block;}
+  .figband .snap img{width:100%;}
+
+  /* ---- 最終CTA ---- */
+  .final{background:var(--stamp-black);color:var(--paper);text-align:center;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:26px 26px;}
+  .final h2{color:#fff;font-size:2.1rem;}
+  .final p{color:rgba(244,241,232,.8);max-width:34em;margin:.6em auto 0;}
+  .final .stamp{border-color:var(--paper);color:var(--paper);background:transparent;margin-bottom:22px;}
+  .final .cta{background:var(--paper);color:var(--ink);box-shadow:3px 3px 0 rgba(0,0,0,.3);}
+  .final .cta:hover{box-shadow:5px 5px 0 rgba(0,0,0,.35);}
+
+  footer{background:var(--paper-2);padding:36px 0;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:.78rem;color:var(--pencil);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+  /* photo grid for gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start;}
+  .gallery .snap{width:100%;}
+  .gallery .snap img{width:100%;aspect-ratio:3/4;object-fit:cover;}
+
+  /* ================= CSS製の観測図（画像生成の代替・世界観に沿った手描き風の下地） ================= */
+  .sketch{
+    position:relative;background:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:22px 22px;background-position:-1px -1px;
+    border:1.5px solid var(--line);
+  }
+  /* --- 成長曲線スケッチ --- */
+  .growth{padding:26px 26px 40px;}
+  .growth .plot{position:relative;height:230px;border-left:2px solid var(--pencil);border-bottom:2px solid var(--pencil);}
+  .growth .axis-y{position:absolute;left:-16px;top:-6px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.62rem;color:var(--pencil);transform:rotate(-90deg);transform-origin:left top;white-space:nowrap;}
+  .growth .axis-x{position:absolute;right:6px;bottom:-20px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.62rem;color:var(--pencil);}
+  .growth svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+  .growth .dot{position:absolute;width:34px;height:26px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 5px rgba(60,54,40,.14);}
+  .growth .dot .d{position:absolute;left:0;right:0;bottom:-15px;text-align:center;font-family:"SFMono-Regular",Consolas,monospace;font-size:.56rem;color:var(--pencil);}
+  .growth .dot::after{content:"";position:absolute;inset:4px;background:var(--grid-soft);}
+
+  /* --- 7ステップ観測手順の帯 --- */
+  .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:0;padding:26px 20px 30px;}
+  .flow .node{position:relative;text-align:center;padding:0 4px;}
+  .flow .node .ring{
+    width:46px;height:46px;margin:0 auto 10px;border:2px solid var(--stamp);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;transform:rotate(-4deg);
+    font-family:"SFMono-Regular",Consolas,monospace;font-weight:700;color:var(--stamp);font-size:.9rem;
+    background:var(--paper);
+  }
+  .flow .node .lab{font-family:"SFMono-Regular",Consolas,monospace;font-size:.66rem;letter-spacing:.04em;color:var(--pencil);text-transform:uppercase;display:block;}
+  .flow .node .jp{font-size:.82rem;color:var(--ink);font-weight:700;display:block;margin-top:2px;line-height:1.35;}
+  .flow .node:not(:last-child)::after{
+    content:"→";position:absolute;top:14px;right:-8px;color:var(--pencil);font-family:monospace;font-size:1rem;z-index:2;
+  }
+
+  /* --- 標本カード（ブツ撮り代替）--- */
+  .specimen{padding:22px 22px 26px;}
+  .specimen .row{display:flex;flex-wrap:wrap;gap:12px;}
+  .specimen .chip{
+    background:#fff;border:1px solid var(--line);box-shadow:0 3px 8px rgba(60,54,40,.12);
+    padding:10px 12px 14px;min-width:96px;flex:1;text-align:center;transform:rotate(-1deg);
+  }
+  .specimen .chip:nth-child(even){transform:rotate(1.4deg);}
+  .specimen .chip .big{display:block;font-family:"SFMono-Regular",Consolas,monospace;font-weight:700;font-size:1.32rem;line-height:1.05;color:var(--ink);}
+  .specimen .chip .big .unit{font-size:.62rem;color:var(--pencil);margin-left:1px;}
+  .specimen.tools .chip .big{color:var(--stamp);border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:6px;}
+  .specimen .chip .nm{display:block;margin-top:6px;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:.68rem;color:var(--ink-2);letter-spacing:.02em;font-weight:700;}
+  .specimen .chip .no{display:block;font-family:"SFMono-Regular",Consolas,monospace;font-size:.56rem;color:var(--stamp);margin-top:2px;}
+
+  @media(max-width:860px){
+    .flow{grid-template-columns:repeat(4,1fr);gap:18px 0;}
+    .flow .node:nth-child(4)::after{content:"";}
+  }
+  @media(max-width:420px){
+    .flow{grid-template-columns:repeat(2,1fr);gap:20px 0;}
+    .flow .node::after{content:""!important;}
+  }
+
+  /* ================= レスポンシブ ================= */
+  @media(max-width:860px){
+    h2{font-size:1.55rem;}
+    .hero-inner{grid-template-columns:1fr;min-height:auto;}
+    .hero-photo{order:2;}
+    .hero-photo img{min-height:300px;max-height:56vh;}
+    .hero-text{order:1;padding:66px 24px 40px;}
+    .hero-text h1{font-size:2rem;}
+    .brand{top:18px;left:24px;}
+    .c2,.c3{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;gap:16px;}
+    .valrow{grid-template-columns:1fr;gap:6px;}
+    section{padding:48px 0;}
+  }
+  @media(max-width:420px){
+    body{font-size:15px;}
+    .hero-text h1{font-size:1.72rem;}
+    .step{grid-template-columns:48px 1fr;gap:14px;}
+    .step .num{width:44px;height:44px;}
+    .gallery{grid-template-columns:1fr;}
+    .fee-list li{flex-direction:column;gap:2px;}
+  }
+
+  /* ================= アプリ画面 ＝「観測票」として貼り込む（新規デザイン） =================
+     参照モックはツヤのある黒スマホ＋角丸カードUI。この案ではそれを流用せず、
+     アプリの各画面を「ノートに綴じた観測票（field observation slip）」として再設計する。
+     ・端末フレームなし／ノッチなし／ステータスバーなし
+     ・生成り紙に方眼、上辺にパンチ穴、右上に赤スタンプ、ワニ口クリップで綴じた1枚の票
+     ・角丸ゼロ（ノートの紙・伝票は角丸にしない）。色は紙・鉛筆グレー・スタンプ赤のみ */
+  .obs-sheets{display:grid;gap:40px 34px;grid-template-columns:repeat(2,1fr);align-items:start;margin-top:8px;}
+  .obs{position:relative;}
+  .obs:nth-child(odd){transform:rotate(-.5deg);}
+  .obs:nth-child(even){transform:rotate(.6deg);}
+
+  /* 観測票 本体（1枚の記録用紙） */
+  .slip{position:relative;background:var(--paper);
+    background-image:
+      linear-gradient(var(--grid-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px);
+    background-size:19px 19px;background-position:-1px -1px;
+    border:1px solid var(--line);
+    box-shadow:0 10px 26px -14px rgba(60,54,40,.5), 3px 4px 0 rgba(60,54,40,.06);
+    padding:26px 20px 22px;}
+  /* 綴じ穴（ルーズリーフ） */
+  .slip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:26px;
+    border-right:1px dashed var(--line);
+    background:
+      radial-gradient(circle at 13px 30px, rgba(60,54,40,.18) 0 4px, transparent 5px),
+      radial-gradient(circle at 13px 50%, rgba(60,54,40,.18) 0 4px, transparent 5px),
+      radial-gradient(circle at 13px calc(100% - 30px), rgba(60,54,40,.18) 0 4px, transparent 5px);}
+  .slip > *{margin-left:20px;}
+  /* ワニ口クリップ（票を綴じている感じ） */
+  .obs .clip{position:absolute;top:-9px;right:26px;width:22px;height:44px;z-index:3;
+    background:linear-gradient(180deg,#8f8a7f,#6d685e);border:1px solid #57534a;
+    box-shadow:0 2px 5px rgba(0,0,0,.25);}
+  .obs .clip::after{content:"";position:absolute;left:5px;top:8px;width:12px;height:3px;background:#4f4b42;
+    box-shadow:0 6px 0 #4f4b42,0 12px 0 #4f4b42;}
+
+  /* 票のヘッダ：観測番号＋赤スタンプ＋日付、下は太い記入罫 */
+  .slip .hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    padding-bottom:9px;border-bottom:2px solid var(--ink);margin-bottom:14px;}
+  .slip .hd .ttl{font-size:15px;font-weight:700;color:var(--ink);line-height:1.25;}
+  .slip .hd .meta{font-family:"SFMono-Regular",Consolas,monospace;font-size:9.5px;color:var(--pencil);
+    margin-top:3px;letter-spacing:.02em;}
+  .slip .hd .rstamp{font-family:"SFMono-Regular",Consolas,monospace;font-size:9px;font-weight:700;color:var(--stamp);
+    border:1.5px solid var(--stamp);padding:3px 6px;transform:rotate(2.5deg);white-space:nowrap;
+    box-shadow:0 0 0 1px rgba(178,58,46,.12) inset;line-height:1.2;text-align:center;flex:0 0 auto;}
+  .slip .hd .rstamp.blk{color:var(--stamp-black);border-color:var(--stamp-black);}
+
+  /* 記入欄：ラベル＋鉛筆で書き込んだ値＋下線罫（枠で囲わない） */
+  .ln{margin-bottom:12px;}
+  .ln .k{font-family:"SFMono-Regular",Consolas,monospace;font-size:9.5px;color:var(--pencil);letter-spacing:.03em;}
+  .ln .val{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+    border-bottom:1.5px dotted var(--pencil);padding:2px 0 4px;margin-top:2px;}
+  .ln .val .w{font-size:14px;font-weight:700;color:var(--ink);}
+  .ln .val .u{font-family:"SFMono-Regular",Consolas,monospace;font-size:9.5px;color:var(--pencil);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  /* 選択（○で囲った項目＝手書き感） */
+  .pick{display:flex;gap:14px;margin-top:3px;}
+  .pick span{font-family:"SFMono-Regular",Consolas,monospace;font-size:11px;color:var(--pencil);position:relative;padding:2px 2px;}
+  .pick span.on{color:var(--stamp);font-weight:700;}
+  .pick span.on::after{content:"";position:absolute;inset:-4px -6px;border:1.5px solid var(--stamp);
+    border-radius:48% 52% 50% 50% / 58% 42% 58% 42%;transform:rotate(-3deg);}
+
+  /* 小見出しスタンプ（票の中の節） */
+  .subhd{font-family:"SFMono-Regular",Consolas,monospace;font-size:9px;font-weight:700;color:var(--pencil);
+    letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--line);
+    padding-bottom:4px;margin:16px 0 10px;}
+
+  /* 集計（右寄せ数値・合計は赤で強調、ドン出し回避＝ラベル同時） */
+  .sum .r{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px dotted var(--line);}
+  .sum .r:last-child{border-bottom:0;}
+  .sum .r .v{font-family:"SFMono-Regular",Consolas,monospace;font-weight:700;color:var(--ink);}
+  .sum .r.total{padding-top:8px;}
+  .sum .r.total .lb{font-weight:700;color:var(--ink);}
+  .sum .r.total .v{font-size:1.2rem;color:var(--stamp);}
+
+  /* 手書き注記（鉛筆の走り書き・赤の縦罫で引用） */
+  .memo{font-family:"SFMono-Regular",Consolas,monospace;font-size:10px;color:var(--pencil);
+    border-left:2.5px solid var(--stamp);padding-left:9px;margin:13px 0;line-height:1.6;}
+
+  /* 票の下部アクション：スタンプを押す型のボタン（グラデ禁止・実物感） */
+  .stampbtn{display:block;width:100%;text-align:center;font-weight:700;font-size:13px;letter-spacing:.06em;
+    color:var(--paper);background:var(--stamp-black);padding:11px;border:none;
+    box-shadow:3px 3px 0 rgba(43,43,43,.2);position:relative;}
+  .stampbtn.red{background:var(--stamp);box-shadow:3px 3px 0 rgba(178,58,46,.25);}
+  .stampbtn.gh{background:transparent;color:var(--ink);border:2px solid var(--ink);box-shadow:none;}
+
+  /* 観測記録の一覧行（売れ行き＝台帳の行） */
+  .ledger .lgr{padding:10px 0;border-bottom:1px dashed var(--line);}
+  .ledger .lgr:last-child{border-bottom:0;}
+  .ledger .lt{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .ledger .dt{font-size:12.5px;font-weight:700;color:var(--ink);}
+  .ledger .pl{font-family:"SFMono-Regular",Consolas,monospace;font-size:9px;color:var(--pencil);margin-top:1px;}
+  .ledger .tag{font-family:"SFMono-Regular",Consolas,monospace;font-size:8.5px;font-weight:700;
+    padding:2px 6px;border:1.5px solid;transform:rotate(-2deg);white-space:nowrap;flex:0 0 auto;}
+  .ledger .tag.on{color:var(--stamp);border-color:var(--stamp);}
+  .ledger .tag.done{color:var(--pencil);border-color:var(--pencil);}
+  /* 進捗＝方眼の目盛りで塗る（バーではなく観測の刻み） */
+  .ticks{display:flex;gap:2px;margin:8px 0 5px;}
+  .ticks i{flex:1;height:9px;border:1px solid var(--line);background:var(--paper);}
+  .ticks i.f{background:var(--stamp);border-color:var(--stamp);}
+  .ticks.done i.f{background:var(--pencil);border-color:var(--pencil);}
+  .ledger .sub{display:flex;justify-content:space-between;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:9px;color:var(--ink-2);}
+  .ledger .amt{font-family:"SFMono-Regular",Consolas,monospace;font-weight:700;color:var(--ink);}
+
+  /* 集計見出し（今月の記録＝観測サマリ。数字は罫の中で意味と同時に） */
+  .roll{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:11px 0;margin-bottom:14px;}
+  .roll .k{font-family:"SFMono-Regular",Consolas,monospace;font-size:9.5px;color:var(--pencil);}
+  .roll .big{font-family:"SFMono-Regular",Consolas,monospace;font-size:25px;font-weight:700;color:var(--ink);line-height:1.1;margin:2px 0;}
+  .roll .note{font-family:"SFMono-Regular",Consolas,monospace;font-size:9px;color:var(--pencil);}
+  .roll .cols{display:flex;margin-top:10px;}
+  .roll .cols .c{flex:1;border-left:1px dotted var(--line);padding-left:9px;}
+  .roll .cols .c:first-child{border-left:0;padding-left:0;}
+  .roll .cols .ck{font-family:"SFMono-Regular",Consolas,monospace;font-size:8px;color:var(--pencil);}
+  .roll .cols .cv{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;font-weight:700;color:var(--ink);margin-top:1px;}
+
+  /* 撮影＝観測（ファインダを"貼り込んだ観測写真"として。黒UIではなく記録写真の1枚） */
+  .finder{position:relative;aspect-ratio:3/4;overflow:hidden;
+    background:#1f1c17;
+    background-image:linear-gradient(135deg,#3a332b 0%,#211d18 55%,#15120e 100%);
+    filter:grayscale(.35) contrast(1.05);border:1px solid var(--ink);}
+  .finder .frame{position:absolute;inset:12px;border:1px solid rgba(255,255,255,.28);}
+  .finder .cr{position:absolute;width:14px;height:14px;border:2px solid rgba(255,255,255,.7);}
+  .finder .cr.tl{top:6px;left:6px;border-right:0;border-bottom:0;}
+  .finder .cr.tr{top:6px;right:6px;border-left:0;border-bottom:0;}
+  .finder .cr.bl{bottom:6px;left:6px;border-right:0;border-top:0;}
+  .finder .cr.br{bottom:6px;right:6px;border-left:0;border-top:0;}
+  .finder .cross{position:absolute;top:50%;left:50%;width:26px;height:26px;transform:translate(-50%,-50%);}
+  .finder .cross::before,.finder .cross::after{content:"";position:absolute;background:rgba(255,255,255,.5);}
+  .finder .cross::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-.5px);}
+  .finder .cross::after{top:50%;left:0;right:0;height:1px;transform:translateY(-.5px);}
+  .finder .fig{position:absolute;bottom:24%;left:50%;transform:translateX(-50%);width:52px;}
+  .finder .fig .h{width:20px;height:20px;border-radius:50%;background:#6b6153;margin:0 auto;}
+  .finder .fig .b{width:36px;height:66px;border-radius:16px 16px 10px 10px;background:#5b5346;margin:5px auto 0;}
+  .finder .fig .s{width:58px;height:9px;border-radius:50%;background:rgba(0,0,0,.45);margin:6px auto 0;filter:blur(2px);}
+  .finder .rec{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:6px;
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:700;color:#f3ecd6;}
+  .finder .rec .d{width:8px;height:8px;border-radius:50%;background:var(--stamp);box-shadow:0 0 0 4px rgba(178,58,46,.3);}
+  .finder .tc{position:absolute;bottom:16px;right:16px;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:10px;color:#f3ecd6;background:rgba(0,0,0,.35);padding:1px 6px;}
+  /* ファインダ下の観測メモ（撮影票の記入欄） */
+  .cammemo{border-top:1px dashed var(--line);margin-top:12px;padding-top:10px;}
+
+  /* 分割＝採取した標本の一覧（contact sheet／標本シート・角丸ゼロ・番号ラベル付き） */
+  .specimens{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:2px;}
+  .sp{position:relative;background:#fff;border:1px solid var(--line);padding:4px 4px 3px;box-shadow:0 2px 5px rgba(60,54,40,.12);}
+  .sp .im{aspect-ratio:1/1;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#4a4237,#241f19);filter:grayscale(.4) contrast(1.05);}
+  .sp .im .g{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44%;height:56%;background:#6b6153;}
+  .sp .no{display:block;font-family:"SFMono-Regular",Consolas,monospace;font-size:8px;color:var(--ink);
+    margin-top:3px;display:flex;justify-content:space-between;}
+  .sp .no b{color:var(--stamp);}
+  .sp.excl .im::after{content:"";position:absolute;inset:0;background:rgba(244,241,232,.72);}
+  .sp.excl .im::before{content:"";position:absolute;inset:0;z-index:2;
+    background:
+      linear-gradient(45deg,transparent calc(50% - 1px),var(--stamp) 50%,transparent calc(50% + 1px)),
+      linear-gradient(-45deg,transparent calc(50% - 1px),var(--stamp) 50%,transparent calc(50% + 1px));}
+  .sp.excl .no b{color:var(--stamp);}
+  .sp .exlab{position:absolute;z-index:3;left:50%;top:38%;transform:translate(-50%,-50%) rotate(-8deg);
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:8.5px;font-weight:700;color:var(--stamp);
+    border:1.5px solid var(--stamp);background:var(--paper);padding:1px 5px;}
+  .cnt{display:flex;justify-content:space-between;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:9.5px;color:var(--ink-2);margin:10px 0 0;}
+  .cnt .ex{color:var(--stamp);}
+
+  /* 受け取り＝封をした標本（開封前）＝紙で封をした標本袋。黒いツヤ玉ではなく紙の封） */
+  .sealed{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--ink);
+    background:var(--paper-2);
+    background-image:
+      linear-gradient(var(--grid-soft) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-soft) 1px,transparent 1px);
+    background-size:19px 19px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  /* 封のテープ（斜めに貼った封緘） */
+  .sealed::before{content:"未開封 · SEALED";position:absolute;top:20px;left:-34px;width:150px;
+    transform:rotate(-45deg);background:var(--tape);color:var(--pencil);
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:8.5px;letter-spacing:.14em;
+    text-align:center;padding:3px 0;box-shadow:0 1px 2px rgba(0,0,0,.08);z-index:2;}
+  .sealed .qm{font-family:"SFMono-Regular",Consolas,monospace;font-size:46px;font-weight:700;color:var(--pencil);line-height:1;}
+  .sealed .cp{font-size:10px;color:var(--ink-2);margin-top:10px;max-width:82%;line-height:1.6;}
+  /* 赤い封蝋スタンプ */
+  .sealed .wax{position:absolute;bottom:14px;right:14px;width:42px;height:42px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%,#c74a3c,var(--stamp) 65%,#8f2c22);
+    display:grid;place-items:center;color:#f3d9d4;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:8px;font-weight:700;box-shadow:0 3px 7px -2px rgba(178,58,46,.6);transform:rotate(-8deg);}
+  .sealed .wax::after{content:"";position:absolute;inset:5px;border:1px dashed rgba(243,217,212,.5);border-radius:50%;}
+  .mini{display:flex;margin:12px 0;border-top:1px dotted var(--line);border-bottom:1px dotted var(--line);}
+  .mini .m{flex:1;padding:8px 4px;text-align:center;border-left:1px dotted var(--line);}
+  .mini .m:first-child{border-left:0;}
+  .mini .m .k{font-family:"SFMono-Regular",Consolas,monospace;font-size:8px;color:var(--pencil);}
+  .mini .m .v{font-family:"SFMono-Regular",Consolas,monospace;font-size:14px;font-weight:700;color:var(--ink);margin-top:1px;}
+  .mini .m .v small{font-size:8px;color:var(--pencil);}
+
+  /* 真正性＝標本ラベル（ラベル台紙に台帳を記す） */
+  .label .ir{display:flex;justify-content:space-between;align-items:center;gap:8px;
+    padding:7px 0;border-bottom:1px dotted var(--line);font-size:11.5px;}
+  .label .ir:last-child{border-bottom:0;}
+  .label .ir .k{font-family:"SFMono-Regular",Consolas,monospace;font-size:9.5px;color:var(--pencil);}
+  .label .ir .v{font-weight:700;color:var(--ink);text-align:right;}
+  .label .ir .v.mono{font-family:"SFMono-Regular",Consolas,monospace;letter-spacing:.01em;}
+  .label .ir .own{font-family:"SFMono-Regular",Consolas,monospace;font-size:8px;color:var(--stamp);
+    border:1px solid var(--stamp);padding:1px 5px;margin-left:5px;}
+  /* 確認スタンプ（斜めに押した「証明済」） */
+  .certified{display:inline-block;font-family:"SFMono-Regular",Consolas,monospace;font-size:11px;font-weight:700;
+    color:var(--stamp);border:2px solid var(--stamp);border-radius:3px;padding:5px 11px;transform:rotate(-4deg);
+    letter-spacing:.06em;box-shadow:0 0 0 1px rgba(178,58,46,.12) inset;margin:2px 0 14px;
+    background:repeating-linear-gradient(45deg,transparent 0 5px,rgba(178,58,46,.05) 5px 6px);}
+
+  @media(max-width:640px){
+    .obs-sheets{grid-template-columns:1fr;gap:34px;}
+    .obs:nth-child(odd),.obs:nth-child(even){transform:none;}
+    .slip{padding:24px 16px 20px;}
+    .slip > *{margin-left:18px;}
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero page">
+  <div class="brand"><span class="dot"></span>Lapsell <span class="mono" style="font-weight:400;font-size:.72rem;color:var(--pencil);">観測記録</span></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="kicker">FIELD NOTES — 練習の観測記録</div>
+      <h1>練習時間を、<br><span class="u">収益に変える。</span></h1>
+      <p class="sub">派手なことはできなくても、毎日の練習を記録し続けることには意味がある。その記録が、あなたの資産になる。<br>Lapsell は、これからやる練習の時間を先に出品し、撮った映像を「世界に1つの動く記録」としてファンへ届けるサービスです。</p>
+      <div class="cta-row">
+        <a href="#start" class="cta">出品をはじめる <span class="arrow">→</span></a>
+        <a href="#how" class="cta ghost">記録の手順を見る</a>
+      </div>
+      <div class="note-under" style="margin-top:18px;">初期費用 0円 ／ 手数料 5%〜 ／ 撮影は当日スマホで撮るだけ</div>
+    </div>
+    <div class="hero-photo">
+      <span class="stamp"><span class="no">REC.</span> 観測記録 No.014</span>
+      <img src="images/hero.png" alt="方眼ノートに貼り込まれた練習の写真と手書きの日付スタンプ、鉛筆と定規" width="1080" height="720">
+    </div>
+  </div>
+</header>
+
+<!-- ======================= 導入 / 課題 ======================= -->
+<section class="problem page">
+  <div class="wrap">
+    <span class="stamp">DAY 001 — 観測</span>
+    <div class="cols c2" style="margin-top:22px;">
+      <div class="sec-head">
+        <h2>その練習は、<br>いつも記録されずに消えていく。</h2>
+        <p class="lead">毎日のリハーサル、ネタ合わせ、ひとりで繰り返すダンス。誰にも見られず、お金にもならず、ただ過ぎていく時間。でも、それはあなたが確かに積み上げている「一次資料」です。</p>
+        <p>研究者が日々の観測を淡々と記録するように、練習の一瞬を記録として残す。無名の今だからこそ、その記録は後から価値を持ちます。</p>
+        <div class="marginnote">見えない努力を、消えない記録にする。<br>それが Lapsell の考え方です。</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="snap tilt corners">
+          <img src="images/practice-idol.png" alt="スタジオでひとり練習するライブアイドルのスマホ写真" loading="lazy" width="700" height="1050">
+          <span class="cap">観測No.014 — 個人練 / スタジオ / 自然光</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 図解の帯（記録が資産に）======================= -->
+<section class="figband page">
+  <div class="wrap">
+    <span class="stamp black">FIG.1 — 記録の積み上がり</span>
+    <div class="cols c2" style="margin-top:22px;align-items:center;">
+      <div class="sec-head">
+        <h2>記録は、時間とともに<br>価値が積み上がる。</h2>
+        <p>1日1日の記録は、その時は小さな一片です。けれど積み重なった記録は、あとから振り返れない「無名時代の一次資料」になる。あなたが有名になるほど、その最初期の記録の希少性は上がっていきます。</p>
+        <p class="scribble">※ たとえば、結成11年目にブレイクしたグループがいる。<br>もし下積み時代の練習が一点物で残っていたら——。</p>
+      </div>
+      <div>
+        <div class="snap tilt2">
+          <div class="sketch growth" role="img" aria-label="日々の記録が積み上がって将来価値になる成長曲線のスケッチ。時間の経過とともに希少性が右肩上がりに増していく">
+            <div class="plot">
+              <span class="axis-y">希少性 / 価値 →</span>
+              <svg viewBox="0 0 320 230" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M6 224 C 70 216, 150 180, 210 118 S 300 20, 316 6" fill="none" stroke="#6f6a61" stroke-width="2.4" stroke-dasharray="2 5" stroke-linecap="round"/>
+              </svg>
+              <div class="dot" style="left:2%;bottom:2%;"><span class="d">DAY001</span></div>
+              <div class="dot" style="left:32%;bottom:18%;"><span class="d">DAY030</span></div>
+              <div class="dot" style="left:60%;bottom:46%;"><span class="d">DAY120</span></div>
+              <div class="dot" style="left:84%;bottom:80%;"><span class="d">LATER</span></div>
+              <span class="axis-x">時間の経過 →</span>
+            </div>
+          </div>
+          <span class="cap">FIG.1 記録量と希少性の関係（観測に基づくスケッチ）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 観測手順 7ステップ ======================= -->
+<section id="how" class="page">
+  <div class="wrap">
+    <span class="stamp">DAY 002 — 観測手順</span>
+    <div class="sec-head" style="margin-top:22px;">
+      <h2>記録の手順は、7つ。</h2>
+      <p class="lead">むずかしい編集も、特別な機材もいりません。研究の観測手順のように、決まった順で淡々と進めるだけ。撮るのは、いつもの練習です。</p>
+    </div>
+
+    <div style="margin:24px 0 34px;text-align:center;">
+      <div class="snap tilt corners" style="max-width:900px;width:100%;">
+        <div class="sketch flow" role="img" aria-label="観測手順の全体図。出品から購入、撮影、分割、検品、配布、受け取りまでの7ステップが順に流れる">
+          <div class="node"><div class="ring">01</div><span class="lab">Record</span><span class="jp">出品</span></div>
+          <div class="node"><div class="ring">02</div><span class="lab">Reserve</span><span class="jp">購入</span></div>
+          <div class="node"><div class="ring">03</div><span class="lab">Observe</span><span class="jp">撮影</span></div>
+          <div class="node"><div class="ring">04</div><span class="lab">Sort</span><span class="jp">分割</span></div>
+          <div class="node"><div class="ring">05</div><span class="lab">Check</span><span class="jp">検品</span></div>
+          <div class="node"><div class="ring">06</div><span class="lab">Assign</span><span class="jp">配布</span></div>
+          <div class="node"><div class="ring">07</div><span class="lab">Keep</span><span class="jp">受け取り</span></div>
+        </div>
+        <span class="cap">FIG.2 観測手順の全体図 — 出品から受け取りまで</span>
+      </div>
+    </div>
+
+    <!-- ===== アプリ画面 ＝ 観測票として綴じる（世界観で新規デザイン） ===== -->
+    <div class="sec-head" style="margin:44px 0 6px;">
+      <span class="stamp black">FIG.3 — アプリの観測票</span>
+      <h2 style="margin-top:18px;">アプリの各画面を、観測票にした。</h2>
+      <p>実際の操作画面を、記録帳に綴じた観測票として1枚ずつ描き起こしました。日時と価格を書き入れ、当日撮って、公開前に確かめて配る——順に追えます。</p>
+    </div>
+
+    <div class="obs-sheets">
+
+      <!-- OBS.01 出品する -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">練習枠を出品する</div><div class="meta">OBS.01 ・ RECORD — 記入</div></div>
+            <div class="rstamp">未来の<br>練習時間</div>
+          </div>
+          <div class="ln"><span class="k">練習の日時</span><div class="val"><span class="w">2026年7月12日（日）19:00</span><span class="u">STAMP</span></div></div>
+          <div class="ln"><span class="k">場所・メモ（購入者に表示）</span><div class="val"><span class="w">下北沢スタジオ／新曲リハ</span></div></div>
+          <div class="grid2">
+            <div class="ln"><span class="k">1本の価格</span><div class="val"><span class="w">¥1,500</span><span class="u">/本</span></div></div>
+            <div class="ln"><span class="k">販売枠数＝配布本数</span><div class="val"><span class="w">30</span><span class="u">本</span></div></div>
+          </div>
+          <div class="ln"><span class="k">1本の長さ</span><div class="pick"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div></div>
+          <div class="memo">撮影も編集も不要。当日スマホで撮った映像を、この長さに自動で分割します。</div>
+          <div class="subhd">記入内容の集計</div>
+          <div class="sum">
+            <div class="r"><span>売上（満枠時）</span><span class="v">¥45,000</span></div>
+            <div class="r"><span>手数料 5%</span><span class="v">− ¥2,250</span></div>
+            <div class="r total"><span class="lb">受け取り見込み</span><span class="v">¥42,750</span></div>
+          </div>
+          <div style="height:14px"></div>
+          <button class="stampbtn red">この内容で出品する</button>
+        </div>
+      </div>
+
+      <!-- OBS.02 売れ行きを見る -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">売れ行きを見る</div><div class="meta">OBS.02 ・ 彩夏さんの記録</div></div>
+            <div class="rstamp blk">出金<br>可</div>
+          </div>
+          <div class="roll">
+            <div class="k">今月の収益（手数料差引後）</div>
+            <div class="big">¥128,400</div>
+            <div class="note">先月比 +38% ／ 出金可能額 ¥96,200</div>
+            <div class="cols">
+              <div class="c"><div class="ck">販売本数</div><div class="cv">102本</div></div>
+              <div class="c"><div class="ck">出品中</div><div class="cv">3件</div></div>
+              <div class="c"><div class="ck">平均単価</div><div class="cv">¥1,480</div></div>
+            </div>
+          </div>
+          <div class="subhd">出品中・過去の枠（観測台帳）</div>
+          <div class="ledger">
+            <div class="lgr">
+              <div class="lt"><div><div class="dt">7/12（日）19:00</div><div class="pl">下北沢スタジオ／新曲リハ</div></div><span class="tag on">販売中</span></div>
+              <div class="ticks"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i></div>
+              <div class="sub"><span>22 / 30 本 売れました（残り8枠）</span><span class="amt">¥33,000</span></div>
+            </div>
+            <div class="lgr">
+              <div class="lt"><div><div class="dt">6/28（土）18:00</div><div class="pl">対バン前 楽屋ネタ合わせ</div></div><span class="tag done">配布済</span></div>
+              <div class="ticks done"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></div>
+              <div class="sub"><span>40 / 40 本 配布完了（受取率 100%）</span><span class="amt">¥56,000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBS.03 撮って、分割される -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">撮って、記録する</div><div class="meta">OBS.03 ・ OBSERVE — 撮影中</div></div>
+            <div class="rstamp">当日<br>REC</div>
+          </div>
+          <div class="finder" role="img" aria-label="スマホのファインダ越しに練習を撮影している観測写真。中央に人物、四隅にフレーミングの目印、左上にRECと録画時間">
+            <div class="frame"></div>
+            <span class="cr tl"></span><span class="cr tr"></span><span class="cr bl"></span><span class="cr br"></span>
+            <div class="cross"></div>
+            <div class="fig"><div class="h"></div><div class="b"></div><div class="s"></div></div>
+            <div class="rec"><span class="d"></span>REC 00:38</div>
+            <div class="tc">7/12 · 新曲リハ</div>
+          </div>
+          <div class="cammemo">
+            <div class="ln" style="margin-bottom:8px;"><span class="k">撮影対象</span><div class="val"><span class="w">新曲リハ（30本ぶんの枠）</span></div></div>
+            <div class="memo" style="margin:6px 0 0;">三脚に立てかけて回すだけ。編集不要。撮り終えてアップすると、約10秒ごとに自動で分割・整理されます。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBS.04 確かめて、配る -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">確かめて、配る</div><div class="meta">OBS.04 ・ SORT & CHECK ・ 3/4</div></div>
+            <div class="rstamp">分割<br>完了</div>
+          </div>
+          <div class="ln" style="margin-bottom:8px;"><span class="k">元の記録</span><div class="val"><span class="w">IMG_4821.MOV</span><span class="u">05:12 · 312MB</span></div></div>
+          <div class="memo">映像は約10秒ずつ、30本に自動分割されました。事故の瞬間だけ非公開にでき、その本数ぶんは購入者へ自動返金されます。</div>
+          <div class="subhd">採取した標本（セグメント 30本のうち）</div>
+          <div class="specimens">
+            <div class="sp"><div class="im"><div class="g"></div></div><span class="no"><span>#01</span><span>0:10</span></span></div>
+            <div class="sp"><div class="im"><div class="g"></div></div><span class="no"><span>#02</span><span>0:10</span></span></div>
+            <div class="sp excl"><div class="im"><div class="g"></div></div><span class="exlab">非公開</span><span class="no"><b>#03</b><span>返金</span></span></div>
+            <div class="sp"><div class="im"><div class="g"></div></div><span class="no"><span>#04</span><span>0:09</span></span></div>
+            <div class="sp"><div class="im"><div class="g"></div></div><span class="no"><span>#05</span><span>0:10</span></span></div>
+            <div class="sp"><div class="im"><div class="g"></div></div><span class="no"><span>#06</span><span>0:11</span></span></div>
+          </div>
+          <div class="cnt"><span>公開 29本</span><span class="ex">非公開 1本（自動返金）</span></div>
+          <div style="height:14px"></div>
+          <button class="stampbtn red">この内容で公開・配布する</button>
+        </div>
+      </div>
+
+      <!-- OBS.05 ファンが受け取る -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">ファンが受け取る</div><div class="meta">OBS.05 ・ 彩夏 / 7/12 新曲リハ</div></div>
+            <div class="rstamp">世界に<br>1つ</div>
+          </div>
+          <div class="sealed" role="img" aria-label="紙で封をされた未開封の標本袋。中央に疑問符、右下に赤い封蝋スタンプ、斜めに未開封の封緘テープ">
+            <div class="qm">?</div>
+            <div class="cp">あなたに割り当てられた約10秒の断片。<br>タップして開封します。</div>
+            <div class="wax">SEAL</div>
+          </div>
+          <div class="mini">
+            <div class="m"><div class="k">通し番号</div><div class="v">#017<small>/29</small></div></div>
+            <div class="m"><div class="k">長さ</div><div class="v">0:10</div></div>
+            <div class="m"><div class="k">発行</div><div class="v">1点</div></div>
+          </div>
+          <button class="stampbtn">開封する</button>
+          <div class="memo" style="margin:13px 0 0;">この断片はあなただけのもの。所有証明つきで手元に保管されます。</div>
+        </div>
+      </div>
+
+      <!-- OBS.06 本物として残る -->
+      <div class="obs">
+        <span class="clip" aria-hidden="true"></span>
+        <div class="slip">
+          <div class="hd">
+            <div><div class="ttl">本物として残る</div><div class="meta">OBS.06 ・ Lapsell 観測レジストリ</div></div>
+            <div class="rstamp">真正性<br>担保</div>
+          </div>
+          <div class="certified">✓ 本物であることを確認</div>
+          <div class="subhd">標本ラベル</div>
+          <div class="label" style="margin-bottom:6px;">
+            <div class="ir"><span class="k">アイテム</span><span class="v">新曲リハ 断片 #017</span></div>
+            <div class="ir"><span class="k">通し番号</span><span class="v mono">017 / 29</span></div>
+            <div class="ir"><span class="k">証明ID</span><span class="v mono">LPS-7C4F-19A2</span></div>
+            <div class="ir"><span class="k">採取日時</span><span class="v mono">2026/07/12 19:48</span></div>
+            <div class="ir"><span class="k">現在の所有者</span><span class="v">あなた<span class="own">保有中</span></span></div>
+          </div>
+          <div class="subhd">所有の記録（来歴）</div>
+          <div class="label">
+            <div class="ir"><span class="k">受け取り</span><span class="v" style="font-size:11px;">あなた（07/12 19:50）</span></div>
+            <div class="ir"><span class="k">発行</span><span class="v" style="font-size:11px;">彩夏 本人（07/12 19:48）</span></div>
+            <div class="ir"><span class="k">記録</span><span class="v" style="font-size:11px;">Lapsell レジストリ</span></div>
+          </div>
+          <div style="height:14px"></div>
+          <button class="stampbtn gh">所有証明を表示・共有する</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="steps" style="margin-top:44px;">
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">RECORD / 計画</div>
+        <h3>出品する</h3>
+        <p>これからやる練習の時間枠を先に出す。日時・価格・販売枠数（＝配布する本数）・1本の長さを、あなたが決めます。まだ撮ってもいない未来の時間を、記録の予定として登録する感覚です。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">RESERVE / 予約</div>
+        <h3>ファンが買う</h3>
+        <p>ファンが時間枠を購入します。中身はまだ撮影すらされていないので、届くまで分からない。「あなたのこの日の練習」という予約に、ファンは価値を感じて申し込みます。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">OBSERVE / 撮影</div>
+        <h3>当日、スマホで撮る</h3>
+        <p>撮影日、いつもの練習をスマホで撮るだけ。編集は不要です。三脚に立てかけて回しておくだけでも構いません。特別なことをする必要はありません。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">SORT / 分割</div>
+        <h3>アップして、自動で分割</h3>
+        <p>撮った映像をアップすると、自動で約10秒の短いセグメントに分割されます。手作業でカットする必要はありません。ここまでがあなたの作業のほぼすべてです。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">CHECK / 検品</div>
+        <h3>公開前にチェックする</h3>
+        <p>配布される前に、あなた自身が中身を確認できます。本当にまずい「事故」の瞬間だけを非公開にできる。該当する購入者には自動で返金されるので、安心です。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">ASSIGN / 配布</div>
+        <h3>一点物として配られる</h3>
+        <p>承認されたセグメントが、購入者へランダムかつ一意に割り当てられます。同じ断片は2つとありません。各人が受け取るのは、世界に1つの記録です。</p>
+      </div></div>
+      <div class="step"><div class="num"></div><div>
+        <div class="tag">KEEP / 保管</div>
+        <h3>ファンが受け取り、所有する</h3>
+        <p>ファンは自分だけの一片を受け取り、手元に保有します。日付と番号で管理された、真正性の担保された記録。あなたの練習の一瞬が、誰かの宝物になります。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 使うイメージ（ギャラリー）======================= -->
+<section class="figband page">
+  <div class="wrap">
+    <span class="stamp black">記録帳より — 現場のスナップ</span>
+    <div class="sec-head" style="margin-top:22px;">
+      <h2>撮るのは、特別な瞬間じゃない。</h2>
+      <p>いつものリハ、ネタ合わせ、ひとり練習。カメラを回しておくだけで、それが記録になります。</p>
+    </div>
+    <div class="gallery" style="margin-top:26px;">
+      <div class="snap tilt"><img src="images/practice-band.png" alt="練習スタジオでリハーサルするインディーズバンドのスマホ写真" loading="lazy"><span class="cap">観測No.021 — バンド / リハ</span></div>
+      <div class="snap tilt2"><img src="images/recording-hand.png" alt="スマホで練習を撮影している手元のスナップ" loading="lazy"><span class="cap">観測No.022 — 記録中 / スマホ</span></div>
+      <div class="snap tilt"><img src="images/practice-idol.png" alt="スタジオでひとり練習するライブアイドルのスマホ写真" loading="lazy"><span class="cap">観測No.023 — 個人練 / スタジオ</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 価値（3つの理由）======================= -->
+<section class="value page">
+  <div class="wrap">
+    <span class="stamp">DAY 003 — 記録が資産になる理由</span>
+    <div class="sec-head" style="margin-top:22px;">
+      <h2>なぜ、練習の記録が売れるのか。</h2>
+      <p class="lead">誇張せず、順を追って説明します。</p>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="valrow">
+        <div class="k">理由 01</div>
+        <div>
+          <h3>お金にならなかった時間が、売れる</h3>
+          <p>これまで捨てていた練習・裏側の時間が、そのまま新しい収益源になります。初期費用は0円、手数料は5%から。在庫も発送もなく、ノーリスクで始められます。撮った練習を出すだけです。</p>
+        </div>
+      </div>
+      <div class="valrow">
+        <div class="k">理由 02</div>
+        <div>
+          <h3>小さい「今」だから、将来価値を見込んで買われる</h3>
+          <p>「自分がこの人を早くから見ていた」「育つ前の記録を持っている」——ファンはその物語ごと買います。無名の今の記録は、あとからは決して手に入りません。だからこそ価値がつきます。</p>
+        </div>
+      </div>
+      <div class="valrow">
+        <div class="k">理由 03</div>
+        <div>
+          <h3>配信事故を、事前に防げる</h3>
+          <p>ライブ配信と違い、撮影してからアップロードする仕組みです。公開前に中身を確認できるので、まずい瞬間が世に出ることはありません。慎重に活動したい人ほど、安心して使えます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= データ（ファンはなぜ買うのか）======================= -->
+<section class="page">
+  <div class="wrap">
+    <span class="stamp black">FIG.3 — 観測データ</span>
+    <div class="cols c2" style="margin-top:22px;align-items:start;">
+      <div class="sec-head">
+        <h2>「本当に売れるの?」<br>という不安に、データで答えます。</h2>
+        <p>ファンは既に「一点物・素のコンテンツ・本人とのつながり」に、実際にお金を払っています。Lapsell の「素の一点物」も、同じ行動原理で買われます。以下は、その根拠となる観測データです。</p>
+        <div style="margin-top:22px;">
+          <div class="snap tilt2" style="max-width:380px;">
+            <div class="sketch specimen" role="img" aria-label="日付スタンプと番号で整理された記録の一片の標本カード">
+              <div class="row">
+                <div class="chip"><span class="nm">採取日</span><span class="big">2026<br>07.02</span><span class="no">DATE STAMP</span></div>
+                <div class="chip"><span class="nm">動く記録</span><span class="big">10<span class="unit">秒</span></span><span class="no">No.014-03</span></div>
+                <div class="chip"><span class="nm">一意の番号</span><span class="big">1/48</span><span class="no">UNIQUE</span></div>
+              </div>
+            </div>
+            <span class="cap">標本 — 記録の一片（日付・番号つき）</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="data-item">
+          <div class="fact">ライブ物販でのグッズ購入者は、<b>年間平均 約2.2万円</b>を使っている。</div>
+          <div class="src">出典: ライブ・エンタメ関連の物販支出調査より（1人あたり年間平均）</div>
+        </div>
+        <div class="data-item">
+          <div class="fact">アイドル系ファンのグッズ購入率は <b>75.4%</b>。多くの人が実際に買っている。</div>
+          <div class="src">出典: アイドル系ファンのグッズ購入行動に関する調査より</div>
+        </div>
+        <div class="data-item">
+          <div class="fact">チェキ1枚 <b>約1,500円</b>。この積み重ねがライブアイドルの収入の過半を支える。</div>
+          <div class="src">出典: ライブアイドルのチェキ販売単価・収入構成に関する記録より</div>
+        </div>
+        <div class="data-item">
+          <div class="fact">本人の「素の日常」に課金する仕組みは、<b>世界200万人超</b>が利用している。</div>
+          <div class="src">出典: 本人の日常発信サービスの購読者数に関する記録より</div>
+        </div>
+        <p class="scribble" style="margin-top:18px;">→ つまり「素の一片にお金を払う」行動は、すでに広く根づいている。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 料金 ======================= -->
+<section class="fee page">
+  <div class="wrap">
+    <span class="stamp">DAY 004 — 料金</span>
+    <div class="cols c2" style="margin-top:22px;align-items:center;">
+      <div class="sec-head">
+        <h2>料金は、シンプルに。</h2>
+        <p class="lead">始めるのにお金はかかりません。売れたときに、手数料をいただくだけ。だから、まずは1枠だけ試すことができます。</p>
+        <p class="scribble">※ 出品も、掲載も、記録の保管も、それ自体には費用はかかりません。</p>
+      </div>
+      <div>
+        <div class="fee-card">
+          <span class="stamp">FEE.</span>
+          <ul class="fee-list">
+            <li><span class="lab">初期費用</span><span class="val">0円</span></li>
+            <li><span class="lab">月額費用</span><span class="val">0円</span></li>
+            <li><span class="lab">出品・掲載</span><span class="val">無料</span></li>
+            <li><span class="lab">販売手数料</span><span class="val">5%〜</span></li>
+            <li><span class="lab">事故時の返金</span><span class="val">自動</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= 安全・信頼 ======================= -->
+<section class="trust page">
+  <div class="wrap">
+    <span class="stamp black">観測記録の作法 — 信頼について</span>
+    <div class="cols c2" style="margin-top:22px;align-items:start;">
+      <div>
+        <div class="snap tilt corners" style="max-width:420px;">
+          <div class="sketch specimen tools" role="img" aria-label="方眼ノート・日付スタンプ・鉛筆・定規を並べた観測道具一式">
+            <div class="row">
+              <div class="chip"><span class="big">01</span><span class="nm">方眼ノート</span></div>
+              <div class="chip"><span class="big">02</span><span class="nm">鉛筆</span></div>
+              <div class="chip"><span class="big">03</span><span class="nm">定規</span></div>
+              <div class="chip"><span class="big">04</span><span class="nm">日付スタンプ</span></div>
+            </div>
+          </div>
+          <span class="cap">観測道具一式 — 几帳面に、正確に</span>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head">
+          <h2>怪しいサービスでは、ありません。</h2>
+          <p>誇張やギャンブル的な煽りとは無縁の設計です。記録として、誠実に扱うための仕組みを用意しています。</p>
+        </div>
+        <ul>
+          <li><b>公開前に、あなたが中身を確認できる。</b> 撮影後アップロード方式。まずい瞬間は非公開にでき、該当者には自動返金されます。</li>
+          <li><b>日付と番号で、真正性を担保。</b> 几帳面に記録された日付・一意の番号が、本物である証明（電子透かし）に重なります。</li>
+          <li><b>一点物は、一意に配布。</b> 同じ断片は決して重複しません。誰が何を持っているかが記録として残ります。</li>
+          <li><b>射幸性を煽らない。</b> 古参自慢やギャンブル的な演出はしません。所有と将来価値という、健全な価値だけを扱います。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ======================= FAQ ======================= -->
+<section class="faq page">
+  <div class="wrap">
+    <span class="stamp">DAY 005 — よくある質問</span>
+    <div class="sec-head" style="margin-top:22px;max-width:44em;">
+      <h2>よくある質問</h2>
+    </div>
+    <div>
+      <details>
+        <summary>撮影や編集の知識がなくても大丈夫ですか?</summary>
+        <p>大丈夫です。スマホで練習を撮るだけで、あとは自動で短いセグメントに分割されます。編集は不要です。三脚に立てかけて回しておくだけでも記録になります。</p>
+      </details>
+      <details>
+        <summary>まだファンが少なくても出品していいですか?</summary>
+        <p>もちろんです。むしろ無名の今の記録こそ、あとからは手に入らない一次資料になります。まずは1枠、少ない販売数から試せます。売れたときだけ手数料がかかります。</p>
+      </details>
+      <details>
+        <summary>変な瞬間が売られてしまわないか心配です。</summary>
+        <p>撮影後にアップロードし、公開前にあなた自身が中身を確認できます。まずい瞬間は非公開にでき、その購入者には自動で返金されます。ライブ配信のような事故は起きません。</p>
+      </details>
+      <details>
+        <summary>お金は本当にかからないんですか?</summary>
+        <p>始めるのに初期費用・月額費用はかかりません。出品も掲載も無料です。売れたときに販売手数料5%〜をいただくだけです。在庫も発送もありません。</p>
+      </details>
+      <details>
+        <summary>受け取ったファンは、何を手にするのですか?</summary>
+        <p>あなたの練習映像から切り出された、約10秒の「世界に1つの動く記録」です。日付と番号で管理され、同じものは他の誰も持っていません。動くチェキのようなものだと考えてください。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 最終CTA ======================= -->
+<section id="start" class="final page">
+  <div class="wrap">
+    <span class="stamp">DAY 006 — 記録をはじめる</span>
+    <h2>今日の練習から、記録を残す。</h2>
+    <p>派手なことはできなくても、毎日の記録を続けることには意味があります。その一片が、あなたの資産になる。まずは1枠、出品してみてください。</p>
+    <div class="cta-row" style="justify-content:center;margin-top:30px;">
+      <a href="#" class="cta">出品をはじめる <span class="arrow">→</span></a>
+    </div>
+    <div class="note-under" style="margin-top:18px;color:rgba(244,241,232,.65);">初期費用 0円 ／ 手数料 5%〜 ／ 撮影は当日スマホで撮るだけ</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Lapsell — 練習時間を、収益に変える。</div>
+    <div>FIELD NOTES / OBSERVATION LOG &nbsp;·&nbsp; © 2026 Lapsell</div>
+  </div>
+</footer>
+</body>
+</html>

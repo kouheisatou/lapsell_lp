@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapsell — Green Room ｜ あなたの"裏側"に、価値がある。</title>
+<style>
+  :root{
+    --ink:#f2ede3;          /* 本文（薄い象牙） */
+    --ink-dim:#a89f8f;      /* 控えめな文字 */
+    --ink-faint:#6f685c;    /* さらに控えめ */
+    --bg:#0c0b09;           /* 楽屋の闇 */
+    --bg-2:#141210;         /* やや明るい闇 */
+    --bulb:#e8a94b;         /* 電球のアンバー */
+    --bulb-deep:#c07d2a;    /* 深いアンバー */
+    --line:#2a2620;         /* 罫線 */
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP",Meiryo,sans-serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    letter-spacing:.02em;
+  }
+  img{display:block;max-width:100%;height:auto;}
+
+  /* フィルム粒子オーバーレイ（全面） */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* 見出しは明朝で写真集トーンに */
+  .serif{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","MS PMincho",serif;
+    font-weight:400;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .narrow{max-width:660px;}
+
+  /* ===== 章ラベル（一般名詞のセクションタイトル） ===== */
+  .chapter{
+    display:flex;align-items:baseline;gap:16px;
+    color:var(--bulb);
+    margin:0 0 26px;
+  }
+  .chapter .num{
+    font-family:"Georgia",serif;
+    font-size:13px;letter-spacing:.32em;
+    color:var(--ink-faint);
+  }
+  .chapter .ttl{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:30px;letter-spacing:.14em;color:var(--ink);
+  }
+  .chapter .line{
+    flex:1;height:1px;background:var(--line);align-self:center;
+  }
+
+  /* ===== HERO ===== */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,9,.55) 0%, rgba(12,11,9,.15) 32%, rgba(12,11,9,.35) 62%, rgba(12,11,9,.96) 100%);
+  }
+  .hero-top{
+    position:absolute;top:0;left:0;right:0;z-index:3;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 24px;
+  }
+  .brand{
+    font-family:"Georgia",serif;font-size:20px;letter-spacing:.42em;
+    color:var(--ink);text-transform:uppercase;padding-left:.42em;
+  }
+  .brand .dot{color:var(--bulb);}
+  .hero-tag{
+    font-size:11px;letter-spacing:.34em;color:var(--ink-dim);
+    text-transform:uppercase;display:none;
+  }
+  .hero-body{position:relative;z-index:3;padding:0 24px 8vh;}
+  .hero-eyebrow{
+    font-size:12px;letter-spacing:.42em;color:var(--bulb);
+    text-transform:uppercase;margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;
+    font-size:clamp(34px,8.4vw,74px);
+    line-height:1.28;
+    margin:0 0 26px;
+    letter-spacing:.06em;
+    text-shadow:0 2px 40px rgba(0,0,0,.6);
+  }
+  .hero h1 em{font-style:normal;color:var(--bulb);}
+  .hero-lead{
+    max-width:540px;font-size:16px;color:var(--ink-dim);
+    line-height:2;margin:0 0 34px;
+  }
+  .hero-scroll{
+    font-size:11px;letter-spacing:.3em;color:var(--ink-faint);
+    text-transform:uppercase;
+  }
+
+  /* ===== 楽屋への導入テキスト ===== */
+  .prologue{padding:clamp(80px,13vh,160px) 0 clamp(64px,10vh,130px);background:var(--bg);}
+  .prologue p{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:clamp(20px,3.6vw,27px);
+    line-height:2.1;color:var(--ink);letter-spacing:.05em;margin:0 0 1.4em;
+  }
+  .prologue p:last-child{margin-bottom:0;}
+  .prologue .q{color:var(--bulb);}
+
+  /* ===== 大判フォトブロック ===== */
+  .plate{position:relative;margin:0;}
+  .plate img{width:100%;object-fit:cover;}
+  .plate.full img{height:min(88svh,760px);}
+  .plate .cap{
+    max-width:var(--maxw);margin:0 auto;padding:18px 24px 0;
+    display:flex;gap:14px;align-items:baseline;
+  }
+  .plate .cap .tick{color:var(--bulb);font-size:12px;letter-spacing:.2em;white-space:nowrap;}
+  .plate .cap .txt{color:var(--ink-dim);font-size:14px;line-height:1.7;}
+
+  .band-space{padding:clamp(56px,9vh,120px) 0;}
+  .band-space.tight{padding:clamp(38px,6vh,74px) 0;}
+
+  /* 2枚並べ（写真集の見開き感） */
+  .spread{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    max-width:1320px;margin:0 auto;padding:0 10px;
+  }
+  .spread .cell{position:relative;}
+  .spread .cell img{width:100%;height:clamp(260px,42vw,520px);object-fit:cover;}
+  .spread .cell .under{padding:12px 4px 0;display:flex;gap:12px;align-items:baseline;}
+  .spread .cell .under .tick{color:var(--bulb);font-size:12px;letter-spacing:.2em;white-space:nowrap;}
+  .spread .cell .under .txt{color:var(--ink-dim);font-size:13.5px;line-height:1.7;}
+
+  /* オフセットのエディトリアル：写真＋横に短文 */
+  .editorial{
+    display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center;
+  }
+  .editorial.flip{grid-template-columns:1fr 1.35fr;}
+  .editorial.flip .ed-txt{order:-1;}
+  .editorial img{width:100%;height:clamp(320px,44vw,540px);object-fit:cover;}
+  .ed-txt h3{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(23px,3.4vw,30px);line-height:1.6;
+    margin:0 0 20px;letter-spacing:.05em;
+  }
+  .ed-txt h3 em{font-style:normal;color:var(--bulb);border-bottom:1px solid var(--bulb-deep);padding-bottom:2px;}
+  .ed-txt p{font-size:15px;color:var(--ink-dim);line-height:2;margin:0 0 1em;}
+  .ed-txt .kicker{
+    font-size:12px;letter-spacing:.34em;color:var(--bulb);text-transform:uppercase;
+    margin-bottom:18px;
+  }
+
+  /* ===== 電球で縁取ったステートメント ===== */
+  .statement{
+    position:relative;padding:20vh 0;text-align:center;
+    background:#080705;
+    overflow:hidden;
+  }
+  .statement::before{
+    content:"";position:absolute;inset:0;
+    background:url("images/texture.png") center/cover no-repeat;
+    opacity:.22;
+  }
+  .statement .wrap{position:relative;z-index:1;}
+  .statement .frame{
+    max-width:820px;margin:0 auto;padding:64px 40px;
+    position:relative;
+  }
+  /* 電球のドット列を上下に */
+  .bulbs{display:flex;justify-content:center;gap:26px;margin:0 auto;}
+  .bulbs span{
+    width:11px;height:11px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #ffe6ab, var(--bulb) 45%, var(--bulb-deep) 100%);
+    box-shadow:0 0 14px 3px rgba(232,169,75,.55);
+  }
+  .statement h2{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(26px,5.2vw,44px);line-height:1.7;
+    margin:38px 0;letter-spacing:.08em;
+  }
+  .statement h2 em{font-style:normal;color:var(--bulb);}
+
+  /* ===== 仕組み：7ステップ フォトストーリー ===== */
+  .flow{background:var(--bg-2);padding:14vh 0;}
+  .flow-lead{max-width:640px;margin:0 0 8vh;}
+  .flow-lead p{font-size:15.5px;color:var(--ink-dim);line-height:2;}
+  .steps{display:flex;flex-direction:column;gap:0;}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:26px;
+    padding:34px 0;border-top:1px solid var(--line);
+  }
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step .no{
+    font-family:"Georgia",serif;font-size:15px;letter-spacing:.1em;
+    color:var(--bulb);padding-top:4px;
+  }
+  .step .body h4{
+    font-size:18px;font-weight:600;margin:0 0 8px;letter-spacing:.05em;color:var(--ink);
+  }
+  .step .body p{font-size:14.5px;color:var(--ink-dim);line-height:1.9;margin:0;}
+  .step .body .note{color:var(--bulb);font-size:13px;margin-top:8px;}
+
+  /* ===== 料金 ===== */
+  .price{padding:14vh 0;}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);}
+  .price-item{padding:30px 0;border-bottom:1px solid var(--line);}
+  .price-item:nth-child(odd){padding-right:30px;border-right:1px solid var(--line);}
+  .price-item:nth-child(even){padding-left:30px;}
+  .price-item .k{font-size:13px;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:10px;}
+  .price-item .v{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:clamp(22px,4vw,30px);color:var(--ink);letter-spacing:.03em;
+  }
+  .price-item .v small{font-size:15px;color:var(--ink-dim);}
+  .price-note{margin-top:26px;font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
+
+  /* ===== よくある不安（Q&A） ===== */
+  .faq{background:#080705;padding:14vh 0;}
+  .qa{border-top:1px solid var(--line);padding:28px 0;}
+  .qa:last-child{border-bottom:1px solid var(--line);}
+  .qa .q{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:18px;color:var(--ink);margin:0 0 12px;letter-spacing:.04em;
+  }
+  .qa .q::before{content:"Q ";color:var(--bulb);font-family:"Georgia",serif;}
+  .qa .a{font-size:14.5px;color:var(--ink-dim);line-height:2;margin:0;}
+
+  /* ===== CTA ===== */
+  .cta{position:relative;text-align:center;padding:0;}
+  .cta-img{position:relative;}
+  .cta-img img{width:100%;height:min(80svh,640px);object-fit:cover;}
+  .cta-img::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,7,5,.75),rgba(8,7,5,.55) 40%,rgba(8,7,5,.92));
+  }
+  .cta-body{
+    position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:0 24px;
+  }
+  .cta-body h2{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(26px,5.6vw,46px);line-height:1.6;
+    margin:0 0 18px;letter-spacing:.07em;
+  }
+  .cta-body h2 em{font-style:normal;color:var(--bulb);}
+  .cta-body p{color:var(--ink-dim);font-size:15px;margin:0 0 40px;max-width:440px;line-height:2;}
+
+  /* 電球サイン風ボタン（角丸グラデ禁止・実物感のある電球ボタン） */
+  .btn{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:18px;letter-spacing:.14em;color:#1a1408;
+    background:linear-gradient(180deg,#f3ce85,var(--bulb));
+    padding:18px 40px;text-decoration:none;
+    border:1px solid #ffe6ab;
+    box-shadow:0 0 30px 4px rgba(232,169,75,.35), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .btn .lb{
+    width:9px;height:9px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#fff,#fff8e6 50%,#1a1408 52%);
+    box-shadow:0 0 8px 2px rgba(255,255,255,.6);
+  }
+  .btn:hover{filter:brightness(1.06);}
+
+  /* ===== フッター ===== */
+  footer{background:var(--bg);padding:56px 0 60px;border-top:1px solid var(--line);}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+  .foot .brand{font-size:17px;letter-spacing:.4em;padding-left:.4em;}
+  .foot .meta{font-size:12px;color:var(--ink-faint);letter-spacing:.14em;line-height:2;}
+
+  /* 引用（証言）帯 */
+  .voice{padding:12vh 0;}
+  .voice blockquote{
+    margin:0;max-width:760px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:clamp(20px,3.6vw,28px);line-height:1.9;color:var(--ink);letter-spacing:.04em;
+  }
+  .voice blockquote .mk{color:var(--bulb);}
+  .voice cite{display:block;margin-top:24px;font-style:normal;font-size:13px;color:var(--ink-faint);letter-spacing:.14em;}
+
+  /* =========================================================================
+     世界観ネイティブ スマホUIモック
+     参照モックからは「機能・情報の並び」だけを踏襲。ビジュアルは楽屋の世界で新規設計:
+     ・端末＝女優ミラー。画面の左端に電球列（.bulbstrip）が灯り、そこだけが光源。
+     ・入力は角丸ボックスではなく、ガムテープ風ラベル＋手書きの記入欄（下罫線）で表現。
+     ・分割は「フィルムのコンタクトシート」（両端にパーフォレーション）で見せる。
+     ・受け取りは「封をした半券をスポットライトが照らす」表現。
+     ========================================================================= */
+  .mockband{background:#0a0907;padding:2vh 0 clamp(64px,11vh,130px);position:relative;}
+  .mock-lead{max-width:660px;margin:0 0 clamp(48px,7vh,90px);}
+  .mock-lead p{font-size:15.5px;color:var(--ink-dim);line-height:2;margin:0;}
+
+  .screens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:72px 48px;justify-items:center;align-items:start;}
+  .scr{width:100%;max-width:344px;}
+  .scr-cap{margin-bottom:20px;padding-left:26px;position:relative;}
+  .scr-cap::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:2px;
+    background:linear-gradient(180deg,var(--bulb),transparent);}
+  .scr-cap .no{font-family:"Georgia",serif;font-size:11px;letter-spacing:.26em;color:var(--bulb);display:block;margin-bottom:6px;}
+  .scr-cap h4{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-weight:400;
+    font-size:21px;color:var(--ink);letter-spacing:.06em;margin:0;line-height:1.4;}
+  .scr-cap span{display:block;font-size:12.5px;color:var(--ink-faint);margin-top:7px;letter-spacing:.03em;}
+
+  /* ===== 端末＝女優ミラー。左端の電球列だけが光源 ===== */
+  .device{
+    --pad:11px;
+    width:312px;max-width:100%;position:relative;
+    background:linear-gradient(150deg,#1c1813,#0e0c09 60%);
+    padding:var(--pad) var(--pad) var(--pad) 30px;border-radius:10px;
+    box-shadow:0 34px 70px -30px #000, inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  /* ミラー枠の電球列（左端に縦に灯る） */
+  .device .bulbstrip{position:absolute;left:9px;top:16px;bottom:16px;width:12px;
+    display:flex;flex-direction:column;justify-content:space-between;align-items:center;z-index:5;}
+  .device .bulbstrip i{width:9px;height:9px;border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,#fff2d0,var(--bulb) 46%,var(--bulb-deep) 100%);
+    box-shadow:0 0 10px 2px rgba(232,169,75,.5);}
+  .device .glass{
+    background:#100e0b;border-radius:4px;overflow:hidden;height:604px;
+    display:flex;flex-direction:column;position:relative;
+    /* 左（電球側）からの光の当たり */
+    box-shadow:inset 14px 0 34px -18px rgba(232,169,75,.28), inset 0 0 0 1px rgba(255,255,255,.03);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+  }
+  .device .glass::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:7;
+    background:radial-gradient(130% 90% at 0% 0%, rgba(232,169,75,.10), transparent 46%);}
+
+  /* 画面上部：時刻＋現場ラベル（アプリバーではなく“香盤の見出し”） */
+  .shead{flex:0 0 auto;padding:14px 16px 12px;display:flex;align-items:flex-end;gap:10px;
+    border-bottom:1px solid var(--line);}
+  .shead .clock{font-family:"Georgia",serif;font-size:12px;color:var(--ink-faint);letter-spacing:.14em;}
+  .shead .h{flex:1;}
+  .shead .h .t{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-size:16px;color:var(--ink);letter-spacing:.05em;line-height:1.3;}
+  .shead .h .s{font-size:10.5px;color:var(--ink-faint);margin-top:2px;letter-spacing:.02em;}
+  .shead .stp{font-family:"Georgia",serif;font-size:10px;color:var(--bulb);letter-spacing:.14em;align-self:flex-start;}
+
+  .sbody{flex:1;overflow:hidden;padding:16px;}
+
+  /* 記入欄：ガムテープ風の見出しラベル＋下罫線の記入行（＝手書きの香盤/申込票） */
+  .wl{margin-bottom:16px;}
+  .wl .tape{display:inline-block;font-size:10px;letter-spacing:.16em;color:#1a1408;
+    background:var(--bulb);padding:2px 9px;margin-bottom:9px;transform:rotate(-.6deg);
+    box-shadow:0 1px 4px rgba(0,0,0,.4);}
+  .wl .tape em{font-style:normal;color:#6a4d18;}
+  .wl .row{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding:0 2px 8px;}
+  .wl .row .val{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-size:15px;color:var(--ink);letter-spacing:.03em;}
+  .wl .row .u{font-size:11px;color:var(--ink-faint);}
+  /* 本数ステッパ（丸い電球ノブ） */
+  .knob{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:7px;}
+  .knob b{width:26px;height:26px;border-radius:50%;border:1px solid var(--bulb-deep);color:var(--bulb);
+    font-size:16px;display:grid;place-items:center;font-weight:400;line-height:1;}
+  .knob .v{font-family:"Hiragino Mincho ProN",serif;font-size:22px;color:var(--ink);}
+  .knob .v small{font-size:12px;color:var(--ink-faint);margin-left:3px;}
+  /* 長さ：フィルムのコマを選ぶ（下線で選択） */
+  .lens{display:flex;gap:18px;padding-bottom:2px;}
+  .lens span{font-size:13px;color:var(--ink-faint);padding-bottom:6px;border-bottom:1px solid transparent;}
+  .lens span.on{color:var(--bulb);border-bottom-color:var(--bulb);}
+  /* 注記：電球アイコン＋一行 */
+  .mnote{display:flex;gap:8px;font-size:11px;color:var(--ink-dim);line-height:1.65;margin:14px 0;padding-left:2px;}
+  .mnote .c{color:var(--bulb);flex:0 0 auto;}
+  /* 集計＝半券／チケットスタブ（点線の切り取り線） */
+  .stub{border-top:1px dashed var(--line);margin-top:16px;padding-top:14px;}
+  .stub .l{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-dim);padding:5px 0;}
+  .stub .l.tot{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);align-items:baseline;}
+  .stub .l.tot span:last-child{font-family:"Hiragino Mincho ProN",serif;font-size:22px;color:var(--bulb);}
+  /* 主要ボタン＝楽屋のサインライト（実物の電球サイン、角丸ではなく細い枠） */
+  .signbtn{margin-top:18px;display:flex;align-items:center;gap:12px;justify-content:center;
+    padding:14px;border:1px solid #ffe6ab;background:linear-gradient(180deg,#f3ce85,var(--bulb));
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-size:14px;letter-spacing:.12em;color:#1a1408;
+    box-shadow:0 0 22px 2px rgba(232,169,75,.28), inset 0 1px 0 rgba(255,255,255,.5);}
+  .signbtn .lb{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#fff8e6 50%,#1a1408 52%);box-shadow:0 0 7px 2px rgba(255,255,255,.6);}
+  .signbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink-dim);box-shadow:none;font-family:inherit;letter-spacing:.06em;}
+
+  /* ===== 撮影：舞台にモニターの赤POV。全面が“撮影中の楽屋” ===== */
+  .camv{position:absolute;inset:0;background:#080705;display:flex;flex-direction:column;z-index:8;}
+  .camstage{flex:1;position:relative;overflow:hidden;
+    background:radial-gradient(120% 80% at 30% 24%, #453d31 0%, #241f18 52%, #0c0a07 100%);}
+  .camstage .grain{position:absolute;inset:0;background:repeating-linear-gradient(116deg,rgba(255,255,255,.02) 0 6px,transparent 6px 18px);}
+  .camstage .floor{position:absolute;left:0;right:0;bottom:31%;height:1px;background:rgba(232,169,75,.16);}
+  .camstage .fig{position:absolute;bottom:31%;left:50%;transform:translateX(-50%);width:52px;text-align:center;}
+  .camstage .fig .h{width:20px;height:20px;border-radius:50%;background:#4d4537;margin:0 auto;}
+  .camstage .fig .t{width:36px;height:70px;border-radius:18px 18px 11px 11px;background:#413a2f;margin:5px auto 0;}
+  .camstage .framec{position:absolute;inset:16px;border:1px solid rgba(255,255,255,.10);}
+  .camstage .framec span{position:absolute;width:12px;height:12px;border:1px solid rgba(255,255,255,.4);}
+  .camstage .framec span:nth-child(1){top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .camstage .framec span:nth-child(2){top:-1px;right:-1px;border-left:none;border-bottom:none;}
+  .camstage .framec span:nth-child(3){bottom:-1px;left:-1px;border-right:none;border-top:none;}
+  .camstage .framec span:nth-child(4){bottom:-1px;right:-1px;border-left:none;border-top:none;}
+  .camtop{position:absolute;top:14px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 26px;}
+  .camtop .rec{display:flex;align-items:center;gap:7px;color:#fff;font-family:"Georgia",serif;font-size:12px;letter-spacing:.1em;}
+  .camtop .rec .d{width:8px;height:8px;border-radius:50%;background:#e0503a;box-shadow:0 0 0 4px rgba(224,80,58,.28);}
+  .camtop .cl{font-family:"Georgia",serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.1em;}
+  .camguide{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(242,237,227,.82);font-size:11px;letter-spacing:.04em;}
+  .camguide b{font-weight:400;color:var(--bulb);}
+  .camctrl{height:116px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-around;padding-bottom:14px;
+    border-top:1px solid rgba(255,255,255,.06);}
+  .camctrl .sd{color:rgba(242,237,227,.6);font-size:10px;text-align:center;line-height:1.3;letter-spacing:.02em;}
+  .shut{width:66px;height:66px;border-radius:50%;border:2px solid rgba(255,255,255,.85);display:grid;place-items:center;}
+  .shut b{width:24px;height:24px;border-radius:5px;background:#e0503a;}
+
+  /* ===== 分割＝フィルムのコンタクトシート ===== */
+  .film{background:#050403;padding:12px 0;position:relative;margin-top:4px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  /* 上下のパーフォレーション（フィルム穴） */
+  .film::before,.film::after{content:"";position:absolute;left:0;right:0;height:7px;
+    background-image:radial-gradient(circle,#100e0b 40%,transparent 42%);
+    background-size:14px 7px;background-repeat:repeat-x;}
+  .film::before{top:2px;}
+  .film::after{bottom:2px;}
+  .filmrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 12px;}
+  .frame{position:relative;aspect-ratio:16/11;overflow:hidden;
+    background:linear-gradient(160deg,#3a332a,#1c1813);}
+  .frame .fg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:26%;height:64%;background:#4b4436;border-radius:8px 8px 0 0;}
+  .frame .n{position:absolute;top:3px;left:5px;font-family:"Georgia",serif;font-size:9px;color:rgba(255,255,255,.75);letter-spacing:.06em;}
+  .frame .ln{position:absolute;bottom:3px;right:5px;font-size:8px;color:rgba(255,255,255,.6);}
+  .frame.hid::before{content:"";position:absolute;inset:0;background:rgba(8,7,5,.78);z-index:1;}
+  .frame.hid{outline:1px solid var(--bulb-deep);outline-offset:-1px;}
+  .frame.hid .flag{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--bulb);font-size:9px;letter-spacing:.06em;}
+  /* アップロード行（フィルム缶ラベル風） */
+  .upl{display:flex;align-items:center;gap:11px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px;}
+  .upl .can{width:40px;height:40px;border-radius:50%;flex:0 0 auto;border:2px solid var(--line);position:relative;background:radial-gradient(circle at 40% 35%,#2a251d,#100e0b);}
+  .upl .can::after{content:"";position:absolute;inset:11px;border-radius:50%;border:1px solid var(--bulb-deep);}
+  .upl .fn{font-family:"Georgia",serif;font-size:12px;color:var(--ink);letter-spacing:.04em;}
+  .upl .fi{font-size:10px;color:var(--ink-faint);margin-top:3px;}
+  .upl .ok{font-size:10px;color:var(--bulb);margin-top:4px;}
+  .segcount{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-dim);margin:12px 2px 0;}
+  .segcount .off{color:var(--bulb);}
+
+  /* ===== 受け取り＝スポットライトが照らす封印された半券 ===== */
+  .spot{position:relative;padding:26px 0 20px;text-align:center;overflow:hidden;}
+  .spot::before{content:"";position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+    width:220px;height:260px;background:radial-gradient(ellipse at 50% 0%,rgba(232,169,75,.22),transparent 62%);pointer-events:none;}
+  .envelope{position:relative;width:168px;margin:0 auto;aspect-ratio:1/1.28;
+    background:linear-gradient(160deg,#241f18,#14110c);border:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+    box-shadow:0 20px 40px -20px #000;}
+  /* 封蝋 */
+  .envelope .wax{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 36% 30%,#f0c268,var(--bulb-deep) 62%,#7c5218);
+    font-family:"Georgia",serif;font-size:20px;color:#3a2708;box-shadow:0 4px 12px -4px rgba(0,0,0,.7);}
+  .envelope .sealtxt{font-family:"Georgia",serif;font-size:10px;letter-spacing:.2em;color:var(--ink-faint);}
+  .spot .cp{font-size:11.5px;color:var(--ink-dim);margin:14px auto 0;max-width:80%;line-height:1.7;}
+  /* 3つの属性（罫線区切り、箱にしない） */
+  .attrs{display:flex;margin:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .attrs .a{flex:1;text-align:center;padding:11px 4px;}
+  .attrs .a + .a{border-left:1px solid var(--line);}
+  .attrs .a .k{font-size:9.5px;color:var(--ink-faint);letter-spacing:.04em;}
+  .attrs .a .v{font-family:"Hiragino Mincho ProN",serif;font-size:15px;color:var(--ink);margin-top:3px;}
+  .attrs .a .v small{font-size:9px;color:var(--ink-faint);}
+  /* 所有の記録（証明）＝台帳の行、罫線のみ */
+  .ledger{margin-top:16px;}
+  .ledger .lh{font-family:"Georgia",serif;font-size:10px;letter-spacing:.18em;color:var(--bulb);margin-bottom:8px;}
+  .ledger .r{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:11.5px;}
+  .ledger .r .k{color:var(--ink-faint);}
+  .ledger .r .v{color:var(--ink);}
+  .ledger .r .mono{font-family:ui-monospace,Consolas,monospace;letter-spacing:.03em;color:var(--bulb);}
+  .ledger .r .tag{font-family:"Georgia",serif;font-size:9px;color:var(--bulb);letter-spacing:.1em;margin-left:8px;}
+
+  @media (max-width:720px){
+    .screens{grid-template-columns:1fr;gap:60px;}
+    .scr{max-width:330px;}
+  }
+
+  /* ===== レスポンシブ ===== */
+  @media (max-width:820px){
+    .editorial,.editorial.flip{grid-template-columns:1fr;gap:22px;}
+    .editorial.flip .ed-txt{order:0;}
+    .editorial img{height:clamp(300px,72vw,420px);}
+    .spread{grid-template-columns:1fr;gap:22px;}
+    .spread .cell img{height:clamp(300px,74vw,440px);}
+    .price-grid{grid-template-columns:1fr;}
+    .price-item:nth-child(odd){padding-right:0;border-right:none;}
+    .price-item:nth-child(even){padding-left:0;}
+    .chapter .ttl{font-size:24px;}
+    .hero-tag{display:none;}
+  }
+  @media (min-width:900px){
+    .hero-tag{display:block;}
+  }
+</style>
+</head>
+
+<!-- ============ HERO / 表紙 ============ -->
+<section class="hero">
+  <img class="hero-img" src="images/hero.png" alt="薄暗い楽屋。電球で縁取られたミラーの前に座る、後ろ姿のライブアイドル。" fetchpriority="high">
+  <div class="hero-top">
+    <div class="brand">LAPSELL<span class="dot">.</span></div>
+    <div class="hero-tag">GREEN ROOM ／ 楽屋の記録</div>
+  </div>
+  <div class="hero-body wrap">
+    <div class="hero-eyebrow">A Photobook of the Backstage</div>
+    <h1>あなたの<em>裏側</em>に、<br>価値がある。</h1>
+    <p class="hero-lead">観客が決して見ない、本番前の楽屋。汗。ネタ合わせ。発声。その「見せていない時間」こそ、ファンが一番欲しがっている。Lapsell は、練習の時間を収益に変える。</p>
+    <div class="hero-scroll">SCROLL ↓</div>
+  </div>
+</section>
+
+<!-- ============ PROLOGUE ============ -->
+<section class="prologue">
+  <div class="wrap narrow">
+    <p>ステージの上のあなたは、いつも完成されている。</p>
+    <p>でも、ファンが本当に見たいのは、<br>その手前にある時間かもしれない。</p>
+    <p class="q">まだ荒削りな、鏡の前の10秒。</p>
+  </div>
+</section>
+
+<!-- ============ 01 楽屋 ============ -->
+<section class="band-space tight">
+  <div class="wrap"><div class="chapter"><span class="num">01</span><span class="ttl">楽屋</span><span class="line"></span></div></div>
+</section>
+
+<figure class="plate full">
+  <img src="images/makeup.png" alt="楽屋の電球ミラーの前で、自分でメイクをするライブアイドル。ヘアクリップを口にくわえ、集中した表情。" loading="lazy">
+  <figcaption class="cap"><span class="tick">01 —</span><span class="txt">本番の1時間前。誰も見ていない鏡の前で、ひとり支度をする。この静けさに、素の顔がある。</span></figcaption>
+</figure>
+
+<div class="band-space">
+  <div class="wrap">
+    <div class="spread">
+      <div class="cell">
+        <img src="images/vocal.png" alt="薄暗い楽屋の廊下で、胸に手を当てて発声練習をするインディーズの歌い手。" loading="lazy">
+        <div class="under"><span class="tick">02 —</span><span class="txt">廊下の隅で、声を出す。誰にも聴かせるつもりのない、一番素の声。</span></div>
+      </div>
+      <div class="cell">
+        <img src="images/comedians.png" alt="コンクリート壁の狭い控室で、台本を手にネタ合わせをするインディーズのお笑いコンビ。" loading="lazy">
+        <div class="under"><span class="tick">03 —</span><span class="txt">本番にはならなかった一言。ネタ合わせの、この空気が見たい人がいる。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<figure class="plate full">
+  <img src="images/rack.png" alt="薄暗い楽屋の壁際。名札の付いた衣装ラックに、アイドルの衣装やバンドのジャケットが並ぶ。" loading="lazy">
+  <figcaption class="cap"><span class="tick">04 —</span><span class="txt">出番を待つ衣装。ここに立つまでの時間は、いつも記録に残らなかった。</span></figcaption>
+</figure>
+
+<!-- ============ ステートメント（電球フレーム） ============ -->
+<section class="statement">
+  <div class="wrap">
+    <div class="frame">
+      <div class="bulbs"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <h2>表舞台では、あなたはまだ<em>目立てない</em>かもしれない。<br>でも裏側には、もう価値がある。</h2>
+      <div class="bulbs"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 本番前 ============ -->
+<section class="band-space tight">
+  <div class="wrap"><div class="chapter"><span class="num">02</span><span class="ttl">本番前</span><span class="line"></span></div></div>
+</section>
+
+<figure class="plate full">
+  <img src="images/setlist.png" alt="本番前の楽屋の床。手書きのセットリスト、ステージ用の靴、水のボトル、タオル、ガムテープが置かれている。" loading="lazy">
+  <figcaption class="cap"><span class="tick">—</span><span class="txt">本番前の床。まだ何も始まっていない、この静けさ。</span></figcaption>
+</figure>
+
+<div class="band-space">
+  <div class="wrap">
+    <div class="editorial">
+      <img src="images/standby.png" alt="暗い舞台袖。赤い非常灯の光の中、ギターを持って出番を待つインディーズバンドのメンバー。" loading="lazy">
+      <div class="ed-txt">
+        <div class="kicker">The last minute</div>
+        <h3>この<em>数分の緊張</em>は、<br>二度と同じ形では戻らない。</h3>
+        <p>舞台袖で出番を待つ、この一回きりの時間。ライブが終われば消えてしまう。だからこそ、その一瞬を欲しがるファンがいる。</p>
+        <p>Lapsell なら、この時間を撮って、そのまま商品にできる。編集はいらない。スマホ1台で足りる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<figure class="plate full">
+  <img src="images/band.png" alt="防音スタジオで汗をかきながらリハーサルするインディーズ3人組バンド。アンプに貼られたセットリスト。" loading="lazy">
+  <figcaption class="cap"><span class="tick">05 —</span><span class="txt">何度も止めて、また合わせる。この「まだ完成していない」リハこそ、あなたを育てた時間だ。</span></figcaption>
+</figure>
+
+<!-- ============ 何を売るのか（オフセット） ============ -->
+<div class="band-space">
+  <div class="wrap">
+    <div class="editorial flip">
+      <div class="ed-txt">
+        <div class="kicker">What you sell</div>
+        <h3>売るのは、完成品じゃない。<br><em>過程</em>そのもの。</h3>
+        <p>撮った映像は、約10秒ずつの短い断片に自動で分割される。その一片一片が、購入者へランダムに、ひとつずつ配られる。</p>
+        <p>同じ映像でも、誰ひとり同じ断片は受け取らない。あなたの練習の10秒が、世界に1つの「動く一点物」になる。</p>
+      </div>
+      <img src="images/filmstrip.png" alt="バンドのリハーサル映像がフィルムのコマのように連なった、短い断片のイメージ。" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ============ 03 裏側（撮る） ============ -->
+<section class="band-space tight">
+  <div class="wrap"><div class="chapter"><span class="num">03</span><span class="ttl">裏側を、撮る</span><span class="line"></span></div></div>
+</section>
+
+<figure class="plate full">
+  <img src="images/filming.png" alt="楽屋の鏡にスマホを立てかけ、三脚で自分のダンス練習を撮影するライブアイドル。画面に本人が映っている。" loading="lazy">
+  <figcaption class="cap"><span class="tick">06 —</span><span class="txt">やることは、いつもの練習をスマホで撮るだけ。特別な機材も、編集の知識もいらない。</span></figcaption>
+</figure>
+
+<!-- ============ 仕組み：7ステップ ============ -->
+<section class="flow">
+  <div class="wrap">
+    <div class="chapter"><span class="num">04</span><span class="ttl">出品から、手渡すまで</span><span class="line"></span></div>
+    <div class="flow-lead">
+      <p>中身は、買った時点ではまだ撮影されていない。「これからやる練習の時間枠」を先に売り、当日撮って、届ける。この順番が Lapsell の仕組みです。</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="no">01</div><div class="body"><h4>出品する</h4><p>これからやる練習の時間枠を出品します。日時・価格・販売枠数（＝配布する本数）・1本の長さを決めるだけ。</p></div></div>
+      <div class="step"><div class="no">02</div><div class="body"><h4>ファンが買う</h4><p>ファンは時間枠を購入します。中身はまだ撮られていないので、届くまで何が来るかは分からない。この「待つ時間」も含めて価値になります。</p></div></div>
+      <div class="step"><div class="no">03</div><div class="body"><h4>当日、撮る</h4><p>当日、いつもの練習をスマホで撮るだけ。編集は不要です。楽屋でも、スタジオでも、舞台袖でも。</p></div></div>
+      <div class="step"><div class="no">04</div><div class="body"><h4>アップして、自動で分割</h4><p>撮った映像をアップすると、約10秒ずつの短い断片に自動で分割されます。手作業はありません。</p></div></div>
+      <div class="step"><div class="no">05</div><div class="body"><h4>公開前に、自分で確認</h4><p>配布される前に、中身を自分でチェック。本当にまずい「事故」の瞬間だけ非公開にできます。<span class="note">該当者には自動で返金。だから、ライブ配信と違って世に出したくない瞬間は世に出ません。</span></p></div></div>
+      <div class="step"><div class="no">06</div><div class="body"><h4>ひとりずつに配る</h4><p>承認された断片が、購入者へランダムかつ一意に割り当てられます。誰も同じものは受け取りません。</p></div></div>
+      <div class="step"><div class="no">07</div><div class="body"><h4>手元に、残る</h4><p>ファンは自分だけの断片を受け取り、手元に保有します。世界に1つの、あなたの裏側の10秒。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ アプリの画面（世界観アレンジ スマホUIモック） ============ -->
+<section class="mockband">
+  <div class="wrap">
+    <div class="chapter"><span class="num">04b</span><span class="ttl">アプリの画面</span><span class="line"></span></div>
+    <div class="mock-lead">
+      <p>言葉だけでは分かりにくい所を、実際のアプリ画面で。出品から、当日の撮影、公開前チェック、そしてファンが受け取るまで。楽屋の暗がりの中で、電球の光だけを頼りに操作する——そんな画面設計になっています。</p>
+    </div>
+
+    <div class="screens">
+
+      <!-- 画面1：出品（香盤への記入） -->
+      <div class="scr">
+        <div class="scr-cap"><span class="no">STEP 01</span><h4>練習枠を出品する</h4><span>日時・価格・本数・長さを決めるだけ</span></div>
+        <div class="device">
+          <div class="bulbstrip"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="glass">
+            <div class="shead"><span class="clock">19:41</span><div class="h"><div class="t">練習枠を出品</div><div class="s">未来の練習時間を、先に売る</div></div><span class="stp">下書き</span></div>
+            <div class="sbody">
+              <div class="wl"><span class="tape">練習の日時</span><div class="row"><span class="val">2026年7月12日（日）19:00</span><span class="u">▾</span></div></div>
+              <div class="wl"><span class="tape">場所・メモ <em>／ 購入者に表示</em></span><div class="row"><span class="val">下北沢スタジオ・新曲リハ</span></div></div>
+              <div class="wl"><span class="tape">1本の価格</span><div class="row"><span class="val">¥ 1,500</span><span class="u">／ 本</span></div></div>
+              <div class="wl"><span class="tape">販売本数 <em>／ 配布する本数</em></span><div class="knob"><b>−</b><span class="v">30 <small>本</small></span><b>＋</b></div></div>
+              <div class="wl"><span class="tape">1本の長さ</span><div class="lens"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div></div>
+              <div class="mnote"><span class="c">◦</span><span>編集は不要。当日スマホで撮った映像を、この長さに自動で分割します。</span></div>
+              <div class="stub">
+                <div class="l"><span>売上（満枠時）</span><span>¥45,000</span></div>
+                <div class="l"><span>手数料 5%</span><span>− ¥2,250</span></div>
+                <div class="l tot"><span>受け取り見込み</span><span>¥42,750</span></div>
+              </div>
+              <div class="signbtn"><span class="lb"></span>この内容で出品する</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面2：撮影（撮影中の楽屋POV） -->
+      <div class="scr">
+        <div class="scr-cap"><span class="no">STEP 03</span><h4>当日、楽屋で撮る</h4><span>いつもの練習を、スマホで撮るだけ</span></div>
+        <div class="device">
+          <div class="bulbstrip"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="glass">
+            <div class="camv">
+              <div class="camstage">
+                <div class="grain"></div>
+                <div class="floor"></div>
+                <div class="fig"><div class="h"></div><div class="t"></div></div>
+                <div class="framec"><span></span><span></span><span></span><span></span></div>
+                <div class="camtop"><div class="rec"><span class="d"></span>REC 00:38</div><div class="cl">19:02</div></div>
+                <div class="camguide">この10秒が、あとで <b>30本の断片</b> になる</div>
+              </div>
+              <div class="camctrl">
+                <div class="sd">ライブ<br>フォト</div>
+                <div class="shut"><b></b></div>
+                <div class="sd">アルバム<br>から選ぶ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面3：分割＆公開前チェック（コンタクトシート） -->
+      <div class="scr">
+        <div class="scr-cap"><span class="no">STEP 04–05</span><h4>自動で分割 ・ 公開前チェック</h4><span>約10秒に分割。事故だけ非公開に</span></div>
+        <div class="device">
+          <div class="bulbstrip"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="glass">
+            <div class="shead"><span class="clock">19:48</span><div class="h"><div class="t">公開前チェック</div><div class="s">7/12 新曲リハ</div></div><span class="stp">3 / 4</span></div>
+            <div class="sbody">
+              <div class="upl">
+                <div class="can"></div>
+                <div><div class="fn">IMG_4821.MOV</div><div class="fi">05:12 ・ 312MB</div><div class="ok">◦ アップロード＆自動分割 完了 ／ 30本</div></div>
+              </div>
+              <div class="mnote"><span class="c">◦</span><span>約10秒ずつに自動分割しました。<b>事故の瞬間だけ</b>非公開にでき、その本数ぶんは購入者へ自動返金されます。</span></div>
+              <div class="film">
+                <div class="filmrow">
+                  <div class="frame"><span class="n">01</span><div class="fg"></div><span class="ln">0:10</span></div>
+                  <div class="frame"><span class="n">02</span><div class="fg"></div><span class="ln">0:10</span></div>
+                  <div class="frame hid"><span class="n">03</span><div class="flag"><span style="font-size:14px">⦸</span>非公開</div></div>
+                  <div class="frame"><span class="n">04</span><div class="fg"></div><span class="ln">0:09</span></div>
+                  <div class="frame"><span class="n">05</span><div class="fg"></div><span class="ln">0:10</span></div>
+                  <div class="frame"><span class="n">06</span><div class="fg"></div><span class="ln">0:11</span></div>
+                </div>
+              </div>
+              <div class="segcount"><span>公開 29本</span><span class="off">非公開 1本（自動返金）</span></div>
+              <div class="signbtn"><span class="lb"></span>この内容で公開・配布する</div>
+              <div class="signbtn ghost">もう一度確認する</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面4：受け取り（封印された半券をスポットライトが照らす） -->
+      <div class="scr">
+        <div class="scr-cap"><span class="no">STEP 06–07</span><h4>ファンが受け取り、手元に残る</h4><span>世界に1つ。所有の記録つき</span></div>
+        <div class="device">
+          <div class="bulbstrip"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="glass">
+            <div class="shead"><span class="clock">19:50</span><div class="h"><div class="t">あなたの断片が届きました</div><div class="s">彩夏 ・ 7/12 新曲リハ</div></div></div>
+            <div class="sbody">
+              <div class="spot">
+                <div class="envelope">
+                  <div class="wax">L</div>
+                  <div class="sealtxt">SEALED</div>
+                </div>
+                <p class="cp">あなたに割り当てられた、約10秒の裏側。<br>タップして開封します。</p>
+              </div>
+              <div class="attrs">
+                <div class="a"><div class="k">通し番号</div><div class="v">#017<small> / 29</small></div></div>
+                <div class="a"><div class="k">長さ</div><div class="v">0:10</div></div>
+                <div class="a"><div class="k">発行</div><div class="v">世界に1</div></div>
+              </div>
+              <div class="signbtn"><span class="lb"></span>開封する</div>
+              <div class="ledger">
+                <div class="lh">所有の記録</div>
+                <div class="r"><span class="k">証明ID</span><span class="v mono">LPS-7C4F-19A2</span></div>
+                <div class="r"><span class="k">撮影・発行</span><span class="v">彩夏 本人 ・ 7/12 19:48</span></div>
+                <div class="r"><span class="k">現在の所有者</span><span class="v">あなた <span class="tag">保有中</span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 受け取る（ファン側） ============ -->
+<div class="band-space">
+  <div class="wrap">
+    <div class="editorial">
+      <img src="images/fan.png" alt="夜、自宅でスマホを両手に持ち、受け取った短い映像を見て柔らかく微笑むファン。画面の光が顔を照らす。" loading="lazy">
+      <div class="ed-txt">
+        <div class="kicker">On the other side</div>
+        <h3>誰かの手元で、<br>あなたの10秒が<em>ずっと残る</em>。</h3>
+        <p>ファンはすでに、チェキや生写真、ライブ物販に本気でお金を払っています。「本人の素」「世界に1つ」「つながり」に価値を感じているからです。</p>
+        <p>あなたの裏側の断片は、それと同じ理由で買われます。しかも、動いていて、本物で、他の誰も持っていない。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 証言（将来価値） ============ -->
+<section class="voice">
+  <div class="wrap narrow">
+    <div class="bulbs" style="justify-content:flex-start;margin-bottom:30px;"><span></span><span></span><span></span></div>
+    <blockquote>今はまだ、小さな箱でやってる。<br>でも <span class="mk">「あの頃の練習を持っている」</span> という理由で、<br>ずっと応援してくれる人がいる。</blockquote>
+    <cite>— 下積みの時間は、あとから価値になる。M!LK が結成11年で紅白に立ったように。</cite>
+  </div>
+</section>
+
+<figure class="plate full">
+  <img src="images/sweat.png" alt="本番直後、暗い舞台袖でタオルで汗をぬぐう若いパフォーマー。髪が濡れ、息が上がっている。" loading="lazy">
+  <figcaption class="cap"><span class="tick">07 —</span><span class="txt">本番が終わった、この脱力の一瞬。誰にも見せていなかった顔が、次の収益になる。</span></figcaption>
+</figure>
+
+<!-- ============ 05 値段 ============ -->
+<section class="price">
+  <div class="wrap">
+    <div class="chapter"><span class="num">05</span><span class="ttl">値段</span><span class="line"></span></div>
+    <div class="price-grid">
+      <div class="price-item"><div class="k">はじめる費用</div><div class="v">0円 <small>／ 初期費用なし</small></div></div>
+      <div class="price-item"><div class="k">手数料</div><div class="v">売れた分の 5%〜</div></div>
+      <div class="price-item"><div class="k">用意するもの</div><div class="v">スマホ 1台<small>だけ</small></div></div>
+      <div class="price-item"><div class="k">売るもの</div><div class="v">これからやる練習の時間</div></div>
+    </div>
+    <p class="price-note">売れなければ費用はかかりません。撮るのはいつもの練習。捨てていた時間が、そのまま収益源になります。だから、ノーリスクで始められます。</p>
+  </div>
+</section>
+
+<!-- ============ 06 よくある不安 ============ -->
+<section class="faq">
+  <div class="wrap narrow">
+    <div class="chapter"><span class="num">06</span><span class="ttl">よくある不安</span><span class="line"></span></div>
+    <div class="qa"><p class="q">本当に、私の練習なんて売れるの?</p><p class="a">ファンはすでにチェキや生写真に日常的にお金を払っています。求められているのは完成度ではなく「本人の素」「世界に1つ」であること。裏側の時間は、まさにそれです。</p></div>
+    <div class="qa"><p class="q">まずい瞬間が世に出たら怖い。</p><p class="a">Lapsell は撮影後にアップロードする仕組みです。配布の前に自分で中身を確認し、事故の瞬間だけ非公開にできます（該当者には自動返金）。ライブ配信のような「その場で流れる」リスクはありません。</p></div>
+    <div class="qa"><p class="q">編集の技術がない。</p><p class="a">編集は不要です。撮った映像をアップすれば、約10秒の断片へ自動で分割されます。あなたがやるのは、いつもの練習をスマホで撮ることだけ。</p></div>
+    <div class="qa"><p class="q">同じ映像を配って、価値が薄まらない?</p><p class="a">薄まりません。断片は購入者へ一意に割り当てられ、誰ひとり同じものを受け取りません。全員が「世界に1つ」を持ちます。</p></div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta-img">
+    <img src="images/mirror.png" alt="電球で縁取られた楽屋のミラー。衣装と化粧品が並ぶ、静かな緑の間。" loading="lazy">
+    <div class="cta-body wrap">
+      <h2>その練習を、<br><em>次の収益</em>にする。</h2>
+      <p>捨てていた裏側の時間を、世界に1つのグッズに。初期費用0円、スマホ1台から。</p>
+      <a class="btn" href="#"><span class="lb"></span>出品をはじめる</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brand">LAPSELL<span style="color:var(--bulb)">.</span></div>
+      <div class="meta">練習の時間を、収益に変える。<br>Green Room ／ 楽屋の記録</div>
+    </div>
+  </div>
+</footer>
+
+</html>

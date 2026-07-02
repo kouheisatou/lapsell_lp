@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapsell ｜ 練習時間を、収益に変える。</title>
+<style>
+  :root{
+    --ink:#f3e9d6;          /* faded warm off-white text */
+    --ink-dim:#c9b89a;       /* dimmer text */
+    --ink-faint:#8f8064;     /* faintest */
+    --amber:#e8a13a;         /* warm timestamp / accent */
+    --amber-deep:#c97a1f;
+    --red:#d94b3a;           /* REC red */
+    --bg:#161009;            /* near-black warm */
+    --bg2:#1f1710;           /* panel */
+    --bg3:#2a1f14;           /* lighter panel */
+    --line:rgba(232,161,58,.28);
+    --crt:#9fd3d0;           /* bluish CRT glow */
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    letter-spacing:.02em;
+  }
+  /* grain + scanline overlay across the whole page */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.10) 0px, rgba(0,0,0,.10) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode:multiply;opacity:.4;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;
+    background-image:url("images/texture-grain.png");
+    background-size:cover;mix-blend-mode:soft-light;opacity:.35;
+  }
+  .mono{font-family:"DS-Digital","Courier New",ui-monospace,monospace;letter-spacing:.06em}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  /* ---------- timestamp label reusable ---------- */
+  .tstamp{
+    font-family:"Courier New",ui-monospace,monospace;
+    color:var(--amber);font-weight:700;font-size:13px;letter-spacing:.12em;
+    text-shadow:0 0 8px rgba(232,161,58,.45);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .tstamp .dot{width:9px;height:9px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 10px var(--red);animation:blink 1.4s steps(1) infinite}
+  @keyframes blink{50%{opacity:.15}}
+
+  /* ---------- section scaffolding ---------- */
+  section{position:relative;padding:82px 0}
+  .kicker{
+    font-family:"Courier New",monospace;color:var(--amber);
+    font-size:13px;letter-spacing:.35em;text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  }
+  .kicker::before{content:"";width:34px;height:1px;background:var(--amber);opacity:.7}
+  h2{
+    font-size:clamp(27px,5.4vw,44px);line-height:1.25;font-weight:800;
+    letter-spacing:.01em;margin-bottom:20px;
+  }
+  h2 em{font-style:normal;color:var(--amber);text-shadow:0 0 18px rgba(232,161,58,.3)}
+  .lead{font-size:clamp(16px,2.2vw,18.5px);color:var(--ink-dim);max-width:42em}
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    padding:96px 0 60px;position:relative;overflow:hidden;
+  }
+  .hero-frame{
+    position:absolute;inset:0;z-index:0;
+  }
+  .hero-frame img{
+    width:100%;height:100%;object-fit:cover;
+    filter:sepia(.28) saturate(1.05) contrast(1.02) brightness(.62);
+  }
+  .hero-frame::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 30%, transparent 30%, rgba(22,16,9,.55) 72%, var(--bg) 100%),
+      linear-gradient(180deg, rgba(22,16,9,.35) 0%, rgba(22,16,9,.15) 40%, var(--bg) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .rec-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;
+    position:absolute;top:26px;left:0;right:0;padding:0 24px;z-index:3}
+  .rec-badge{font-family:"Courier New",monospace;color:#fff;font-weight:700;font-size:14px;
+    letter-spacing:.14em;display:flex;align-items:center;gap:9px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .rec-badge .dot{width:11px;height:11px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 12px var(--red);animation:blink 1.4s steps(1) infinite}
+  .hero-stamp{font-family:"Courier New",monospace;color:var(--amber);font-weight:700;font-size:14px;
+    letter-spacing:.12em;text-shadow:0 0 8px rgba(232,161,58,.5),0 1px 4px rgba(0,0,0,.7)}
+  .hero-inner{max-width:20em}
+  .hero h1{
+    font-size:clamp(34px,8.4vw,72px);line-height:1.14;font-weight:900;letter-spacing:0;
+    text-shadow:0 2px 18px rgba(0,0,0,.55);
+  }
+  .hero h1 .glow{color:var(--amber);text-shadow:0 0 26px rgba(232,161,58,.5)}
+  .hero p.sub{margin-top:22px;font-size:clamp(15px,2.4vw,19px);color:var(--ink);max-width:24em;
+    text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  .scroll-hint{margin-top:46px;font-family:"Courier New",monospace;font-size:12px;letter-spacing:.2em;
+    color:var(--ink-faint);display:flex;align-items:center;gap:10px}
+  .scroll-hint::before{content:"▶";color:var(--amber);animation:blink 1.4s steps(1) infinite}
+
+  /* play button — physical tape-deck look */
+  .btn-play{
+    display:inline-flex;align-items:center;gap:14px;
+    background:linear-gradient(180deg,#2c2013,#1a120a);
+    border:1px solid var(--line);border-radius:3px;
+    padding:15px 26px 15px 20px;color:var(--ink);font-weight:800;font-size:16px;
+    box-shadow:0 6px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+    cursor:pointer;transition:transform .15s, border-color .15s;letter-spacing:.03em;
+  }
+  .btn-play:hover{transform:translateY(-2px);border-color:var(--amber)}
+  .btn-play .tri{
+    width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent var(--amber);
+    filter:drop-shadow(0 0 6px rgba(232,161,58,.6));
+  }
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:9px;color:var(--ink-dim);font-weight:600;font-size:15px;
+    border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .15s,border-color .15s;
+  }
+  .btn-ghost:hover{color:var(--amber);border-color:var(--amber)}
+
+  /* ============ generic film-frame image ============ */
+  .film{position:relative;border:1px solid var(--line);background:#0c0906;
+    box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .film img{filter:sepia(.2) saturate(1.06) contrast(1.03) brightness(1.02)}
+  .film .scan{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.1) 0,rgba(0,0,0,.1) 1px,transparent 1px,transparent 3px);opacity:.5}
+  .film .stamp{position:absolute;bottom:9px;right:11px;font-family:"Courier New",monospace;
+    color:var(--amber);font-weight:700;font-size:12px;letter-spacing:.1em;
+    text-shadow:0 0 7px rgba(232,161,58,.6),0 1px 3px rgba(0,0,0,.8)}
+  .film .rec{position:absolute;top:9px;left:11px;font-family:"Courier New",monospace;color:#fff;
+    font-weight:700;font-size:11px;letter-spacing:.12em;display:flex;align-items:center;gap:6px;
+    text-shadow:0 1px 4px rgba(0,0,0,.8)}
+  .film .rec .dot{width:8px;height:8px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 9px var(--red);animation:blink 1.4s steps(1) infinite}
+
+  /* ============ INSIGHT ============ */
+  .insight{background:var(--bg)}
+  .insight .big{
+    font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.4;max-width:16em;margin:0 auto;
+    text-align:center;
+  }
+  .insight .big .glow{color:var(--amber);text-shadow:0 0 20px rgba(232,161,58,.35)}
+  .insight .note{text-align:center;color:var(--ink-dim);margin-top:26px;max-width:36em;
+    margin-left:auto;margin-right:auto;font-size:16px}
+  .still-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;margin:40px auto 0}
+  .still-pair figure{margin:0}
+  @media(max-width:560px){.still-pair{grid-template-columns:1fr;gap:16px}}
+
+  /* ============ WHAT IS (product) ============ */
+  .what{background:linear-gradient(180deg,var(--bg),#120c06)}
+  .what-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  .segline{display:flex;gap:6px;margin:22px 0 6px;flex-wrap:wrap}
+  .seg{height:34px;flex:1;min-width:26px;border:1px solid var(--line);background:linear-gradient(180deg,#241a10,#160f08);
+    position:relative;overflow:hidden}
+  .seg::after{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0,rgba(0,0,0,.2) 1px,transparent 1px,transparent 3px)}
+  .seg.lit{border-color:var(--amber);background:linear-gradient(180deg,#4a3313,#2a1c0d);
+    box-shadow:0 0 14px rgba(232,161,58,.35) inset}
+  .caption-mono{font-family:"Courier New",monospace;font-size:12.5px;color:var(--ink-faint);letter-spacing:.08em}
+  .what ul{list-style:none;margin-top:10px}
+  .what li{padding:14px 0;border-bottom:1px solid rgba(232,161,58,.14);display:flex;gap:14px;align-items:flex-start}
+  .what li:last-child{border-bottom:0}
+  .what li b{color:var(--amber);font-family:"Courier New",monospace;font-size:13px;letter-spacing:.1em;
+    flex:0 0 auto;padding-top:3px}
+  .what li span{color:var(--ink);font-size:15.5px}
+
+  /* ============ STEPS (録画) ============ */
+  .steps{background:#120c06}
+  .tape{position:relative;margin-top:44px}
+  .tape-line{position:absolute;left:22px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,transparent,var(--line) 8%,var(--line) 92%,transparent);z-index:0}
+  .step{position:relative;padding:0 0 40px 66px;z-index:1}
+  .step:last-child{padding-bottom:0}
+  .step .num{position:absolute;left:0;top:0;width:46px;height:46px;border-radius:50%;
+    background:var(--bg2);border:1px solid var(--amber);color:var(--amber);
+    font-family:"Courier New",monospace;font-weight:700;font-size:17px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 16px rgba(232,161,58,.25)}
+  .step h3{font-size:19px;font-weight:800;margin-bottom:5px}
+  .step p{color:var(--ink-dim);font-size:15px;max-width:34em}
+  .step .tag{font-family:"Courier New",monospace;font-size:11px;color:var(--ink-faint);
+    letter-spacing:.14em;text-transform:uppercase}
+
+  /* ============ VALUE / future ============ */
+  .value{background:linear-gradient(180deg,#120c06,var(--bg))}
+  .appreciate{margin:40px 0 8px;border:1px solid var(--line);background:rgba(20,14,8,.5);padding:30px 26px}
+  .appreciate .row{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+    padding:16px 0;border-bottom:1px dashed rgba(232,161,58,.2)}
+  .appreciate .row:last-child{border-bottom:0}
+  .appreciate .yr{font-family:"Courier New",monospace;color:var(--amber);font-weight:700;font-size:15px;
+    letter-spacing:.06em;white-space:nowrap}
+  .appreciate .bar{height:12px;background:linear-gradient(90deg,var(--amber-deep),var(--amber));
+    border-radius:1px;box-shadow:0 0 12px rgba(232,161,58,.4)}
+  .appreciate .row p{color:var(--ink-dim);font-size:14.5px;margin-top:4px}
+  .milk{margin-top:30px;padding:24px 26px;border-left:3px solid var(--amber);background:rgba(232,161,58,.06)}
+  .milk p{color:var(--ink);font-size:15.5px}
+  .milk .src{color:var(--ink-faint);font-size:12.5px;margin-top:10px;font-family:"Courier New",monospace}
+
+  /* ============ REASONS fans buy ============ */
+  .reasons{background:var(--bg)}
+  .fact{display:grid;grid-template-columns:1fr;gap:0;margin-top:34px}
+  .fact-item{padding:24px 0;border-top:1px solid rgba(232,161,58,.16);display:grid;
+    grid-template-columns:1fr auto;gap:10px 30px;align-items:baseline}
+  .fact-item:last-child{border-bottom:1px solid rgba(232,161,58,.16)}
+  .fact-item .lbl{font-size:16px;color:var(--ink);max-width:30em}
+  .fact-item .lbl b{color:var(--amber);font-weight:800}
+  .fact-item .val{font-family:"Courier New",monospace;color:var(--amber);font-weight:700;
+    font-size:clamp(20px,4vw,28px);letter-spacing:.02em;white-space:nowrap;text-align:right;
+    text-shadow:0 0 14px rgba(232,161,58,.3)}
+  .reasons .src{color:var(--ink-faint);font-size:12.5px;margin-top:16px;font-family:"Courier New",monospace}
+
+  /* ============ SAFE (事故) ============ */
+  .safe{background:linear-gradient(180deg,var(--bg),#120c06)}
+  .safe-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center}
+  .safe ol{list-style:none;counter-reset:s;margin-top:6px}
+  .safe li{padding:12px 0 12px 40px;position:relative;color:var(--ink-dim);font-size:15.5px}
+  .safe li::before{counter-increment:s;content:"✓";position:absolute;left:0;top:12px;
+    color:var(--amber);font-weight:800;font-size:17px}
+  .safe li b{color:var(--ink)}
+
+  /* ============ PRICE (料金) ============ */
+  .price{background:#120c06}
+  .price-panel{border:1px solid var(--line);background:rgba(20,14,8,.55);padding:0;margin-top:36px;
+    box-shadow:0 14px 44px rgba(0,0,0,.4)}
+  .price-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;
+    border-bottom:1px solid var(--line);background:rgba(232,161,58,.05)}
+  .price-head .t{font-family:"Courier New",monospace;letter-spacing:.14em;color:var(--amber);font-size:13px}
+  .price-body{display:grid;grid-template-columns:1fr 1fr 1fr}
+  .price-cell{padding:30px 24px;border-right:1px solid rgba(232,161,58,.14)}
+  .price-cell:last-child{border-right:0}
+  .price-cell .k{font-family:"Courier New",monospace;font-size:12px;color:var(--ink-faint);
+    letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .price-cell .v{font-size:clamp(26px,5vw,34px);font-weight:900;color:var(--ink)}
+  .price-cell .v span{color:var(--amber)}
+  .price-cell p{color:var(--ink-dim);font-size:13.5px;margin-top:8px}
+  .price-note{padding:18px 26px;border-top:1px solid rgba(232,161,58,.14);color:var(--ink-faint);
+    font-size:13px}
+
+  /* ============ FAQ ============ */
+  .faq{background:var(--bg)}
+  details{border-bottom:1px solid rgba(232,161,58,.18);padding:6px 0}
+  details summary{list-style:none;cursor:pointer;padding:18px 40px 18px 0;position:relative;
+    font-weight:700;font-size:16.5px;color:var(--ink)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";position:absolute;right:4px;top:15px;color:var(--amber);
+    font-size:24px;font-weight:400;transition:transform .2s}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--ink-dim);font-size:15px;padding:0 0 20px;max-width:44em}
+
+  /* ============ CTA ============ */
+  .cta{background:linear-gradient(180deg,#120c06,#0c0805);text-align:center;padding:96px 0}
+  .cta h2{max-width:16em;margin:0 auto 8px}
+  .cta .lead{margin:0 auto 34px;text-align:center}
+  .cta .hero-cta{justify-content:center}
+
+  footer{background:#0c0805;border-top:1px solid rgba(232,161,58,.14);padding:40px 0;color:var(--ink-faint);
+    font-size:13px;text-align:center}
+  footer .logo{font-weight:900;font-size:20px;letter-spacing:.16em;color:var(--ink);margin-bottom:8px}
+
+  /* ============ APP MOCK — 8mm/VHS arranged phone UI ============ */
+  .app{background:#100b06}
+  .app .intro{max-width:44em}
+  .mocks{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:48px;align-items:start;
+  }
+  .mock{display:flex;flex-direction:column;align-items:center}
+  .mock .mcap{margin-bottom:16px;text-align:center;max-width:19em}
+  .mock .mcap .mn{font-family:"Courier New",monospace;color:var(--amber);font-weight:700;
+    font-size:12px;letter-spacing:.16em;display:inline-flex;align-items:center;gap:7px;margin-bottom:7px}
+  .mock .mcap .mn .dot{width:7px;height:7px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 8px var(--red);animation:blink 1.4s steps(1) infinite}
+  .mock .mcap h3{font-size:16px;font-weight:800;color:var(--ink);line-height:1.4}
+  .mock .mcap p{font-size:12.5px;color:var(--ink-faint);margin-top:5px;line-height:1.6}
+
+  /* phone shell — dark plastic camcorder body */
+  .phone{width:100%;max-width:300px;background:linear-gradient(180deg,#1a130c,#0b0805);
+    border-radius:34px;padding:9px;position:relative;
+    box-shadow:0 20px 46px rgba(0,0,0,.55),inset 0 1px 0 rgba(232,161,58,.14);
+    border:1px solid rgba(232,161,58,.16)}
+  .phone .screen{background:#0c0a07;border-radius:26px;overflow:hidden;height:560px;
+    display:flex;flex-direction:column;position:relative}
+  /* CRT scanlines + grain over each screen */
+  .phone .screen::after{content:"";position:absolute;inset:0;z-index:20;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0,rgba(0,0,0,.16) 1px,transparent 1px,transparent 3px);
+    mix-blend-mode:multiply;opacity:.55}
+  .phone .screen::before{content:"";position:absolute;inset:0;z-index:19;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.5) 100%)}
+  /* viewfinder date/rec bar */
+  .vf{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+    padding:10px 13px 8px;font-family:"Courier New",monospace;position:relative;z-index:21}
+  .vf .rec{display:flex;align-items:center;gap:6px;color:#fff;font-weight:700;font-size:11px;
+    letter-spacing:.1em;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+  .vf .rec .d{width:8px;height:8px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 8px var(--red);animation:blink 1.4s steps(1) infinite}
+  .vf .date{color:var(--amber);font-weight:700;font-size:11px;letter-spacing:.08em;
+    text-shadow:0 0 6px rgba(232,161,58,.5),0 1px 3px rgba(0,0,0,.9)}
+  .mbody{flex:1;overflow:hidden;padding:4px 15px 15px;position:relative;z-index:21;
+    color:var(--ink);font-size:13px}
+  .mtitle{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:.01em}
+  .msub{font-size:11px;color:var(--ink-faint);font-family:"Courier New",monospace;
+    letter-spacing:.06em;margin-top:2px;margin-bottom:14px}
+
+  /* form field, film-panel style */
+  .mfield{margin-bottom:12px}
+  .mfield .lab{font-size:11px;font-weight:700;color:var(--ink-dim);
+    font-family:"Courier New",monospace;letter-spacing:.08em;margin-bottom:5px;display:block}
+  .minput{background:rgba(232,161,58,.05);border:1px solid var(--line);
+    padding:10px 12px;font-size:13.5px;font-weight:700;color:var(--ink);
+    display:flex;align-items:center;justify-content:space-between}
+  .minput .u{color:var(--ink-faint);font-size:11px;font-family:"Courier New",monospace}
+  .mstep{display:flex;align-items:center;justify-content:space-between;
+    background:rgba(232,161,58,.05);border:1px solid var(--line);padding:5px 9px}
+  .mstep button{width:30px;height:30px;background:rgba(232,161,58,.12);border:1px solid var(--line);
+    color:var(--amber);font-size:17px;font-weight:700;line-height:1;cursor:default}
+  .mstep .v{font-size:18px;font-weight:800;color:var(--ink)}
+  .mstep .v small{font-size:11px;color:var(--ink-faint);font-weight:600;margin-left:2px}
+  .mseg{display:flex;border:1px solid var(--line);background:rgba(0,0,0,.25)}
+  .mseg span{flex:1;text-align:center;font-size:11.5px;font-weight:700;color:var(--ink-faint);
+    padding:8px 0}
+  .mseg span.on{background:rgba(232,161,58,.16);color:var(--amber);
+    box-shadow:0 0 12px rgba(232,161,58,.25) inset}
+  /* receipt-style summary */
+  .msum{border:1px dashed var(--line);padding:12px 13px;margin-top:12px;background:rgba(0,0,0,.25)}
+  .msum .l{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:var(--ink-dim)}
+  .msum .l.big{border-top:1px solid var(--line);margin-top:5px;padding-top:9px;
+    font-size:15px;color:var(--ink);font-weight:800}
+  .msum .l.big span:last-child{color:var(--amber);font-family:"Courier New",monospace}
+  /* tape-deck button inside phone */
+  .mbtn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:13px;
+    background:linear-gradient(180deg,#2c2013,#1a120a);border:1px solid var(--amber);
+    padding:12px;font-weight:800;font-size:13.5px;color:var(--ink);letter-spacing:.02em;
+    box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  .mbtn .tri{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;
+    border-color:transparent transparent transparent var(--amber)}
+  .mnote{font-size:11px;color:var(--ink-dim);line-height:1.6;padding:9px 11px;margin-top:11px;
+    border-left:2px solid var(--amber);background:rgba(232,161,58,.06)}
+
+  /* camera / viewfinder screen 2 */
+  .camscene{position:absolute;inset:0;z-index:5;overflow:hidden}
+  .camscene img{width:100%;height:100%;object-fit:cover;
+    filter:sepia(.3) saturate(1.05) contrast(1.02) brightness(.72)}
+  .camscene .grid-guide{position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,transparent 33.3%,rgba(255,255,255,.08) 33.3%,rgba(255,255,255,.08) 33.5%,transparent 33.5%,transparent 66.5%,rgba(255,255,255,.08) 66.5%,rgba(255,255,255,.08) 66.7%,transparent 66.7%),
+      linear-gradient(0deg,transparent 33.3%,rgba(255,255,255,.08) 33.3%,rgba(255,255,255,.08) 33.5%,transparent 33.5%,transparent 66.5%,rgba(255,255,255,.08) 66.5%,rgba(255,255,255,.08) 66.7%,transparent 66.7%)}
+  .camscene .corner{position:absolute;width:22px;height:22px;border:2px solid rgba(255,255,255,.55)}
+  .camscene .corner.tl{top:16px;left:16px;border-right:0;border-bottom:0}
+  .camscene .corner.tr{top:16px;right:16px;border-left:0;border-bottom:0}
+  .camscene .corner.bl{bottom:110px;left:16px;border-right:0;border-top:0}
+  .camscene .corner.br{bottom:110px;right:16px;border-left:0;border-top:0}
+  .camguide{position:absolute;left:0;right:0;bottom:118px;text-align:center;z-index:8}
+  .camguide b{display:inline-block;background:rgba(0,0,0,.55);color:#fff;font-weight:600;
+    font-size:11px;padding:6px 13px;border-radius:2px;letter-spacing:.02em}
+  .camctrl{position:absolute;left:0;right:0;bottom:0;height:100px;z-index:9;
+    display:flex;align-items:center;justify-content:space-around;
+    background:linear-gradient(0deg,rgba(0,0,0,.72),transparent)}
+  .camctrl .side{width:46px;text-align:center;color:#e9e1d3;font-size:9.5px;line-height:1.3;font-weight:600}
+  .camctrl .shutter{width:62px;height:62px;border-radius:50%;border:4px solid #fff;
+    display:grid;place-items:center}
+  .camctrl .shutter b{width:22px;height:22px;border-radius:5px;background:var(--red);
+    box-shadow:0 0 14px var(--red)}
+
+  /* segment split grid screen 3 */
+  .segwrap{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:4px}
+  .stile{position:relative;aspect-ratio:9/12;overflow:hidden;border:1px solid var(--line);
+    background:linear-gradient(160deg,#3a2c19,#1a120a)}
+  .stile img{width:100%;height:100%;object-fit:cover;
+    filter:sepia(.34) saturate(1.05) brightness(.82)}
+  .stile .no{position:absolute;top:4px;left:5px;font-family:"Courier New",monospace;
+    font-size:9px;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:1px 5px}
+  .stile .len{position:absolute;bottom:4px;right:5px;font-family:"Courier New",monospace;
+    font-size:8.5px;color:var(--amber);background:rgba(0,0,0,.5);padding:1px 4px}
+  .stile.off::before{content:"";position:absolute;inset:0;background:rgba(12,10,7,.78);z-index:2}
+  .stile.off{border-color:var(--red)}
+  .stile.off .flag{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#fff;gap:3px;font-size:9px;font-weight:700}
+  .stile.off .flag .x{font-size:15px;color:var(--red)}
+  .splitmeta{display:flex;justify-content:space-between;font-family:"Courier New",monospace;
+    font-size:10.5px;color:var(--ink-dim);margin:10px 2px 0;font-weight:600}
+  .splitmeta .hide{color:var(--red)}
+
+  /* unbox / receive screen 4 */
+  .mystery{position:relative;aspect-ratio:1/1.05;overflow:hidden;border:1px solid var(--line);
+    background:radial-gradient(90% 70% at 50% 35%,#3a2c19,#160f08 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .mystery .seal{position:absolute;top:11px;left:11px;font-family:"Courier New",monospace;
+    font-size:9px;letter-spacing:.14em;color:var(--amber);border:1px solid var(--line);padding:3px 8px}
+  .mystery .qm{font-family:"Courier New",monospace;font-size:56px;font-weight:800;
+    color:var(--amber);text-shadow:0 0 24px rgba(232,161,58,.5);line-height:1}
+  .mystery .cap{font-size:11.5px;color:var(--ink-dim);margin-top:12px;max-width:80%;line-height:1.6}
+  .mystery .shine{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0,rgba(0,0,0,.12) 1px,transparent 1px,transparent 3px)}
+  .miniinfo{display:flex;gap:7px;margin:12px 0}
+  .miniinfo .m{flex:1;border:1px solid var(--line);padding:8px 4px;text-align:center;background:rgba(0,0,0,.2)}
+  .miniinfo .m .mk{font-size:9px;color:var(--ink-faint);font-family:"Courier New",monospace;letter-spacing:.06em}
+  .miniinfo .m .mv{font-size:14px;font-weight:800;color:var(--ink);margin-top:3px}
+  .miniinfo .m .mv small{font-size:9px;color:var(--ink-faint);font-weight:600}
+  @media(max-width:900px){
+    .mocks{grid-template-columns:repeat(2,1fr);gap:24px 20px}
+  }
+  @media(max-width:520px){
+    .mocks{grid-template-columns:1fr;gap:38px;max-width:320px;margin-left:auto;margin-right:auto}
+  }
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .what-grid,.safe-grid{grid-template-columns:1fr;gap:34px}
+    .price-body{grid-template-columns:1fr}
+    .price-cell{border-right:0;border-bottom:1px solid rgba(232,161,58,.14)}
+    .price-cell:last-child{border-bottom:0}
+  }
+  @media(max-width:560px){
+    section{padding:64px 0}
+    .rec-row{padding:0 18px;top:20px}
+    .fact-item{grid-template-columns:1fr;gap:6px}
+    .fact-item .val{text-align:left}
+    .appreciate{padding:22px 18px}
+    .appreciate .row{grid-template-columns:1fr;gap:8px}
+    .hero-cta{gap:14px}
+    .btn-play{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO / 録画 ============ -->
+<header class="hero">
+  <div class="hero-frame">
+    <img src="images/hero.png" alt="薄暗いスタジオで練習するライブアイドルの粒状なホームビデオ映像" fetchpriority="high">
+  </div>
+  <div class="rec-row">
+    <span class="rec-badge"><span class="dot"></span>REC</span>
+    <span class="hero-stamp">2026 7 2 &nbsp;PM 9:14</span>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="kicker" style="margin-bottom:22px">Lapsell</div>
+      <h1>練習時間を、<br><span class="glow">収益に変える。</span></h1>
+      <p class="sub">今日撮った、なんでもない練習の10秒。<br>それが世界に1つの「動くグッズ」になって、ファンの手元で再生され続ける。</p>
+      <div class="hero-cta">
+        <a href="#app" class="btn-play"><span class="tri"></span>この仕組みを再生する</a>
+        <a href="#what" class="btn-ghost">Lapsellとは何か →</a>
+      </div>
+      <div class="scroll-hint">SCROLL TO PLAY</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INSIGHT ============ -->
+<section class="insight">
+  <div class="wrap rv">
+    <div class="kicker" style="justify-content:center">RE-PLAY</div>
+    <p class="big">撮った時は、なんでもない日常だった。<br>でも時間が経って見返すと、<br><span class="glow">二度と戻らない宝物になっている。</span></p>
+    <p class="note">昔のホームビデオを見返したときの、あの感覚。Lapsellは、あなたの「今の練習」を、その宝物に変える仕組みです。まだ無名の今だからこそ、その一場面には価値がある。</p>
+    <div class="still-pair">
+      <figure class="rv film">
+        <img src="images/vhs-tape.png" alt="ラベルが空白のVHSテープのブツ撮り写真" loading="lazy">
+        <div class="scan"></div>
+        <span class="stamp">TAPE</span>
+      </figure>
+      <figure class="rv film">
+        <img src="images/reel.png" alt="暖色の光に照らされた8mmフィルムのリールのブツ撮り写真" loading="lazy">
+        <div class="scan"></div>
+        <span class="stamp">REEL</span>
+      </figure>
+    </div>
+    <p class="note" style="margin-top:22px">かつては、テープやフィルムに残した。今は、スマホで撮った10秒に残す。</p>
+  </div>
+</section>
+
+<!-- ============ WHAT IS ============ -->
+<section class="what" id="what">
+  <div class="wrap">
+    <div class="what-grid">
+      <div class="rv">
+        <div class="kicker">What is Lapsell</div>
+        <h2>あなたの練習は、<br><em>動くホームビデオ</em>になる。</h2>
+        <p class="lead">アーティストが「これからやる練習の時間枠」を先に出品する。ファンはそれを買う。当日スマホで練習を撮るだけ。その映像は約10秒の断片に自動で分割され、世界に1つの一場面として、購入者ひとりひとりに配られます。</p>
+        <div class="caption-mono">▼ 1本の練習映像が、それぞれ違う一場面に分かれて配られる</div>
+        <div class="segline" aria-hidden="true">
+          <span class="seg lit"></span><span class="seg"></span><span class="seg lit"></span>
+          <span class="seg"></span><span class="seg lit"></span><span class="seg"></span>
+          <span class="seg lit"></span><span class="seg"></span>
+        </div>
+        <div class="caption-mono">= ライブ物販のチェキや生写真の、"動く一点物"版。</div>
+      </div>
+      <div class="rv film">
+        <img src="images/rec-shooting.png" alt="練習スタジオでスマホを三脚に立ててバンドのリハーサルを撮影する様子" loading="lazy">
+        <div class="scan"></div>
+        <span class="rec"><span class="dot"></span>REC</span>
+        <span class="stamp">2026 7 2</span>
+      </div>
+    </div>
+    <ul class="rv" style="margin-top:48px">
+      <li><b>動く</b><span>写真ではなく、本人の練習が動いている映像。10秒の生の断片。</span></li>
+      <li><b>本物</b><span>作られた演出ではなく、その日の本当の練習時間そのもの。</span></li>
+      <li><b>1つだけ</b><span>同じ断片は誰も持っていない。買った人だけの一場面。</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ STEPS / 録画 ============ -->
+<section class="steps">
+  <div class="wrap">
+    <div class="rv">
+      <div class="kicker">録画 — 出品から所有まで</div>
+      <h2>テープに残して、ダビングして、<em>手元で再生される。</em></h2>
+      <p class="lead">やることは「撮るだけ」。編集も、機材も要りません。出品してから、ファンの手元に届くまでの流れです。</p>
+    </div>
+    <div class="tape rv">
+      <div class="tape-line" aria-hidden="true"></div>
+      <div class="step">
+        <div class="num">1</div>
+        <div class="tag">出品</div>
+        <h3>未来の練習の時間枠を出す</h3>
+        <p>「◯月◯日のダンス練習」など、これからやる練習を出品。日時・価格・配布本数・1本の長さを自分で決めます。</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="tag">購入</div>
+        <h3>ファンが時間枠を買う</h3>
+        <p>中身はまだ撮影すらされていない。だから「届くまで分からない」。その日を一緒に待つ体験ごと売れます。</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="tag">撮影</div>
+        <h3>当日、スマホで撮るだけ</h3>
+        <p>いつもの練習をスマホで回すだけ。特別なことは何もしなくていい。編集も不要です。</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div class="tag">保存・分割</div>
+        <h3>アップすると自動で断片に分かれる</h3>
+        <p>撮った映像をアップロードすると、約10秒のセグメントに自動分割。1本のテープが、配る分だけの一場面になります。</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <div class="tag">公開前チェック</div>
+        <h3>まずい瞬間は、世に出す前に外せる</h3>
+        <p>配布前に自分で中身を確認。事故の瞬間だけを非公開にできます（対象の購入者には自動で返金）。</p>
+      </div>
+      <div class="step">
+        <div class="num">6</div>
+        <div class="tag">配布</div>
+        <h3>ひとりひとりに、違う一場面を配る</h3>
+        <p>承認された断片が、購入者へランダムかつ一意に割り当てられる。誰ひとり同じものは受け取りません。</p>
+      </div>
+      <div class="step">
+        <div class="num">7</div>
+        <div class="tag">所有・再生</div>
+        <h3>ファンの手元で、再生され続ける</h3>
+        <p>ファンは自分だけの断片を受け取り、手元に保有。何度でも見返せる、世界に1つのホームビデオになります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP MOCK / アプリ画面 ============ -->
+<section class="app" id="app">
+  <div class="wrap">
+    <div class="rv intro">
+      <div class="kicker">アプリ画面 — 実際の操作</div>
+      <h2>スマホの中では、<em>こう動く。</em></h2>
+      <p class="lead">出品から、当日の撮影、断片への分割、ファンの受け取りまで。難しい操作はありません。実際のアプリ画面を、8mmビデオのファインダー越しに覗いてみてください。</p>
+    </div>
+
+    <div class="mocks">
+
+      <!-- 画面1：出品 -->
+      <div class="mock rv">
+        <div class="mcap">
+          <span class="mn"><span class="dot"></span>SCREEN 01 ・ 出品</span>
+          <h3>練習枠を出品する</h3>
+          <p>日時・価格・本数・長さを入れるだけ。売上の見込みもその場で分かる。</p>
+        </div>
+        <div class="phone"><div class="screen">
+          <div class="vf"><span class="rec"><span class="d"></span>REC</span><span class="date">2026 7 2 &nbsp;PM 9:14</span></div>
+          <div class="mbody">
+            <div class="mtitle">練習枠を出品</div>
+            <div class="msub">未来の練習時間を先に販売</div>
+            <div class="mfield"><span class="lab">練習の日時</span>
+              <div class="minput"><span>7月12日（日）19:00</span><span class="u">📅</span></div></div>
+            <div class="mfield"><span class="lab">1本の価格</span>
+              <div class="minput"><span>¥ 1,500</span><span class="u">/ 本</span></div></div>
+            <div class="mfield"><span class="lab">販売本数＝配布数</span>
+              <div class="mstep"><button>−</button><span class="v">30 <small>本</small></span><button>＋</button></div></div>
+            <div class="mfield"><span class="lab">1本の長さ</span>
+              <div class="mseg"><span>7秒</span><span class="on">10秒</span><span>15秒</span></div></div>
+            <div class="msum">
+              <div class="l"><span>売上（満枠）</span><span>¥45,000</span></div>
+              <div class="l"><span>手数料 5%</span><span>− ¥2,250</span></div>
+              <div class="l big"><span>受け取り見込み</span><span>¥42,750</span></div>
+            </div>
+            <div class="mbtn"><span class="tri"></span>この内容で出品する</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- 画面2：撮影 -->
+      <div class="mock rv">
+        <div class="mcap">
+          <span class="mn"><span class="dot"></span>SCREEN 02 ・ 録画</span>
+          <h3>当日、スマホで撮るだけ</h3>
+          <p>いつもの練習を回すだけ。特別な機材も編集もいらない。</p>
+        </div>
+        <div class="phone"><div class="screen">
+          <div class="camscene">
+            <img src="images/rec-shooting.png" alt="スタジオでスマホを構えて練習を撮影するアーティストのビデオファインダー映像" loading="lazy">
+            <div class="grid-guide"></div>
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+          </div>
+          <div class="vf" style="z-index:10"><span class="rec"><span class="d"></span>REC 00:38</span><span class="date">2026 7 12</span></div>
+          <div class="camguide"><b>7/12 新曲リハ ・ 30本ぶんの枠</b></div>
+          <div class="camctrl">
+            <div class="side">ライブ<br>フォト</div>
+            <div class="shutter"><b></b></div>
+            <div class="side">アルバム<br>から選ぶ</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- 画面3：分割・公開前チェック -->
+      <div class="mock rv">
+        <div class="mcap">
+          <span class="mn"><span class="dot"></span>SCREEN 03 ・ 保存</span>
+          <h3>断片に分けて、事故だけ外す</h3>
+          <p>約10秒に自動分割。まずい瞬間だけ非公開に。その分は自動返金。</p>
+        </div>
+        <div class="phone"><div class="screen">
+          <div class="vf"><span class="rec"><span class="d"></span>REC</span><span class="date">2026 7 12 &nbsp;PM 7:48</span></div>
+          <div class="mbody">
+            <div class="mtitle">公開前チェック</div>
+            <div class="msub">IMG_4821.MOV ・ 30本に分割完了</div>
+            <div class="mnote">映像は約10秒ずつに自動分割されました。<b>事故の瞬間だけ</b>非公開にできます。</div>
+            <div class="segwrap" style="margin-top:12px">
+              <div class="stile"><img src="images/rec-shooting.png" alt="練習映像の断片1" loading="lazy"><span class="no">#01</span><span class="len">0:10</span></div>
+              <div class="stile"><img src="images/hero.png" alt="練習映像の断片2" loading="lazy"><span class="no">#02</span><span class="len">0:10</span></div>
+              <div class="stile off"><span class="no">#03</span><span class="len">0:10</span><span class="flag"><span class="x">✕</span>非公開</span></div>
+              <div class="stile"><img src="images/hero.png" alt="練習映像の断片4" loading="lazy" style="object-position:70% 50%"><span class="no">#04</span><span class="len">0:09</span></div>
+              <div class="stile"><img src="images/rec-shooting.png" alt="練習映像の断片5" loading="lazy" style="object-position:30% 40%"><span class="no">#05</span><span class="len">0:10</span></div>
+              <div class="stile"><img src="images/hero.png" alt="練習映像の断片6" loading="lazy" style="object-position:20% 50%"><span class="no">#06</span><span class="len">0:11</span></div>
+            </div>
+            <div class="splitmeta"><span>公開 29本</span><span class="hide">非公開 1本（自動返金）</span></div>
+            <div class="mbtn"><span class="tri"></span>公開・配布する</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- 画面4：受け取り・開封 -->
+      <div class="mock rv">
+        <div class="mcap">
+          <span class="mn"><span class="dot"></span>SCREEN 04 ・ 再生</span>
+          <h3>ファンが受け取り、開封する</h3>
+          <p>中身は届くまで分からない。世界に1つの断片が、手元で再生される。</p>
+        </div>
+        <div class="phone"><div class="screen">
+          <div class="vf"><span class="rec"><span class="d"></span>PLAY</span><span class="date">2026 7 12 &nbsp;PM 7:50</span></div>
+          <div class="mbody">
+            <div class="mtitle">断片が届きました</div>
+            <div class="msub">彩夏 ・ 7/12 新曲リハ</div>
+            <div class="mystery">
+              <span class="seal">SEALED ・ 開封前</span>
+              <div class="qm">?</div>
+              <div class="cap">世界に1つ。あなたに割り当てられた約10秒の断片。</div>
+              <div class="shine"></div>
+            </div>
+            <div class="miniinfo">
+              <div class="m"><div class="mk">通し番号</div><div class="mv">#017<small>/29</small></div></div>
+              <div class="m"><div class="mk">長さ</div><div class="mv">0:10</div></div>
+              <div class="m"><div class="mk">発行</div><div class="mv">世界に1</div></div>
+            </div>
+            <div class="mbtn"><span class="tri"></span>開封して再生する</div>
+            <div class="mnote" style="border-color:var(--line);background:rgba(0,0,0,.2)">この断片はあなただけのもの。所有証明つきで、手元に保管されます。</div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUE / 将来価値 ============ -->
+<section class="value">
+  <div class="wrap">
+    <div class="rv">
+      <div class="kicker">再生 — 5年後に見返す</div>
+      <h2>無名の"今"ほど、<em>あとで価値が上がる。</em></h2>
+      <p class="lead">ホームビデオは、撮った瞬間より、年月が経ってからの方が価値が出る。無名時代の練習映像は、まさにそれ。ファンは「自分が育てた」という物語ごと、あなたの今を買います。</p>
+    </div>
+
+    <div class="appreciate rv">
+      <div class="caption-mono" style="margin-bottom:6px">同じ1本の練習映像が、時間とともにどう見えるか</div>
+      <div class="row">
+        <span class="yr">2026 今</span>
+        <div>
+          <div class="bar" style="width:22%"></div>
+          <p>まだ無名。「なんでもない練習」の一場面に見える。</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="yr">2029</span>
+        <div>
+          <div class="bar" style="width:52%"></div>
+          <p>少しずつ知られてきた。あの頃を知るファンの「宝物」になる。</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="yr">2031</span>
+        <div>
+          <div class="bar" style="width:92%"></div>
+          <p>ブレイク後。「無名時代の、世界に1つの練習映像」は二度と手に入らない。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="milk rv">
+      <p><b>例えば M!LK。</b> 結成から11年目にブレイクし、紅白初出場を果たしました。もし彼らの「無名時代の練習風景」を、世界に1つの動く断片として持っていたら——。今のあなたの練習も、誰かにとっての「その1本」になり得ます。</p>
+      <p class="src">※ 将来の価値上昇を保証するものではありません。過去の事例として。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REASONS fans buy ============ -->
+<section class="reasons">
+  <div class="wrap">
+    <div class="rv">
+      <div class="kicker">本当に売れるのか</div>
+      <h2>ファンは、素の一場面に<br><em>もうお金を払っている。</em></h2>
+      <p class="lead">「動く一点物なんて、本当に買われるの?」——その答えは、すでにある行動が示しています。一点物・素のコンテンツ・本人とのつながりに、ファンは現に課金している。Lapsellの断片も、同じ理由で買われます。</p>
+    </div>
+    <div class="fact rv">
+      <div class="fact-item">
+        <div class="lbl"><b>ライブ物販</b>で、グッズ購入者が1年間に使う平均額</div>
+        <div class="val">2.2万円</div>
+      </div>
+      <div class="fact-item">
+        <div class="lbl">アイドル系ファンの<b>グッズ購入率</b></div>
+        <div class="val">75.4%</div>
+      </div>
+      <div class="fact-item">
+        <div class="lbl">ライブアイドル収入の過半を支える<b>チェキ1枚</b>の相場</div>
+        <div class="val">約1,500円</div>
+      </div>
+      <div class="fact-item">
+        <div class="lbl">本人の"素の日常"に課金する<b>bubbleの購読者</b>（世界）</div>
+        <div class="val">200万人超</div>
+      </div>
+    </div>
+    <p class="src">※ 出典: ライブ・エンタメ／ファンダム市場に関する各種調査より。数値は「何の数字か」を先に示しています。</p>
+  </div>
+</section>
+
+<!-- ============ TV playback feature image ============ -->
+<section style="padding:0">
+  <div class="film rv" style="border-left:0;border-right:0">
+    <img src="images/tv-playback.png" alt="薄暗い部屋でブラウン管テレビに映る粒状の映像を見つめるファン" loading="lazy" style="width:100%;max-height:62vh;object-fit:cover">
+    <div class="scan"></div>
+    <span class="stamp">PLAY ▶ 2026 7 2</span>
+  </div>
+</section>
+
+<!-- ============ SAFE / 事故を防ぐ ============ -->
+<section class="safe">
+  <div class="wrap">
+    <div class="safe-grid">
+      <div class="rv film">
+        <img src="images/camcorder.png" alt="家庭用ビデオカメラのブツ撮り写真" loading="lazy">
+        <div class="scan"></div>
+        <span class="stamp">STOP ■</span>
+      </div>
+      <div class="rv">
+        <div class="kicker">一時停止できる</div>
+        <h2>事故は、<em>世に出る前に止められる。</em></h2>
+        <p class="lead">生配信と違い、Lapsellは「撮ってから、アップして、配る」順番。配布の前に、必ず自分で中身を確認できます。</p>
+        <ol>
+          <li><b>撮影は後からアップロード。</b> リアルタイムで流れないから、うっかりが世に出ません。</li>
+          <li><b>公開前に全部の断片を確認。</b> まずい瞬間だけを、配布前に非公開にできます。</li>
+          <li><b>非公開にした分は自動で返金。</b> 該当の購入者への対応も自動。手間はかかりません。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICE / 料金 ============ -->
+<section class="price">
+  <div class="wrap">
+    <div class="rv">
+      <div class="kicker">料金</div>
+      <h2>始めるのに、<em>お金はかからない。</em></h2>
+      <p class="lead">初期費用0円。売れたときだけ、手数料がかかります。捨てていた練習の時間を、ノーリスクで収益に変えられます。</p>
+    </div>
+    <div class="price-panel rv">
+      <div class="price-head">
+        <span class="t">LAPSELL — FEE</span>
+        <span class="tstamp"><span class="dot"></span>REC</span>
+      </div>
+      <div class="price-body">
+        <div class="price-cell">
+          <div class="k">初期費用</div>
+          <div class="v"><span>0</span>円</div>
+          <p>登録も出品も無料。まず出してみるだけなら1円もかかりません。</p>
+        </div>
+        <div class="price-cell">
+          <div class="k">手数料</div>
+          <div class="v"><span>5</span>%〜</div>
+          <p>売れた金額から。売れなければ費用は発生しません。</p>
+        </div>
+        <div class="price-cell">
+          <div class="k">用意するもの</div>
+          <div class="v">スマホ<span>のみ</span></div>
+          <p>撮影機材も編集ソフトも不要。いつもの練習を撮るだけ。</p>
+        </div>
+      </div>
+      <div class="price-note">※ 手数料率は販売形態により変動する場合があります。詳細は登録時にご確認いただけます。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="rv" style="max-width:760px;margin:0 auto">
+      <div class="kicker">よくある質問</div>
+      <h2 style="margin-bottom:34px">Q &amp; A</h2>
+      <details><summary>編集や特別な撮影は必要ですか?</summary>
+        <p>必要ありません。当日、いつもの練習をスマホで撮るだけです。アップロードすれば、約10秒の断片への分割は自動で行われます。</p></details>
+      <details><summary>本当に売れるのか不安です。</summary>
+        <p>ファンはすでに、チェキ・生写真・ファンとのつながりに現にお金を払っています（ライブ物販の年間平均2.2万円、チェキ1枚約1,500円など）。Lapsellの「動く一点物」も、同じ理由で買われます。まず少ない配布本数から試すこともできます。</p></details>
+      <details><summary>まずい瞬間が配られてしまわないか心配です。</summary>
+        <p>配布の前に、あなた自身がすべての断片を確認できます。事故の瞬間だけを非公開にでき、その分は購入者へ自動返金されます。生配信と違い、後からアップロードする仕組みなので安心です。</p></details>
+      <details><summary>どんな練習を出せばいいですか?</summary>
+        <p>ダンスや歌の練習、バンドのリハ、ネタ合わせ、楽屋の裏側など、普段の活動そのものでかまいません。「なんでもない日常」こそ、後で宝物になります。</p></details>
+      <details><summary>費用はいくらかかりますか?</summary>
+        <p>初期費用は0円です。売れたときだけ手数料5%〜がかかります。売れなければ費用は発生しません。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="cta">
+  <div class="wrap rv">
+    <div class="kicker" style="justify-content:center">Lapsell</div>
+    <h2>今日の練習を、<em>録画しておこう。</em></h2>
+    <p class="lead">なんでもない今の10秒が、後で誰かの宝物になる。<br>初期費用0円・スマホだけで、今日から始められます。</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-play"><span class="tri"></span>無料で出品をはじめる</a>
+      <a href="#what" class="btn-ghost">もう一度、仕組みを見る →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">LAPSELL</div>
+    <p>練習時間を、収益に変える。</p>
+    <p style="margin-top:14px;opacity:.7">© 2026 Lapsell</p>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
