@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapsell｜チェキは、撮った。次は"動くチェキ"。</title>
+<style>
+  :root{
+    --ink:#1c1815;          /* 手書きペンの黒に近い墨 */
+    --ink-soft:#4a423b;
+    --paper:#f4ece0;        /* 物販机の紙・POPの地色 */
+    --paper-2:#efe4d3;
+    --cloth:#7c1f24;        /* テーブルクロスの赤 */
+    --cloth-dark:#5c161a;
+    --wood:#2a2320;         /* 物販机の暗い木目 */
+    --white-border:#fbf9f5; /* チェキの白フチ */
+    --accent:#e0483d;       /* 油性ペンの赤 */
+    --pink:#e86a8e;         /* サインのピンク */
+    --gold:#c8a24a;
+    --line:#d8cbb6;
+    --shadow:0 14px 30px rgba(30,20,15,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit}
+
+  /* 手書きサイン風の見出しに使う代替：太字＋わずかな傾き */
+  .hand{
+    font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+    font-weight:800;
+    letter-spacing:.02em;
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:760px;margin:0 auto;padding:0 22px}
+
+  /* ===== 章ラベル（物販の言葉・ POP風タグ） ===== */
+  .kicker{
+    display:inline-block;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.18em;
+    color:var(--cloth);
+    background:var(--white-border);
+    padding:6px 14px;
+    border:1.5px solid var(--ink);
+    box-shadow:3px 3px 0 rgba(28,24,21,.85);
+    transform:rotate(-1.6deg);
+    margin-bottom:22px;
+  }
+  h2.sec{
+    font-size:clamp(26px,6vw,40px);
+    line-height:1.28;
+    font-weight:800;
+    letter-spacing:.01em;
+    margin-bottom:16px;
+  }
+  h2.sec .u{
+    background:linear-gradient(transparent 62%, rgba(224,72,61,.32) 62%);
+    padding:0 .05em;
+  }
+  .lead{font-size:clamp(16px,2.4vw,18px);color:var(--ink-soft);max-width:640px}
+
+  /* ===================== HERO ===================== */
+  header.hero{
+    position:relative;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #3a2f28 0%, #241d19 60%, #191411 100%);
+    color:#f6efe3;
+    padding:26px 0 0;
+    overflow:hidden;
+  }
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    max-width:1040px;margin:0 auto;padding:0 22px 8px;
+  }
+  .logo{
+    font-weight:800;font-size:22px;letter-spacing:.04em;
+    display:flex;align-items:center;gap:9px;
+  }
+  .logo .dot{
+    width:14px;height:14px;border-radius:3px;background:var(--accent);
+    box-shadow:0 0 0 3px rgba(255,255,255,.12);transform:rotate(8deg);
+  }
+  .topbar nav{display:flex;gap:20px;font-size:14px;font-weight:600}
+  .topbar nav a{opacity:.8;text-decoration:none}
+  .topbar nav a:hover{opacity:1}
+
+  .hero-inner{
+    max-width:1040px;margin:0 auto;padding:34px 22px 0;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;
+  }
+  .hero-copy .tag{
+    display:inline-block;font-weight:700;font-size:13.5px;letter-spacing:.14em;
+    color:#f3d9a0;border:1.5px solid rgba(243,217,160,.5);
+    padding:5px 12px;border-radius:2px;margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(30px,6.6vw,56px);
+    line-height:1.16;font-weight:800;letter-spacing:.005em;margin-bottom:20px;
+  }
+  .hero h1 .mv{color:#f3d9a0}
+  .hero h1 small{
+    display:block;font-size:clamp(15px,3vw,20px);font-weight:600;
+    color:#d8ccbb;margin-top:14px;letter-spacing:.01em;line-height:1.6;
+  }
+  .hero p.sub{color:#c9beac;font-size:16.5px;max-width:480px;margin-bottom:26px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+  /* CTA＝物販POPの「値札／プレート」の質感。グラデ角丸ボタン禁止。 */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-weight:800;font-size:16px;text-decoration:none;cursor:pointer;
+    padding:15px 26px;border:0;
+  }
+  .btn-primary{
+    background:var(--accent);color:#fff;
+    border:2px solid #fff;
+    box-shadow:5px 5px 0 rgba(0,0,0,.35);
+    transform:rotate(-1deg);
+  }
+  .btn-primary:hover{transform:rotate(-1deg) translateY(-2px);}
+  .btn-ghost{
+    color:#f6efe3;text-decoration:underline;text-underline-offset:5px;
+    text-decoration-thickness:2px;font-size:15px;
+  }
+  .fee-note{margin-top:16px;font-size:13.5px;color:#b7ab98;letter-spacing:.02em}
+  .fee-note b{color:#f3d9a0}
+
+  /* ヒーロー写真をチェキ風の白フチ＋テープで演出 */
+  .hero-photo{position:relative;padding:6px 0 40px}
+  .cheki{
+    background:var(--white-border);
+    padding:12px 12px 46px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .cheki img{width:100%}
+  .cheki .cap{
+    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:700;
+    color:#3a322b;font-size:14px;
+  }
+  .cheki.tilt{transform:rotate(2deg)}
+  .tape{
+    position:absolute;width:96px;height:30px;
+    background:rgba(240,224,150,.55);
+    box-shadow:0 1px 3px rgba(0,0,0,.15);
+    top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    z-index:3;
+  }
+  .tape.r{left:auto;right:16px;top:-10px;transform:rotate(6deg)}
+
+  .hero-wave{display:block;width:100%;height:60px;margin-top:-2px}
+
+  /* ===================== 物販の事実 ===================== */
+  .fact{background:var(--cloth);color:#fbf3e6;padding:64px 0}
+  .fact .wrap{display:grid;grid-template-columns:1fr;gap:26px}
+  .fact .kicker{color:var(--cloth);border-color:#fff;box-shadow:3px 3px 0 rgba(0,0,0,.4)}
+  .fact h2{font-size:clamp(24px,5.4vw,36px);font-weight:800;line-height:1.35}
+  .fact .statline{
+    display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:8px;
+    border-top:2px dashed rgba(255,255,255,.35);
+    border-bottom:2px dashed rgba(255,255,255,.35);
+    padding:22px 0;
+  }
+  .fact .stat{max-width:300px}
+  .fact .stat .label{font-size:14px;color:#f2d3b5;font-weight:700;margin-bottom:2px}
+  .fact .stat .val{font-size:15.5px;line-height:1.6}
+  .fact .stat .val b{font-size:21px;color:#ffd98a}
+  .fact .close{font-size:17px;line-height:1.8;max-width:660px}
+  .fact .close b{color:#ffd98a}
+
+  /* ===================== セクション共通 ===================== */
+  section{padding:78px 0}
+  section.tight{padding:60px 0}
+
+  /* ===================== 比較：チェキ / 動くチェキ ===================== */
+  .compare-head{text-align:center;margin-bottom:44px}
+  .compare-head .kicker{transform:rotate(1.4deg)}
+  .compare{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;
+    max-width:940px;margin:0 auto;
+  }
+  .col{padding:30px 26px}
+  .col.old{background:var(--paper-2)}
+  .col.new{background:var(--wood);color:#f4ebdd}
+  .col h3{font-size:22px;font-weight:800;margin-bottom:6px}
+  .col .role{font-size:13px;letter-spacing:.14em;font-weight:700;opacity:.7;margin-bottom:20px}
+  .col.new .role{color:#f3d9a0;opacity:1}
+  .col .thumb{margin-bottom:20px}
+  .col .thumb .cheki{transform:none;padding:9px 9px 30px}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .col li{display:flex;gap:11px;font-size:15px;line-height:1.6;align-items:flex-start}
+  .col li .mk{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;
+    margin-top:2px;
+  }
+  .col.old .mk{background:#d9cbb4;color:#6a5c46}
+  .col.new .mk{background:var(--accent);color:#fff}
+  .arrow{
+    display:flex;align-items:center;justify-content:center;
+    background:var(--cloth);color:#fff;font-weight:800;font-size:15px;
+    writing-mode:vertical-rl;letter-spacing:.15em;padding:0 6px;min-width:44px;
+  }
+  .arrow span{writing-mode:horizontal-tb;transform:rotate(0)}
+  .compare-note{
+    text-align:center;max-width:640px;margin:32px auto 0;
+    font-size:16px;color:var(--ink-soft);
+  }
+  .compare-note b{color:var(--cloth);font-weight:800}
+
+  /* ===================== 使うイメージ（横断写真） ===================== */
+  .usecase{background:var(--wood);color:#f2e9db}
+  .usecase .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:center}
+  .usecase .kicker{color:var(--cloth);border-color:#f2e9db}
+  .usecase h2{font-size:clamp(24px,5vw,36px);font-weight:800;line-height:1.35;margin-bottom:18px}
+  .usecase p{color:#cfc3b2;font-size:16.5px;margin-bottom:16px}
+  .usecase p b{color:#f3d9a0}
+  .usecase .photo .cheki{transform:rotate(-2deg)}
+  .usecase .photo .cheki .cap{color:#3a322b}
+
+  /* ===================== 流れ（物販フロー7ステップ） ===================== */
+  .flow{background:var(--paper)}
+  .flow-head{margin-bottom:46px}
+  .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .step{
+    padding:26px 26px 30px;position:relative;
+    border-bottom:2px solid var(--line);
+  }
+  .step:nth-child(odd){border-right:2px solid var(--line)}
+  .step .no{
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;
+    font-weight:800;font-size:15px;color:#fff;background:var(--cloth);
+    width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    box-shadow:2px 2px 0 rgba(0,0,0,.2);
+  }
+  .step h4{font-size:19px;font-weight:800;margin-bottom:8px}
+  .step p{font-size:14.5px;color:var(--ink-soft);line-height:1.7}
+  .step .mini{font-size:12.5px;color:var(--cloth);font-weight:700;margin-top:9px}
+  .flow-safety{
+    margin-top:40px;background:var(--white-border);
+    border:2px solid var(--ink);box-shadow:6px 6px 0 rgba(28,24,21,.85);
+    padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+  }
+  .flow-safety .badge{
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:800;
+    background:var(--ink);color:#f3d9a0;font-size:13px;letter-spacing:.1em;
+    padding:16px 10px;text-align:center;writing-mode:vertical-rl;
+  }
+  .flow-safety h4{font-size:19px;font-weight:800;margin-bottom:6px}
+  .flow-safety p{font-size:14.5px;color:var(--ink-soft)}
+
+  /* ===================== 売れる理由 ===================== */
+  .reasons{background:var(--paper-2)}
+  .reasons .r-head{margin-bottom:48px;max-width:680px}
+  .reason{
+    display:grid;grid-template-columns:64px 1fr;gap:22px;
+    padding:30px 0;border-top:2px dashed var(--line);align-items:start;
+  }
+  .reason:first-of-type{border-top:0}
+  .reason .rn{
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:800;
+    font-size:30px;color:var(--cloth);
+    border-bottom:3px solid var(--accent);width:min-content;padding-bottom:2px;
+  }
+  .reason h3{font-size:21px;font-weight:800;margin-bottom:8px;line-height:1.4}
+  .reason p{font-size:15.5px;color:var(--ink-soft);line-height:1.85}
+  .reason p b{color:var(--ink);background:linear-gradient(transparent 60%,rgba(224,72,61,.22) 60%)}
+  .reason .m11k{
+    margin-top:12px;font-size:13.5px;color:var(--ink-soft);
+    border-left:3px solid var(--cloth);padding-left:12px;background:rgba(124,31,36,.05);
+    padding:8px 12px;
+  }
+
+  /* ===================== はじめ方・料金 ===================== */
+  .start{background:var(--cloth);color:#fbf3e6}
+  .start .kicker{color:var(--cloth);border-color:#fff;box-shadow:3px 3px 0 rgba(0,0,0,.4)}
+  .start h2{font-size:clamp(24px,5.4vw,38px);font-weight:800;margin-bottom:14px}
+  .start .lead{color:#f4ddc9;margin-bottom:34px}
+  .pricelist{
+    background:var(--white-border);color:var(--ink);
+    box-shadow:var(--shadow);border:2px solid var(--ink);
+    max-width:560px;
+  }
+  .pricelist .pl-head{
+    background:var(--ink);color:#f3d9a0;font-family:"Hiragino Maru Gothic ProN",sans-serif;
+    font-weight:800;font-size:16px;letter-spacing:.1em;padding:12px 20px;text-align:center;
+  }
+  .pl-row{display:flex;justify-content:space-between;gap:16px;padding:15px 22px;border-bottom:1.5px dashed var(--line)}
+  .pl-row .k{font-weight:700;font-size:15px}
+  .pl-row .v{font-weight:800;font-size:15px;color:var(--cloth);text-align:right}
+  .pl-row .v small{display:block;font-weight:600;font-size:12px;color:var(--ink-soft)}
+  .pl-foot{padding:16px 22px;font-size:13px;color:var(--ink-soft);line-height:1.7}
+
+  /* ===================== FAQ ===================== */
+  .faq{background:var(--paper)}
+  details.q{border-bottom:2px solid var(--line);padding:6px 0}
+  details.q summary{
+    list-style:none;cursor:pointer;font-weight:800;font-size:17px;
+    padding:18px 40px 18px 0;position:relative;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary::after{
+    content:"＋";position:absolute;right:4px;top:16px;font-size:20px;color:var(--cloth);font-weight:800;
+  }
+  details.q[open] summary::after{content:"－"}
+  details.q .a{padding:0 4px 20px;color:var(--ink-soft);font-size:15px;line-height:1.9}
+
+  /* ===================== 最終CTA ===================== */
+  .final{background:var(--wood);color:#f4ebdd;text-align:center}
+  .final h2{font-size:clamp(26px,6vw,44px);font-weight:800;line-height:1.25;margin-bottom:18px}
+  .final h2 .mv{color:#f3d9a0}
+  .final p{color:#cfc3b2;max-width:520px;margin:0 auto 30px;font-size:16.5px}
+  .final .fee-note{margin-top:22px}
+
+  footer{background:#171210;color:#8f8577;padding:40px 0;font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+  footer .logo{color:#e6ddd0;font-size:18px}
+  footer nav{display:flex;gap:18px}
+  footer nav a{text-decoration:none;opacity:.75}
+
+  /* =====================================================================
+     スマホUIモック — 物販机の世界観で"新規に"デザイン。
+     参照モックは機能と情報構成のみ踏襲。ビジュアルは総取っ替え：
+     画面の地＝会場の暗がり／中身＝白フチのチェキ・手書きPOP短冊・
+     油性ペンの罫線・木札プレート・ゴム印スタンプ・手渡し伝票。
+     ===================================================================== */
+  .mock-head{margin-bottom:40px}
+  .mockgrid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:56px 44px;justify-items:center;align-items:start;
+  }
+  .mockslot{width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center}
+
+  /* 見出し＝物販机の手書き値札POP（画鋲どめ） */
+  .mockcap{text-align:center;margin-bottom:20px}
+  .mockcap .tagpop{
+    display:inline-block;position:relative;background:var(--white-border);
+    padding:10px 18px 12px;border:1.5px solid var(--ink);
+    box-shadow:3px 3px 0 rgba(28,24,21,.75);transform:rotate(-1.4deg);
+  }
+  .mockcap .tagpop::before{ /* 画鋲 */
+    content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:11px;height:11px;border-radius:50%;background:var(--accent);
+    box-shadow:0 1px 2px rgba(0,0,0,.4),inset 0 -1px 2px rgba(0,0,0,.3);
+  }
+  .mockcap .no{font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:800;font-size:12px;color:var(--cloth);letter-spacing:.1em}
+  .mockcap h3{font-size:17px;font-weight:800;line-height:1.35;color:var(--ink);margin-top:2px}
+  .mockcap p{font-size:12.5px;color:var(--ink-soft);margin-top:9px;letter-spacing:.01em}
+
+  /* 筐体：物販机に立てかけたスマホ。画面の地は"会場の暗がり＝木の机" */
+  .phone{
+    width:340px;max-width:100%;background:#0e0b09;border-radius:8px;padding:8px;
+    box-shadow:0 24px 48px rgba(20,12,8,.5), 0 0 0 1px rgba(0,0,0,.6);
+    position:relative;
+  }
+  /* マスキングテープで机に留めた演出（チェキ現場の質感） */
+  .phone::before{content:"";position:absolute;top:-13px;left:26px;width:78px;height:28px;
+    background:repeating-linear-gradient(90deg,rgba(240,224,150,.62) 0 6px,rgba(233,214,120,.62) 6px 12px);
+    transform:rotate(-4deg);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .phone::after{content:"";position:absolute;top:-11px;right:24px;width:70px;height:26px;
+    background:repeating-linear-gradient(90deg,rgba(240,224,150,.55) 0 6px,rgba(233,214,120,.55) 6px 12px);
+    transform:rotate(5deg);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  /* 画面の地＝会場の暗い木の質感。角丸は控えめ（物販机の"面"） */
+  .phscreen{
+    border-radius:4px;overflow:hidden;height:690px;display:flex;flex-direction:column;position:relative;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.05) 22%, rgba(0,0,0,.28)),
+      repeating-linear-gradient(91deg, #2a221c 0 14px, #251d18 14px 28px, #2e251e 28px 42px),
+      #241d18;
+    color:#f2e7d6;
+  }
+  .phnotch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:96px;height:20px;background:#0e0b09;border-radius:0 0 11px 11px;z-index:8}
+
+  /* ステータスバー：会場の暗がりなので明色 */
+  .phstatus{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 22px;font-size:12px;font-weight:700;color:#f2e7d6;flex:0 0 auto;z-index:4}
+  .phstatus .r{display:flex;align-items:center;gap:5px}
+  .phsig{display:flex;align-items:flex-end;gap:1.5px;height:10px}
+  .phsig i{width:3px;background:currentColor;border-radius:1px}
+  .phsig i:nth-child(1){height:4px}.phsig i:nth-child(2){height:6px}.phsig i:nth-child(3){height:8px}.phsig i:nth-child(4){height:10px}
+  .phbatt{width:22px;height:11px;border:1.5px solid currentColor;border-radius:2px;padding:1.5px;opacity:.9}
+  .phbatt b{display:block;height:100%;width:80%;background:currentColor;border-radius:1px}
+
+  /* アプリバー：POPの手書き見出し。下線は油性ペンの赤い波線 */
+  .phbar{flex:0 0 auto;padding:2px 16px 10px;display:flex;align-items:flex-end;gap:9px}
+  .phbar .back{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(242,231,214,.4);display:flex;align-items:center;justify-content:center;color:#f2e7d6;font-size:15px;flex:0 0 auto}
+  .phbar .ttl{font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:17px;font-weight:800;line-height:1.15;color:#fbf3e6;
+    padding-bottom:3px;background:linear-gradient(transparent 88%, rgba(224,72,61,.85) 88%)}
+  .phbar .sub{font-size:10px;color:#b7a892;margin-top:3px}
+  .phbar .sp{flex:1}
+  /* 右上のアクション＝小さな木札 */
+  .phbar .tagchip{font-size:10px;font-weight:800;color:#f3d9a0;background:#3a2f26;border:1px solid #5a4a3a;padding:4px 9px;border-radius:2px}
+
+  .phbody{flex:1;overflow:hidden;padding:2px 15px 14px;position:relative}
+
+  /* ---- 入力＝手書きPOPの短冊（紙片・油性ペンの記入欄）---- */
+  .popfield{margin-bottom:11px}
+  .popfield .lb{display:flex;align-items:baseline;gap:6px;font-size:11px;font-weight:800;color:#e6d9c4;margin-bottom:5px;letter-spacing:.02em}
+  .popfield .lb .h{font-weight:600;color:#a99a84;font-size:10px}
+  /* 紙の記入スリップ。角は紙のわずかな不揃い、下線＝ペンのケイ線 */
+  .slip{background:var(--white-border);color:var(--ink);padding:9px 12px 8px;
+    border:1px solid #d9cbb2;box-shadow:1px 2px 0 rgba(28,24,21,.12);
+    display:flex;align-items:center;justify-content:space-between;
+    font-weight:700;font-size:14px;position:relative}
+  .slip::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:1.5px;
+    background:repeating-linear-gradient(90deg,rgba(124,31,36,.4) 0 5px,transparent 5px 9px)}
+  .slip .u{color:#9a8f7e;font-size:11px;font-weight:700}
+  .slip.hand{font-family:"Hiragino Maru Gothic ProN",sans-serif}
+
+  /* 本数の増減＝チケットのもぎり枚数カウンタ（木札の＋−） */
+  .tally{display:flex;align-items:center;justify-content:space-between;background:var(--white-border);
+    border:1px solid #d9cbb2;box-shadow:1px 2px 0 rgba(28,24,21,.12);padding:6px 10px}
+  .tally button{width:32px;height:32px;border:0;background:#3a2f26;color:#f3d9a0;font-size:19px;font-weight:800;line-height:1;border-radius:2px;cursor:default;box-shadow:0 2px 0 #1f1712}
+  .tally .v{font-size:20px;font-weight:800;color:var(--ink)}
+  .tally .v small{font-size:11px;color:#9a8f7e;font-weight:700;margin-left:3px}
+
+  /* 尺の選択＝紙タブの短冊（選択中はペンで丸囲み風） */
+  .lentab{display:flex;gap:8px}
+  .lentab span{flex:1;text-align:center;font-size:12px;font-weight:800;color:#c9bda8;
+    padding:8px 0;border:1.5px dashed rgba(242,231,214,.3);border-radius:2px}
+  .lentab span.on{color:#241d19;background:var(--white-border);border:2px solid var(--accent);border-radius:14px 3px 14px 3px}
+
+  /* 注記＝ふせん（角をめくった付箋） */
+  .stickynote{background:#f6e7a6;color:#4a3b12;padding:9px 12px;font-size:11px;line-height:1.55;
+    position:relative;box-shadow:1px 2px 4px rgba(0,0,0,.2);transform:rotate(-.6deg)}
+  .stickynote::before{content:"";position:absolute;top:0;right:0;border-width:0 12px 12px 0;
+    border-style:solid;border-color:transparent #e7d488 transparent transparent}
+  .stickynote b{font-weight:800}
+
+  /* 売上プレビュー＝物販机の黒板メニュー（チョーク書き） */
+  .chalk{background:#20261f;color:#eef1e6;padding:12px 14px;margin-top:2px;
+    border:3px solid #4a3b2c;box-shadow:0 4px 0 #1a140f;border-radius:2px;position:relative}
+  .chalk .t{font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:11px;color:#a9c0a2;letter-spacing:.1em;margin-bottom:8px;border-bottom:1px dashed rgba(255,255,255,.18);padding-bottom:6px}
+  .chalk .ln{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:#d7ddcf}
+  .chalk .big{font-size:22px;font-weight:800;color:#f6e7a6;font-family:"Hiragino Maru Gothic ProN",sans-serif}
+
+  /* CTA＝手書きの木札プレート（グラデ角丸禁止・実物の値札） */
+  .plate{display:block;width:100%;text-align:center;border:0;cursor:default;
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:14.5px;font-weight:800;letter-spacing:.03em;
+    background:var(--accent);color:#fff;padding:14px;border:2px solid #fbf9f5;
+    box-shadow:4px 4px 0 rgba(0,0,0,.35);transform:rotate(-.8deg)}
+  .plate.gold{background:var(--gold);color:#241d19;border-color:var(--ink)}
+  .plate.wood{background:#3a2f26;color:#f3d9a0;border-color:#f3d9a0}
+  .plate.paper{background:var(--white-border);color:var(--ink);border-color:var(--ink);box-shadow:3px 3px 0 rgba(28,24,21,.4)}
+
+  .phkick{font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:11px;font-weight:800;letter-spacing:.08em;color:#b7a892;margin:14px 0 9px}
+  .phrule{height:2px;margin:14px 0;background:repeating-linear-gradient(90deg,rgba(242,231,214,.32) 0 6px,transparent 6px 12px)}
+
+  /* ---- 売れ行き：今日の売上を"手書き集計POP"で ---- */
+  .takings{background:var(--white-border);color:var(--ink);padding:14px 15px 13px;margin-bottom:14px;
+    border:1.5px solid var(--ink);box-shadow:4px 4px 0 rgba(28,24,21,.6);position:relative}
+  .takings::before{content:"";position:absolute;top:-8px;left:16px;width:60px;height:18px;
+    background:rgba(240,224,150,.6);transform:rotate(-5deg)}
+  .takings .lbl{font-size:10.5px;color:#8a7d68;font-weight:700;letter-spacing:.03em}
+  .takings .amt{font-size:32px;font-weight:800;margin:2px 0 2px;color:var(--cloth);font-family:"Hiragino Maru Gothic ProN",sans-serif;letter-spacing:-.01em}
+  .takings .s{font-size:11px;color:#8a7d68}
+  .takings .chips{display:flex;gap:0;margin-top:12px;border-top:1.5px dashed var(--line);padding-top:10px}
+  .takings .chip{flex:1;text-align:center;border-right:1.5px dashed var(--line)}
+  .takings .chip:last-child{border-right:0}
+  .takings .chip .k{font-size:9.5px;color:#8a7d68}
+  .takings .chip .v{font-size:15px;font-weight:800;margin-top:2px;color:var(--ink)}
+
+  /* 出品一覧＝物販机の"お品書き短冊"（画鋲どめの紙片、微妙に傾く） */
+  .slat{background:var(--white-border);color:var(--ink);border:1px solid #d9cbb2;padding:11px 13px;margin-bottom:12px;
+    box-shadow:2px 3px 0 rgba(28,24,21,.14);position:relative}
+  .slat:nth-child(odd){transform:rotate(-.5deg)}
+  .slat:nth-child(even){transform:rotate(.5deg)}
+  .slat::before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--cloth);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+  .slat .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+  .slat .date{font-size:13.5px;font-weight:800}
+  .slat .place{font-size:10px;color:#9a8f7e;margin-top:2px}
+  /* 状態＝ゴム印スタンプ風のラベル */
+  .stamp{font-size:9.5px;font-weight:800;padding:3px 8px;flex:0 0 auto;border:1.5px solid;transform:rotate(-3deg);letter-spacing:.04em}
+  .stamp.soon{color:var(--cloth);border-color:var(--cloth)}
+  .stamp.live{color:#3f7a52;border-color:#3f7a52}
+  .stamp.done{color:#8a7d68;border-color:#c3b7a2}
+  /* 売れ行き＝チケットのもぎり跡（ミシン目を塗る） */
+  .perf{height:12px;margin:9px 0 7px;display:flex;gap:2px;overflow:hidden}
+  .perf i{flex:1;background:var(--line);border-radius:2px}
+  .perf i.on{background:var(--accent)}
+  .perf i.ondone{background:#3f7a52}
+  .perf i.onarch{background:#9a8f7e}
+  .slat .sold{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-soft);font-weight:700}
+  .slat .foot{display:flex;justify-content:space-between;align-items:center;margin-top:9px;padding-top:8px;border-top:1px dashed var(--line)}
+  .slat .rev{font-size:15px;font-weight:800;color:var(--cloth)}
+  .slat .rev small{font-size:9.5px;color:#9a8f7e;font-weight:700}
+
+  /* 下部ナビ＝会場の暗がりに沈むバー（木のトーン） */
+  .phnav{flex:0 0 auto;height:54px;background:#1c1611;border-top:1px solid #3a2f26;display:flex;justify-content:space-around;align-items:center}
+  .phnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;color:#8a7d68;font-weight:700;flex:1}
+  .phnav a.on{color:#f3d9a0}
+  .phnav svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---- 受け取り＝物販机で受け取る"白フチの一点物チェキ"（開封前は裏面）---- */
+  .chekiframe{background:var(--white-border);padding:11px 11px 40px;box-shadow:0 8px 20px rgba(0,0,0,.35);
+    position:relative;transform:rotate(-1.2deg)}
+  .chekiframe .win{aspect-ratio:1/1.04;position:relative;overflow:hidden;
+    background:radial-gradient(85% 65% at 50% 32%, #3a2f26 0%, #201913 62%, #140f0b 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f3ecd6;text-align:center;padding:0 18px}
+  /* 開封前＝現像待ちの真っさら（?は現像前のプレースホルダ） */
+  .chekiframe .qm{font-size:52px;font-weight:800;line-height:1;color:#c9b78a;font-family:"Hiragino Maru Gothic ProN",sans-serif}
+  .chekiframe .cap-in{font-size:11px;color:#c9bda8;margin-top:10px;line-height:1.6}
+  .chekiframe .stampseal{position:absolute;top:12px;right:12px;font-size:9px;letter-spacing:.06em;color:#d8c79a;
+    border:1.5px solid rgba(216,199,154,.5);padding:3px 7px;transform:rotate(6deg);border-radius:2px}
+  .chekiframe .develop{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 40%)}
+  /* 白フチ下部＝手書きサイン欄（チェキの決め手） */
+  .chekiframe .sign{position:absolute;left:0;right:0;bottom:10px;text-align:center;
+    font-family:"Hiragino Maru Gothic ProN",sans-serif;font-weight:700;color:#2f2820;font-size:12px}
+  .chekiframe .sign small{display:block;color:#9a8f7e;font-size:9px;font-weight:600;letter-spacing:.06em;margin-top:1px}
+
+  /* 断片の素性＝チェキ裏の手書きスペック（3列の短冊） */
+  .specs{display:flex;gap:8px;margin:13px 0 13px}
+  .specs .m{flex:1;text-align:center;background:var(--white-border);color:var(--ink);border:1px solid #d9cbb2;padding:8px 4px;box-shadow:1px 2px 0 rgba(28,24,21,.1)}
+  .specs .mk{font-size:9px;color:#9a8f7e;font-weight:700}
+  .specs .mv{font-size:15px;font-weight:800;margin-top:2px}
+  .specs .mv small{font-size:9px;color:#9a8f7e;font-weight:700}
+
+  /* 開封後プレビュー＝白フチの中で"動くチェキ"が再生（映像フレーム） */
+  .movingcheki{background:var(--white-border);padding:9px 9px 12px;box-shadow:0 4px 12px rgba(0,0,0,.28)}
+  .movingcheki .scr{aspect-ratio:9/10;position:relative;overflow:hidden;
+    background:radial-gradient(120% 80% at 35% 20%,#4a4237 0%,#2b241d 60%,#181310 100%)}
+  .movingcheki .fig{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:34%;height:56%;background:#5b5346;border-radius:16px 16px 0 0}
+  .movingcheki .fig .h{width:30px;height:30px;border-radius:50%;background:#6b6153;margin:-24px auto 0}
+  .movingcheki .play{position:absolute;inset:0;margin:auto;width:46px;height:46px;border-radius:50%;background:rgba(251,249,245,.94);display:flex;align-items:center;justify-content:center}
+  .movingcheki .play::after{content:"";border-left:13px solid var(--cloth);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+  .movingcheki .seek{position:absolute;left:0;right:0;bottom:0;height:26px;background:rgba(0,0,0,.42);display:flex;align-items:center;gap:7px;padding:0 10px}
+  .movingcheki .seek .t{flex:1;height:2.5px;background:rgba(255,255,255,.3);position:relative}
+  .movingcheki .seek .t b{position:absolute;left:0;top:0;bottom:0;width:34%;background:#f3d9a0}
+  .movingcheki .seek span{color:#fff;font-size:9px;font-weight:700}
+
+  /* ---- 真正性＝物販のサインの"本物保証"＝朱肉のゴム印スタンプ ---- */
+  .authstamp{text-align:center;padding:6px 0 4px;position:relative}
+  .authstamp .ring{width:96px;height:96px;margin:0 auto 6px;border-radius:50%;
+    border:3px solid var(--cloth);color:var(--cloth);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transform:rotate(-8deg);position:relative;
+    box-shadow:inset 0 0 0 1px rgba(124,31,36,.35)}
+  .authstamp .ring::before{content:"";position:absolute;inset:6px;border:1.5px solid var(--cloth);border-radius:50%;opacity:.6}
+  .authstamp .ring svg{width:30px;height:30px;stroke:var(--cloth);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .authstamp .ring .rt{font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;margin-top:3px}
+  .authstamp .vt{font-size:15px;font-weight:800;color:#fbf3e6;margin-top:4px}
+  .authstamp .vs{font-size:11px;color:#c1b39c;margin-top:4px;line-height:1.55;padding:0 6px}
+
+  /* 証書の中身＝手渡しの"伝票"（レシート紙・ミシン目つき） */
+  .receipt{background:var(--white-border);color:var(--ink);margin-top:14px;padding:12px 14px 6px;position:relative;box-shadow:2px 3px 0 rgba(28,24,21,.18)}
+  .receipt::before,.receipt::after{content:"";position:absolute;left:0;right:0;height:6px;
+    background:radial-gradient(circle at 4px 0, transparent 4px, var(--white-border) 4px);
+    background-size:8px 6px}
+  .receipt::before{top:-6px;background:radial-gradient(circle at 4px 6px, transparent 4px, var(--white-border) 4px);background-size:8px 6px}
+  .receipt::after{bottom:-6px}
+  .receipt .rhead{text-align:center;font-family:"Hiragino Maru Gothic ProN",sans-serif;font-size:11px;font-weight:800;color:#8a7d68;letter-spacing:.14em;border-bottom:1.5px dashed var(--line);padding-bottom:7px;margin-bottom:2px}
+  .recrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12px}
+  .recrow:last-child{border:0}
+  .recrow .k{color:#9a8f7e;font-weight:700}
+  .recrow .v{font-weight:800;text-align:right}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.01em}
+  .heldtag{font-size:9px;color:#3f7a52;font-weight:800;border:1.5px solid #3f7a52;padding:1px 6px;margin-left:5px;transform:rotate(-2deg);display:inline-block}
+
+  /* 所有の記録＝手渡しの列（縦の受け渡しメモ） */
+  .handlog{margin-top:14px}
+  .handitem{display:flex;gap:11px;position:relative;padding-bottom:15px}
+  .handitem:last-child{padding-bottom:0}
+  .handitem .col{flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+  .handitem .d{width:11px;height:11px;background:var(--gold);border:2px solid #f3d9a0;transform:rotate(45deg);z-index:1}
+  .handitem .d.cur{background:#3f7a52;border-color:#a9c0a2}
+  .handitem .line{flex:1;width:2px;background:repeating-linear-gradient(180deg,rgba(242,231,214,.3) 0 4px,transparent 4px 8px)}
+  .handitem:last-child .line{display:none}
+  .handitem .who{font-size:12.5px;font-weight:800;color:#fbf3e6}
+  .handitem .when{font-size:10px;color:#a99a84;margin-top:1px}
+  .handitem .act{font-size:10.5px;color:#c1b39c;margin-top:2px}
+
+  /* ===================== レスポンシブ ===================== */
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:20px;padding-top:20px}
+    .hero-photo{max-width:400px;margin:0 auto}
+    .usecase .wrap{grid-template-columns:1fr;gap:28px}
+    .usecase .photo{max-width:420px;margin:0 auto}
+    .topbar nav{display:none}
+  }
+  @media(max-width:760px){
+    .mockgrid{grid-template-columns:1fr;gap:44px}
+  }
+  @media(max-width:640px){
+    section{padding:56px 0}
+    .compare{grid-template-columns:1fr;max-width:420px}
+    .arrow{writing-mode:horizontal-tb;min-width:0;padding:12px 0}
+    .arrow span{display:inline-block}
+    .steps{grid-template-columns:1fr}
+    .step{border-right:0!important}
+    .flow-safety{grid-template-columns:1fr}
+    .flow-safety .badge{writing-mode:horizontal-tb;padding:8px}
+    .reason{grid-template-columns:48px 1fr;gap:14px}
+    .reason .rn{font-size:24px}
+    footer .wrap{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="topbar">
+    <div class="logo"><span class="dot"></span>Lapsell</div>
+    <nav>
+      <a href="#compare">動くチェキ</a>
+      <a href="#flow">出品の流れ</a>
+      <a href="#app">アプリ画面</a>
+      <a href="#reasons">売れる理由</a>
+      <a href="#start">料金</a>
+    </nav>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="tag">ライブアイドル・バンド・芸人のための物販</span>
+      <h1>
+        チェキは、撮った。<br>次は<span class="mv">"動くチェキ"</span>。
+        <small>いつもの練習時間を出品するだけ。<br>本人の本物の練習が、世界に1つのグッズになって売れる。</small>
+      </h1>
+      <p class="sub">
+        物販机で1枚1,500円のチェキが売れているのと同じ理由で、
+        <b style="color:#f3d9a0">動く一点物</b>も売れます。撮って、上げるだけ。編集はいりません。
+      </p>
+      <div class="cta-row">
+        <a href="#start" class="btn btn-primary">練習時間を出品する →</a>
+        <a href="#flow" class="btn-ghost">まず流れを見る</a>
+      </div>
+      <p class="fee-note">初期費用 <b>0円</b>／手数料 <b>5%〜</b>／撮影は当日スマホ1台でOK</p>
+    </div>
+
+    <div class="hero-photo">
+      <div class="cheki tilt">
+        <span class="tape"></span>
+        <img src="images/hero.png" width="600" height="360"
+          alt="ライブ終演後の物販机。白フチのチェキの束の中で、スマホが練習映像を再生している様子">
+        <span class="cap">物販机の上：静止のチェキと、動くチェキ</span>
+      </div>
+    </div>
+  </div>
+
+  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C240,10 480,55 720,38 C960,20 1200,52 1440,30 L1440,60 L0,60 Z" fill="#f4ece0"/>
+  </svg>
+</header>
+
+<!-- ===================== 物販の事実 ===================== -->
+<section class="fact" style="padding-top:58px">
+  <div class="wrap">
+    <span class="kicker">物販の、いちばん強い事実</span>
+    <h2 class="hand">ファンは、その場の一点物に<br>すでにお金を払っている。</h2>
+    <div class="statline">
+      <div class="stat">
+        <div class="label">チェキ1枚の相場</div>
+        <div class="val"><b>約1,500円</b>／これがライブアイドルの収入の<b>半分以上</b>を支える現場も多い。</div>
+      </div>
+      <div class="stat">
+        <div class="label">ライブ物販グッズの購入者</div>
+        <div class="val">年間平均 <b>約2.2万円</b>を使う。アイドル系のグッズ購入率は <b>75.4%</b>。</div>
+      </div>
+      <div class="stat">
+        <div class="label">"素の日常"への課金</div>
+        <div class="val">本人の日常に月額課金する仕組みは、世界で <b>200万人超</b>が利用。</div>
+      </div>
+    </div>
+    <p class="close">
+      ファンが買っているのは、写真そのものではありません。<b>「その場でしか手に入らない・本人と地続きの・世界に1つ」</b>という価値です。
+      Lapsell は、その同じ価値を <b>"動く一点物"</b> に広げるだけ。だから、新しく売り方を覚える必要はありません。
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 比較：チェキ / 動くチェキ ===================== -->
+<section id="compare">
+  <div class="wrap">
+    <div class="compare-head">
+      <span class="kicker">一点物</span>
+      <h2 class="sec">机の上で、<span class="u">並べて</span>比べてみる。</h2>
+      <p class="lead" style="margin:0 auto;">チェキでできていたことは、そのまま。足りなかったところが、動くチェキで埋まります。</p>
+    </div>
+
+    <div class="compare">
+      <div class="col old">
+        <div class="role">これまで</div>
+        <h3>チェキ（紙・静止）</h3>
+        <div class="thumb">
+          <div class="cheki">
+            <img src="images/cheki-stack.png" width="480" height="480" loading="lazy"
+              alt="手書きサイン入りの白フチのチェキが3枚並んだ静物写真">
+            <span class="cap" style="color:#3a322b">サイン入り・その場の一点物</span>
+          </div>
+        </div>
+        <ul>
+          <li><span class="mk">◯</span><span>その場でしか撮れない、コピーできない一点物</span></li>
+          <li><span class="mk">◯</span><span>サイン入りで、本人とのつながりがある</span></li>
+          <li><span class="mk">△</span><span>止まった一瞬。声も動きも残らない</span></li>
+          <li><span class="mk">△</span><span>会場に来られる人にしか渡せない</span></li>
+          <li><span class="mk">△</span><span>撮る枚数＝その日のライブ時間に縛られる</span></li>
+        </ul>
+      </div>
+
+      <div class="arrow"><span>拡張</span></div>
+
+      <div class="col new">
+        <div class="role">Lapsell</div>
+        <h3>動くチェキ（映像・唯一）</h3>
+        <div class="thumb">
+          <div class="cheki" style="background:#0f0c0a;padding:9px 9px 30px">
+            <img src="images/hero.png" width="480" height="288" loading="lazy"
+              alt="スマホに映る本人の練習映像。動くチェキのイメージ">
+            <span class="cap" style="color:#f3d9a0">練習の一場面・通し番号つき</span>
+          </div>
+        </div>
+        <ul>
+          <li><span class="mk">◎</span><span><b style="color:#fff">動く。</b>本人の本物の練習時間が、そのまま残る</span></li>
+          <li><span class="mk">◎</span><span>1本ずつ違う断片。<b style="color:#fff">世界に1つ</b>を通し番号と電子透かしで担保</span></li>
+          <li><span class="mk">◎</span><span>スマホで受け取れるから、<b style="color:#fff">遠くのファンにも</b>届く</span></li>
+          <li><span class="mk">◎</span><span>会場に来られない日も、練習の時間が売り物になる</span></li>
+          <li><span class="mk">◎</span><span>枠数を決めて出品。売れる本数を自分でコントロール</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="compare-note">
+      つまり動くチェキは、<b>チェキの上位版</b>ではありません。<b>チェキの隣に、もう1種類の物販を置く</b>ということ。
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 使うイメージ ===================== -->
+<section class="usecase">
+  <div class="wrap">
+    <div class="txt">
+      <span class="kicker">使うイメージ</span>
+      <h2 class="hand">「今日の物販、チェキと<br>"動くチェキ"、どっちにする?」</h2>
+      <p>ライブ後、いつもチェキを渡しているあの数秒。その横に、<b>「今日の練習を10秒だけ、世界に1人へ」</b>という選択肢が増えるだけです。</p>
+      <p>渡し方は変わりません。ファンは列に並んで、買って、その場（スマホ）で受け取る。違うのは、届くのが<b>紙ではなく、あなたの動く時間</b>だということ。</p>
+      <p>会場に来られなかった遠方のファンにも、同じ一点物が届きます。<b>物販の机が、スマホの中にも広がる</b>——それがLapsellです。</p>
+    </div>
+    <div class="photo">
+      <div class="cheki">
+        <span class="tape r"></span>
+        <img src="images/handing-cheki.png" width="520" height="360" loading="lazy"
+          alt="物販列で、アイドルがサイン入りのチェキをファンの手に渡している様子">
+        <span class="cap">その場で、1対1で、手渡す数秒</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 流れ（物販フロー） ===================== -->
+<section class="flow" id="flow">
+  <div class="wrap">
+    <div class="flow-head">
+      <span class="kicker">出品の流れ</span>
+      <h2 class="sec">やることは、<span class="u">並ぶ → 買う → 渡す</span>の物販と同じ。</h2>
+      <p class="lead">違うのは「先に枠を売って、あとで撮る」こと。撮影当日の作業は、スマホで撮って上げるだけです。</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="no">1</div>
+        <h4>枠を出品する</h4>
+        <p>これからやる練習の「日時・価格・販売本数・1本の長さ」を決めて出品。まだ撮影前でOK。</p>
+        <div class="mini">＝ 物販の「お品書き」を出す</div>
+      </div>
+      <div class="step">
+        <div class="no">2</div>
+        <h4>ファンが枠を買う</h4>
+        <p>中身はまだ世界に存在しない。「あなたの次の練習」を、届くのを楽しみに先に買ってくれる。</p>
+        <div class="mini">＝ 現像を待つチェキのワクワク</div>
+      </div>
+      <div class="step">
+        <div class="no">3</div>
+        <h4>当日、スマホで撮る</h4>
+        <p>いつもの練習をスマホで撮るだけ。特別なことも、編集も、機材もいりません。</p>
+        <div class="mini">＝ ふだんの練習、そのまま</div>
+      </div>
+      <div class="step">
+        <div class="no">4</div>
+        <h4>上げると、自動で分割</h4>
+        <p>撮った映像をアップすると、約10秒ずつの短い断片へ自動でカット。手作業ゼロ。</p>
+        <div class="mini">＝ 束から1枚ずつに分ける</div>
+      </div>
+      <div class="step">
+        <div class="no">5</div>
+        <h4>公開前に、自分で確認</h4>
+        <p>ライブ配信と違い、撮ってから公開。まずい瞬間だけ非公開にできる（その購入者は自動返金）。</p>
+        <div class="mini">＝ 出す前に、目で見て選ぶ</div>
+      </div>
+      <div class="step">
+        <div class="no">6</div>
+        <h4>1人に1本ずつ配布</h4>
+        <p>承認した断片が、購入者へランダムかつ重複なしで割り当て。誰の手にも、違う1本が届く。</p>
+        <div class="mini">＝ 世界に1つを手渡す</div>
+      </div>
+    </div>
+
+    <div class="flow-safety">
+      <div class="badge">事故は<br>出さない</div>
+      <div>
+        <h4>「変な瞬間が出たら…」という不安は、構造でなくします。</h4>
+        <p>Lapsellは生配信ではありません。<b>撮影 → あなたの確認 → 公開</b>の順。だから、事故になりそうな瞬間は世に出る前に止められます。安心して"素"を撮ってください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== アプリ画面（物販机の上に置いたスマホ） ===================== -->
+<section class="mocks" id="app" style="background:var(--wood);color:#f2e7d6">
+  <div class="wrap">
+    <div class="mock-head">
+      <span class="kicker" style="transform:rotate(1.2deg)">アプリの画面</span>
+      <h2 class="sec" style="color:#fbf3e6">机の上の作業は、<span class="u">この4画面</span>で終わります。</h2>
+      <p class="lead" style="color:#cfc3b2">出品する側も、受け取るファンも、やることはシンプル。物販机に置いたスマホの中で、並ぶ→買う→受け取るがそのまま完結します。</p>
+    </div>
+
+    <div class="mockgrid">
+
+      <!-- 画面1：練習枠を出品（＝物販机の「お品書き」を手書きで出す） -->
+      <div class="mockslot">
+        <div class="mockcap"><span class="tagpop"><span class="no">画面 01</span><h3>練習枠を出品する</h3></span><p>お品書きを書いて立てる感覚。撮影前でOK</p></div>
+        <div class="phone"><div class="phscreen"><div class="phnotch"></div>
+          <div class="phstatus"><span>19:41</span><span class="r"><span class="phsig"><i></i><i></i><i></i><i></i></span><span class="phbatt"><b></b></span></span></div>
+          <div class="phbar"><span class="back">‹</span><span><span class="ttl">練習枠を出品</span><span class="sub">未来の練習時間を、先に売る</span></span><span class="sp"></span><span class="tagchip">下書き</span></div>
+          <div class="phbody">
+            <div class="popfield"><span class="lb">練習の日時</span><div class="slip hand"><span>7月12日（日）19:00</span><span class="u">▾</span></div></div>
+            <div class="popfield"><span class="lb">場所・メモ <span class="h">（購入者に表示）</span></span><div class="slip hand"><span>下北沢／新曲リハ</span></div></div>
+            <div class="popfield"><span class="lb">1本の価格</span><div class="slip"><span style="font-size:16px">¥ 1,500</span><span class="u">/ 本</span></div></div>
+            <div class="popfield"><span class="lb">販売本数 <span class="h">＝ 配布する本数</span></span>
+              <div class="tally"><button>−</button><span class="v">30 <small>本</small></span><button>＋</button></div></div>
+            <div class="popfield"><span class="lb">1本の長さ</span><div class="lentab"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div></div>
+            <div class="stickynote">✎ 編集は不要。当日撮った映像を、この長さに<b>自動で分割</b>します。</div>
+            <div style="height:11px"></div>
+            <div class="chalk">
+              <div class="t">◎ 出品プレビュー</div>
+              <div class="ln"><span>売上（満枠時）</span><span>¥45,000</span></div>
+              <div class="ln"><span>手数料 5%</span><span>− ¥2,250</span></div>
+              <div class="ln" style="align-items:baseline"><span>受け取り見込み</span><span class="big">¥42,750</span></div>
+            </div>
+            <div style="height:12px"></div>
+            <div class="plate">この内容で出品する</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- 画面2：売れ行き（＝手書きの売上集計POP＋お品書き短冊の束） -->
+      <div class="mockslot">
+        <div class="mockcap"><span class="tagpop"><span class="no">画面 02</span><h3>売れ行きを見る</h3></span><p>何本売れたか・いくらになったか</p></div>
+        <div class="phone"><div class="phscreen"><div class="phnotch"></div>
+          <div class="phstatus"><span>19:41</span><span class="r"><span class="phsig"><i></i><i></i><i></i><i></i></span><span class="phbatt"><b></b></span></span></div>
+          <div class="phbar"><span><span class="ttl">マイ出品</span><span class="sub">こんにちは、彩夏さん</span></span><span class="sp"></span><span class="tagchip">出金</span></div>
+          <div class="phbody">
+            <div class="takings">
+              <div class="lbl">今月の売上（手数料 差引後）</div>
+              <div class="amt">¥128,400</div>
+              <div class="s">先月比 +38%　／　出金できる額 ¥96,200</div>
+              <div class="chips">
+                <div class="chip"><div class="k">販売本数</div><div class="v">102本</div></div>
+                <div class="chip"><div class="k">出品中</div><div class="v">3件</div></div>
+                <div class="chip"><div class="k">平均単価</div><div class="v">¥1,480</div></div>
+              </div>
+            </div>
+            <div class="phkick">✎ 出品中の枠（お品書き）</div>
+            <div class="slat">
+              <div class="top"><div><div class="date">7/12（日）19:00</div><div class="place">下北沢／新曲リハ</div></div><span class="stamp soon">販売中</span></div>
+              <div class="perf"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+              <div class="sold"><span>22 / 30 本 売れました</span><span>残り8枠</span></div>
+              <div class="foot"><span style="font-size:10px;color:#9a8f7e">¥1,500 / 本</span><span class="rev">¥33,000 <small>売上</small></span></div>
+            </div>
+            <div class="slat">
+              <div class="top"><div><div class="date">7/8（火）21:00</div><div class="place">配信前リハ／ダンス通し</div></div><span class="stamp live">撮影日</span></div>
+              <div class="perf"><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i><i class="ondone"></i></div>
+              <div class="sold"><span>25 / 25 本 完売</span><span style="color:#3f7a52">今日 撮影</span></div>
+              <div class="foot"><span style="font-size:10px;color:#9a8f7e">¥1,600 / 本</span><span class="rev">¥40,000 <small>売上</small></span></div>
+            </div>
+            <div class="slat" style="opacity:.9">
+              <div class="top"><div><div class="date">6/28（土）18:00</div><div class="place">対バン前 楽屋ネタ合わせ</div></div><span class="stamp done">配布済</span></div>
+              <div class="perf"><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i><i class="onarch"></i></div>
+              <div class="sold"><span>40 / 40 本 配布完了</span><span>受取率 100%</span></div>
+              <div class="foot"><span style="font-size:10px;color:#9a8f7e">¥1,400 / 本</span><span class="rev">¥56,000 <small>売上</small></span></div>
+            </div>
+          </div>
+          <nav class="phnav">
+            <a class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>ホーム</a>
+            <a><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>お品書き</a>
+            <a><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V8"/></svg>売上</a>
+            <a><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>マイ</a>
+          </nav>
+        </div></div>
+      </div>
+
+      <!-- 画面3：受け取り（開封）＝白フチの一点物チェキを物販机で受け取る -->
+      <div class="mockslot">
+        <div class="mockcap"><span class="tagpop"><span class="no">画面 03</span><h3>ファンが受け取る（開封）</h3></span><p>中身は届くまで分からない、白フチの一点物</p></div>
+        <div class="phone"><div class="phscreen"><div class="phnotch"></div>
+          <div class="phstatus"><span>19:50</span><span class="r"><span class="phsig"><i></i><i></i><i></i><i></i></span><span class="phbatt"><b></b></span></span></div>
+          <div class="phbar"><span class="back">‹</span><span><span class="ttl">断片が届きました</span><span class="sub">彩夏 ・ 7/12 新曲リハ</span></span></div>
+          <div class="phbody">
+            <div class="chekiframe">
+              <div class="win">
+                <span class="stampseal">現像前</span>
+                <div class="develop"></div>
+                <div class="qm">？</div>
+                <div class="cap-in">世界に1つ。あなたに割り当てられた<br>約10秒の断片です。</div>
+              </div>
+              <div class="sign">タップして開封<small>SEALED ・ 未開封の一点物</small></div>
+            </div>
+            <div class="specs">
+              <div class="m"><div class="mk">通し番号</div><div class="mv">#017<small>/29</small></div></div>
+              <div class="m"><div class="mk">長さ</div><div class="mv">0:10</div></div>
+              <div class="m"><div class="mk">発行</div><div class="mv">世界に1</div></div>
+            </div>
+            <div class="plate gold">この1本を開封する</div>
+            <div class="phrule"></div>
+            <div class="phkick">✎ 開封後のプレビュー（動くチェキ）</div>
+            <div class="movingcheki">
+              <div class="scr">
+                <div class="fig"><div class="h"></div></div>
+                <div class="play"></div>
+                <div class="seek"><span>0:03</span><span class="t"><b></b></span><span>0:10</span></div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:#a99a84;text-align:center;margin-top:9px;line-height:1.55">この断片はあなただけのもの。所有証明つきで手元に残ります。</div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- 画面4：真正性＝物販のサインの「本物保証」＝朱肉のゴム印スタンプ＋手渡し伝票 -->
+      <div class="mockslot">
+        <div class="mockcap"><span class="tagpop"><span class="no">画面 04</span><h3>本物であることの証明</h3></span><p>誰の1本か・改ざんがないか（サインの本物保証）</p></div>
+        <div class="phone"><div class="phscreen"><div class="phnotch"></div>
+          <div class="phstatus"><span>20:05</span><span class="r"><span class="phsig"><i></i><i></i><i></i><i></i></span><span class="phbatt"><b></b></span></span></div>
+          <div class="phbar"><span class="back">‹</span><span><span class="ttl">真正性の証明</span><span class="sub">Lapsell 公式レジストリ</span></span></div>
+          <div class="phbody">
+            <div class="authstamp">
+              <div class="ring">
+                <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                <span class="rt">本物 保証</span>
+              </div>
+              <div class="vt">本物であることを確認しました</div>
+              <div class="vs">彩夏 本人が 2026/07/12 に撮影・公開した練習映像の、正規の1本です。改ざん・複製は検出されていません。</div>
+            </div>
+            <div class="receipt">
+              <div class="rhead">所 有 証 明 書</div>
+              <div class="recrow"><span class="k">アイテム</span><span class="v">新曲リハ 断片 #017</span></div>
+              <div class="recrow"><span class="k">通し番号</span><span class="v mono">017 / 29</span></div>
+              <div class="recrow"><span class="k">証明ID</span><span class="v mono">LPS-7C4F-19A2</span></div>
+              <div class="recrow"><span class="k">現在の所有者</span><span class="v">あなた <span class="heldtag">保有中</span></span></div>
+            </div>
+            <div class="phkick" style="margin-top:14px">✎ 手渡しの記録</div>
+            <div class="handlog">
+              <div class="handitem"><span class="col"><span class="d cur"></span><span class="line"></span></span><span><span class="who">あなた <span class="heldtag">現所有者</span></span><span class="when" style="display:block">7/12 19:50 受け取り</span><span class="act" style="display:block">開封・保有中</span></span></div>
+              <div class="handitem"><span class="col"><span class="d"></span><span class="line"></span></span><span><span class="who">彩夏（出品者）</span><span class="when" style="display:block">7/12 19:48 発行</span><span class="act" style="display:block">撮影・公開・配布</span></span></div>
+              <div class="handitem"><span class="col"><span class="d"></span></span><span><span class="who">Lapsell レジストリ</span><span class="when" style="display:block">7/12 19:48 記録</span><span class="act" style="display:block">真正性を証明・記録</span></span></div>
+            </div>
+            <div style="height:12px"></div>
+            <div class="plate wood">所有証明を表示 / 共有</div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 売れる理由 ===================== -->
+<section class="reasons" id="reasons">
+  <div class="wrap">
+    <div class="r-head">
+      <span class="kicker">売れる理由</span>
+      <h2 class="sec">下積みの時間ほど、<span class="u">価値になる</span>。</h2>
+      <p class="lead">「本当に売れるの?」への、正直な答えです。射幸心を煽らず、所有と将来価値という前向きな気持ちで買われます。</p>
+    </div>
+
+    <div class="reason">
+      <div class="rn">1</div>
+      <div>
+        <h3>お金にならなかった時間が、そのまま収入になる</h3>
+        <p>毎日のリハ、ネタ合わせ、レコーディング。<b>これまで1円にもならなかった練習の時間</b>が、そのまま新しい物販になります。初期費用0円・手数料5%〜。在庫も、刷り直しもありません。</p>
+      </div>
+    </div>
+
+    <div class="reason">
+      <div class="rn">2</div>
+      <div>
+        <h3>"小さい今"だから、将来の価値を見込んで買われる</h3>
+        <p>ファンは「自分が育てた」という物語ごと買います。<b>まだ有名でない今の練習風景</b>こそ、あとから価値が上がる一点物。古参自慢のためではなく、応援している人の"はじまり"を手元に持つために。</p>
+        <div class="m11k">たとえば結成11年目で紅白に出たグループがいます。もし、その下積み時代の練習を「世界に1本」持っていたら——ファンにとって、それは何にも代えがたい一点物です。</div>
+      </div>
+    </div>
+
+    <div class="reason">
+      <div class="rn">3</div>
+      <div>
+        <h3>受け取った断片が、自然な宣伝になる</h3>
+        <p>世界に1つの動くチェキは、ファンが「見て」と誰かに見せたくなるもの。<b>買った人が、次のファンを連れてくる</b>。押しつけない、等身大の広がり方です。</p>
+      </div>
+    </div>
+
+    <div class="reason">
+      <div class="rn">4</div>
+      <div>
+        <h3>配信事故を、出す前に防げる</h3>
+        <p>生配信の一番怖いところ——"取り返しがつかない瞬間"がありません。<b>撮ってから、自分で確認して、公開</b>。まずい所は世に出ないので、安心して素の自分を撮れます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== はじめ方・料金 ===================== -->
+<section class="start" id="start">
+  <div class="wrap">
+    <span class="kicker">はじめ方</span>
+    <h2 class="hand">今日の練習から、始められます。</h2>
+    <p class="lead">用意するのは、スマホ1台と、いつもの練習だけ。登録して枠を出せば、その日のうちに売れます。</p>
+
+    <div class="pricelist">
+      <div class="pl-head">お品書き ／ 料金</div>
+      <div class="pl-row"><span class="k">はじめる</span><span class="v">初期費用 0円<small>登録・出品は無料</small></span></div>
+      <div class="pl-row"><span class="k">売れたとき</span><span class="v">手数料 5%〜<small>売上が立ったときだけ</small></span></div>
+      <div class="pl-row"><span class="k">用意するもの</span><span class="v">スマホ1台<small>撮影・出品・確認まで完結</small></span></div>
+      <div class="pl-row"><span class="k">価格・本数</span><span class="v">自分で設定<small>1本の長さ・販売本数も自由</small></span></div>
+      <div class="pl-foot">
+        枠数を売り切ってから撮るので、赤字になりません。売れなければ費用は発生しません。<b style="color:var(--cloth)">ノーリスクで、まず1枠だけ試せます。</b>
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin-top:32px">
+      <a href="#" class="btn btn-primary" style="background:#fff;color:var(--cloth);border-color:var(--ink)">練習時間を出品する →</a>
+      <a href="#faq" class="btn-ghost">その前に、疑問を解消</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq" id="faq">
+  <div class="narrow">
+    <span class="kicker">よくある質問</span>
+    <h2 class="sec" style="margin-bottom:30px;">気になるところ、先に。</h2>
+
+    <details class="q" open>
+      <summary>撮影や編集って、大変じゃないですか?</summary>
+      <div class="a">いつもの練習をスマホで撮るだけです。分割・配布・通し番号づけはすべて自動。編集も、特別な機材も、撮り直しもいりません。当日やることは「撮って、上げて、確認する」だけです。</div>
+    </details>
+
+    <details class="q">
+      <summary>本当に売れるんですか?</summary>
+      <div class="a">ファンはすでに、チェキ（1枚約1,500円）や物販グッズ（年間平均約2.2万円）に、その場の一点物としてお金を払っています。動くチェキも同じ「本人と地続きの、世界に1つ」。買う理由は、まったく新しいものではありません。まず1枠、少ない本数から試せます。</div>
+    </details>
+
+    <details class="q">
+      <summary>変な瞬間や、事故が映ったら?</summary>
+      <div class="a">生配信ではないので、撮影してから公開します。アップ後、あなた自身が中身を確認し、まずい瞬間だけを非公開にできます（その断片の購入者には自動で返金）。取り返しのつかない事故は、構造的に起きません。</div>
+    </details>
+
+    <details class="q">
+      <summary>チェキの売上が減ったりしませんか?</summary>
+      <div class="a">動くチェキは、チェキの置き換えではなく「隣に置くもう1種類の物販」です。会場に来られない遠方のファンにも届くので、これまで取りこぼしていた層に新しく売れます。チェキと動くチェキ、両方を出している方が多いです。</div>
+    </details>
+
+    <details class="q">
+      <summary>ファンが勝手にコピー・転売しませんか?</summary>
+      <div class="a">配布される各断片には通し番号と電子透かしが入り、「誰の1本か」が分かる形で所有されます。だからこそ"世界に1つ"としての価値が保たれます。</div>
+    </details>
+
+    <details class="q">
+      <summary>アイドルじゃなくても使えますか?</summary>
+      <div class="a">はい。インディーズのバンド・楽曲アーティストのリハや制作風景、お笑い芸人のネタ合わせや楽屋など、"裏側の時間"がある活動なら相性が良いです。下積みの時間ほど、あとで価値になります。</div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== 最終CTA ===================== -->
+<section class="final">
+  <div class="narrow">
+    <h2>チェキは、撮った。<br>次は、<span class="mv">今日の練習</span>を売ってみる。</h2>
+    <p>捨てていた練習の時間を、世界に1つの動くチェキに。まずは1枠だけ、出品してみてください。</p>
+    <a href="#" class="btn btn-primary">練習時間を出品する →</a>
+    <p class="fee-note">初期費用 <b>0円</b>／手数料 <b>5%〜</b>／売れなければ費用は発生しません</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>Lapsell</div>
+    <nav>
+      <a href="#compare">動くチェキ</a>
+      <a href="#flow">出品の流れ</a>
+      <a href="#start">料金</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div>練習の時間を、収益に変える。</div>
+  </div>
+</footer>
+
+</body>
+</html>

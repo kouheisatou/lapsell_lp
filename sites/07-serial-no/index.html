@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapsell — 世界に1つには、番号がある。</title>
+<style>
+  :root{
+    --paper:#efe6d3;        /* チケット用紙・アイボリー */
+    --paper-2:#e6dcc4;      /* 少し濃い券面 */
+    --kraft:#d8cbaa;        /* クラフト */
+    --ink:#1c1813;          /* 黒の活字 */
+    --ink-soft:#4a4237;
+    --red:#c0261b;          /* 赤いナンバリングインク */
+    --red-deep:#9c1d15;
+    --line:#b9ac8c;         /* ミシン目・罫線 */
+    --white:#faf6ec;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,"Courier New",monospace;
+    --serif:"Times New Roman",Georgia,"Yu Mincho","YuMincho",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit}
+
+  /* ===== 紙のノイズ地 ===== */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    opacity:.5;mix-blend-mode:multiply;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(120,105,75,.06) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(120,105,75,.05) 0 1px, transparent 1px);
+    background-size:7px 7px, 11px 11px;
+  }
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ===== ミシン目の区切り ===== */
+  .perf{
+    position:relative;height:0;border:0;
+    border-top:2px dashed var(--line);
+    max-width:1080px;margin:0 auto;
+  }
+  .perf::before,.perf::after{
+    content:"";position:absolute;top:-9px;width:16px;height:16px;border-radius:50%;
+    background:var(--paper);border:2px dashed var(--line);
+  }
+  .perf::before{left:-8px}
+  .perf::after{right:-8px}
+
+  /* 共通 章ヘッダ（券面の見出し帯） */
+  .stub{
+    display:flex;align-items:baseline;gap:14px;
+    padding:9px 0 7px;border-bottom:2px solid var(--ink);
+    margin-bottom:34px;
+  }
+  .stub .no{
+    font-family:var(--mono);font-weight:700;letter-spacing:.06em;
+    color:var(--red);font-size:15px;white-space:nowrap;
+    border:1.5px solid var(--red);padding:2px 9px;border-radius:2px;
+  }
+  .stub .ttl{
+    font-family:var(--serif);font-weight:700;font-size:clamp(22px,5vw,34px);
+    letter-spacing:.02em;line-height:1.1;
+  }
+  .stub .ttl small{
+    display:block;font-family:var(--sans);font-weight:600;
+    font-size:12px;letter-spacing:.34em;color:var(--ink-soft);
+    text-transform:uppercase;margin-bottom:5px;line-height:1;
+  }
+  section{padding:60px 0}
+  p{max-width:62ch}
+  .lead{font-size:clamp(17px,2.4vw,20px);line-height:1.95}
+
+  /* ===== ヘッダ ===== */
+  header.top{
+    position:relative;z-index:3;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 22px;max-width:1080px;margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:.06em}
+  .brand b{color:var(--red)}
+  .top .navcta{
+    font-family:var(--mono);font-size:13px;letter-spacing:.05em;
+    text-decoration:none;color:var(--ink);
+    border:1.5px solid var(--ink);padding:7px 15px;border-radius:2px;
+    background:var(--white);
+  }
+  .top .navcta:hover{background:var(--ink);color:var(--paper)}
+
+  /* ===== ヒーロー ===== */
+  .hero{padding:40px 0 20px}
+  .hero .ticketrow{font-family:var(--mono);font-size:12px;letter-spacing:.28em;
+    color:var(--ink-soft);text-transform:uppercase;display:flex;gap:18px;flex-wrap:wrap;
+    border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:26px}
+  .hero .ticketrow .rn{color:var(--red);font-weight:700}
+  .hero h1{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(34px,8.5vw,72px);line-height:1.02;letter-spacing:.01em;
+    margin-bottom:22px;
+  }
+  .hero h1 .u{
+    color:var(--red);position:relative;
+  }
+  .hero .sub{font-size:clamp(16px,2.6vw,20px);max-width:34ch;margin-bottom:14px;color:var(--ink-soft)}
+  .hero .heronum{font-family:var(--mono);color:var(--red);font-weight:700;letter-spacing:.05em}
+  .heroimg{margin:30px 0 6px;position:relative}
+  .heroimg img{width:100%;border:1px solid var(--line);
+    filter:contrast(1.02) saturate(.98)}
+  .heroimg .cap{
+    position:absolute;left:14px;bottom:14px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    background:var(--paper);color:var(--ink);padding:5px 10px;
+    border:1px solid var(--ink);
+  }
+  .heroimg .cap .rn{color:var(--red);font-weight:700}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:26px}
+
+  /* ===== チケット型CTAボタン（角丸グラデ禁止・券の形） ===== */
+  .btn-ticket{
+    position:relative;display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-weight:700;letter-spacing:.04em;font-size:15px;
+    text-decoration:none;color:var(--white);background:var(--red);
+    padding:15px 22px 15px 20px;border:none;cursor:pointer;
+    clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  }
+  .btn-ticket::after{
+    /* ミシン目の切り取り線 */
+    content:"";position:absolute;top:6px;bottom:6px;right:52px;width:1px;
+    background-image:linear-gradient(var(--paper) 50%, transparent 0);
+    background-size:1px 6px;opacity:.85;
+  }
+  .btn-ticket .stubno{padding-left:14px;color:var(--paper);opacity:.9;font-size:13px}
+  .btn-ticket:hover{background:var(--red-deep)}
+  .btn-ghost{
+    font-family:var(--mono);font-size:14px;letter-spacing:.03em;text-decoration:none;
+    color:var(--ink);border-bottom:2px solid var(--red);padding-bottom:2px;
+  }
+
+  /* ===== 汎用: 写真＋文 ===== */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .split.rev{direction:rtl}.split.rev>*{direction:ltr}
+  .fignum{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-soft);
+    margin-top:8px;display:flex;gap:8px;align-items:center;
+  }
+  .fignum .rn{color:var(--red);font-weight:700}
+  .photo{border:1px solid var(--line);filter:contrast(1.02)}
+
+  h3.sub-h{font-family:var(--serif);font-weight:700;font-size:clamp(20px,3.6vw,27px);
+    line-height:1.2;margin-bottom:14px}
+  .muted{color:var(--ink-soft)}
+
+  /* ===== 一意性フロー（1本→番号断片→別々のファン） ===== */
+  .flow{margin-top:14px}
+  .flow .src{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:26px}
+  .flow .src img{width:190px;border:1px solid var(--line)}
+  .flow .src .txt{max-width:32ch}
+  .chips{display:flex;flex-wrap:wrap;gap:12px}
+  .chip{
+    position:relative;background:var(--white);border:1px solid var(--ink);
+    padding:12px 14px 12px 14px;min-width:132px;
+    clip-path:polygon(0 0,100% 0,100% 100%,10px 100%,0 calc(100% - 10px));
+  }
+  .chip .cno{font-family:var(--mono);font-weight:700;color:var(--red);font-size:15px;letter-spacing:.03em}
+  .chip .cwho{font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.4}
+  .chip .perfdot{position:absolute;left:0;top:0;bottom:0;width:8px;
+    background-image:radial-gradient(circle,var(--paper) 1.6px,transparent 1.7px);
+    background-size:8px 8px;background-position:center;border-right:1px dashed var(--line)}
+
+  /* ===== 7ステップ 発券→もぎり→配布 ===== */
+  .steps{counter-reset:st;margin-top:6px}
+  .step{
+    display:grid;grid-template-columns:74px 1fr;gap:20px;
+    padding:22px 0;border-bottom:1px dashed var(--line);
+  }
+  .step:last-child{border-bottom:none}
+  .step .tk{
+    counter-increment:st;position:relative;
+    font-family:var(--mono);font-weight:700;color:var(--red);
+    font-size:13px;letter-spacing:.04em;align-self:start;
+    border:1.5px solid var(--red);padding:8px 0;text-align:center;border-radius:2px;
+    background:var(--white);
+  }
+  .step .tk::before{content:"No." counter(st,decimal-leading-zero)}
+  .step .sh{font-family:var(--serif);font-weight:700;font-size:20px;margin-bottom:5px;line-height:1.25}
+  .step .sd{color:var(--ink-soft);font-size:15px}
+  .step .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--ink-soft);border-bottom:1px solid var(--line);margin-top:8px}
+
+  /* ===== 番号=本物の証明 ===== */
+  .verify{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  .serialcard{
+    background:var(--white);border:1px solid var(--ink);padding:26px 24px;position:relative;
+  }
+  .serialcard .perftop{position:absolute;left:14px;right:14px;top:-1px;height:8px;
+    background-image:radial-gradient(circle,var(--paper) 2px,transparent 2.2px);
+    background-size:11px 8px;background-position:top}
+  .serialcard .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--ink-soft);text-transform:uppercase}
+  .serialcard .big{font-family:var(--mono);font-weight:700;color:var(--red);
+    font-size:clamp(30px,7vw,46px);letter-spacing:.02em;line-height:1.1;margin:4px 0 6px;
+    text-shadow:1px 1px 0 rgba(156,29,21,.18)}
+  .serialcard .row2{display:flex;justify-content:space-between;gap:12px;
+    border-top:1px dashed var(--line);padding-top:12px;margin-top:14px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .serialcard .row2 b{color:var(--ink)}
+  .verify .checkmark{font-family:var(--mono);color:var(--red);font-weight:700}
+
+  /* ===== 売れる理由：数字を文の中で提示 ===== */
+  .reasons{display:grid;gap:0;margin-top:8px}
+  .reason{display:grid;grid-template-columns:1fr;gap:6px;padding:24px 0;border-bottom:1px dashed var(--line)}
+  .reason:first-child{border-top:1px dashed var(--line)}
+  .reason .rh{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.35}
+  .reason .rh em{font-style:normal;color:var(--red);
+    border-bottom:2px solid var(--red);font-family:var(--mono);font-weight:700;padding:0 1px}
+  .reason .rb{color:var(--ink-soft);font-size:15px;max-width:64ch}
+  .reason .rsrc{font-family:var(--mono);font-size:11px;color:var(--line);letter-spacing:.06em;margin-top:2px}
+
+  /* ===== 料金 ===== */
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;margin-top:8px}
+  .priceline{border-bottom:1px dashed var(--line);padding:16px 0;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+  .priceline .k{font-weight:600}
+  .priceline .v{font-family:var(--mono);font-weight:700;color:var(--red);font-size:18px;white-space:nowrap}
+  .priceline .v small{color:var(--ink-soft);font-weight:400;font-size:12px}
+  .pricenote{font-size:14px;color:var(--ink-soft);margin-top:16px}
+
+  /* ===== FAQ ===== */
+  .faq details{border-bottom:1px dashed var(--line);padding:6px 0}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 30px 16px 34px;position:relative;
+    font-weight:600;font-family:var(--serif);font-size:18px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::before{content:"Q";position:absolute;left:0;top:15px;
+    font-family:var(--mono);color:var(--red);font-weight:700;
+    border:1.5px solid var(--red);border-radius:50%;width:22px;height:22px;
+    display:flex;align-items:center;justify-content:center;font-size:12px}
+  .faq summary::after{content:"+";position:absolute;right:6px;top:12px;color:var(--red);font-size:22px;font-family:var(--mono)}
+  .faq details[open] summary::after{content:"–"}
+  .faq .a{padding:0 6px 18px 34px;color:var(--ink-soft);font-size:15px;max-width:70ch}
+
+  /* ===== 最終CTA（半券もぎり演出） ===== */
+  .final{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+  .final .wrap{padding:70px 22px}
+  .final::before,.final::after{content:"";position:absolute;left:0;right:0;height:10px;
+    background-image:radial-gradient(circle,var(--paper) 2.4px,transparent 2.6px);
+    background-size:15px 10px}
+  .final::before{top:0;background-position:top}
+  .final::after{bottom:0;background-position:bottom}
+  .final .en{font-family:var(--mono);font-size:12px;letter-spacing:.34em;color:#d8b3ad;text-transform:uppercase}
+  .final h2{font-family:var(--serif);font-weight:700;font-size:clamp(28px,6vw,46px);line-height:1.12;margin:12px 0 16px}
+  .final p{color:#d9cfbd;max-width:52ch;margin-bottom:26px}
+  .final .btn-ticket{background:var(--red)}
+  .final .btn-ticket::after{background-image:linear-gradient(var(--ink) 50%,transparent 0);background-size:1px 6px}
+  .final .btn-ticket .stubno{color:#f4e7cf}
+  .final .fineprint{font-family:var(--mono);font-size:12px;color:#9a8f7d;margin-top:20px;letter-spacing:.04em}
+
+  /* ===================================================
+     スマホUIモック（券面・赤ナンバリング・ミシン目でアレンジ）
+     =================================================== */
+  .mocks{margin-top:22px}
+  .mockgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 34px;justify-items:center;margin-top:10px}
+  .mockslot{width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center}
+  .mockcap{width:100%;margin-bottom:14px;display:flex;align-items:baseline;gap:10px;
+    border-bottom:1.5px solid var(--ink);padding-bottom:7px}
+  .mockcap .mno{font-family:var(--mono);font-weight:700;color:var(--red);font-size:12px;
+    letter-spacing:.05em;border:1.5px solid var(--red);padding:1px 7px;border-radius:2px;white-space:nowrap}
+  .mockcap .mh{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.2}
+  .mockcap .ms{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    color:var(--ink-soft);text-transform:uppercase;margin-top:2px}
+
+  /* スマホ筐体：黒枠 */
+  .phone{width:320px;max-width:100%;background:#17130d;border-radius:40px;padding:9px;
+    box-shadow:0 20px 44px -20px rgba(28,24,19,.55);position:relative}
+  .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    width:104px;height:22px;background:#17130d;border-radius:0 0 13px 13px;z-index:6}
+  .phone .screen{background:var(--paper);border-radius:31px;overflow:hidden;height:648px;
+    display:flex;flex-direction:column;position:relative}
+  /* 画面内の紙ノイズ */
+  .phone .screen::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    opacity:.5;mix-blend-mode:multiply;
+    background-image:radial-gradient(circle at 25% 30%, rgba(120,105,75,.06) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(120,105,75,.05) 0 1px, transparent 1px);
+    background-size:7px 7px,11px 11px}
+
+  .pstatus{height:34px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink);
+    flex:0 0 auto;position:relative;z-index:4}
+  .pstatus .picons{display:flex;align-items:center;gap:5px}
+  .psig{display:flex;align-items:flex-end;gap:1.5px;height:9px}
+  .psig i{width:2.5px;background:var(--ink);border-radius:1px}
+  .psig i:nth-child(1){height:3px}.psig i:nth-child(2){height:5px}
+  .psig i:nth-child(3){height:7px}.psig i:nth-child(4){height:9px}
+  .pbatt{width:20px;height:10px;border:1.4px solid var(--ink);border-radius:2px;position:relative;padding:1.4px}
+  .pbatt::after{content:"";position:absolute;right:-3px;top:2.6px;width:2px;height:3.5px;background:var(--ink);border-radius:0 1px 1px 0}
+  .pbatt b{display:block;height:100%;width:76%;background:var(--ink);border-radius:1px}
+
+  /* 券面ヘッダ帯（黒地に赤番号） */
+  .pbar{flex:0 0 auto;background:var(--ink);color:var(--paper);
+    padding:9px 16px 10px;display:flex;align-items:center;gap:10px;position:relative;z-index:3}
+  .pbar .pback{font-family:var(--mono);font-size:16px;color:var(--kraft)}
+  .pbar .ptt{font-family:var(--serif);font-weight:700;font-size:15px;letter-spacing:.01em;line-height:1.15}
+  .pbar .pss{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:#c9bda0;margin-top:1px}
+  .pbar .pspacer{flex:1}
+  .pbar .padmit{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--paper);
+    border:1px solid #6f6250;padding:3px 7px;text-transform:uppercase}
+  /* ヘッダ下のミシン目 */
+  .pbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:5px;
+    background-image:radial-gradient(circle,var(--paper) 1.8px,transparent 2px);
+    background-size:9px 5px;background-position:bottom}
+
+  .pbody{flex:1;overflow:hidden;padding:14px 16px 16px;position:relative;z-index:1}
+
+  /* 入力行（券面の記入欄＝下線スタイル、箱に詰めない） */
+  .pf{margin-bottom:13px}
+  .pf .pl{display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);
+    text-transform:uppercase;margin-bottom:4px}
+  .pf .pl .req{color:var(--red)}
+  .pf .pv{border-bottom:1.5px solid var(--ink);padding:5px 2px 6px;
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-size:14px;font-weight:600;color:var(--ink)}
+  .pf .pv .unit{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:600}
+  .pf .pv .cal{color:var(--ink-soft)}
+  .pf .pv.big{font-size:19px}
+
+  .pstepper{display:flex;align-items:center;justify-content:space-between;
+    border-bottom:1.5px solid var(--ink);padding:2px 0 5px}
+  .pstepper button{width:30px;height:30px;border:1.5px solid var(--red);background:var(--white);
+    color:var(--red);font-family:var(--mono);font-size:17px;font-weight:700;line-height:1;border-radius:2px}
+  .pstepper .sv{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--ink)}
+  .pstepper .sv small{font-size:11px;color:var(--ink-soft);font-weight:600;margin-left:3px}
+
+  .pseg{display:flex;border:1.5px solid var(--ink);border-radius:2px;overflow:hidden}
+  .pseg span{flex:1;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;
+    color:var(--ink-soft);padding:8px 0;border-right:1px dashed var(--line)}
+  .pseg span:last-child{border-right:none}
+  .pseg span.on{background:var(--red);color:var(--white)}
+
+  /* 券面プレビュー＝黒地の半券（番号入り） */
+  .pstub{background:var(--ink);color:var(--paper);padding:13px 15px;margin-top:6px;position:relative}
+  .pstub::before{content:"";position:absolute;left:10px;right:10px;top:-1px;height:5px;
+    background-image:radial-gradient(circle,var(--paper) 1.6px,transparent 1.8px);
+    background-size:9px 5px;background-position:top}
+  .pstub .st{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#c9bda0;text-transform:uppercase;margin-bottom:8px}
+  .pstub .sl{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;
+    border-bottom:1px solid rgba(255,255,255,.1)}
+  .pstub .sl:last-child{border:none}
+  .pstub .sl .sk{color:#c9bda0}
+  .pstub .sl .sred{font-family:var(--mono);font-weight:800;color:#e8998f;font-size:16px}
+
+  /* 券型ボタン（画面内CTA） */
+  .pcta{width:100%;border:none;background:var(--red);color:var(--white);
+    font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.03em;
+    padding:13px;margin-top:6px;position:relative;cursor:default;
+    clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+  .pcta::after{content:"";position:absolute;top:5px;bottom:5px;right:44px;width:1px;
+    background-image:linear-gradient(var(--paper) 50%,transparent 0);background-size:1px 5px;opacity:.85}
+  .pcta.ghost{background:var(--white);color:var(--ink);border:1.5px solid var(--ink);clip-path:none}
+  .pcta.ghost::after{display:none}
+
+  .pnote{border-left:3px solid var(--red);padding:8px 0 8px 11px;margin:12px 0;
+    font-size:11.5px;color:var(--ink-soft);line-height:1.55}
+  .pnote b{color:var(--ink)}
+  .pkick{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;
+    color:var(--ink-soft);text-transform:uppercase;margin:14px 0 9px}
+
+  /* 分割セグメント：連番の半券タイル */
+  .psegwrap{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .ptile{position:relative;aspect-ratio:3/4;background:var(--white);border:1.5px solid var(--ink);
+    display:flex;flex-direction:column;justify-content:space-between;padding:6px 6px 5px}
+  .ptile .tno{font-family:var(--mono);font-weight:800;color:var(--red);font-size:12px;letter-spacing:.02em}
+  .ptile .tlen{font-family:var(--mono);font-size:9px;color:var(--ink-soft);align-self:flex-end}
+  .ptile .tfilm{position:absolute;left:6px;right:6px;top:22px;bottom:16px;
+    background:repeating-linear-gradient(180deg,#3a332b 0 8px,#2b271f 8px 10px);opacity:.5}
+  .ptile.hide{background:var(--ink)}
+  .ptile.hide .tno{color:#e8998f}
+  .ptile.hide .tfilm{opacity:.25}
+  .ptile.hide .tflag{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--paper);letter-spacing:.05em;z-index:2}
+  .ptile .tdot{position:absolute;left:0;top:8px;bottom:8px;width:5px;
+    background-image:radial-gradient(circle,var(--paper) 1px,transparent 1.2px);
+    background-size:5px 6px;background-position:center;border-right:1px dashed var(--line)}
+  .ptile.hide .tdot{border-right-color:#5a5142;background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.2px)}
+  .psplit{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;
+    font-weight:700;color:var(--ink-soft);margin:9px 2px 0}
+  .psplit .hid{color:var(--red)}
+
+  /* 受け取り：開封前の封緘半券 */
+  .psealed{position:relative;aspect-ratio:1/1;background:var(--ink);color:var(--paper);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;overflow:hidden}
+  .psealed::before,.psealed::after{content:"";position:absolute;left:12px;right:12px;height:5px;
+    background-image:radial-gradient(circle,var(--paper) 1.7px,transparent 1.9px);background-size:9px 5px}
+  .psealed::before{top:0;background-position:top}
+  .psealed::after{bottom:0;background-position:bottom}
+  .psealed .seal{position:absolute;top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+    color:#c9bda0;border:1px solid #6f6250;padding:3px 9px;text-transform:uppercase}
+  .psealed .qbig{font-family:var(--serif);font-weight:700;font-size:60px;line-height:1;color:#e8998f}
+  .psealed .qcap{font-size:11.5px;color:#d4c8ae;margin-top:12px;max-width:80%;line-height:1.6}
+  .pmini{display:flex;gap:8px;margin:12px 0}
+  .pmini .m{flex:1;border-bottom:1.5px solid var(--ink);padding:3px 2px 6px;text-align:center}
+  .pmini .m .mk{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase}
+  .pmini .m .mv{font-family:var(--mono);font-size:16px;font-weight:800;color:var(--red);margin-top:3px}
+  .pmini .m .mv small{font-size:9px;color:var(--ink-soft);font-weight:600}
+
+  /* 真正性：黒地の証明パネル＋所有記録 */
+  .pverify{background:var(--ink);color:var(--paper);padding:16px;text-align:center;position:relative}
+  .pverify .vseal{width:52px;height:52px;border-radius:50%;margin:2px auto 9px;display:grid;place-items:center;
+    border:2px solid var(--red);color:#e8998f;font-family:var(--mono);font-size:22px;font-weight:800;position:relative}
+  .pverify .vseal::after{content:"";position:absolute;inset:5px;border:1px dashed rgba(232,153,143,.5);border-radius:50%}
+  .pverify .vt{font-family:var(--serif);font-weight:700;font-size:15px}
+  .pverify .vs{font-family:var(--mono);font-size:10px;color:#c9bda0;margin-top:5px;line-height:1.55;letter-spacing:.02em}
+  .pid{margin-top:12px}
+  .pid .idr{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12px}
+  .pid .idr:last-child{border:none}
+  .pid .idr .ik{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase}
+  .pid .idr .iv{font-weight:700;text-align:right}
+  .pid .idr .iv.mono{font-family:var(--mono);color:var(--red);letter-spacing:.02em}
+  .pid .idr .own{font-family:var(--mono);font-size:8.5px;font-weight:700;color:var(--red);border:1px solid var(--red);padding:1px 5px;margin-left:6px}
+
+  /* 触感の帯（ミシン目のマクロ写真） */
+  .perfband{position:relative;overflow:hidden;height:88px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .perfband img{width:100%;height:100%;object-fit:cover;object-position:center;filter:contrast(1.03)}
+  .perfband .tearlabel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--ink);background:var(--paper);padding:5px 14px;border:1px solid var(--ink)}
+
+  footer{background:var(--ink);color:#9a8f7d;padding:28px 22px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+  footer .brand{color:var(--paper);font-family:var(--serif);letter-spacing:.06em}
+
+  /* ===== レスポンシブ ===== */
+  @media(max-width:760px){
+    .split,.verify,.price{grid-template-columns:1fr;gap:22px}
+    .split.rev{direction:ltr}
+    .verify .serialcard{order:-1}
+    .flow .src img{width:140px}
+    section{padding:46px 0}
+    .step{grid-template-columns:60px 1fr;gap:14px}
+    .hero h1{font-size:clamp(30px,10vw,44px)}
+    .mockgrid{grid-template-columns:1fr;gap:34px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Lap<b>sell</b></div>
+  <a class="navcta" href="#start">出品をはじめる</a>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<div class="wrap hero">
+  <div class="ticketrow">
+    <span>Lapsell — Serial Ticket</span>
+    <span class="rn">No. 0001</span>
+    <span>ADMIT ONE</span>
+    <span>本人の練習・世界に1つ</span>
+  </div>
+  <h1>練習時間を、<br>収益に変える。<br><span class="u">世界に1つには、番号がある。</span></h1>
+  <p class="sub">あなたの練習の10秒には、<span class="heronum">1本ずつ通し番号</span>が振られる。だから替えがきかないし、値段がつく。</p>
+  <p class="sub muted">ライブアイドル・バンド・お笑い — まだ大きくない"今"の裏側を、一点物として届けるサービスです。</p>
+
+  <div class="heroimg">
+    <img src="images/hero.png" alt="ミシン目に沿ってライブチケットの半券をちぎる手のアップ。券面に赤いナンバリングで通し番号が押されている" loading="eager">
+    <span class="cap">半券をちぎる＝受け取りの瞬間 / <span class="rn">No. 128</span></span>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn-ticket" href="#start">出品をはじめる<span class="stubno">▸ 0円</span></a>
+    <a class="btn-ghost" href="#how">売れるまでの流れを見る →</a>
+  </div>
+</div>
+
+<div class="perfband">
+  <img src="images/perforation.png" alt="チケット用紙に空いたミシン目の穴のマクロ写真。ここで半券がちぎられる" loading="lazy">
+  <span class="tearlabel">tear here — ここでもぎる</span>
+</div>
+
+<!-- ===================== No.01 発券 ===================== -->
+<section id="issue"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.01</span>
+    <span class="ttl"><small>Issue / 発券</small>まだ撮っていない練習を、<br>先に「発券」する。</span>
+  </div>
+  <div class="split">
+    <div>
+      <p class="lead">Lapsell は、<b>これからやる練習の時間枠</b>を、あなたが先にチケットとして発券するサービスです。ファンはその「まだ中身のない券」を買います。</p>
+      <p style="margin-top:16px" class="muted">当日はスマホで練習を撮るだけ。撮った映像は自動で約10秒ずつの断片に分かれ、<b>1本1本に通し番号が押されて</b>、買ってくれた人へ配られます。編集はいりません。</p>
+      <p style="margin-top:16px" class="muted">練習・リハ・ネタ合わせ。今まで一円にもならず消えていた時間が、そのまま番号付きの一点物になります。</p>
+      <div class="fignum"><span class="rn">Fig. A</span> 券面のマクロ — 黒の活字と赤いナンバリング</div>
+    </div>
+    <div>
+      <img class="photo" src="images/ticket-macro.png" alt="クラフト紙のライブチケット券面のマクロ写真。黒い活字の券面情報と、赤いナンバリングインクで押された大きな通し番号" loading="lazy">
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.02 番号（一意性） ===================== -->
+<section id="unique"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.02</span>
+    <span class="ttl"><small>Serial / 番号</small>1本の練習が、<br>番号違いの一点物になる。</span>
+  </div>
+  <p class="lead">同じ練習から生まれた断片でも、<b>番号が違えば別物</b>。あなたが撮った1回の練習が、通し番号のついた複数の「世界に1つ」に分かれて、それぞれ違うファンの手に渡ります。</p>
+
+  <div class="flow">
+    <div class="src">
+      <img src="images/practice-idol.png" alt="スタジオの鏡の前でダンスの練習をする日本人ライブアイドルのスナップ写真" loading="lazy">
+      <div class="txt">
+        <h3 class="sub-h">1回の練習（約90秒の映像）</h3>
+        <p class="muted">アップすると、自動で約10秒の断片に分割。それぞれに連番が押されます。</p>
+        <div class="fignum"><span class="rn">Source</span> No.121 – No.129 を発行</div>
+      </div>
+    </div>
+
+    <div class="chips" aria-label="番号付きの断片がそれぞれ別のファンへ配られる図">
+      <div class="chip"><span class="perfdot"></span><div class="cno">No.121</div><div class="cwho">→ 東京・A さんへ</div></div>
+      <div class="chip"><span class="perfdot"></span><div class="cno">No.122</div><div class="cwho">→ 大阪・B さんへ</div></div>
+      <div class="chip"><span class="perfdot"></span><div class="cno">No.123</div><div class="cwho">→ 福岡・C さんへ</div></div>
+      <div class="chip"><span class="perfdot"></span><div class="cno">No.124</div><div class="cwho">→ 名古屋・D さんへ</div></div>
+      <div class="chip"><span class="perfdot"></span><div class="cno">No.125</div><div class="cwho">→ 札幌・E さんへ</div></div>
+    </div>
+    <p class="muted" style="margin-top:20px">配られる断片はランダムかつ一意。「どの番号が誰に渡ったか」は Lapsell が記録します。だから <b>No.123 はこの世に1つだけ</b>。半券を捨てられないあの気持ちが、そのまま値段になります。</p>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.03 もぎり（7ステップ） ===================== -->
+<section id="how"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.03</span>
+    <span class="ttl"><small>Flow / もぎり</small>発券から配布まで、<br>やることはほぼ「撮るだけ」。</span>
+  </div>
+  <p class="lead" style="margin-bottom:8px">チケットが発行され、もぎられ、番号順に配られる — その流れをそのまま7枚の券で追います。</p>
+
+  <div class="steps">
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">出品する（発券）</div>
+      <div class="sd">練習の日時・1本の長さ・販売枠数（＝配布する本数）・価格を決めて出品。まだ撮っていない未来の時間を券にします。</div>
+      <span class="tag">所要 約3分・スマホで完結</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">ファンが買う</div>
+      <div class="sd">中身はまだ撮影すらされていない。届くまで分からないから、開けるまでのワクワクごと買われます。</div>
+      <span class="tag">前売り券のように売れていく</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">当日、スマホで撮る</div>
+      <div class="sd">いつもの練習をそのまま撮影。編集不要。特別な機材もいりません。</div>
+      <span class="tag">普段の練習でOK</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">アップして自動で分割</div>
+      <div class="sd">撮った映像をアップすると、約10秒ずつの断片に自動分割。1本ごとに通し番号が押されます。</div>
+      <span class="tag">分割・採番は自動</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">公開前に自分で確認</div>
+      <div class="sd">配る前に中身をチェック。本当にまずい「事故」の瞬間だけを非公開にできます（その人には自動で返金）。</div>
+      <span class="tag">ライブ配信と違い、出す前に止められる</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">番号付きで配布（もぎり）</div>
+      <div class="sd">承認された断片が、購入者へランダムかつ一意に割り当て。各人が受け取るのは番号違いの1本だけ。</div>
+      <span class="tag">誰にどの番号が渡ったか記録</span>
+    </div></div>
+    <div class="step"><div class="tk"></div><div>
+      <div class="sh">ファンが受け取り、手元に持つ</div>
+      <div class="sd">「No.007 / 300」— 世界に1つの断片が、そのファンのものに。半券を取っておくように、ずっと手元に残ります。</div>
+      <span class="tag">所有できる一点物</span>
+    </div></div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.03b アプリ画面（券面UIモック） ===================== -->
+<section id="app"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.03b</span>
+    <span class="ttl"><small>Screens / 画面</small>アプリはぜんぶ、<br>券面のまま。</span>
+  </div>
+  <p class="lead">出品から受け取りまで、実際のアプリ画面です。番号・ミシン目・半券のまま操作するので、「何が起きているか」が一目で分かります。</p>
+
+  <div class="mocks"><div class="mockgrid">
+
+    <!-- 画面1：発券（出品） -->
+    <div class="mockslot">
+      <div class="mockcap"><span class="mno">No.03b-1</span><span class="mh">練習を「発券」する<span class="ms">Issue / 出品</span></span></div>
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="pstatus"><span>9:41</span><span class="picons"><span class="psig"><i></i><i></i><i></i><i></i></span><span class="pbatt"><b></b></span></span></div>
+        <div class="pbar"><span class="pback">‹</span><div><div class="ptt">練習枠を発券</div><div class="pss">未来の練習時間を先に売る</div></div><span class="pspacer"></span><span class="padmit">Admit</span></div>
+        <div class="pbody">
+          <div class="pf"><div class="pl"><span>練習の日時</span><span class="req">必須</span></div><div class="pv"><span>2026年7月12日（日）19:00</span><span class="cal">📅</span></div></div>
+          <div class="pf"><div class="pl"><span>場所・メモ</span><span>任意</span></div><div class="pv"><span>下北沢スタジオ／新曲リハ</span></div></div>
+          <div class="pf"><div class="pl"><span>1枠（1本）の価格</span></div><div class="pv big"><span>¥ 1,500</span><span class="unit">/ 本</span></div></div>
+          <div class="pf"><div class="pl"><span>販売枠数 ＝ 配布本数</span></div><div class="pstepper"><button>−</button><span class="sv">30<small>本</small></span><button>＋</button></div></div>
+          <div class="pf"><div class="pl"><span>1本の長さ</span></div><div class="pseg"><span>約7秒</span><span class="on">約10秒</span><span>約15秒</span></div></div>
+          <div class="pnote">撮影・編集は不要。当日スマホで撮った映像を、<b>この長さに自動で分割</b>して配ります。</div>
+          <div class="pstub">
+            <div class="st">発券プレビュー</div>
+            <div class="sl"><span class="sk">売上（満枠時）</span><span>¥45,000</span></div>
+            <div class="sl"><span class="sk">手数料 5%</span><span>− ¥2,250</span></div>
+            <div class="sl"><span class="sk">受け取り見込み</span><span class="sred">¥42,750</span></div>
+          </div>
+          <button class="pcta">この内容で発券する</button>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 画面2：自動分割＆検品 -->
+    <div class="mockslot">
+      <div class="mockcap"><span class="mno">No.03b-2</span><span class="mh">分割して、番号を振る<span class="ms">Split / 公開前チェック</span></span></div>
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="pstatus"><span>19:48</span><span class="picons"><span class="psig"><i></i><i></i><i></i><i></i></span><span class="pbatt"><b></b></span></span></div>
+        <div class="pbar"><span class="pback">‹</span><div><div class="ptt">公開前チェック</div><div class="pss">7/12 新曲リハ — 30本に分割</div></div><span class="pspacer"></span><span class="padmit">3 / 4</span></div>
+        <div class="pbody">
+          <div class="pnote">映像は約10秒ずつに自動分割し、<b>1本ごとに通し番号（No.121〜）を発番</b>。まずい瞬間だけ非公開にでき、その本数分は購入者へ自動返金されます。</div>
+          <div class="pkick">セグメント一覧（連番の半券）</div>
+          <div class="psegwrap">
+            <div class="ptile"><span class="tdot"></span><span class="tno">No.121</span><span class="tfilm"></span><span class="tlen">0:10</span></div>
+            <div class="ptile"><span class="tdot"></span><span class="tno">No.122</span><span class="tfilm"></span><span class="tlen">0:10</span></div>
+            <div class="ptile hide"><span class="tdot"></span><span class="tno">No.123</span><span class="tfilm"></span><span class="tflag">非公開 / 返金</span></div>
+            <div class="ptile"><span class="tdot"></span><span class="tno">No.124</span><span class="tfilm"></span><span class="tlen">0:09</span></div>
+            <div class="ptile"><span class="tdot"></span><span class="tno">No.125</span><span class="tfilm"></span><span class="tlen">0:10</span></div>
+            <div class="ptile"><span class="tdot"></span><span class="tno">No.126</span><span class="tfilm"></span><span class="tlen">0:11</span></div>
+          </div>
+          <div class="psplit"><span>公開 29本</span><span class="hid">非公開 1本（自動返金）</span></div>
+          <button class="pcta" style="margin-top:14px">この内容で公開・配布する</button>
+          <button class="pcta ghost" style="margin-top:8px">もう一度確認する</button>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 画面3：受け取り（開封） -->
+    <div class="mockslot">
+      <div class="mockcap"><span class="mno">No.03b-3</span><span class="mh">ファンがもぎって受け取る<span class="ms">Receive / 開封</span></span></div>
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="pstatus"><span>19:50</span><span class="picons"><span class="psig"><i></i><i></i><i></i><i></i></span><span class="pbatt"><b></b></span></span></div>
+        <div class="pbar"><span class="pback">‹</span><div><div class="ptt">あなたの断片が届きました</div><div class="pss">彩夏 ・ 7/12 新曲リハ</div></div></div>
+        <div class="pbody">
+          <div class="psealed">
+            <span class="seal">Sealed ・ 開封前</span>
+            <span class="qbig">No.?</span>
+            <span class="qcap">世界に1つ。あなたに割り当てられた約10秒の断片。もぎって開封します。</span>
+          </div>
+          <div class="pmini">
+            <div class="m"><div class="mk">通し番号</div><div class="mv">No.123<small> /300</small></div></div>
+            <div class="m"><div class="mk">長さ</div><div class="mv">0:10</div></div>
+            <div class="m"><div class="mk">発行</div><div class="mv">世界に1</div></div>
+          </div>
+          <button class="pcta">ここでもぎって開封する</button>
+          <div class="pnote" style="margin-top:14px">開封すると、この番号の断片が<b>あなたのものに</b>。半券のように、所有証明つきで手元に残ります。</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 画面4：真正性の検証 -->
+    <div class="mockslot">
+      <div class="mockcap"><span class="mno">No.03b-4</span><span class="mh">番号で本物だと確かめる<span class="ms">Verify / 真正性</span></span></div>
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="pstatus"><span>20:05</span><span class="picons"><span class="psig"><i></i><i></i><i></i><i></i></span><span class="pbatt"><b></b></span></span></div>
+        <div class="pbar"><span class="pback">‹</span><div><div class="ptt">真正性の証明</div><div class="pss">Lapsell 公式レジストリ</div></div></div>
+        <div class="pbody">
+          <div class="pverify">
+            <div class="vseal">✓</div>
+            <div class="vt">本物であることを確認しました</div>
+            <div class="vs">彩夏 本人が 2026/07/12 に撮影・公開した練習映像の正規セグメントです。複製・改ざんは検出されていません。</div>
+          </div>
+          <div class="pid">
+            <div class="idr"><span class="ik">アイテム</span><span class="iv">新曲リハ 断片</span></div>
+            <div class="idr"><span class="ik">通し番号</span><span class="iv mono">No.123 / 300</span></div>
+            <div class="idr"><span class="ik">証明ID</span><span class="iv mono">LPS-7C4F-19A2</span></div>
+            <div class="idr"><span class="ik">発行日時</span><span class="iv">2026/07/12 19:48</span></div>
+            <div class="idr"><span class="ik">現在の所有者</span><span class="iv">あなた<span class="own">保有中</span></span></div>
+          </div>
+          <button class="pcta" style="margin-top:14px">所有証明を表示 / 共有</button>
+        </div>
+      </div></div>
+    </div>
+
+  </div></div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.04 撮影 写真セクション ===================== -->
+<section id="shoot"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.04</span>
+    <span class="ttl"><small>Shoot / 撮影</small>いつもの練習を、<br>スマホで撮るだけ。</span>
+  </div>
+  <div class="split rev">
+    <div>
+      <img class="photo" src="images/shooting-phone.png" alt="狭いスタジオでスマホを三脚に立て、練習中のインディーズバンドを撮影している様子。スマホ画面に録画中のバンドが映っている" loading="lazy">
+      <div class="fignum"><span class="rn">Fig. B</span> 三脚に立てたスマホ1台で十分</div>
+    </div>
+    <div>
+      <h3 class="sub-h">機材も編集もいらない。<br>下積みの時間が、そのまま商品になる。</h3>
+      <p class="muted">リハーサル、振り入れ、ネタ合わせ。カメラを回すだけで、あなたが積み重ねている時間が番号付きの断片になります。</p>
+      <p class="muted" style="margin-top:14px">「まだ何者でもない今」こそ、二度と撮り直せない。だからその映像は、あとから価値を持ちます。</p>
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.05 本物の証明 ===================== -->
+<section id="proof"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.05</span>
+    <span class="ttl"><small>Authenticity / 本物の証明</small>番号が、本物であることを<br>保証する。</span>
+  </div>
+  <div class="verify">
+    <div>
+      <p class="lead">チケットの半券に印刷されたセキュリティの見立てで、Lapsell の断片には<b>電子的な透かしと通し番号</b>が埋め込まれています。</p>
+      <p class="muted" style="margin-top:16px">「これは誰の、どの練習の、何番の断片か」— そのすべてを Lapsell 上で照合できます。コピーやなりすましと、あなたが本人として配った本物とを、番号で見分けられる。だからファンは安心して所有できます。</p>
+      <ul style="list-style:none;margin-top:18px">
+        <li class="muted" style="padding:8px 0;border-bottom:1px dashed var(--line)"><span class="checkmark">✓ </span>誰の手に渡った番号かを記録</li>
+        <li class="muted" style="padding:8px 0;border-bottom:1px dashed var(--line)"><span class="checkmark">✓ </span>電子透かしで真正性を検証</li>
+        <li class="muted" style="padding:8px 0"><span class="checkmark">✓ </span>同じ番号は二度と発行されない</li>
+      </ul>
+    </div>
+    <div>
+      <div class="serialcard">
+        <span class="perftop"></span>
+        <div class="lbl">Lapsell Authenticity</div>
+        <div class="big">No. 007<br>/ 300</div>
+        <div class="lbl">練習 2026.03.14 — 本人発行・検証済</div>
+        <div class="row2">
+          <span>ARTIST <b>本人</b></span>
+          <span>STATUS <b style="color:var(--red)">AUTHENTIC</b></span>
+        </div>
+      </div>
+      <img class="photo" style="margin-top:14px" src="images/numbering-stamp.png" alt="クラフト紙に赤いインクで通し番号を押した、真鍮と鉄でできた古いナンバリングスタンプのブツ撮り" loading="lazy">
+      <div class="fignum"><span class="rn">Fig. F</span> 一つずつ番号を押す — 二度と同じ番号は出ない</div>
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.06 売れる理由 ===================== -->
+<section id="why"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.06</span>
+    <span class="ttl"><small>Why it sells / 売れる理由</small>「本当に売れるの?」<br>への、事実で出した答え。</span>
+  </div>
+  <p class="lead">ファンはもう、一点物・素のコンテンツ・本人とのつながりに、実際にお金を払っています。Lapsell の「番号付きの一点物」も、同じ理由で買われます。</p>
+
+  <div style="margin:26px 0 4px;position:relative">
+    <img class="photo" src="images/band-rehearsal.png" alt="ライブハウスのリハーサルで演奏するインディーズバンドのスナップ写真" loading="lazy">
+    <div class="fignum"><span class="rn">Fig. G</span> 下積みのリハーサルこそ、二度と撮り直せない一点物になる</div>
+  </div>
+
+  <div class="reasons">
+    <div class="reason">
+      <div class="rh">ライブ物販で、グッズ購入者は<em>年間平均2.2万円</em>使っている。</div>
+      <div class="rb">アイドル系のグッズ購入率は75.4%。「本人にまつわるモノ」に払う習慣は、すでに根づいています。</div>
+      <div class="rsrc">出典：ライブ・エンタメ市場の物販支出調査</div>
+    </div>
+    <div class="reason">
+      <div class="rh">チェキ1枚<em>約1,500円</em>が、ライブアイドルの収入の過半を支える。</div>
+      <div class="rb">「その場でしか手に入らない・世界に1つ」に価値がつくのは証明済み。Lapsell はそれを"動く一点物"にしただけです。</div>
+      <div class="rsrc">出典：ライブアイドルの収益構造に関する報道</div>
+    </div>
+    <div class="reason">
+      <div class="rh">本人の"素の日常"に課金する購読は、<em>世界200万人超</em>。</div>
+      <div class="rb">加工されたステージより、練習や裏側の"素"にこそファンは反応する。番号のついた練習の断片は、まさにその「素の一点物」です。</div>
+      <div class="rsrc">出典：本人配信サービスの購読者数公表値</div>
+    </div>
+    <div class="reason">
+      <div class="rh">小さい"今"だから、<em>将来価値</em>を見込んで買われる。</div>
+      <div class="rb">例えば結成11年目でブレイクし紅白へ出たグループがいます。もし下積み時代の練習を番号付きの一点物で持っていたら—「自分が育てた」という物語ごと、ファンは買います。</div>
+      <div class="rsrc">参考：無名時代からのファンが持つ"物語"の価値</div>
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.07 コレクション（写真） ===================== -->
+<section id="collect"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.07</span>
+    <span class="ttl"><small>Collection / 台紙</small>捨てられない半券が、<br>そのままファンの財産になる。</span>
+  </div>
+  <div class="split">
+    <div>
+      <img class="photo" src="images/collection-mount.png" alt="コレクション用の台紙に並べて貼られた、赤い通し番号入りのライブチケット半券のブツ撮り" loading="lazy">
+      <div class="fignum"><span class="rn">Fig. C</span> 番号違いの半券が並ぶ台紙</div>
+    </div>
+    <div>
+      <h3 class="sub-h">番号が並ぶほど、<br>物語が積み上がる。</h3>
+      <p class="muted">受け取ったファンは、自分の番号を集めて並べます。半券を大切に取っておくのと同じ心理が、あなたの活動を長く応援する理由になります。</p>
+      <div class="fignum" style="margin-top:20px"><span class="rn">Fig. D</span> 受け取った番号を確認するファン</div>
+      <img class="photo" style="margin-top:8px" src="images/fan-receive.png" alt="部屋でスマホを見て嬉しそうにするファン。画面には赤い番号「No.007 / 300」の付いた短い映像が映っている" loading="lazy">
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.08 事故を防ぐ ===================== -->
+<section id="safe"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.08</span>
+    <span class="ttl"><small>Safety / 検品</small>出す前に止められるから、<br>配信事故が起きない。</span>
+  </div>
+  <div class="split rev">
+    <div>
+      <img class="photo" src="images/comedian.png" alt="殺風景な稽古場でネタ合わせをする若い日本人お笑いコンビのスナップ" loading="lazy">
+      <div class="fignum"><span class="rn">Fig. E</span> 楽屋・ネタ合わせも安心して撮れる</div>
+    </div>
+    <div>
+      <h3 class="sub-h">ライブ配信と違い、<br>撮ってから・確認してから配る。</h3>
+      <p class="muted">Lapsell は撮影後にアップロードする仕組み。公開前に自分で中身を確認できるので、本当にまずい瞬間は世に出ません。</p>
+      <p class="muted" style="margin-top:14px">非公開にした断片を買っていた人には自動で返金。裏側や楽屋の"素"を、リスクを抑えて出せます。</p>
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.09 料金 ===================== -->
+<section id="price"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.09</span>
+    <span class="ttl"><small>Fee / 料金</small>始めるのに、<br>お金はかからない。</span>
+  </div>
+  <div class="price">
+    <div>
+      <div class="priceline"><span class="k">初期費用</span><span class="v">0円</span></div>
+      <div class="priceline"><span class="k">月額</span><span class="v">0円</span></div>
+      <div class="priceline"><span class="k">販売手数料</span><span class="v">5%〜 <small>/ 売れたときだけ</small></span></div>
+      <div class="priceline"><span class="k">必要なもの</span><span class="v">スマホ1台</span></div>
+      <p class="pricenote">売れなければ費用はゼロ。捨てていた練習時間を出品するだけなので、失うものがありません。まずは1枠、試しに発券してみてください。</p>
+    </div>
+    <div>
+      <div class="serialcard">
+        <span class="perftop"></span>
+        <div class="lbl">Starter Ticket</div>
+        <div class="big" style="font-size:clamp(24px,6vw,34px)">ノーリスクで<br>始められる</div>
+        <div class="lbl">初期費用・月額なし / 売れたら手数料5%〜</div>
+        <div class="row2"><span>登録 <b>無料</b></span><span>解約 <b>いつでも</b></span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<hr class="perf">
+
+<!-- ===================== No.10 FAQ ===================== -->
+<section id="faq"><div class="wrap">
+  <div class="stub">
+    <span class="no">No.10</span>
+    <span class="ttl"><small>FAQ / よくある質問</small>気になるところ。</span>
+  </div>
+  <div class="faq">
+    <details><summary>まだファンが少なくても売れますか?</summary>
+      <div class="a">はい。販売枠数（配布本数）は自分で決められます。少人数のファンに向けて数本だけ発券することもできます。むしろ小さい"今"の断片ほど、後から「初期を支えた1本」として価値を持ちます。</div></details>
+    <details><summary>撮影が下手でも大丈夫ですか?</summary>
+      <div class="a">問題ありません。ファンが求めているのは加工されたステージではなく、あなたの"素"の練習です。スマホで普段どおり撮るだけで、それが一点物になります。</div></details>
+    <details><summary>変な瞬間まで配られてしまいませんか?</summary>
+      <div class="a">配布前に必ず自分で中身を確認できます。まずい瞬間だけを非公開にでき、その断片を買っていた人には自動で返金されます。ライブ配信と違い「出す前に止められる」のが特徴です。</div></details>
+    <details><summary>「番号が世界に1つ」って、コピーされたら意味がないのでは?</summary>
+      <div class="a">各断片には電子透かしと通し番号が埋め込まれ、Lapsell 上で本物かどうかを照合できます。コピーはコピーとして判別され、あなたが本人として配った本物とは区別されます。</div></details>
+    <details><summary>手数料以外にお金はかかりますか?</summary>
+      <div class="a">初期費用・月額は0円です。かかるのは売れたときの販売手数料（5%〜）だけ。売れなければ費用はかかりません。</div></details>
+    <details><summary>どんな人が使っていますか?</summary>
+      <div class="a">ライブアイドル、インディーズのバンドや楽曲アーティスト、お笑い芸人など、生身で活動していて練習や裏側の時間が多い作り手です。その「お金にならなかった時間」を収益に変えています。</div></details>
+  </div>
+</div></section>
+
+<!-- ===================== 最終CTA ===================== -->
+<section class="final" id="start"><div class="wrap">
+  <div class="en">Admit One — Lapsell</div>
+  <h2>あなたの練習に、<br>最初の番号を振ろう。</h2>
+  <p>初期費用0円・スマホ1台。捨てていた練習の10秒に通し番号がつき、世界に1つの一点物として売れていきます。</p>
+  <a class="btn-ticket" href="#start">出品をはじめる<span class="stubno">▸ No.0001</span></a>
+  <div class="fineprint">登録無料 / 手数料は売れたときだけ 5%〜 / いつでも解約可</div>
+</div></section>
+
+<footer>
+  <div class="brand">Lapsell</div>
+  <div style="margin-top:8px">練習時間を、収益に変える。 — 世界に1つには、番号がある。</div>
+  <div style="margin-top:6px;color:#6f6656">© 2026 Lapsell</div>
+</footer>
+
+</body>
+</html>
