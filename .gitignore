@@ -10,4 +10,4 @@ _sample_*.png
 .how*.png
 .DS_Store
 .idea/
-node_modules
+node_modulesimg_backup/
