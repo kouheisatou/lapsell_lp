@@ -188,10 +188,14 @@ strong { font-weight: 700; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 .form-section__embed {
-  width: min(640px, 100%);
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: 1928px;
+  border: 0;
 }
 
 .section__label {
@@ -1204,10 +1208,12 @@ strong { font-weight: 700; }
   .merit3 { gap: 40px; }
   .fan__photos { gap: 40px; margin-bottom: 64px; }
   .fan__values { gap: 36px; }
+  .form-section__embed { height: 2320px; }
 }
 
 @media (max-width: 480px) {
   .genre { grid-template-columns: 1fr; }
   .btn--primary, .btn--large { width: 100%; }
   .cta__actions { flex-direction: column; }
+  .form-section__embed { height: 2480px; }
 }
