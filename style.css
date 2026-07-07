@@ -184,6 +184,15 @@ strong { font-weight: 700; }
 
 .section__inner { max-width: 1080px; margin: 0 auto; }
 .section__inner--narrow { max-width: 800px; }
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-section__embed {
+  width: min(640px, 100%);
+  max-width: 100%;
+}
 
 .section__label {
   font-family: var(--font-en);
