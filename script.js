@@ -93,3 +93,50 @@ document.querySelectorAll('.btn').forEach((btn) => {
     }
   });
 })();
+
+// #form への遷移時、画像読み込み中のレイアウト変動で着地位置がずれないよう補正
+(function () {
+  const formSection = document.getElementById('form');
+  const formLinks = document.querySelectorAll('a[href="#form"]');
+  if (!formSection || !formLinks.length) return;
+
+  const getScrollPaddingTop = () => {
+    const value = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+    return Number.isFinite(value) ? value : 0;
+  };
+
+  const scrollToForm = (behavior = 'smooth') => {
+    const targetY = window.scrollY + formSection.getBoundingClientRect().top - getScrollPaddingTop();
+    window.scrollTo({ top: Math.max(targetY, 0), behavior });
+  };
+
+  const keepAlignedWhileLayoutShifts = () => {
+    const startedAt = performance.now();
+    const durationMs = 2200;
+    const tolerancePx = 2;
+
+    const tick = () => {
+      const formTop = formSection.getBoundingClientRect().top;
+      const expectedTop = getScrollPaddingTop();
+      if (Math.abs(formTop - expectedTop) > tolerancePx) {
+        scrollToForm('auto');
+      }
+      if (performance.now() - startedAt < durationMs) {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  formLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (window.location.hash !== '#form') {
+        history.pushState(null, '', '#form');
+      }
+      scrollToForm('smooth');
+      keepAlignedWhileLayoutShifts();
+    });
+  });
+})();
