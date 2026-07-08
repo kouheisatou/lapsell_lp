@@ -70,6 +70,13 @@ strong { font-weight: 700; }
   padding: 10px 24px;
   font-size: 14px;
 }
+.btn--small.btn--ghost {
+  background: transparent;
+  color: var(--blue-strong);
+  border: 1.5px solid var(--blue-strong);
+  padding: 8.5px 20px;
+}
+.btn--small.btn--ghost::after { content: none; }
 .btn--large { padding: 20px 56px; font-size: 18px; }
 
 .btn-wrap {
