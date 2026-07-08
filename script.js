@@ -93,3 +93,77 @@ document.querySelectorAll('.btn').forEach((btn) => {
     }
   });
 })();
+
+// #form への遷移時、画像読み込み中のレイアウト変動で着地位置がずれないよう補正
+(function () {
+  const formSection = document.getElementById('form');
+  const formLinks = document.querySelectorAll('a[href="#form"]');
+  if (!formSection || !formLinks.length) return;
+
+  const lockDurationMs = 3000;
+  let lockUntil = 0;
+
+  const getScrollPaddingTop = () => {
+    const value = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+    return Number.isFinite(value) ? value : 0;
+  };
+
+  const scrollToForm = (behavior = 'auto') => {
+    const targetY = window.scrollY + formSection.getBoundingClientRect().top - getScrollPaddingTop();
+    window.scrollTo({ top: Math.max(targetY, 0), behavior });
+  };
+
+  const isFormNavigationActive = () => window.location.hash === '#form' && performance.now() < lockUntil;
+
+  const keepAlignedWhileLayoutShifts = () => {
+    const tolerancePx = 2;
+
+    const tick = () => {
+      if (!isFormNavigationActive()) return;
+      const formTop = formSection.getBoundingClientRect().top;
+      const expectedTop = getScrollPaddingTop();
+      if (Math.abs(formTop - expectedTop) > tolerancePx) {
+        scrollToForm('auto');
+      }
+      requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const startFormNavigation = () => {
+    lockUntil = performance.now() + lockDurationMs;
+    scrollToForm('auto');
+    keepAlignedWhileLayoutShifts();
+  };
+
+  document.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) {
+      img.addEventListener('load', () => {
+        if (isFormNavigationActive()) {
+          scrollToForm('auto');
+        }
+      }, { passive: true });
+    }
+  });
+
+  window.addEventListener('load', () => {
+    if (window.location.hash === '#form') {
+      startFormNavigation();
+    }
+  });
+
+  formLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (window.location.hash !== '#form') {
+        history.pushState(null, '', '#form');
+      }
+      startFormNavigation();
+    });
+  });
+
+  if (window.location.hash === '#form') {
+    startFormNavigation();
+  }
+})();
