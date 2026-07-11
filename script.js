@@ -17,7 +17,7 @@ const fadeTargets = document.querySelectorAll(
     '.fan__photos figure', '.fan__value',
     '.merit3__item',
     '.price__plan', '.price__image',
-    '.genre__item',
+    '.genre__item', '.genre__more',
     '.faq__item',
     '.cta__title', '.cta__lead', '.cta__actions',
   ].join(',')
