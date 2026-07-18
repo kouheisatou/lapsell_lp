@@ -14,7 +14,7 @@ const fadeTargets = document.querySelectorAll(
     '.uploader', '.flow__closing',
     '.resale',
     '.reason__item',
-    '.fan__photos figure', '.fan__value',
+    '.fan__photos figure', '.fan__value', '.fanmap__visual',
     '.merit3__item',
     '.price__plan', '.price__image',
     '.genre__item', '.genre__more',

@@ -910,6 +910,18 @@ strong { font-weight: 700; }
 }
 .fan__value p { color: var(--text-weak); padding-left: 18px; }
 
+/* ラプセルマップ */
+.fanmap { margin-top: 0; }
+.fanmap__visual {
+  max-width: 860px;
+  margin: 0 auto 72px;
+}
+.fanmap__visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 /* ===== 出品者のメリット ===== */
 .merit3 {
   display: grid;
@@ -1302,6 +1314,8 @@ strong { font-weight: 700; }
   .fan__photos figcaption { font-size: 14px; margin-top: 10px; }
   .fan__values { gap: 28px; }
   .fan__value h3 { font-size: 17px; }
+  .fanmap { margin-top: 0; }
+  .fanmap__visual { margin-bottom: 40px; }
 
   .faq__item { padding: 20px 0; }
   .faq__item summary { font-size: 15px; }
