@@ -315,28 +315,6 @@ strong { font-weight: 700; }
   margin: 0;
 }
 
-/* ===== Lapsellとは ===== */
-.about__points {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
-  margin-bottom: 130px;
-}
-.about__point h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-.about__point h3::before {
-  content: "";
-  display: inline-block;
-  width: 12px; height: 12px;
-  background: var(--yellow);
-  border-radius: 50%;
-  margin-right: 12px;
-  vertical-align: 2px;
-}
-.about__point p { color: var(--text-weak); }
-
 /* ===== 利用フロー（縦スクロール連動の横スクロールタイムライン） ===== */
 .afterflow {
   list-style: none;
@@ -737,7 +715,6 @@ strong { font-weight: 700; }
   .section__lead { font-size: 15px; margin-bottom: 40px; }
 
   .problem__grid,
-  .about__points,
   .reason__item,
   .merit3,
   .price {
@@ -773,9 +750,6 @@ strong { font-weight: 700; }
   .mockups__caption { margin-top: 18px; }
   .mockups__title { font-size: 17px; }
   .mockups__desc { font-size: 14px; }
-
-  .about__points { gap: 28px; margin-bottom: 56px; }
-  .about__point h3 { font-size: 17px; }
 
   .afterflow { gap: 44px; padding: 4px 20px 12px; }
   .afterflow__stage { flex-basis: 264px; }
