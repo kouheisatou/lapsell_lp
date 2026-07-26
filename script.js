@@ -7,17 +7,17 @@ window.addEventListener('scroll', () => {
 // セクション内の主要ブロックをスクロールでフェードイン
 const fadeTargets = document.querySelectorAll(
   [
-    '.section__title', '.section__lead',
+    '.hero__text', '.hero__visual',
+    '.section__label', '.section__title', '.section__lead',
     '.problem__item', '.problem__closing',
-    '.scheme', '.about__point',
-    '.feedintro', '.fanmap',
+    '.mockups__device',
     '.afterflow',
     '.reason__item',
-    '.merit3__item',
-    '.price__plan', '.price__image',
-    '.genre__item', '.genre__more',
+    '.price__item',
     '.faq__item',
     '.cta__title', '.cta__lead', '.cta__actions',
+    '.form-section__embed',
+    '.footer__inner',
   ].join(',')
 );
 
@@ -139,4 +139,3 @@ document.querySelectorAll('.btn').forEach((btn) => {
     }
   });
 })();
-

@@ -505,7 +505,9 @@ strong { font-weight: 700; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 64px;
+  width: 100%;
   max-width: 920px;
+  margin-inline: auto;
 }
 .price__item {
   min-width: 0;
@@ -528,12 +530,6 @@ strong { font-weight: 700; }
   font-size: 13px;
   line-height: 1.7;
 }
-.price__free {
-  margin-top: 36px;
-  color: var(--text-weak);
-  font-size: 13px;
-}
-
 /* ===== FAQ ===== */
 .faq { display: grid; }
 .faq__item {
@@ -750,7 +746,6 @@ strong { font-weight: 700; }
   .price { grid-template-columns: 1fr; gap: 48px; }
   .price__label { margin-bottom: 16px; }
   .price__description { min-height: 0; }
-  .price__free { margin-top: 28px; }
 
   .faq__item { padding: 20px 0; }
   .faq__item summary { font-size: 15px; }
