@@ -500,27 +500,6 @@ strong { font-weight: 700; }
   text-align: center;
 }
 
-/* ===== 出品者のメリット ===== */
-.merit3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
-}
-.merit3__item img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.merit3__item figcaption h3 {
-  font-size: 19px;
-  margin: 18px 0 8px;
-}
-.merit3__item figcaption p {
-  font-size: 14.5px;
-  color: var(--text-weak);
-}
-
 /* ===== 料金 ===== */
 .price {
   display: grid;
@@ -716,14 +695,12 @@ strong { font-weight: 700; }
 
   .problem__grid,
   .reason__item,
-  .merit3,
   .price {
     grid-template-columns: 1fr;
   }
 
   /* 1カラム化した画像は16:9・最大300pxに抑え、縦のスクロール量を減らす */
   .problem__item img,
-  .merit3__item img,
   .reason__photo img {
     width: 100%;
     max-width: 300px;
@@ -777,10 +754,6 @@ strong { font-weight: 700; }
 
   .price { gap: 40px; }
   .price__amount { font-size: 34px; }
-
-  .merit3 { gap: 32px; }
-  .merit3__item figcaption h3 { font-size: 17px; margin-top: 12px; }
-  .merit3__item figcaption p { font-size: 14px; }
 
   .faq__item { padding: 20px 0; }
   .faq__item summary { font-size: 15px; }
