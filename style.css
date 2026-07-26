@@ -503,41 +503,36 @@ strong { font-weight: 700; }
 /* ===== 料金 ===== */
 .price {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 96px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
   max-width: 920px;
 }
-.price__plan-name {
+.price__item {
+  min-width: 0;
+}
+.price__label {
   font-size: 18px;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 3px solid var(--yellow);
-  display: inline-block;
+  margin-bottom: 18px;
 }
-.price__amount {
-  font-family: var(--font-en);
-  font-size: 44px;
-  font-weight: 800;
-  color: var(--navy);
-  margin-bottom: 20px;
+.price__diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 18px 0 20px;
 }
-.price__yen { font-size: 18px; font-weight: 700; }
-
-.price__features { list-style: none; display: grid; gap: 10px; margin-bottom: 20px; }
-.price__features li {
-  padding-left: 30px;
-  position: relative;
+.price__description {
+  min-height: 50px;
+  color: var(--text-weak);
+  font-size: 13px;
+  line-height: 1.7;
 }
-.price__features li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--blue);
-  font-weight: 900;
+.price__free {
+  margin-top: 36px;
+  color: var(--text-weak);
+  font-size: 13px;
 }
-.price__note { font-size: 13px; color: var(--text-weak); }
 
 /* ===== FAQ ===== */
 .faq { display: grid; }
@@ -752,8 +747,10 @@ strong { font-weight: 700; }
   .donut__hole { width: 106px; height: 106px; }
   .donut__hole strong { font-size: 24px; }
 
-  .price { gap: 40px; }
-  .price__amount { font-size: 34px; }
+  .price { grid-template-columns: 1fr; gap: 48px; }
+  .price__label { margin-bottom: 16px; }
+  .price__description { min-height: 0; }
+  .price__free { margin-top: 28px; }
 
   .faq__item { padding: 20px 0; }
   .faq__item summary { font-size: 15px; }
