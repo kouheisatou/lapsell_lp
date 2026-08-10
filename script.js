@@ -7,7 +7,7 @@ window.addEventListener('scroll', () => {
 // セクション内の主要ブロックをスクロールでフェードイン
 const fadeTargets = document.querySelectorAll(
   [
-    '.hero__text', '.hero__visual',
+    '.hero__text',
     '.section__title', '.section__lead',
     '.mockups__device',
     '.split__item',

@@ -107,17 +107,13 @@ strong { font-weight: 700; }
 
 /* ===== ヒーロー ===== */
 .hero {
-  padding: 170px 32px 100px;
-  overflow: hidden;
+  padding: 180px 32px 130px;
 }
 .hero__inner {
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  gap: 40px;
 }
+.hero__text { max-width: 760px; }
 .nowrap { display: inline-block; }
 
 .hero__title {
@@ -140,11 +136,7 @@ strong { font-weight: 700; }
   margin-top: 18px;
   font-size: 13px;
   color: var(--text-weak);
-}
-.hero__visual img {
-  width: 100%;
-  margin: 0 auto;
-  transform: scale(1.45);
+  max-width: 620px;
 }
 
 /* ===== セクション共通 ===== */
@@ -406,13 +398,11 @@ strong { font-weight: 700; }
   }
   .btn--primary { padding: 15px 36px; font-size: 15px; }
 
-  .hero { padding: 104px 20px 56px; }
-  .hero__inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero { padding: 104px 20px 64px; }
   .hero__title br { display: none; }
   .hero__title { font-size: 29px; margin-bottom: 20px; }
   .hero__lead { font-size: 16px; }
   .hero__note { font-size: 12px; }
-  .hero__visual img { transform: none; max-width: 400px; }
 
   .section { padding: 60px 20px; }
   .section__title { font-size: 23px; margin-bottom: 16px; }
@@ -432,7 +422,6 @@ strong { font-weight: 700; }
     object-fit: cover;
   }
   .split__photo { max-width: 300px; width: 100%; margin: 0 auto; }
-  .hero__visual img { max-width: 280px; }
 
   .mockups {
     flex-direction: column;
