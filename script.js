@@ -8,14 +8,12 @@ window.addEventListener('scroll', () => {
 const fadeTargets = document.querySelectorAll(
   [
     '.hero__text', '.hero__visual',
-    '.section__label', '.section__title', '.section__lead',
-    '.problem__item', '.problem__closing',
+    '.section__title', '.section__lead',
     '.mockups__device',
-    '.afterflow',
-    '.reason__item',
+    '.split__item',
     '.price__item',
     '.faq__item',
-    '.cta__title', '.cta__lead', '.cta__actions',
+    '.lead-block',
     '.form-section__embed',
     '.footer__inner',
   ].join(',')
@@ -36,54 +34,6 @@ const observer = new IntersectionObserver(
 );
 
 fadeTargets.forEach((el) => observer.observe(el));
-
-// 利用フロー: 縦スクロールに連動して横スクロール
-// （画面下端に入り始めで左端、上端に抜けるときに右端。手動の横スクロール直後は一時停止）
-(function () {
-  const strip = document.querySelector('.afterflow');
-  if (!strip) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  let target = 0;
-  let raf = null;
-  let manualUntil = 0;
-
-  const markManual = () => { manualUntil = Date.now() + 1200; };
-  strip.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) markManual();
-  }, { passive: true });
-  strip.addEventListener('touchmove', markManual, { passive: true });
-  strip.addEventListener('pointerdown', markManual, { passive: true });
-
-  function animate() {
-    raf = null;
-    if (Date.now() < manualUntil) return;
-    const diff = target - strip.scrollLeft;
-    if (Math.abs(diff) < 1) {
-      strip.scrollLeft = target;
-      return;
-    }
-    strip.scrollLeft += diff * 0.16;
-    raf = requestAnimationFrame(animate);
-  }
-
-  function sync() {
-    const rect = strip.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const total = vh + rect.height;
-    const raw = (vh - rect.top) / total;
-    // ストリップが画面に完全に入った時点でStep 1が左端に揃うよう、出入りの区間を除外する
-    const dz = Math.min(0.42, (rect.height / total) * 1.05);
-    let p = Math.min(1, Math.max(0, (raw - dz) / (1 - dz * 2)));
-    p = p * p * (3 - 2 * p);
-    target = p * (strip.scrollWidth - strip.clientWidth);
-    if (!raf) raf = requestAnimationFrame(animate);
-  }
-
-  window.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('resize', sync, { passive: true });
-  sync();
-})();
 
 // FAQ: 開いている項目以外を閉じる
 document.querySelectorAll('.faq__item').forEach((item) => {
