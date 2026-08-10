@@ -14,6 +14,7 @@ const fadeTargets = document.querySelectorAll(
     '.price__item',
     '.faq__item',
     '.lead-block',
+    '.award',
     '.form-section__embed',
     '.footer__inner',
   ].join(',')

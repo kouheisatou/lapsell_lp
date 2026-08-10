@@ -145,25 +145,54 @@ strong { font-weight: 700; }
 
 .section__inner { max-width: 1080px; margin: 0 auto; }
 .section__inner--narrow { max-width: 800px; }
-.form-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
+.form-section { width: 100%; }
 .lead-block {
   width: 100%;
   max-width: 720px;
-  margin: 0 auto 52px;
+  margin: 0 0 52px;
 }
 .lead-block p { margin-bottom: 16px; }
 .lead-block p:last-child { margin-bottom: 0; }
+/* ===== 実績 ===== */
+.award {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+.award__icon {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  color: var(--navy);
+  margin-top: 4px;
+}
+.award__prize {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.award__event {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.award__desc { margin-bottom: 14px; }
+.award__link a {
+  color: var(--blue-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 14px;
+}
 
 .form-section__embed {
   display: block;
   width: 100%;
   max-width: 640px;
   height: 1928px;
+  margin: 0 auto;
   border: 0;
 }
 
@@ -454,6 +483,12 @@ strong { font-weight: 700; }
 
   .lead-block { margin-bottom: 36px; }
   .lead-block p { font-size: 15px; margin-bottom: 14px; }
+
+  .award { gap: 20px; }
+  .award__icon { width: 52px; height: 52px; margin-top: 2px; }
+  .award__prize { font-size: 20px; }
+  .award__event { font-size: 15px; margin-bottom: 10px; }
+  .award__desc { font-size: 15px; }
 
   .footer { padding: 56px 20px 32px; }
 
