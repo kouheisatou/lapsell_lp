@@ -231,7 +231,7 @@ strong { font-weight: 700; }
 .para{position: absolute; inset: 0; z-index: 0;}
 .para__img{
   position: absolute;
-  inset: -14% 0;            /* 動いても上下に隙間が出ないよう余裕を持たせる */
+  inset: -65% 0;            /* 動く分だけ上下に余裕を持たせ、隙間が出ないようにする */
   background-size: cover;
   background-position: center;
 }

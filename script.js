@@ -91,8 +91,9 @@ document.querySelectorAll('.btn').forEach((btn) => {
   });
 })();
 
-// 背景写真を、スクロールより遅い速度で動かす（パララックス）
+// 背景写真を、前景より遅い速度で動かす（奥にあるように見せる）
 (function () {
+  var SPEED = 0.62;                    // 前景を1としたときの背景の速度
   var layers = [].slice.call(document.querySelectorAll('.para__img'));
   if (!layers.length) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -103,11 +104,13 @@ document.querySelectorAll('.btn').forEach((btn) => {
     var vh = window.innerHeight;
     for (var i = 0; i < layers.length; i++) {
       var el = layers[i];
-      var box = el.parentElement.parentElement.getBoundingClientRect();
-      if (box.bottom < -200 || box.top > vh + 200) continue;
-      // セクションの中心が画面中心からどれだけ離れているか（-1〜1）
-      var p = (box.top + box.height / 2 - vh / 2) / (vh / 2 + box.height / 2);
-      el.style.transform = 'translate3d(0,' + (p * 9).toFixed(2) + '%,0)';
+      var sec = el.parentElement.parentElement;
+      var box = sec.getBoundingClientRect();
+      if (box.bottom < -400 || box.top > vh + 400) continue;
+      // セクション中心が画面中心からどれだけ離れているか＝前景の移動量
+      var fromCenter = box.top + box.height / 2 - vh / 2;
+      // その (1 - SPEED) 倍だけ逆に戻すと、背景の実効速度が SPEED 倍になる
+      el.style.transform = 'translate3d(0,' + (-fromCenter * (1 - SPEED)).toFixed(1) + 'px,0)';
     }
   }
   function onScroll() {
