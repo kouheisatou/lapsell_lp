@@ -103,7 +103,7 @@
     content:"";position:absolute;inset:0;
     background:linear-gradient(180deg, rgba(12,11,9,.55) 0%, rgba(12,11,9,.15) 32%, rgba(12,11,9,.35) 62%, rgba(12,11,9,.96) 100%);
   }
-  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero{position:relative;z-index:3;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
   .hero-top{position:absolute;top:0;left:0;right:0;z-index:3;padding:22px 24px;}
   .brand{
     font-family:"Inter","Noto Sans JP",sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;
@@ -123,7 +123,7 @@
   .hero-note{font-size:12.5px;color:var(--ink-faint);line-height:1.9;margin:22px 0 0;}
 
   /* ===== セクション ===== */
-  .section{padding:clamp(72px,11vh,130px) 24px;}
+  .section{position:relative;z-index:3;padding:clamp(72px,11vh,130px) 24px;background-color:var(--bg);}
   .section--tint{background:var(--bg-2);}
   .inner{max-width:var(--maxw);margin:0 auto;}
   .inner--narrow{max-width:800px;}
@@ -164,7 +164,7 @@
     will-change:transform;
   }
   .section--parallax::after{
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    content:"";position:absolute;inset:-1px 0;z-index:1;pointer-events:none;
     background:linear-gradient(180deg, rgba(12,11,9,.84), rgba(12,11,9,.66) 45%, rgba(12,11,9,.84));
   }
   .section--parallax > .inner{position:relative;z-index:2;}
@@ -209,8 +209,8 @@
 
   /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
   .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
-  .merit__photo{margin:0 0 20px;overflow:hidden;border-radius:3px;}
-  .merit__photo img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+  .merit__photo{margin:0 0 20px;}
+  .merit__photo img{width:100%;height:auto;}
   .merit__heading{font-weight:700;font-size:19px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
   .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
@@ -220,7 +220,7 @@
   .inline-photo img{width:100%;height:auto;}
 
   /* ===== 料金 ===== */
-  .price{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .price{display:grid;gap:56px;max-width:720px;}
   .price__label{
     font-weight:700;font-size:18px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;
   }
@@ -239,7 +239,12 @@
   /* ===== 先行利用の募集 ===== */
   .lead-block{max-width:720px;margin:0 0 48px;}
   .lead-block p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0;}
-  .form-embed{display:block;width:100%;max-width:640px;height:1928px;margin:0 auto;border:0;}
+  .form-embed{
+    display:block;width:100%;max-width:640px;height:1928px;margin:0 auto;border:0;
+    /* 埋め込みフォームは配色を指定できないため、反転させて暗い面に寄せる。
+       色相を180度戻すことで、青などの色味は元のまま保たれる。 */
+    filter:invert(0.92) hue-rotate(180deg);
+  }
 
   /* ===== よくある質問 ===== */
   .qa{border-top:1px solid var(--line);padding:26px 0;}
@@ -250,8 +255,12 @@
   .qa .a{font-size:14.5px;color:var(--ink-dim);line-height:2;margin:0;}
 
   /* ===== フッター ===== */
-  footer{padding:56px 24px 60px;border-top:1px solid var(--line);background-color:var(--bg);}
-  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer{position:relative;z-index:3;padding:clamp(90px,14vh,150px) 24px 60px;border-top:1px solid var(--line);overflow:clip;view-timeline:--sec block;background-color:var(--bg);}
+  footer::after{
+    content:"";position:absolute;inset:-1px 0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(12,11,9,.72), rgba(12,11,9,.92));
+  }
+  .foot{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
   .foot .brand{font-size:19px;letter-spacing:.02em;}
   .foot .meta{font-size:12px;color:var(--ink-faint);letter-spacing:.1em;line-height:2;}
 
@@ -272,32 +281,29 @@
     .mockups{
       flex-direction:row;justify-content:flex-start;align-items:flex-start;
       gap:16px;max-width:none;
-      overflow-x:auto;scroll-snap-type:x mandatory;
-      overscroll-behavior-x:contain;
+      overflow-x:auto;overscroll-behavior-x:contain;
       margin-inline:-20px;padding:0 20px 12px;
       -webkit-overflow-scrolling:touch;
     }
     .mockups::-webkit-scrollbar{height:5px;}
     .mockups::-webkit-scrollbar-track{background:transparent;}
     .mockups::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
-    .mockups__device{width:62%;flex:0 0 62%;scroll-snap-align:start;}
+    .mockups__device{width:62%;flex:0 0 62%;}
     .mockups__caption{text-align:left;}
     .mockups__title{font-size:16.5px;}
     .mockups__desc{font-size:13.5px;}
 
     .merits{
       display:flex;grid-template-columns:none;gap:16px;
-      overflow-x:auto;scroll-snap-type:x mandatory;
-      overscroll-behavior-x:contain;
+      overflow-x:auto;overscroll-behavior-x:contain;
       margin-inline:-20px;padding:0 20px 12px;
       -webkit-overflow-scrolling:touch;
     }
     .merits::-webkit-scrollbar{height:5px;}
     .merits::-webkit-scrollbar-track{background:transparent;}
     .merits::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
-    .merit{flex:0 0 76%;scroll-snap-align:start;}
+    .merit{flex:0 0 76%;}
     .merit__photo{margin-bottom:14px;}
-    .merit__photo img{aspect-ratio:16/9;}
     .merit__heading{font-size:17px;margin-bottom:8px;}
     .merit p{font-size:14.5px;}
 
@@ -344,7 +350,7 @@
     <h2 class="section__title">Lapsellとは</h2>
     <p class="section__lead">制作の裏側を、<span class="hl">一点物のデジタルグッズ</span>として販売できます。</p>
 
-    <div class="mockups">
+    <div class="mockups" data-hscroll>
       <figure class="mockups__device">
         <div class="mockups__phone">
           <img class="mockups__shot" src="img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" loading="lazy">
@@ -392,7 +398,7 @@
 <section class="section section--texture" id="merit">
   <div class="inner">
     <h2 class="section__title">出品するメリット</h2>
-    <div class="merits">
+    <div class="merits" data-hscroll>
       <div class="merit">
         <figure class="merit__photo">
           <img src="img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy">
@@ -425,10 +431,6 @@
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
     <div class="price">
-      <div class="price__item">
-        <p class="price__label">はじめて売れたとき</p>
-        <p class="price__description">販売価格の10%を、販売手数料としていただきます。</p>
-      </div>
       <div class="price__item">
         <p class="price__label">ファン同士で転売されたとき</p>
         <p class="price__description">販売額の<span class="hl">20%</span>が、出品者に分配されます。</p>
@@ -505,6 +507,7 @@
 </section>
 
 <footer>
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_mirror.webp)"></div></div>
   <div class="foot">
     <div class="brand">Lapsell</div>
     <div class="meta">練習時間を、収益に変える。<br>&copy; 2026 Lapsell</div>
@@ -539,6 +542,42 @@
   window.addEventListener('resize', onScroll, { passive: true });
   window.addEventListener('load', update);
   update();
+})();
+
+// 横に並んだ列を、縦スクロールに合わせて送る。
+// 画面に入ってしばらくは動かさず、抜けるまでに右端へ到達する。
+// 指で操作した直後は自動送りを止める。
+(function () {
+  var strips = [].slice.call(document.querySelectorAll('[data-hscroll]'));
+  if (!strips.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  strips.forEach(function (strip) {
+    var manualUntil = 0;
+    function markManual() { manualUntil = Date.now() + 1600; }
+    strip.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) markManual();
+    }, { passive: true });
+    strip.addEventListener('touchstart', markManual, { passive: true });
+    strip.addEventListener('pointerdown', markManual, { passive: true });
+
+    function sync() {
+      if (Date.now() < manualUntil) return;       // 指で操作した直後は触らない
+      var max = strip.scrollWidth - strip.clientWidth;
+      if (max <= 0) return;                       // 収まっている場合は何もしない
+      var rect = strip.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var raw = (vh - rect.top) / (vh + rect.height);
+      var dz = 0.3;                               // 出入りの区間は送らない
+      var p = Math.min(1, Math.max(0, (raw - dz) / (1 - dz * 2)));
+      p = p * p * (3 - 2 * p);                    // 始めと終わりをなめらかに
+      strip.scrollLeft = p * max;                 // 縦スクロールに直接連動させる
+    }
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    window.addEventListener('load', sync);
+    sync();
+  });
 })();
 
 // ===== GA4 計測 =====
