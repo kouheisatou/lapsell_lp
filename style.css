@@ -223,20 +223,27 @@ strong { font-weight: 700; }
 }
 .section--texture > .section__inner{position: relative;}
 
-/* 写真を背景に固定し、スクロールでずれて見えるようにする */
+/* 写真の背景。スクロールに合わせて、内容よりゆっくり動く */
 .section--parallax{
   position: relative;
+  overflow: hidden;
+}
+.para{position: absolute; inset: 0; z-index: 0;}
+.para__img{
+  position: absolute;
+  inset: -14% 0;            /* 動いても上下に隙間が出ないよう余裕を持たせる */
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
-.section--parallax::before{
+.section--parallax::after{
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.92);
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.90);
 }
-.section--parallax > .section__inner{position: relative;}
+.section--parallax > .section__inner{position: relative; z-index: 2;}
+
 
 /* ===== 仕組み図（出品者 → Lapsell → ファン） ===== */
 .mockups {
@@ -479,7 +486,6 @@ strong { font-weight: 700; }
 
   .section { padding: 60px 20px; }
   /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
-  .section--parallax{background-attachment: scroll;}
   .section--texture::before{background-size: 420px 420px;}
   .section__title { font-size: 23px; margin-bottom: 16px; }
   .section__lead { font-size: 15px; margin-bottom: 32px; }

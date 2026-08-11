@@ -121,18 +121,19 @@
   }
   .section--texture > .inner{position:relative;}
   /* 写真を背景に固定し、スクロールでずれて見えるようにする */
-  .section--parallax{
-    position:relative;
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+  .section--parallax{position:relative;overflow:hidden;}
+  .para{position:absolute;inset:0;z-index:0;}
+  .para__img{
+    position:absolute;inset:-14% 0;
+    background-size:cover;background-position:center;
   }
-  .section--parallax::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,11,9,.985), rgba(12,11,9,.93) 45%, rgba(12,11,9,.985));
+  .section--parallax::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,9,.90), rgba(12,11,9,.78) 45%, rgba(12,11,9,.90));
   }
-  .section--parallax > .inner{position:relative;}
-  .section--texture{background-attachment:fixed;}
+  .section--parallax > .inner{position:relative;z-index:2;}
+
+  /* スクロール駆動アニメーション。対応ブラウザでのみ背景が動く */
 
   /* ===== アプリ画面 ===== */
   .mockups{display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,8vw,96px);max-width:720px;margin:0 auto;}
@@ -207,7 +208,6 @@
     body{font-size:15px;}
     .section{padding:64px 20px;}
     /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
-    .section--parallax{background-attachment:scroll;}
     .section--texture{background-size:18px 18px, 100% 100%;}
     .section__title{font-size:22px;margin-bottom:20px;}
     .section__lead{font-size:15px;margin-bottom:36px;}
@@ -309,7 +309,8 @@
 </section>
 
 <!-- もし、無名だった頃の練習動画が残っていたら -->
-<section class="section section--parallax" id="value" style="background-image:url(images/bg_standby.webp)">
+<section class="section section--parallax" id="value">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(images/bg_standby.webp)"></div></div>
   <div class="inner">
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="split">
@@ -358,7 +359,8 @@
 </section>
 
 <!-- 料金 -->
-<section class="section section--parallax" id="price" style="background-image:url(images/bg_setlist.webp)">
+<section class="section section--parallax" id="price">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(images/bg_setlist.webp)"></div></div>
   <div class="inner">
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
@@ -396,7 +398,8 @@
 </section>
 
 <!-- 実績 -->
-<section class="section section--parallax" id="award" style="background-image:url(images/bg_mirror.webp)">
+<section class="section section--parallax" id="award">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(images/bg_mirror.webp)"></div></div>
   <div class="inner inner--narrow">
     <h2 class="section__title">実績</h2>
     <div class="award">
@@ -448,6 +451,36 @@
     <div class="meta">練習時間を、収益に変える。<br>&copy; 2026 Lapsell</div>
   </div>
 </footer>
+
+<script>
+// 背景写真を、スクロールより遅い速度で動かす（パララックス）
+(function () {
+  var layers = [].slice.call(document.querySelectorAll('.para__img'));
+  if (!layers.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    for (var i = 0; i < layers.length; i++) {
+      var el = layers[i];
+      var box = el.parentElement.parentElement.getBoundingClientRect();
+      if (box.bottom < -200 || box.top > vh + 200) continue;
+      // セクションの中心が画面中心からどれだけ離れているか（-1〜1）
+      var p = (box.top + box.height / 2 - vh / 2) / (vh / 2 + box.height / 2);
+      el.style.transform = 'translate3d(0,' + (p * 9).toFixed(2) + '%,0)';
+    }
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', update);
+  update();
+})();
+</script>
 
 </body>
 </html>

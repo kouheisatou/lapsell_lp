@@ -90,3 +90,31 @@ document.querySelectorAll('.btn').forEach((btn) => {
     }
   });
 })();
+
+// 背景写真を、スクロールより遅い速度で動かす（パララックス）
+(function () {
+  var layers = [].slice.call(document.querySelectorAll('.para__img'));
+  if (!layers.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    for (var i = 0; i < layers.length; i++) {
+      var el = layers[i];
+      var box = el.parentElement.parentElement.getBoundingClientRect();
+      if (box.bottom < -200 || box.top > vh + 200) continue;
+      // セクションの中心が画面中心からどれだけ離れているか（-1〜1）
+      var p = (box.top + box.height / 2 - vh / 2) / (vh / 2 + box.height / 2);
+      el.style.transform = 'translate3d(0,' + (p * 9).toFixed(2) + '%,0)';
+    }
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', update);
+  update();
+})();
