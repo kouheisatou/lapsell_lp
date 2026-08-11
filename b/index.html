@@ -42,6 +42,13 @@
   img{display:block;max-width:100%;height:auto;}
   a{color:inherit;}
 
+  /* 文中の強調（電球のアンバーで下半分を照らす） */
+  .hl{
+    color:var(--ink);
+    font-weight:600;
+    background:linear-gradient(transparent 62%, rgba(232,169,75,.30) 62%);
+  }
+
   /* ===== ボタン ===== */
   .btn{
     display:inline-block;
@@ -217,7 +224,7 @@
   </div>
   <div class="hero-body">
     <h1>あなたの<em>裏側</em>に、<br>価値がある。</h1>
-    <p class="hero-lead">練習や制作の様子を撮った動画を、一点物のデジタルグッズとして販売できます。編集は必要ありません。</p>
+    <p class="hero-lead">練習や制作の様子を撮った動画を、一点物のデジタルグッズとして販売できます。<span class="hl">編集は必要ありません。</span></p>
     <a class="btn" href="#form">先行利用に登録する</a>
     <p class="hero-note">一緒に試していただけるクリエイターを募集しています。</p>
   </div>
@@ -227,7 +234,7 @@
 <section class="section section--tint" id="about">
   <div class="inner">
     <h2 class="section__title">Lapsellとは</h2>
-    <p class="section__lead">制作の裏側を、一点物のデジタルグッズとして販売できます。</p>
+    <p class="section__lead">制作の裏側を、<span class="hl">一点物のデジタルグッズ</span>として販売できます。</p>
 
     <div class="mockups">
       <figure class="mockups__device">
@@ -237,7 +244,7 @@
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">一点物のグッズとして販売</h3>
-          <p class="mockups__desc">練習の映像は、AIが数分ごとのクリップに区切ります。売れたクリップは非公開になり、購入した方だけが視聴できます。</p>
+          <p class="mockups__desc">練習の映像は、AIが数分ごとのクリップに区切ります。売れたクリップは非公開になり、<span class="hl">購入した方だけ</span>が視聴できます。</p>
         </figcaption>
       </figure>
       <figure class="mockups__device">
@@ -247,7 +254,7 @@
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">応援した記録を、地図に残す</h3>
-          <p class="mockups__desc">購入した方は、マップ上のセルを先着順で取得できます。活動拠点に近いセルほど、早くから応援していたことを示します。</p>
+          <p class="mockups__desc">購入した方は、<span class="hl">マップ上のセルを先着順で取得</span>できます。活動拠点に近いセルほど、早くから応援していたことを示します。</p>
         </figcaption>
       </figure>
     </div>
@@ -262,8 +269,8 @@
       <div class="split__item">
         <div class="split__text">
           <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。その頃の練習風景を撮った動画が手元に残っていたら、ファンにとってどれくらいの価値になるでしょうか。</p>
-          <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、後からは手に入らない一点物として残します。</p>
-          <p class="split__note">20代の男女393人に伺った自社調査では、およそ3人に1人が制作風景の動画に対価を支払ってもよいと回答しています。</p>
+          <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
+          <p class="split__note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
         </div>
         <figure class="split__photo">
           <img src="../img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy">
@@ -281,7 +288,7 @@
       <div class="split__item">
         <div class="split__text">
           <h3 class="split__heading">認知が広がる</h3>
-          <p>クリップはSNSでの拡散を通じて、既存のファンの外側にも届きます。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
+          <p>クリップはSNSでの拡散を通じて、<span class="hl">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
         </div>
         <figure class="split__photo">
           <img src="../img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy">
@@ -299,7 +306,7 @@
       <div class="split__item">
         <div class="split__text">
           <h3 class="split__heading">グッズのマンネリ化を解消できる</h3>
-          <p>写真やアクリルスタンドとは異なる、これまでになかった形のグッズとして販売できます。</p>
+          <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
         </div>
         <figure class="split__photo">
           <img src="../img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" loading="lazy">
@@ -313,7 +320,7 @@
 <section class="section" id="price">
   <div class="inner">
     <h2 class="section__title">料金</h2>
-    <p class="section__lead">販売手数料は10%です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
+    <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
     <div class="price">
       <div class="price__item">
         <p class="price__label">一次流通</p>
@@ -321,7 +328,7 @@
       </div>
       <div class="price__item">
         <p class="price__label">二次流通</p>
-        <p class="price__description">ファン同士で転売された場合は、販売額の20%が出品者に分配されます。</p>
+        <p class="price__description">ファン同士で転売された場合は、販売額の<span class="hl">20%</span>が出品者に分配されます。</p>
       </div>
     </div>
   </div>
@@ -335,7 +342,7 @@
       <div class="split__item">
         <div class="split__text">
           <p>母は銅版画を制作しており、私は幼い頃からその様子をいつも横で見ていました。</p>
-          <p>完成品の裏側にある試行錯誤にも、確かな美しさがあります。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、将来は貴重な記録になるかもしれません。</p>
+          <p>完成品の裏側にある試行錯誤にも、確かな美しさがあります。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
           <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
           <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
         </div>
