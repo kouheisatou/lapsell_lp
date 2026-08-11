@@ -1,31 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>練習時間を収益に変える｜Lapsell（ラプセル）</title>
-<meta name="description" content="練習や制作の様子を撮った動画を、数分ごとのクリップに分けて一点物のデジタルグッズとして販売できます。編集は必要ありません。現在は開発中で、一緒に試していただけるクリエイターを募集しています。">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>あなたの裏側に、価値がある。｜Lapsell（ラプセル）</title>
+<meta name="description" content="練習や制作の様子を撮った動画を、数分ごとのクリップに分けて一点物のデジタルグッズとして販売できます。編集は必要ありません。一緒に試していただけるクリエイターを募集しています。">
 <link rel="canonical" href="https://www.lapsell.art/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lapsell">
-<meta property="og:title" content="練習時間を収益に変える｜Lapsell（ラプセル）">
+<meta property="og:title" content="あなたの裏側に、価値がある。｜Lapsell（ラプセル）">
 <meta property="og:description" content="練習や制作の様子を撮った動画を、数分ごとのクリップに分けて一点物のデジタルグッズとして販売できます。編集は必要ありません。">
 <meta property="og:url" content="https://www.lapsell.art/">
-<meta property="og:image" content="https://www.lapsell.art/img/mock_home_iphone.webp">
+<meta property="og:image" content="https://www.lapsell.art/img/hero.webp">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8CHRFNV96K"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8CHRFNV96K');
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,103 +28,325 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "メールを受け取りましたが、送付先はどのように選んでいますか。",
-          "acceptedAnswer": { "@type": "Answer", "text": "公開されている活動情報を拝見し、練習や制作の様子を継続して記録できそうな方に、一件ずつ内容を確認したうえでご連絡しています。" }
-        },
-        {
-          "@type": "Question",
-          "name": "どんな動画を販売できますか。",
-          "acceptedAnswer": { "@type": "Answer", "text": "練習、制作、リハーサルなど活動の裏側であれば、ジャンルを問わず販売できます。完成品である必要はありません。" }
-        },
-        {
-          "@type": "Question",
-          "name": "登録者数や再生時間などの収益化条件はありますか。",
-          "acceptedAnswer": { "@type": "Answer", "text": "ありません。1本目のクリップから販売できます。" }
-        },
-        {
-          "@type": "Question",
-          "name": "動画編集のスキルがなくても使えますか。",
-          "acceptedAnswer": { "@type": "Answer", "text": "AIが切り分けとタイトル案の作成、価格の提案までを行いますので、内容を確認して出品するだけで販売できます。" }
-        },
-        {
-          "@type": "Question",
-          "name": "映り込みや失言が世に出てしまわないか心配です。",
-          "acceptedAnswer": { "@type": "Answer", "text": "人物の映り込みや発言はAIが検出しますので、公開前に確認して除外できます。" }
-        },
-        {
-          "@type": "Question",
-          "name": "マップとは何ですか。",
-          "acceptedAnswer": { "@type": "Answer", "text": "購入した方が世界地図上のセルを先着順で取得できる機能です。早くから応援していたことを地図に残せます。クリップ本編は非公開のままです。" }
-        }
+        {"@type":"Question","name":"メールを受け取りましたが、送付先はどのように選んでいますか。","acceptedAnswer":{"@type":"Answer","text":"公開されている活動情報を拝見し、練習や制作の様子を継続して記録できそうな方に、一件ずつ内容を確認したうえでご連絡しています。"}},
+        {"@type":"Question","name":"どんな動画を販売できますか。","acceptedAnswer":{"@type":"Answer","text":"練習、制作、リハーサルなど活動の裏側であれば、ジャンルを問わず販売できます。完成品である必要はありません。"}},
+        {"@type":"Question","name":"登録者数や再生時間などの収益化条件はありますか。","acceptedAnswer":{"@type":"Answer","text":"ありません。1本目のクリップから販売できます。"}},
+        {"@type":"Question","name":"動画編集のスキルがなくても使えますか。","acceptedAnswer":{"@type":"Answer","text":"AIが切り分けとタイトル案の作成、価格の提案までを行いますので、内容を確認して出品するだけで販売できます。"}},
+        {"@type":"Question","name":"映り込みや失言が世に出てしまわないか心配です。","acceptedAnswer":{"@type":"Answer","text":"人物の映り込みや発言はAIが検出しますので、公開前に確認して除外できます。"}},
+        {"@type":"Question","name":"マップとは何ですか。","acceptedAnswer":{"@type":"Answer","text":"購入した方が世界地図上のセルを先着順で取得できる機能です。早くから応援していたことを地図に残せます。クリップ本編は非公開のままです。"}}
       ]
     }
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8CHRFNV96K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8CHRFNV96K');
+</script>
+<style>
+  :root{
+    --ink:#f2ede3;
+    --ink-dim:#a89f8f;
+    --ink-faint:#6f685c;
+    --bg:#0c0b09;
+    --bg-2:#141210;
+    --bulb:#e8a94b;
+    --line:#2a2620;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:24px;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    line-height:1.9;
+    font-size:16px;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+  }
+  html{overflow-x:clip;}
+  img{display:block;max-width:100%;height:auto;}
+  a{color:inherit;}
+
+  /* 文中の強調（ヒーローの「裏側」と同じアンバー） */
+  .hl{color:var(--bulb);font-weight:700;}
+
+  /* ===== ボタン ===== */
+  .btn{
+    display:inline-block;
+    background:var(--ink);
+    color:#141210;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.06em;
+    padding:16px 40px;
+    text-decoration:none;
+    border-radius:2px;
+    transition:opacity .2s ease;
+  }
+  .btn:hover{opacity:.85;}
+
+  /* ===== ヒーロー ===== */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,9,.55) 0%, rgba(12,11,9,.15) 32%, rgba(12,11,9,.35) 62%, rgba(12,11,9,.96) 100%);
+  }
+  .hero-top{position:absolute;top:0;left:0;right:0;z-index:3;padding:22px 24px;}
+  .brand{
+    font-family:"Inter","Noto Sans JP",sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;
+    color:var(--ink);
+  }
+  .hero-body{position:relative;z-index:3;padding:0 24px 9vh;max-width:calc(var(--maxw) + 48px);margin:0 auto;width:100%;}
+  .hero h1{
+    font-weight:900;
+    font-size:clamp(32px,7.4vw,64px);
+    line-height:1.34;
+    margin:0 0 26px;
+    letter-spacing:.03em;
+    text-shadow:0 2px 40px rgba(0,0,0,.6);
+  }
+  .hero h1 em{font-style:normal;color:var(--bulb);}
+  .hero-lead{max-width:560px;font-size:16px;color:var(--ink-dim);line-height:2;margin:0 0 30px;}
+  .hero-note{font-size:12.5px;color:var(--ink-faint);line-height:1.9;margin:22px 0 0;}
+
+  /* ===== セクション ===== */
+  .section{padding:clamp(72px,11vh,130px) 24px;}
+  .section--tint{background:var(--bg-2);}
+  .inner{max-width:var(--maxw);margin:0 auto;}
+  .inner--narrow{max-width:800px;}
+
+  .section__title{
+    font-weight:900;
+    font-size:clamp(24px,3.4vw,34px);
+    letter-spacing:.04em;
+    line-height:1.5;
+    margin:0 0 28px;
+  }
+  .section__lead{font-size:16px;color:var(--ink-dim);max-width:760px;margin:0 0 64px;line-height:2;}
+
+  /* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
+  /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
+  .section--texture{
+    position:relative;
+    background-color:#0b0a08;
+  }
+  .section--texture::before{
+    content:"";position:absolute;inset:0;
+    /* 1枚を全面に引き伸ばす。タイルしないので継ぎ目が出ない */
+    background:url(img/texture_dark.webp) center/cover no-repeat;
+    opacity:.42;
+  }
+  .section--texture::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.07), transparent 62%);
+  }
+  .section--texture > .inner{position:relative;}
+  /* 写真を背景に固定し、スクロールでずれて見えるようにする */
+  .section--parallax{position:relative;overflow:hidden;}
+  .para{position:absolute;inset:0;z-index:0;}
+  .para__img{
+    position:absolute;inset:-65% 0;
+    background-size:cover;background-position:center;
+  }
+  .section--parallax::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,9,.90), rgba(12,11,9,.78) 45%, rgba(12,11,9,.90));
+  }
+  .section--parallax > .inner{position:relative;z-index:2;}
+
+  /* スクロール駆動アニメーション。対応ブラウザでのみ背景が動く */
+
+  /* ===== アプリ画面 ===== */
+  .mockups{display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,8vw,96px);max-width:720px;margin:0 auto;}
+  .mockups__device{margin:0;flex:0 0 auto;width:256px;}
+  .mockups__phone{position:relative;width:100%;aspect-ratio:1350/2760;filter:drop-shadow(0 30px 64px rgba(0,0,0,.75));}
+  .mockups__shot{position:absolute;top:2.5%;left:5.33%;width:89.33%;height:95%;object-fit:cover;object-position:top center;border-radius:7%/3.4%;z-index:1;}
+  .mockups__frame{position:relative;display:block;width:100%;height:auto;z-index:2;pointer-events:none;}
+  .mockups__caption{margin-top:24px;text-align:center;}
+  .mockups__title{
+    font-weight:700;font-size:18px;color:var(--ink);margin:0 0 10px;letter-spacing:.02em;
+  }
+  .mockups__desc{font-size:14px;line-height:1.9;color:var(--ink-dim);margin:0;}
+
+  /* ===== 2カラムブロック ===== */
+  .split{display:grid;gap:110px;}
+  .split__item{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center;}
+  .split__item--reverse .split__text{order:2;}
+  .split__item--reverse .split__photo{order:1;}
+  .split__heading{
+    font-weight:700;font-size:22px;color:var(--ink);margin:0 0 18px;letter-spacing:.02em;line-height:1.6;
+  }
+  .split__text p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0 0 1.1em;}
+  .split__text p:last-child{margin-bottom:0;}
+  .split__note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
+  .split__photo{margin:0;}
+  .split__photo img{width:100%;border-radius:3px;}
+
+  /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
+  .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
+  .merit__photo{margin:0 0 20px;overflow:hidden;border-radius:3px;}
+  .merit__photo img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+  .merit__heading{font-weight:700;font-size:19px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
+  .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
+
+  /* ===== 料金 ===== */
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .price__label{
+    font-weight:700;font-size:18px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;
+  }
+  .price__description{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
+
+  /* ===== 実績 ===== */
+  .award{display:flex;align-items:flex-start;gap:32px;}
+  .award__icon{flex:0 0 auto;width:72px;height:72px;color:var(--bulb);margin-top:4px;}
+  .award__prize{
+    font-weight:900;font-size:25px;color:var(--bulb);letter-spacing:.03em;margin:0 0 10px;line-height:1.4;
+  }
+  .award__event{font-size:16px;color:var(--ink);margin:0 0 16px;letter-spacing:.03em;}
+  .award__desc{font-size:15px;color:var(--ink-dim);line-height:2;margin:0 0 16px;}
+  .award__link a{color:var(--bulb);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;}
+
+  /* ===== 先行利用の募集 ===== */
+  .lead-block{max-width:720px;margin:0 0 48px;}
+  .lead-block p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0;}
+  .form-embed{display:block;width:100%;max-width:640px;height:1928px;margin:0 auto;border:0;}
+
+  /* ===== よくある質問 ===== */
+  .qa{border-top:1px solid var(--line);padding:26px 0;}
+  .qa:last-child{border-bottom:1px solid var(--line);}
+  .qa .q{
+    font-weight:700;font-size:17px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;
+  }
+  .qa .a{font-size:14.5px;color:var(--ink-dim);line-height:2;margin:0;}
+
+  /* ===== フッター ===== */
+  footer{padding:56px 24px 60px;border-top:1px solid var(--line);}
+  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .foot .brand{font-size:19px;letter-spacing:.02em;}
+  .foot .meta{font-size:12px;color:var(--ink-faint);letter-spacing:.1em;line-height:2;}
+
+  @media (max-width:820px){
+    body{font-size:15px;}
+    .section{padding:64px 20px;}
+    /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
+    .section__title{font-size:22px;margin-bottom:20px;}
+    .section__lead{font-size:15px;margin-bottom:36px;}
+    .hero-body{padding:0 20px 7vh;}
+    .hero-lead{font-size:15px;}
+    .btn{display:block;text-align:center;padding:16px 24px;}
+
+    .split{gap:56px;}
+    .split__item{grid-template-columns:1fr;gap:20px;}
+    .split__item--reverse .split__text{order:1;}
+    .split__item--reverse .split__photo{order:2;}
+    .split__heading{font-size:18px;margin-bottom:10px;}
+    .split__text p{font-size:15px;}
+    .split__photo{max-width:300px;width:100%;margin:0 auto;}
+    .split__photo img{aspect-ratio:16/9;object-fit:cover;}
+
+    /* 縦積みだとキャプションが窮屈になるため、横に並べて横スクロールにする */
+    .mockups{
+      flex-direction:row;justify-content:flex-start;align-items:flex-start;
+      gap:16px;max-width:none;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      touch-action:pan-x;overscroll-behavior-x:contain;
+      margin-inline:-20px;padding:0 20px 12px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .mockups::-webkit-scrollbar{height:5px;}
+    .mockups::-webkit-scrollbar-track{background:transparent;}
+    .mockups::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+    .mockups__device{width:62%;flex:0 0 62%;scroll-snap-align:start;}
+    .mockups__caption{text-align:left;}
+    .mockups__title{font-size:16.5px;}
+    .mockups__desc{font-size:13.5px;}
+
+    .merits{
+      display:flex;grid-template-columns:none;gap:16px;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      touch-action:pan-x;overscroll-behavior-x:contain;
+      margin-inline:-20px;padding:0 20px 12px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .merits::-webkit-scrollbar{height:5px;}
+    .merits::-webkit-scrollbar-track{background:transparent;}
+    .merits::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+    .merit{flex:0 0 76%;scroll-snap-align:start;}
+    .merit__photo{margin-bottom:14px;}
+    .merit__photo img{aspect-ratio:16/9;}
+    .merit__heading{font-size:17px;margin-bottom:8px;}
+    .merit p{font-size:14.5px;}
+
+    .price{grid-template-columns:1fr;gap:32px;}
+    .price__label{font-size:17px;}
+
+    .award{gap:20px;}
+    .award__icon{width:54px;height:54px;}
+    .award__prize{font-size:21px;}
+
+    .lead-block{margin-bottom:36px;}
+    .form-embed{height:2320px;}
+    .qa{padding:20px 0;}
+    .qa .q{font-size:15.5px;}
+  }
+  @media (max-width:480px){
+    .form-embed{height:2480px;}
+  }
+</style>
 </head>
 <body>
 
-<!-- ヘッダー -->
-<header class="header" id="header">
-  <div class="header__inner">
-    <a href="#" class="header__logo">Lapsell</a>
-    <nav class="header__nav">
-      <a href="#about">Lapsellとは</a>
-      <a href="#merit">出品するメリット</a>
-      <a href="#price">料金</a>
-      <a href="#faq">よくある質問</a>
-    </nav>
-    <a href="#form" class="btn btn--small"><span class="pc-only">先行利用に登録する</span><span class="sp-only">先行登録</span></a>
+<!-- ヒーロー -->
+<header class="hero">
+  <img class="hero-img" src="img/hero.webp" alt="電球で縁取られた楽屋の鏡の前で、本番前に身支度をするアイドル。">
+  <div class="hero-top">
+    <div class="brand">Lapsell</div>
+  </div>
+  <div class="hero-body">
+    <h1>あなたの<em>裏側</em>に、<br>価値がある。</h1>
+    <p class="hero-lead">練習や制作の様子を撮った動画を、<span class="hl">一点物のデジタルグッズとして販売</span>できます。編集は必要ありません。</p>
+    <a class="btn" href="#form">先行利用に登録する</a>
+    <p class="hero-note">一緒に試していただけるクリエイターを募集しています。</p>
   </div>
 </header>
 
-<!-- ヒーロー -->
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__text">
-      <h1 class="hero__title">
-        <span class="nowrap">練習時間を、</span><br><span class="nowrap"><span class="marker">収益</span>に変える。</span>
-      </h1>
-      <p class="hero__lead">
-        練習や制作の様子を撮った動画を、<span class="marker">一点物のデジタルグッズとして販売</span>できます。編集は必要ありません。
-      </p>
-      <div class="hero__actions">
-        <a href="#form" class="btn btn--primary">先行利用に登録する</a>
-      </div>
-      <p class="hero__note">一緒に試していただけるクリエイターを募集しています。</p>
-    </div>
-  </div>
-</section>
-
 <!-- Lapsellとは -->
 <section class="section section--texture" id="about">
-  <div class="section__inner">
+  <div class="inner">
     <h2 class="section__title">Lapsellとは</h2>
-    <p class="section__lead">
-      制作の裏側を、<span class="marker">一点物のデジタルグッズ</span>として販売できます。
-    </p>
+    <p class="section__lead">制作の裏側を、<span class="hl">一点物のデジタルグッズ</span>として販売できます。</p>
 
     <div class="mockups">
       <figure class="mockups__device">
         <div class="mockups__phone">
-          <img class="mockups__shot" src="img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" width="640" height="1384" loading="lazy">
-          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" width="620" height="1268" loading="lazy">
+          <img class="mockups__shot" src="img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" loading="lazy">
+          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy">
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">一点物のグッズとして販売</h3>
-          <p class="mockups__desc">練習の映像は、AIが数分ごとのクリップに区切ります。売れたクリップは非公開になり、<span class="marker">購入した方だけ</span>が視聴できます。</p>
+          <p class="mockups__desc">練習の映像は、AIが数分ごとのクリップに区切ります。売れたクリップは非公開になり、<span class="hl">購入した方だけ</span>が視聴できます。</p>
         </figcaption>
       </figure>
       <figure class="mockups__device">
         <div class="mockups__phone">
-          <img class="mockups__shot" src="img/mock_about_map.webp" alt="マップの画面。クリエイターの拠点周辺のセルを初期支援者が取得し、この頃から推していたと表示されている" width="640" height="1384" loading="lazy">
-          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" width="620" height="1268" loading="lazy">
+          <img class="mockups__shot" src="img/mock_about_map.webp" alt="マップの画面。クリエイターの拠点周辺のセルを初期支援者が取得し、この頃から推していたと表示されている" loading="lazy">
+          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy">
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">応援した記録を、地図に残す</h3>
-          <p class="mockups__desc">購入した方は、<span class="marker">マップ上のセルを先着順で取得</span>できます。活動拠点に近いセルほど、早くから応援していたことを示します。</p>
+          <p class="mockups__desc">購入した方は、<span class="hl">マップ上のセルを先着順で取得</span>できます。活動拠点に近いセルほど、早くから応援していたことを示します。</p>
         </figcaption>
       </figure>
     </div>
@@ -145,19 +355,18 @@
 
 <!-- もし、無名だった頃の練習動画が残っていたら -->
 <section class="section section--parallax" id="value">
-  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/flow_capture.webp)"></div></div>
-  <div class="section__inner">
-    <h2 class="section__title">もし、無名だった頃の<br class="sp-only">練習動画が残っていたら</h2>
-
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_standby.webp)"></div></div>
+  <div class="inner">
+    <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="split">
       <div class="split__item">
         <div class="split__text">
-          <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="marker">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
-          <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="marker">後からは手に入らない一点物</span>として残します。</p>
-          <p class="split__note">20代の男女393人に伺った自社調査では、およそ<span class="marker">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
+          <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
+          <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
+          <p class="split__note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
         </div>
         <figure class="split__photo">
-          <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" width="1664" height="936" loading="lazy">
+          <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy">
         </figure>
       </div>
     </div>
@@ -166,32 +375,29 @@
 
 <!-- 出品するメリット -->
 <section class="section section--texture" id="merit">
-  <div class="section__inner">
+  <div class="inner">
     <h2 class="section__title">出品するメリット</h2>
-
     <div class="merits">
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" width="1016" height="762" loading="lazy">
+          <img src="img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy">
         </figure>
         <h3 class="merit__heading">認知が広がる</h3>
-        <p>クリップはSNSでの拡散を通じて、<span class="marker">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
+        <p>クリップはSNSでの拡散を通じて、<span class="hl">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
       </div>
-
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/merit_close.webp" alt="ライブ後の物販でファンと握手を交わすミュージシャン" width="1456" height="1092" loading="lazy">
+          <img src="img/merit_close.webp" alt="ライブ後の物販でファンと握手を交わすミュージシャン" loading="lazy">
         </figure>
         <h3 class="merit__heading">ファンとの距離が縮まる</h3>
         <p>完成した作品だけでなく制作の裏側を共有することで、ファンとの関係が深まります。</p>
       </div>
-
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" width="1536" height="1024" loading="lazy">
+          <img src="img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" loading="lazy">
         </figure>
         <h3 class="merit__heading">グッズのマンネリ化を解消できる</h3>
-        <p>写真やアクリルスタンドとは異なる、<span class="marker">これまでになかった形のグッズ</span>として販売できます。</p>
+        <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
       </div>
     </div>
   </div>
@@ -199,13 +405,10 @@
 
 <!-- 料金 -->
 <section class="section section--parallax" id="price">
-  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/scene_studio.webp)"></div></div>
-  <div class="section__inner">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_setlist.webp)"></div></div>
+  <div class="inner">
     <h2 class="section__title">料金</h2>
-    <p class="section__lead">
-      <span class="marker">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。
-    </p>
-
+    <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
     <div class="price">
       <div class="price__item">
         <p class="price__label">はじめて売れたとき</p>
@@ -213,7 +416,7 @@
       </div>
       <div class="price__item">
         <p class="price__label">ファン同士で転売されたとき</p>
-        <p class="price__description">販売額の<span class="marker">20%</span>が、出品者に分配されます。</p>
+        <p class="price__description">販売額の<span class="hl">20%</span>が、出品者に分配されます。</p>
       </div>
     </div>
   </div>
@@ -221,19 +424,18 @@
 
 <!-- Lapsellが目指すこと -->
 <section class="section section--texture" id="vision">
-  <div class="section__inner">
+  <div class="inner">
     <h2 class="section__title">Lapsellが目指すこと</h2>
-
     <div class="split">
       <div class="split__item">
         <div class="split__text">
           <p>母は銅版画を制作しており、私は幼い頃からその様子をいつも横で見ていました。</p>
-          <p>完成品の裏側にある試行錯誤にも、確かな美しさがあります。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="marker">将来は貴重な記録になるかもしれません</span>。</p>
+          <p>完成品の裏側にある試行錯誤にも、確かな美しさがあります。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
           <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
           <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
         </div>
         <figure class="split__photo">
-          <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" width="1400" height="782" loading="lazy">
+          <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy">
         </figure>
       </div>
     </div>
@@ -241,12 +443,12 @@
 </section>
 
 <!-- 実績 -->
-<section class="section" id="award">
-  <div class="section__inner section__inner--narrow">
+<section class="section section--parallax" id="award">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_mirror.webp)"></div></div>
+  <div class="inner inner--narrow">
     <h2 class="section__title">実績</h2>
-
     <div class="award">
-      <svg class="award__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg class="award__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M15 7h18v11c0 5-4 9-9 9s-9-4-9-9V7Z"/>
         <path d="M15 11h-5v2.5c0 3.6 2.8 6.5 6.3 6.5"/>
         <path d="M33 11h5v2.5c0 3.6-2.8 6.5-6.3 6.5"/>
@@ -254,8 +456,8 @@
         <path d="M19.5 41l1-7h7l1 7"/>
         <path d="M15.5 41h17"/>
       </svg>
-      <div class="award__body">
-        <p class="award__prize"><span class="marker">最優秀賞</span></p>
+      <div>
+        <p class="award__prize">最優秀賞</p>
         <p class="award__event">第10回芝浦ビジネスモデルコンペティション（主催：芝浦工業大学）</p>
         <p class="award__desc">中高生から社会人まで48チーム169人が応募したコンペティションで、Lapsellの構想が最優秀賞に選ばれました。</p>
         <p class="award__link"><a href="https://www.shibaura-it.ac.jp/headline/detail/20251015_7070_718.html" target="_blank" rel="noopener">受賞の発表ページ（芝浦工業大学）</a></p>
@@ -266,67 +468,101 @@
 
 <!-- 先行利用の募集 -->
 <section class="section section--texture" id="form">
-  <div class="section__inner section__inner--narrow form-section">
+  <div class="inner inner--narrow">
     <h2 class="section__title">先行利用の募集</h2>
-
     <div class="lead-block">
       <p>現在はリリースに向けた準備段階で、実際に活動されている方のご意見を伺いながら仕様を固めているところです。練習や試行錯誤そのものに価値がつく仕組みを一緒に作りたいと考えております。</p>
     </div>
-
-    <iframe class="form-section__embed" src="https://docs.google.com/forms/d/e/1FAIpQLScwi4YGPl-YCMkFWtjllrrDqfTassxQxQO3ePA8napdNu9vcg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">読み込んでいます…</iframe>
+    <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLScwi4YGPl-YCMkFWtjllrrDqfTassxQxQO3ePA8napdNu9vcg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">読み込んでいます…</iframe>
   </div>
 </section>
 
 <!-- よくある質問 -->
 <section class="section" id="faq">
-  <div class="section__inner section__inner--narrow">
+  <div class="inner inner--narrow">
     <h2 class="section__title">よくある質問</h2>
-
-    <div class="faq">
-      <details class="faq__item">
-        <summary>メールを受け取りましたが、送付先はどのように選んでいますか。</summary>
-        <p>公開されている活動情報を拝見し、練習や制作の様子を継続して記録できそうな方に、一件ずつ内容を確認したうえでご連絡しています。</p>
-      </details>
-      <details class="faq__item">
-        <summary>どんな動画を販売できますか。</summary>
-        <p>練習、制作、リハーサルなど活動の裏側であれば、ジャンルを問わず販売できます。完成品である必要はありません。</p>
-      </details>
-      <details class="faq__item">
-        <summary>登録者数や再生時間などの収益化条件はありますか。</summary>
-        <p>ありません。1本目のクリップから販売できます。</p>
-      </details>
-      <details class="faq__item">
-        <summary>動画編集のスキルがなくても使えますか。</summary>
-        <p>AIが切り分けとタイトル案の作成、価格の提案までを行いますので、内容を確認して出品するだけで販売できます。</p>
-      </details>
-      <details class="faq__item">
-        <summary>映り込みや失言が世に出てしまわないか心配です。</summary>
-        <p>人物の映り込みや発言はAIが検出しますので、公開前に確認して除外できます。</p>
-      </details>
-      <details class="faq__item">
-        <summary>マップとは何ですか。</summary>
-        <p>購入した方が世界地図上のセルを先着順で取得できる機能です。早くから応援していたことを地図に残せます。クリップ本編は非公開のままです。</p>
-      </details>
-    </div>
+    <div class="qa"><p class="q">メールを受け取りましたが、送付先はどのように選んでいますか。</p><p class="a">公開されている活動情報を拝見し、練習や制作の様子を継続して記録できそうな方に、一件ずつ内容を確認したうえでご連絡しています。</p></div>
+    <div class="qa"><p class="q">どんな動画を販売できますか。</p><p class="a">練習、制作、リハーサルなど活動の裏側であれば、ジャンルを問わず販売できます。完成品である必要はありません。</p></div>
+    <div class="qa"><p class="q">登録者数や再生時間などの収益化条件はありますか。</p><p class="a">ありません。1本目のクリップから販売できます。</p></div>
+    <div class="qa"><p class="q">動画編集のスキルがなくても使えますか。</p><p class="a">AIが切り分けとタイトル案の作成、価格の提案までを行いますので、内容を確認して出品するだけで販売できます。</p></div>
+    <div class="qa"><p class="q">映り込みや失言が世に出てしまわないか心配です。</p><p class="a">人物の映り込みや発言はAIが検出しますので、公開前に確認して除外できます。</p></div>
+    <div class="qa"><p class="q">マップとは何ですか。</p><p class="a">購入した方が世界地図上のセルを先着順で取得できる機能です。早くから応援していたことを地図に残せます。クリップ本編は非公開のままです。</p></div>
   </div>
 </section>
 
-<!-- フッター -->
-<footer class="footer">
-  <div class="footer__inner">
-    <p class="footer__logo">Lapsell</p>
-    <p class="footer__tag">練習時間を、収益に変える。</p>
-    <nav class="footer__nav">
-      <a href="#about">Lapsellとは</a>
-      <a href="#merit">出品するメリット</a>
-      <a href="#price">料金</a>
-      <a href="#faq">よくある質問</a>
-      <a href="#form">お問い合わせ</a>
-    </nav>
-    <p class="footer__copy">&copy; 2026 Lapsell</p>
+<footer>
+  <div class="foot">
+    <div class="brand">Lapsell</div>
+    <div class="meta">練習時間を、収益に変える。<br>&copy; 2026 Lapsell</div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+// 背景写真を、前景より遅い速度で動かす（奥にあるように見せる）
+(function () {
+  var SPEED = 0.62;                    // 前景を1としたときの背景の速度
+  var layers = [].slice.call(document.querySelectorAll('.para__img'));
+  if (!layers.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    for (var i = 0; i < layers.length; i++) {
+      var el = layers[i];
+      var sec = el.parentElement.parentElement;
+      var box = sec.getBoundingClientRect();
+      if (box.bottom < -400 || box.top > vh + 400) continue;
+      // セクション中心が画面中心からどれだけ離れているか＝前景の移動量
+      var fromCenter = box.top + box.height / 2 - vh / 2;
+      // その (1 - SPEED) 倍だけ逆に戻すと、背景の実効速度が SPEED 倍になる
+      el.style.transform = 'translate3d(0,' + (-fromCenter * (1 - SPEED)).toFixed(1) + 'px,0)';
+    }
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', update);
+  update();
+})();
+
+// ===== GA4 計測 =====
+function gaSend(eventName, params) {
+  if (typeof gtag === 'function') gtag('event', eventName, params);
+}
+document.querySelectorAll('.btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    gaSend('button_click', {
+      button_label: btn.textContent.trim(),
+      button_href: btn.getAttribute('href') || ''
+    });
+  });
+});
+(function () {
+  var milestones = [25, 50, 75, 90];
+  var reached = {};
+  window.addEventListener('scroll', function () {
+    var scrolled = window.scrollY + window.innerHeight;
+    var total = document.documentElement.scrollHeight;
+    var pct = Math.round((scrolled / total) * 100);
+    milestones.forEach(function (m) {
+      if (pct >= m && !reached[m]) { reached[m] = true; gaSend('scroll_depth', { depth_percent: m }); }
+    });
+  }, { passive: true });
+})();
+(function () {
+  var iframe = document.querySelector('#form iframe');
+  if (!iframe) return;
+  var loadCount = 0;
+  iframe.addEventListener('load', function () {
+    loadCount++;
+    if (loadCount >= 2) gaSend('form_submit', { form_name: 'google_form_senkou' });
+  });
+})();
+</script>
+
 </body>
 </html>
