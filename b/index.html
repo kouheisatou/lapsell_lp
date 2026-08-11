@@ -111,8 +111,8 @@
   }
   .section--texture::before{
     content:"";position:absolute;inset:0;
-    background:url(images/texture_dark.webp) repeat;
-    background-size:600px 600px;
+    /* 1枚を全面に引き伸ばす。タイルしないので継ぎ目が出ない */
+    background:url(images/texture_dark.webp) center/cover no-repeat;
     opacity:.42;
   }
   .section--texture::after{
@@ -208,7 +208,6 @@
     body{font-size:15px;}
     .section{padding:64px 20px;}
     /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
-    .section--texture{background-size:18px 18px, 100% 100%;}
     .section__title{font-size:22px;margin-bottom:20px;}
     .section__lead{font-size:15px;margin-bottom:36px;}
     .hero-body{padding:0 20px 7vh;}

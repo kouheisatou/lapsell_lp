@@ -217,8 +217,8 @@ strong { font-weight: 700; }
   content: "";
   position: absolute;
   inset: 0;
-  background: url(img/texture_light.webp) repeat;
-  background-size: 600px 600px;
+  /* 1枚を全面に引き伸ばす。タイルしないので継ぎ目が出ない */
+  background: url(img/texture_light.webp) center / cover no-repeat;
   opacity: 0.75;
 }
 .section--texture > .section__inner{position: relative;}
@@ -486,7 +486,6 @@ strong { font-weight: 700; }
 
   .section { padding: 60px 20px; }
   /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
-  .section--texture::before{background-size: 420px 420px;}
   .section__title { font-size: 23px; margin-bottom: 16px; }
   .section__lead { font-size: 15px; margin-bottom: 32px; }
 
