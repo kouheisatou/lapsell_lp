@@ -306,17 +306,10 @@ strong { font-weight: 700; }
   color: var(--navy);
   margin-bottom: 18px;
 }
-.price__diagram {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 18px 0 20px;
-}
 .price__description {
-  min-height: 50px;
   color: var(--text-weak);
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.9;
 }
 /* ===== FAQ ===== */
 .faq { display: grid; }
@@ -474,8 +467,6 @@ strong { font-weight: 700; }
 
   .price { grid-template-columns: 1fr; gap: 36px; }
   .price__label { font-size: 16px; margin-bottom: 10px; }
-  .price__description { min-height: 0; }
-  .price__diagram { margin: 12px 0 0; }
 
   .faq__item { padding: 18px 0; }
   .faq__item summary { font-size: 15px; }
