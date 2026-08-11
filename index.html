@@ -97,7 +97,7 @@
   .btn:hover{opacity:.85;}
 
   /* ===== ヒーロー ===== */
-  .hero-bg{position:fixed;top:0;left:0;right:0;height:100svh;z-index:0;pointer-events:none;}
+  .hero-bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
   .hero-bg img{width:100%;height:100%;object-fit:cover;}
   .hero-bg::after{
     content:"";position:absolute;inset:0;
@@ -161,6 +161,7 @@
   .para__img{
     position:absolute;inset:-65% 0;
     background-size:cover;background-position:center;
+    will-change:transform;backface-visibility:hidden;
   }
   .section--parallax::after{
     content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -204,8 +205,8 @@
   .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
   /* 文章が続くところに、途中で小さく画像を挟む */
-  .inline-photo{margin:26px 0;overflow:hidden;border-radius:3px;}
-  .inline-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .inline-photo{margin:28px 0;}
+  .inline-photo img{width:100%;height:auto;}
 
   /* ===== 料金 ===== */
   .price{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
