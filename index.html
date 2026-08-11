@@ -74,7 +74,7 @@
     letter-spacing:.02em;
     -webkit-font-smoothing:antialiased;
   }
-  html{overflow-x:clip;}
+  /* html への overflow 指定はスクロールタイムラインの基準を壊すため置かない */
   img{display:block;max-width:100%;height:auto;}
   a{color:inherit;}
 
@@ -156,12 +156,12 @@
   }
   .section--texture > .inner{position:relative;}
   /* 写真を背景に固定し、スクロールでずれて見えるようにする */
-  .section--parallax{position:relative;overflow:hidden;background-color:var(--bg);}
-  .para{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .section--parallax{position:relative;background-color:var(--bg);view-timeline:--sec block;}
+  .para{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip;}
   .para__img{
     position:absolute;inset:-65% 0;
     background-size:cover;background-position:center;
-    will-change:transform;backface-visibility:hidden;
+    will-change:transform;
   }
   .section--parallax::after{
     content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -183,19 +183,29 @@
   }
   .mockups__desc{font-size:14px;line-height:1.9;color:var(--ink-dim);margin:0;}
 
-  /* ===== 2カラムブロック ===== */
-  .split{display:grid;gap:110px;}
-  .split__item{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center;}
-  .split__item--reverse .split__text{order:2;}
-  .split__item--reverse .split__photo{order:1;}
-  .split__heading{
-    font-weight:700;font-size:22px;color:var(--ink);margin:0 0 18px;letter-spacing:.02em;line-height:1.6;
+  /* 背景の写真を、前景より遅く動かす。
+     スクロール駆動アニメーションはコンポジタ側で動くため、
+     JavaScriptで書き換える方式と違って揺れない。 */
+  @keyframes parallax-drift{
+    from{transform:translate3d(0,-9%,0);}
+    to  {transform:translate3d(0,9%,0);}
   }
-  .split__text p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0 0 1.1em;}
-  .split__text p:last-child{margin-bottom:0;}
-  .split__note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
-  .split__photo{margin:0;}
-  .split__photo img{width:100%;border-radius:3px;}
+  @supports (animation-timeline: --sec){
+    .para__img{
+      animation-name:parallax-drift;
+      animation-duration:1s;
+      animation-timing-function:linear;
+      animation-fill-mode:both;
+      animation-timeline:--sec;   /* セクションが画面を横切る進行度 */
+      animation-range:cover 0% cover 100%;
+    }
+  }
+
+  /* ===== 本文と挿絵 ===== */
+  .prose{max-width:720px;}
+  .prose p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0 0 1.3em;}
+  .prose p:last-child{margin-bottom:0;}
+  .prose .note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
 
   /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
   .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
@@ -205,7 +215,8 @@
   .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
   /* 文章が続くところに、途中で小さく画像を挟む */
-  .inline-photo{margin:28px 0;}
+  /* 文中に挟む挿絵。読みの邪魔をしない大きさに抑える */
+  .inline-photo{margin:30px 0;max-width:520px;}
   .inline-photo img{width:100%;height:auto;}
 
   /* ===== 料金 ===== */
@@ -254,14 +265,8 @@
     .hero-lead{font-size:15px;}
     .btn{display:block;text-align:center;padding:16px 24px;}
 
-    .split{gap:56px;}
-    .split__item{grid-template-columns:1fr;gap:20px;}
-    .split__item--reverse .split__text{order:1;}
-    .split__item--reverse .split__photo{order:2;}
-    .split__heading{font-size:18px;margin-bottom:10px;}
-    .split__text p{font-size:15px;}
-    .split__photo{max-width:300px;width:100%;margin:0 auto;}
-    .split__photo img{aspect-ratio:16/9;object-fit:cover;}
+    .prose p{font-size:15px;}
+    .inline-photo{margin:22px 0;max-width:none;}
 
     /* 縦積みだとキャプションが窮屈になるため、横に並べて横スクロールにする */
     .mockups{
@@ -369,20 +374,16 @@
   <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_standby.webp)"></div></div>
   <div class="inner">
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
-    <div class="split">
-      <div class="split__item">
-        <div class="split__text">
-          <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
-          <figure class="inline-photo">
-            <img src="img/fan_watching.webp" alt="夜、自宅のソファでスマホを持ち、アプリで練習動画を見ているファン" loading="lazy">
-          </figure>
-          <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
-          <p class="split__note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
-        </div>
-        <figure class="split__photo">
-          <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy">
-        </figure>
-      </div>
+    <div class="prose">
+      <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
+      <figure class="inline-photo">
+        <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy">
+      </figure>
+      <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
+      <figure class="inline-photo">
+        <img src="img/fan_watching.webp" alt="夜、自宅のソファでスマホを持ち、アプリで練習動画を見ているファン" loading="lazy">
+      </figure>
+      <p class="note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
     </div>
   </div>
 </section>
@@ -440,21 +441,17 @@
 <section class="section section--texture" id="vision">
   <div class="inner">
     <h2 class="section__title">Lapsellが目指すこと</h2>
-    <div class="split">
-      <div class="split__item">
-        <div class="split__text">
-          <p>私は幼少期から、母の銅版画の制作を横で見てきました。</p>
-          <p>完成品の裏側に隠れてしまう試行錯誤にある面白さを私は知っています。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
-          <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
-          <figure class="inline-photo">
-            <img src="img/route_break.webp" alt="満員の会場で、観客がスマホを掲げて撮影するライブ" loading="lazy">
-          </figure>
-          <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
-        </div>
-        <figure class="split__photo">
-          <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy">
-        </figure>
-      </div>
+    <div class="prose">
+      <p>私は幼少期から、母の銅版画の制作を横で見てきました。</p>
+      <figure class="inline-photo">
+        <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy">
+      </figure>
+      <p>完成品の裏側に隠れてしまう試行錯誤にある面白さを私は知っています。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
+      <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
+      <figure class="inline-photo">
+        <img src="img/route_break.webp" alt="満員の会場で、観客がスマホを掲げて撮影するライブ" loading="lazy">
+      </figure>
+      <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
     </div>
   </div>
 </section>
@@ -515,31 +512,29 @@
 </footer>
 
 <script>
-// 背景写真を、前景より遅い速度で動かす（奥にあるように見せる）
+
+// 背景写真のパララックス。
+// スクロール駆動アニメーション（CSS）が使えるブラウザではCSS側が動くので何もしない。
+// 使えない場合だけ、JavaScriptで代替する（こちらはスクロールとの同期がずれ、多少揺れる）。
 (function () {
-  var SPEED = 0.62;                    // 前景を1としたときの背景の速度
+  if (CSS.supports('animation-timeline', 'view()')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var SPEED = 0.62;
   var layers = [].slice.call(document.querySelectorAll('.para__img'));
   if (!layers.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
   var ticking = false;
   function update() {
     ticking = false;
     var vh = window.innerHeight;
     for (var i = 0; i < layers.length; i++) {
       var el = layers[i];
-      var sec = el.parentElement.parentElement;
-      var box = sec.getBoundingClientRect();
+      var box = el.parentElement.parentElement.getBoundingClientRect();
       if (box.bottom < -400 || box.top > vh + 400) continue;
-      // セクション中心が画面中心からどれだけ離れているか＝前景の移動量
       var fromCenter = box.top + box.height / 2 - vh / 2;
-      // その (1 - SPEED) 倍だけ逆に戻すと、背景の実効速度が SPEED 倍になる
       el.style.transform = 'translate3d(0,' + (-fromCenter * (1 - SPEED)).toFixed(1) + 'px,0)';
     }
   }
-  function onScroll() {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   window.addEventListener('load', update);
