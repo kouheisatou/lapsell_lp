@@ -40,8 +40,8 @@
     font-size:16px;
     letter-spacing:.02em;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
   }
+  html{overflow-x:clip;}
   img{display:block;max-width:100%;height:auto;}
   a{color:inherit;}
 
@@ -223,14 +223,27 @@
     .split__photo{max-width:300px;width:100%;margin:0 auto;}
     .split__photo img{aspect-ratio:16/9;object-fit:cover;}
 
-    .mockups{flex-direction:column;align-items:center;gap:36px;}
-    .mockups__device{width:200px;}
+    /* 縦積みだとキャプションが窮屈になるため、横に並べて横スクロールにする */
+    .mockups{
+      flex-direction:row;justify-content:flex-start;align-items:flex-start;
+      gap:16px;max-width:none;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      touch-action:pan-x;overscroll-behavior-x:contain;
+      margin-inline:-20px;padding:0 20px 12px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .mockups::-webkit-scrollbar{height:5px;}
+    .mockups::-webkit-scrollbar-track{background:transparent;}
+    .mockups::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+    .mockups__device{width:62%;flex:0 0 62%;scroll-snap-align:start;}
+    .mockups__caption{text-align:left;}
     .mockups__title{font-size:16.5px;}
     .mockups__desc{font-size:13.5px;}
 
     .merits{
       display:flex;grid-template-columns:none;gap:16px;
       overflow-x:auto;scroll-snap-type:x mandatory;
+      touch-action:pan-x;overscroll-behavior-x:contain;
       margin-inline:-20px;padding:0 20px 12px;
       -webkit-overflow-scrolling:touch;
     }

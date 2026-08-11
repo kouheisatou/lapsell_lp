@@ -504,13 +504,26 @@ strong { font-weight: 700; }
   }
   .split__photo { max-width: 300px; width: 100%; margin: 0 auto; }
 
+  /* 縦積みだとキャプションが窮屈になるため、横に並べて横スクロールにする */
   .mockups {
-    flex-direction: column;
-    align-items: center;
-    gap: 36px;
-    max-width: 320px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    margin-inline: -20px;
+    padding: 0 20px 12px;
+    -webkit-overflow-scrolling: touch;
   }
-  .mockups__device { width: 200px; }
+  .mockups::-webkit-scrollbar { height: 5px; }
+  .mockups::-webkit-scrollbar-track { background: transparent; }
+  .mockups::-webkit-scrollbar-thumb { background: #c3d3e2; border-radius: 3px; }
+  .mockups__device { width: 62%; flex: 0 0 62%; scroll-snap-align: start; }
+  .mockups__caption { text-align: left; }
   .mockups__phone { filter: drop-shadow(0 14px 26px rgba(20, 30, 48, 0.24)); }
   .mockups__caption { margin-top: 14px; }
   .mockups__title { font-size: 16px; margin-bottom: 6px; }
@@ -531,6 +544,8 @@ strong { font-weight: 700; }
     gap:16px;
     overflow-x:auto;
     scroll-snap-type:x mandatory;
+    touch-action:pan-x;
+    overscroll-behavior-x:contain;
     margin-inline:-20px;
     padding:0 20px 12px;
     -webkit-overflow-scrolling:touch;
