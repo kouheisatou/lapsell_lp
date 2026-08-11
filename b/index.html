@@ -90,41 +90,8 @@
   .hero-note{font-size:12.5px;color:var(--ink-faint);line-height:1.9;margin:22px 0 0;}
 
   /* ===== セクション ===== */
-  .section{padding:clamp(72px,11vh,130px) 24px;position:relative;}
+  .section{padding:clamp(72px,11vh,130px) 24px;}
   .section--tint{background:var(--bg-2);}
-
-  /* 画像を敷くセクション（単色のセクションと交互に置く） */
-  .section--photo{overflow:hidden;background:var(--bg);}
-  .section--photo > .inner{position:relative;z-index:2;}
-  .section__bg{
-    position:absolute;inset:-14% 0;z-index:0;
-    background-position:center;background-size:cover;background-repeat:no-repeat;
-    filter:brightness(.42) saturate(.9);
-    will-change:transform;
-  }
-  .section__bg::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,11,9,.96) 0%, rgba(12,11,9,.74) 35%, rgba(12,11,9,.74) 65%, rgba(12,11,9,.96) 100%);
-  }
-  /* 写真ごとに明るさが違うので、セクション単位で合わせる */
-  #value .section__bg{filter:brightness(.85) saturate(.9);}
-  #price .section__bg{filter:brightness(.3) saturate(.85);}
-  #award .section__bg{filter:brightness(.5) saturate(.9);}
-  /* スクロールに合わせて背景だけがゆっくり動く（対応ブラウザのみ） */
-  @supports (animation-timeline: view()){
-    .section__bg{
-      animation:bg-parallax linear both;
-      animation-timeline:view();
-      animation-range:entry 0% exit 100%;
-    }
-    @keyframes bg-parallax{
-      from{transform:translateY(-7%);}
-      to{transform:translateY(7%);}
-    }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .section__bg{animation:none;}
-  }
   .inner{max-width:var(--maxw);margin:0 auto;}
   .inner--narrow{max-width:800px;}
 
@@ -162,6 +129,13 @@
   .split__note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
   .split__photo{margin:0;}
   .split__photo img{width:100%;border-radius:3px;}
+
+  /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
+  .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
+  .merit__photo{margin:0 0 20px;overflow:hidden;border-radius:3px;}
+  .merit__photo img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+  .merit__heading{font-weight:700;font-size:19px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
+  .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
   /* ===== 料金 ===== */
   .price{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
@@ -221,6 +195,21 @@
     .mockups__device{width:200px;}
     .mockups__title{font-size:16.5px;}
     .mockups__desc{font-size:13.5px;}
+
+    .merits{
+      display:flex;grid-template-columns:none;gap:16px;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      margin-inline:-20px;padding:0 20px 12px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .merits::-webkit-scrollbar{height:5px;}
+    .merits::-webkit-scrollbar-track{background:transparent;}
+    .merits::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+    .merit{flex:0 0 76%;scroll-snap-align:start;}
+    .merit__photo{margin-bottom:14px;}
+    .merit__photo img{aspect-ratio:16/9;}
+    .merit__heading{font-size:17px;margin-bottom:8px;}
+    .merit p{font-size:14.5px;}
 
     .price{grid-template-columns:1fr;gap:32px;}
     .price__label{font-size:17px;}
@@ -287,8 +276,7 @@
 </section>
 
 <!-- もし、無名だった頃の練習動画が残っていたら -->
-<section class="section section--photo" id="value">
-  <div class="section__bg" style="background-image:url(images/bg_standby.webp)" aria-hidden="true"></div>
+<section class="section" id="value">
   <div class="inner">
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="split">
@@ -310,41 +298,34 @@
 <section class="section section--tint" id="merit">
   <div class="inner">
     <h2 class="section__title">出品するメリット</h2>
-    <div class="split">
-      <div class="split__item">
-        <div class="split__text">
-          <h3 class="split__heading">認知が広がる</h3>
-          <p>クリップはSNSでの拡散を通じて、<span class="hl">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
-        </div>
-        <figure class="split__photo">
+    <div class="merits">
+      <div class="merit">
+        <figure class="merit__photo">
           <img src="../img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy">
         </figure>
+        <h3 class="merit__heading">認知が広がる</h3>
+        <p>クリップはSNSでの拡散を通じて、<span class="hl">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
       </div>
-      <div class="split__item split__item--reverse">
-        <div class="split__text">
-          <h3 class="split__heading">ファンとの距離が縮まる</h3>
-          <p>完成した作品だけでなく制作の裏側を共有することで、ファンとの関係が深まります。</p>
-        </div>
-        <figure class="split__photo">
+      <div class="merit">
+        <figure class="merit__photo">
           <img src="../img/merit_close.webp" alt="ライブ後の物販でファンと握手を交わすミュージシャン" loading="lazy">
         </figure>
+        <h3 class="merit__heading">ファンとの距離が縮まる</h3>
+        <p>完成した作品だけでなく制作の裏側を共有することで、ファンとの関係が深まります。</p>
       </div>
-      <div class="split__item">
-        <div class="split__text">
-          <h3 class="split__heading">グッズのマンネリ化を解消できる</h3>
-          <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
-        </div>
-        <figure class="split__photo">
+      <div class="merit">
+        <figure class="merit__photo">
           <img src="../img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" loading="lazy">
         </figure>
+        <h3 class="merit__heading">グッズのマンネリ化を解消できる</h3>
+        <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 料金 -->
-<section class="section section--photo" id="price">
-  <div class="section__bg" style="background-image:url(images/bg_setlist.webp)" aria-hidden="true"></div>
+<section class="section" id="price">
   <div class="inner">
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
@@ -382,8 +363,7 @@
 </section>
 
 <!-- 実績 -->
-<section class="section section--photo" id="award">
-  <div class="section__bg" style="background-image:url(images/bg_mirror.webp)" aria-hidden="true"></div>
+<section class="section" id="award">
   <div class="inner inner--narrow">
     <h2 class="section__title">実績</h2>
     <div class="award">

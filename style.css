@@ -290,6 +290,26 @@ strong { font-weight: 700; }
   line-height: 1.9;
 }
 
+/* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
+.merits{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:48px;
+}
+.merit__photo{margin:0 0 20px;}
+.merit__photo img{
+  width:100%;
+  aspect-ratio:16 / 10;
+  object-fit:cover;
+  border-radius:8px;
+}
+.merit__heading{
+  font-size:19px;
+  margin:0 0 12px;
+  line-height:1.6;
+}
+.merit p{font-size:15px;line-height:1.95;margin:0;}
+
 /* ===== 料金 ===== */
 .price {
   display: grid;
@@ -464,6 +484,26 @@ strong { font-weight: 700; }
   .split__heading { font-size: 18px; margin-bottom: 10px; }
   .split__text p { font-size: 15px; }
   .split__note { margin-top: 16px; font-size: 13px; line-height: 1.8; }
+
+  /* メリットは横スクロールにして、縦に伸びるのを防ぐ */
+  .merits{
+    display:flex;
+    grid-template-columns:none;
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    margin-inline:-20px;
+    padding:0 20px 12px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .merits::-webkit-scrollbar{height:5px;}
+  .merits::-webkit-scrollbar-track{background:transparent;}
+  .merits::-webkit-scrollbar-thumb{background:#c3d3e2;border-radius:3px;}
+  .merit{flex:0 0 76%;scroll-snap-align:start;}
+  .merit__photo{margin-bottom:14px;}
+  .merit__photo img{aspect-ratio:16 / 9;}
+  .merit__heading{font-size:17px;margin-bottom:8px;}
+  .merit p{font-size:14.5px;}
 
   .price { grid-template-columns: 1fr; gap: 36px; }
   .price__label { font-size: 16px; margin-bottom: 10px; }
