@@ -72,10 +72,9 @@
   }
   .hero-top{position:absolute;top:0;left:0;right:0;z-index:3;padding:22px 24px;}
   .brand{
-    font-family:"Inter","Noto Sans JP",sans-serif;font-weight:800;font-size:20px;letter-spacing:.34em;
-    color:var(--ink);text-transform:uppercase;padding-left:.42em;
+    font-family:"Inter","Noto Sans JP",sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;
+    color:var(--ink);
   }
-  .brand .dot{color:var(--bulb);}
   .hero-body{position:relative;z-index:3;padding:0 24px 9vh;max-width:calc(var(--maxw) + 48px);margin:0 auto;width:100%;}
   .hero h1{
     font-weight:900;
@@ -107,13 +106,20 @@
   /* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
   /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
   .section--texture{
+    position:relative;
     background-color:var(--bg-2);
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(232,169,75,.05) 1px, transparent 0),
-      radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.045), transparent 60%);
-    background-size:22px 22px, 100% 100%;
-    background-repeat:repeat, no-repeat;
   }
+  .section--texture::before{
+    content:"";position:absolute;inset:0;
+    background:url(images/texture_dark.webp) repeat;
+    background-size:600px 600px;
+    opacity:.55;
+  }
+  .section--texture::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.07), transparent 62%);
+  }
+  .section--texture > .inner{position:relative;}
   /* 写真を背景に固定し、スクロールでずれて見えるようにする */
   .section--parallax{
     position:relative;
@@ -123,9 +129,10 @@
   }
   .section--parallax::before{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,11,9,.94), rgba(12,11,9,.88) 40%, rgba(12,11,9,.94));
+    background:linear-gradient(180deg, rgba(12,11,9,.985), rgba(12,11,9,.93) 45%, rgba(12,11,9,.985));
   }
   .section--parallax > .inner{position:relative;}
+  .section--texture{background-attachment:fixed;}
 
   /* ===== アプリ画面 ===== */
   .mockups{display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,8vw,96px);max-width:720px;margin:0 auto;}
@@ -193,7 +200,7 @@
   /* ===== フッター ===== */
   footer{padding:56px 24px 60px;border-top:1px solid var(--line);}
   .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  .foot .brand{font-size:17px;letter-spacing:.4em;padding-left:.4em;}
+  .foot .brand{font-size:19px;letter-spacing:.02em;}
   .foot .meta{font-size:12px;color:var(--ink-faint);letter-spacing:.1em;line-height:2;}
 
   @media (max-width:820px){
@@ -260,7 +267,7 @@
 <header class="hero">
   <img class="hero-img" src="images/hero.webp" alt="電球で縁取られた楽屋の鏡の前で、本番前に身支度をするアイドル。">
   <div class="hero-top">
-    <div class="brand">Lapsell<span class="dot">.</span></div>
+    <div class="brand">Lapsell</div>
   </div>
   <div class="hero-body">
     <h1>あなたの<em>裏側</em>に、<br>価値がある。</h1>
@@ -302,7 +309,7 @@
 </section>
 
 <!-- もし、無名だった頃の練習動画が残っていたら -->
-<section class="section section--parallax" id="value" style="background-image:url(../img/flow_capture.webp)">
+<section class="section section--parallax" id="value" style="background-image:url(images/bg_standby.webp)">
   <div class="inner">
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="split">
@@ -351,7 +358,7 @@
 </section>
 
 <!-- 料金 -->
-<section class="section section--parallax" id="price" style="background-image:url(../img/scene_studio.webp)">
+<section class="section section--parallax" id="price" style="background-image:url(images/bg_setlist.webp)">
   <div class="inner">
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
@@ -389,7 +396,7 @@
 </section>
 
 <!-- 実績 -->
-<section class="section" id="award">
+<section class="section section--parallax" id="award" style="background-image:url(images/bg_mirror.webp)">
   <div class="inner inner--narrow">
     <h2 class="section__title">実績</h2>
     <div class="award">
@@ -437,7 +444,7 @@
 
 <footer>
   <div class="foot">
-    <div class="brand">Lapsell<span class="dot" style="color:var(--bulb)">.</span></div>
+    <div class="brand">Lapsell</div>
     <div class="meta">練習時間を、収益に変える。<br>&copy; 2026 Lapsell</div>
   </div>
 </footer>

@@ -210,13 +210,18 @@ strong { font-weight: 700; }
 /* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
 /* 紙の目のような細かいドット。単色の広い面をやわらげる */
 .section--texture{
+  position: relative;
   background-color: var(--bg-tint);
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(27, 58, 92, 0.055) 1px, transparent 0),
-    linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
-  background-size: 20px 20px, 100% 240px;
-  background-repeat: repeat, no-repeat;
 }
+.section--texture::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(img/texture_light.webp) repeat;
+  background-size: 600px 600px;
+  opacity: 0.75;
+}
+.section--texture > .section__inner{position: relative;}
 
 /* 写真を背景に固定し、スクロールでずれて見えるようにする */
 .section--parallax{
@@ -229,7 +234,7 @@ strong { font-weight: 700; }
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 0.92);
 }
 .section--parallax > .section__inner{position: relative;}
 
@@ -475,7 +480,7 @@ strong { font-weight: 700; }
   .section { padding: 60px 20px; }
   /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
   .section--parallax{background-attachment: scroll;}
-  .section--texture{background-size: 16px 16px, 100% 180px;}
+  .section--texture::before{background-size: 420px 420px;}
   .section__title { font-size: 23px; margin-bottom: 16px; }
   .section__lead { font-size: 15px; margin-bottom: 32px; }
 
