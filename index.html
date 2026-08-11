@@ -142,37 +142,29 @@
   }
   .section__lead{font-size:16px;color:var(--ink-dim);max-width:760px;margin:0 0 64px;line-height:2;}
 
-  /* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
-  /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
-  .section--texture{
-    position:relative;
-    background-color:#131211;
-  }
-  .section--texture::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    /* 1枚を全面に引き伸ばす。タイルしないので継ぎ目が出ない */
-    background:url(img/texture_dark.webp) center/cover no-repeat;
-    filter:grayscale(1);
-    opacity:.5;
-  }
-  .section--texture::after{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.07), transparent 62%);
-  }
-  .section--texture > .inner{position:relative;}
+  /* ===== 背景 ===== */
+  /* テクスチャ側は単色。写真を敷いた面との差で、奥行きの違いを出す */
+  .section--texture{background-color:#131211;}
   /* 写真を背景に固定し、スクロールでずれて見えるようにする */
   .section--parallax{position:relative;background-color:var(--bg);view-timeline:--sec block;}
   .para{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip;}
   .para__img{
-    position:absolute;inset:-65% 0;
+    position:absolute;inset:-75% 0;
     background-size:cover;background-position:center;
     will-change:transform;
   }
   .section--parallax::after{
     content:"";position:absolute;inset:-1px 0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(12,11,9,.84), rgba(12,11,9,.66) 45%, rgba(12,11,9,.84));
+    background:linear-gradient(180deg, rgba(12,11,9,.74), rgba(12,11,9,.56) 45%, rgba(12,11,9,.74));
   }
-  .section--parallax > .inner{position:relative;z-index:2;}
+  .section--parallax > .inner{position:relative;z-index:3;}
+  /* 上下の面から落ちる影。境目が切り替わるのではなく、暗がりが続いて見える */
+  .section--parallax::before{
+    content:"";position:absolute;inset:-1px 0;z-index:2;pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(4,4,3,.85), rgba(4,4,3,0)) top / 100% clamp(90px,16vh,200px) no-repeat,
+      linear-gradient(0deg,   rgba(4,4,3,.85), rgba(4,4,3,0)) bottom / 100% clamp(90px,16vh,200px) no-repeat;
+  }
 
   /* スクロール駆動アニメーション。対応ブラウザでのみ背景が動く */
 
@@ -192,8 +184,8 @@
      スクロール駆動アニメーションはコンポジタ側で動くため、
      JavaScriptで書き換える方式と違って揺れない。 */
   @keyframes parallax-drift{
-    from{transform:translate3d(0,-9%,0);}
-    to  {transform:translate3d(0,9%,0);}
+    from{transform:translate3d(0,-14%,0);}
+    to  {transform:translate3d(0,14%,0);}
   }
   @supports (animation-timeline: --sec){
     .para__img{
@@ -527,7 +519,7 @@
 (function () {
   if (CSS.supports('animation-timeline', 'view()')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var SPEED = 0.62;
+  var SPEED = 0.55;
   var layers = [].slice.call(document.querySelectorAll('.para__img'));
   if (!layers.length) return;
   var ticking = false;
