@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>あなたの裏側に、価値がある。｜Lapsell（ラプセル）</title>
+<meta name="description" content="練習や制作の様子を撮った動画を、数分ごとのクリップに分けて一点物のデジタルグッズとして販売できます。編集は必要ありません。現在は開発中で、一緒に試していただけるクリエイターを募集しています。">
+<meta name="robots" content="noindex, nofollow">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8CHRFNV96K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8CHRFNV96K');
+</script>
+<style>
+  :root{
+    --ink:#f2ede3;
+    --ink-dim:#a89f8f;
+    --ink-faint:#6f685c;
+    --bg:#0c0b09;
+    --bg-2:#141210;
+    --bulb:#e8a94b;
+    --bulb-deep:#c07d2a;
+    --line:#2a2620;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP",Meiryo,sans-serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    letter-spacing:.02em;
+  }
+  img{display:block;max-width:100%;height:auto;}
+
+  /* フィルム粒子オーバーレイ */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .narrow{max-width:680px;}
+
+  /* ===== 章ラベル ===== */
+  .chapter{
+    display:flex;align-items:baseline;gap:16px;
+    color:var(--bulb);
+    margin:0 0 34px;
+  }
+  .chapter .num{
+    font-family:"Georgia",serif;
+    font-size:13px;letter-spacing:.32em;
+    color:var(--ink-faint);
+  }
+  .chapter .ttl{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:30px;letter-spacing:.12em;color:var(--ink);line-height:1.5;
+  }
+  .chapter .line{
+    flex:1;height:1px;background:var(--line);align-self:center;min-width:24px;
+  }
+
+  /* ===== ヒーロー ===== */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,9,.55) 0%, rgba(12,11,9,.15) 32%, rgba(12,11,9,.35) 62%, rgba(12,11,9,.96) 100%);
+  }
+  .hero-top{
+    position:absolute;top:0;left:0;right:0;z-index:3;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 24px;
+  }
+  .brand{
+    font-family:"Georgia",serif;font-size:20px;letter-spacing:.42em;
+    color:var(--ink);text-transform:uppercase;padding-left:.42em;
+  }
+  .brand .dot{color:var(--bulb);}
+  .hero-tag{
+    font-size:11px;letter-spacing:.34em;color:var(--ink-dim);
+    text-transform:uppercase;display:none;
+  }
+  .hero-body{position:relative;z-index:3;padding:0 24px 8vh;}
+  .hero-eyebrow{
+    font-size:12px;letter-spacing:.42em;color:var(--bulb);
+    text-transform:uppercase;margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;
+    font-size:clamp(34px,8.4vw,74px);
+    line-height:1.28;
+    margin:0 0 26px;
+    letter-spacing:.06em;
+    text-shadow:0 2px 40px rgba(0,0,0,.6);
+  }
+  .hero h1 em{font-style:normal;color:var(--bulb);}
+  .hero-lead{
+    max-width:560px;font-size:16px;color:var(--ink-dim);
+    line-height:2;margin:0 0 30px;
+  }
+  .hero-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:26px;}
+  .hero-note{font-size:12.5px;color:var(--ink-faint);line-height:1.9;max-width:520px;margin:0 0 26px;}
+  .hero-scroll{
+    font-size:11px;letter-spacing:.3em;color:var(--ink-faint);
+    text-transform:uppercase;
+  }
+
+  /* ===== 大判フォト ===== */
+  .plate{position:relative;margin:0;}
+  .plate img{width:100%;object-fit:cover;}
+  .plate.full img{height:min(88svh,760px);}
+  .plate .cap{
+    max-width:var(--maxw);margin:0 auto;padding:18px 24px 0;
+    display:flex;gap:14px;align-items:baseline;
+  }
+  .plate .cap .tick{color:var(--bulb);font-size:12px;letter-spacing:.2em;white-space:nowrap;}
+  .plate .cap .txt{color:var(--ink-dim);font-size:14px;line-height:1.7;}
+
+  .band-space{padding:clamp(48px,9vh,120px) 0;}
+  .band-space.tight{padding:clamp(38px,6vh,74px) 0;}
+
+  /* ===== 写真＋短文 ===== */
+  .editorial{
+    display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center;
+  }
+  .editorial.flip{grid-template-columns:1fr 1.35fr;}
+  .editorial.flip .ed-txt{order:-1;}
+  .editorial img{width:100%;height:clamp(320px,44vw,540px);object-fit:cover;}
+  .ed-txt h3{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(23px,3.4vw,30px);line-height:1.6;
+    margin:0 0 20px;letter-spacing:.05em;
+  }
+  .ed-txt h3 em{font-style:normal;color:var(--bulb);border-bottom:1px solid var(--bulb-deep);padding-bottom:2px;}
+  .ed-txt p{font-size:15px;color:var(--ink-dim);line-height:2;margin:0 0 1em;}
+  .ed-txt p:last-child{margin-bottom:0;}
+  .ed-txt .kicker{
+    font-size:12px;letter-spacing:.34em;color:var(--bulb);text-transform:uppercase;
+    margin-bottom:18px;
+  }
+
+  /* ===== 本文ブロック ===== */
+  .prose p{font-size:15.5px;color:var(--ink-dim);line-height:2.1;margin:0 0 1.4em;}
+  .prose p:last-child{margin-bottom:0;}
+  .prose .em{color:var(--ink);}
+  .prose .note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
+
+  /* ===== アプリ画面 ===== */
+  .screens{display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,8vw,96px);max-width:760px;margin:0 auto;}
+  .scr{margin:0;flex:0 0 auto;width:264px;}
+  .scr-phone{position:relative;width:100%;aspect-ratio:1350/2760;filter:drop-shadow(0 34px 70px rgba(0,0,0,.8));}
+  .scr-shot{position:absolute;top:2.5%;left:5.33%;width:89.33%;height:95%;object-fit:cover;object-position:top center;border-radius:7%/3.4%;z-index:1;}
+  .scr-frame{position:relative;display:block;width:100%;height:auto;z-index:2;pointer-events:none;}
+  .scr-cap{margin-top:26px;}
+  .scr-cap .no{font-family:"Georgia",serif;font-size:11px;letter-spacing:.26em;color:var(--bulb);display:block;margin-bottom:8px;}
+  .scr-cap h4{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-weight:400;
+    font-size:20px;color:var(--ink);letter-spacing:.06em;margin:0 0 10px;line-height:1.5;
+  }
+  .scr-cap p{font-size:13.5px;color:var(--ink-dim);line-height:1.9;margin:0;}
+
+  /* ===== ステートメント ===== */
+  .statement{
+    position:relative;padding:16vh 0;
+    background:#080705;
+    overflow:hidden;
+  }
+  .statement::before{
+    content:"";position:absolute;inset:0;
+    background:url("images/texture.webp") center/cover no-repeat;
+    opacity:.22;
+  }
+  .statement .wrap{position:relative;z-index:1;}
+  .bulbs{display:flex;gap:26px;margin:0;}
+  .bulbs span{
+    width:11px;height:11px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #ffe6ab, var(--bulb) 45%, var(--bulb-deep) 100%);
+    box-shadow:0 0 14px 3px rgba(232,169,75,.55);
+  }
+  .statement h2{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(24px,4.4vw,38px);line-height:1.75;
+    margin:34px 0 32px;letter-spacing:.07em;
+  }
+  .statement h2 em{font-style:normal;color:var(--bulb);}
+
+  /* ===== 値段 ===== */
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);}
+  .price-item{padding:30px 0;border-bottom:1px solid var(--line);}
+  .price-item:nth-child(odd){padding-right:30px;border-right:1px solid var(--line);}
+  .price-item:nth-child(even){padding-left:30px;}
+  .price-item .k{font-size:13px;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:10px;}
+  .price-item .v{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:clamp(22px,4vw,30px);color:var(--ink);letter-spacing:.03em;
+  }
+  .price-item .v small{font-size:15px;color:var(--ink-dim);}
+  .price-note{margin-top:26px;font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
+
+  /* ===== 実績 ===== */
+  .award{display:flex;align-items:flex-start;gap:34px;}
+  .award__icon{flex:0 0 auto;width:78px;height:78px;color:var(--bulb);margin-top:4px;}
+  .award__prize{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:clamp(24px,4vw,32px);color:var(--bulb);letter-spacing:.08em;margin:0 0 10px;line-height:1.4;
+  }
+  .award__event{font-size:16px;color:var(--ink);margin:0 0 16px;letter-spacing:.04em;}
+  .award__desc{font-size:14.5px;color:var(--ink-dim);line-height:2;margin:0 0 16px;}
+  .award__link a{color:var(--bulb);font-size:13px;letter-spacing:.06em;text-decoration:none;border-bottom:1px solid var(--bulb-deep);padding-bottom:2px;}
+  .award__link a:hover{color:#f3ce85;}
+
+  /* ===== Q&A ===== */
+  .faq{background:#080705;padding:14vh 0;}
+  .qa{border-top:1px solid var(--line);padding:28px 0;}
+  .qa:last-child{border-bottom:1px solid var(--line);}
+  .qa .q{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:18px;color:var(--ink);margin:0 0 12px;letter-spacing:.04em;line-height:1.6;
+  }
+  .qa .q::before{content:"Q ";color:var(--bulb);font-family:"Georgia",serif;}
+  .qa .a{font-size:14.5px;color:var(--ink-dim);line-height:2;margin:0;}
+
+  /* ===== CTA ===== */
+  .cta{position:relative;text-align:center;padding:0;}
+  .cta-img{position:relative;}
+  .cta-img img{width:100%;height:min(80svh,640px);object-fit:cover;}
+  .cta-img::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,7,5,.75),rgba(8,7,5,.55) 40%,rgba(8,7,5,.94));
+  }
+  .cta-body{
+    position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:0 24px;
+  }
+  .cta-body h2{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;font-size:clamp(26px,5.6vw,46px);line-height:1.6;
+    margin:0 0 18px;letter-spacing:.07em;
+  }
+  .cta-body h2 em{font-style:normal;color:var(--bulb);}
+  .cta-body p{color:var(--ink-dim);font-size:15px;margin:0 0 40px;max-width:460px;line-height:2;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-size:18px;letter-spacing:.14em;color:#1a1408;
+    background:linear-gradient(180deg,#f3ce85,var(--bulb));
+    padding:18px 40px;text-decoration:none;
+    border:1px solid #ffe6ab;
+    box-shadow:0 0 30px 4px rgba(232,169,75,.35), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .btn .lb{
+    width:9px;height:9px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#fff,#fff8e6 50%,#1a1408 52%);
+    box-shadow:0 0 8px 2px rgba(255,255,255,.6);
+  }
+  .btn:hover{filter:brightness(1.06);}
+
+  /* ===== 申し込みフォーム ===== */
+  .entry{background:var(--bg-2);padding:14vh 0;}
+  .entry .form-lead{max-width:680px;margin:0 0 48px;}
+  .entry .form-lead p{font-size:15px;color:var(--ink-dim);line-height:2.1;margin:0 0 1.2em;}
+  .entry .form-lead p:last-child{margin-bottom:0;}
+  .entry iframe{
+    display:block;width:100%;max-width:640px;height:1928px;margin:0 auto;border:0;
+  }
+
+  /* ===== フッター ===== */
+  footer{background:var(--bg);padding:56px 0 60px;border-top:1px solid var(--line);}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+  .foot .brand{font-size:17px;letter-spacing:.4em;padding-left:.4em;}
+  .foot .meta{font-size:12px;color:var(--ink-faint);letter-spacing:.14em;line-height:2;}
+
+  @media (max-width:820px){
+    .editorial,.editorial.flip{grid-template-columns:1fr;gap:22px;}
+    .editorial.flip .ed-txt{order:0;}
+    .editorial img{height:clamp(240px,56vw,330px);}
+    .price-grid{grid-template-columns:1fr;}
+    .price-item:nth-child(odd){padding-right:0;border-right:none;}
+    .price-item:nth-child(even){padding-left:0;}
+    .chapter .ttl{font-size:22px;}
+    .chapter{margin-bottom:26px;}
+    .hero-tag{display:none;}
+    .plate.full img{height:min(52svh,380px);}
+    .screens{flex-direction:column;align-items:center;gap:56px;}
+    .scr{width:224px;}
+    .scr-cap{text-align:center;}
+    .award{gap:20px;}
+    .award__icon{width:54px;height:54px;}
+    .prose p{font-size:15px;}
+    .entry iframe{height:2320px;}
+  }
+  @media (min-width:900px){
+    .hero-tag{display:block;}
+  }
+  @media (max-width:480px){
+    .entry iframe{height:2480px;}
+    .btn{font-size:16px;padding:16px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ヒーロー ============ -->
+<header class="hero">
+  <img class="hero-img" src="images/hero.webp" alt="電球で縁取られた楽屋の鏡の前で、本番前に身支度をするアイドル。">
+  <div class="hero-top">
+    <div class="brand">Lapsell<span class="dot">.</span></div>
+    <div class="hero-tag">Green Room ／ 楽屋の記録</div>
+  </div>
+  <div class="hero-body wrap">
+    <div class="hero-eyebrow">Behind the scenes</div>
+    <h1>あなたの<em>裏側</em>に、<br>価値がある。</h1>
+    <p class="hero-lead">練習や制作の様子を撮った動画を、一点物のデジタルグッズとして販売できます。編集は必要ありません。</p>
+    <div class="hero-actions">
+      <a class="btn" href="#entry"><span class="lb"></span>先行利用に登録する</a>
+    </div>
+    <p class="hero-note">現在サービスを開発中で、一緒に試していただけるクリエイターを募集しています。登録と出品は無料で、費用は売れたときの手数料だけです。</p>
+    <div class="hero-scroll">Scroll ↓</div>
+  </div>
+</header>
+
+<!-- ============ 01 Lapsellとは ============ -->
+<section class="band-space" id="about">
+  <div class="wrap">
+    <div class="chapter"><span class="num">01</span><span class="ttl">Lapsellとは</span><span class="line"></span></div>
+    <div class="narrow prose" style="margin-bottom:clamp(48px,8vh,90px)">
+      <p class="em">制作の裏側を、一点物のデジタルグッズとして販売できます。</p>
+    </div>
+
+    <div class="screens">
+      <figure class="scr">
+        <div class="scr-phone">
+          <img class="scr-shot" src="../img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" loading="lazy">
+          <img class="scr-frame" src="../img/iphone_frame.webp" alt="" loading="lazy">
+        </div>
+        <figcaption class="scr-cap">
+          <span class="no">01</span>
+          <h4>一点物のグッズとして販売</h4>
+          <p>練習の映像は、AIが数分ごとのクリップに区切ります。売れたクリップは非公開になり、購入した方だけが視聴できます。</p>
+        </figcaption>
+      </figure>
+      <figure class="scr">
+        <div class="scr-phone">
+          <img class="scr-shot" src="../img/mock_about_map.webp" alt="マップの画面。クリエイターの拠点周辺のセルを初期支援者が取得し、この頃から推していたと表示されている" loading="lazy">
+          <img class="scr-frame" src="../img/iphone_frame.webp" alt="" loading="lazy">
+        </div>
+        <figcaption class="scr-cap">
+          <span class="no">02</span>
+          <h4>応援した記録を、地図に残す</h4>
+          <p>購入した方は、マップ上のセルを先着順で取得できます。活動拠点に近いセルほど、早くから応援していたことを示します。</p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<figure class="plate full">
+  <img src="images/filming.webp" alt="楽屋の鏡にスマホを立てかけ、三脚で自分のダンス練習を撮影するアイドル。" loading="lazy">
+  <figcaption class="cap"><span class="tick">—</span><span class="txt">三脚に固定したスマホで撮影した映像をアップロードすると、AIが数分ごとのクリップに区切り、それぞれにタイトル案と価格を提案します。</span></figcaption>
+</figure>
+
+<!-- ============ 02 もし、無名だった頃の練習動画が残っていたら ============ -->
+<section class="band-space" id="value">
+  <div class="wrap">
+    <div class="chapter"><span class="num">02</span><span class="ttl">もし、無名だった頃の練習動画が残っていたら</span><span class="line"></span></div>
+    <div class="narrow prose">
+      <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。その頃の練習風景を撮った動画が手元に残っていたら、ファンにとってどれくらいの価値になるでしょうか。</p>
+      <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。</p>
+      <p class="note">推し活をしている方393人に伺った自社調査では、およそ3人に1人が制作風景の動画に対価を支払ってもよいと回答しています。</p>
+    </div>
+  </div>
+</section>
+
+<figure class="plate full">
+  <img src="images/standby.webp" alt="暗い舞台袖。非常灯の光の中で出番を待つバンドのメンバー。" loading="lazy">
+  <figcaption class="cap"><span class="tick">—</span><span class="txt">ライブが終われば消えてしまう、一回きりの時間。</span></figcaption>
+</figure>
+
+<div class="band-space">
+  <div class="wrap">
+    <div class="editorial flip">
+      <div class="ed-txt">
+        <div class="kicker">One of a kind</div>
+        <h3>今この瞬間の練習を、<br><em>後からは手に入らない一点物</em>として残す。</h3>
+        <p>撮った映像は数分ごとのクリップに区切られ、その一つひとつが個別の商品になります。</p>
+        <p>売れたクリップは非公開になり、視聴できるのは購入した方だけです。同じものは他に存在しません。</p>
+      </div>
+      <img src="images/filmstrip.webp" alt="リハーサルの映像がフィルムのコマのように連なった、短い断片のイメージ。" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ============ 03 出品するメリット ============ -->
+<section class="band-space" id="merit">
+  <div class="wrap">
+    <div class="chapter"><span class="num">03</span><span class="ttl">出品するメリット</span><span class="line"></span></div>
+
+    <div class="editorial" style="margin-bottom:clamp(64px,10vh,130px)">
+      <img src="images/band.webp" alt="防音スタジオで汗をかきながらリハーサルする3人組バンド。" loading="lazy">
+      <div class="ed-txt">
+        <div class="kicker">Reach</div>
+        <h3>認知が広がる</h3>
+        <p>クリップはSNSでの拡散を通じて、既存のファンの外側にも届きます。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
+      </div>
+    </div>
+
+    <div class="editorial flip" style="margin-bottom:clamp(64px,10vh,130px)">
+      <div class="ed-txt">
+        <div class="kicker">Closer</div>
+        <h3>ファンとの距離が縮まる</h3>
+        <p>完成した作品だけでなく制作の裏側を共有することで、ファンとの関係が深まります。</p>
+      </div>
+      <img src="images/fan.webp" alt="夜、自宅でスマホを持ち、受け取った映像を見て微笑むファン。" loading="lazy">
+    </div>
+
+    <div class="editorial">
+      <img src="images/rack.webp" alt="楽屋の衣装ラックに並ぶステージ衣装。" loading="lazy">
+      <div class="ed-txt">
+        <div class="kicker">Not mass-produced</div>
+        <h3>グッズのマンネリ化を<br>解消できる</h3>
+        <p>写真やアクリルスタンドとは異なる、これまでになかった形のグッズとして販売できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<figure class="plate full">
+  <img src="images/setlist.webp" alt="本番前の楽屋の床。手書きのセットリスト、靴、水のボトル、タオル。" loading="lazy">
+  <figcaption class="cap"><span class="tick">—</span><span class="txt">本番前の床。まだ何も始まっていない、この静けさ。</span></figcaption>
+</figure>
+
+<!-- ============ 04 料金 ============ -->
+<section class="band-space" id="price">
+  <div class="wrap">
+    <div class="chapter"><span class="num">04</span><span class="ttl">料金</span><span class="line"></span></div>
+    <div class="price-grid">
+      <div class="price-item"><div class="k">はじめる費用</div><div class="v">0円 <small>／ 登録・出品は無料</small></div></div>
+      <div class="price-item"><div class="k">月額費用</div><div class="v">0円</div></div>
+      <div class="price-item"><div class="k">販売手数料</div><div class="v">販売価格の 10%</div></div>
+      <div class="price-item"><div class="k">二次流通の還元</div><div class="v">売却益の 20% <small>／ 出品者へ</small></div></div>
+    </div>
+    <p class="price-note">費用は販売手数料のみで、クリップが売れた場合に販売価格の10%をいただきます。購入されたクリップがファンの間で再び売買されたときは、売却益の20%を出品者にお支払いします。</p>
+  </div>
+</section>
+
+<!-- ============ 05 Lapsellが目指すこと ============ -->
+<section class="statement" id="vision">
+  <div class="wrap narrow">
+    <div class="bulbs"><span></span><span></span><span></span></div>
+    <h2>完成品の裏側にある試行錯誤そのものに、<em>市場価値</em>を与える。</h2>
+    <div class="prose">
+      <p>母は銅版画を制作しており、私は幼い頃からその様子をいつも横で見ていました。</p>
+      <p>その過程は、見ていて純粋に面白いものでした。しかし、世に出るのは完成した作品だけで、そこに至るまでの過程が誰かに知られることはありません。完成品だけが成果として扱われるこの構造に、私は違和感を覚えていました。</p>
+      <p>完成品の裏側にある試行錯誤にも、確かな美しさがあります。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、将来は貴重な記録になるかもしれません。</p>
+      <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
+      <p>駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる状態を作ります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 実績 ============ -->
+<section class="band-space" id="award">
+  <div class="wrap narrow">
+    <div class="chapter"><span class="num">06</span><span class="ttl">実績</span><span class="line"></span></div>
+    <div class="award">
+      <svg class="award__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 7h18v11c0 5-4 9-9 9s-9-4-9-9V7Z"/>
+        <path d="M15 11h-5v2.5c0 3.6 2.8 6.5 6.3 6.5"/>
+        <path d="M33 11h5v2.5c0 3.6-2.8 6.5-6.3 6.5"/>
+        <path d="M24 27v7"/>
+        <path d="M19.5 41l1-7h7l1 7"/>
+        <path d="M15.5 41h17"/>
+      </svg>
+      <div>
+        <p class="award__prize">最優秀賞</p>
+        <p class="award__event">第10回芝浦ビジネスモデルコンペティション（主催：芝浦工業大学）</p>
+        <p class="award__desc">中高生から社会人まで48チーム169人が応募したコンペティションで、Lapsellの構想が最優秀賞に選ばれました。</p>
+        <p class="award__link"><a href="https://www.shibaura-it.ac.jp/headline/detail/20251015_7070_718.html" target="_blank" rel="noopener">受賞の発表ページ（芝浦工業大学）</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta-img">
+    <img src="images/mirror.webp" alt="電球で縁取られた楽屋のミラー。衣装と化粧品が並ぶ、静かな部屋。" loading="lazy">
+    <div class="cta-body wrap">
+      <h2>その練習を、<br><em>次の収益</em>にする。</h2>
+      <p>登録と出品は無料です。費用は売れたときの手数料だけです。</p>
+      <a class="btn" href="#entry"><span class="lb"></span>先行利用に登録する</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 先行利用の募集 ============ -->
+<section class="entry" id="entry">
+  <div class="wrap">
+    <div class="chapter"><span class="num">07</span><span class="ttl">先行利用の募集</span><span class="line"></span></div>
+    <div class="form-lead">
+      <p>練習や制作の動画を売買する市場は、まだどこにもありません。この仕組みで実際に売れるかどうかも、現時点では分かりません。まずは実際に活動されている方に試していただき、需要があるかどうかを一緒に確かめたいと考えています。</p>
+      <p>登録と出品は無料です。メールをお送りした方は、そのまま返信いただく形でも差し支えありません。</p>
+    </div>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScwi4YGPl-YCMkFWtjllrrDqfTassxQxQO3ePA8napdNu9vcg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">読み込んでいます…</iframe>
+  </div>
+</section>
+
+<!-- ============ 08 よくある質問 ============ -->
+<section class="faq" id="faq">
+  <div class="wrap narrow">
+    <div class="chapter"><span class="num">08</span><span class="ttl">よくある質問</span><span class="line"></span></div>
+    <div class="qa"><p class="q">メールを受け取りましたが、送付先はどのように選んでいますか。</p><p class="a">公開されている活動情報を拝見し、練習や制作の様子を継続して記録できそうな方に、一件ずつ内容を確認したうえでご連絡しています。</p></div>
+    <div class="qa"><p class="q">どんな動画を販売できますか。</p><p class="a">練習、制作、リハーサルなど活動の裏側であれば、ジャンルを問わず販売できます。完成品である必要はありません。</p></div>
+    <div class="qa"><p class="q">登録者数や再生時間などの収益化条件はありますか。</p><p class="a">ありません。1本目のクリップから販売できます。</p></div>
+    <div class="qa"><p class="q">動画編集のスキルがなくても使えますか。</p><p class="a">AIが切り分けとタイトル案の作成、価格の提案までを行いますので、内容を確認して出品するだけで販売できます。</p></div>
+    <div class="qa"><p class="q">映り込みや失言が世に出てしまわないか心配です。</p><p class="a">人物の映り込みや発言はAIが検出しますので、公開前に確認して除外できます。</p></div>
+    <div class="qa"><p class="q">マップとは何ですか。</p><p class="a">購入した方が世界地図上のセルを先着順で取得できる機能です。早くから応援していたことを地図に残せます。クリップ本編は非公開のままです。</p></div>
+  </div>
+</section>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brand">Lapsell<span class="dot" style="color:var(--bulb)">.</span></div>
+      <div class="meta">練習時間を、収益に変える。<br>&copy; 2026 Lapsell</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
