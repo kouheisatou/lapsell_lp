@@ -140,29 +140,30 @@
   /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
   .section--texture{
     position:relative;
-    background-color:#0b0a08;
+    background-color:#131211;
   }
   .section--texture::before{
-    content:"";position:absolute;inset:0;
+    content:"";position:absolute;inset:0;pointer-events:none;
     /* 1枚を全面に引き伸ばす。タイルしないので継ぎ目が出ない */
     background:url(img/texture_dark.webp) center/cover no-repeat;
-    opacity:.42;
+    filter:grayscale(1);
+    opacity:.5;
   }
   .section--texture::after{
-    content:"";position:absolute;inset:0;
+    content:"";position:absolute;inset:0;pointer-events:none;
     background:radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.07), transparent 62%);
   }
   .section--texture > .inner{position:relative;}
   /* 写真を背景に固定し、スクロールでずれて見えるようにする */
   .section--parallax{position:relative;overflow:hidden;}
-  .para{position:absolute;inset:0;z-index:0;}
+  .para{position:absolute;inset:0;z-index:0;pointer-events:none;}
   .para__img{
     position:absolute;inset:-65% 0;
     background-size:cover;background-position:center;
   }
   .section--parallax::after{
-    content:"";position:absolute;inset:0;z-index:1;
-    background:linear-gradient(180deg, rgba(12,11,9,.90), rgba(12,11,9,.78) 45%, rgba(12,11,9,.90));
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(12,11,9,.84), rgba(12,11,9,.66) 45%, rgba(12,11,9,.84));
   }
   .section--parallax > .inner{position:relative;z-index:2;}
 
@@ -261,7 +262,7 @@
       flex-direction:row;justify-content:flex-start;align-items:flex-start;
       gap:16px;max-width:none;
       overflow-x:auto;scroll-snap-type:x mandatory;
-      touch-action:pan-x;overscroll-behavior-x:contain;
+      overscroll-behavior-x:contain;
       margin-inline:-20px;padding:0 20px 12px;
       -webkit-overflow-scrolling:touch;
     }
@@ -276,7 +277,7 @@
     .merits{
       display:flex;grid-template-columns:none;gap:16px;
       overflow-x:auto;scroll-snap-type:x mandatory;
-      touch-action:pan-x;overscroll-behavior-x:contain;
+      overscroll-behavior-x:contain;
       margin-inline:-20px;padding:0 20px 12px;
       -webkit-overflow-scrolling:touch;
     }
