@@ -207,6 +207,32 @@ strong { font-weight: 700; }
   margin-bottom: 72px;
 }
 
+/* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
+/* 紙の目のような細かいドット。単色の広い面をやわらげる */
+.section--texture{
+  background-color: var(--bg-tint);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(27, 58, 92, 0.055) 1px, transparent 0),
+    linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
+  background-size: 20px 20px, 100% 240px;
+  background-repeat: repeat, no-repeat;
+}
+
+/* 写真を背景に固定し、スクロールでずれて見えるようにする */
+.section--parallax{
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.section--parallax::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.90);
+}
+.section--parallax > .section__inner{position: relative;}
+
 /* ===== 仕組み図（出品者 → Lapsell → ファン） ===== */
 .mockups {
   display: flex;
@@ -447,6 +473,9 @@ strong { font-weight: 700; }
   .hero__note { font-size: 12px; }
 
   .section { padding: 60px 20px; }
+  /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
+  .section--parallax{background-attachment: scroll;}
+  .section--texture{background-size: 16px 16px, 100% 180px;}
   .section__title { font-size: 23px; margin-bottom: 16px; }
   .section__lead { font-size: 15px; margin-bottom: 32px; }
 

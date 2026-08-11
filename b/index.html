@@ -104,6 +104,29 @@
   }
   .section__lead{font-size:16px;color:var(--ink-dim);max-width:760px;margin:0 0 64px;line-height:2;}
 
+  /* ===== 背景（テクスチャと写真パララックスを交互に敷く） ===== */
+  /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
+  .section--texture{
+    background-color:var(--bg-2);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(232,169,75,.05) 1px, transparent 0),
+      radial-gradient(120% 80% at 50% 0%, rgba(232,169,75,.045), transparent 60%);
+    background-size:22px 22px, 100% 100%;
+    background-repeat:repeat, no-repeat;
+  }
+  /* 写真を背景に固定し、スクロールでずれて見えるようにする */
+  .section--parallax{
+    position:relative;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+  }
+  .section--parallax::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(12,11,9,.94), rgba(12,11,9,.88) 40%, rgba(12,11,9,.94));
+  }
+  .section--parallax > .inner{position:relative;}
+
   /* ===== アプリ画面 ===== */
   .mockups{display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,8vw,96px);max-width:720px;margin:0 auto;}
   .mockups__device{margin:0;flex:0 0 auto;width:256px;}
@@ -176,6 +199,9 @@
   @media (max-width:820px){
     body{font-size:15px;}
     .section{padding:64px 20px;}
+    /* iOSでは背景の固定が正しく効かないため、通常のスクロールに戻す */
+    .section--parallax{background-attachment:scroll;}
+    .section--texture{background-size:18px 18px, 100% 100%;}
     .section__title{font-size:22px;margin-bottom:20px;}
     .section__lead{font-size:15px;margin-bottom:36px;}
     .hero-body{padding:0 20px 7vh;}
@@ -245,7 +271,7 @@
 </header>
 
 <!-- Lapsellとは -->
-<section class="section section--tint" id="about">
+<section class="section section--texture" id="about">
   <div class="inner">
     <h2 class="section__title">Lapsellとは</h2>
     <p class="section__lead">制作の裏側を、<span class="hl">一点物のデジタルグッズ</span>として販売できます。</p>
@@ -276,7 +302,7 @@
 </section>
 
 <!-- もし、無名だった頃の練習動画が残っていたら -->
-<section class="section" id="value">
+<section class="section section--parallax" id="value" style="background-image:url(../img/flow_capture.webp)">
   <div class="inner">
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="split">
@@ -295,7 +321,7 @@
 </section>
 
 <!-- 出品するメリット -->
-<section class="section section--tint" id="merit">
+<section class="section section--texture" id="merit">
   <div class="inner">
     <h2 class="section__title">出品するメリット</h2>
     <div class="merits">
@@ -325,7 +351,7 @@
 </section>
 
 <!-- 料金 -->
-<section class="section" id="price">
+<section class="section section--parallax" id="price" style="background-image:url(../img/scene_studio.webp)">
   <div class="inner">
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
@@ -343,7 +369,7 @@
 </section>
 
 <!-- Lapsellが目指すこと -->
-<section class="section section--tint" id="vision">
+<section class="section section--texture" id="vision">
   <div class="inner">
     <h2 class="section__title">Lapsellが目指すこと</h2>
     <div class="split">
@@ -386,7 +412,7 @@
 </section>
 
 <!-- 先行利用の募集 -->
-<section class="section section--tint" id="form">
+<section class="section section--texture" id="form">
   <div class="inner inner--narrow">
     <h2 class="section__title">先行利用の募集</h2>
     <div class="lead-block">
