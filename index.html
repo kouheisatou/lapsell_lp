@@ -97,7 +97,12 @@
   .btn:hover{opacity:.85;}
 
   /* ===== ヒーロー ===== */
-  .hero-bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+  .hero-bg{
+    position:fixed;top:0;left:0;right:0;
+    height:100vh;
+    height:100lvh;               /* アドレスバーの伸縮で高さが変わらないよう最大値で固定する */
+    z-index:0;pointer-events:none;
+  }
   .hero-bg img{width:100%;height:100%;object-fit:cover;}
   .hero-bg::after{
     content:"";position:absolute;inset:0;
@@ -210,7 +215,7 @@
   /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
   .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
   .merit__photo{margin:0 0 20px;}
-  .merit__photo img{width:100%;height:auto;}
+  .merit__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;}
   .merit__heading{font-weight:700;font-size:19px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
   .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
@@ -329,7 +334,7 @@
 <!-- ヒーロー -->
 <!-- ファーストビューの背景。画面に固定し、次のセクションが上に被さってくる -->
 <div class="hero-bg" aria-hidden="true">
-  <img src="img/hero.webp" alt="">
+  <img src="img/hero.webp" alt="" width="1920" height="1278">
 </div>
 
 <header class="hero">
@@ -353,8 +358,8 @@
     <div class="mockups" data-hscroll>
       <figure class="mockups__device">
         <div class="mockups__phone">
-          <img class="mockups__shot" src="img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" loading="lazy">
-          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy">
+          <img class="mockups__shot" src="img/mock_about_practice.webp" alt="Lapsellアプリの練習ページ。1本の練習が数分ごとのクリップに分割され、SOLDや価格つきでタイムラインに並んでいる" loading="lazy" width="640" height="1384">
+          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy" width="620" height="1268">
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">一点物のグッズとして販売</h3>
@@ -363,8 +368,8 @@
       </figure>
       <figure class="mockups__device">
         <div class="mockups__phone">
-          <img class="mockups__shot" src="img/mock_about_map.webp" alt="マップの画面。クリエイターの拠点周辺のセルを初期支援者が取得し、この頃から推していたと表示されている" loading="lazy">
-          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy">
+          <img class="mockups__shot" src="img/mock_about_map.webp" alt="マップの画面。クリエイターの拠点周辺のセルを初期支援者が取得し、この頃から推していたと表示されている" loading="lazy" width="640" height="1384">
+          <img class="mockups__frame" src="img/iphone_frame.webp" alt="" loading="lazy" width="620" height="1268">
         </div>
         <figcaption class="mockups__caption">
           <h3 class="mockups__title">応援した記録を、地図に残す</h3>
@@ -383,11 +388,11 @@
     <div class="prose">
       <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
       <figure class="inline-photo">
-        <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy">
+        <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy" width="1673" height="940">
       </figure>
       <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
       <figure class="inline-photo">
-        <img src="img/fan_watching.webp" alt="夜、自宅のソファでスマホを持ち、アプリで練習動画を見ているファン" loading="lazy">
+        <img src="img/fan_watching.webp" alt="夜、自宅のソファでスマホを持ち、アプリで練習動画を見ているファン" loading="lazy" width="1000" height="667">
       </figure>
       <p class="note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
     </div>
@@ -401,21 +406,21 @@
     <div class="merits" data-hscroll>
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy">
+          <img src="img/route_sns.webp" alt="SNSで256万回表示された練習クリップの投稿" loading="lazy" width="1016" height="762">
         </figure>
         <h3 class="merit__heading">認知が広がる</h3>
         <p>クリップはSNSでの拡散を通じて、<span class="hl">既存のファンの外側にも届きます</span>。アプリ内には新人を発掘する目的で見ている購買層もいます。</p>
       </div>
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/merit_close.webp" alt="ライブ後の物販でファンと握手を交わすミュージシャン" loading="lazy">
+          <img src="img/merit_close.webp" alt="ライブ後の物販でファンと握手を交わすミュージシャン" loading="lazy" width="1448" height="1086">
         </figure>
         <h3 class="merit__heading">ファンとの距離が縮まる</h3>
         <p>完成した作品だけでなく制作の裏側を共有することで、ファンとの関係が深まります。</p>
       </div>
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" loading="lazy">
+          <img src="img/reason_oshikatsu.webp" alt="机いっぱいに並んだ既存の推し活グッズ。写真もぬいぐるみもすべて量産品" loading="lazy" width="1536" height="1024">
         </figure>
         <h3 class="merit__heading">グッズのマンネリ化を解消できる</h3>
         <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
@@ -446,12 +451,12 @@
     <div class="prose">
       <p>私は幼少期から、母の銅版画の制作を横で見てきました。</p>
       <figure class="inline-photo">
-        <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy">
+        <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy" width="1400" height="788">
       </figure>
       <p>完成品の裏側に隠れてしまう試行錯誤にある面白さを私は知っています。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
       <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
       <figure class="inline-photo">
-        <img src="img/route_break.webp" alt="満員の会場で、観客がスマホを掲げて撮影するライブ" loading="lazy">
+        <img src="img/route_break.webp" alt="満員の会場で、観客がスマホを掲げて撮影するライブ" loading="lazy" width="1448" height="1086">
       </figure>
       <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
     </div>
@@ -561,6 +566,15 @@
     strip.addEventListener('touchstart', markManual, { passive: true });
     strip.addEventListener('pointerdown', markManual, { passive: true });
 
+    var target = 0, raf = null;
+    function step() {
+      raf = null;
+      if (Date.now() < manualUntil) return;
+      var diff = target - strip.scrollLeft;
+      if (Math.abs(diff) < 0.5) { strip.scrollLeft = target; return; }
+      strip.scrollLeft += diff * 0.2;             // 目標へ少しずつ寄せて、段差をならす
+      raf = requestAnimationFrame(step);
+    }
     function sync() {
       if (Date.now() < manualUntil) return;       // 指で操作した直後は触らない
       var max = strip.scrollWidth - strip.clientWidth;
@@ -571,12 +585,39 @@
       var dz = 0.3;                               // 出入りの区間は送らない
       var p = Math.min(1, Math.max(0, (raw - dz) / (1 - dz * 2)));
       p = p * p * (3 - 2 * p);                    // 始めと終わりをなめらかに
-      strip.scrollLeft = p * max;                 // 縦スクロールに直接連動させる
+      target = p * max;
+      if (!raf) raf = requestAnimationFrame(step);
     }
     window.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync, { passive: true });
     window.addEventListener('load', sync);
     sync();
+  });
+})();
+
+// ページ内リンクの着地。画像の読み込みで高さが変わっても、正しい位置に留まるようにする。
+// 画像には実寸を書いてあるので基本的にはずれないが、埋め込みフォームなど
+// 高さが後から確定する要素があるため、着地後にもう一度合わせる。
+(function () {
+  function goto(el, smooth) {
+    el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id === '#') return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      goto(el, true);
+      setTimeout(function () { goto(el, false); }, 700);
+    });
+  });
+  // ハッシュ付きで開かれた場合も、読み込み完了後に合わせ直す
+  window.addEventListener('load', function () {
+    if (!location.hash) return;
+    var el = document.querySelector(location.hash);
+    if (el) setTimeout(function () { goto(el, false); }, 60);
   });
 })();
 
