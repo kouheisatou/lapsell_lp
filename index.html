@@ -198,6 +198,8 @@
     }
   }
 
+  .showcase__note{margin:44px 0 0;font-size:15.5px;color:var(--ink-dim);line-height:2.05;max-width:720px;}
+
   /* ===== 本文と挿絵 ===== */
   .prose{max-width:720px;}
   .prose p{font-size:15.5px;color:var(--ink-dim);line-height:2.05;margin:0 0 1.3em;}
@@ -205,10 +207,10 @@
   .prose .note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
 
   /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
-  .merits{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
+  .merits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;}
   .merit__photo{margin:0 0 20px;}
   .merit__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;}
-  .merit__heading{font-weight:700;font-size:19px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
+  .merit__heading{font-weight:700;font-size:18px;color:var(--ink);margin:0 0 12px;letter-spacing:.02em;line-height:1.6;}
   .merit p{font-size:15px;color:var(--ink-dim);line-height:1.95;margin:0;}
 
   /* 文章が続くところに、途中で小さく画像を挟む */
@@ -380,11 +382,15 @@
     <div class="prose">
       <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
       <figure class="inline-photo">
-        <img src="img/practice_scene.webp" alt="誰も見ていないダンススタジオで、鏡に向かって一人で練習を繰り返すダンサー" loading="lazy" width="1673" height="940">
+        <img src="img/scene_studio.webp" alt="鏡張りのスタジオで、鏡を見ながら振りを確認するダンサー" loading="lazy" width="1448" height="1086">
       </figure>
       <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
       <figure class="inline-photo">
-        <img src="img/fan_watching.webp" alt="夜、自宅のソファでスマホを持ち、アプリで練習動画を見ているファン" loading="lazy" width="1000" height="667">
+        <img src="img/practice_band.webp" alt="リハーサルスタジオで音を合わせるバンドの4人" loading="lazy" width="1200" height="675">
+      </figure>
+      <p>これから撮る映像も、今日撮った映像も、同じように出品できます。</p>
+      <figure class="inline-photo">
+        <img src="img/practice_group.webp" alt="三脚に立てたスマホでグループの振り入れを定点撮影しているダンススタジオ" loading="lazy" width="1200" height="676">
       </figure>
       <p class="note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
     </div>
@@ -417,7 +423,48 @@
         <h3 class="merit__heading">グッズのマンネリ化を解消できる</h3>
         <p>写真やアクリルスタンドとは異なる、<span class="hl">これまでになかった形のグッズ</span>として販売できます。</p>
       </div>
+
+      <div class="merit">
+        <figure class="merit__photo">
+          <img src="img/problem_accident.webp" alt="生配信中に人物が映り込んでしまった配信事故" loading="lazy" width="1024" height="1536">
+        </figure>
+        <h3 class="merit__heading">配信事故の心配がない</h3>
+        <p>撮った映像を確認してから出品するため、<span class="hl">生配信のように取り消せなくなること</span>がありません。映り込みや発言はAIが検出します。</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- 出品イメージ -->
+<section class="section section--parallax" id="showcase">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_standby.webp)"></div></div>
+  <div class="inner">
+    <h2 class="section__title">出品イメージ</h2>
+    <p class="section__lead">出品したクリップは、いくつかの入り口からファンに届きます。</p>
+    <div class="merits" data-hscroll>
+      <div class="merit">
+        <figure class="merit__photo">
+          <img src="img/route_qr_setup.webp" alt="ライブ会場の物販机に、グッズと並べてQRコードのスタンドを置くミュージシャン" loading="lazy" width="1448" height="1086">
+        </figure>
+        <h3 class="merit__heading">物販で、グッズと一緒に</h3>
+        <p>会場の物販机にQRを置くだけで、その場で買ってもらえます。在庫も送料もかかりません。</p>
+      </div>
+      <div class="merit">
+        <figure class="merit__photo">
+          <img src="img/sns_post.webp" alt="ベッドでスマホを見ながら、流れてきたクリップを再生している人" loading="lazy" width="1200" height="900">
+        </figure>
+        <h3 class="merit__heading">SNSから</h3>
+        <p>普段の投稿にリンクを添えるだけです。練習の様子を見た人が、そのまま購入まで進めます。</p>
+      </div>
+      <div class="merit">
+        <figure class="merit__photo">
+          <img src="img/deliver_qr.webp" alt="展示された作品の横に掲示されたQRコードを、来場者がスマホで読み取っている" loading="lazy" width="1254" height="1254">
+        </figure>
+        <h3 class="merit__heading">展示やギャラリーで</h3>
+        <p>作品の横にQRを掲示すれば、完成品を見た人が、その制作過程まで持ち帰れます。</p>
+      </div>
+    </div>
+    <p class="showcase__note">こうした導線がなくても、<span class="hl">アプリ内のマップやフィードから見つけて買われます</span>。</p>
   </div>
 </section>
 
