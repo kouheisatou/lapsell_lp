@@ -224,7 +224,9 @@
   .artwork{--d:13px;--turn:-12deg;--tilt:15deg;perspective:2600px;margin:110px 0 128px;}
   .artwork__frame{
     position:relative;transform-style:preserve-3d;
-    transform:rotateX(var(--tilt)) rotateY(var(--turn)) translateZ(calc(var(--d) / -2));
+    /* 立てかける傾きを先に当て、そのうえで画面の垂直軸まわりに振る。
+       順序が逆だと振りの軸ごと傾き、上辺が水平でなくなる */
+    transform:rotateY(var(--turn)) rotateX(var(--tilt)) translateZ(calc(var(--d) / -2));
   }
   .artwork__front{
     position:relative;transform:translateZ(var(--d));backface-visibility:hidden;
@@ -710,17 +712,28 @@
 // ===== 画面に入っている間だけ映像を再生する =====
 (function () {
   var v = document.querySelector('.prose video');
-  if (!v || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        var p = v.play();
-        if (p) p.catch(function () {}); // 自動再生が拒否されても何もしない
-      } else {
-        v.pause();
-      }
-    });
-  }, { threshold: 0.15 }).observe(v);
+  if (!v) return;
+  var inView = true;
+
+  function sync() {
+    if (inView && !document.hidden) {
+      var p = v.play();
+      if (p) p.catch(function () {}); // 自動再生が拒否されても何もしない
+    } else {
+      v.pause();
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { inView = e.isIntersecting; });
+      sync();
+    }, { threshold: 0.15 }).observe(v);
+  }
+  // 他のタブや他のアプリから戻ったとき、交差状態は変わらないので observer は
+  // 呼ばれない。可視状態そのものの変化でも再開させる
+  document.addEventListener('visibilitychange', sync);
+  window.addEventListener('pageshow', sync);
 })();
 
 // ===== 額装した作品の向きをスクロールに連れて振る =====
