@@ -219,7 +219,7 @@
   .inline-photo img{width:100%;height:auto;}
 
   /* 立てかけた額縁。向きはスクロールに連れて左から右へ振れる。--d は額縁の厚み */
-  .artwork{--d:13px;--turn:-20deg;--tilt:9deg;perspective:1200px;}
+  .artwork{--d:13px;--turn:-12deg;--tilt:15deg;perspective:1200px;}
   .artwork__frame{
     position:relative;transform-style:preserve-3d;
     transform:rotateX(var(--tilt)) rotateY(var(--turn)) translateZ(calc(var(--d) / -2));
@@ -241,7 +241,7 @@
   .artwork__side--t{left:0;right:0;top:0;height:var(--d);transform-origin:center top;transform:rotateX(90deg);background:#54422f;}
   .artwork__side--b{left:0;right:0;bottom:0;height:var(--d);transform-origin:center bottom;transform:rotateX(-90deg);background:#241c14;}
   @media (prefers-reduced-motion: reduce){
-    .artwork{--turn:-12deg;}
+    .artwork{--turn:-9deg;}
   }
 
   /* ===== 料金 ===== */
@@ -711,8 +711,8 @@
   if (!art) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var START = -20; // 画面に入るとき（左を向いている）
-  var END = -5;    // 画面から抜けるとき（正面寄りまで戻る）
+  var START = -12; // 画面に入るとき（左を向いている）
+  var END = -6;    // 画面から抜けるとき（正面寄りまで戻る）
   var DZ = 0.28;   // 画面の上下端では動かさない幅
   var raf = null;
 
