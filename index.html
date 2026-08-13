@@ -141,6 +141,8 @@
     margin:0 0 28px;
   }
   .section__lead{font-size:16px;color:var(--ink-dim);max-width:760px;margin:0 0 64px;line-height:2;}
+  /* 1つのセクションに見出しが2つ並ぶときの間 */
+  .section__title--next{margin-top:clamp(72px,10vh,116px);}
 
   /* ===== 背景 ===== */
   /* 粗いコンクリートのような粒。単色の広い面をやわらげる */
@@ -480,14 +482,8 @@
         <p>撮った映像を確認してから出品するため、<span class="hl">生配信のように取り消せなくなること</span>がありません。</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- 出品イメージ -->
-<section class="section section--parallax" id="showcase">
-  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_setlist.webp)"></div></div>
-  <div class="inner">
-    <h2 class="section__title">出品イメージ</h2>
+    <h2 class="section__title section__title--next" id="showcase">出品イメージ</h2>
     <p class="section__lead">出品したクリップは、いくつかの入り口からファンに届きます。</p>
     <div class="merits" data-hscroll>
       <div class="merit">
@@ -517,7 +513,8 @@
 </section>
 
 <!-- 料金 -->
-<section class="section section--texture" id="price">
+<section class="section section--parallax" id="price">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_setlist.webp)"></div></div>
   <div class="inner">
     <h2 class="section__title">料金</h2>
     <p class="section__lead"><span class="hl">販売手数料は10%</span>です。登録と出品は無料で、初期費用と月額費用はかかりません。</p>
@@ -535,8 +532,7 @@
 </section>
 
 <!-- Lapsellが目指すこと -->
-<section class="section section--parallax" id="vision">
-  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_standby.webp)"></div></div>
+<section class="section section--texture" id="vision">
   <div class="inner">
     <h2 class="section__title">Lapsellが目指すこと</h2>
     <div class="prose">
@@ -564,7 +560,8 @@
 </section>
 
 <!-- 実績 -->
-<section class="section section--texture" id="award">
+<section class="section section--parallax" id="award">
+  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_mirror.webp)"></div></div>
   <div class="inner inner--narrow">
     <h2 class="section__title">実績</h2>
     <div class="award">
@@ -587,8 +584,7 @@
 </section>
 
 <!-- 先行利用の募集 -->
-<section class="section section--parallax" id="form">
-  <div class="para" aria-hidden="true"><div class="para__img" style="background-image:url(img/bg_mirror.webp)"></div></div>
+<section class="section section--texture" id="form">
   <div class="inner inner--narrow">
     <h2 class="section__title">先行利用の募集</h2>
     <div class="lead-block">
