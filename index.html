@@ -216,7 +216,16 @@
   .prose .note{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
 
   /* ===== 出品するメリット（横3列。狭い画面では横スクロール） ===== */
-  .merits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;}
+  /* 個数によらず1枚の幅は3等分で固定し、収まらない分は横スクロールで見せる */
+  .merits{
+    display:flex;gap:32px;
+    overflow-x:auto;overscroll-behavior-x:contain;
+    padding-bottom:14px;-webkit-overflow-scrolling:touch;
+  }
+  .merits::-webkit-scrollbar{height:5px;}
+  .merits::-webkit-scrollbar-track{background:transparent;}
+  .merits::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+  .merit{flex:0 0 calc((100% - 64px) / 3);}
   .merit__photo{margin:0 0 20px;}
   .merit__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;}
   /* 見出しが1行でも2行分の高さを取り、横並びの本文の開始位置を揃える */
@@ -341,15 +350,7 @@
     .mockups__title{font-size:16.5px;}
     .mockups__desc{font-size:13.5px;}
 
-    .merits{
-      display:flex;grid-template-columns:none;gap:16px;
-      overflow-x:auto;overscroll-behavior-x:contain;
-      margin-inline:-20px;padding:0 20px 12px;
-      -webkit-overflow-scrolling:touch;
-    }
-    .merits::-webkit-scrollbar{height:5px;}
-    .merits::-webkit-scrollbar-track{background:transparent;}
-    .merits::-webkit-scrollbar-thumb{background:#3a342c;border-radius:3px;}
+    .merits{gap:16px;margin-inline:-20px;padding:0 20px 12px;}
     .merit{flex:0 0 min(76%,300px);}
     .merit__photo{margin-bottom:14px;}
     .merit__heading{font-size:17px;margin-bottom:8px;}
