@@ -218,6 +218,12 @@
   .inline-photo{margin:30px 0;max-width:520px;}
   .inline-photo img{width:100%;height:auto;}
 
+  /* チェキ風の白フチ。下だけ広く取る */
+  .inline-photo--cheki{
+    max-width:430px;background:#f1eee4;padding:3.2% 3.2% 11%;
+    box-shadow:0 16px 34px rgba(0,0,0,.55);
+  }
+
   /* 立てかけた額縁。向きはスクロールに連れて左から右へ振れる。--d は額縁の厚み */
   .artwork{--d:13px;--turn:-12deg;--tilt:15deg;perspective:1200px;}
   .artwork__frame{
@@ -303,6 +309,7 @@
 
     .prose p{font-size:15px;}
     .inline-photo{margin:22px 0;max-width:none;}
+    .inline-photo--cheki{max-width:88%;}
     /* 画面が狭いぶん、額縁は薄く、遠近は強めにして立体感を保つ。幅も詰める */
     .artwork{--d:10px;perspective:800px;max-width:82%;}
     .artwork__front{padding:8px;}
@@ -413,15 +420,15 @@
     <h2 class="section__title">もし、無名だった頃の練習動画が残っていたら</h2>
     <div class="prose">
       <p>今では誰もが知っているアーティストにも、客席に数人しかいない時期があります。<span class="hl">その頃の練習風景を撮った動画が手元に残っていたら</span>、ファンにとってどれくらいの価値になるでしょうか。</p>
-      <figure class="inline-photo">
+      <figure class="inline-photo inline-photo--cheki">
         <img src="img/practice_band.webp" alt="リハーサルスタジオで音を合わせるバンドの4人" loading="lazy" width="1200" height="675">
       </figure>
       <p>これまで、そうした時期の映像はほとんど残されてきませんでした。撮っても売る場所がなく、残す理由もなかったからです。Lapsellは、今この瞬間の練習を、<span class="hl">後からは手に入らない一点物</span>として残します。</p>
-      <figure class="inline-photo">
+      <figure class="inline-photo inline-photo--cheki">
         <img src="img/scene_studio.webp" alt="鏡張りのスタジオで、鏡を見ながら振りを確認するダンサー" loading="lazy" width="1448" height="1086">
       </figure>
       <p>これから撮る映像も、今日撮った映像も、同じように出品できます。</p>
-      <figure class="inline-photo">
+      <figure class="inline-photo inline-photo--cheki">
         <img src="img/practice_group.webp" alt="三脚に立てたスマホでグループの振り入れを定点撮影しているダンススタジオ" loading="lazy" width="1200" height="676">
       </figure>
       <p class="note">20代の男女393人に伺った自社調査では、およそ<span class="hl">3人に1人</span>が制作風景の動画に対価を支払ってもよいと回答しています。</p>
