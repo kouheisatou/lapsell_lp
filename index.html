@@ -219,7 +219,8 @@
   .inline-photo img{width:100%;height:auto;}
 
   /* 立てかけた額縁。向きはスクロールに連れて左から右へ振れる。--d は額縁の厚み */
-  .artwork{--d:13px;--turn:-12deg;--tilt:15deg;perspective:1200px;}
+  /* 傾いて手前に張り出すぶん、前後の文章との間を広めに取る */
+  .artwork{--d:13px;--turn:-12deg;--tilt:15deg;perspective:1200px;margin:64px 0 76px;}
   .artwork__frame{
     position:relative;transform-style:preserve-3d;
     transform:rotateX(var(--tilt)) rotateY(var(--turn)) translateZ(calc(var(--d) / -2));
@@ -304,7 +305,7 @@
     .prose p{font-size:15px;}
     .inline-photo{margin:22px 0;max-width:none;}
     /* 画面が狭いぶん、額縁は薄く、遠近は強めにして立体感を保つ。幅も詰める */
-    .artwork{--d:10px;perspective:800px;max-width:82%;}
+    .artwork{--d:10px;perspective:800px;max-width:82%;margin:46px 0 54px;}
     .artwork__front{padding:8px;}
     .artwork__back{box-shadow:inset 0 0 0 8px #4a3b2b, inset 0 0 0 9px rgba(0,0,0,.6), inset 0 0 20px rgba(0,0,0,.55);}
 
