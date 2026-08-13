@@ -216,7 +216,8 @@
   /* 文章が続くところに、途中で小さく画像を挟む */
   /* 文中に挟む挿絵。読みの邪魔をしない大きさに抑える */
   .inline-photo{margin:30px 0;max-width:520px;}
-  .inline-photo img{width:100%;height:auto;}
+  .inline-photo img,
+  .inline-photo video{width:100%;height:auto;display:block;}
 
   /* 立てかけた額縁。向きはスクロールに連れて左から右へ振れる。--d は額縁の厚み */
   /* 傾いて手前に張り出すぶん、前後の文章との間を広めに取る */
@@ -540,7 +541,7 @@
       </figure>
       <p>完成品の裏側に隠れてしまう試行錯誤にある面白さを私は知っています。それが記録されないまま捨てられていくことが、私にはもったいなく思えました。今は誰も見ていない過程であっても、<span class="hl">将来は貴重な記録になるかもしれません</span>。</p>
       <figure class="inline-photo">
-        <img src="img/copper.webp" alt="作業台の上で、彫り上げた銅版にインクを詰めている手元。寒冷紗やバレン、インクのチューブが並んでいる" loading="lazy" width="1400" height="788">
+        <video src="img/timelapse.mp4" width="1280" height="720" autoplay loop muted playsinline preload="metadata" disablepictureinpicture aria-label="制作の過程を定点で撮り、早送りにした映像"></video>
       </figure>
       <p>この体験が、制作の過程そのものを残す仕組みをつくりたいという着想につながっています。</p>
       <p>完成品の裏側にある試行錯誤そのものに、市場価値を与えることを目指しています。駆け出しのクリエイターが下積みの時期から正当に収益を得られ、ファンがその成長の証人になれる社会を作ります。</p>
@@ -704,6 +705,22 @@
     var el = document.querySelector(location.hash);
     if (el) setTimeout(function () { goto(el, false); }, 60);
   });
+})();
+
+// ===== 画面に入っている間だけ映像を再生する =====
+(function () {
+  var v = document.querySelector('.prose video');
+  if (!v || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var p = v.play();
+        if (p) p.catch(function () {}); // 自動再生が拒否されても何もしない
+      } else {
+        v.pause();
+      }
+    });
+  }, { threshold: 0.15 }).observe(v);
 })();
 
 // ===== 額装した作品の向きをスクロールに連れて振る =====

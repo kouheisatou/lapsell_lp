@@ -11,3 +11,6 @@ _sample_*.png
 .DS_Store
 .idea/
 node_modulesimg_backup/
+
+# 切り出し元の動画（55MB）。配信するのは img/timelapse.mp4 だけ
+/img/制作過程タイムラプスサンプル.mp4
