@@ -103,10 +103,19 @@
     height:100lvh;               /* アドレスバーの伸縮で高さが変わらないよう最大値で固定する */
     z-index:0;pointer-events:none;
   }
+  /* 背景は重ねて置き、透明度で入れ替える */
   .hero-bg img,
-  .hero-bg video{width:100%;height:100%;object-fit:cover;}
+  .hero-bg video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity 1.4s ease;
+  }
+  .hero-bg .is-on{opacity:1;}
   /* 映像を背景に使うときは色を落とし、見出しの読みやすさを保つ */
-  .hero-bg--video video{filter:grayscale(1) contrast(1.06) brightness(.92);}
+  .hero-bg video{filter:grayscale(1) contrast(1.06) brightness(.92);}
+  @media (prefers-reduced-motion: reduce){
+    .hero-bg img,
+    .hero-bg video{transition:none;}
+  }
   .hero-bg::after{
     content:"";position:absolute;inset:0;
     /* 背景は読み込みごとに変わり、明るい写真も混ざるため、下側は濃いめに覆う */
@@ -399,44 +408,74 @@
   <noscript><img src="img/hero.webp" alt="" width="1920" height="1278"></noscript>
 </div>
 <script>
-// 読み込みごとに背景を1つ選ぶ。ジャンルの違う裏側が入り口で伝わるようにする
+// ファーストビューの背景。?bg=a〜e で1つに固定し、指定がなければ順に入れ替える
 (function () {
-  var picks = [
-    'img/hero.webp',
-    'img/hero_arch.webp',
-    'img/hero_painter.webp',
-    'img/hero_track.webp',
-    'img/timelapse.mp4'
+  var SLIDES = [
+    { key: 'a', src: 'img/hero.webp' },
+    { key: 'b', src: 'img/hero_arch.webp' },
+    { key: 'c', src: 'img/hero_painter.webp' },
+    { key: 'd', src: 'img/hero_track.webp' },
+    { key: 'e', src: 'img/timelapse.mp4', poster: 'img/hero_timelapse_poster.webp' }
   ];
+  var INTERVAL = 7000; // 入れ替えの間隔
+
   var box = document.querySelector('.hero-bg');
   if (!box) return;
-  var src = picks[Math.floor(Math.random() * picks.length)];
-  var el;
-  if (/\.mp4$/.test(src)) {
-    el = document.createElement('video');
-    el.autoplay = true; el.loop = true; el.muted = true; el.defaultMuted = true;
-    el.playsInline = true;
-    el.setAttribute('playsinline', '');
-    el.setAttribute('disablepictureinpicture', '');
-    el.poster = 'img/hero_timelapse_poster.webp'; // 読み込みの間もこの1枚が出る
-    box.classList.add('hero-bg--video');
-    // 読み込めなかったときだけ写真に戻す。再生できなくても poster が残る
-    el.addEventListener('error', function () { swapToPhoto(); });
-  } else {
-    el = document.createElement('img');
-    el.alt = '';
-  }
-  el.src = src;
-  box.appendChild(el);
+  var current = null;
 
-  function swapToPhoto() {
-    if (!box.classList.contains('hero-bg--video')) return;
-    box.classList.remove('hero-bg--video');
-    box.innerHTML = '';
-    var img = document.createElement('img');
-    img.src = 'img/hero.webp'; img.alt = '';
-    box.appendChild(img);
+  function build(slide) {
+    var el;
+    if (/\.mp4$/.test(slide.src)) {
+      el = document.createElement('video');
+      el.autoplay = true; el.loop = true; el.muted = true; el.defaultMuted = true;
+      el.playsInline = true;
+      el.setAttribute('playsinline', '');
+      el.setAttribute('disablepictureinpicture', '');
+      el.poster = slide.poster; // 読み込みの間もこの1枚が出る
+    } else {
+      el = document.createElement('img');
+      el.alt = '';
+    }
+    el.src = slide.src;
+    return el;
   }
+
+  function show(index, immediate) {
+    var next = build(SLIDES[index]);
+    // 1枚目は遷移させない。描画を待つ仕組みに頼ると、裏で開かれたときに何も出ない
+    if (immediate) {
+      next.classList.add('is-on');
+      box.appendChild(next);
+      current = next;
+      return;
+    }
+    box.appendChild(next);
+    // 追加した直後に透明度を変えても遷移しないため、少し置いてから切り替える
+    setTimeout(function () {
+      next.classList.add('is-on');
+      if (current) {
+        var prev = current;
+        prev.classList.remove('is-on');
+        setTimeout(function () { prev.remove(); }, 1600);
+      }
+      current = next;
+    }, 40);
+  }
+
+  var fixed = (location.search.match(/[?&]bg=([^&]*)/) || [])[1];
+  var at = 0;
+  for (var i = 0; i < SLIDES.length; i++) {
+    if (SLIDES[i].key === fixed) { at = i; break; }
+  }
+  show(at, true);
+
+  if (fixed) return; // 固定指定があるときは入れ替えない
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () {
+    if (document.hidden) return; // 見ていない間は進めない
+    at = (at + 1) % SLIDES.length;
+    show(at);
+  }, INTERVAL);
 })();
 </script>
 
@@ -547,7 +586,7 @@
     <div class="merits" data-hscroll>
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/route_qr_setup.webp" alt="ライブ会場の物販机に、グッズと並べてQRコードのスタンドを置くミュージシャン" loading="lazy" width="1448" height="1086">
+          <img src="img/deliver_qr.webp" alt="物販の台に並んだグッズの横に置かれたQRコードを、来場者がスマホで読み取っている" loading="lazy" width="1254" height="1254">
         </figure>
         <h3 class="merit__heading">物販で、グッズと一緒に</h3>
         <p>会場の物販机にQRを置くだけで、その場で買ってもらえます。在庫も送料もかかりません。</p>
@@ -561,7 +600,7 @@
       </div>
       <div class="merit">
         <figure class="merit__photo">
-          <img src="img/deliver_qr.webp" alt="展示された作品の横に掲示されたQRコードを、来場者がスマホで読み取っている" loading="lazy" width="1254" height="1254">
+          <img src="img/gallery_qr.webp" alt="ギャラリーの壁に掛けた作品。キャプションの下にQRコードの札が掲示されている" loading="lazy" width="1400" height="933">
         </figure>
         <h3 class="merit__heading">展示やギャラリーで</h3>
         <p>作品の横にQRを掲示すれば、完成品を見た人が、その制作過程まで持ち帰れます。</p>
