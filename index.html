@@ -103,10 +103,14 @@
     height:100lvh;               /* アドレスバーの伸縮で高さが変わらないよう最大値で固定する */
     z-index:0;pointer-events:none;
   }
-  .hero-bg img{width:100%;height:100%;object-fit:cover;}
+  .hero-bg img,
+  .hero-bg video{width:100%;height:100%;object-fit:cover;}
+  /* 映像を背景に使うときは色を落とし、見出しの読みやすさを保つ */
+  .hero-bg--video video{filter:grayscale(1) contrast(1.06) brightness(.92);}
   .hero-bg::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,11,9,.55) 0%, rgba(12,11,9,.15) 32%, rgba(12,11,9,.35) 62%, rgba(12,11,9,.96) 100%);
+    /* 背景は読み込みごとに変わり、明るい写真も混ざるため、下側は濃いめに覆う */
+    background:linear-gradient(180deg, rgba(12,11,9,.6) 0%, rgba(12,11,9,.26) 30%, rgba(12,11,9,.58) 62%, rgba(12,11,9,.97) 100%);
   }
   .hero{position:relative;z-index:3;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;}
   .hero-top{position:absolute;top:0;left:0;right:0;z-index:3;padding:22px 24px;}
@@ -392,8 +396,49 @@
 <!-- ヒーロー -->
 <!-- ファーストビューの背景。画面に固定し、次のセクションが上に被さってくる -->
 <div class="hero-bg" aria-hidden="true">
-  <img src="img/hero.webp" alt="" width="1920" height="1278">
+  <noscript><img src="img/hero.webp" alt="" width="1920" height="1278"></noscript>
 </div>
+<script>
+// 読み込みごとに背景を1つ選ぶ。ジャンルの違う裏側が入り口で伝わるようにする
+(function () {
+  var picks = [
+    'img/hero.webp',
+    'img/hero_arch.webp',
+    'img/hero_painter.webp',
+    'img/hero_track.webp',
+    'img/timelapse.mp4'
+  ];
+  var box = document.querySelector('.hero-bg');
+  if (!box) return;
+  var src = picks[Math.floor(Math.random() * picks.length)];
+  var el;
+  if (/\.mp4$/.test(src)) {
+    el = document.createElement('video');
+    el.autoplay = true; el.loop = true; el.muted = true; el.defaultMuted = true;
+    el.playsInline = true;
+    el.setAttribute('playsinline', '');
+    el.setAttribute('disablepictureinpicture', '');
+    el.poster = 'img/hero_timelapse_poster.webp'; // 読み込みの間もこの1枚が出る
+    box.classList.add('hero-bg--video');
+    // 読み込めなかったときだけ写真に戻す。再生できなくても poster が残る
+    el.addEventListener('error', function () { swapToPhoto(); });
+  } else {
+    el = document.createElement('img');
+    el.alt = '';
+  }
+  el.src = src;
+  box.appendChild(el);
+
+  function swapToPhoto() {
+    if (!box.classList.contains('hero-bg--video')) return;
+    box.classList.remove('hero-bg--video');
+    box.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = 'img/hero.webp'; img.alt = '';
+    box.appendChild(img);
+  }
+})();
+</script>
 
 <header class="hero">
   <div class="hero-top">
